@@ -104,7 +104,6 @@ deploy:
           docker compose down --volumes
           docker compose --profile prod up -d
 ```
-
 This action uses three secrets that must be configured in the repository:
 - DEPLOY_HOST: IP of the remote machine.
 - DEPLOY_USER: user with permission to execute the commands in the remote machine.
