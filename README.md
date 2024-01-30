@@ -1,5 +1,11 @@
 # wiq_es1a
 
+## Development team
+| Desarrolladores | UO | Perfil
+|-----------------|----|-------
+|Martín Cancio Barrera | UO287561 | <a href="https://github.com/canci0">Mi github</a>
+
+## Project description 
 [![Deploy on release](https://github.com/Arquisoft/wiq_es1a/actions/workflows/release.yml/badge.svg)](https://github.com/Arquisoft/wiq_es1a/actions/workflows/release.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_es1a&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_es1a)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Arquisoft_wiq_es1a&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Arquisoft_wiq_es1a)
