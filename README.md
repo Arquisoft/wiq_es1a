@@ -4,6 +4,7 @@
 | User | UO | Github
 |------|----|--------
 |Martín Cancio Barrera | UO287561 | [Mi github](https://github.com/CANCI0)
+|Iyán Fernández Riol | UO288231 | [Mi github](https://github.com/iyanfdezz)
 
 ## Introduction to our project
 [![Deploy on release](https://github.com/Arquisoft/wiq_es1a/actions/workflows/release.yml/badge.svg)](https://github.com/Arquisoft/wiq_es1a/actions/workflows/release.yml)
