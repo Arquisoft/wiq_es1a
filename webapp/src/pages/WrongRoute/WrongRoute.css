@@ -2,6 +2,7 @@
     width: 90%;
     display: flex;
     justify-content: center;
+    margin: auto 0;
 }
 
 #notfound .notfound-bg>div {

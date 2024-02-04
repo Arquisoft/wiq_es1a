@@ -5,12 +5,14 @@
 }
 
 ul{
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     grid-template-columns: 1fr;
     list-style-type: none;
     text-align: center;
     gap: 1rem;
-    margin: auto;
+    margin: 1rem;
     padding: 0;
 }
 

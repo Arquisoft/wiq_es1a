@@ -4,6 +4,7 @@ import Preguntas from "../../components/Preguntas";
 import { useNavigate } from "react-router-dom";
 import Nav from '../../components/Nav/Nav.js';
 import { Link } from 'react-router-dom';
+import Footer from "../../components/Footer/Footer.js";
 
 const JuegoPreguntas = () => {
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -77,20 +78,20 @@ const JuegoPreguntas = () => {
     setMostrarMenu(false);
   };
 
-  const handleVolverAlMenu = () => {
-    navigate("../home");
-  };
-
   if (mostrarMenu) {
     return (
-      <div className="menuContainer">
-        <h2>¡Juego terminado!</h2>
-        <p>
-          Tu puntuación: {puntuacion}/{Preguntas.length}
-        </p>
-        <button onClick={handleRepetirJuego}>Repetir Juego</button>
-        <Link to="home">Volver al Menú Principal</Link>
-      </div>
+      <>
+        <Nav />
+        <div className="menuContainer">
+          <h2>¡Juego terminado!</h2>
+          <p>
+            Tu puntuación: {puntuacion}/{Preguntas.length}
+          </p>
+          <button onClick={handleRepetirJuego}>Repetir Juego</button>
+          <Link to="/home">Volver al Menú Principal</Link>
+        </div>
+        <Footer />
+      </>
     );
   }
 
@@ -115,6 +116,7 @@ const JuegoPreguntas = () => {
         <div className="timer">Tiempo restante: {tiempoRestante}</div>
         <div className="points">Puntuación: {puntuacion}</div>
       </div>
+      <Footer />
     </>
   );
 };
