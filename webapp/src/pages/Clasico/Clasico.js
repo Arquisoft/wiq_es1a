@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import './Clasico.css';
-import Preguntas from '../../components/Preguntas';
-import { useNavigate  } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import "./Clasico.css";
+import Preguntas from "../../components/Preguntas";
+import { useNavigate } from "react-router-dom";
 
 const JuegoPreguntas = () => {
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -20,7 +20,7 @@ const JuegoPreguntas = () => {
       }, 3000);
     }
     const timer = setInterval(() => {
-      setTiempoRestante(prevTiempo => prevTiempo <= 0 ? 0 : prevTiempo - 1);
+      setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
   }, [tiempoRestante, indicePregunta]);
@@ -40,13 +40,13 @@ const JuegoPreguntas = () => {
   const estiloRespuesta = (respuesta) => {
     if (juegoTerminado) {
       if (respuesta === preguntaActual.respuestaCorrecta) {
-        return { backgroundColor: 'green' };
+        return { backgroundColor: "green" };
       } else if (respuesta === respuestaSeleccionada) {
-        return { backgroundColor: 'red' };
+        return { backgroundColor: "red" };
       }
     } else {
       if (respuesta === respuestaSeleccionada) {
-        return { backgroundColor: 'orange' };
+        return { backgroundColor: "orange" };
       }
     }
     return {};
@@ -76,14 +76,16 @@ const JuegoPreguntas = () => {
   };
 
   const handleVolverAlMenu = () => {
-    navigate('../home');
+    navigate("../home");
   };
 
   if (mostrarMenu) {
     return (
       <div className="menuContainer">
         <h2>¡Juego terminado!</h2>
-        <p>Tu puntuación: {puntuacion}/{Preguntas.length}</p>
+        <p>
+          Tu puntuación: {puntuacion}/{Preguntas.length}
+        </p>
         <button onClick={handleRepetirJuego}>Repetir Juego</button>
         <button onClick={handleVolverAlMenu}>Volver al Menú Principal</button>
       </div>
