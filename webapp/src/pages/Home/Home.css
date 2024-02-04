@@ -1,0 +1,19 @@
+.games-container{
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+}
+
+ul{
+    display: grid;
+    grid-template-columns: 1fr;
+    list-style-type: none;
+    text-align: center;
+    gap: 1rem;
+    width: 50%;
+    margin: auto;
+}
+
+ul li{
+    text-decoration: none;
+}

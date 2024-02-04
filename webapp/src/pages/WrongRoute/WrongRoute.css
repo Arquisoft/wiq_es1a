@@ -1,0 +1,23 @@
+.notFoundContainer{
+    align-self: center;
+    grid-template-columns: 1fr;
+}
+
+.notFoundContainer h1, .notFoundContainer p{
+    font-family: montserrat, sans-serif;
+    font-size: 5rem;
+    font-weight: 900;
+    text-align: center;
+    
+}
+
+.notFoundContainer h1{
+    font-size: 20vw;
+    text-shadow: -4px -4px 0px #00FFC0;
+    margin: 0;
+}
+
+.notFoundContainer p{
+    font-size: 5vw;
+    color: #0F0F0F;
+}
