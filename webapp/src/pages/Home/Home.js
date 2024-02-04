@@ -1,19 +1,28 @@
 import React from "react";
 import "./Home.css";
+import Nav from '../../components/Nav/Nav.js';
+import Footer from '../../components/Footer/Footer.js';
 import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="games-container">
-      <h1>Bienvenido a WIQ. Selecciona un modo de juego</h1>
-      <ul>
-        <a href="clasico">Clásico</a>
-        <a href="bateria">Batería de sabios</a>
-        <a href="descartando">Descartando</a>
-        <a href="pregunta">La pregunta caliente</a>
-        <a href="descubriendo">Descubriendo ciudades</a>
-      </ul>
-    </div>
+    <>
+      <Nav />
+      <div className="games-container">
+        <hgroup>
+          <h1>Bienvenido a WIQ!</h1>
+          <h2>Selecciona un modo de juego</h2>
+        </hgroup>         
+        <ul>
+          <Link to="clasico">Clásico</Link>
+          <Link to="bateria">Batería de sabios</Link>
+          <Link to="descartando">Descartando</Link>
+          <Link to="pregunta">La pregunta caliente</Link>
+          <Link to="descubriendo">Descubriendo ciudades</Link>
+        </ul>
+      </div>
+      <Footer />
+    </>
   );
 };
 

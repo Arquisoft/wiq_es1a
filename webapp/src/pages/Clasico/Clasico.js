@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./Clasico.css";
 import Preguntas from "../../components/Preguntas";
 import { useNavigate } from "react-router-dom";
+import Nav from '../../components/Nav/Nav.js';
+import { Link } from 'react-router-dom';
 
 const JuegoPreguntas = () => {
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -87,30 +89,33 @@ const JuegoPreguntas = () => {
           Tu puntuación: {puntuacion}/{Preguntas.length}
         </p>
         <button onClick={handleRepetirJuego}>Repetir Juego</button>
-        <button onClick={handleVolverAlMenu}>Volver al Menú Principal</button>
+        <Link to="home">Volver al Menú Principal</Link>
       </div>
     );
   }
 
   return (
-    <div className="questionContainer">
-      <h2>Pregunta {indicePregunta + 1}:</h2>
-      <p>{preguntaActual.pregunta}</p>
-      <div className="responsesContainer">
-        {preguntaActual.respuestas.map((respuesta, index) => (
-          <button
-            key={index}
-            onClick={() => handleRespuestaSeleccionada(respuesta)}
-            disabled={tiempoRestante === 0 || juegoTerminado}
-            style={estiloRespuesta(respuesta)}
-          >
-            {respuesta}
-          </button>
-        ))}
+    <>
+      <Nav />
+      <div className="questionContainer">
+        <h2>Pregunta {indicePregunta + 1}:</h2>
+        <p>{preguntaActual.pregunta}</p>
+        <div className="responsesContainer">
+          {preguntaActual.respuestas.map((respuesta, index) => (
+            <button
+              key={index}
+              onClick={() => handleRespuestaSeleccionada(respuesta)}
+              disabled={tiempoRestante === 0 || juegoTerminado}
+              style={estiloRespuesta(respuesta)}
+            >
+              {respuesta}
+            </button>
+          ))}
+        </div>
+        <div className="timer">Tiempo restante: {tiempoRestante}</div>
+        <div className="points">Puntuación: {puntuacion}</div>
       </div>
-      <div className="timer">Tiempo restante: {tiempoRestante}</div>
-      <div className="points">Puntuación: {puntuacion}</div>
-    </div>
+    </>
   );
 };
 

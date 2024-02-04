@@ -10,10 +10,11 @@ ul{
     list-style-type: none;
     text-align: center;
     gap: 1rem;
-    width: 50%;
     margin: auto;
+    padding: 0;
 }
 
 ul li{
     text-decoration: none;
+    
 }
