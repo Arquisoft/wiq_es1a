@@ -2,30 +2,47 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { useNavigate } from "react-router-dom";
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
 
 const Login = () => {
+  const signIn = useSignIn();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken] = useState('');
   const [error, setError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
+
+  const navigate = useNavigate();
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   const loginUser = async () => {
     try {
       const response = await axios.post(`${apiEndpoint}/login`, { username, password });
-
+      console.log(response);
       // Extract data from the response
       const { createdAt: userCreatedAt } = response.data;
+      setToken(response.data.token);
+
+      signIn({
+        auth: {
+          token: token
+        },
+        userState: {name: username}
+      })
 
       setCreatedAt(userCreatedAt);
       setLoginSuccess(true);
 
       setOpenSnackbar(true);
+
+      navigate('/home')
     } catch (error) {
-      setError(error.response.data.error);
+      //console.log(error);
+      //setError(error.response.data.error);
     }
   };
 
@@ -36,14 +53,7 @@ const Login = () => {
   return (
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
       {loginSuccess ? (
-        <div>
-          <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
-            Hello {username}!
-          </Typography>
-          <Typography component="p" variant="body1" sx={{ textAlign: 'center', marginTop: 2 }}>
-            Your account was created on {new Date(createdAt).toLocaleDateString()}.
-          </Typography>
-        </div>
+        navigate('../home')
       ) : (
         <div>
           <Typography component="h1" variant="h5">
