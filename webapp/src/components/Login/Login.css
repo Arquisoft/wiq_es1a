@@ -1,0 +1,9 @@
+.login-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.login-container h1{
+    text-align: center;
+}

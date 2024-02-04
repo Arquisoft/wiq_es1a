@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import '../css/JuegoPreguntas.css';
-import Preguntas from '../components/Preguntas';
+import './Clasico.css';
+import Preguntas from '../../components/Preguntas';
 import { useNavigate  } from 'react-router-dom';
 
 const JuegoPreguntas = () => {
@@ -27,7 +27,6 @@ const JuegoPreguntas = () => {
 
   useEffect(() => {
     if (juegoTerminado) {
-      // Detener el juego y mostrar el menú al finalizar el juego
       setMostrarMenu(true);
     }
   }, [juegoTerminado]);

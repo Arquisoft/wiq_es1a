@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import Authenticate from './pages/Authenticate';
-import Home from './pages/Home.js';
-import Clasico from './pages/Clasico.js';
+import Authenticate from './pages/Authenticate/Authenticate.js';
+import Home from './pages/Home/Home.js';
+import Clasico from './pages/Clasico/Clasico.js';
+import './App.css';
 
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import AuthProvider from 'react-auth-kit';
