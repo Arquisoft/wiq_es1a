@@ -15,6 +15,7 @@ nav{
     border-radius: 1rem;
     padding: 1rem;
     margin: 1rem;
+    justify-content: center;
     -webkit-box-shadow: 10px 10px 6px 0px rgba(0,255,192,1);
     -moz-box-shadow: 10px 10px 6px 0px rgba(0,255,192,1);
     box-shadow: 10px 10px 5px 0px rgba(0,255,192,1);  
@@ -22,11 +23,11 @@ nav{
 
 nav ul{
     display: flex;
+    justify-content: center;
     flex-direction: row;
 }
 
 nav li{
     display: flex;
     flex-direction: row;
-    height: 100%;
 }

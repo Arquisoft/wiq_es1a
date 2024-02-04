@@ -49,7 +49,7 @@ const JuegoPreguntas = () => {
       }
     } else {
       if (respuesta === respuestaSeleccionada) {
-        return { backgroundColor: "orange" };
+        return { backgroundColor: "#0F0F0F", color: "#F0F0F0" };
       }
     }
     return {};
