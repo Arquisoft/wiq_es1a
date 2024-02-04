@@ -7,11 +7,11 @@ const Home = () => {
         <div className='games-container'>
             <h1>Bienvenido a WIQ. Selecciona un modo de juego</h1>
             <ul>
-                <a href="home/clasico">Clásico</a>
-                <a href="home/bateria">Batería de sabios</a>
-                <a href="home/descartando">Descartando</a>
-                <a href="home/pregunta">La pregunta caliente</a>
-                <a href="home/descubriendo">Descubriendo ciudades</a>
+                <a href="clasico">Clásico</a>
+                <a href="bateria">Batería de sabios</a>
+                <a href="descartando">Descartando</a>
+                <a href="pregunta">La pregunta caliente</a>
+                <a href="descubriendo">Descubriendo ciudades</a>
             </ul>
         </div>
     )
