@@ -1,13 +1,13 @@
 const { fetch } = require('cross-fetch');
 
 // q es la entidad, p la propiedad
-async function consultaSPARQL(q, p) {
+async function consultaSPARQL(entity, property) {
     const endpointUrl = 'https://query.wikidata.org/sparql';
 
     const query = `
         SELECT DISTINCT ?entityLabel ?propertyLabel WHERE {
-        ?entity wdt:P31 wd:${q}; # Selecciona entidades que son países
-                wdt:${p} ?property.  # Obtiene la propiedad deseada
+        ?entity wdt:P31 wd:${entity}; # Selecciona entidades que son países
+                wdt:${property} ?property.  # Obtiene la propiedad deseada
         SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
         }
         ORDER BY UUID()
@@ -26,8 +26,8 @@ async function consultaSPARQL(q, p) {
     }));
 }
 
-async function obtenerPregunta(q, p, question, formatter = x => x) {
-    const sparqlResult = await consultaSPARQL(q, p);
+async function obtenerPregunta(entity, property, question, formatter = x => x) {
+    const sparqlResult = await consultaSPARQL(entity, property);
     const randomIndex = Math.floor(Math.random() * sparqlResult.length);
     const selectedEntity = sparqlResult[randomIndex];
 
