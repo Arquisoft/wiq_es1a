@@ -2,13 +2,14 @@ const { fetch } = require('cross-fetch');
 const { format } = require('date-fns');
 const { es } = require('date-fns/locale');
 
+//TODO: Hay algunos eventos que salen como entidad (ej. Q3293979) en vez de su nombre). Hay que solucionarlo 
 async function consultaSPARQL() {
   const endpointUrl = 'https://query.wikidata.org/sparql';
 
   const query = `
-    SELECT DISTINCT ?countryLabel ?foundationLabel WHERE {
+    SELECT DISTINCT ?countryLabel ?eventLabel WHERE {
       ?country wdt:P31 wd:Q6256; # Selecciona entidades que son países
-               wdt:P571 ?foundation.  # Obtiene la fecha de fundación de cada país
+               wdt:P1344 ?event.  # Obtiene la fecha de un evento histórico en el que participó de cada país
       SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
     }
     ORDER BY UUID()
@@ -23,7 +24,7 @@ async function consultaSPARQL() {
 
   return data.results.bindings.map(binding => ({
     country: binding.countryLabel.value,
-    foundation: binding.foundationLabel.value
+    event: binding.eventLabel.value
   }));
 }
 
@@ -32,9 +33,9 @@ async function obtenerPregunta() {
   const randomIndex = Math.floor(Math.random() * sparqlResult.length);
   const selectedCountry = sparqlResult[randomIndex];
 
-  const pregunta = `¿Cuál fue la fecha de fundación de ${selectedCountry.country}?`;
-  const respuestas = sparqlResult.map(result => result.foundation).map(f => format(new Date(f), "dd 'de' MMMM 'de' yyyy", { locale: es }));
-  const respuestaCorrecta = format(new Date(selectedCountry.foundation), "dd 'de' MMMM 'de' yyyy", { locale: es });
+  const pregunta = `¿En qué evento histórico participó ${selectedCountry.country}?`;
+  const respuestas = sparqlResult.map(result => result.event);
+  const respuestaCorrecta = selectedCountry.event;
 
   const formato = {
     pregunta: pregunta,

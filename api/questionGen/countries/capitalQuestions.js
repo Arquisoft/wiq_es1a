@@ -9,6 +9,7 @@ async function consultaSPARQL() {
                wdt:P36 ?capital.  # Obtiene la capital de cada país
       SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
     }
+    ORDER BY UUID()
     LIMIT 4
   `;
 
