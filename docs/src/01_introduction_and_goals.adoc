@@ -2,7 +2,6 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-introduction-and-goals]]
 == Introduction and Goals
-
 [role="arc42help"]
 ****
 Describes the relevant requirements and the driving forces that software architects and development team must consider. 
@@ -88,6 +87,8 @@ Table with role names, person names, and their expectations with respect to the 
 [options="header",cols="1,2,2"]
 |===
 |Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+| Alfredo Jirout Cid | UO288443@uniovi.es | Aprobar (opcional)
+| Rodrigo Gracía Iglesias | UO276396@uniovi.es | No tomar de ejemplo a Miguel
+| Iyán Fernández Riol | UO288231@uniovi.es | Sacar matricula
+| Martín Cancio Barrera | UO287561@uniovi.es | Ser feliz
 |===
