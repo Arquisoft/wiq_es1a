@@ -3,25 +3,23 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-architecture-constraints]]
 == Architecture Constraints
 
+|===
+| *_Restricción de Arquitectura_* | *_Descripción_*
 
-[role="arc42help"]
-****
-.Contents
-Any requirement that constraints software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
+| *_Tecnología de Desarrollo_* | La aplicación debe desarrollarse utilizando tecnologías web compatibles con los requisitos y estándares de RTVE.
 
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
+| *_Plataforma de Implementación_* | La aplicación debe ser implementada en una plataforma de alojamiento web que cumpla con los requisitos de rendimiento, seguridad y escalabilidad de RTVE.
 
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
+| *_Cumplimiento de Normativas de Privacidad_* | La arquitectura debe garantizar el cumplimiento de las regulaciones de privacidad de datos, como GDPR, para proteger la información de los usuarios.
 
+| *_Compatibilidad con Navegadores_* | La aplicación debe ser compatible con una amplia gama de navegadores web populares para garantizar una experiencia de usuario consistente.
 
-.Further Information
+| *_Seguridad de la Información_* | Se deben implementar medidas de seguridad sólidas, como autenticación de usuarios, control de acceso y encriptación de datos, para proteger la información confidencial de los usuarios.
 
-See https://docs.arc42.org/section-2/[Architecture Constraints] in the arc42 documentation.
+| *_Escalabilidad_* | La arquitectura debe ser escalable para manejar un aumento en el tráfico de usuarios sin comprometer el rendimiento.
 
-****
+| *_Mantenibilidad del Código_* | Se deben seguir prácticas de desarrollo de software que promuevan un código limpio y bien documentado para facilitar futuras actualizaciones y mantenimiento.
+
+| *_Tiempo de Desarrollo_* | La aplicación debe desarrollarse dentro de un marco de tiempo específico, lo que puede influir en las decisiones arquitectónicas y en la selección de tecnologías.
+
+|===

@@ -3,91 +3,78 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-introduction-and-goals]]
 == Introduction and Goals
 
-[role="arc42help"]
-****
-Describes the relevant requirements and the driving forces that software architects and development team must consider. 
-These include
+WIQ! es un proyecto desarrollado para la asignatura "Arquitectura de Software" del grado de Ingeniería Informática de la Escuela de Ingeniería Informática de la Universidad de Oviedo. Este proyecto toma como base el proyecto wiq, puesto a la disposición de los alumnos por los profesores de la asignatura.
+WIQ! ha sido encargado a la empresa HappySw por RTVE, con el objetivo de recrear su famoso concurso Saber y ganar en una versión web accesible para todo el mundo. Este proyecto será realizado por el equipo de desarrollo es1a formado por:
 
-* underlying business goals, 
-* essential features, 
-* essential functional requirements, 
-* quality goals for the architecture and
-* relevant stakeholders and their expectations
-****
+* Martín Cancio Barrera, mailto:UO287561@uniovi.es[_UO287561_].
+
+* Iyán Fernández Riol, mailto:UO288231@uniovi.es[_UO288231_].
+
+* Rodrigo García Iglesias, mailto:UO276396@uniovi.es[_UO276396_].
+
+* Alfredo Jirout Cid, mailto:UO288443@uniovi.es[_UO288443_]. 
+
+WIQ! es un software mediante el cual los usuarios pueden emular ser los participantes del concurso Saber y ganar, que cuenta con numerosas funcionalidades:
+
+* Jugar a varios de los modos de juego vistos en el programa
+
+* Registrarse para poder llevar registro de sus estadísticas en el juego
+
+* Jugar con amigos
+
+* Ajustar las temáticas de las preguntas, el tiempo de respuesta, el número de preguntas...
+***
 
 === Requirements Overview
 
-[role="arc42help"]
-****
-.Contents
-Short description of the functional requirements, driving forces, extract (or abstract)
-of requirements. Link to (hopefully existing) requirements documents
-(with version number and information where to find it).
+* El sistema contará al menos con un frontend web que estará desplegado y el acceso será a través de la Web.
+* Los usuarios podrán registrarse en el sistema y consultar el histórico de su participación en el sistema: número de juegos, preguntas acertadas/falladas, tiempos, etc.
+* Las preguntas serán generadas automáticamente a partir de los datos de Wikidata.
+* Las preguntas deberán responderse en un plazo de tiempo determinado.
+* Cada pregunta tendrá una respuesta correcta y varias respuestas incorrectas o distractoras. Tanto la respuesta correcta como las incorrectas se generarán automáticamente.
+* El sistema permitirá acceder a la información de los usuarios a través de un API.
+* El sistema permitirá acceder a la información de las preguntas generadas a través de un API.
 
-.Motivation
-From the point of view of the end users a system is created or modified to
-improve support of a business activity and/or improve the quality.
-
-.Form
-Short textual description, probably in tabular use-case format.
-If requirements documents exist this overview should refer to these documents.
-
-Keep these excerpts as short as possible. Balance readability of this document with potential redundancy w.r.t to requirements documents.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-1/[Introduction and Goals] in the arc42 documentation.
-
-****
 
 === Quality Goals
 
-[role="arc42help"]
-****
-.Contents
-The top three (max five) quality goals for the architecture whose fulfillment is of highest importance to the major stakeholders. 
-We really mean quality goals for the architecture. Don't confuse them with project goals.
-They are not necessarily identical.
 
-Consider this overview of potential topics (based upon the ISO 25010 standard):
+[options="header"]
+|===
+| Priority | Quality Goal | Motivation
 
-image::01_2_iso-25010-topics-EN.drawio.png["Categories of Quality Requirements"]
+| *1*
+| *_Usabilidad_*
+| La aplicación debe ser intuitiva para los usuarios, facilitándoles la interacción con la misma independientemente de sus habilidades.
 
-.Motivation
-You should know the quality goals of your most important stakeholders, since they will influence fundamental architectural decisions. 
-Make sure to be very concrete about these qualities, avoid buzzwords.
-If you as an architect do not know how the quality of your work will be judged...
+| *2*
+| *_Mantenibilidad_*
+| La aplicación debe contar con un diseño bien definido y estructurado, de tal forma que sea sencillo realizar modificaciones y/o ampliaciones.
 
-.Form
-A table with quality goals and concrete scenarios, ordered by priorities
-****
+| *3*
+| *_Privacidad_*
+| La aplicación debe garantizar la privacidad de la información de sus usuarios, contando con mecanismos para evitar intrusiones en el sistema.
+|===
 
 === Stakeholders
 
-[role="arc42help"]
-****
-.Contents
-Explicit overview of stakeholders of the system, i.e. all person, roles or organizations that
-
-* should know the architecture
-* have to be convinced of the architecture
-* have to work with the architecture or with code
-* need the documentation of the architecture for their work
-* have to come up with decisions about the system or its development
-
-.Motivation
-You should know all parties involved in development of the system or affected by the system.
-Otherwise, you may get nasty surprises later in the development process.
-These stakeholders determine the extent and the level of detail of your work and its results.
-
-.Form
-Table with role names, person names, and their expectations with respect to the architecture and its documentation.
-****
-
-[options="header",cols="1,2,2"]
+[options="header"]
 |===
-|Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+|Role/Name|Contact|Expectations 
+
+| *_Estudiantes (HappySw)_*
+| Martín Cancio Barrera, Iyán Fernández Riol, Rodrigo García Iglesias y Alfredo Jirout Cid
+| Los estudiantes son los desarrolladores de la aplicación. Están a cargo del desarrollo completo, lo que mejorará sus habilidades tanto de programación como de trabajo en grupo.
+
+| *_Usuarios_*
+| Cualquier persona que utilice la aplicación
+| Los usuarios son los que en última instancia van a utilizar la aplicación, por lo que debe ser intuitiva y fácil de entender.
+
+| *_Profesores_*
+| José Emilio Labra Gayo, Pablo González González, Jorge Álvarez Fidalgo y Cristian Augusto Alonso
+| Son los supervisores del proyecto, y ayudarán a los estudiantes para asegurarse de que el proyecto llegue a buen puerto.
+
+| *_RTVE_*
+| RTVE
+| Son los principales interesados en la aplicación, puesto que son los que la han encargado, para que sus espectadores puedan utilizarla.
 |===
