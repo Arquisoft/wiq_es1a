@@ -2,8 +2,27 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-design-decisions]]
 == Architecture Decisions
-  JavaScript:
-  We will use the JavaScript language to create both the front-end and the backend of the application, is the default technology of the initial project
+JavaScript:
+  We will use the JavaScript language to create both the front-end and the backend of the application, is the default technology of the initial project.
+
+ReactJS:
+  The base project they have given us uses ReactJS for the front-end of the application, although it is a framework with which we are not familiar.
+  We think that is a good oportunity to start using this framework.
+
+NodeJS:
+  We use NodeJS for the back-end of the application, this is the default technology of the initial project and all the group thought it was a good idea
+  to use it.
+
+MongoDB
+  The base project they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, but it seemed like a
+  good idea to learn this GBD system.
+
+Docker:
+  We will use Docker to package the application modules in containers, it is the initial technology of the project
+
+MySQL:
+  The base project that they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, however MySQL is another
+database management system that we have used in other subjects. We decided to discard this option to learn how to use MongoDB
 
 [role="arc42help"]
 ****
