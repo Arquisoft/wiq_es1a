@@ -2,7 +2,8 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-design-decisions]]
 == Architecture Decisions
-
+  JavaScript:
+  We will use the JavaScript language to create both the front-end and the backend of the application, is the default technology of the initial project
 
 [role="arc42help"]
 ****
