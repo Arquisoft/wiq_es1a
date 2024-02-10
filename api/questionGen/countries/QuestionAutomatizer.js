@@ -8,24 +8,16 @@ async function consultaSPARQL(entity, property) {
 
     const query = `
         SELECT DISTINCT ?entity ?entityLabel ?propertyLabel WHERE {
-        {
             ?entity wdt:P31 wd:${entity};
                     wdt:${property} ?property.
             FILTER NOT EXISTS {
-            ?entity wdt:${property} ?otherProperty.
-            FILTER (?property != ?otherProperty)
+                ?entity wdt:${property} ?otherProperty.
+                FILTER (?propertyLabel != ?otherPropertyLabel)
             }
-        }
-        UNION
-        {
-            ?entity wdt:P31 wd:${entity};
-                    wdt:${property} ?property.
-            FILTER NOT EXISTS { ?property wdt:P31 ?entity }
-        }
-        SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
+            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
         }
         ORDER BY UUID()
-        LIMIT 4
+        LIMIT 4          
     `;
 
     const encodedQuery = encodeURIComponent(query);
@@ -96,6 +88,7 @@ var questionTypes = [
     }
 ]
 
-var randomType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+// var randomType = questionTypes[Math.floor(Math.random() * questionTypes.length)];
+var randomType = questionTypes[4];
 
 obtenerPregunta(randomType).then(pregunta => console.log(pregunta));
