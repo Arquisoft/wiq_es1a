@@ -3,14 +3,16 @@ import "./Home.css";
 import Nav from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
 import { Link } from "react-router-dom";
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 
 const Home = () => {
+  const auth = useAuthUser()
   return (
     <>
       <Nav />
       <div className="games-container">
         <hgroup>
-          <h1>Bienvenido a WIQ!</h1>
+          <h1>Bienvenido, {auth.name}</h1>
           <h2>Selecciona un modo de juego</h2>
         </hgroup>         
         <ul>
