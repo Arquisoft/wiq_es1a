@@ -7,9 +7,21 @@ async function consultaSPARQL(entity, property) {
     const endpointUrl = 'https://query.wikidata.org/sparql';
 
     const query = `
-        SELECT DISTINCT ?entityLabel ?propertyLabel WHERE {
-        ?entity wdt:P31 wd:${entity}; # Selecciona entidades que son países
-                wdt:${property} ?property.  # Obtiene la propiedad deseada
+        SELECT DISTINCT ?entity ?entityLabel ?propertyLabel WHERE {
+        {
+            ?entity wdt:P31 wd:${entity};
+                    wdt:${property} ?property.
+            FILTER NOT EXISTS {
+            ?entity wdt:${property} ?otherProperty.
+            FILTER (?property != ?otherProperty)
+            }
+        }
+        UNION
+        {
+            ?entity wdt:P31 wd:${entity};
+                    wdt:${property} ?property.
+            FILTER NOT EXISTS { ?property wdt:P31 ?entity }
+        }
         SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
         }
         ORDER BY UUID()
