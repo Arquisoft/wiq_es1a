@@ -79,7 +79,7 @@ async function generateRandomQuestion(data) {
         let prop = otroPais[propiedadPregunta][0];
 
         // Si no está en las propiedades del país de la pregunta
-        if(!(prop in entidad[propiedadPregunta])){
+        if(!(prop in questionObj.respuestas) && !(prop in entidad[propiedadPregunta])){
             questionObj.respuestas.push(prop)
         }
     }
@@ -125,14 +125,16 @@ async function generateRandomQuestions(n) {
 
     // Generar 5 preguntas aleatorias
     for (let i = 0; i < n; i++) {
-        const question = generateRandomQuestion(data);
+        const question = Promise.resolve(generateRandomQuestion(data));
         questions.push(question);
     }
 
     return questions;
 }
 
-// Llamar a la función principal y mostrar el resultado
 generateRandomQuestions(5)
-    .then(question => console.log(question.pregunta, question.respuestas, question.correcta))
+    .then(promises => Promise.all(promises))
+    .then(questions => {
+        console.log(questions);
+    })
     .catch(error => console.error("Error generando preguntas:", error));
