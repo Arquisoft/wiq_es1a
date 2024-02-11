@@ -79,7 +79,7 @@ async function generateRandomQuestion(data) {
         let prop = otroPais[propiedadPregunta][0];
 
         // Si no está en las propiedades del país de la pregunta
-        if(!(prop in questionObj.respuestas) && !(prop in entidad[propiedadPregunta])){
+        if(!(prop in questionObj.respuestas) && !(prop in entidad[propiedadPregunta]) && !/^Q\d+/.test(prop)){
             questionObj.respuestas.push(prop)
         }
     }
