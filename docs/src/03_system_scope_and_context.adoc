@@ -7,14 +7,36 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [plantuml, "businesscontext", png]
 ----
-[horizontal, caption="WIQ! Business Context"]
-.Users: Participate in quizzes
-.Hall: Hosts quizzes
-.Business: Use the application
-Users -- Hall
-Users -- Business
-Hall -- Business
+Actor User as user
+
+component "WIQ!" as wiq <<system>>
+component "API Users" as apiusers <<extern>>
+component "API Questions" as apiquestions <<extern>>
+component "Wikidata" as wikidata <<extern>>
+component "Authentication" as authentication <<extern>>
+
+user -down.> wiq
+
+wiq -left.> apiusers
+wiq -.> apiquestions
+wiq -right.> wikidata
+wiq -.> authentication
 ----
 
 === Technical Context
 
+[plantuml, "technicalcontext", png]
+---
+Actor User as user
+Actor Admin as admin
+
+node cloud as "Cloud"{
+  component wiq as "WIQ! Webapp"
+}
+
+component wikidata as "Wikidata"
+
+user -down-> cloud: HTTP/HTTPS
+admin -down-> cloud: SSH
+wikidata -right- cloud: REST
+---
