@@ -99,13 +99,13 @@ async function generateRandomQuestion(data) {
             questionObj.pregunta = `¿Quién es el jefe de estado de ${entidadLabel}?`;
             break;
         case "eventLabel":
-            questionObj.pregunta = `¿Cuál es el evento importante de ${entidadLabel}?`;
+            questionObj.pregunta = `¿En qué evento histórico participó ${entidadLabel}?`;
             break;
         case "idiomaLabel":
             questionObj.pregunta = `¿Cuál es uno de los idiomas oficiales de ${entidadLabel}?`;
             break;
         case "fronteraLabel":
-            questionObj.pregunta = `¿Cuál es la frontera de ${entidadLabel}?`;
+            questionObj.pregunta = `¿Con qué país comparte frontera ${entidadLabel}?`;
             break;
         case "lemaLabel":
             questionObj.pregunta = `¿Cuál es el lema de ${entidadLabel}?`;
