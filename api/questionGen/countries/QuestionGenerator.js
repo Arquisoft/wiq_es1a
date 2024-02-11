@@ -27,20 +27,21 @@ Array.prototype.groupByCountry = function () {
 // Función para realizar la consulta SPARQL y obtener los datos
 async function getData() {
     const sparqlQuery = `
-    SELECT DISTINCT ?countryLabel ?capitalLabel ?jefeLabel ?eventLabel ?idiomaLabel ?fronteraLabel ?edadLabel ?fundacionLabel ?gobiernoLabel ?lemaLabel
-    WHERE {
-        ?country wdt:P31 wd:Q6256;            
-             wdt:P36 ?capital;   
-             wdt:P35 ?jefe;
-             wdt:P1344 ?event;
-             wdt:P37 ?idioma;
-             wdt:P47 ?frontera;
-             wdt:P2250 ?edad;
-             wdt:P571 ?fundacion;
-             wdt:P122 ?gobierno;
-             wdt:P1451 ?lema .
-        SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
-    }`;
+        SELECT DISTINCT ?countryLabel ?capitalLabel ?jefeLabel ?eventLabel ?idiomaLabel ?fronteraLabel ?edadLabel ?fundacionLabel ?gobiernoLabel ?lemaLabel
+        WHERE {
+            ?country wdt:P31 wd:Q6256;            
+                wdt:P36 ?capital;   
+                wdt:P35 ?jefe;
+                wdt:P1344 ?event;
+                wdt:P37 ?idioma;
+                wdt:P47 ?frontera;
+                wdt:P2250 ?edad;
+                wdt:P571 ?fundacion;
+                wdt:P122 ?gobierno;
+                wdt:P1451 ?lema .
+            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
+        }
+    `;
 
     const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparqlQuery)}&format=json`;
 
@@ -67,7 +68,7 @@ async function generateRandomQuestion(data) {
     const propiedadPregunta = propiedades[Math.floor(Math.random() * propiedades.length)];
   
     // Obtener la respuesta correcta
-    const respuestaCorrecta = entidad[propiedadPregunta][0];
+    const respuestaCorrecta = entidad[propiedadPregunta][entidad[propiedadPregunta].length - 1];
   
     var questionObj = {
         pregunta: "",
