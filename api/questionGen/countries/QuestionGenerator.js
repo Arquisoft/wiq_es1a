@@ -27,7 +27,7 @@ Array.prototype.groupByCountry = function () {
 // Función para realizar la consulta SPARQL y obtener los datos
 async function getData() {
     const sparqlQuery = `
-    SELECT DISTINCT ?countryLabel ?capitalLabel ?jefeLabel ?eventLabel ?idiomaLabel ?fronteraLabel ?edadLabel ?fundacionLabel ?lemaLabel
+    SELECT DISTINCT ?countryLabel ?capitalLabel ?jefeLabel ?eventLabel ?idiomaLabel ?fronteraLabel ?edadLabel ?fundacionLabel ?gobiernoLabel ?lemaLabel
     WHERE {
         ?country wdt:P31 wd:Q6256;            
              wdt:P36 ?capital;   
@@ -37,6 +37,7 @@ async function getData() {
              wdt:P47 ?frontera;
              wdt:P2250 ?edad;
              wdt:P571 ?fundacion;
+             wdt:P122 ?gobierno;
              wdt:P1451 ?lema .
         SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
     }`;
@@ -62,7 +63,7 @@ async function generateRandomQuestion(data) {
     const entidad = data[entidadLabel];
   
     // Elegir aleatoriamente una propiedad del país para hacer la pregunta
-    const propiedades = ["capitalLabel", "jefeLabel", "eventLabel", "idiomaLabel", "fronteraLabel", "lemaLabel", "edadLabel", "fundacionLabel"];
+    const propiedades = ["capitalLabel", "jefeLabel", "eventLabel", "idiomaLabel", "fronteraLabel", "lemaLabel", "edadLabel", "fundacionLabel", "gobiernoLabel"];
     const propiedadPregunta = propiedades[Math.floor(Math.random() * propiedades.length)];
   
     // Obtener la respuesta correcta
@@ -81,7 +82,7 @@ async function generateRandomQuestion(data) {
         let prop = otroPais[propiedadPregunta][0];
 
         // Si no está en las propiedades del país de la pregunta
-        if(!questionObj.respuestas.includes(prop)&& !entidad[propiedadPregunta].includes(prop) == -1 && !/^Q\d+/.test(prop)){
+        if(!questionObj.respuestas.includes(prop) && !entidad[propiedadPregunta].includes(prop) && !/^Q\d+/.test(prop)){
             questionObj.respuestas.push(prop)
         }
     }
@@ -115,6 +116,11 @@ async function generateRandomQuestion(data) {
             break;
         case "fundacionLabel":
             questionObj.pregunta = `¿En qué fecha se fundó ${entidadLabel}?`;
+            questionObj.respuestas = questionObj.respuestas.map(x => format(x, "d 'de' MMMM 'de' yyyy", { locale: es }));
+            questionObj.correcta = format(questionObj.correcta, "d 'de' MMMM 'de' yyyy", { locale: es });
+            break;
+        case "gobiernoLabel":
+            questionObj.pregunta = `¿Cuál es la forma de gobierno de ${entidadLabel}?`;
             break;
         default:
             questionObj.pregunta = `¿Cuál es la propiedad ${entidadLabel} de ${entidadLabel}?`;
