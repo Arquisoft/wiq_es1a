@@ -2,19 +2,27 @@ const { fetch } = require('cross-fetch');
 const { format } = require('date-fns');
 const { es } = require('date-fns/locale');
 
-Array.prototype.groupByCountry = function() {
-    return this.reduce(function(acc, obj) {
-        const country = obj.countryLabel.value;
-        const existingCountryIndex = acc.findIndex(item => item.country === country);
-        if (existingCountryIndex === -1) {
-            acc.push({ country, items: [obj] });
-        } else {
-            acc[existingCountryIndex].items.push(obj);
+Array.prototype.groupByCountry = function () {
+    return this.reduce((acumulador, actual) => {
+        const pais = actual.countryLabel.value;
+        if (!acumulador[pais]) {
+            acumulador[pais] = {};
         }
-        return acc;
-    }, []);
-};
 
+        for (const key in actual) {
+            if (key !== "countryLabel") {
+                const valor = actual[key].value;
+            if (!acumulador[pais][key]) {
+                acumulador[pais][key] = [valor];
+            } else if (!acumulador[pais][key].includes(valor)) {
+                acumulador[pais][key].push(valor);
+            }
+            }
+        }
+
+        return acumulador;
+    }, {});
+};
 
 // Función para realizar la consulta SPARQL y obtener los datos
 async function getData() {
@@ -43,72 +51,70 @@ async function getData() {
     }
 }
 
-// Función para generar una pregunta aleatoria
-function generateRandomQuestion(data) {
-    const randomIndex = Math.floor(Math.random() * data.keys().length);
-    const props = ["capitalLabel", "jefeLabel", "eventLabel", "idiomaLabel", "fronteraLabel", "lemaLabel"];
-    const randomPropIndex = Math.floor(Math.random() * props.length);
-    const randomProp = props[randomPropIndex];
-
-    const entity = data[randomIndex];
-    const prop = data[randomIndex][randomProp].value;
-
-    const questionObj = {
+async function generateRandomQuestion(data) {
+    // Elegir aleatoriamente un país del array
+    var entidades = Object.keys(data);
+    const entidadLabel = entidades[Math.floor(Math.random() * entidades.length)];
+    //Eliminar el país de la lista de países
+    entidades = entidades.filter(x => x !== entidadLabel);  
+    const entidad = data[entidadLabel];
+  
+    // Elegir aleatoriamente una propiedad del país para hacer la pregunta
+    const propiedades = ["capitalLabel", "jefeLabel", "eventLabel", "idiomaLabel", "fronteraLabel", "lemaLabel"];
+    const propiedadPregunta = propiedades[Math.floor(Math.random() * propiedades.length)];
+  
+    // Obtener la respuesta correcta
+    const respuestaCorrecta = entidad[propiedadPregunta][0];
+  
+    var questionObj = {
         pregunta: "",
-        respuestas: [],
-        correcta: ""
-    };
+        respuestas: [respuestaCorrecta],
+        correcta: respuestaCorrecta
+    }
 
-    questionObj.respuestas.push(prop)
+    // Obtener respuestas incorrectas
+    while (questionObj.respuestas.length < 4){
+        const otroPaisLabel = entidades[Math.floor(Math.random() * entidades.length)];
+        const otroPais = data[otroPaisLabel];
+        let prop = otroPais[propiedadPregunta][0];
 
-    // Obtener tres respuestas incorrectas distintas
-    while (questionObj.respuestas.length < 4) {
-        let randomEntityIndex = Math.floor(Math.random() * data.length);
-        const randomProperty = data[randomEntityIndex][props[randomPropIndex]].value;
-        if (!questionObj.respuestas.includes(randomProperty) && randomProperty !== prop) {
-            questionObj.respuestas.push(randomProperty);
+        // Si no está en las propiedades del país de la pregunta
+        if(!(prop in entidad[propiedadPregunta])){
+            questionObj.respuestas.push(prop)
         }
     }
+  
+    // Barajar las opciones de respuesta
+    questionObj.respuestas.sort(() => Math.random() - 0.5);
 
-    // Dependiendo de la propiedad seleccionada, configurar la pregunta y la respuesta correcta
-    switch(randomProp) {
+    switch(propiedadPregunta) {
         case "capitalLabel":
-            questionObj.pregunta = `¿Cuál es la capital de ${entity}?`;
-            questionObj.correcta = prop;
+            questionObj.pregunta = `¿Cuál es la capital de ${entidadLabel}?`;
             break;
         case "jefeLabel":
-            questionObj.pregunta = `¿Quién es el jefe de estado de ${entity}?`;
-            questionObj.correcta = prop;
+            questionObj.pregunta = `¿Quién es el jefe de estado de ${entidadLabel}?`;
             break;
         case "eventLabel":
-            questionObj.pregunta = `¿Cuál es el evento importante de ${entity}?`;
-            questionObj.correcta = prop;
+            questionObj.pregunta = `¿Cuál es el evento importante de ${entidadLabel}?`;
             break;
         case "idiomaLabel":
-            questionObj.pregunta = `¿Cuál es el idioma principal de ${entity}?`;
-            questionObj.correcta = prop;
+            questionObj.pregunta = `¿Cuál es el idioma principal de ${entidadLabel}?`;
             break;
         case "fronteraLabel":
-            questionObj.pregunta = `¿Cuál es la frontera de ${entity}?`;
-            questionObj.correcta = prop;
+            questionObj.pregunta = `¿Cuál es la frontera de ${entidadLabel}?`;
             break;
         case "lemaLabel":
-            questionObj.pregunta = `¿Cuál es el lema de ${entity}?`;
-            questionObj.correcta = prop;
+            questionObj.pregunta = `¿Cuál es el lema de ${entidadLabel}?`;
             break;
         default:
-            questionObj.pregunta = `¿Cuál es la propiedad ${randomProp} de ${entity}?`;
-            questionObj.correcta = prop;
+            questionObj.pregunta = `¿Cuál es la propiedad ${entidadLabel} de ${entidadLabel}?`;
     }
-
-    // Mezclar las respuestas
-    shuffleArray(questionObj.respuestas);
 
     return questionObj;
 }
 
 // Función principal para generar preguntas aleatorias
-async function generateRandomQuestions() {
+async function generateRandomQuestions(n) {
     const data = await getData();
     if (data.length === 0) {
         console.log("No se pudo obtener datos para generar preguntas.");
@@ -118,7 +124,7 @@ async function generateRandomQuestions() {
     const questions = [];
 
     // Generar 5 preguntas aleatorias
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < n; i++) {
         const question = generateRandomQuestion(data);
         questions.push(question);
     }
@@ -126,15 +132,7 @@ async function generateRandomQuestions() {
     return questions;
 }
 
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
-
 // Llamar a la función principal y mostrar el resultado
-generateRandomQuestions()
-    .then(questions => console.log(questions))
+generateRandomQuestions(5)
+    .then(question => console.log(question.pregunta, question.respuestas, question.correcta))
     .catch(error => console.error("Error generando preguntas:", error));
