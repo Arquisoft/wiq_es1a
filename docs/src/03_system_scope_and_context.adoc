@@ -7,13 +7,13 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [plantuml, "businesscontext", png]
 ----
-Actor User as user
+Actor user as "User"
 
-component "WIQ!" as wiq <<system>>
-component "API Users" as apiusers <<extern>>
-component "API Questions" as apiquestions <<extern>>
-component "Wikidata" as wikidata <<extern>>
-component "Authentication" as authentication <<extern>>
+component wiq <<system>> as "WIQ!" 
+component apiusers <<extern>> as "API Users" 
+component apiquestions <<extern>> as "API Questions"
+component wikidata <<extern>> as "Wikidata"
+component authentication <<extern>> as "Authentication"
 
 user -down.> wiq
 
@@ -26,9 +26,9 @@ wiq -.> authentication
 === Technical Context
 
 [plantuml, "technicalcontext", png]
----
-Actor User as user
-Actor Admin as admin
+----
+Actor user as "User"
+Actor admin as "Admin"
 
 node cloud as "Cloud"{
   component wiq as "WIQ! Webapp"
@@ -39,4 +39,4 @@ component wikidata as "Wikidata"
 user -down-> cloud: HTTP/HTTPS
 admin -down-> cloud: SSH
 wikidata -right- cloud: REST
----
+----
