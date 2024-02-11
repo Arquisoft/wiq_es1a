@@ -27,7 +27,7 @@ Array.prototype.groupByCountry = function () {
 // Función para realizar la consulta SPARQL y obtener los datos
 async function getData() {
     const sparqlQuery = `
-    SELECT DISTINCT ?countryLabel ?capitalLabel ?jefeLabel ?eventLabel ?idiomaLabel ?fronteraLabel ?edadLabel ?lemaLabel
+    SELECT DISTINCT ?countryLabel ?capitalLabel ?jefeLabel ?eventLabel ?idiomaLabel ?fronteraLabel ?edadLabel ?fundacionLabel ?lemaLabel
     WHERE {
         ?country wdt:P31 wd:Q6256;            
              wdt:P36 ?capital;   
@@ -36,6 +36,7 @@ async function getData() {
              wdt:P37 ?idioma;
              wdt:P47 ?frontera;
              wdt:P2250 ?edad;
+             wdt:P571 ?fundacion;
              wdt:P1451 ?lema .
         SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
     }`;
@@ -61,7 +62,7 @@ async function generateRandomQuestion(data) {
     const entidad = data[entidadLabel];
   
     // Elegir aleatoriamente una propiedad del país para hacer la pregunta
-    const propiedades = ["capitalLabel", "jefeLabel", "eventLabel", "idiomaLabel", "fronteraLabel", "lemaLabel", "edadLabel"];
+    const propiedades = ["capitalLabel", "jefeLabel", "eventLabel", "idiomaLabel", "fronteraLabel", "lemaLabel", "edadLabel", "fundacionLabel"];
     const propiedadPregunta = propiedades[Math.floor(Math.random() * propiedades.length)];
   
     // Obtener la respuesta correcta
@@ -80,7 +81,7 @@ async function generateRandomQuestion(data) {
         let prop = otroPais[propiedadPregunta][0];
 
         // Si no está en las propiedades del país de la pregunta
-        if(!(prop in questionObj.respuestas) && !(prop in entidad[propiedadPregunta]) && !/^Q\d+/.test(prop)){
+        if(!questionObj.respuestas.includes(prop)&& !entidad[propiedadPregunta].includes(prop) == -1 && !/^Q\d+/.test(prop)){
             questionObj.respuestas.push(prop)
         }
     }
@@ -99,7 +100,7 @@ async function generateRandomQuestion(data) {
             questionObj.pregunta = `¿Cuál es el evento importante de ${entidadLabel}?`;
             break;
         case "idiomaLabel":
-            questionObj.pregunta = `¿Cuál es el idioma principal de ${entidadLabel}?`;
+            questionObj.pregunta = `¿Cuál es uno de los idiomas oficiales de ${entidadLabel}?`;
             break;
         case "fronteraLabel":
             questionObj.pregunta = `¿Cuál es la frontera de ${entidadLabel}?`;
@@ -111,6 +112,9 @@ async function generateRandomQuestion(data) {
             questionObj.pregunta = `¿Cuál es la esperanza de vida media de ${entidadLabel}?`;
             questionObj.respuestas = questionObj.respuestas.map(x => Math.floor(x));
             questionObj.correcta = Math.floor(questionObj.correcta);
+            break;
+        case "fundacionLabel":
+            questionObj.pregunta = `¿En qué fecha se fundó ${entidadLabel}?`;
             break;
         default:
             questionObj.pregunta = `¿Cuál es la propiedad ${entidadLabel} de ${entidadLabel}?`;
