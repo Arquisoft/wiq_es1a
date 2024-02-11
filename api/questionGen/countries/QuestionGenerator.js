@@ -27,7 +27,7 @@ Array.prototype.groupByCountry = function () {
 // Función para realizar la consulta SPARQL y obtener los datos
 async function getData() {
     const sparqlQuery = `
-    SELECT DISTINCT ?countryLabel ?capitalLabel ?jefeLabel ?eventLabel ?idiomaLabel ?fronteraLabel ?lemaLabel
+    SELECT DISTINCT ?countryLabel ?capitalLabel ?jefeLabel ?eventLabel ?idiomaLabel ?fronteraLabel ?edadLabel ?lemaLabel
     WHERE {
         ?country wdt:P31 wd:Q6256;            
              wdt:P36 ?capital;   
@@ -35,6 +35,7 @@ async function getData() {
              wdt:P1344 ?event;
              wdt:P37 ?idioma;
              wdt:P47 ?frontera;
+             wdt:P2250 ?edad;
              wdt:P1451 ?lema .
         SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
     }`;
@@ -60,7 +61,7 @@ async function generateRandomQuestion(data) {
     const entidad = data[entidadLabel];
   
     // Elegir aleatoriamente una propiedad del país para hacer la pregunta
-    const propiedades = ["capitalLabel", "jefeLabel", "eventLabel", "idiomaLabel", "fronteraLabel", "lemaLabel"];
+    const propiedades = ["capitalLabel", "jefeLabel", "eventLabel", "idiomaLabel", "fronteraLabel", "lemaLabel", "edadLabel"];
     const propiedadPregunta = propiedades[Math.floor(Math.random() * propiedades.length)];
   
     // Obtener la respuesta correcta
@@ -106,6 +107,11 @@ async function generateRandomQuestion(data) {
         case "lemaLabel":
             questionObj.pregunta = `¿Cuál es el lema de ${entidadLabel}?`;
             break;
+        case "edadLabel":
+            questionObj.pregunta = `¿Cuál es la esperanza de vida media de ${entidadLabel}?`;
+            questionObj.respuestas = questionObj.respuestas.map(x => Math.floor(x));
+            questionObj.correcta = Math.floor(questionObj.correcta);
+            break;
         default:
             questionObj.pregunta = `¿Cuál es la propiedad ${entidadLabel} de ${entidadLabel}?`;
     }
@@ -129,11 +135,10 @@ async function generateRandomQuestions(n) {
         questions.push(question);
     }
 
-    return questions;
+    return Promise.all(questions);
 }
 
-generateRandomQuestions(5)
-    .then(promises => Promise.all(promises))
+generateRandomQuestions(25)
     .then(questions => {
         console.log(questions);
     })
