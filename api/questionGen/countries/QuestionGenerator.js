@@ -117,8 +117,12 @@ async function generateRandomQuestion(data) {
             break;
         case "fundacionLabel":
             questionObj.pregunta = `¿En qué fecha se fundó ${entidadLabel}?`;
-            questionObj.respuestas = questionObj.respuestas.map(x => format(x, "d 'de' MMMM 'de' yyyy", { locale: es }));
-            questionObj.correcta = format(questionObj.correcta, "d 'de' MMMM 'de' yyyy", { locale: es });
+            questionObj.respuestas = questionObj.respuestas.map(d => {
+                d = new Date(d)
+                return `${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`;
+            });
+            var d = new Date(questionObj.correcta);
+            questionObj.correcta = `${d.getDate()}/${d.getMonth()}/${d.getFullYear()}`;
             break;
         case "gobiernoLabel":
             questionObj.pregunta = `¿Cuál es la forma de gobierno de ${entidadLabel}?`;
