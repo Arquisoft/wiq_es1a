@@ -458,12 +458,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_technical_context">3.2. Technical Context</a></li>
 </ul>
 </li>
-<li><a href="#section-solution-strategy">4. Solution Strategy</a></li>
+<li><a href="#section-solution-strategy">4. Solution Strategy</a>
+<ul class="sectlevel2">
+<li><a href="#_diseño">4.1. Diseño</a></li>
+<li><a href="#_seguridad">4.2. Seguridad</a></li>
+<li><a href="#_testabilidad">4.3. Testabilidad</a></li>
+<li><a href="#_interfaz">4.4. Interfaz</a></li>
+</ul>
+</li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
 <ul class="sectlevel2">
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
-<li><a href="#_level_2">5.2. Level 2</a></li>
-<li><a href="#_level_3">5.3. Level 3</a></li>
+<li><a href="#_blackbox_overall_system">5.2. Blackbox Overall System</a></li>
+<li><a href="#_level_2">5.3. Level 2</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Runtime View</a>
@@ -804,326 +811,136 @@ un ranking con la máxima puntuación del usuario y se podrá comparar con otros
 </li>
 </ul>
 </div>
+<div class="sect2">
+<h3 id="_diseño">4.1. Diseño</h3>
 <div class="paragraph">
-<div class="title">Diseño</div>
 <p>La página web diseñada está compuesta por un frontend en React, un backend en Node.js y está documentada usando Asciidoc. Cada usuario tendrá su propia cuenta donde se guardará su información. Las decisiones relacionadas con el diseño se detallan en el punto 9.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_seguridad">4.2. Seguridad</h3>
 <div class="paragraph">
-<div class="title">Seguridad</div>
 <p>Garantizamos la seguridad del usuario</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_testabilidad">4.3. Testabilidad</h3>
 <div class="paragraph">
-<div class="title">Testabilidad</div>
 <p>Se realizarán pruebas para cada parte individual de la aplicación, garantizando así el correcto funcionamiento de los diferentes modulos tanto individualmente como de forma conjunta.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_interfaz">4.4. Interfaz</h3>
 <div class="paragraph">
-<div class="title">Interfaz</div>
 <p>La interfaz gráfica será elegida entre todos los miembros del equipo, aportando cada uno algún boceto o idea, los cuales serán puestos en común y se decidirá cual se ajusta mejor a la apicación esperada y que elementos de dichos bocetos resultan más adecuados.
 Para ello se tendrá en cuenta la usabilidad y las necesidades de los difentes tipos de usuarios.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="section-building-block-view">5. Building Block View</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
+<div class="sect2">
+<h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
 <div class="paragraph">
-<div class="title">Content</div>
-<p>The building block view shows the static decomposition of the system into building blocks (modules, components, subsystems, classes, interfaces, packages, libraries, frameworks, layers, partitions, tiers, functions, macros, operations, data structures, &#8230;&#8203;) as well as their dependencies (relationships, associations, &#8230;&#8203;)</p>
-</div>
-<div class="paragraph">
-<p>This view is mandatory for every architecture documentation.
-In analogy to a house this is the <em>floor plan</em>.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Maintain an overview of your source code by making its structure understandable through
-abstraction.</p>
-</div>
-<div class="paragraph">
-<p>This allows you to communicate with your stakeholder on an abstract level without disclosing implementation details.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>The building block view is a hierarchical collection of black boxes and white boxes
-(see figure below) and their descriptions.</p>
+<p>El código se descompone de manera estructurada por niveles, en los que se enseñan las dependencias internas de cada elemento. El sistema se divide en Whitebox y Blackbox.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/05_building_blocks-EN.png" alt="Hierarchy of building blocks">
+<img src="./images/whiteBox5.1.png" alt="Hierarchy of building blocks">
 </div>
-</div>
-<div class="paragraph">
-<p><strong>Level 1</strong> is the white box description of the overall system together with black
-box descriptions of all contained building blocks.</p>
-</div>
-<div class="paragraph">
-<p><strong>Level 2</strong> zooms into some building blocks of level 1.
-Thus it contains the white box description of selected building blocks of level 1, together with black box descriptions of their internal building blocks.</p>
-</div>
-<div class="paragraph">
-<p><strong>Level 3</strong> zooms into selected building blocks of level 2, and so on.</p>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-5/">Building Block View</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Here you describe the decomposition of the overall system using the following white box template. It contains</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>an overview diagram</p>
-</li>
-<li>
-<p>a motivation for the decomposition</p>
-</li>
-<li>
-<p>black box descriptions of the contained building blocks. For these we offer you alternatives:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>use <em>one</em> table for a short and pragmatic overview of all contained building blocks and their interfaces</p>
-</li>
-<li>
-<p>use a list of black box descriptions of the building blocks according to the black box template (see below).
-Depending on your choice of tool this list could be sub-chapters (in text files), sub-pages (in a Wiki) or nested elements (in a modeling tool).</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>(optional:) important interfaces, that are not explained in the black box templates of a building block, but are very important for understanding the white box.
-Since there are so many ways to specify interfaces why do not provide a specific template for them.
- In the worst case you have to specify and describe syntax, semantics, protocols, error handling,
- restrictions, versions, qualities, necessary compatibilities and many things more.
-In the best case you will get away with examples or simple signatures.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Motivation</dt>
-<dd>
-<p><em>&lt;text explanation&gt;</em></p>
-</dd>
-<dt class="hdlist1">Contained Building Blocks</dt>
-<dd>
-<p><em>&lt;Description of contained building block (black boxes)&gt;</em></p>
-</dd>
-<dt class="hdlist1">Important Interfaces</dt>
-<dd>
-<p><em>&lt;Description of important interfaces&gt;</em></p>
-</dd>
-</dl>
-</div>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Insert your explanations of black boxes from level 1:</p>
-</div>
-<div class="paragraph">
-<p>If you use tabular form you will only describe your black boxes with name and
-responsibility according to the following schema:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
-<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Actores</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Admin</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tiene acceso al completo de la aplicación y puede administrarla para que funcione correctamente.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>User</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es el que interactua directamente con la aplicación.</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
-Its headline is the name of the black box.</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_black_box_1">5.1.1. &lt;Name black box 1&gt;</h4>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Here you describe &lt;black box 1&gt;
-according the the following black box template:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Purpose/Responsibility</p>
-</li>
-<li>
-<p>Interface(s), when they are not extracted as separate paragraphs. This interfaces may include qualities and performance characteristics.</p>
-</li>
-<li>
-<p>(Optional) Quality-/Performance characteristics of the black box, e.g.availability, run time behavior, &#8230;&#8203;.</p>
-</li>
-<li>
-<p>(Optional) directory/file location</p>
-</li>
-<li>
-<p>(Optional) Fulfilled requirements (if you need traceability to requirements).</p>
-</li>
-<li>
-<p>(Optional) Open issues/problems/risks</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><em>&lt;Purpose/Responsibility&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;Interface(s)&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Quality/Performance Characteristics&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Directory/File Location&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Fulfilled Requirements&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_black_box_2">5.1.2. &lt;Name black box 2&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_black_box_n">5.1.3. &lt;Name black box n&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_interface_1">5.1.4. &lt;Name interface 1&gt;</h4>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_interface_m">5.1.5. &lt;Name interface m&gt;</h4>
-
-</div>
 </div>
 <div class="sect2">
-<h3 id="_level_2">5.2. Level 2</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.</p>
-</div>
-<div class="paragraph">
-<p>You have to decide which building blocks of your system are important enough to justify such a detailed description.
-Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
-Leave out normal, simple, boring or standardized parts of your system</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_1">5.2.1. White Box <em>&lt;building block 1&gt;</em></h4>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>&#8230;&#8203;describes the internal structure of <em>building block 1</em>.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_2">5.2.2. White Box <em>&lt;building block 2&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_m">5.2.3. White Box <em>&lt;building block m&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
+<h3 id="_blackbox_overall_system">5.2. Blackbox Overall System</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Name</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Interface</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">La interfaz con la que interactua el usuario</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>WikiData</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Proporciona las preguntas que se usaran en la aplicación</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>MongoDB</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Almacena los datos del usuario</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
-<h3 id="_level_3">5.3. Level 3</h3>
-<div class="sidebarblock arc42help">
+<h3 id="_level_2">5.3. Level 2</h3>
+<div class="imageblock">
 <div class="content">
-<div class="paragraph">
-<p>Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.</p>
-</div>
-<div class="paragraph">
-<p>When you need more detailed levels of your architecture please copy this
-part of arc42 for additional levels.</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_x_1">5.3.1. White Box &lt;_building block x.1_&gt;</h4>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Specifies the internal structure of <em>building block x.1</em>.</p>
-</div>
+<img src="./images/Level2.png" alt="Hierarchy of building blocks">
 </div>
 </div>
 <div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
+<div class="title">Motivación</div>
+<p>En este diagrama podemos observar los microservicios decididos que proporcionarán todas las operaciones necesarias para que la
+aplicación funcione correctamente.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_x_2">5.3.2. White Box &lt;_building block x.2_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_y_1">5.3.3. White Box &lt;_building block y.1_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Name</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Game Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es el microservicio que se encargara del correcto funcionamiento del juego y calcular la puntuación del usuario.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>UserData Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es el microservicio que proporciona los datos necesarios del usuario.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Authetification Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es un microservicio que los usuarios usan para iniciar sesión en la aplicación.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Question Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Es eel microservicio que generara las preguntas a traves de la Api de WikiData.</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
-</div>
 </div>
 </div>
 </div>
@@ -1564,34 +1381,6 @@ on this list.</p>
 <div class="sect1">
 <h2 id="section-design-decisions">9. Architecture Decisions</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>JavaScript:
-  We will use the JavaScript language to create both the front-end and the backend of the application, is the default technology of the initial project.</p>
-</div>
-<div class="paragraph">
-<p>ReactJS:
-  The base project they have given us uses ReactJS for the front-end of the application, although it is a framework with which we are not familiar.
-  We think that is a good oportunity to start using this framework.</p>
-</div>
-<div class="paragraph">
-<p>NodeJS:
-  We use NodeJS for the back-end of the application, this is the default technology of the initial project and all the group thought it was a good idea
-  to use it.</p>
-</div>
-<div class="paragraph">
-<p>MongoDB
-  The base project they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, but it seemed like a
-  good idea to learn this GBD system.</p>
-</div>
-<div class="paragraph">
-<p>Docker:
-  We will use Docker to package the application modules in containers, it is the initial technology of the project</p>
-</div>
-<div class="paragraph">
-<p>MySQL:
-  The base project that they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, however MySQL is another
-database management system that we have used in other subjects. We decided to discard this option to learn how to use MongoDB</p>
-</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1836,26 +1625,25 @@ These are:</p>
 <p class="tableblock">&lt;&lt;&lt;&lt;</p>
 <p class="tableblock"><a id="section-technical-risks"></a>
 == Risks and Technical Debts</p>
-<p class="tableblock">JavaScript: A dynamic, weakly typed language that can have bugs and problems.</p>
-<p class="tableblock">ReactJS: A framework for creating user interfaces, but with difficulties and challenges. A high learning curve is required</p>
-<p class="tableblock">NodeJS: An environment for running JavaScript on the server, but with limitations and risks.</p>
-<p class="tableblock">MongoDB: A NoSQL database that offers scalability, flexibility, and performance, but with trade-offs and challenges. It does not support transactions, joins, or schemas, which can affect the consistency, integrity, and reliability of the data. It has a different language and data model than SQL databases, which implies a paradigm shift.</p>
-<p class="tableblock">Docker: A platform for building and running applications in isolated containers, but with drawbacks and risks. It can increase the complexity and cost of deploying and handling your applications as you need additional tools and configurations.</p>
-<p class="tableblock">The wikidata api, since it is the first time we use it and we will have to learn how to use it to create questions and also learn how to generate templates for those questions</p>
-<p class="tableblock">Communication and group work can be complicated at times, so you should always try to maintain a good working atmosphere with the whole team</p>
-<p class="tableblock">[role="arc42help"]
-<strong><strong>*
-.Contents
-A list of identified technical risks or technical debts, ordered by priority</p>
-<p class="tableblock">.Motivation
-“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.)</p>
-<p class="tableblock">This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.</p>
-<p class="tableblock">.Form
-List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.</p>
-<p class="tableblock">.Further Information</p>
-<p class="tableblock">See <a href="https://docs.arc42.org/section-11/">Risks and Technical Debt</a> in the arc42 documentation.</p>
-<p class="tableblock"></strong></strong>*</p>
-<p class="tableblock">&lt;&lt;&lt;&lt;</p>
+<p class="tableblock">[options="header"]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>| Priority | Description of Risk/Technical Debt | Suggested Measures
+| High     | Vulnerabilities in user authentication | Implement additional security measures, such as password encryption
+| High     | Potential application malfunctions | Implement unit tests for key components and critical functions, along with extensive testing with real users
+| Medium   | Slow performance of database queries | Optimize database queries, avoid unnecessary queries
+| Low      | Unoptimized styles | Optimize CSS styles to improve application performance and loading times
+| Low      | Insufficient documentation | Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&lt;&lt;</p>
 <p class="tableblock"><a id="section-glossary"></a>
 == Glossary</p>
 <p class="tableblock">[cols="e,2e" options="header"]</p></td>
