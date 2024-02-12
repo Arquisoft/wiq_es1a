@@ -34,9 +34,45 @@ See https://docs.arc42.org/section-12/[Glossary] in the arc42 documentation.
 |===
 |Term |Definition
 
-|<Term-1>
-|<definition-1>
+|Quality Tree 
+| Structured representation of quality attributes and their relationships.
 
-|<Term-2>
-|<definition-2>
+|Quality Scenarios 
+| Specific instances or situations that show the behavior of a system under various quality attributes.
+
+|Change Scenarios 
+| Scenarios depicting how a system responds or adapts to changes, like fixes or addings.
+
+|Usage Scenarios 
+| Instances demonstrating how users interact with a system in various contexts.
+
+|User Interface 
+| The visual and interactive part of a computer program or system through which users interact.
+
+|Query 
+| Request for information from a database.
+
+|Database 
+| Organized collection of structured information.
+
+|Documentation 
+| Written information regarding a system's design, functionality, or usage.
+
+|NodeJS 
+| Runtime environment that allows the execution of JavaScript code outside of a web browser.
+
+|ReactJS 
+| JavaScript library for building user interfaces, particularly single-page applications.
+
+|JavaScript 
+| High-level programming language primarily used for creating interactive web pages and applications.
+
+|MongoDB 
+| Popular NoSQL database program, known for its flexibility and scalability.
+
+|CSS 
+| Cascading Style Sheets, used for styling and formatting web pages written in HTML.
+
+|HTML 
+| Hypertext Markup Language, the standard markup language for creating web pages and web applications.
 |===
