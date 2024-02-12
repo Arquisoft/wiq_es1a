@@ -13,7 +13,6 @@ app.use(bodyParser.json());
 
 app.get('/randomQuestion', async (req, res) => {
     try {       
-        console.log(req.params)
         var data = await gen.getCountryQuestions(req.query.n);
         res.json(data);
     } catch (error) {
