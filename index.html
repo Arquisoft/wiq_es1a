@@ -754,7 +754,7 @@ WIQ! ha sido encargado a la empresa HappySw por RTVE, con el objetivo de recrear
 <h3 id="_business_context">3.1. Business Context</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/businesscontext.png" alt="businesscontext" width="1008" height="578">
+<img src="./images/businesscontext.png" alt="businesscontext" width="1031" height="578">
 </div>
 </div>
 </div>
@@ -1541,6 +1541,24 @@ There you will find links and examples about ADR.</p>
 <div class="sect1">
 <h2 id="section-quality-scenarios">10. Quality Requirements</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>In our project, we have some quality goals or expectations that we want to be met.
+These are:
+* Performance: ability of the software system to respond well to user interactions and perform tasks efficiently.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Security: protection of the system from unauthorized access, data breaches, and malicious activities, ensuring safety of sensitive information.</p>
+</li>
+<li>
+<p>Usability: intuitiveness of the software interface, making it easy for users to interact with the system.</p>
+</li>
+<li>
+<p>Maintainability: how easily the software system can be modified, updated, and extended without significant effort or risk.</p>
+</li>
+</ul>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1594,6 +1612,49 @@ concrete and measurable.</p>
 </div>
 </div>
 </div>
+<div class="ulist">
+<ul>
+<li>
+<p>Quality</p>
+</li>
+<li>
+<p>Performance</p>
+</li>
+<li>
+<p>Response time</p>
+</li>
+<li>
+<p>Throughput</p>
+</li>
+<li>
+<p>Security</p>
+</li>
+<li>
+<p>Data encryption</p>
+</li>
+<li>
+<p>Access control</p>
+</li>
+<li>
+<p>Usability</p>
+</li>
+<li>
+<p>Intuitive interface</p>
+</li>
+<li>
+<p>User guidance</p>
+</li>
+<li>
+<p>Maintainability</p>
+</li>
+<li>
+<p>Code readability</p>
+</li>
+<li>
+<p>Documentation</p>
+</li>
+</ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_quality_scenarios">10.2. Quality Scenarios</h3>
@@ -1634,6 +1695,29 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <p>Tabular or free form text.</p>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<div class="title">.Quality Scenarios</div>
+<p>&#8230;&#8203;Usage Scenarios</p>
+</div>
+<div class="paragraph">
+<p>| Aspect        | Scenario  | Sitmulus  | Response
+|---------------|---------------|---------------|---------------|
+| Performance   | The game responds fast to user interactions | While playing, an user selects a response to a question. | The system updates its interface very fast and the user knows if he responded correctly, so he can keep playing.
+| Security      | Usernames and passwords are encrypted before being stored in the MongoDB database. | A new user registers in the game by providing their username and password. | The server encrypts the user&#8217;s password before storing it in the MongoDB database, so it is safe from data leaks |
+| Usability     | User interface elements are intuitive and easy to understand, even for new users. | A new user starts playing the game. | The user interface displays available options and provides clear instructions on how to play, even a 'Help' button.                                      |
+| Performance   | The game resets correctly and saves the user&#8217;s score | Some user is playing, and eventually loses, but wants to play again | The system ends the current game, shows the user his score and resets everything. After that, gives the player the option to start a new game.</p>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;Change Scenarios</p>
+</div>
+<div class="paragraph">
+<p>| Aspect        | Scenario  | Sitmulus  | Response
+|---------------|---------------|---------------|---------------|
+| Security / Maintainability | Login system is well structured so it is easy to modify it or add new ways of logging in | We want to add the option of logging in with an e-mail instead of an username | The development team implements the new login method easily, ensuring that neither the current data or the new credentials will be compromised|
+| Security  | User data migration to a new database system is secured. | The decision is made to transition from MongoDB to another database system. | The system initiates a secure data migration process, ensuring all user data, including usernames and passwords, is transferred to the new database system intact and encrypted. |
+| Maintainability | The game&#8217;s code is well-structured and documented, facilitating the incorporation of new features and the correction of errors. | Developers want to add a new game mode | Due to code being well-structured and documented, it is easy to add new functionality to our system without risking our already implemented functionality |
+| Maintainability | The game&#8217;s code is well-structured and documented, facilitating the incorporation of new features and the correction of errors. | An error is identified in the game that needs to be corrected. | Due to code being well-structured and documented, developers can easily locate the error and correct it |</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1735,7 +1819,7 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-08 11:11:53 +0100
+Last updated 2024-02-10 15:07:19 +0100
 </div>
 </div>
 </body>
