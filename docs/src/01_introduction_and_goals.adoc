@@ -3,8 +3,8 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-introduction-and-goals]]
 == Introduction and Goals
 
-WIQ! es un proyecto desarrollado para la asignatura "Arquitectura de Software" del grado de Ingeniería Informática de la Escuela de Ingeniería Informática de la Universidad de Oviedo. Este proyecto toma como base el proyecto wiq, puesto a la disposición de los alumnos por los profesores de la asignatura.
-WIQ! ha sido encargado a la empresa HappySw por RTVE, con el objetivo de recrear su famoso concurso Saber y ganar en una versión web accesible para todo el mundo. Este proyecto será realizado por el equipo de desarrollo es1a formado por:
+WIQ! is a project developed for the subject "Software Architecture" of the Computer Engineering degree of the School of Computer Engineering of the University of Oviedo. This project is based on the wiq project, made available to the students by the teachers of the subject.
+WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recreating its famous quiz show Saber y ganar in a web version accessible to everyone. This project will be carried out by the development team is formed by:
 
 * Martín Cancio Barrera, mailto:UO287561@uniovi.es[_UO287561_].
 
@@ -14,46 +14,44 @@ WIQ! ha sido encargado a la empresa HappySw por RTVE, con el objetivo de recrear
 
 * Alfredo Jirout Cid, mailto:UO288443@uniovi.es[_UO288443_]. 
 
-WIQ! es un software mediante el cual los usuarios pueden emular ser los participantes del concurso Saber y ganar, que cuenta con numerosas funcionalidades:
+WIQ! is a software by means of which users can emulate being the participants of the quiz show Saber y ganar, which has numerous functionalities:
 
-* Jugar a varios de los modos de juego vistos en el programa
+* Play several of the game modes seen on the show.
 
-* Registrarse para poder llevar registro de sus estadísticas en el juego
+* Register to be able to keep track of their statistics in the game
 
-* Jugar con amigos
+* Play with friends
 
-* Ajustar las temáticas de las preguntas, el tiempo de respuesta, el número de preguntas...
+* Adjust the themes of the questions, the answer time, the number of questions...
 ***
 
 === Requirements Overview
 
-* El sistema contará al menos con un frontend web que estará desplegado y el acceso será a través de la Web.
-* Los usuarios podrán registrarse en el sistema y consultar el histórico de su participación en el sistema: número de juegos, preguntas acertadas/falladas, tiempos, etc.
-* Las preguntas serán generadas automáticamente a partir de los datos de Wikidata.
-* Las preguntas deberán responderse en un plazo de tiempo determinado.
-* Cada pregunta tendrá una respuesta correcta y varias respuestas incorrectas o distractoras. Tanto la respuesta correcta como las incorrectas se generarán automáticamente.
-* El sistema permitirá acceder a la información de los usuarios a través de un API.
-* El sistema permitirá acceder a la información de las preguntas generadas a través de un API.
-
+* The system will have at least one web frontend that will be deployed and accessed via the web.
+* Users will be able to register in the system and consult the history of their participation in the system: number of games, number of correct/failed questions, times, etc.
+* Questions will be automatically generated from Wikidata data.
+* Questions must be answered within a given time limit.
+* Each question will have one correct answer and several incorrect or distracting answers. Both correct and incorrect answers will be generated automatically.
+* The system shall allow access to user information through an API.
+* The system shall allow access to the information of the generated questions through an API.
 
 === Quality Goals
-
 
 [options="header"]
 |===
 | Priority | Quality Goal | Motivation
 
 | *1*
-| *_Usabilidad_*
-| La aplicación debe ser intuitiva para los usuarios, facilitándoles la interacción con la misma independientemente de sus habilidades.
+| *_Usability_*
+| The application should be intuitive for users, making it easy for them to interact with the application regardless of their skills.
 
 | *2*
-| *_Mantenibilidad_*
-| La aplicación debe contar con un diseño bien definido y estructurado, de tal forma que sea sencillo realizar modificaciones y/o ampliaciones.
+| *_Mantainability_*
+| The application must have a well-defined and structured design, so that it is easy to make modifications and/or extensions.
 
 | *3*
-| *_Privacidad_*
-| La aplicación debe garantizar la privacidad de la información de sus usuarios, contando con mecanismos para evitar intrusiones en el sistema.
+| *_Privacy_*
+| The application must guarantee the privacy of its users' information, with mechanisms in place to prevent intrusions into the system.
 |===
 
 === Stakeholders
@@ -62,19 +60,19 @@ WIQ! es un software mediante el cual los usuarios pueden emular ser los particip
 |===
 |Role/Name|Contact|Expectations 
 
-| *_Estudiantes (HappySw)_*
-| Martín Cancio Barrera, Iyán Fernández Riol, Rodrigo García Iglesias y Alfredo Jirout Cid
-| Los estudiantes son los desarrolladores de la aplicación. Están a cargo del desarrollo completo, lo que mejorará sus habilidades tanto de programación como de trabajo en grupo.
+| *_Students (HappySw)_*
+| Martín Cancio Barrera, Iyán Fernández Riol, Rodrigo García Iglesias and Alfredo Jirout Cid
+| The students are the developers of the application. They are in charge of the complete development, which will improve their programming and teamwork skills.
 
-| *_Usuarios_*
-| Cualquier persona que utilice la aplicación
-| Los usuarios son los que en última instancia van a utilizar la aplicación, por lo que debe ser intuitiva y fácil de entender.
+| *_Users_*
+| Anyone who uses the application
+| Users are the ones who will ultimately use the application, so it must be intuitive and easy to understand.
 
-| *_Profesores_*
-| José Emilio Labra Gayo, Pablo González González, Jorge Álvarez Fidalgo y Cristian Augusto Alonso
-| Son los supervisores del proyecto, y ayudarán a los estudiantes para asegurarse de que el proyecto llegue a buen puerto.
+| *_Teachers_*
+| José Emilio Labra Gayo, Pablo González González, Jorge Álvarez Fidalgo and  Cristian Augusto Alonso. 
+| They are the supervisors of the project, and will help the students toensure that the project comes to fruition.
 
 | *_RTVE_*
 | RTVE
-| Son los principales interesados en la aplicación, puesto que son los que la han encargado, para que sus espectadores puedan utilizarla.
+| They are the main stakeholders in the application, as they are the ones who commissioned it, so that their viewers can use it.
 |===

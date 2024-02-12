@@ -4,39 +4,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 == System Scope and Context
 
 === Business Context
-
-[plantuml, "businesscontext", png]
-----
-Actor user as "User"
-
-component wiq <<system>> as "WIQ!" 
-component apiusers <<extern>> as "API Users" 
-component apiquestions <<extern>> as "API Questions"
-component wikidata <<extern>> as "Wikidata"
-component authentication <<extern>> as "Authentication"
-
-user -down.> wiq
-
-wiq -left.> apiusers
-wiq -.> apiquestions
-wiq -right.> wikidata
-wiq -.> authentication
-----
+image::businesscontext.png[Business context]
 
 === Technical Context
-
-[plantuml, "technicalcontext", png]
-----
-Actor user as "User"
-Actor admin as "Admin"
-
-node cloud as "Cloud"{
-  component wiq as "WIQ! Webapp"
-}
-
-component wikidata as "Wikidata"
-
-user -down-> cloud: HTTP/HTTPS
-admin -down-> cloud: SSH
-wikidata -right- cloud: REST
-----
+image::technicalcontext.png[Technical Context]
