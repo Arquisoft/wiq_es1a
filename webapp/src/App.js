@@ -1,38 +1,41 @@
 import React, { useState } from 'react';
-import AddUser from './components/AddUser';
-import Login from './components/Login';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import Authenticate from './pages/Authenticate/Authenticate.js';
+import Home from './pages/Home/Home.js';
+import Clasico from './pages/Clasico/Clasico.js';
+import WrongRoute from './pages/WrongRoute/WrongRoute.js';
+import './App.css';
 
-function App() {
-  const [showLogin, setShowLogin] = useState(true);
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import AuthProvider from 'react-auth-kit';
+import AuthOutlet from '@auth-kit/react-router/AuthOutlet';
+import createStore from 'react-auth-kit/createStore';
 
-  const handleToggleView = () => {
-    setShowLogin(!showLogin);
-  };
+const store = createStore({
+  authName:'_auth',
+  authType:'cookie',
+  cookieDomain: window.location.hostname,
+  cookieSecure: window.location.protocol === 'https:'
+})
+ 
+ const App = () => {
+   return (
+     <AuthProvider store={store}>
+       <BrowserRouter>
+         <Routes>
+           {/** Rutas públicas */}
+           <Route path={'/'} element={<Authenticate />}/>
+ 
+           {/** Rutas privadas */}
+           <Route element={<AuthOutlet fallbackPath='/' />}>
+             <Route path='/home' element={<Home />} />
+             <Route path='/home/clasico' element={<Clasico />} />
+           </Route>
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-        Welcome to the 2024 edition of the Software Architecture course
-      </Typography>
-      {showLogin ? <Login /> : <AddUser />}
-      <Typography component="div" align="center" sx={{ marginTop: 2 }}>
-        {showLogin ? (
-          <Link name="gotoregister" component="button" variant="body2" onClick={handleToggleView}>
-            Don't have an account? Register here.
-          </Link>
-        ) : (
-          <Link component="button" variant="body2" onClick={handleToggleView}>
-            Already have an account? Login here.
-          </Link>
-        )}
-      </Typography>
-    </Container>
-  );
-}
+           <Route path='*' element={<WrongRoute />} />
+         </Routes>
+       </BrowserRouter>
+     </AuthProvider>
+   );
+ };
 
 export default App;
