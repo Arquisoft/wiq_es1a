@@ -3,8 +3,6 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-quality-scenarios]]
 == Quality Requirements
 
-# Quality Requirements
-
 In our project, we have some quality goals or expectations that we want to be met.
 These are:
 
@@ -19,27 +17,21 @@ These are:
 
 === Quality Tree
 
-# Quality Tree
-
-- Quality
+* Quality
   - Performance
-    - Response time
-    - Throughput
   - Security
-    - Data encryption
-    - Access control
   - Usability
-    - Intuitive interface
-    - User guidance
   - Maintainability
-    - Code readability
-    - Documentation
+
+* Relationships
+  - Quality -> Performance
+  - Quality -> Security
+  - Quality -> Usability
+  - Quality -> Maintainability
 
 === Quality Scenarios
 
-# Quality Scenarios
-
-## Usage Scenarios
+### Usage Scenarios
 
 [options="header"]
 |===
@@ -51,7 +43,7 @@ These are:
 |===
 
 
-## Change Scenarios
+### Change Scenarios
 
 [options="header"]
 |===

@@ -3,8 +3,6 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-technical-risks]]
 == Risks and Technical Debts
 
-# Technical Risks / Debts
-
 [options="header"] 
 |===
 | Priority | Description of Risk/Technical Debt | Suggested Measures 

@@ -3,8 +3,6 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-glossary]]
 == Glossary
 
-# Glossary
-
 [cols="e,2e" options="header"]
 |===
 |Term |Definition
