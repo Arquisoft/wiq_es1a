@@ -125,7 +125,7 @@ class GenericGenerator {
     questionObj.respuestas.sort(() => Math.random() - 0.5);
 
     questionObj.pregunta =
-      this.preguntasMap.get(propiedadPregunta) + entidadLabel;
+      this.preguntasMap.get(propiedadPregunta) + entidadLabel + '?';
 
     return questionObj;
   }
@@ -150,23 +150,4 @@ class GenericGenerator {
   }
 }
 
-entity = "Q6256"
-props = ["P36", "P35", "P1344", "P37", "P47", "P2250", "P571", "P122", "P1451"]
-preguntas = [
-    "¿Cuál es la capital de ", 
-    "¿Quién es el jefe de estado de ",
-    "¿En qué evento histórico participó ",
-    "¿Cuál es uno de los idiomas oficiales de ",
-    "¿Con qué país comparte frontera ",
-    "¿Cuál es la esperanza de vida media de ",
-    "¿En qué fecha se fundó ",
-    "¿Cuál es la forma de gobierno de ",
-    "¿Cuál es el lema de "
-]
-
-var gen = new GenericGenerator(entity, props, preguntas)
-gen.generateRandomQuestions(5)
-    .then(questions => {
-        console.log(questions);
-    })
-    .catch(error => console.error("Error generando preguntas:", error));
+module.exports = GenericGenerator;
