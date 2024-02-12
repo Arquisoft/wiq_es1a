@@ -444,14 +444,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#section-introduction-and-goals">1. Introduction and Goals</a>
-<ul class="sectlevel2">
-<li><a href="#_diseño">1.1. Diseño</a></li>
-<li><a href="#_seguridad">1.2. Seguridad</a></li>
-<li><a href="#_testabilidad">1.3. Testabilidad</a></li>
-<li><a href="#_interfaz">1.4. Interfaz</a></li>
-</ul>
-</li>
+<li><a href="#section-introduction-and-goals">1. Introduction and Goals</a></li>
 </ul>
 </div>
 </div>
@@ -507,11 +500,21 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <div class="sect1">
 <h2 id="section-introduction-and-goals">1. Introduction and Goals</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
 <p>Describes the relevant requirements and the driving forces that software architects and development team must consider.
 These include</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>WIQ! is a project developed for the subject "Software Architecture" of the Computer Engineering degree of the School of Computer Engineering of the University of Oviedo. This project is based on the wiq project, made available to the students by the teachers of the subject.
+WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recreating its famous quiz show Saber y ganar in a web version accessible to everyone. This project will be carried out by the development team is formed by:
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; bc38116a46fe4d35d847382a96c27343738d4cd4</p>
 </div>
 <div class="ulist">
 <ul>
@@ -530,21 +533,21 @@ These include</p>
 </ul>
 </div>
 <div class="paragraph">
-<p>WIQ! es un software mediante el cual los usuarios pueden emular ser los participantes del concurso Saber y ganar, que cuenta con numerosas funcionalidades:</p>
+<p>WIQ! is a software by means of which users can emulate being the participants of the quiz show Saber y ganar, which has numerous functionalities:</p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>Jugar a varios de los modos de juego vistos en el programa</p>
+<p>Play several of the game modes seen on the show.</p>
 </li>
 <li>
-<p>Registrarse para poder llevar registro de sus estadísticas en el juego</p>
+<p>Register to be able to keep track of their statistics in the game</p>
 </li>
 <li>
-<p>Jugar con amigos</p>
+<p>Play with friends</p>
 </li>
 <li>
-<p>Ajustar las temáticas de las preguntas, el tiempo de respuesta, el número de preguntas&#8230;&#8203;
+<p>Adjust the themes of the questions, the answer time, the number of questions&#8230;&#8203;
 <strong>*</strong></p>
 </li>
 </ul>
@@ -555,25 +558,25 @@ These include</p>
 <div class="ulist">
 <ul>
 <li>
-<p>El sistema contará al menos con un frontend web que estará desplegado y el acceso será a través de la Web.</p>
+<p>The system will have at least one web frontend that will be deployed and accessed via the web.</p>
 </li>
 <li>
-<p>Los usuarios podrán registrarse en el sistema y consultar el histórico de su participación en el sistema: número de juegos, preguntas acertadas/falladas, tiempos, etc.</p>
+<p>Users will be able to register in the system and consult the history of their participation in the system: number of games, number of correct/failed questions, times, etc.</p>
 </li>
 <li>
-<p>Las preguntas serán generadas automáticamente a partir de los datos de Wikidata.</p>
+<p>Questions will be automatically generated from Wikidata data.</p>
 </li>
 <li>
-<p>Las preguntas deberán responderse en un plazo de tiempo determinado.</p>
+<p>Questions must be answered within a given time limit.</p>
 </li>
 <li>
-<p>Cada pregunta tendrá una respuesta correcta y varias respuestas incorrectas o distractoras. Tanto la respuesta correcta como las incorrectas se generarán automáticamente.</p>
+<p>Each question will have one correct answer and several incorrect or distracting answers. Both correct and incorrect answers will be generated automatically.</p>
 </li>
 <li>
-<p>El sistema permitirá acceder a la información de los usuarios a través de un API.</p>
+<p>The system shall allow access to user information through an API.</p>
 </li>
 <li>
-<p>El sistema permitirá acceder a la información de las preguntas generadas a través de un API.</p>
+<p>The system shall allow access to the information of the generated questions through an API.</p>
 </li>
 </ul>
 </div>
@@ -596,18 +599,18 @@ These include</p>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Usabilidad</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación debe ser intuitiva para los usuarios, facilitándoles la interacción con la misma independientemente de sus habilidades.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Usability</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application should be intuitive for users, making it easy for them to interact with the application regardless of their skills.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>2</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Mantenibilidad</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación debe contar con un diseño bien definido y estructurado, de tal forma que sea sencillo realizar modificaciones y/o ampliaciones.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Mantainability</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application must have a well-defined and structured design, so that it is easy to make modifications and/or extensions.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>3</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Privacidad</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación debe garantizar la privacidad de la información de sus usuarios, contando con mecanismos para evitar intrusiones en el sistema.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Privacy</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application must guarantee the privacy of its users' information, with mechanisms in place to prevent intrusions into the system.</p></td>
 </tr>
 </tbody>
 </table>
@@ -616,160 +619,180 @@ These include</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 100%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Role/Name</th>
-<th class="tableblock halign-left valign-top">Contact</th>
-<th class="tableblock halign-left valign-top">Expectations</th>
+<th class="tableblock halign-left valign-top">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Role/Name</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Contact</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expectations</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Alfredo Jirout Cid</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:UO288443@uniovi.es">UO288443@uniovi.es</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Aprobar (opcional)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Rodrigo Gracía Iglesias</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:UO276396@uniovi.es">UO276396@uniovi.es</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">No tomar de ejemplo a Miguel</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Iyán Fernández Riol</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:UO288231@uniovi.es">UO288231@uniovi.es</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Sacar matricula</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Martín Cancio Barrera</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="mailto:UO287561@uniovi.es">UO287561@uniovi.es</a></p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Ser feliz</p></td>
 </tr>
 </tbody>
 </table>
-<div style="page-break-after: always;"></div>
-<div id="section-architecture-constraints" class="paragraph">
-<p>== Architecture Constraints</p>
+</div>
+</div>
+<div class="paragraph">
+<p>|Role/Name|Contact|Expectations</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>Students (HappySw)</em></strong>
+| Martín Cancio Barrera, Iyán Fernández Riol, Rodrigo García Iglesias and Alfredo Jirout Cid
+| The students are the developers of the application. They are in charge of the complete development, which will improve their programming and teamwork skills.</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>Users</em></strong>
+| Anyone who uses the application
+| Users are the ones who will ultimately use the application, so it must be intuitive and easy to understand.</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>Teachers</em></strong>
+| José Emilio Labra Gayo, Pablo González González, Jorge Álvarez Fidalgo and  Cristian Augusto Alonso.
+| They are the supervisors of the project, and will help the students toensure that the project comes to fruition.</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>RTVE</em></strong>
+| RTVE
+| They are the main stakeholders in the application, as they are the ones who commissioned it, so that their viewers can use it.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; bc38116a46fe4d35d847382a96c27343738d4cd4</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 100%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top"><strong><em>Restricción de Arquitectura</em></strong></th>
-<th class="tableblock halign-left valign-top"><strong><em>Descripción</em></strong></th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Tecnología de Desarrollo</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación debe desarrollarse utilizando tecnologías web compatibles con los requisitos y estándares de RTVE.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Plataforma de Implementación</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación debe ser implementada en una plataforma de alojamiento web que cumpla con los requisitos de rendimiento, seguridad y escalabilidad de RTVE.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Cumplimiento de Normativas de Privacidad</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La arquitectura debe garantizar el cumplimiento de las regulaciones de privacidad de datos, como GDPR, para proteger la información de los usuarios.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Compatibilidad con Navegadores</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación debe ser compatible con una amplia gama de navegadores web populares para garantizar una experiencia de usuario consistente.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Seguridad de la Información</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Se deben implementar medidas de seguridad sólidas, como autenticación de usuarios, control de acceso y encriptación de datos, para proteger la información confidencial de los usuarios.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Escalabilidad</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La arquitectura debe ser escalable para manejar un aumento en el tráfico de usuarios sin comprometer el rendimiento.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Mantenibilidad del Código</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Se deben seguir prácticas de desarrollo de software que promuevan un código limpio y bien documentado para facilitar futuras actualizaciones y mantenimiento.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Tiempo de Desarrollo</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La aplicación debe desarrollarse dentro de un marco de tiempo específico, lo que puede influir en las decisiones arquitectónicas y en la selección de tecnologías.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&lt;&lt;</p>
+<p class="tableblock"><a id="section-architecture-constraints"></a>
+== Architecture Constraints</p></td>
 </tr>
 </tbody>
 </table>
-<div style="page-break-after: always;"></div>
-<div id="section-system-scope-and-context" class="paragraph">
-<p>== System Scope and Context</p>
+<div class="paragraph">
+<p>| <strong><em>Architecture constraint</em></strong> | <strong><em>Description</em></strong></p>
 </div>
 <div class="paragraph">
-<p>=== Business Context</p>
+<p>| <strong><em>Tecnología de Desarrollo</em></strong> | The application must be developed using web technologies compatible with RTVE&#8217;s requirements and standards.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/businesscontext.png" alt="businesscontext" width="1008" height="578">
+<div class="paragraph">
+<p>| <strong><em>Plataforma de Implementación</em></strong> | The application must be implemented on a web hosting platform that meets RTVE&#8217;s performance, security and scalability requirements.</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>Cumplimiento de Normativas de Privacidad</em></strong> | The architecture must ensure compliance with data privacy regulations, such as GDPR, to protect users' information.</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>Compatibilidad con Navegadores</em></strong> | The application should be compatible with a wide range of popular web browsers to ensure a consistent user experience.</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>Seguridad de la Información</em></strong> | Strong security measures, such as user authentication, access control and data encryption, must be implemented to protect users' confidential information.</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>Escalabilidad</em></strong> | The architecture must be scalable to handle increased user traffic without compromising performance.</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>Mantenibilidad del Código</em></strong> | Software development practices that promote clean and well-documented code should be followed to facilitate future upgrades and maintenance.</p>
+</div>
+<div class="paragraph">
+<p>| <strong><em>Tiempo de Desarrollo</em></strong> | The application must be developed within a specific time frame, which may influence architectural decisions and technology selection.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&lt;&lt;</p>
+<p class="tableblock"><a id="section-system-scope-and-context"></a>
+== System Scope and Context</p>
+<p class="tableblock">=== Business Context
+image::businesscontext.png[Business context]</p>
+<p class="tableblock">=== Technical Context
+image::technicalcontext.png[Technical Context]</p>
+<p class="tableblock">&lt;&lt;&lt;&lt;</p>
+<p class="tableblock"><a id="section-solution-strategy"></a>
+== Solution Strategy</p>
+<p class="tableblock">[role="arc42help"]</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="paragraph">
-<p>=== Technical Context</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/technicalcontext.png" alt="technicalcontext" width="1033" height="578">
-</div>
-</div>
-<div style="page-break-after: always;"></div>
-<div id="section-solution-strategy" class="paragraph">
-<p>== Solution Strategy</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p>Elaboramos una aplicacíon en la que los usuarios pueden registrarse para jugar, donde en cada juego tendran que responder varias preguntas, de distintas categorias, donde se guardará
-un ranking con la máxima puntuación del usuario y se podrá comparar con otros usuarios, también tendra una sección que indique su promedio de aciertos y en que categoría acierta más preguntas.</p>
+<div class="title">Contents</div>
+<p>A short summary and explanation of the fundamental decisions and solution strategies, that shape system architecture. It includes</p>
 </div>
 <div class="ulist">
-<div class="title">Tecnologías usadas para llevar a cabo:</div>
 <ul>
 <li>
-<p>MongoDB: MongoDB es una base de datos NoSQL de código abierto que utiliza un modelo de datos basado en documentos para el almacenamiento y recuperación de información.</p>
+<p>technology decisions</p>
 </li>
 <li>
-<p>React JS: Es un framework creado por Facebook ampliamente utlizado para crear componentes de la interfaz de usuario. Escogido por el gran volumen de documentación y ser el framework utilizado durante los anteriores cursos.</p>
+<p>decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern</p>
 </li>
 <li>
-<p>WikiData: Es una base de conocimientos gratuita modificada por seres humanos como por máquinas, y es de donde obtendremos nuestras preguntas.</p>
+<p>decisions on how to achieve key quality goals</p>
 </li>
 <li>
-<p>Microsoft Azure: plataforma de computación en la nube que proporciona servicios de infraestructura, plataforma y software como servicio para alojar, administrar y escalar aplicaciones y servicios en línea.</p>
+<p>relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.</p>
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_diseño">1.1. Diseño</h3>
 <div class="paragraph">
-<p>La página web diseñada está compuesta por un frontend en React, un backend en Node.js y está documentada usando Asciidoc. Cada usuario tendrá su propia cuenta donde se guardará su información. Las decisiones relacionadas con el diseño se detallan en el punto 9.</p>
+<div class="title">Motivation</div>
+<p>These decisions form the cornerstones for your architecture. They are the foundation for many other detailed decisions or implementation rules.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_seguridad">1.2. Seguridad</h3>
 <div class="paragraph">
-<p>Garantizamos la seguridad del usuario</p>
+<div class="title">Form</div>
+<p>Keep the explanations of such key decisions short.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_testabilidad">1.3. Testabilidad</h3>
 <div class="paragraph">
-<p>Se realizarán pruebas para cada parte individual de la aplicación, garantizando así el correcto funcionamiento de los diferentes modulos tanto individualmente como de forma conjunta.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_interfaz">1.4. Interfaz</h3>
-<div class="paragraph">
-<p>La interfaz gráfica será elegida entre todos los miembros del equipo, aportando cada uno algún boceto o idea, los cuales serán puestos en común y se decidirá cual se ajusta mejor a la apicación esperada y que elementos de dichos bocetos resultan más adecuados.
-Para ello se tendrá en cuenta la usabilidad y las necesidades de los difentes tipos de usuarios.</p>
+<p>Motivate what was decided and why it was decided that way,
+based upon problem statement, quality goals and key constraints.
+Refer to details in the following sections.</p>
 </div>
 <div class="paragraph">
 <div class="title">Further Information</div>
@@ -1418,22 +1441,87 @@ on this list.</p>
 <div class="sidebarblock">
 <div class="content">
 <div class="paragraph">
-<p>=== <em>&lt;Concept 1&gt;</em></p>
+<p>=== <em>&lt;User Interface &gt;</em></p>
 </div>
 <div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
+<p><em>&lt;A user interface is the space where a human and a computer or device communicate and exchange information.&gt;</em></p>
 </div>
 <div class="paragraph">
-<p>=== <em>&lt;Concept 2&gt;</em></p>
+<p>=== <em>&lt;Ergonomics &gt;</em></p>
 </div>
 <div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
+<p><em>&lt;Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations. &gt;</em></p>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>=== <em>&lt;Internationalization &gt;</em></p>
 </div>
 <div class="paragraph">
-<p>=== <em>&lt;Concept n&gt;</em></p>
+<p><em>&lt;Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Security &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm. &gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Safety  &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Is the state of being protected from danger or harm.&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Build, Test, Deploy &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&#8592; Build: This stage involves compiling, validating, and packaging the source code into executable or deployable artifacts.
+- Test: This stage involves running various tests, such as unit tests, integration tests, and regression tests, to ensure the quality and functionality of the software.
+- Deploy: This stage involves delivering or releasing the software to the target environment, such as a server, a cloud platform, or a user device. &gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Code Generation &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Migration &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Configurability &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Configurability is the ability to modify or customize something, especially in computing, electronics, or de&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Administration &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;The process or activity of managing, directing, or organizing something or someone&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Management &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Management is the process of organizing and directing the resources of a business or organization to achieve its goals. &gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Disaster-Recovery &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Architecture and design patterns  &gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>=== <em>&lt;Concept &gt;</em></p>
 </div>
 <div class="paragraph">
 <p><em>&lt;explanation&gt;</em></p>
@@ -1516,105 +1604,212 @@ There you will find links and examples about ADR.</p>
 <div id="section-quality-scenarios" class="paragraph">
 <p>== Quality Requirements</p>
 </div>
-</div>
-</div>
 <div class="paragraph">
-<div class="title">Content</div>
-<p>This section contains all quality requirements as quality tree with scenarios. The most important ones have already been described in section 1.2. (quality goals)</p>
+<p>In our project, we have some quality goals or expectations that we want to be met.
+These are:</p>
 </div>
-<div class="paragraph">
-<p>Here you can also capture quality requirements with lesser priority,
-which will not create high risks when they are not fully achieved.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Performance: ability of the software system to respond well to user interactions and perform tasks efficiently.</p>
+</li>
+<li>
+<p>Security: protection of the system from unauthorized access, data breaches, and malicious activities, ensuring safety of sensitive information.</p>
+</li>
+<li>
+<p>Usability: intuitiveness of the software interface, making it easy for users to interact with the system.</p>
+</li>
+<li>
+<p>Maintainability: how easily the software system can be modified, updated, and extended without significant effort or risk.</p>
+</li>
+</ul>
 </div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Since quality requirements will have a lot of influence on architectural
-decisions you should know for every stakeholder what is really important to them,
-concrete and measurable.</p>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-10/">Quality Requirements</a> in the arc42 documentation.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
 <div class="paragraph">
 <p>=== Quality Tree</p>
 </div>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">Content</div>
-<p>The quality tree (as defined in ATAM – Architecture Tradeoff Analysis Method) with quality/evaluation scenarios as leafs.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>The tree structure with priorities provides an overview for a sometimes large number of quality requirements.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>The quality tree is a high-level overview of the quality goals and requirements:</p>
-</div>
 <div class="ulist">
 <ul>
 <li>
-<p>tree-like refinement of the term "quality". Use "quality" or "usefulness" as a root</p>
+<p>Quality</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Performance</p>
 </li>
 <li>
-<p>a mind map with quality categories as main branches</p>
+<p>Security</p>
+</li>
+<li>
+<p>Usability</p>
+</li>
+<li>
+<p>Maintainability</p>
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>In any case the tree should include links to the scenarios of the following section.</p>
+</li>
+<li>
+<p>Relationships</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Quality &#8594; Performance</p>
+</li>
+<li>
+<p>Quality &#8594; Security</p>
+</li>
+<li>
+<p>Quality &#8594; Usability</p>
+</li>
+<li>
+<p>Quality &#8594; Maintainability</p>
+</li>
+</ul>
 </div>
-<div class="sidebarblock">
-<div class="content">
+</li>
+</ul>
+</div>
 <div class="paragraph">
 <p>=== Quality Scenarios</p>
 </div>
-</div>
-</div>
 <div class="paragraph">
-<div class="title">Contents</div>
-<p>Concretization of (sometimes vague or implicit) quality requirements using (quality) scenarios.</p>
+<p><mark>#</mark> Usage Scenarios</p>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Stimulus</th>
+<th class="tableblock halign-left valign-top">Artefact</th>
+<th class="tableblock halign-left valign-top">Environment</th>
+<th class="tableblock halign-left valign-top">Response</th>
+<th class="tableblock halign-left valign-top">Response Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">While playing, a user selects a response to a question.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Normal gameplay conditions.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system updates its interface very fast and the user knows if they responded correctly, so they can keep playing.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface update time is less than 0.5 seconds.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A new user registers in the game by providing their username and password.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Encrypting system</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User registration process.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server encrypts the user&#8217;s password before storing it in the MongoDB database, so it is safe from data leaks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passwords are encrypted using a strong hashing algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A new user starts playing the game.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial game setup.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user interface displays available options and provides clear instructions on how to play, including a 'Help' button.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User can navigate through the interface without guidance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user finishes playing a game and wants to start a new one.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">System and User Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Post-game completion.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system ends the current game, displays the user&#8217;s score, resets all game elements, and offers the option to start a new game.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Score is saved accurately, and game restarts without errors.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="paragraph">
-<p>These scenarios describe what should happen when a stimulus arrives at the system.</p>
+<p><mark>#</mark> Change Scenarios</p>
 </div>
-<div class="paragraph">
-<p>For architects, two kinds of scenarios are important:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Usage scenarios (also called application scenarios or use case scenarios) describe the system’s runtime reaction to a certain stimulus. This also includes scenarios that describe the system’s efficiency or performance. Example: The system reacts to a user’s request within one second.</p>
-</li>
-<li>
-<p>Change scenarios describe a modification of the system or of its immediate environment. Example: Additional functionality is implemented or requirements for a quality attribute change.</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Scenarios make quality requirements concrete and allow to
-more easily measure or decide whether they are fulfilled.</p>
-</div>
-<div class="paragraph">
-<p>Especially when you want to assess your architecture using methods like
-ATAM you need to describe your quality goals (from section 1.2)
-more precisely down to a level of scenarios that can be discussed and evaluated.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>Tabular or free form text.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
-<div style="page-break-after: always;"></div>
-<div id="section-technical-risks" class="paragraph">
-<p>== Risks and Technical Debts</p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Stimulus</th>
+<th class="tableblock halign-left valign-top">Artefact</th>
+<th class="tableblock halign-left valign-top">Environment</th>
+<th class="tableblock halign-left valign-top">Response</th>
+<th class="tableblock halign-left valign-top">Response Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security / Maintainability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We want to add the option of logging in with an e-mail instead of an username</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Login system is well structured so it is easy to modify it or add new ways of logging in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Normal conditions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The development team implements the new login method easily, ensuring that neither the current data or the new credentials will be compromised</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful integration of the new login method without compromising data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The decision is made to transition from MongoDB to another database system</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User data migration to a new database system is secured</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database migration phase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system initiates a secure data migration process, ensuring all user data, including usernames and passwords, is transferred to the new database system intact and encrypted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful transfer of user data without compromise</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maintainability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers want to add a new game mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The game&#8217;s code is well-structured and documented</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development phase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Due to code being well-structured and documented, it is easy to add new functionality to our system without risking our already implemented functionality</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful addition of new game mode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maintainability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An error is identified in the game that needs to be corrected.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The game&#8217;s code is well-structured and documented</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Error identification and resolution phase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Due to code being well-structured and documented, developers can easily locate the error and correct it</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful identification and correction of the error</p>
+<p class="tableblock">&lt;&lt;&lt;&lt;</p>
+<p class="tableblock"><a id="section-technical-risks"></a>
+== Risks and Technical Debts</p>
+<p class="tableblock">JavaScript: A dynamic, weakly typed language that can have bugs and problems.</p>
+<p class="tableblock">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+ReactJS: A framework for creating user interfaces, but with difficulties and challenges. A high learning curve is required</p>
+<p class="tableblock">NodeJS: An environment for running JavaScript on the server, but with limitations and risks.</p>
+<p class="tableblock">MongoDB: A NoSQL database that offers scalability, flexibility, and performance, but with trade-offs and challenges. It does not support transactions, joins, or schemas, which can affect the consistency, integrity, and reliability of the data. It has a different language and data model than SQL databases, which implies a paradigm shift.</p>
+<p class="tableblock">Docker: A platform for building and running applications in isolated containers, but with drawbacks and risks. It can increase the complexity and cost of deploying and handling your applications as you need additional tools and configurations.</p>
+<p class="tableblock">The wikidata api, since it is the first time we use it and we will have to learn how to use it to create questions and also learn how to generate templates for those questions</p>
+<p class="tableblock">Communication and group work can be complicated at times, so you should always try to maintain a good working atmosphere with the whole team</p>
+<p class="tableblock">[role="arc42help"]</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="paragraph">
@@ -1638,46 +1833,56 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 <div class="sidebarblock">
 <div class="content">
+<div class="exampleblock">
+<div class="content">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">Description of Risk/Technical Debt</th>
+<th class="tableblock halign-left valign-top">Suggested Measures</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vulnerabilities in user authentication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implement additional security measures, such as password encryption</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Potential application malfunctions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implement unit tests for key components and critical functions, along with extensive testing with real users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Slow performance of database queries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optimize database queries, avoid unnecessary queries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unoptimized styles</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optimize CSS styles to improve application performance and loading times</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Insufficient documentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>&gt;&gt;&gt;&gt;&gt;&gt;&gt; bc38116a46fe4d35d847382a96c27343738d4cd4</p>
+</div>
 <div style="page-break-after: always;"></div>
 <div id="section-glossary" class="paragraph">
 <p>== Glossary</p>
 </div>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>The most important domain and technical terms that your stakeholders use when discussing the system.</p>
-</div>
-<div class="paragraph">
-<p>You can also see the glossary as source for translations if you work in multi-language teams.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>You should clearly define your terms, so that all stakeholders</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>have an identical understanding of these terms</p>
-</li>
-<li>
-<p>do not use synonyms and homonyms</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>A table with columns &lt;Term&gt; and &lt;Definition&gt;.</p>
-</div>
-<div class="paragraph">
-<p>Potentially more columns in case you need translations.</p>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-12/">Glossary</a> in the arc42 documentation.</p>
-</div>
-<div class="sidebarblock">
-<div class="content">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 33.3333%;">
@@ -1691,12 +1896,60 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Term-1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;definition-1&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Quality Tree</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Structured representation of quality attributes and their relationships.</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Term-2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;definition-2&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Quality Scenarios</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Specific instances or situations that show the behavior of a system under various quality attributes.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Change Scenarios</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Scenarios depicting how a system responds or adapts to changes, like fixes or addings.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usage Scenarios</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Instances demonstrating how users interact with a system in various contexts.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>User Interface</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The visual and interactive part of a computer program or system through which users interact.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Query</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Request for information from a database.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Database</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Organized collection of structured information.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Documentation</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Written information regarding a system&#8217;s design, functionality, or usage.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>NodeJS</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Runtime environment that allows the execution of JavaScript code outside of a web browser.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ReactJS</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>JavaScript library for building user interfaces, particularly single-page applications.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>JavaScript</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>High-level programming language primarily used for creating interactive web pages and applications.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Popular NoSQL database program, known for its flexibility and scalability.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>CSS</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cascading Style Sheets, used for styling and formatting web pages written in HTML.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>HTML</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Hypertext Markup Language, the standard markup language for creating web pages and web applications.</em></p></td>
 </tr>
 </tbody>
 </table>
@@ -1706,10 +1959,11 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-12 12:23:45 +0100
+Last updated 2024-02-12 18:06:51 +0100
 </div>
 </div>
 </body>
