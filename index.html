@@ -488,14 +488,23 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
-<li><a href="#section-quality-scenarios">10. Quality Requirements</a>
+<li><a href="#section-quality-scenarios">10. Quality Requirements</a></li>
+<li><a href="#_quality_requirements">Quality Requirements</a>
 <ul class="sectlevel2">
-<li><a href="#_quality_tree">10.1. Quality Tree</a></li>
-<li><a href="#_quality_scenarios">10.2. Quality Scenarios</a></li>
+<li><a href="#_quality_tree">.1. Quality Tree</a></li>
 </ul>
 </li>
-<li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
-<li><a href="#section-glossary">12. Glossary</a></li>
+<li><a href="#_quality_tree_2">Quality Tree</a>
+<ul class="sectlevel2">
+<li><a href="#_quality_scenarios">.1. Quality Scenarios</a></li>
+</ul>
+</li>
+<li><a href="#_quality_scenarios_2">Quality Scenarios</a>
+<ul class="sectlevel1">
+<li><a href="#_usage_scenarios">1. Usage Scenarios</a></li>
+<li><a href="#_change_scenarios">2. Change Scenarios</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -754,7 +763,7 @@ WIQ! ha sido encargado a la empresa HappySw por RTVE, con el objetivo de recrear
 <h3 id="_business_context">3.1. Business Context</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/businesscontext.png" alt="businesscontext" width="1031" height="578">
+<img src="./images/businesscontext.png" alt="businesscontext" width="1053" height="578">
 </div>
 </div>
 </div>
@@ -762,7 +771,7 @@ WIQ! ha sido encargado a la empresa HappySw por RTVE, con el objetivo de recrear
 <h3 id="_technical_context">3.2. Technical Context</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/technicalcontext.png" alt="technicalcontext" width="1017" height="578">
+<img src="./images/technicalcontext.png" alt="technicalcontext" width="1014" height="578">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -1541,24 +1550,6 @@ There you will find links and examples about ADR.</p>
 <div class="sect1">
 <h2 id="section-quality-scenarios">10. Quality Requirements</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>In our project, we have some quality goals or expectations that we want to be met.
-These are:
-* Performance: ability of the software system to respond well to user interactions and perform tasks efficiently.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Security: protection of the system from unauthorized access, data breaches, and malicious activities, ensuring safety of sensitive information.</p>
-</li>
-<li>
-<p>Usability: intuitiveness of the software interface, making it easy for users to interact with the system.</p>
-</li>
-<li>
-<p>Maintainability: how easily the software system can be modified, updated, and extended without significant effort or risk.</p>
-</li>
-</ul>
-</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1581,8 +1572,31 @@ concrete and measurable.</p>
 </div>
 </div>
 </div>
+</div>
+</div>
+<h1 id="_quality_requirements" class="sect0">Quality Requirements</h1>
+<div class="paragraph">
+<p>In our project, we have some quality goals or expectations that we want to be met.
+These are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Performance: ability of the software system to respond well to user interactions and perform tasks efficiently.</p>
+</li>
+<li>
+<p>Security: protection of the system from unauthorized access, data breaches, and malicious activities, ensuring safety of sensitive information.</p>
+</li>
+<li>
+<p>Usability: intuitiveness of the software interface, making it easy for users to interact with the system.</p>
+</li>
+<li>
+<p>Maintainability: how easily the software system can be modified, updated, and extended without significant effort or risk.</p>
+</li>
+</ul>
+</div>
 <div class="sect2">
-<h3 id="_quality_tree">10.1. Quality Tree</h3>
+<h3 id="_quality_tree">.1. Quality Tree</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1612,6 +1626,8 @@ concrete and measurable.</p>
 </div>
 </div>
 </div>
+</div>
+<h1 id="_quality_tree_2" class="sect0">Quality Tree</h1>
 <div class="ulist">
 <ul>
 <li>
@@ -1655,9 +1671,8 @@ concrete and measurable.</p>
 </li>
 </ul>
 </div>
-</div>
 <div class="sect2">
-<h3 id="_quality_scenarios">10.2. Quality Scenarios</h3>
+<h3 id="_quality_scenarios">.1. Quality Scenarios</h3>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1696,122 +1711,201 @@ more precisely down to a level of scenarios that can be discussed and evaluated.
 </div>
 </div>
 </div>
-<div class="paragraph">
-<div class="title">.Quality Scenarios</div>
-<p>&#8230;&#8203;Usage Scenarios</p>
 </div>
-<div class="paragraph">
-<p>| Aspect        | Scenario  | Sitmulus  | Response
-|---------------|---------------|---------------|---------------|
-| Performance   | The game responds fast to user interactions | While playing, an user selects a response to a question. | The system updates its interface very fast and the user knows if he responded correctly, so he can keep playing.
-| Security      | Usernames and passwords are encrypted before being stored in the MongoDB database. | A new user registers in the game by providing their username and password. | The server encrypts the user&#8217;s password before storing it in the MongoDB database, so it is safe from data leaks |
-| Usability     | User interface elements are intuitive and easy to understand, even for new users. | A new user starts playing the game. | The user interface displays available options and provides clear instructions on how to play, even a 'Help' button.                                      |
-| Performance   | The game resets correctly and saves the user&#8217;s score | Some user is playing, and eventually loses, but wants to play again | The system ends the current game, shows the user his score and resets everything. After that, gives the player the option to start a new game.</p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;Change Scenarios</p>
-</div>
-<div class="paragraph">
-<p>| Aspect        | Scenario  | Sitmulus  | Response
-|---------------|---------------|---------------|---------------|
-| Security / Maintainability | Login system is well structured so it is easy to modify it or add new ways of logging in | We want to add the option of logging in with an e-mail instead of an username | The development team implements the new login method easily, ensuring that neither the current data or the new credentials will be compromised|
-| Security  | User data migration to a new database system is secured. | The decision is made to transition from MongoDB to another database system. | The system initiates a secure data migration process, ensuring all user data, including usernames and passwords, is transferred to the new database system intact and encrypted. |
-| Maintainability | The game&#8217;s code is well-structured and documented, facilitating the incorporation of new features and the correction of errors. | Developers want to add a new game mode | Due to code being well-structured and documented, it is easy to add new functionality to our system without risking our already implemented functionality |
-| Maintainability | The game&#8217;s code is well-structured and documented, facilitating the incorporation of new features and the correction of errors. | An error is identified in the game that needs to be corrected. | Due to code being well-structured and documented, developers can easily locate the error and correct it |</p>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-</div>
+<h1 id="_quality_scenarios_2" class="sect0">Quality Scenarios</h1>
 <div class="sect1">
-<h2 id="section-technical-risks">11. Risks and Technical Debts</h2>
+<h2 id="_usage_scenarios">1. Usage Scenarios</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>A list of identified technical risks or technical debts, ordered by priority</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.)</p>
-</div>
-<div class="paragraph">
-<p>This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.</p>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-11/">Risks and Technical Debt</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
-<div style="page-break-after: always;"></div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="section-glossary">12. Glossary</h2>
-<div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>The most important domain and technical terms that your stakeholders use when discussing the system.</p>
-</div>
-<div class="paragraph">
-<p>You can also see the glossary as source for translations if you work in multi-language teams.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>You should clearly define your terms, so that all stakeholders</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>have an identical understanding of these terms</p>
-</li>
-<li>
-<p>do not use synonyms and homonyms</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>A table with columns &lt;Term&gt; and &lt;Definition&gt;.</p>
-</div>
-<div class="paragraph">
-<p>Potentially more columns in case you need translations.</p>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-12/">Glossary</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Term</th>
-<th class="tableblock halign-left valign-top">Definition</th>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Stimulus</th>
+<th class="tableblock halign-left valign-top">Artefact</th>
+<th class="tableblock halign-left valign-top">Environment</th>
+<th class="tableblock halign-left valign-top">Response</th>
+<th class="tableblock halign-left valign-top">Response Measurement</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Term-1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;definition-1&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">While playing, a user selects a response to a question.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Normal gameplay conditions.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system updates its interface very fast and the user knows if they responded correctly, so they can keep playing.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface update time is less than 0.5 seconds.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;Term-2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;definition-2&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A new user registers in the game by providing their username and password.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Encrypting system</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User registration process.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The server encrypts the user&#8217;s password before storing it in the MongoDB database, so it is safe from data leaks.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Passwords are encrypted using a strong hashing algorithm.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Usability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A new user starts playing the game.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initial game setup.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user interface displays available options and provides clear instructions on how to play, including a 'Help' button.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User can navigate through the interface without guidance.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user finishes playing a game and wants to start a new one.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">System and User Interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Post-game completion.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system ends the current game, displays the user&#8217;s score, resets all game elements, and offers the option to start a new game.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Score is saved accurately, and game restarts without errors.</p></td>
 </tr>
 </tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_change_scenarios">2. Change Scenarios</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2857%;">
+<col style="width: 14.2858%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Aspect</th>
+<th class="tableblock halign-left valign-top">Source</th>
+<th class="tableblock halign-left valign-top">Stimulus</th>
+<th class="tableblock halign-left valign-top">Artefact</th>
+<th class="tableblock halign-left valign-top">Environment</th>
+<th class="tableblock halign-left valign-top">Response</th>
+<th class="tableblock halign-left valign-top">Response Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security / Maintainability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">We want to add the option of logging in with an e-mail instead of an username</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Login system is well structured so it is easy to modify it or add new ways of logging in</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Normal conditions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The development team implements the new login method easily, ensuring that neither the current data or the new credentials will be compromised</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful integration of the new login method without compromising data</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Security</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The decision is made to transition from MongoDB to another database system</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User data migration to a new database system is secured</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Database migration phase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system initiates a secure data migration process, ensuring all user data, including usernames and passwords, is transferred to the new database system intact and encrypted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful transfer of user data without compromise</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maintainability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers want to add a new game mode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The game&#8217;s code is well-structured and documented</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Development phase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Due to code being well-structured and documented, it is easy to add new functionality to our system without risking our already implemented functionality</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful addition of new game mode</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Maintainability</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Developers</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">An error is identified in the game that needs to be corrected.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The game&#8217;s code is well-structured and documented</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Error identification and resolution phase</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Due to code being well-structured and documented, developers can easily locate the error and correct it</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful identification and correction of the error</p>
+<p class="tableblock">&lt;&lt;&lt;&lt;</p>
+<p class="tableblock"><a id="section-technical-risks"></a>
+== Risks and Technical Debts</p>
+<p class="tableblock">[role="arc42help"]
+<strong><strong>*
+.Contents
+A list of identified technical risks or technical debts, ordered by priority</p>
+<p class="tableblock">.Motivation
+“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.)</p>
+<p class="tableblock">This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.</p>
+<p class="tableblock">.Form
+List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.</p>
+<p class="tableblock">.Further Information</p>
+<p class="tableblock">See <a href="https://docs.arc42.org/section-11/">Risks and Technical Debt</a> in the arc42 documentation.</p>
+<p class="tableblock"></strong></strong>*</p>
+<p class="tableblock"># Technical Risks / Debts</p>
+<p class="tableblock">[options="header"]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>| Priority | Description of Risk/Technical Debt | Suggested Measures
+| High     | Vulnerabilities in user authentication | Implement additional security measures, such as password encryption
+| High     | Potential application malfunctions | Implement unit tests for key components and critical functions, along with extensive testing with real users
+| Medium   | Slow performance of database queries | Optimize database queries, avoid unnecessary queries
+| Low      | Unoptimized styles | Optimize CSS styles to improve application performance and loading times
+| Low      | Insufficient documentation | Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 100%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&lt;&lt;</p>
+<p class="tableblock"><a id="section-glossary"></a>
+== Glossary</p>
+<p class="tableblock">[role="arc42help"]
+<strong><strong>*
+.Contents
+The most important domain and technical terms that your stakeholders use when discussing the system.</p>
+<p class="tableblock">You can also see the glossary as source for translations if you work in multi-language teams.</p>
+<p class="tableblock">.Motivation
+You should clearly define your terms, so that all stakeholders</p>
+<p class="tableblock">* have an identical understanding of these terms
+* do not use synonyms and homonyms</p>
+<p class="tableblock">.Form</p>
+<p class="tableblock">A table with columns &lt;Term&gt; and &lt;Definition&gt;.</p>
+<p class="tableblock">Potentially more columns in case you need translations.</p>
+<p class="tableblock">.Further Information</p>
+<p class="tableblock">See <a href="https://docs.arc42.org/section-12/">Glossary</a> in the arc42 documentation.</p>
+<p class="tableblock"></strong></strong>*</p>
+<p class="tableblock">[cols="e,2e" options="header"]</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>|Term |Definition</p>
+</div>
+<div class="paragraph">
+<p>|&lt;Term-1&gt;
+|&lt;definition-1&gt;</p>
+</div>
+<div class="paragraph">
+<p>|&lt;Term-2&gt;
+|&lt;definition-2&gt;</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
 </table>
 </div>
 </div>
