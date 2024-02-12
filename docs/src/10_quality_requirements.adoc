@@ -106,20 +106,22 @@ Tabular or free form text.
 
 ## Usage Scenarios
 
-|Aspect|Source|Stimulus|Artefact|Environment|Response|Response Measurement|
-|------|------|--------|---------|-------|---------|-------------------|
-|Performance|User|While playing, a user selects a response to a question.|User Interface|Normal gameplay conditions.|The system updates its interface very fast and the user knows if they responded correctly, so they can keep playing.|Interface update time is less than 0.5 seconds.|
-|Security|User|A new user registers in the game by providing their username and password.|Encrypting system|User registration process.|The server encrypts the user's password before storing it in the MongoDB database, so it is safe from data leaks.|Passwords are encrypted using a strong hashing algorithm.|
-|Usability|User|A new user starts playing the game.|User Interface|Initial game setup.|The user interface displays available options and provides clear instructions on how to play, including a 'Help' button.|User can navigate through the interface without guidance.|
-|Performance|User|A user finishes playing a game and wants to start a new one.|System and User Interface|Post-game completion.|The system ends the current game, displays the user's score, resets all game elements, and offers the option to start a new game.|Score is saved accurately, and game restarts without errors.|
-
+[options="header"]
+|===
+|Aspect|Source|Stimulus|Artefact|Environment|Response|Response Measurement
+| Performance |User |While playing, a user selects a response to a question.|User Interface|Normal gameplay conditions.|The system updates its interface very fast and the user knows if they responded correctly, so they can keep playing.|Interface update time is less than 0.5 seconds.
+|Security|User|A new user registers in the game by providing their username and password.|Encrypting system|User registration process.|The server encrypts the user's password before storing it in the MongoDB database, so it is safe from data leaks.|Passwords are encrypted using a strong hashing algorithm.
+|Usability|User|A new user starts playing the game.|User Interface|Initial game setup.|The user interface displays available options and provides clear instructions on how to play, including a 'Help' button.|User can navigate through the interface without guidance.
+|Performance|User|A user finishes playing a game and wants to start a new one.|System and User Interface|Post-game completion.|The system ends the current game, displays the user's score, resets all game elements, and offers the option to start a new game.|Score is saved accurately, and game restarts without errors.
+|===
 
 
 ## Change Scenarios
 
-| Aspect | Source | Stimulus | Artefact | Environment | Response | Response Measurement                                                        |
-|------|------|------|-------|-------|-------|-------|
-| Security / Maintainability | Developers | We want to add the option of logging in with an e-mail instead of an username | Login system is well structured so it is easy to modify it or add new ways of logging in | Normal conditions | The development team implements the new login method easily, ensuring that neither the current data or the new credentials will be compromised | Successful integration of the new login method without compromising data |
-| Security | Developers | The decision is made to transition from MongoDB to another database system | User data migration to a new database system is secured | Database migration phase | The system initiates a secure data migration process, ensuring all user data, including usernames and passwords, is transferred to the new database system intact and encrypted | Successful transfer of user data without compromise |
-| Maintainability | Developers | Developers want to add a new game mode | The game's code is well-structured and documented | Development phase | Due to code being well-structured and documented, it is easy to add new functionality to our system without risking our already implemented functionality | Successful addition of new game mode |
-| Maintainability | Developers | An error is identified in the game that needs to be corrected. | The game's code is well-structured and documented | Error identification and resolution phase | Due to code being well-structured and documented, developers can easily locate the error and correct it | Successful identification and correction of the error |
+[options="header"]
+|===
+| Aspect | Source | Stimulus | Artefact | Environment | Response | Response Measurement
+| Security / Maintainability | Developers | We want to add the option of logging in with an e-mail instead of an username | Login system is well structured so it is easy to modify it or add new ways of logging in | Normal conditions | The development team implements the new login method easily, ensuring that neither the current data or the new credentials will be compromised | Successful integration of the new login method without compromising data 
+| Security | Developers | The decision is made to transition from MongoDB to another database system | User data migration to a new database system is secured | Database migration phase | The system initiates a secure data migration process, ensuring all user data, including usernames and passwords, is transferred to the new database system intact and encrypted | Successful transfer of user data without compromise 
+| Maintainability | Developers | Developers want to add a new game mode | The game's code is well-structured and documented | Development phase | Due to code being well-structured and documented, it is easy to add new functionality to our system without risking our already implemented functionality | Successful addition of new game mode 
+| Maintainability | Developers | An error is identified in the game that needs to be corrected. | The game's code is well-structured and documented | Error identification and resolution phase | Due to code being well-structured and documented, developers can easily locate the error and correct it | Successful identification and correction of the error 
