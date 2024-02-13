@@ -15,6 +15,16 @@ var tematicas = {
             "¿Cuál es la forma de gobierno de ",
             "¿Cuál es el lema de "
         ]
+    },
+    "famosos":{
+        entity: "Q31629",
+        props: ["P495", "P1873", "P575", "P61"],
+        preguntas: [
+            "¿En qué país se originó el ", 
+            "¿Cuál es el número máximo de jugadores en el ",
+            "¿Cuándo se inventó el ",
+            "¿Quién inventó el ",
+        ]
     }
 }
 
@@ -22,11 +32,22 @@ class GeneratorChooser{
     constructor(){
         var paises = tematicas["paises"];
         this.paises = new GenericGenerator(paises.entity, paises.props, paises.preguntas);
+
+        var famosos = tematicas["famosos"];
+        this.famosos = new GenericGenerator(famosos.entity, famosos.props, famosos.preguntas);
     }
 
     getCountryQuestions(n){
         return this.paises.generateRandomQuestions(n).then(x => x);
     }
+
+    getFamososQuestions(n){
+        return this.famosos.generateRandomQuestions(n).then(x => x);
+    }
 }
 
-module.exports = GeneratorChooser;
+var x = new GeneratorChooser();
+//x.getCountryQuestions(5).then(x => console.log(x))
+x.getFamososQuestions(5).then(x => console.log(x))
+
+//module.exports = GeneratorChooser;
