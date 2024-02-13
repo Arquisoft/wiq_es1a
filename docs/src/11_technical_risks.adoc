@@ -2,13 +2,37 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-technical-risks]]
 == Risks and Technical Debts
+  
+JavaScript: A dynamic, weakly typed language that can have bugs and problems. 
 
-[options="header"] 
-|===
-| Priority | Description of Risk/Technical Debt | Suggested Measures 
-| High     | Vulnerabilities in user authentication | Implement additional security measures, such as password encryption 
-| High     | Potential application malfunctions | Implement unit tests for key components and critical functions, along with extensive testing with real users 
-| Medium   | Slow performance of database queries | Optimize database queries, avoid unnecessary queries 
-| Low      | Unoptimized styles | Optimize CSS styles to improve application performance and loading times 
-| Low      | Insufficient documentation | Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration 
-|===
+ReactJS: A framework for creating user interfaces, but with difficulties and challenges. A high learning curve is required
+
+NodeJS: An environment for running JavaScript on the server, but with limitations and risks.
+
+MongoDB: A NoSQL database that offers scalability, flexibility, and performance, but with trade-offs and challenges. It does not support transactions, joins, or schemas, which can affect the consistency, integrity, and reliability of the data. It has a different language and data model than SQL databases, which implies a paradigm shift.
+
+Docker: A platform for building and running applications in isolated containers, but with drawbacks and risks. It can increase the complexity and cost of deploying and handling your applications as you need additional tools and configurations. 
+
+The wikidata api, since it is the first time we use it and we will have to learn how to use it to create questions and also learn how to generate templates for those questions
+
+Communication and group work can be complicated at times, so you should always try to maintain a good working atmosphere with the whole team
+
+[role="arc42help"]
+****
+.Contents
+A list of identified technical risks or technical debts, ordered by priority
+
+.Motivation
+“Risk management is project management for grown-ups” (Tim Lister, Atlantic Systems Guild.) 
+
+This should be your motto for systematic detection and evaluation of risks and technical debts in the architecture, which will be needed by management stakeholders (e.g. project managers, product owners) as part of the overall risk analysis and measurement planning.
+
+.Form
+List of risks and/or technical debts, probably including suggested measures to minimize, mitigate or avoid risks or reduce technical debts.
+
+
+.Further Information
+
+See https://docs.arc42.org/section-11/[Risks and Technical Debt] in the arc42 documentation.
+
+****
