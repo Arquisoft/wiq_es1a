@@ -61,7 +61,7 @@ _**<Overview Diagram>**_
 
 Motivation::
 
-_<explanation in text form>_
+_<Simple structure of how the different parts of the application would work>_
 
 Quality and/or Performance Features::
 
