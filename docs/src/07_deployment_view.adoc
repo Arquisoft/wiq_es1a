@@ -68,7 +68,9 @@ Quality and/or Performance Features::
 _<We will have a link to wikidata that will be where we get the different questions, in addition a registration and persistence layer of user and registration data, finally they will be united in the link layer and this will be the one that is directly related to the application>_
 
 Mapping of Building Blocks to Infrastructure::
-_<description of the mapping>_
+_<Quiestion Generator: give us the questions posible answers
+  User service: All the options that users needs
+  Register: create new acounts or login with one>_
 
 
 === Infrastructure Level 2
