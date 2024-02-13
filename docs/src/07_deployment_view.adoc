@@ -4,7 +4,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 
 == Deployment View
-image::UML.png
+image::UML.png[UML]
 
 [role="arc42help"]
 ****
