@@ -3,25 +3,23 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-architecture-constraints]]
 == Architecture Constraints
 
+|===
+| *_Architecture constraint_* | *_Description_*
 
-[role="arc42help"]
-****
-.Contents
-Any requirement that constraints software architects in their freedom of design and implementation decisions or decision about the development process. These constraints sometimes go beyond individual systems and are valid for whole organizations and companies.
+| *_Tecnología de Desarrollo_* | The application must be developed using web technologies compatible with RTVE's requirements and standards.
 
-.Motivation
-Architects should know exactly where they are free in their design decisions and where they must adhere to constraints.
-Constraints must always be dealt with; they may be negotiable, though.
+| *_Plataforma de Implementación_* | The application must be implemented on a web hosting platform that meets RTVE's performance, security and scalability requirements.
 
-.Form
-Simple tables of constraints with explanations.
-If needed you can subdivide them into
-technical constraints, organizational and political constraints and
-conventions (e.g. programming or versioning guidelines, documentation or naming conventions)
+| *_Cumplimiento de Normativas de Privacidad_* | The architecture must ensure compliance with data privacy regulations, such as GDPR, to protect users' information.
 
+| *_Compatibilidad con Navegadores_* | The application should be compatible with a wide range of popular web browsers to ensure a consistent user experience.
 
-.Further Information
+| *_Seguridad de la Información_* | Strong security measures, such as user authentication, access control and data encryption, must be implemented to protect users' confidential information.
 
-See https://docs.arc42.org/section-2/[Architecture Constraints] in the arc42 documentation.
+| *_Escalabilidad_* | The architecture must be scalable to handle increased user traffic without compromising performance.
 
-****
+| *_Mantenibilidad del Código_* | Software development practices that promote clean and well-documented code should be followed to facilitate future upgrades and maintenance.
+
+| *_Tiempo de Desarrollo_* | The application must be developed within a specific time frame, which may influence architectural decisions and technology selection.
+
+|===
