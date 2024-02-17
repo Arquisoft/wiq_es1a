@@ -458,25 +458,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_technical_context">3.2. Technical Context</a></li>
 </ul>
 </li>
-<li><a href="#section-solution-strategy">4. Solution Strategy</a>
-<ul class="sectlevel2">
-<li><a href="#_diseño">4.1. Diseño</a></li>
-<li><a href="#_seguridad">4.2. Seguridad</a></li>
-<li><a href="#_testabilidad">4.3. Testabilidad</a></li>
-<li><a href="#_interfaz">4.4. Interfaz</a></li>
-</ul>
-</li>
+<li><a href="#section-solution-strategy">4. Solution Strategy</a></li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
 <ul class="sectlevel2">
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
-<li><a href="#_blackbox_overall_system">5.2. Blackbox Overall System</a></li>
-<li><a href="#_level_2">5.3. Level 2</a></li>
+<li><a href="#_level_2">5.2. Level 2</a></li>
+<li><a href="#_level_3">5.3. Level 3</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Runtime View</a>
 <ul class="sectlevel2">
-<li><a href="#_runtime_el_usuario_juega">6.1. &lt;Runtime El usuario juega&gt;</a></li>
-<li><a href="#_runtime_el_usuario_mira_su_historial">6.2. &lt;Runtime El usuario mira su historial&gt;</a></li>
+<li><a href="#_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</a></li>
+<li><a href="#_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</a></li>
+<li><a href="#">6.3. &#8230;&#8203;</a></li>
+<li><a href="#_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Deployment View</a>
@@ -512,6 +507,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_change_scenarios">10.4. Change Scenarios</a></li>
 </ul>
 </li>
+<li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
+<li><a href="#section-glossary">12. Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -809,163 +806,426 @@ un ranking con la máxima puntuación del usuario y se podrá comparar con otros
 </li>
 </ul>
 </div>
-<div class="sect2">
-<h3 id="_diseño">4.1. Diseño</h3>
 <div class="paragraph">
+<div class="title">Diseño</div>
 <p>La página web diseñada está compuesta por un frontend en React, un backend en Node.js y está documentada usando Asciidoc. Cada usuario tendrá su propia cuenta donde se guardará su información. Las decisiones relacionadas con el diseño se detallan en el punto 9.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_seguridad">4.2. Seguridad</h3>
 <div class="paragraph">
+<div class="title">Seguridad</div>
 <p>Garantizamos la seguridad del usuario</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_testabilidad">4.3. Testabilidad</h3>
 <div class="paragraph">
+<div class="title">Testabilidad</div>
 <p>Se realizarán pruebas para cada parte individual de la aplicación, garantizando así el correcto funcionamiento de los diferentes modulos tanto individualmente como de forma conjunta.</p>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_interfaz">4.4. Interfaz</h3>
 <div class="paragraph">
+<div class="title">Interfaz</div>
 <p>La interfaz gráfica será elegida entre todos los miembros del equipo, aportando cada uno algún boceto o idea, los cuales serán puestos en común y se decidirá cual se ajusta mejor a la apicación esperada y que elementos de dichos bocetos resultan más adecuados.
 Para ello se tendrá en cuenta la usabilidad y las necesidades de los difentes tipos de usuarios.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
-</div>
 <div class="sect1">
 <h2 id="section-building-block-view">5. Building Block View</h2>
 <div class="sectionbody">
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<div class="title">Content</div>
+<p>The building block view shows the static decomposition of the system into building blocks (modules, components, subsystems, classes, interfaces, packages, libraries, frameworks, layers, partitions, tiers, functions, macros, operations, data structures, &#8230;&#8203;) as well as their dependencies (relationships, associations, &#8230;&#8203;)</p>
+</div>
+<div class="paragraph">
+<p>This view is mandatory for every architecture documentation.
+In analogy to a house this is the <em>floor plan</em>.</p>
+</div>
+<div class="paragraph">
+<div class="title">Motivation</div>
+<p>Maintain an overview of your source code by making its structure understandable through
+abstraction.</p>
+</div>
+<div class="paragraph">
+<p>This allows you to communicate with your stakeholder on an abstract level without disclosing implementation details.</p>
+</div>
+<div class="paragraph">
+<div class="title">Form</div>
+<p>The building block view is a hierarchical collection of black boxes and white boxes
+(see figure below) and their descriptions.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/05_building_blocks-EN.png" alt="Hierarchy of building blocks">
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Level 1</strong> is the white box description of the overall system together with black
+box descriptions of all contained building blocks.</p>
+</div>
+<div class="paragraph">
+<p><strong>Level 2</strong> zooms into some building blocks of level 1.
+Thus it contains the white box description of selected building blocks of level 1, together with black box descriptions of their internal building blocks.</p>
+</div>
+<div class="paragraph">
+<p><strong>Level 3</strong> zooms into selected building blocks of level 2, and so on.</p>
+</div>
+<div class="paragraph">
+<div class="title">Further Information</div>
+<p>See <a href="https://docs.arc42.org/section-5/">Building Block View</a> in the arc42 documentation.</p>
+</div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
 <div class="paragraph">
-<p>El código se descompone de manera estructurada por niveles, en los que se enseñan las dependencias internas de cada elemento. El sistema se divide en Whitebox y Blackbox.</p>
+<p>Here you describe the decomposition of the overall system using the following white box template. It contains</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/whiteBox5.1.png" alt="Hierarchy of building blocks">
+<div class="ulist">
+<ul>
+<li>
+<p>an overview diagram</p>
+</li>
+<li>
+<p>a motivation for the decomposition</p>
+</li>
+<li>
+<p>black box descriptions of the contained building blocks. For these we offer you alternatives:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>use <em>one</em> table for a short and pragmatic overview of all contained building blocks and their interfaces</p>
+</li>
+<li>
+<p>use a list of black box descriptions of the building blocks according to the black box template (see below).
+Depending on your choice of tool this list could be sub-chapters (in text files), sub-pages (in a Wiki) or nested elements (in a modeling tool).</p>
+</li>
+</ul>
 </div>
+</li>
+<li>
+<p>(optional:) important interfaces, that are not explained in the black box templates of a building block, but are very important for understanding the white box.
+Since there are so many ways to specify interfaces why do not provide a specific template for them.
+ In the worst case you have to specify and describe syntax, semantics, protocols, error handling,
+ restrictions, versions, qualities, necessary compatibilities and many things more.
+In the best case you will get away with examples or simple signatures.</p>
+</li>
+</ul>
 </div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Actores</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Admin</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Tiene acceso al completo de la aplicación y puede administrarla para que funcione correctamente.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>User</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Es el que interactua directamente con la aplicación.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_blackbox_overall_system">5.2. Blackbox Overall System</h3>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Name</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Interface</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">La interfaz con la que interactua el usuario</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>WikiData</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Proporciona las preguntas que se usaran en la aplicación</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>MongoDB</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Almacena los datos del usuario</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect2">
-<h3 id="_level_2">5.3. Level 2</h3>
-<div class="imageblock">
-<div class="content">
-<img src="./images/Level2.png" alt="Hierarchy of building blocks">
 </div>
 </div>
 <div class="paragraph">
-<div class="title">Motivación</div>
-<p>En este diagrama podemos observar los microservicios decididos que proporcionarán todas las operaciones necesarias para que la
-aplicación funcione correctamente.</p>
+<p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Motivation</dt>
+<dd>
+<p><em>&lt;text explanation&gt;</em></p>
+</dd>
+<dt class="hdlist1">Contained Building Blocks</dt>
+<dd>
+<p><em>&lt;Description of contained building block (black boxes)&gt;</em></p>
+</dd>
+<dt class="hdlist1">Important Interfaces</dt>
+<dd>
+<p><em>&lt;Description of important interfaces&gt;</em></p>
+</dd>
+</dl>
+</div>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Insert your explanations of black boxes from level 1:</p>
+</div>
+<div class="paragraph">
+<p>If you use tabular form you will only describe your black boxes with name and
+responsibility according to the following schema:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
+<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Name</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 1&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Game Service</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Es el microservicio que se encargara del correcto funcionamiento del juego y calcular la puntuación del usuario.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>UserData Service</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Es el microservicio que proporciona los datos necesarios del usuario.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Authetification Service</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Es un microservicio que los usuarios usan para iniciar sesión en la aplicación.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Question Service</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Es eel microservicio que generara las preguntas a traves de la Api de WikiData.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 2&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
+Its headline is the name of the black box.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_name_black_box_1">5.1.1. &lt;Name black box 1&gt;</h4>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Here you describe &lt;black box 1&gt;
+according the the following black box template:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Purpose/Responsibility</p>
+</li>
+<li>
+<p>Interface(s), when they are not extracted as separate paragraphs. This interfaces may include qualities and performance characteristics.</p>
+</li>
+<li>
+<p>(Optional) Quality-/Performance characteristics of the black box, e.g.availability, run time behavior, &#8230;&#8203;.</p>
+</li>
+<li>
+<p>(Optional) directory/file location</p>
+</li>
+<li>
+<p>(Optional) Fulfilled requirements (if you need traceability to requirements).</p>
+</li>
+<li>
+<p>(Optional) Open issues/problems/risks</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><em>&lt;Purpose/Responsibility&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;Interface(s)&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(Optional) Quality/Performance Characteristics&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(Optional) Directory/File Location&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(Optional) Fulfilled Requirements&gt;</em></p>
+</div>
+<div class="paragraph">
+<p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_name_black_box_2">5.1.2. &lt;Name black box 2&gt;</h4>
+<div class="paragraph">
+<p><em>&lt;black box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_name_black_box_n">5.1.3. &lt;Name black box n&gt;</h4>
+<div class="paragraph">
+<p><em>&lt;black box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_name_interface_1">5.1.4. &lt;Name interface 1&gt;</h4>
+<div class="paragraph">
+<p>&#8230;&#8203;</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_name_interface_m">5.1.5. &lt;Name interface m&gt;</h4>
+
+</div>
+</div>
+<div class="sect2">
+<h3 id="_level_2">5.2. Level 2</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.</p>
+</div>
+<div class="paragraph">
+<p>You have to decide which building blocks of your system are important enough to justify such a detailed description.
+Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
+Leave out normal, simple, boring or standardized parts of your system</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_building_block_1">5.2.1. White Box <em>&lt;building block 1&gt;</em></h4>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>&#8230;&#8203;describes the internal structure of <em>building block 1</em>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_building_block_2">5.2.2. White Box <em>&lt;building block 2&gt;</em></h4>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_building_block_m">5.2.3. White Box <em>&lt;building block m&gt;</em></h4>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_level_3">5.3. Level 3</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.</p>
+</div>
+<div class="paragraph">
+<p>When you need more detailed levels of your architecture please copy this
+part of arc42 for additional levels.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_building_block_x_1">5.3.1. White Box &lt;_building block x.1_&gt;</h4>
+<div class="sidebarblock arc42help">
+<div class="content">
+<div class="paragraph">
+<p>Specifies the internal structure of <em>building block x.1</em>.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_building_block_x_2">5.3.2. White Box &lt;_building block x.2_&gt;</h4>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_white_box_building_block_y_1">5.3.3. White Box &lt;_building block y.1_&gt;</h4>
+<div class="paragraph">
+<p><em>&lt;white box template&gt;</em></p>
+</div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="section-runtime-view">6. Runtime View</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_runtime_el_usuario_juega">6.1. &lt;Runtime El usuario juega&gt;</h3>
+<div class="sidebarblock arc42help">
+<div class="content">
 <div class="paragraph">
-<p>El usuario inicia un juego y este usa el servicio preguntas para poder ejecutarse.</p>
+<div class="title">Contents</div>
+<p>The runtime view describes concrete behavior and interactions of the system’s building blocks in form of scenarios from the following areas:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>important use cases or features: how do building blocks execute them?</p>
+</li>
+<li>
+<p>interactions at critical external interfaces: how do building blocks cooperate with users and neighboring systems?</p>
+</li>
+<li>
+<p>operation and administration: launch, start-up, stop</p>
+</li>
+<li>
+<p>error and exception scenarios</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Remark: The main criterion for the choice of possible scenarios (sequences, workflows) is their <strong>architectural relevance</strong>. It is <strong>not</strong> important to describe a large number of scenarios. You should rather document a representative selection.</p>
+</div>
+<div class="paragraph">
+<div class="title">Motivation</div>
+<p>You should understand how (instances of) building blocks of your system perform their job and communicate at runtime.
+You will mainly capture scenarios in your documentation to communicate your architecture to stakeholders that are less willing or able to read and understand the static models (building block view, deployment view).</p>
+</div>
+<div class="paragraph">
+<div class="title">Form</div>
+<p>There are many notations for describing scenarios, e.g.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>numbered list of steps (in natural language)</p>
+</li>
+<li>
+<p>activity diagrams or flow charts</p>
+</li>
+<li>
+<p>sequence diagrams</p>
+</li>
+<li>
+<p>BPMN or EPCs (event process chains)</p>
+</li>
+<li>
+<p>state machines</p>
+</li>
+<li>
+<p>&#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<div class="title">Further Information</div>
+<p>See <a href="https://docs.arc42.org/section-6/">Runtime View</a> in the arc42 documentation.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><em>&lt;insert runtime diagram or textual description of the scenario&gt;</em></p>
+</li>
+<li>
+<p><em>&lt;insert description of the notable aspects of the interactions between the
+building block instances depicted in this diagram.&gt;</em></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>It is possible to use a sequence diagram:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/juega.png" alt="Hierarchy of building blocks">
+<img src="./images/Sequence%20diagram.png" alt="Sequence diagram" width="332" height="335">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_runtime_el_usuario_mira_su_historial">6.2. &lt;Runtime El usuario mira su historial&gt;</h3>
-<div class="paragraph">
-<p>El usuario comprubrueba sus puntuaciones y estadisticas.</p>
+<h3 id="_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</h3>
+
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="./images/historial.png" alt="Hierarchy of building blocks">
+<div class="sect2">
+<h3 id="">6.3. &#8230;&#8203;</h3>
+
 </div>
-</div>
+<div class="sect2">
+<h3 id="_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</h3>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1029,6 +1289,11 @@ when your infrastructure is more complex.</p>
 </div>
 <div class="sect2">
 <h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/UML.png" alt="UML">
+</div>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1062,15 +1327,17 @@ when your infrastructure is more complex.</p>
 <dl>
 <dt class="hdlist1">Motivation</dt>
 <dd>
-<p><em>&lt;explanation in text form&gt;</em></p>
+<p><em>&lt;Simple structure of how the different parts of the application would work&gt;</em></p>
 </dd>
 <dt class="hdlist1">Quality and/or Performance Features</dt>
 <dd>
-<p><em>&lt;explanation in text form&gt;</em></p>
+<p><em>&lt;We will have a link to wikidata that will be where we get the different questions, in addition a registration and persistence layer of user and registration data, finally they will be united in the link layer and this will be the one that is directly related to the application&gt;</em></p>
 </dd>
 <dt class="hdlist1">Mapping of Building Blocks to Infrastructure</dt>
 <dd>
-<p><em>&lt;description of the mapping&gt;</em></p>
+<p><em>&lt;Quiestion Generator: give us the questions posible answers
+  User service: All the options that users needs
+  Register: create new acounts or login with one&gt;</em></p>
 </dd>
 </dl>
 </div>
@@ -1306,6 +1573,34 @@ on this list.</p>
 <div class="sect1">
 <h2 id="section-design-decisions">9. Architecture Decisions</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>JavaScript:
+  We will use the JavaScript language to create both the front-end and the backend of the application, is the default technology of the initial project.</p>
+</div>
+<div class="paragraph">
+<p>ReactJS:
+  The base project they have given us uses ReactJS for the front-end of the application, although it is a framework with which we are not familiar.
+  We think that is a good oportunity to start using this framework.</p>
+</div>
+<div class="paragraph">
+<p>NodeJS:
+  We use NodeJS for the back-end of the application, this is the default technology of the initial project and all the group thought it was a good idea
+  to use it.</p>
+</div>
+<div class="paragraph">
+<p>MongoDB
+  The base project they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, but it seemed like a
+  good idea to learn this GBD system.</p>
+</div>
+<div class="paragraph">
+<p>Docker:
+  We will use Docker to package the application modules in containers, it is the initial technology of the project</p>
+</div>
+<div class="paragraph">
+<p>MySQL:
+  The base project that they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, however MySQL is another
+database management system that we have used in other subjects. We decided to discard this option to learn how to use MongoDB</p>
+</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1546,104 +1841,141 @@ These are:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The game&#8217;s code is well-structured and documented</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Error identification and resolution phase</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Due to code being well-structured and documented, developers can easily locate the error and correct it</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Successful identification and correction of the error</p>
-<p class="tableblock">&lt;&lt;&lt;&lt;</p>
-<p class="tableblock"><a id="section-technical-risks"></a>
-== Risks and Technical Debts</p>
-<p class="tableblock">[options="header"]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful identification and correction of the error</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>| Priority | Description of Risk/Technical Debt | Suggested Measures
-| High     | Vulnerabilities in user authentication | Implement additional security measures, such as password encryption
-| High     | Potential application malfunctions | Implement unit tests for key components and critical functions, along with extensive testing with real users
-| Medium   | Slow performance of database queries | Optimize database queries, avoid unnecessary queries
-| Low      | Unoptimized styles | Optimize CSS styles to improve application performance and loading times
-| Low      | Insufficient documentation | Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration</p>
+<div style="page-break-after: always;"></div>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="section-technical-risks">11. Risks and Technical Debts</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 100%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
 </colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Priority</th>
+<th class="tableblock halign-left valign-top">Description of Risk/Technical Debt</th>
+<th class="tableblock halign-left valign-top">Suggested Measures</th>
+</tr>
+</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&lt;&lt;</p>
-<p class="tableblock"><a id="section-glossary"></a>
-== Glossary</p>
-<p class="tableblock">[cols="e,2e" options="header"]</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vulnerabilities in user authentication</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implement additional security measures, such as password encryption</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Potential application malfunctions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implement unit tests for key components and critical functions, along with extensive testing with real users</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Slow performance of database queries</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optimize database queries, avoid unnecessary queries</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Unoptimized styles</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optimize CSS styles to improve application performance and loading times</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Insufficient documentation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>|Term |Definition</p>
+<div style="page-break-after: always;"></div>
 </div>
-<div class="paragraph">
-<p>|Quality Tree
-| Structured representation of quality attributes and their relationships.</p>
 </div>
-<div class="paragraph">
-<p>|Quality Scenarios
-| Specific instances or situations that show the behavior of a system under various quality attributes.</p>
-</div>
-<div class="paragraph">
-<p>|Change Scenarios
-| Scenarios depicting how a system responds or adapts to changes, like fixes or addings.</p>
-</div>
-<div class="paragraph">
-<p>|Usage Scenarios
-| Instances demonstrating how users interact with a system in various contexts.</p>
-</div>
-<div class="paragraph">
-<p>|User Interface
-| The visual and interactive part of a computer program or system through which users interact.</p>
-</div>
-<div class="paragraph">
-<p>|Query
-| Request for information from a database.</p>
-</div>
-<div class="paragraph">
-<p>|Database
-| Organized collection of structured information.</p>
-</div>
-<div class="paragraph">
-<p>|Documentation
-| Written information regarding a system&#8217;s design, functionality, or usage.</p>
-</div>
-<div class="paragraph">
-<p>|NodeJS
-| Runtime environment that allows the execution of JavaScript code outside of a web browser.</p>
-</div>
-<div class="paragraph">
-<p>|ReactJS
-| JavaScript library for building user interfaces, particularly single-page applications.</p>
-</div>
-<div class="paragraph">
-<p>|JavaScript
-| High-level programming language primarily used for creating interactive web pages and applications.</p>
-</div>
-<div class="paragraph">
-<p>|MongoDB
-| Popular NoSQL database program, known for its flexibility and scalability.</p>
-</div>
-<div class="paragraph">
-<p>|CSS
-| Cascading Style Sheets, used for styling and formatting web pages written in HTML.</p>
-</div>
-<div class="paragraph">
-<p>|HTML
-| Hypertext Markup Language, the standard markup language for creating web pages and web applications.</p>
-</div>
+<div class="sect1">
+<h2 id="section-glossary">12. Glossary</h2>
+<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Term</th>
+<th class="tableblock halign-left valign-top">Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Quality Tree</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Structured representation of quality attributes and their relationships.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Quality Scenarios</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Specific instances or situations that show the behavior of a system under various quality attributes.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Change Scenarios</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Scenarios depicting how a system responds or adapts to changes, like fixes or addings.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usage Scenarios</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Instances demonstrating how users interact with a system in various contexts.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>User Interface</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The visual and interactive part of a computer program or system through which users interact.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Query</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Request for information from a database.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Database</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Organized collection of structured information.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Documentation</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Written information regarding a system&#8217;s design, functionality, or usage.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>NodeJS</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Runtime environment that allows the execution of JavaScript code outside of a web browser.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ReactJS</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>JavaScript library for building user interfaces, particularly single-page applications.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>JavaScript</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>High-level programming language primarily used for creating interactive web pages and applications.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Popular NoSQL database program, known for its flexibility and scalability.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>CSS</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cascading Style Sheets, used for styling and formatting web pages written in HTML.</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>HTML</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Hypertext Markup Language, the standard markup language for creating web pages and web applications.</em></p></td>
+</tr>
+</tbody>
 </table>
-</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-12 18:20:30 +0100
+Last updated 2024-02-10 15:07:19 +0100
 </div>
 </div>
 </body>
