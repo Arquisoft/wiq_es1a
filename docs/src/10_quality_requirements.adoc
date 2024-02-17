@@ -31,7 +31,7 @@ These are:
 
 === Quality Scenarios
 
-### Usage Scenarios
+#### Usage Scenarios
 
 [options="header"]
 |===
@@ -43,7 +43,7 @@ These are:
 |===
 
 
-### Change Scenarios
+#### Change Scenarios
 
 [options="header"]
 |===
