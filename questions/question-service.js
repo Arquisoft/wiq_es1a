@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 app.set("json spaces", 40);
 
-app.get("/randomQuestion", async (req, res) => {
+app.get("/countryQuestion", async (req, res) => {
   if (req.query.n > MAX_QUESTIONS) {
     res
       .status(400)
@@ -23,6 +23,20 @@ app.get("/randomQuestion", async (req, res) => {
   }
   try {
     var data = gen.getCountryQuestions(req.query.n);
+    res.json(data);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.get("/famososQuestion", async (req, res) => {
+  if (req.query.n > MAX_QUESTIONS) {
+    res
+      .status(400)
+      .json({ error: `El límite de preguntas son ${MAX_QUESTIONS}` });
+  }
+  try {
+    var data = gen.getFamososQuestions(req.query.n);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });

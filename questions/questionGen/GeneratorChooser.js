@@ -42,6 +42,10 @@ class GeneratorChooser{
         return this.famosos.generateRandomQuestions(n);
     }
 
+    getFamosos(){
+        return this.famosos.data;
+    }
+
     async loadGenerators(){     
         this.paises = new GenericGenerator(this.paisesTopic.entity, this.paisesTopic.props, this.paisesTopic.preguntas);
         this.famosos = new GenericGenerator(this.famososTopic.entity, this.famososTopic.props, this.famososTopic.preguntas);
