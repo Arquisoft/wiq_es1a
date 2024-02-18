@@ -4,7 +4,9 @@ class GenericGenerator {
   constructor(entity, props, preguntas) {
     this.entity = entity;
     this.props = props;
-    this.propLabels = this.#generateLabels(props).map(x => x.slice(1).trimEnd());
+    this.propLabels = this.#generateLabels(props).map((x) =>
+      x.slice(1).trimEnd()
+    );
     this.preguntas = preguntas;
     this.preguntasMap = this.#generateQuestionLabels(preguntas);
 
@@ -58,7 +60,9 @@ class GenericGenerator {
   // Función para realizar la consulta SPARQL y obtener los datos de Wikidata
   async getData() {
     const sparqlQuery = `
-              SELECT DISTINCT ?entityLabel ${this.#generateLabels(this.props).join(' ')}
+              SELECT DISTINCT ?entityLabel ${this.#generateLabels(
+                this.props
+              ).join(" ")}
               WHERE {
                   ?entity wdt:P31 wd:${this.entity};            
                       ${this.#generateProps(this.props)} .
@@ -85,7 +89,7 @@ class GenericGenerator {
     const entidadLabel =
       entidades[Math.floor(Math.random() * entidades.length)];
     //Eliminar la entidad de la lista de entidades
-    entidades = entidades.filter((x) => x !== entidadLabel);
+    entidades = entidades.filter((x) => x !== entidadLabel && !/^Q\d+/.test(entidadLabel));
     const entidad = data[entidadLabel];
 
     // Elegir aleatoriamente una propiedad de la entidad para hacer la pregunta
@@ -124,7 +128,7 @@ class GenericGenerator {
     questionObj.respuestas.sort(() => Math.random() - 0.5);
 
     questionObj.pregunta =
-      this.preguntasMap.get(propiedadPregunta) + entidadLabel + '?';
+      this.preguntasMap.get(propiedadPregunta) + entidadLabel + "?";
 
     return questionObj;
   }

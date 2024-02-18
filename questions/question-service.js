@@ -15,28 +15,14 @@ app.use(bodyParser.json());
 
 app.set("json spaces", 40);
 
-app.get("/countryQuestion", async (req, res) => {
+app.get("/questions", async (req, res) => {
   if (req.query.n > MAX_QUESTIONS) {
     res
       .status(400)
       .json({ error: `El límite de preguntas son ${MAX_QUESTIONS}` });
   }
   try {
-    var data = gen.getCountryQuestions(req.query.n);
-    res.json(data);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
-
-app.get("/famososQuestion", async (req, res) => {
-  if (req.query.n > MAX_QUESTIONS) {
-    res
-      .status(400)
-      .json({ error: `El límite de preguntas son ${MAX_QUESTIONS}` });
-  }
-  try {
-    var data = gen.getFamososQuestions(req.query.n);
+    var data = gen.getQuestions(req.query.tematica, req.query.n);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });

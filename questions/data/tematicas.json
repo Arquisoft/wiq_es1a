@@ -1,0 +1,28 @@
+{
+    "paises": {
+        "entity": "Q6256",
+        "props": ["P36", "P35", "P1344", "P37", "P47", "P2250", "P571", "P122", "P1451"],
+        "preguntas": [
+            "¿Cuál es la capital de ", 
+            "¿Quién es el jefe de estado de ",
+            "¿En qué evento histórico participó ",
+            "¿Cuál es uno de los idiomas oficiales de ",
+            "¿Con qué país comparte frontera ",
+            "¿Cuál es la esperanza de vida media de ",
+            "¿En qué fecha se fundó ",
+            "¿Cuál es la forma de gobierno de ",
+            "¿Cuál es el lema de "
+        ]
+    },
+    "literatura": {
+        "entity": "Q7725634",
+        "props": ["P50", "P577", "P136", "P674", "P840"],
+        "preguntas": [
+            "¿Quién es el autor de la obra literaria ",
+            "¿Cuál fue la fecha de publicación de la obra literaria ",
+            "¿Cuál es el género literario de la obra literaria ",
+            "¿Cuál es uno de los personajes de la obra literaria ",
+            "¿Cuál es uno de los lugares en los que transcurre la obra literaria "
+        ]
+    }
+}      
