@@ -1,4 +1,4 @@
-const { fetch } = require("cross-fetch");
+const axios = require("axios");
 
 class GenericGenerator {
   constructor(entity, props, preguntas) {
@@ -74,13 +74,15 @@ class GenericGenerator {
       sparqlQuery
     )}&format=json`;
 
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      this.data = data.results.bindings.groupByEntity();
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
+    await axios
+      .get(url)
+      .then((response) => {
+        const data = response.data;
+        this.data = data.results.bindings.groupByEntity();
+      })
+      .catch((error) => {
+        console.error("Error fetching data: " + error.message);
+      });
   }
 
   generateRandomQuestion(data) {
@@ -89,7 +91,9 @@ class GenericGenerator {
     const entidadLabel =
       entidades[Math.floor(Math.random() * entidades.length)];
     //Eliminar la entidad de la lista de entidades
-    entidades = entidades.filter((x) => x !== entidadLabel && !/^Q\d+/.test(entidadLabel));
+    entidades = entidades.filter(
+      (x) => x !== entidadLabel && !/^Q\d+/.test(entidadLabel)
+    );
     const entidad = data[entidadLabel];
 
     // Elegir aleatoriamente una propiedad de la entidad para hacer la pregunta

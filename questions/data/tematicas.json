@@ -24,5 +24,23 @@
             "¿Cuál es uno de los personajes de la obra literaria ",
             "¿Cuál es uno de los lugares en los que transcurre la obra literaria "
         ]
+    },
+    "cine": {
+        "entity": "Q11424",
+        "props": ["P577", "P57", "P161"],
+        "preguntas": [
+            "¿En qué año se estrenó ",
+            "¿Quién es director de la película ",
+            "¿Cuál de estos actores forma parte del reparto de  "
+        ]
+    },
+    "arte": {
+        "entity": "Q3305213",
+        "props": ["P571", "P135", "P276"],
+        "preguntas": [
+            "¿En qué año se pintó la obra ",
+            "¿A qué movimiento artístico pertenece la obra ",
+            "¿Dónde está exhibida la obra "
+        ]
     }
 }      

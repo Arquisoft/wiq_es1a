@@ -22,7 +22,7 @@ class GeneratorChooser{
     }
 
     getQuestions(tematica, n){
-        return this.generadores[tematica].generateRandomQuestions(n);
+        return this.generators.get(tematica).generateRandomQuestions(n);
     }
 
     async loadGenerators(){     
@@ -30,11 +30,7 @@ class GeneratorChooser{
             var gen = this.generators.get(this.tematicas[i]);
             await gen.getData();
         }
-        console.log("hecho")
     }
 }
-
-var gen = new GeneratorChooser();
-gen.loadGenerators();
 
 module.exports = GeneratorChooser;
