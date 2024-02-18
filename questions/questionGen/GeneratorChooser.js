@@ -28,9 +28,23 @@ class GeneratorChooser{
     async loadGenerators(){     
         for(let i = 0 ; i < this.tematicas.length ; i++){
             var gen = this.generators.get(this.tematicas[i]);
+            console.log("Cargando temática: " + this.tematicas[i]);
             await gen.getData();
+            await this.#sleep(10000);
         }
     }
+
+    #sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
 }
+// var gen = new GeneratorChooser();
+// gen.loadGenerators()
+//       .then(() => {
+//         console.log("Generators loaded successfully!");
+//       })
+//       .catch((error) => {
+//         console.error("Error al cargar los generadores de preguntas:", error);
+//       });
 
 module.exports = GeneratorChooser;

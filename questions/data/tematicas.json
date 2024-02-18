@@ -16,22 +16,21 @@
     },
     "literatura": {
         "entity": "Q7725634",
-        "props": ["P50", "P577", "P136", "P674", "P840"],
+        "props": ["P50", "P577", "P136", "P674"],
         "preguntas": [
             "¿Quién es el autor de la obra literaria ",
             "¿Cuál fue la fecha de publicación de la obra literaria ",
-            "¿Cuál es el género literario de la obra literaria ",
-            "¿Cuál es uno de los personajes de la obra literaria ",
-            "¿Cuál es uno de los lugares en los que transcurre la obra literaria "
+            "¿Cuál es el género de la obra literaria ",
+            "¿Cuál es uno de los personajes de la obra literaria "
         ]
     },
     "cine": {
         "entity": "Q11424",
-        "props": ["P577", "P57", "P161"],
+        "props": ["P577", "P57", "P2130"],
         "preguntas": [
-            "¿En qué año se estrenó ",
+            "¿En qué año se estrenó el film ",
             "¿Quién es director de la película ",
-            "¿Cuál de estos actores forma parte del reparto de  "
+            "¿Cuál fue el presupuesto de la película "
         ]
     },
     "arte": {

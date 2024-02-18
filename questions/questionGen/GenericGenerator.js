@@ -13,17 +13,19 @@ class GenericGenerator {
     Array.prototype.groupByEntity = function () {
       return this.reduce((acumulador, actual) => {
         const entity = actual.entityLabel.value;
-        if (!acumulador[entity]) {
-          acumulador[entity] = {};
-        }
+        if (!/^Q\d+/.test(entity)) {
+          if (!acumulador[entity]) {
+            acumulador[entity] = {};
+          }
 
-        for (const key in actual) {
-          if (key !== "entityLabel") {
-            const valor = actual[key].value;
-            if (!acumulador[entity][key]) {
-              acumulador[entity][key] = [valor];
-            } else if (!acumulador[entity][key].includes(valor)) {
-              acumulador[entity][key].push(valor);
+          for (const key in actual) {
+            if (key !== "entityLabel") {
+              const valor = actual[key].value;
+              if (!acumulador[entity][key]) {
+                acumulador[entity][key] = [valor];
+              } else if (!acumulador[entity][key].includes(valor)) {
+                acumulador[entity][key].push(valor);
+              }
             }
           }
         }
@@ -68,6 +70,7 @@ class GenericGenerator {
                       ${this.#generateProps(this.props)} .
                   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
               }
+              LIMIT 10000
           `;
 
     const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
@@ -78,6 +81,7 @@ class GenericGenerator {
       .get(url)
       .then((response) => {
         const data = response.data;
+        console.log(data);
         this.data = data.results.bindings.groupByEntity();
       })
       .catch((error) => {
@@ -86,14 +90,11 @@ class GenericGenerator {
   }
 
   generateRandomQuestion(data) {
-    // Elegir aleatoriamente un país del array
+    // Elegir aleatoriamente una entidad del array
     var entidades = Object.keys(data);
     const entidadLabel =
       entidades[Math.floor(Math.random() * entidades.length)];
-    //Eliminar la entidad de la lista de entidades
-    entidades = entidades.filter(
-      (x) => x !== entidadLabel && !/^Q\d+/.test(entidadLabel)
-    );
+
     const entidad = data[entidadLabel];
 
     // Elegir aleatoriamente una propiedad de la entidad para hacer la pregunta
