@@ -7,7 +7,6 @@ class GenericGenerator {
     this.propLabels = this.#generateLabels(props).map(x => x.slice(1).trimEnd());
     this.preguntas = preguntas;
     this.preguntasMap = this.#generateQuestionLabels(preguntas);
-    this.#getData(this.entity, this.props);
 
     Array.prototype.groupByEntity = function () {
       return this.reduce((acumulador, actual) => {
@@ -57,7 +56,7 @@ class GenericGenerator {
   }
 
   // Función para realizar la consulta SPARQL y obtener los datos de Wikidata
-  async #getData() {
+  async getData() {
     const sparqlQuery = `
             SELECT DISTINCT ?entityLabel ${this.#generateLabels(this.props).join(' ')}
             WHERE {
