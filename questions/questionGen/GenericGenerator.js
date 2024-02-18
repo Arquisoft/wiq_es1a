@@ -98,12 +98,16 @@ class GenericGenerator {
 
     // Elegir aleatoriamente una propiedad de la entidad para hacer la pregunta
     const propiedades = this.propLabels;
-    const propiedadPregunta =
-      propiedades[Math.floor(Math.random() * propiedades.length)];
 
-    // Obtener la respuesta correcta
-    const respuestaCorrecta =
-      entidad[propiedadPregunta][entidad[propiedadPregunta].length - 1];
+    var respuestaCorrecta = "";
+    do{
+      var propiedadPregunta =
+        propiedades[Math.floor(Math.random() * propiedades.length)];
+
+      // Obtener la respuesta correcta
+      respuestaCorrecta =
+        entidad[propiedadPregunta][entidad[propiedadPregunta].length - 1];
+    }while(/^Q\d+/.test(respuestaCorrecta));
 
     var questionObj = {
       pregunta: "",
