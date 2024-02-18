@@ -81,7 +81,6 @@ class GenericGenerator {
       .get(url)
       .then((response) => {
         const data = response.data;
-        console.log(data);
         this.data = data.results.bindings.groupByEntity();
       })
       .catch((error) => {

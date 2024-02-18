@@ -41,5 +41,15 @@
             "¿A qué movimiento artístico pertenece la obra ",
             "¿Dónde está exhibida la obra "
         ]
+    },
+    "programacion": {
+        "entity": "Q9143",
+        "props": ["P571", "P287", "P348", "P1195"],
+        "preguntas": [
+            "¿En qué fecha se creó el lenguaje de programación ",
+            "¿Quién es el creador del lenguaje de programación ",
+            "¿Cuál es la última versión del lenguaje de programación ",
+            "¿Cuál es una de las extensiones usadas por el lenguaje de programación "
+        ]
     }
 }      
