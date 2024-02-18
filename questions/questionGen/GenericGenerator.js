@@ -7,6 +7,7 @@ class GenericGenerator {
     this.propLabels = this.#generateLabels(props).map(x => x.slice(1).trimEnd());
     this.preguntas = preguntas;
     this.preguntasMap = this.#generateQuestionLabels(preguntas);
+    this.#getData(this.entity, this.props);
 
     Array.prototype.groupByEntity = function () {
       return this.reduce((acumulador, actual) => {
@@ -73,10 +74,9 @@ class GenericGenerator {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      return data.results.bindings.groupByEntity();
+      this.data = data.results.bindings.groupByEntity();
     } catch (error) {
       console.error("Error fetching data:", error);
-      return [];
     }
   }
 
@@ -131,14 +131,6 @@ class GenericGenerator {
   }
 
   async generateRandomQuestions(n) {
-    if(!this.data){
-      this.data = await this.#getData(this.entity, this.props);
-    }
-    if (this.data.length === 0) {
-      console.log("No se pudo obtener datos para generar preguntas.");
-      return;
-    }
-
     const questions = [];
 
     for (let i = 0; i < n; i++) {

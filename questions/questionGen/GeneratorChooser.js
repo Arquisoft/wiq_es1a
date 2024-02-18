@@ -30,11 +30,11 @@ var tematicas = {
 
 class GeneratorChooser{
     constructor(){
-        var paises = tematicas["paises"];
-        this.paises = new GenericGenerator(paises.entity, paises.props, paises.preguntas);
-
-        var famosos = tematicas["famosos"];
-        this.famosos = new GenericGenerator(famosos.entity, famosos.props, famosos.preguntas);
+        this.loadGenerators().then(() => {
+            console.log("Generators loaded successfully!");
+        }).catch(error => {
+            console.error("Error loading generators:", error);
+        });
     }
 
     getCountryQuestions(n){
@@ -44,10 +44,14 @@ class GeneratorChooser{
     getFamososQuestions(n){
         return this.famosos.generateRandomQuestions(n).then(x => x);
     }
+
+    async loadGenerators(){
+        var paises = tematicas["paises"];
+        this.paises = await new GenericGenerator(paises.entity, paises.props, paises.preguntas);
+
+        var famosos = tematicas["famosos"];
+        this.famosos = await new GenericGenerator(famosos.entity, famosos.props, famosos.preguntas);
+    }
 }
 
-var x = new GeneratorChooser();
-//x.getCountryQuestions(5).then(x => console.log(x))
-x.getFamososQuestions(5).then(x => console.log(x))
-
-//module.exports = GeneratorChooser;
+module.exports = GeneratorChooser;
