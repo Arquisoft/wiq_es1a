@@ -35,11 +35,11 @@ class GeneratorChooser{
     }
 
     getCountryQuestions(n){
-        return this.paises.generateRandomQuestions(n).then(x => x);
+        return this.paises.generateRandomQuestions(n);
     }
 
     getFamososQuestions(n){
-        return this.famosos.generateRandomQuestions(n).then(x => x);
+        return this.famosos.generateRandomQuestions(n);
     }
 
     async loadGenerators(){     

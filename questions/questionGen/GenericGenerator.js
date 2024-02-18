@@ -58,13 +58,13 @@ class GenericGenerator {
   // Función para realizar la consulta SPARQL y obtener los datos de Wikidata
   async getData() {
     const sparqlQuery = `
-            SELECT DISTINCT ?entityLabel ${this.#generateLabels(this.props).join(' ')}
-            WHERE {
-                ?entity wdt:P31 wd:${this.entity};            
-                    ${this.#generateProps(this.props)} .
-                SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
-            }
-        `;
+              SELECT DISTINCT ?entityLabel ${this.#generateLabels(this.props).join(' ')}
+              WHERE {
+                  ?entity wdt:P31 wd:${this.entity};            
+                      ${this.#generateProps(this.props)} .
+                  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
+              }
+          `;
 
     const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
       sparqlQuery
@@ -79,7 +79,7 @@ class GenericGenerator {
     }
   }
 
-  async generateRandomQuestion(data) {
+  generateRandomQuestion(data) {
     // Elegir aleatoriamente un país del array
     var entidades = Object.keys(data);
     const entidadLabel =
@@ -129,15 +129,15 @@ class GenericGenerator {
     return questionObj;
   }
 
-  async generateRandomQuestions(n) {
+  generateRandomQuestions(n) {
     const questions = [];
 
     for (let i = 0; i < n; i++) {
-      const question = Promise.resolve(this.generateRandomQuestion(this.data));
+      const question = this.generateRandomQuestion(this.data);
       questions.push(question);
     }
 
-    return Promise.all(questions);
+    return questions;
   }
 }
 

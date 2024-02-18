@@ -22,7 +22,7 @@ app.get("/randomQuestion", async (req, res) => {
       .json({ error: `El límite de preguntas son ${MAX_QUESTIONS}` });
   }
   try {
-    var data = await gen.getFamososQuestions(req.query.n);
+    var data = gen.getCountryQuestions(req.query.n);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });
