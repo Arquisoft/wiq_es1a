@@ -16,7 +16,7 @@ class GeneratorChooser{
             var tematica = tematicas[i];
             this.tematicas.push(i);
             this.generators.set(i, 
-                new GenericGenerator(tematica.entity, tematica.props, tematica.preguntas)
+                new GenericGenerator(tematica.entity, tematica.props, tematica.types, tematica.preguntas)
             );
         }
     }

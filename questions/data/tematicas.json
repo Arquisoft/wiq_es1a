@@ -2,6 +2,7 @@
     "paises": {
         "entity": "Q6256",
         "props": ["P36", "P35", "P1344", "P37", "P47", "P2250", "P571", "P122", "P1451"],
+        "types": ["str", "str", "str", "str", "str", "num", "date", "str", "str"],
         "preguntas": [
             "¿Cuál es la capital de ", 
             "¿Quién es el jefe de estado de ",
@@ -17,6 +18,7 @@
     "literatura": {
         "entity": "Q7725634",
         "props": ["P50", "P577", "P136", "P674"],
+        "types": ["str", "date", "str", "str"],
         "preguntas": [
             "¿Quién es el autor de la obra literaria ",
             "¿Cuál fue la fecha de publicación de la obra literaria ",
@@ -27,15 +29,17 @@
     "cine": {
         "entity": "Q11424",
         "props": ["P577", "P57", "P2130"],
+        "types": ["date", "str", "num"],
         "preguntas": [
             "¿En qué año se estrenó el film ",
             "¿Quién es director de la película ",
-            "¿Cuál fue el presupuesto de la película "
+            "¿Cuál fue el presupuesto (en USD) de la película "
         ]
     },
     "arte": {
         "entity": "Q3305213",
         "props": ["P571", "P135", "P276"],
+        "types": ["date", "str", "str"],
         "preguntas": [
             "¿En qué año se pintó la obra ",
             "¿A qué movimiento artístico pertenece la obra ",
@@ -45,6 +49,7 @@
     "programacion": {
         "entity": "Q9143",
         "props": ["P571", "P287", "P348", "P1195"],
+        "types": ["date", "str", "str", "str"],
         "preguntas": [
             "¿En qué fecha se creó el lenguaje de programación ",
             "¿Quién es el creador del lenguaje de programación ",

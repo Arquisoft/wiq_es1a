@@ -1,9 +1,10 @@
 const axios = require("axios");
 
 class GenericGenerator {
-  constructor(entity, props, preguntas) {
+  constructor(entity, props, types, preguntas) {
     this.entity = entity;
     this.props = props;
+    this.types = types;
     this.propLabels = this.#generateLabels(props).map((x) =>
       x.slice(1).trimEnd()
     );
@@ -100,9 +101,10 @@ class GenericGenerator {
     const propiedades = this.propLabels;
 
     var respuestaCorrecta = "";
+    var propIndex = 0;
     do{
-      var propiedadPregunta =
-        propiedades[Math.floor(Math.random() * propiedades.length)];
+      propIndex = Math.floor(Math.random() * propiedades.length);
+      var propiedadPregunta = propiedades[propIndex];
 
       // Obtener la respuesta correcta
       respuestaCorrecta =
@@ -135,6 +137,19 @@ class GenericGenerator {
     // Barajar las opciones de respuesta
     questionObj.respuestas.sort(() => Math.random() - 0.5);
 
+    switch(this.types[propIndex]){
+      case "date":
+        questionObj.respuestas = questionObj.respuestas.map(x => this.#dateFormatter(x));
+        questionObj.correcta = this.#dateFormatter(questionObj.correcta);
+        break;
+      case "num":
+        questionObj.respuestas = questionObj.respuestas.map(x => Math.floor(x));
+        questionObj.correcta = Math.floor(questionObj.correcta);
+        break;
+      default:
+        break;
+    }
+
     questionObj.pregunta =
       this.preguntasMap.get(propiedadPregunta) + entidadLabel + "?";
 
@@ -151,6 +166,21 @@ class GenericGenerator {
 
     return questions;
   }
+
+  #dateFormatter(fecha) {
+    var isAC = false;
+    if(fecha.startsWith('-')){
+        isAC = true;
+        fecha = fecha.substring(1);
+    }
+
+    const [año, mes, dia] = fecha.split('T')[0].split('-').map(n => Number.parseInt(n).toFixed());
+
+    const fechaFormateada = `${dia}/${mes}/${año} ${isAC ? 'a.C.' : ''}`;
+    
+    return fechaFormateada;
+}
+
 }
 
 module.exports = GenericGenerator;
