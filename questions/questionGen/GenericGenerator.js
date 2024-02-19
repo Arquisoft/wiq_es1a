@@ -176,7 +176,7 @@ class GenericGenerator {
 
     const [año, mes, dia] = fecha.split('T')[0].split('-').map(n => Number.parseInt(n).toFixed());
 
-    const fechaFormateada = `${dia}/${mes}/${año} ${isAC ? 'a.C.' : ''}`;
+    const fechaFormateada = `${dia}/${mes}/${año}${isAC ? ' a.C.' : ''}`;
     
     return fechaFormateada;
 }

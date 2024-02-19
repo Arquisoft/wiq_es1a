@@ -31,7 +31,7 @@
         "props": ["P577", "P57", "P2130"],
         "types": ["date", "str", "num"],
         "preguntas": [
-            "¿En qué año se estrenó el film ",
+            "¿En qué fecha se estrenó el film ",
             "¿Quién es director de la película ",
             "¿Cuál fue el presupuesto (en USD) de la película "
         ]
@@ -41,7 +41,7 @@
         "props": ["P571", "P135", "P276"],
         "types": ["date", "str", "str"],
         "preguntas": [
-            "¿En qué año se pintó la obra ",
+            "¿En qué fecha se pintó la obra ",
             "¿A qué movimiento artístico pertenece la obra ",
             "¿Dónde está exhibida la obra "
         ]
