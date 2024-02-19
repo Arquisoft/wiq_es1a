@@ -458,20 +458,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_technical_context">3.2. Technical Context</a></li>
 </ul>
 </li>
-<li><a href="#section-solution-strategy">4. Solution Strategy</a></li>
+<li><a href="#section-solution-strategy">4. Solution Strategy</a>
+<ul class="sectlevel2">
+<li><a href="#_design">4.1. Design</a></li>
+<li><a href="#_security">4.2. Security</a></li>
+<li><a href="#_testability">4.3. Testability</a></li>
+<li><a href="#_interface">4.4. Interface</a></li>
+</ul>
+</li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
 <ul class="sectlevel2">
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
-<li><a href="#_level_2">5.2. Level 2</a></li>
-<li><a href="#_level_3">5.3. Level 3</a></li>
+<li><a href="#_blackbox_overall_system">5.2. Blackbox Overall System</a></li>
+<li><a href="#_level_2">5.3. Level 2</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Runtime View</a>
 <ul class="sectlevel2">
-<li><a href="#_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</a></li>
-<li><a href="#_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</a></li>
-<li><a href="#">6.3. &#8230;&#8203;</a></li>
-<li><a href="#_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</a></li>
+<li><a href="#_the_user_plays">6.1. &lt;The user plays&gt;</a></li>
+<li><a href="#_the_user_looks_at_their_history">6.2. &lt;The user looks at their history&gt;</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Deployment View</a>
@@ -482,20 +487,19 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
-<li><a href="#_user_interface">8.1. <em>&lt;User Interface &gt;</em></a></li>
-<li><a href="#_ergonomics">8.2. <em>&lt;Ergonomics &gt;</em></a></li>
-<li><a href="#_internationalization">8.3. <em>&lt;Internationalization &gt;</em></a></li>
-<li><a href="#_security">8.4. <em>&lt;Security &gt;</em></a></li>
-<li><a href="#_safety">8.5. <em>&lt;Safety  &gt;</em></a></li>
-<li><a href="#_build_test_deploy">8.6. <em>&lt;Build, Test, Deploy &gt;</em></a></li>
-<li><a href="#_code_generation">8.7. <em>&lt;Code Generation &gt;</em></a></li>
-<li><a href="#_migration">8.8. <em>&lt;Migration &gt;</em></a></li>
-<li><a href="#_configurability">8.9. <em>&lt;Configurability &gt;</em></a></li>
-<li><a href="#_administration">8.10. <em>&lt;Administration &gt;</em></a></li>
-<li><a href="#_management">8.11. <em>&lt;Management &gt;</em></a></li>
-<li><a href="#_disaster_recovery">8.12. <em>&lt;Disaster-Recovery &gt;</em></a></li>
-<li><a href="#_architecture_and_design_patterns">8.13. <em>&lt;Architecture and design patterns  &gt;</em></a></li>
-<li><a href="#_concept">8.14. <em>&lt;Concept &gt;</em></a></li>
+<li><a href="#_user_interface">8.1. User Interface</a></li>
+<li><a href="#_ergonomics">8.2. &lt;Ergonomics &gt;</a></li>
+<li><a href="#_internationalization">8.3. Internationalization</a></li>
+<li><a href="#_security_2">8.4. Security</a></li>
+<li><a href="#_safety">8.5. Safety</a></li>
+<li><a href="#_build_test_deploy">8.6. Build, Test, Deploy</a></li>
+<li><a href="#_code_generation">8.7. Code Generation</a></li>
+<li><a href="#_migration">8.8. Migration</a></li>
+<li><a href="#_configurability">8.9. Configurability</a></li>
+<li><a href="#_administration">8.10. Administration</a></li>
+<li><a href="#_management">8.11. Management</a></li>
+<li><a href="#_disaster_recovery">8.12. Disaster-Recovery</a></li>
+<li><a href="#_architecture_and_design_patterns">8.13. Architecture and design patterns</a></li>
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
@@ -784,446 +788,183 @@ WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recre
 <h2 id="section-solution-strategy">4. Solution Strategy</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Elaboramos una aplicacíon en la que los usuarios pueden registrarse para jugar, donde en cada juego tendran que responder varias preguntas, de distintas categorias, donde se guardará
-un ranking con la máxima puntuación del usuario y se podrá comparar con otros usuarios, también tendra una sección que indique su promedio de aciertos y en que categoría acierta más preguntas.</p>
+<p>We developed an application in which users can register to play, where in each game they will have to answer several questions, from different categories, where it will be saved
+A ranking with the maximum score of the user and can be compared with other users, it will also have a section that indicates their correct guess and in which category they get the most questions right.</p>
 </div>
 <div class="ulist">
-<div class="title">Tecnologías usadas para llevar a cabo:</div>
+<div class="title">Technologies used to carry out:</div>
 <ul>
 <li>
-<p>MongoDB: MongoDB es una base de datos NoSQL de código abierto que utiliza un modelo de datos basado en documentos para el almacenamiento y recuperación de información.</p>
+<p>MongoDB: MongoDB is an open-source NoSQL database that uses a document-based data model for information storage and retrieval.</p>
 </li>
 <li>
-<p>React JS: Es un framework creado por Facebook ampliamente utlizado para crear componentes de la interfaz de usuario. Escogido por el gran volumen de documentación y ser el framework utilizado durante los anteriores cursos.</p>
+<p>React JS: It&#8217;s a framework created by Facebook that&#8217;s widely used to create user interface components. Chosen for the large volume of documentation and the fact that it is the framework used during the previous courses.</p>
 </li>
 <li>
-<p>WikiData: Es una base de conocimientos gratuita modificada por seres humanos como por máquinas, y es de donde obtendremos nuestras preguntas.</p>
+<p>WikiData: It&#8217;s a free knowledge base modified by humans as well as machines, and it&#8217;s where we&#8217;ll get our questions from.</p>
 </li>
 <li>
-<p>Microsoft Azure: plataforma de computación en la nube que proporciona servicios de infraestructura, plataforma y software como servicio para alojar, administrar y escalar aplicaciones y servicios en línea.</p>
+<p>Microsoft Azure: A cloud computing platform that provides infrastructure, platform, and software-as-a-service services to host, manage, and scale online applications and services.</p>
 </li>
 </ul>
 </div>
+<div class="sect2">
+<h3 id="_design">4.1. Design</h3>
 <div class="paragraph">
-<div class="title">Diseño</div>
-<p>La página web diseñada está compuesta por un frontend en React, un backend en Node.js y está documentada usando Asciidoc. Cada usuario tendrá su propia cuenta donde se guardará su información. Las decisiones relacionadas con el diseño se detallan en el punto 9.</p>
+<p>The designed website is composed of a frontend in React, a backend in Node.js and is documented using Asciidoc. Each user will have their own account where their information will be saved. Design-related decisions are detailed in point 9.</p>
 </div>
-<div class="paragraph">
-<div class="title">Seguridad</div>
-<p>Garantizamos la seguridad del usuario</p>
 </div>
+<div class="sect2">
+<h3 id="_security">4.2. Security</h3>
 <div class="paragraph">
-<div class="title">Testabilidad</div>
-<p>Se realizarán pruebas para cada parte individual de la aplicación, garantizando así el correcto funcionamiento de los diferentes modulos tanto individualmente como de forma conjunta.</p>
+<p>We guarantee the safety of the user</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_testability">4.3. Testability</h3>
 <div class="paragraph">
-<div class="title">Interfaz</div>
-<p>La interfaz gráfica será elegida entre todos los miembros del equipo, aportando cada uno algún boceto o idea, los cuales serán puestos en común y se decidirá cual se ajusta mejor a la apicación esperada y que elementos de dichos bocetos resultan más adecuados.
-Para ello se tendrá en cuenta la usabilidad y las necesidades de los difentes tipos de usuarios.</p>
+<p>Tests will be carried out for each individual part of the application, thus ensuring the correct operation of the different modules both individually and together.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_interface">4.4. Interface</h3>
+<div class="paragraph">
+<p>The graphical interface will be chosen among all the members of the team, each one contributing a sketch or idea, which will be shared and it will be decided which best fits the expected performance and which elements of these sketches are most suitable.
+This will take into account the usability and needs of different types of users.</p>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="section-building-block-view">5. Building Block View</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
+<div class="sect2">
+<h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
 <div class="paragraph">
-<div class="title">Content</div>
-<p>The building block view shows the static decomposition of the system into building blocks (modules, components, subsystems, classes, interfaces, packages, libraries, frameworks, layers, partitions, tiers, functions, macros, operations, data structures, &#8230;&#8203;) as well as their dependencies (relationships, associations, &#8230;&#8203;)</p>
-</div>
-<div class="paragraph">
-<p>This view is mandatory for every architecture documentation.
-In analogy to a house this is the <em>floor plan</em>.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Maintain an overview of your source code by making its structure understandable through
-abstraction.</p>
-</div>
-<div class="paragraph">
-<p>This allows you to communicate with your stakeholder on an abstract level without disclosing implementation details.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>The building block view is a hierarchical collection of black boxes and white boxes
-(see figure below) and their descriptions.</p>
+<p>The code is broken down in a structured way by levels, in which the internal dependencies of each element are taught. The system is divided into Whitebox and Blackbox.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/05_building_blocks-EN.png" alt="Hierarchy of building blocks">
+<img src="./images/whiteBox5.1.png" alt="Hierarchy of building blocks">
 </div>
-</div>
-<div class="paragraph">
-<p><strong>Level 1</strong> is the white box description of the overall system together with black
-box descriptions of all contained building blocks.</p>
-</div>
-<div class="paragraph">
-<p><strong>Level 2</strong> zooms into some building blocks of level 1.
-Thus it contains the white box description of selected building blocks of level 1, together with black box descriptions of their internal building blocks.</p>
-</div>
-<div class="paragraph">
-<p><strong>Level 3</strong> zooms into selected building blocks of level 2, and so on.</p>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-5/">Building Block View</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_whitebox_overall_system">5.1. Whitebox Overall System</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Here you describe the decomposition of the overall system using the following white box template. It contains</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>an overview diagram</p>
-</li>
-<li>
-<p>a motivation for the decomposition</p>
-</li>
-<li>
-<p>black box descriptions of the contained building blocks. For these we offer you alternatives:</p>
-<div class="ulist">
-<ul>
-<li>
-<p>use <em>one</em> table for a short and pragmatic overview of all contained building blocks and their interfaces</p>
-</li>
-<li>
-<p>use a list of black box descriptions of the building blocks according to the black box template (see below).
-Depending on your choice of tool this list could be sub-chapters (in text files), sub-pages (in a Wiki) or nested elements (in a modeling tool).</p>
-</li>
-</ul>
-</div>
-</li>
-<li>
-<p>(optional:) important interfaces, that are not explained in the black box templates of a building block, but are very important for understanding the white box.
-Since there are so many ways to specify interfaces why do not provide a specific template for them.
- In the worst case you have to specify and describe syntax, semantics, protocols, error handling,
- restrictions, versions, qualities, necessary compatibilities and many things more.
-In the best case you will get away with examples or simple signatures.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><em><strong>&lt;Overview Diagram&gt;</strong></em></p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Motivation</dt>
-<dd>
-<p><em>&lt;text explanation&gt;</em></p>
-</dd>
-<dt class="hdlist1">Contained Building Blocks</dt>
-<dd>
-<p><em>&lt;Description of contained building block (black boxes)&gt;</em></p>
-</dd>
-<dt class="hdlist1">Important Interfaces</dt>
-<dd>
-<p><em>&lt;Description of important interfaces&gt;</em></p>
-</dd>
-</dl>
-</div>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Insert your explanations of black boxes from level 1:</p>
-</div>
-<div class="paragraph">
-<p>If you use tabular form you will only describe your black boxes with name and
-responsibility according to the following schema:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top"><strong>Name</strong></th>
-<th class="tableblock halign-left valign-top"><strong>Responsibility</strong></th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 1&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Actors</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>&lt;black box 2&gt;</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"> <em>&lt;Text&gt;</em></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Admin</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">You have access to the entire app and can manage it to make it work properly.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>User</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It&#8217;s the one that interacts directly with the app.</p></td>
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>If you use a list of black box descriptions then you fill in a separate black box template for every important building block .
-Its headline is the name of the black box.</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_black_box_1">5.1.1. &lt;Name black box 1&gt;</h4>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Here you describe &lt;black box 1&gt;
-according the the following black box template:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Purpose/Responsibility</p>
-</li>
-<li>
-<p>Interface(s), when they are not extracted as separate paragraphs. This interfaces may include qualities and performance characteristics.</p>
-</li>
-<li>
-<p>(Optional) Quality-/Performance characteristics of the black box, e.g.availability, run time behavior, &#8230;&#8203;.</p>
-</li>
-<li>
-<p>(Optional) directory/file location</p>
-</li>
-<li>
-<p>(Optional) Fulfilled requirements (if you need traceability to requirements).</p>
-</li>
-<li>
-<p>(Optional) Open issues/problems/risks</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><em>&lt;Purpose/Responsibility&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;Interface(s)&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Quality/Performance Characteristics&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Directory/File Location&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(Optional) Fulfilled Requirements&gt;</em></p>
-</div>
-<div class="paragraph">
-<p><em>&lt;(optional) Open Issues/Problems/Risks&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_black_box_2">5.1.2. &lt;Name black box 2&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_black_box_n">5.1.3. &lt;Name black box n&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;black box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_interface_1">5.1.4. &lt;Name interface 1&gt;</h4>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_name_interface_m">5.1.5. &lt;Name interface m&gt;</h4>
-
-</div>
 </div>
 <div class="sect2">
-<h3 id="_level_2">5.2. Level 2</h3>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Here you can specify the inner structure of (some) building blocks from level 1 as white boxes.</p>
-</div>
-<div class="paragraph">
-<p>You have to decide which building blocks of your system are important enough to justify such a detailed description.
-Please prefer relevance over completeness. Specify important, surprising, risky, complex or volatile building blocks.
-Leave out normal, simple, boring or standardized parts of your system</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_1">5.2.1. White Box <em>&lt;building block 1&gt;</em></h4>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>&#8230;&#8203;describes the internal structure of <em>building block 1</em>.</p>
-</div>
-</div>
-</div>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_2">5.2.2. White Box <em>&lt;building block 2&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_m">5.2.3. White Box <em>&lt;building block m&gt;</em></h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
+<h3 id="_blackbox_overall_system">5.2. Blackbox Overall System</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Name</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Interface</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The interface with which the user interacts</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>WikiData</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Provide the questions that will be used in the app</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>MongoDB</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store user data</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
-<h3 id="_level_3">5.3. Level 3</h3>
-<div class="sidebarblock arc42help">
+<h3 id="_level_2">5.3. Level 2</h3>
+<div class="imageblock">
 <div class="content">
-<div class="paragraph">
-<p>Here you can specify the inner structure of (some) building blocks from level 2 as white boxes.</p>
-</div>
-<div class="paragraph">
-<p>When you need more detailed levels of your architecture please copy this
-part of arc42 for additional levels.</p>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_x_1">5.3.1. White Box &lt;_building block x.1_&gt;</h4>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<p>Specifies the internal structure of <em>building block x.1</em>.</p>
-</div>
+<img src="./images/Level2.png" alt="Hierarchy of building blocks">
 </div>
 </div>
 <div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
+<div class="title">Motivation</div>
+<p>In this diagram we can see the decided microservices that will provide all the operations necessary for the
+application to work properly.</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_x_2">5.3.2. White Box &lt;_building block x.2_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_white_box_building_block_y_1">5.3.3. White Box &lt;_building block y.1_&gt;</h4>
-<div class="paragraph">
-<p><em>&lt;white box template&gt;</em></p>
-</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Name</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Game Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is the microservice that will be in charge of the correct functioning of the game and calculate the user&#8217;s score.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>UserData Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is the microservice that provides the necessary user data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Authetification Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It&#8217;s a microservice that users use to sign in to your app.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Question Service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It is the microservice that will generate the questions through the WikiData API.</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
-</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="section-runtime-view">6. Runtime View</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>The runtime view describes concrete behavior and interactions of the system’s building blocks in form of scenarios from the following areas:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>important use cases or features: how do building blocks execute them?</p>
-</li>
-<li>
-<p>interactions at critical external interfaces: how do building blocks cooperate with users and neighboring systems?</p>
-</li>
-<li>
-<p>operation and administration: launch, start-up, stop</p>
-</li>
-<li>
-<p>error and exception scenarios</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Remark: The main criterion for the choice of possible scenarios (sequences, workflows) is their <strong>architectural relevance</strong>. It is <strong>not</strong> important to describe a large number of scenarios. You should rather document a representative selection.</p>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>You should understand how (instances of) building blocks of your system perform their job and communicate at runtime.
-You will mainly capture scenarios in your documentation to communicate your architecture to stakeholders that are less willing or able to read and understand the static models (building block view, deployment view).</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>There are many notations for describing scenarios, e.g.</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>numbered list of steps (in natural language)</p>
-</li>
-<li>
-<p>activity diagrams or flow charts</p>
-</li>
-<li>
-<p>sequence diagrams</p>
-</li>
-<li>
-<p>BPMN or EPCs (event process chains)</p>
-</li>
-<li>
-<p>state machines</p>
-</li>
-<li>
-<p>&#8230;&#8203;</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-6/">Runtime View</a> in the arc42 documentation.</p>
-</div>
-</div>
-</div>
 <div class="sect2">
-<h3 id="_runtime_scenario_1">6.1. &lt;Runtime Scenario 1&gt;</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><em>&lt;insert runtime diagram or textual description of the scenario&gt;</em></p>
-</li>
-<li>
-<p><em>&lt;insert description of the notable aspects of the interactions between the
-building block instances depicted in this diagram.&gt;</em></p>
-</li>
-</ul>
-</div>
+<h3 id="_the_user_plays">6.1. &lt;The user plays&gt;</h3>
 <div class="paragraph">
-<p>It is possible to use a sequence diagram:</p>
+<p>The user starts a game, and the game uses the questions service to run it.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/Sequence%20diagram.png" alt="Sequence diagram" width="332" height="335">
+<img src="./images/juega.png" alt="Hierarchy of building blocks">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_runtime_scenario_2">6.2. &lt;Runtime Scenario 2&gt;</h3>
-
+<h3 id="_the_user_looks_at_their_history">6.2. &lt;The user looks at their history&gt;</h3>
+<div class="paragraph">
+<p>The user checks their scores and statistics.</p>
 </div>
-<div class="sect2">
-<h3 id="">6.3. &#8230;&#8203;</h3>
-
+<div class="imageblock">
+<div class="content">
+<img src="./images/historial.png" alt="Hierarchy of building blocks">
 </div>
-<div class="sect2">
-<h3 id="_runtime_scenario_n">6.4. &lt;Runtime Scenario n&gt;</h3>
+</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1325,17 +1066,7 @@ when your infrastructure is more complex.</p>
 <dl>
 <dt class="hdlist1">Motivation</dt>
 <dd>
-<p><em>&lt;Simple structure of how the different parts of the application would work&gt;</em></p>
-</dd>
-<dt class="hdlist1">Quality and/or Performance Features</dt>
-<dd>
-<p><em>&lt;We will have a link to wikidata that will be where we get the different questions, in addition a registration and persistence layer of user and registration data, finally they will be united in the link layer and this will be the one that is directly related to the application&gt;</em></p>
-</dd>
-<dt class="hdlist1">Mapping of Building Blocks to Infrastructure</dt>
-<dd>
-<p><em>&lt;Quiestion Generator: give us the questions posible answers
-  User service: All the options that users needs
-  Register: create new acounts or login with one&gt;</em></p>
+<p>As we can see, this would be the initial diagram of how the classes would relate to each other. We have, in the first place, the 'app' class that is related to 'link', which in turn is related to the different parts of the app.</p>
 </dd>
 </dl>
 </div>
@@ -1353,24 +1084,39 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_1">7.2.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
+<h4 id="_app">7.2.1. APP</h4>
 <div class="paragraph">
-<p><em>&lt;diagram + explanation&gt;</em></p>
+<p>"App": It is the part with which the user interacts. This part would be responsible for providing the visual interface and using the rest of the created classes.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_2">7.2.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
+<h4 id="_link">7.2.2. LINK</h4>
 <div class="paragraph">
-<p><em>&lt;diagram + explanation&gt;</em></p>
-</div>
-<div class="paragraph">
-<p>&#8230;&#8203;</p>
+<p>"Link" is the part of the application that connects the rest of the parts. This will facilitate the use of the different parts of the application in the App section.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_infrastructure_element_n">7.2.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
+<h4 id="_register">7.2.3. REGISTER</h4>
 <div class="paragraph">
-<p><em>&lt;diagram + explanation&gt;</em></p>
+<p>"Register" is the part of the application that handles user registration and login. It&#8217;s very important as it&#8217;s the first thing a potential user will encounter when they visit our page.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_user_service">7.2.4. USER SERVICE</h4>
+<div class="paragraph">
+<p>"User service" is the part of the application that generates the various services within the application to the user, such as a ranking, correctly answered questions, and so on.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_question_generator">7.2.5. QUESTION GENERATOR</h4>
+<div class="paragraph">
+<p>"Question generator" is the part of the application that, using the data from Wikidata and some pre-created templates, generates the questions and possible answers of the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wikidata">7.2.6. WIKIDATA</h4>
+<div class="paragraph">
+<p>Wikidata” is the API that you will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1480,89 +1226,91 @@ on this list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_user_interface">8.1. <em>&lt;User Interface &gt;</em></h3>
+<h3 id="_user_interface">8.1. User Interface</h3>
 <div class="paragraph">
-<p><em>&lt;A user interface is the space where a human and a computer or device communicate and exchange information.&gt;</em></p>
+<p>A user interface is the space where a human and a computer or device communicate and exchange information</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_ergonomics">8.2. <em>&lt;Ergonomics &gt;</em></h3>
+<h3 id="_ergonomics">8.2. &lt;Ergonomics &gt;</h3>
 <div class="paragraph">
-<p><em>&lt;Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations. &gt;</em></p>
+<p>Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_internationalization">8.3. <em>&lt;Internationalization &gt;</em></h3>
+<h3 id="_internationalization">8.3. Internationalization</h3>
 <div class="paragraph">
-<p><em>&lt;Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions&gt;</em></p>
+<p>Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_security">8.4. <em>&lt;Security &gt;</em></h3>
+<h3 id="_security_2">8.4. Security</h3>
 <div class="paragraph">
-<p><em>&lt;Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm. &gt;</em></p>
+<p>Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_safety">8.5. <em>&lt;Safety  &gt;</em></h3>
+<h3 id="_safety">8.5. Safety</h3>
 <div class="paragraph">
-<p><em>&lt;Is the state of being protected from danger or harm.&gt;</em></p>
+<p>Is the state of being protected from danger or harm.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_build_test_deploy">8.6. <em>&lt;Build, Test, Deploy &gt;</em></h3>
-<div class="paragraph">
-<p><em>&#8592; Build: This stage involves compiling, validating, and packaging the source code into executable or deployable artifacts.
-- Test: This stage involves running various tests, such as unit tests, integration tests, and regression tests, to ensure the quality and functionality of the software.
-- Deploy: This stage involves delivering or releasing the software to the target environment, such as a server, a cloud platform, or a user device. &gt;</em></p>
+<h3 id="_build_test_deploy">8.6. Build, Test, Deploy</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Build: This stage involves compiling, validating, and packaging the source code into executable or deployable artifacts.</p>
+</li>
+<li>
+<p>Test: This stage involves running various tests, such as unit tests, integration tests, and regression tests, to ensure the quality and functionality of the software.</p>
+</li>
+<li>
+<p>Deploy: This stage involves delivering or releasing the software to the target environment, such as a server, a cloud platform, or a user device.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_code_generation">8.7. <em>&lt;Code Generation &gt;</em></h3>
+<h3 id="_code_generation">8.7. Code Generation</h3>
 <div class="paragraph">
-<p><em>&lt;Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.&gt;</em></p>
+<p>Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_migration">8.8. <em>&lt;Migration &gt;</em></h3>
+<h3 id="_migration">8.8. Migration</h3>
 <div class="paragraph">
-<p><em>&lt;Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.&gt;</em></p>
+<p>Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_configurability">8.9. <em>&lt;Configurability &gt;</em></h3>
+<h3 id="_configurability">8.9. Configurability</h3>
 <div class="paragraph">
-<p><em>&lt;Configurability is the ability to modify or customize something, especially in computing, electronics, or de&gt;</em></p>
+<p>Configurability is the ability to modify or customize something, especially in computing, electronics, or devices</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_administration">8.10. <em>&lt;Administration &gt;</em></h3>
+<h3 id="_administration">8.10. Administration</h3>
 <div class="paragraph">
-<p><em>&lt;The process or activity of managing, directing, or organizing something or someone&gt;</em></p>
+<p>The process or activity of managing, directing, or organizing something or someone</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_management">8.11. <em>&lt;Management &gt;</em></h3>
+<h3 id="_management">8.11. Management</h3>
 <div class="paragraph">
-<p><em>&lt;Management is the process of organizing and directing the resources of a business or organization to achieve its goals. &gt;</em></p>
+<p>Management is the process of organizing and directing the resources of a business or organization to achieve its goals.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_disaster_recovery">8.12. <em>&lt;Disaster-Recovery &gt;</em></h3>
+<h3 id="_disaster_recovery">8.12. Disaster-Recovery</h3>
 <div class="paragraph">
-<p><em>&lt;Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.&gt;</em></p>
+<p>Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_architecture_and_design_patterns">8.13. <em>&lt;Architecture and design patterns  &gt;</em></h3>
+<h3 id="_architecture_and_design_patterns">8.13. Architecture and design patterns</h3>
 <div class="paragraph">
-<p><em>&lt;Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable&gt;</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_concept">8.14. <em>&lt;Concept &gt;</em></h3>
-<div class="paragraph">
-<p><em>&lt;explanation&gt;</em></p>
+<p>Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1972,7 +1720,7 @@ These are:</p>
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-10 15:07:19 +0100
+Last updated 2024-02-12 18:20:30 +0100
 </div>
 </div>
 </body>
