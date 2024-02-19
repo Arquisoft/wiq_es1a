@@ -88,13 +88,13 @@ class GenericGenerator {
       });
   }
 
-  generateRandomQuestion(data) {
+  generateRandomQuestion() {
     // Elegir aleatoriamente una entidad del array
-    var entidades = Object.keys(data);
+    var entidades = Object.keys(this.data);
     const entidadLabel =
       entidades[Math.floor(Math.random() * entidades.length)];
 
-    const entidad = data[entidadLabel];
+    const entidad = this.data[entidadLabel];
 
     // Elegir aleatoriamente una propiedad de la entidad para hacer la pregunta
     const propiedades = this.propLabels;
@@ -112,14 +112,14 @@ class GenericGenerator {
     var questionObj = {
       pregunta: "",
       respuestas: [respuestaCorrecta],
-      correcta: respuestaCorrecta,
+      correcta: respuestaCorrecta
     };
 
     // Obtener respuestas incorrectas
     while (questionObj.respuestas.length < 4) {
       const otroPaisLabel =
         entidades[Math.floor(Math.random() * entidades.length)];
-      const otroPais = data[otroPaisLabel];
+      const otroPais = this.data[otroPaisLabel];
       let prop = otroPais[propiedadPregunta][0];
 
       // Si no está en las propiedades de la entidad de la pregunta
@@ -145,7 +145,7 @@ class GenericGenerator {
     const questions = [];
 
     for (let i = 0; i < n; i++) {
-      const question = this.generateRandomQuestion(this.data);
+      const question = this.generateRandomQuestion();
       questions.push(question);
     }
 

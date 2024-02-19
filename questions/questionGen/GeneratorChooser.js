@@ -22,7 +22,18 @@ class GeneratorChooser{
     }
 
     getQuestions(tematica, n){
-        return this.generators.get(tematica).generateRandomQuestions(n);
+        if(tematica === "all"){
+            var questions = [];
+            for(let i = 0 ; i < n ; i++){
+                let rand = Math.floor(Math.random() * this.tematicas.length)
+                let randTematica =this.tematicas[rand];
+                let q = this.generators.get(randTematica).generateRandomQuestions(1);
+                questions.push(q);
+            }
+            return questions.flat();
+        }else{
+            return this.generators.get(tematica).generateRandomQuestions(n);
+        }
     }
 
     async loadGenerators(){     
