@@ -7,14 +7,14 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 === Whitebox Overall System
 
-El código se descompone de manera estructurada por niveles, en los que se enseñan las dependencias internas de cada elemento. El sistema se divide en Whitebox y Blackbox.
+The code is broken down in a structured way by levels, in which the internal dependencies of each element are taught. The system is divided into Whitebox and Blackbox.
 
 image::whiteBox5.1.png["Hierarchy of building blocks"]
 
 |===
-| *_Actores_* | *_Description_*
-| *_Admin_* | Tiene acceso al completo de la aplicación y puede administrarla para que funcione correctamente.
-| *_User_* | Es el que interactua directamente con la aplicación.
+| *_Actors_* | *_Description_*
+| *_Admin_* | You have access to the entire app and can manage it to make it work properly.
+| *_User_* | It's the one that interacts directly with the app.
 |===
 
 
@@ -23,24 +23,24 @@ image::whiteBox5.1.png["Hierarchy of building blocks"]
 
 |===
 | *_Name_* | *_Description_*
-| *_Interface_* | La interfaz con la que interactua el usuario
-| *_WikiData_* | Proporciona las preguntas que se usaran en la aplicación
-| *_MongoDB_* | Almacena los datos del usuario
+| *_Interface_* | The interface with which the user interacts
+| *_WikiData_* | Provide the questions that will be used in the app
+| *_MongoDB_* | Store user data
 |===
 
 === Level 2
 
 image::Level2.png["Hierarchy of building blocks"]
 
-.Motivación
+.Motivation
 
-En este diagrama podemos observar los microservicios decididos que proporcionarán todas las operaciones necesarias para que la 
-aplicación funcione correctamente.
+In this diagram we can see the decided microservices that will provide all the operations necessary for the 
+application to work properly.
 
 |===
 | *_Name_* | *_Description_*
-| *_Game Service_* | Es el microservicio que se encargara del correcto funcionamiento del juego y calcular la puntuación del usuario.
-| *_UserData Service_* | Es el microservicio que proporciona los datos necesarios del usuario.
-| *_Authetification Service_* | Es un microservicio que los usuarios usan para iniciar sesión en la aplicación.
-| *_Question Service_* | Es eel microservicio que generara las preguntas a traves de la Api de WikiData.
+| *_Game Service_* | It is the microservice that will be in charge of the correct functioning of the game and calculate the user's score.
+| *_UserData Service_* | It is the microservice that provides the necessary user data.
+| *_Authetification Service_* | It's a microservice that users use to sign in to your app.
+| *_Question Service_* | It is the microservice that will generate the questions through the WikiData API.
 |===

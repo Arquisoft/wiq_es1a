@@ -4,14 +4,14 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Runtime View
 
 
-=== <Runtime El usuario juega>
+=== <The user plays>
 
-El usuario inicia un juego y este usa el servicio preguntas para poder ejecutarse.
+The user starts a game, and the game uses the questions service to run it.
 
 image::juega.png["Hierarchy of building blocks"]
 
-=== <Runtime El usuario mira su historial>
+=== <The user looks at their history>
 
-El usuario comprubrueba sus puntuaciones y estadisticas.
+The user checks their scores and statistics.
 
 image::historial.png["Hierarchy of building blocks"]
