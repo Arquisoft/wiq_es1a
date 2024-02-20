@@ -4,7 +4,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Architecture Decisions
 JavaScript:
 
-xref:ADR#1[https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScript]
+ADR#1 xref:ADR#1[https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScript]
 
 ReactJS:
 
