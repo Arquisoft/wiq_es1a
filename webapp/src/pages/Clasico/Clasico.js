@@ -23,7 +23,7 @@ const JuegoPreguntas = () => {
       .then((response) => response.json())
       .then((data) => {
         setPreguntas(data);
-        setIsLoading(false);
+        //setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error al obtener las preguntas:', error);
@@ -34,6 +34,7 @@ const JuegoPreguntas = () => {
   useEffect(() => {
     if (preguntas && preguntas.length > 0) {
       setPreguntaActual(preguntas[0]);
+      setIsLoading(false);
     }
   }, [preguntas]);
 
@@ -77,7 +78,7 @@ const JuegoPreguntas = () => {
   };
 
   const handleSiguientePregunta = () => {
-    if (respuestaSeleccionada === preguntaActual.respuestaCorrecta) {
+    if (respuestaSeleccionada === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
     }
     setRespuestaSeleccionada(null);
