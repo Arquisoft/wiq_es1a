@@ -8,7 +8,7 @@ ADR#1 xref:ADR#1[https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScrip
 
 ReactJS:
 
-[ADR#2](https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%232)-ReactJS)
+(https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%232)-ReactJS)[ADR#2]
 
 NodeJS:
 
