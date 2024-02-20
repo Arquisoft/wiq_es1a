@@ -7,20 +7,20 @@ ifndef::imagesdir[:imagesdir: ../images]
 |===
 |Term |Definition
 
-|Quality Tree 
-| Structured representation of quality attributes and their relationships.
+|WIQ
+| Application or game based on the TV show "Saber y Ganar".
 
-|Quality Scenarios 
-| Specific instances or situations that show the behavior of a system under various quality attributes.
+|Login
+| Process of authenticating a user's identity to access the application.
 
-|Change Scenarios 
-| Scenarios depicting how a system responds or adapts to changes, like fixes or addings.
+|Wikidata
+| Online collaborative database storing structured data and linking information across different projects and languages.
 
-|Usage Scenarios 
-| Instances demonstrating how users interact with a system in various contexts.
+|User
+| Person who interacts with a system, service, or application to perform tasks. 
 
-|User Interface 
-| The visual and interactive part of a computer program or system through which users interact.
+|Admin
+| Person with special rights or authority to manageaspects of an application.
 
 |Query 
 | Request for information from a database.
@@ -30,6 +30,9 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 |Documentation 
 | Written information regarding a system's design, functionality, or usage.
+
+|Distractors
+| Incorrect or irrelevant options or elements included in a question.
 
 |NodeJS 
 | Runtime environment that allows the execution of JavaScript code outside of a web browser.
