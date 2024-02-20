@@ -56,62 +56,70 @@ See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
 ****
 
 
-=== _<User Interface >_
+=== User Interface 
 
-_<A user interface is the space where a human and a computer or device communicate and exchange information.>_
+A user interface is the space where a human and a computer or device communicate and exchange information
 
-=== _<Ergonomics >_
+The user interface is the part of the application that directly interacts with the client, in our case, the player. It should function correctly and be user-friendly.
+=== Ergonomics 
 
-_<Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations. >_
+Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations. 
 
-=== _<Internationalization >_
+=== Internationalization 
 
-_<Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions>_
+Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions.
 
-=== _<Security >_
+Internationalization consists of adapting to the language and culture depending on the location, this is very important as it helps users from different regions to be able to use our game
 
-_<Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm. >_
+=== Security 
 
-=== _<Safety  >_
+Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm. 
 
-_<Is the state of being protected from danger or harm.>_
+A minimum of security in the application is important to save our customers' data
+=== Safety  
 
-=== _<Build, Test, Deploy >_
+Is the state of being protected from danger or harm.
 
-_<- Build: This stage involves compiling, validating, and packaging the source code into executable or deployable artifacts. 
+=== Build, Test, Deploy 
+
+- Build: This stage involves compiling, validating, and packaging the source code into executable or deployable artifacts. 
 - Test: This stage involves running various tests, such as unit tests, integration tests, and regression tests, to ensure the quality and functionality of the software. 
-- Deploy: This stage involves delivering or releasing the software to the target environment, such as a server, a cloud platform, or a user device. >_
+- Deploy: This stage involves delivering or releasing the software to the target environment, such as a server, a cloud platform, or a user device. 
 
-=== _<Code Generation >_
+=== Code Generation 
 
-_<Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.>_
+Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.
 
-=== _<Migration >_
+Generating code makes it easier for the programmer to create functions without wasting a lot of time and simply focusing on the correct implementation of the code, an example is for example generating the getters and setters
 
-_<Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.>_
+=== Migration 
 
-=== _<Configurability >_
+Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.
 
-_<Configurability is the ability to modify or customize something, especially in computing, electronics, or de>_
+=== Configurability 
 
-=== _<Administration >_
+Configurability is the ability to modify or customize something, especially in computing, electronics, or devices
 
-_<The process or activity of managing, directing, or organizing something or someone>_
+=== Administration 
 
-=== _<Management >_
+The process or activity of managing, directing, or organizing something or someone.
 
-_<Management is the process of organizing and directing the resources of a business or organization to achieve its goals. >_
+Administering an application consists of managing all the resources, users to be able to maintain it in a correct way
 
-=== _<Disaster-Recovery >_
+=== Management 
 
-_<Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.>_
+Management is the process of organizing and directing the resources of a business or organization to achieve its goals. 
 
-=== _<Architecture and design patterns  >_
+=== Disaster-Recovery 
 
-_<Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable>_
+Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.
+
+It is important to have a plan to recover the data in case of a system failure, it is usually a backup.
+
+=== Architecture and design patterns  
+
+Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable.
+
+Design patterns are important so that your application can scale without cascading changes.
 
 
-
-=== _<Concept >_
-
-_<explanation>_
