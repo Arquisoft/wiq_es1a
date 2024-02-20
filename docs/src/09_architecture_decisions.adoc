@@ -24,6 +24,9 @@ MySQL:
   The base project that they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, however MySQL is another
 database management system that we have used in other subjects. We decided to discard this option to learn how to use MongoDB
 
+Link to all the Architecture Decisions 
+  https://github.com/Arquisoft/wiq_es1a/wiki/Decisiones-arquitect%C3%B3nicas
+
 [role="arc42help"]
 ****
 .Contents
