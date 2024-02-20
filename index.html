@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.20">
-<title>Template</title>
+<title>WIQ! Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1><span class="image"><img src="./images/arc42-logo.png" alt="arc42"></span> Template</h1>
+<h1><span class="image"><img src="./images/arc42-logo.png" alt="arc42"></span> WIQ! Documentation</h1>
 <div class="details">
 <span id="revnumber">version 8.2 EN,</span>
 <span id="revdate">January 2023</span>
@@ -488,18 +488,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
 <li><a href="#_user_interface">8.1. User Interface</a></li>
-<li><a href="#_ergonomics">8.2. &lt;Ergonomics &gt;</a></li>
-<li><a href="#_internationalization">8.3. Internationalization</a></li>
-<li><a href="#_security_2">8.4. Security</a></li>
-<li><a href="#_safety">8.5. Safety</a></li>
-<li><a href="#_build_test_deploy">8.6. Build, Test, Deploy</a></li>
-<li><a href="#_code_generation">8.7. Code Generation</a></li>
-<li><a href="#_migration">8.8. Migration</a></li>
-<li><a href="#_configurability">8.9. Configurability</a></li>
-<li><a href="#_administration">8.10. Administration</a></li>
-<li><a href="#_management">8.11. Management</a></li>
-<li><a href="#_disaster_recovery">8.12. Disaster-Recovery</a></li>
-<li><a href="#_architecture_and_design_patterns">8.13. Architecture and design patterns</a></li>
+<li><a href="#_internationalization">8.2. Internationalization</a></li>
+<li><a href="#_security_2">8.3. Security</a></li>
+<li><a href="#_build_test_deploy">8.4. Build, Test, Deploy</a></li>
+<li><a href="#_code_generation">8.5. Code Generation</a></li>
+<li><a href="#_migration">8.6. Migration</a></li>
+<li><a href="#_configurability">8.7. Configurability</a></li>
+<li><a href="#_administration">8.8. Administration</a></li>
+<li><a href="#_management">8.9. Management</a></li>
+<li><a href="#_disaster_recovery">8.10. Disaster-Recovery</a></li>
+<li><a href="#_architecture_and_design_patterns">8.11. Architecture and design patterns</a></li>
 </ul>
 </li>
 <li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
@@ -507,10 +505,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_quality_tree">10.1. Quality Tree</a></li>
 <li><a href="#_quality_scenarios">10.2. Quality Scenarios</a></li>
+<li><a href="#_usage_scenarios">10.3. Usage Scenarios</a></li>
+<li><a href="#_change_scenarios">10.4. Change Scenarios</a></li>
 </ul>
 </li>
-<li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
-<li><a href="#section-glossary">12. Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -662,8 +660,8 @@ WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recre
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong>3</strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Privacy</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The application must guarantee the privacy of its users' information, with mechanisms in place to prevent intrusions into the system.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Availability</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application must ensure high availability, with mechanisms in place to prevent system failures and ensure continuous access to its services.</p></td>
 </tr>
 </tbody>
 </table>
@@ -726,36 +724,28 @@ WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recre
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Tecnología de Desarrollo</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Development Technology</em></strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The application must be developed using web technologies compatible with RTVE&#8217;s requirements and standards.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Plataforma de Implementación</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Implementation Platform</em></strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The application must be implemented on a web hosting platform that meets RTVE&#8217;s performance, security and scalability requirements.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Cumplimiento de Normativas de Privacidad</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Privacy Compliance</em></strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The architecture must ensure compliance with data privacy regulations, such as GDPR, to protect users' information.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Compatibilidad con Navegadores</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The application should be compatible with a wide range of popular web browsers to ensure a consistent user experience.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Seguridad de la Información</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Strong security measures, such as user authentication, access control and data encryption, must be implemented to protect users' confidential information.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Escalabilidad</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The architecture must be scalable to handle increased user traffic without compromising performance.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Mantenibilidad del Código</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Code Maintainability</em></strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Software development practices that promote clean and well-documented code should be followed to facilitate future upgrades and maintenance.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Tiempo de Desarrollo</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Development Time</em></strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The application must be developed within a specific time frame, which may influence architectural decisions and technology selection.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Wikidata Integration</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The system architecture must incorporate the use of Wikidata as data source to generate questions, ensuring seamless integration and consistency with external knowledge bases.</p></td>
 </tr>
 </tbody>
 </table>
@@ -769,17 +759,77 @@ WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recre
 <h3 id="_business_context">3.1. Business Context</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/businesscontext.png" alt="Business context">
+<img src="./images/businesscontext.svg" alt="Business context">
 </div>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Entity</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>User</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">It&#8217;s the one that interacts directly with the app.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>WIQ!</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The web application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Wikidata</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source from which data is drawn to formulate questions</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_technical_context">3.2. Technical Context</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/technicalcontext.png" alt="Technical Context">
+<img src="./images/technicalcontext.svg" alt="Technical Context">
 </div>
 </div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>Entity</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>User</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents the user interacting with the system. In this case, the user is interacting with the "WIQ!" application through the device and the web browser.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Device</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The device used by the user to access the application. This node contains the web browser component that allows the user to interact with the application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Cloud</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Represents the cloud infrastructure, in this case, Azure. This node contains the "WIQ!" component that hosts the application and allows its access through HTTP/HTTPS protocols.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>WIQ!</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The main application that the user interacts with. It is hosted on the Azure cloud and accesses a MongoDB database to store and retrieve data, as well as interacts with Wikidata through REST.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Wikidata</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source from which data is drawn to formulate questions. The application will request data via "Wikidata Query Service", which allows to retrieve data using SparQL.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>MongoDB</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The database management system used by the "WIQ!" application to store and retrieve data. In this case, it is used to store data related to the application.</p></td>
+</tr>
+</tbody>
+</table>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -1028,11 +1078,6 @@ when your infrastructure is more complex.</p>
 </div>
 <div class="sect2">
 <h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
-<div class="imageblock">
-<div class="content">
-<img src="./images/UML.png" alt="UML">
-</div>
-</div>
 <div class="sidebarblock arc42help">
 <div class="content">
 <div class="paragraph">
@@ -1066,7 +1111,15 @@ when your infrastructure is more complex.</p>
 <dl>
 <dt class="hdlist1">Motivation</dt>
 <dd>
-<p>As we can see, this would be the initial diagram of how the classes would relate to each other. We have, in the first place, the 'app' class that is related to 'link', which in turn is related to the different parts of the app.</p>
+<p><em>&lt;explanation in text form&gt;</em></p>
+</dd>
+<dt class="hdlist1">Quality and/or Performance Features</dt>
+<dd>
+<p><em>&lt;explanation in text form&gt;</em></p>
+</dd>
+<dt class="hdlist1">Mapping of Building Blocks to Infrastructure</dt>
+<dd>
+<p><em>&lt;description of the mapping&gt;</em></p>
 </dd>
 </dl>
 </div>
@@ -1084,39 +1137,24 @@ when your infrastructure is more complex.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_app">7.2.1. APP</h4>
+<h4 id="_infrastructure_element_1">7.2.1. <em>&lt;Infrastructure Element 1&gt;</em></h4>
 <div class="paragraph">
-<p>"App": It is the part with which the user interacts. This part would be responsible for providing the visual interface and using the rest of the created classes.</p>
+<p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_link">7.2.2. LINK</h4>
+<h4 id="_infrastructure_element_2">7.2.2. <em>&lt;Infrastructure Element 2&gt;</em></h4>
 <div class="paragraph">
-<p>"Link" is the part of the application that connects the rest of the parts. This will facilitate the use of the different parts of the application in the App section.</p>
+<p><em>&lt;diagram + explanation&gt;</em></p>
+</div>
+<div class="paragraph">
+<p>&#8230;&#8203;</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_register">7.2.3. REGISTER</h4>
+<h4 id="_infrastructure_element_n">7.2.3. <em>&lt;Infrastructure Element n&gt;</em></h4>
 <div class="paragraph">
-<p>"Register" is the part of the application that handles user registration and login. It&#8217;s very important as it&#8217;s the first thing a potential user will encounter when they visit our page.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_user_service">7.2.4. USER SERVICE</h4>
-<div class="paragraph">
-<p>"User service" is the part of the application that generates the various services within the application to the user, such as a ranking, correctly answered questions, and so on.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_question_generator">7.2.5. QUESTION GENERATOR</h4>
-<div class="paragraph">
-<p>"Question generator" is the part of the application that, using the data from Wikidata and some pre-created templates, generates the questions and possible answers of the application.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_wikidata">7.2.6. WIKIDATA</h4>
-<div class="paragraph">
-<p>Wikidata” is the API that you will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects.</p>
+<p><em>&lt;diagram + explanation&gt;</em></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1230,33 +1268,38 @@ on this list.</p>
 <div class="paragraph">
 <p>A user interface is the space where a human and a computer or device communicate and exchange information</p>
 </div>
+<div class="paragraph">
+<p>The user interface is the part of the application that directly interacts with the client, in our case, the player. It should function correctly and be user-friendly.
+=== Ergonomics</p>
 </div>
-<div class="sect2">
-<h3 id="_ergonomics">8.2. &lt;Ergonomics &gt;</h3>
 <div class="paragraph">
 <p>Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_internationalization">8.3. Internationalization</h3>
+<h3 id="_internationalization">8.2. Internationalization</h3>
 <div class="paragraph">
-<p>Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions</p>
+<p>Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions.</p>
+</div>
+<div class="paragraph">
+<p>Internationalization consists of adapting to the language and culture depending on the location, this is very important as it helps users from different regions to be able to use our game</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_security_2">8.4. Security</h3>
+<h3 id="_security_2">8.3. Security</h3>
 <div class="paragraph">
 <p>Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm.</p>
 </div>
+<div class="paragraph">
+<p>A minimum of security in the application is important to save our customers' data
+=== Safety</p>
 </div>
-<div class="sect2">
-<h3 id="_safety">8.5. Safety</h3>
 <div class="paragraph">
 <p>Is the state of being protected from danger or harm.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_build_test_deploy">8.6. Build, Test, Deploy</h3>
+<h3 id="_build_test_deploy">8.4. Build, Test, Deploy</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -1272,45 +1315,57 @@ on this list.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_code_generation">8.7. Code Generation</h3>
+<h3 id="_code_generation">8.5. Code Generation</h3>
 <div class="paragraph">
 <p>Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.</p>
 </div>
+<div class="paragraph">
+<p>Generating code makes it easier for the programmer to create functions without wasting a lot of time and simply focusing on the correct implementation of the code, an example is for example generating the getters and setters</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_migration">8.8. Migration</h3>
+<h3 id="_migration">8.6. Migration</h3>
 <div class="paragraph">
 <p>Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_configurability">8.9. Configurability</h3>
+<h3 id="_configurability">8.7. Configurability</h3>
 <div class="paragraph">
 <p>Configurability is the ability to modify or customize something, especially in computing, electronics, or devices</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_administration">8.10. Administration</h3>
+<h3 id="_administration">8.8. Administration</h3>
 <div class="paragraph">
-<p>The process or activity of managing, directing, or organizing something or someone</p>
+<p>The process or activity of managing, directing, or organizing something or someone.</p>
+</div>
+<div class="paragraph">
+<p>Administering an application consists of managing all the resources, users to be able to maintain it in a correct way</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_management">8.11. Management</h3>
+<h3 id="_management">8.9. Management</h3>
 <div class="paragraph">
 <p>Management is the process of organizing and directing the resources of a business or organization to achieve its goals.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_disaster_recovery">8.12. Disaster-Recovery</h3>
+<h3 id="_disaster_recovery">8.10. Disaster-Recovery</h3>
 <div class="paragraph">
 <p>Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.</p>
 </div>
+<div class="paragraph">
+<p>It is important to have a plan to recover the data in case of a system failure, it is usually a backup.</p>
+</div>
 </div>
 <div class="sect2">
-<h3 id="_architecture_and_design_patterns">8.13. Architecture and design patterns</h3>
+<h3 id="_architecture_and_design_patterns">8.11. Architecture and design patterns</h3>
 <div class="paragraph">
-<p>Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable</p>
+<p>Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable.</p>
+</div>
+<div class="paragraph">
+<p>Design patterns are important so that your application can scale without cascading changes.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1320,76 +1375,40 @@ on this list.</p>
 <h2 id="section-design-decisions">9. Architecture Decisions</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>JavaScript:
-  We will use the JavaScript language to create both the front-end and the backend of the application, is the default technology of the initial project.</p>
+<p>JavaScript:</p>
 </div>
 <div class="paragraph">
-<p>ReactJS:
-  The base project they have given us uses ReactJS for the front-end of the application, although it is a framework with which we are not familiar.
-  We think that is a good oportunity to start using this framework.</p>
+<p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScript">ADR#1</a></p>
 </div>
 <div class="paragraph">
-<p>NodeJS:
-  We use NodeJS for the back-end of the application, this is the default technology of the initial project and all the group thought it was a good idea
-  to use it.</p>
+<p>ReactJS:</p>
 </div>
 <div class="paragraph">
-<p>MongoDB
-  The base project they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, but it seemed like a
-  good idea to learn this GBD system.</p>
+<p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%232)-ReactJS">ADR#2</a></p>
 </div>
 <div class="paragraph">
-<p>Docker:
-  We will use Docker to package the application modules in containers, it is the initial technology of the project</p>
+<p>NodeJS:</p>
 </div>
 <div class="paragraph">
-<p>MySQL:
-  The base project that they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, however MySQL is another
-database management system that we have used in other subjects. We decided to discard this option to learn how to use MongoDB</p>
-</div>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="paragraph">
-<div class="title">Contents</div>
-<p>Important, expensive, large scale or risky architecture decisions including rationales.
-With "decisions" we mean selecting one alternative based on given criteria.</p>
+<p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%233)-NodeJS">ADR#3</a></p>
 </div>
 <div class="paragraph">
-<p>Please use your judgement to decide whether an architectural decision should be documented
-here in this central section or whether you better document it locally
-(e.g. within the white box template of one building block).</p>
+<p>MongoDB:</p>
 </div>
 <div class="paragraph">
-<p>Avoid redundancy.
-Refer to section 4, where you already captured the most important decisions of your architecture.</p>
+<p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%234)-MongoDB">ADR#4</a></p>
 </div>
 <div class="paragraph">
-<div class="title">Motivation</div>
-<p>Stakeholders of your system should be able to comprehend and retrace your decisions.</p>
+<p>Docker:</p>
 </div>
 <div class="paragraph">
-<div class="title">Form</div>
-<p>Various options:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>ADR (<a href="https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions">Documenting Architecture Decisions</a>) for every important decision</p>
-</li>
-<li>
-<p>List or table, ordered by importance and consequences or:</p>
-</li>
-<li>
-<p>more detailed in form of separate sections per decision</p>
-</li>
-</ul>
+<p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%235)-Docker">ADR#5</a></p>
 </div>
 <div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-9/">Architecture Decisions</a> in the arc42 documentation.
-There you will find links and examples about ADR.</p>
+<p>MySQL:</p>
 </div>
-</div>
+<div class="paragraph">
+<p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%236)-MySQL">ADR#6</a></p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1464,8 +1483,10 @@ These are:</p>
 </div>
 <div class="sect2">
 <h3 id="_quality_scenarios">10.2. Quality Scenarios</h3>
-<div class="sect3">
-<h4 id="_usage_scenarios">10.2.1. Usage Scenarios</h4>
+
+</div>
+<div class="sect2">
+<h3 id="_usage_scenarios">10.3. Usage Scenarios</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1527,8 +1548,8 @@ These are:</p>
 </tbody>
 </table>
 </div>
-<div class="sect3">
-<h4 id="_change_scenarios">10.2.2. Change Scenarios</h4>
+<div class="sect2">
+<h3 id="_change_scenarios">10.4. Change Scenarios</h3>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 14.2857%;">
@@ -1585,142 +1606,108 @@ These are:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The game&#8217;s code is well-structured and documented</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Error identification and resolution phase</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Due to code being well-structured and documented, developers can easily locate the error and correct it</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Successful identification and correction of the error</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Successful identification and correction of the error</p>
+<p class="tableblock">&lt;&lt;&lt;&lt;</p>
+<p class="tableblock"><a id="section-technical-risks"></a>
+== Risks and Technical Debts</p>
+<p class="tableblock">[options="header"]</p></td>
 </tr>
 </tbody>
 </table>
-<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>| Priority | Description of Risk/Technical Debt | Suggested Measures
+| High     | Vulnerabilities in user authentication | Implement additional security measures, such as password encryption
+| High     | Potential application malfunctions | Implement unit tests for key components and critical functions, along with extensive testing with real users
+| Medium   | Slow performance of database queries | Optimize database queries, avoid unnecessary queries
+| Low      | Unoptimized styles | Optimize CSS styles to improve application performance and loading times
+| Low      | Insufficient documentation | Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration</p>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="section-technical-risks">11. Risks and Technical Debts</h2>
-<div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 100%;">
 </colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Priority</th>
-<th class="tableblock halign-left valign-top">Description of Risk/Technical Debt</th>
-<th class="tableblock halign-left valign-top">Suggested Measures</th>
-</tr>
-</thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Vulnerabilities in user authentication</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implement additional security measures, such as password encryption</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">High</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Potential application malfunctions</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Implement unit tests for key components and critical functions, along with extensive testing with real users</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Medium</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Slow performance of database queries</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optimize database queries, avoid unnecessary queries</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Unoptimized styles</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optimize CSS styles to improve application performance and loading times</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Insufficient documentation</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">&lt;&lt;&lt;&lt;</p>
+<p class="tableblock"><a id="section-glossary"></a>
+== Glossary</p>
+<p class="tableblock">[cols="e,2e" options="header"]</p></td>
 </tr>
 </tbody>
 </table>
-<div style="page-break-after: always;"></div>
+<div class="paragraph">
+<p>|Term |Definition</p>
 </div>
+<div class="paragraph">
+<p>|WIQ
+| Application or game based on the TV show "Saber y Ganar".</p>
 </div>
-<div class="sect1">
-<h2 id="section-glossary">12. Glossary</h2>
-<div class="sectionbody">
+<div class="paragraph">
+<p>|Login
+| Process of authenticating a user&#8217;s identity to access the application.</p>
+</div>
+<div class="paragraph">
+<p>|Wikidata
+| Online collaborative database storing structured data and linking information across different projects and languages.</p>
+</div>
+<div class="paragraph">
+<p>|User
+| Person who interacts with a system, service, or application to perform tasks.</p>
+</div>
+<div class="paragraph">
+<p>|Admin
+| Person with special rights or authority to manageaspects of an application.</p>
+</div>
+<div class="paragraph">
+<p>|Query
+| Request for information from a database.</p>
+</div>
+<div class="paragraph">
+<p>|Database
+| Organized collection of structured information.</p>
+</div>
+<div class="paragraph">
+<p>|Documentation
+| Written information regarding a system&#8217;s design, functionality, or usage.</p>
+</div>
+<div class="paragraph">
+<p>|Distractors
+| Incorrect or irrelevant options or elements included in a question.</p>
+</div>
+<div class="paragraph">
+<p>|NodeJS
+| Runtime environment that allows the execution of JavaScript code outside of a web browser.</p>
+</div>
+<div class="paragraph">
+<p>|ReactJS
+| JavaScript library for building user interfaces, particularly single-page applications.</p>
+</div>
+<div class="paragraph">
+<p>|JavaScript
+| High-level programming language primarily used for creating interactive web pages and applications.</p>
+</div>
+<div class="paragraph">
+<p>|MongoDB
+| Popular NoSQL database program, known for its flexibility and scalability.</p>
+</div>
+<div class="paragraph">
+<p>|CSS
+| Cascading Style Sheets, used for styling and formatting web pages written in HTML.</p>
+</div>
+<div class="paragraph">
+<p>|HTML
+| Hypertext Markup Language, the standard markup language for creating web pages and web applications.</p>
+</div>
 <table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 66.6667%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Term</th>
-<th class="tableblock halign-left valign-top">Definition</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Quality Tree</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Structured representation of quality attributes and their relationships.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Quality Scenarios</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Specific instances or situations that show the behavior of a system under various quality attributes.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Change Scenarios</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Scenarios depicting how a system responds or adapts to changes, like fixes or addings.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Usage Scenarios</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Instances demonstrating how users interact with a system in various contexts.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>User Interface</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>The visual and interactive part of a computer program or system through which users interact.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Query</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Request for information from a database.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Database</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Organized collection of structured information.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Documentation</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Written information regarding a system&#8217;s design, functionality, or usage.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>NodeJS</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Runtime environment that allows the execution of JavaScript code outside of a web browser.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>ReactJS</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>JavaScript library for building user interfaces, particularly single-page applications.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>JavaScript</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>High-level programming language primarily used for creating interactive web pages and applications.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>MongoDB</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Popular NoSQL database program, known for its flexibility and scalability.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>CSS</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Cascading Style Sheets, used for styling and formatting web pages written in HTML.</em></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>HTML</em></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><em>Hypertext Markup Language, the standard markup language for creating web pages and web applications.</em></p></td>
-</tr>
-</tbody>
 </table>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-02-12 18:20:30 +0100
+Last updated 2024-02-20 14:25:30 +0100
 </div>
 </div>
 </body>
