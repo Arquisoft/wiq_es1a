@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="492px" preserveAspectRatio="none" style="width:420px;height:492px;background:#FFFFFF;" version="1.1" viewBox="0 0 420 492" width="420px" zoomAndPan="magnify"><defs/><g><!--MD5=[405d0ec63eaa964b5569457e2b7115d4]
+cluster device--><g id="cluster_device"><polygon fill="none" points="151,16,161,6,315,6,315,114,305,124,151,124,151,16" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="305" x2="315" y1="16" y2="6"/><line style="stroke:#181818;stroke-width:1.0;" x1="151" x2="305" y1="16" y2="16"/><line style="stroke:#181818;stroke-width:1.0;" x1="305" x2="305" y1="16" y2="124"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="53" x="202.5" y="31.9951">Device</text></g><!--MD5=[bfeb4e40a9e05244ea0843bb1cef058f]
+cluster cloud--><g id="cluster_cloud"><polygon fill="none" points="16,261,26,251,340,251,340,359,330,369,16,369,16,261" style="stroke:#181818;stroke-width:1.0;"/><line style="stroke:#181818;stroke-width:1.0;" x1="330" x2="340" y1="261" y2="251"/><line style="stroke:#181818;stroke-width:1.0;" x1="16" x2="330" y1="261" y2="261"/><line style="stroke:#181818;stroke-width:1.0;" x1="330" x2="330" y1="261" y2="369"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="47" x="150.5" y="276.9951">Azure</text></g><!--MD5=[23555a4f9c8a267cdfd801ad53ceaf15]
+entity browser--><g id="elem_browser"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="97" x="194.5" y="54"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="271.5" y="59"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="269.5" y="61"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="269.5" y="65"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="209.5" y="86.9951">Browser</text></g><!--MD5=[97ccd76a35ae00951f9f6fc964721e46]
+entity wiq--><g id="elem_wiq"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="72" x="40" y="299"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="92" y="304"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="90" y="306"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="90" y="310"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="55" y="331.9951">WIQ!</text></g><!--MD5=[ba72416187da2a396e219ea5b5d73a26]
+entity MongoDB--><g id="elem_MongoDB"><path d="M207.5,309.5 C207.5,299.5 252,299.5 252,299.5 C252,299.5 296.5,299.5 296.5,309.5 L296.5,334.7969 C296.5,344.7969 252,344.7969 252,344.7969 C252,344.7969 207.5,344.7969 207.5,334.7969 L207.5,309.5 " fill="#F1F1F1" style="stroke:#181818;stroke-width:0.5;"/><path d="M207.5,309.5 C207.5,319.5 252,319.5 252,319.5 C252,319.5 296.5,319.5 296.5,309.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69" x="217.5" y="336.4951">MongoDB</text></g><!--MD5=[8fc3522a43f8c7199df5e09e5bb0188e]
+entity user--><g id="elem_user"><ellipse cx="76" cy="47.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M76,55.5 L76,82.5 M63,63.5 L89,63.5 M76,82.5 L63,97.5 M76,82.5 L89,97.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="60" y="111.9951">User</text></g><!--MD5=[79a439086b036a57b90a01d7b2f8bbd1]
+entity admin--><g id="elem_admin"><ellipse cx="392" cy="47.5" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M392,55.5 L392,82.5 M379,63.5 L405,63.5 M392,82.5 L379,97.5 M392,82.5 L405,97.5 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="43" x="370.5" y="111.9951">Admin</text></g><!--MD5=[e2307af040e3f87d22824e7603ca28ec]
+entity api--><g id="elem_api"><rect fill="#F1F1F1" height="46.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="97" x="26.5" y="440"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="103.5" y="445"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="101.5" y="447"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="101.5" y="451"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="41.5" y="472.9951">Wikidata</text></g><!--MD5=[6cd33e9359d07407233175ce6d91ec2a]
+link user to wiq--><g id="link_user_wiq"><path d="M76,115.17 C76,164.36 76,249.93 76,293.62 " fill="none" id="user-to-wiq" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="76,298.74,80,289.74,76,293.74,72,289.74,76,298.74" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="56" x="77" y="192.0669">interacts</text></g><!--MD5=[3649df4c96f9abd4e6886728f3d495c8]
+link user to device--><g id="link_user_device"><path d="M92,77 C103.305,77 118.7325,77 131.9338,77 C138.5344,77 144.5784,77 149.2723,77 C149.8591,77 150.4247,77 150.9677,77 " fill="none" id="user-to-device" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="150.9677,77,141.9677,73,145.9677,77,141.9677,81,150.9677,77" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="30" x="110.32" y="70.0669">uses</text></g><!--MD5=[10f573dfbd25f7990faf9bfae0c63fed]
+link admin to cloud--><g id="link_admin_cloud"><path d="M382.82,115.17 C374.55,148.675 362.11,199.06 351.6075,241.5925 C348.9819,252.2256 346.4773,262.368 344.1893,271.6331 C343.0453,276.2656 341.9555,280.6789 340.9316,284.8245 C340.6757,285.8609 340.4239,286.8806 340.1764,287.8828 " fill="none" id="admin-to-cloud" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="340.1764,287.8828,346.2175,280.1044,341.3752,283.0287,338.4509,278.1863,340.1764,287.8828" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="28" x="367" y="192.0669">SSH</text></g><!--MD5=[52b6856d8dc61304299547023911ff93]
+link browser to cloud--><g id="link_browser_cloud"><path d="M245.68,100.11 C249.41,124.79 257.74,165.28 275,196 C286.7,216.83 300.68,213.96 312,235 C314.2525,239.1838 316.2528,243.6153 318.029,248.1733 C318.251,248.7431 318.4695,249.3148 318.6846,249.8883 C318.7921,250.175 318.8988,250.4622 319.0046,250.7497 " fill="none" id="browser-to-cloud" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="319.0046,250.7497,319.6505,240.9221,317.2779,246.0573,312.1427,243.6848,319.0046,250.7497" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="77" x="276" y="192.0669">HTTP/HTTPS</text></g><!--MD5=[48ecb2abb8fc1626378d253ec8b6c1ea]
+link wiq to MongoDB--><g id="link_wiq_MongoDB"><path d="M117.33,322 C142.64,322 175.21,322 201.98,322 " fill="none" id="wiq-MongoDB" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="207.25,322,198.25,318,202.25,322,198.25,326,207.25,322" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="112.04,322,121.04,326,117.04,322,121.04,318,112.04,322" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="59" x="130.25" y="315.0669">accesses</text></g><!--MD5=[8d05012eae3f2362e3568d0a15fb6c09]
+link wiq to api--><g id="link_wiq_api"><path d="M59.67,345.2 C48.89,362.58 37.8,387.5 44,410 C46.45,418.89 50.86,427.8 55.6,435.66 " fill="none" id="wiq-to-api" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="58.26,439.92,56.8968,430.1659,55.6164,435.676,50.1064,434.3957,58.26,439.92" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="32" x="45" y="406.0669">REST</text></g><!--MD5=[5d0bccf1a8798a28ecdab50d6fd395a7]
+reverse link wiq to api--><g id="link_wiq_api"><path d="M79.79,350.31 C81.69,367.45 83.34,390.01 82,410 C81.34,419.82 79.99,430.6 78.65,439.8 " fill="none" id="wiq-backto-api" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="79.19,345.17,76.2705,354.5762,79.775,350.1357,84.2156,353.6402,79.19,345.17" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[aecf69fe592a9721f0b47cc90c9a2c60]
+@startuml
+Actor User as user
+Actor Admin as admin
+
+node device as "Device" {
+    component browser as "Browser"
+}
+
+node cloud as "Azure"{
+  component wiq as "WIQ!"
+  database MongoDB
+}
+
+component api as "Wikidata"
+
+
+
+user -down..> wiq: interacts
+user -right-> device: uses
+admin -down- -> cloud : SSH
+browser -right-> cloud: HTTP/HTTPS
+wiq <-right-> MongoDB: accesses
+wiq -down-> api: REST
+api -up.> wiq
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
