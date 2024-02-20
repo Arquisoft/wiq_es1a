@@ -4,27 +4,27 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Architecture Decisions
 JavaScript:
 
-(https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScript)[ADR#1]
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScript[ADR#1]
 
 ReactJS:
 
-(https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%232)-ReactJS)[ADR#2]
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%232)-ReactJS[ADR#2]
 
 NodeJS:
 
-(https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%233)-NodeJS)[ADR#3]
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%233)-NodeJS[ADR#3]
 
 MongoDB:
 
-(https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%234)-MongoDB)[ADR#4]
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%234)-MongoDB[ADR#4]
 
 Docker:
 
-(https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%235)-Docker)[ADR#5]
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%235)-Docker[ADR#5]
 
 MySQL:
   
-(https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%236)-MySQL)[ADR#6]
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%236)-MySQL[ADR#6]
 
 
 
