@@ -39,9 +39,9 @@
     "arte": {
         "entity": "Q3305213",
         "props": ["P571", "P135", "P276"],
-        "types": ["date", "str", "str"],
+        "types": ["str", "str", "str"],
         "preguntas": [
-            "¿En qué fecha se pintó la obra ",
+            "¿En qué año se pintó la obra ",
             "¿A qué movimiento artístico pertenece la obra ",
             "¿Dónde está exhibida la obra "
         ]

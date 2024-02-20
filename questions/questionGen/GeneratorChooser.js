@@ -5,7 +5,7 @@ class GeneratorChooser{
     constructor(){
         this.generators = new Map();
         this.tematicas = [];
-        this.leer_json(`C:\\Users\\marti\\Desktop\\ASW\\wiq_es1a\\questions\\data\\tematicas.json`);
+        this.leer_json("./data/tematicas.json");
     }
 
     leer_json(ruta){
@@ -49,13 +49,5 @@ class GeneratorChooser{
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
-// var gen = new GeneratorChooser();
-// gen.loadGenerators()
-//       .then(() => {
-//         console.log("Generators loaded successfully!");
-//       })
-//       .catch((error) => {
-//         console.error("Error al cargar los generadores de preguntas:", error);
-//       });
 
 module.exports = GeneratorChooser;
