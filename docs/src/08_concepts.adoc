@@ -60,18 +60,22 @@ See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
 
 A user interface is the space where a human and a computer or device communicate and exchange information
 
-=== <Ergonomics >
+The user interface is the part of the application that directly interacts with the client, in our case, the player. It should function correctly and be user-friendly.
+=== Ergonomics 
 
 Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations. 
 
 === Internationalization 
 
-Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions
+Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions.
+
+Internationalization consists of adapting to the language and culture depending on the location, this is very important as it helps users from different regions to be able to use our game
 
 === Security 
 
 Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm. 
 
+A minimum of security in the application is important to save our customers' data
 === Safety  
 
 Is the state of being protected from danger or harm.
@@ -96,7 +100,9 @@ Configurability is the ability to modify or customize something, especially in c
 
 === Administration 
 
-The process or activity of managing, directing, or organizing something or someone
+The process or activity of managing, directing, or organizing something or someone.
+
+Administering an application consists of managing all the resources, users to be able to maintain it in a correct way
 
 === Management 
 
@@ -106,8 +112,12 @@ Management is the process of organizing and directing the resources of a busines
 
 Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.
 
+It is important to have a plan to recover the data in case of a system failure, it is usually a backup.
+
 === Architecture and design patterns  
 
-Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable
+Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable.
+
+Design patterns are important so that your application can scale without cascading changes.
 
 
