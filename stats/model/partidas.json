@@ -1,0 +1,38 @@
+[
+    {
+        "username": "vagrant",
+        "points": 200,
+        "correctQuestions": 7,
+        "incorrectQuestions": 3
+    },
+    {
+        "username": "vagrant",
+        "points": 400,
+        "correctQuestions": 16,
+        "incorrectQuestions": 4
+    },
+    {
+        "username": "jose123",
+        "points": 200,
+        "correctQuestions": 8,
+        "incorrectQuestions": 2
+    },
+    {
+        "username": "vagrant",
+        "points": 1000,
+        "correctQuestions": 40,
+        "incorrectQuestions": 10
+    },
+    {
+        "username": "rober200",
+        "points": 100,
+        "correctQuestions": 3,
+        "incorrectQuestions": 2
+    },
+    {
+        "username": "jose123",
+        "points": 40,
+        "correctQuestions": 1,
+        "incorrectQuestions": 1
+    }
+]

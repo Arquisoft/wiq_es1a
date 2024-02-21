@@ -31,7 +31,7 @@ These are:
 
 === Quality Scenarios
 
-### Usage Scenarios
+#### Usage Scenarios
 
 [options="header"]
 |===
@@ -43,7 +43,7 @@ These are:
 |===
 
 
-### Change Scenarios
+#### Change Scenarios
 
 [options="header"]
 |===
@@ -52,3 +52,4 @@ These are:
 | Security | Developers | The decision is made to transition from MongoDB to another database system | User data migration to a new database system is secured | Database migration phase | The system initiates a secure data migration process, ensuring all user data, including usernames and passwords, is transferred to the new database system intact and encrypted | Successful transfer of user data without compromise 
 | Maintainability | Developers | Developers want to add a new game mode | The game's code is well-structured and documented | Development phase | Due to code being well-structured and documented, it is easy to add new functionality to our system without risking our already implemented functionality | Successful addition of new game mode 
 | Maintainability | Developers | An error is identified in the game that needs to be corrected. | The game's code is well-structured and documented | Error identification and resolution phase | Due to code being well-structured and documented, developers can easily locate the error and correct it | Successful identification and correction of the error 
+|===
