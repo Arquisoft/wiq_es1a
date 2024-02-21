@@ -56,18 +56,62 @@ See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
 ****
 
 
-=== _<Concept 1>_
+=== _<User Interface >_
 
-_<explanation>_
+_<A user interface is the space where a human and a computer or device communicate and exchange information.>_
+
+=== _<Ergonomics >_
+
+_<Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations. >_
+
+=== _<Internationalization >_
+
+_<Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions>_
+
+=== _<Security >_
+
+_<Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm. >_
+
+=== _<Safety  >_
+
+_<Is the state of being protected from danger or harm.>_
+
+=== _<Build, Test, Deploy >_
+
+_<- Build: This stage involves compiling, validating, and packaging the source code into executable or deployable artifacts. 
+- Test: This stage involves running various tests, such as unit tests, integration tests, and regression tests, to ensure the quality and functionality of the software. 
+- Deploy: This stage involves delivering or releasing the software to the target environment, such as a server, a cloud platform, or a user device. >_
+
+=== _<Code Generation >_
+
+_<Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.>_
+
+=== _<Migration >_
+
+_<Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.>_
+
+=== _<Configurability >_
+
+_<Configurability is the ability to modify or customize something, especially in computing, electronics, or de>_
+
+=== _<Administration >_
+
+_<The process or activity of managing, directing, or organizing something or someone>_
+
+=== _<Management >_
+
+_<Management is the process of organizing and directing the resources of a business or organization to achieve its goals. >_
+
+=== _<Disaster-Recovery >_
+
+_<Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.>_
+
+=== _<Architecture and design patterns  >_
+
+_<Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable>_
 
 
 
-=== _<Concept 2>_
-
-_<explanation>_
-
-...
-
-=== _<Concept n>_
+=== _<Concept >_
 
 _<explanation>_

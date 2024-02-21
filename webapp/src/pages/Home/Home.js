@@ -10,7 +10,7 @@ const Home = () => {
       <Nav />
       <div className="games-container">
         <hgroup>
-          <h1>Bienvenido a WIQ!</h1>
+          <h1>Bienvenido</h1>
           <h2>Selecciona un modo de juego</h2>
         </hgroup>         
         <ul>

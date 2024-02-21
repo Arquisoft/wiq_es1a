@@ -3,30 +3,26 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-solution-strategy]]
 == Solution Strategy
 
+Elaboramos una aplicacíon en la que los usuarios pueden registrarse para jugar, donde en cada juego tendran que responder varias preguntas, de distintas categorias, donde se guardará
+un ranking con la máxima puntuación del usuario y se podrá comparar con otros usuarios, también tendra una sección que indique su promedio de aciertos y en que categoría acierta más preguntas.
 
-[role="arc42help"]
-****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape system architecture. It includes
+.Tecnologías usadas para llevar a cabo:
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+* MongoDB: MongoDB es una base de datos NoSQL de código abierto que utiliza un modelo de datos basado en documentos para el almacenamiento y recuperación de información.
+* React JS: Es un framework creado por Facebook ampliamente utlizado para crear componentes de la interfaz de usuario. Escogido por el gran volumen de documentación y ser el framework utilizado durante los anteriores cursos.
+* WikiData: Es una base de conocimientos gratuita modificada por seres humanos como por máquinas, y es de donde obtendremos nuestras preguntas.
+* Microsoft Azure: plataforma de computación en la nube que proporciona servicios de infraestructura, plataforma y software como servicio para alojar, administrar y escalar aplicaciones y servicios en línea.
 
-.Motivation
-These decisions form the cornerstones for your architecture. They are the foundation for many other detailed decisions or implementation rules.
+.Diseño
+La página web diseñada está compuesta por un frontend en React, un backend en Node.js y está documentada usando Asciidoc. Cada usuario tendrá su propia cuenta donde se guardará su información. Las decisiones relacionadas con el diseño se detallan en el punto 9.
 
-.Form
-Keep the explanations of such key decisions short.
+.Seguridad
+Garantizamos la seguridad del usuario
 
-Motivate what was decided and why it was decided that way,
-based upon problem statement, quality goals and key constraints.
-Refer to details in the following sections.
+.Testabilidad
+Se realizarán pruebas para cada parte individual de la aplicación, garantizando así el correcto funcionamiento de los diferentes modulos tanto individualmente como de forma conjunta.
 
+.Interfaz
+La interfaz gráfica será elegida entre todos los miembros del equipo, aportando cada uno algún boceto o idea, los cuales serán puestos en común y se decidirá cual se ajusta mejor a la apicación esperada y que elementos de dichos bocetos resultan más adecuados.
+Para ello se tendrá en cuenta la usabilidad y las necesidades de los difentes tipos de usuarios.
 
-.Further Information
-
-See https://docs.arc42.org/section-4/[Solution Strategy] in the arc42 documentation.
-
-****

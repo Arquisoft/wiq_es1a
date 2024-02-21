@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "cross-fetch": "^4.0.0",
+    "date-fns": "^3.3.1",
     "react-auth-kit": "^3.0.2-alpha.19"
   }
 }
