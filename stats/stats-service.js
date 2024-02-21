@@ -1,26 +1,25 @@
 // user-service.js
 const express = require("express");
 const bodyParser = require("body-parser");
-const StatsForUser = require("./stats-getter");
+const StatsForUser = require("./model/stats-getter");
 
 const app = express();
 const port = 8004;
 
 const statsGetter = new StatsForUser();
 
-// Middleware to parse JSON in request body
 app.use(bodyParser.json());
 
 app.set("json spaces", 40);
 
 app.get("/stats", async (req, res) => {
-  if (!statsGetter.existsUser(req.query.username)) {
+  if (!statsGetter.existsUser(req.query.user)) {
     res
       .status(400)
       .json({ error: `El usuario no existe` });
   }
   try {
-    var data = statsGetter.getStatsForUser(req.query.username);
+    var data = statsGetter.getStatsForUser(req.query.user);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -28,7 +27,7 @@ app.get("/stats", async (req, res) => {
 });
 
 const server = app.listen(port, () => {
-    console.log(`User Service listening at http://localhost:${port}`);
+    console.log(`Stats Service listening at http://localhost:${port}`);
   });
   
 module.exports = server;

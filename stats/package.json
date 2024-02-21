@@ -1,0 +1,15 @@
+{
+  "name": "stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "stats-service.js",
+  "scripts": {
+    "start": "node stats-service.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
