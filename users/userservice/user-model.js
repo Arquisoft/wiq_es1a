@@ -13,6 +13,10 @@ const userSchema = new mongoose.Schema({
       type: Date,
       default: Date.now, 
     },
+    games: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Game'
+    }],
 });
 
 const User = mongoose.model('User', userSchema);

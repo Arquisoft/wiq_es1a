@@ -1,50 +1,49 @@
-const fs = require('fs');
+const User = require('../../users/userservice/user-mode.js/User');
 
 class StatsForUser {
 
-    getStatsForUser(username){
-        // Leer el archivo JSON de partidas
-        const data = fs.readFileSync("./model/partidas.json");
-        const partidas = JSON.parse(data);
+    async getStatsForUser(username){
+        try {
+            const user = await User.findOne({ username: username });
 
-        let nGamesPlayed = 0;
-        let totalPoints = 0;
-        let totalCorrectQuestions = 0;
-        let totalIncorrectQuestions = 0;
-
-        // Calcular las estadísticas para el usuario
-        for (const partida of partidas){
-            if (partida.username === this.username){
-                nGamesPlayed++;
-                totalPoints += partida.points;
-                totalCorrectQuestions += partida.correctQuestions;
-                totalIncorrectQuestions += partida.incorrectQuestions;
+            if (!user) {
+                throw new Error('Usuario no encontrado');
             }
+
+            const partidas = user.games;
+
+            var nGamesPlayed = partidas.length;
+            var totalPoints = 0;
+            var totalCorrectQuestions = 0;
+            var totalIncorrectQuestions = 0;
+
+            for (const partida of partidas){
+                totalPoints += partida.points;
+                totalCorrectQuestions += partida.correctAnswers;
+                totalIncorrectQuestions += partida.incorrectAnswers;
+            }
+
+            const avgPoints = nGamesPlayed > 0 ?
+             totalPoints / nGamesPlayed : 0;
+
+            const ratioCorrectToIncorrect = totalIncorrectQuestions !== 0 ?
+             totalCorrectQuestions / totalIncorrectQuestions : totalCorrectQuestions;
+
+            const statsJSON = {
+                username: username,
+                nGamesPlayed: nGamesPlayed,
+                avgPoints: avgPoints,
+                totalPoints: totalPoints,
+                totalCorrectQuestions: totalCorrectQuestions,
+                totalIncorrectQuestions: totalIncorrectQuestions,
+                ratioCorrectToIncorrect: ratioCorrectToIncorrect
+            };
+
+            return statsJSON;
+        } catch (error) {
+            console.error('Error al obtener las estadísticas del usuario:', error);
+            throw error;
         }
-
-        // Calcular el promedio de puntos por juego
-        const avgPoints = nGamesPlayed > 0 ? totalPoints / nGamesPlayed : 0;
-
-        // Calcular el ratio de preguntas acertadas/falladas
-        const ratioCorrectToIncorrect = totalIncorrectQuestions !== 0 ? totalCorrectQuestions / totalIncorrectQuestions : totalCorrectQuestions;
-
-        // Construir el objeto JSON con las estadísticas
-        const statsJSON = {
-            username: this.username,
-            nGamesPlayed: nGamesPlayed,
-            avgPoints: avgPoints,
-            totalPoints: totalPoints,
-            totalCorrectQuestions: totalCorrectQuestions,
-            totalIncorrectQuestions: totalIncorrectQuestions,
-            ratioCorrectToIncorrect: ratioCorrectToIncorrect
-        };
-
-        return statsJSON;
-    }
-
-    existsUser(username){
-        //TODO
-        return true;
     }
 }
 
