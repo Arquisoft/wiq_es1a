@@ -18,8 +18,11 @@ const JuegoPreguntas = () => {
   const [preguntaActual, setPreguntaActual] = useState("");
   const navigate = useNavigate();
 
-  var preguntasCorrectas=0;
-  var preguntasFalladas=0;
+  //Used for user stats
+  var [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
+  var [preguntasFalladas, setPreguntasFalladas] = useState(0);
+  var [tiempoTotal, setTiempoTotal] = useState(0);
+  var [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
     fetch("http://localhost:8003/questions?tematica=all&n=10")
@@ -81,20 +84,27 @@ const JuegoPreguntas = () => {
   };
 
   const handleSiguientePregunta = () => {
-    if (respuestaSeleccionada === preguntaActual.correcta) {
+    if (respuestaSeleccionada === preguntaActual.respuestaCorrecta) {
       setPuntuacion(puntuacion + 1);
-      preguntasCorrectas++;
-    }else{
-      preguntasFalladas++;
+      setPreguntasCorrectas(preguntasCorrectas + 1);
+    } else {
+      setPreguntasFalladas(preguntasFalladas + 1);
     }
+
+    setTiempoTotal(tiempoTotal+10-tiempoRestante);
+
+
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta]);
     } else {
+      //TODO: Introducir puntos, preguntas correctas, tiempo y preguntas falladas en la BD
+      if (preguntasCorrectas + preguntasFalladas > 0) {
+        setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
+      }
 
-      //TODO: Introducir puntos, preguntas correctas y preguntas falladas en la BD
       setJuegoTerminado(true);
     }
   };
