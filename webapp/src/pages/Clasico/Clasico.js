@@ -105,6 +105,48 @@ const JuegoPreguntas = () => {
         setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
       }
 
+      //Now we store the game in the user's DB
+      const username = sessionStorage.getItem('username');
+
+      const newGame = new Game({
+        correctAnswers: preguntasCorrectas,
+        incorrectAnswers: preguntasFalladas,
+        points: puntuacion,
+        avgTime: tiempoMedio,
+      });
+
+      //SAVING THE GAME ON THE USERS DATABASE
+
+      // Encontrar el usuario en la base de datos
+      User.findOne({ username }, (err, user) => {
+        if (err) {
+          console.error('Error al encontrar el usuario:', err);
+          // TODO : hacer la UI para el manejo de errores
+        } else {
+
+            newGame.save((err, game) => {
+              
+            if (err) {
+
+              console.error('Error al guardar el juego:', err);
+              // TODO : hacer la UI para el manejo de errores
+            } 
+          else {
+            
+            user.games.push(game._id);
+
+            user.save((err) => {
+            if (err) {
+              console.error('Error al guardar el usuario actualizado:', err);
+              // TODO : hacer la UI para el manejo de errores
+              }
+            });
+          }
+        });
+      
+      }
+    });
+
       setJuegoTerminado(true);
     }
   };
