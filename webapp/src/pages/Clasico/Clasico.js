@@ -18,6 +18,9 @@ const JuegoPreguntas = () => {
   const [preguntaActual, setPreguntaActual] = useState("");
   const navigate = useNavigate();
 
+  var preguntasCorrectas=0;
+  var preguntasFalladas=0;
+
   useEffect(() => {
     fetch("http://localhost:8003/questions?tematica=all&n=10")
       .then((response) => response.json())
@@ -80,6 +83,9 @@ const JuegoPreguntas = () => {
   const handleSiguientePregunta = () => {
     if (respuestaSeleccionada === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
+      preguntasCorrectas++;
+    }else{
+      preguntasFalladas++;
     }
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
@@ -87,6 +93,8 @@ const JuegoPreguntas = () => {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta]);
     } else {
+
+      //TODO: Introducir puntos, preguntas correctas y preguntas falladas en la BD
       setJuegoTerminado(true);
     }
   };
