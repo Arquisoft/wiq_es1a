@@ -20,6 +20,20 @@ services:
         - "8003:8003"
       networks:
         - mynetwork
+  
+  statsservice:
+      container_name: statsservice-${teamname:-defaultASW}
+      image: ghcr.io/arquisoft/wiq_es1a/statsservice:latest
+      profiles: ["dev", "prod"]
+      build: ./statsservice
+      depends_on:
+        - mongodb
+      ports:
+        - "8004:8004"
+      networks:
+        - mynetwork
+      environment:
+        MONGODB_URI: mongodb://mongodb:27017/userdb
 
   authservice:
     container_name: authservice-${teamname:-defaultASW}
@@ -56,6 +70,7 @@ services:
     build: ./gatewayservice
     depends_on:
       - mongodb
+      - statsservice
       - userservice
       - authservice
       - questionservice
@@ -64,6 +79,7 @@ services:
     networks:
       - mynetwork
     environment:
+      STATS_SERVICE_URL: http://questionservice:8004
       QUESTION_SERVICE_URL: http://questionservice:8003
       AUTH_SERVICE_URL: http://authservice:8002
       USER_SERVICE_URL: http://userservice:8001
