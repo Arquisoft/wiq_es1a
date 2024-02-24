@@ -130,12 +130,11 @@ const JuegoPreguntas = () => {
       if (!response.ok) {
         throw new Error('Error al guardar el juego');
       }
-
-      // Si la respuesta es exitosa, marcar el juego como terminado
-      setJuegoTerminado(true);
     } catch (error) {
       console.error('Error al guardar el juego:', error);
       // Manejar el error, por ejemplo, mostrando un mensaje al usuario
+    } finally {
+      setJuegoTerminado(true);
     }
   }
 };

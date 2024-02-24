@@ -2,7 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const StatsForUser = require("./model/stats-getter");
-const User = require("../users/user-model.js");
+const User = require("./user-model");
 
 const app = express();
 const port = 8004;
