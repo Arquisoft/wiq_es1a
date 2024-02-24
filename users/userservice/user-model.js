@@ -14,8 +14,10 @@ const userSchema = new mongoose.Schema({
       default: Date.now, 
     },
     games: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Game'
+      correctAnswers: Number,
+      incorrectAnswers: Number,
+      points: Number,
+      avgTime: Number
     }],
 });
 

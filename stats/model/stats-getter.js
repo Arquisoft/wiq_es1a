@@ -1,4 +1,4 @@
-const User = require('../../users/userservice/user-mode.js/User');
+const User = require('../../users/userservice/user-model.js/User');
 
 class StatsForUser {
 

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Footer from "../../components/Footer/Footer.js";
 import axios from 'axios';
 
+
 const JuegoPreguntas = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -83,7 +84,7 @@ const JuegoPreguntas = () => {
     return {};
   };
 
-  const handleSiguientePregunta = () => {
+  const handleSiguientePregunta = async () => {
     if (respuestaSeleccionada === preguntaActual.respuestaCorrecta) {
       setPuntuacion(puntuacion + 1);
       setPreguntasCorrectas(preguntasCorrectas + 1);
@@ -100,56 +101,44 @@ const JuegoPreguntas = () => {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta]);
     } else {
-      //TODO: Introducir puntos, preguntas correctas, tiempo y preguntas falladas en la BD
+
       if (preguntasCorrectas + preguntasFalladas > 0) {
         setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
       }
 
       //Now we store the game in the user's DB
       const username = sessionStorage.getItem('username');
-
-      const newGame = new Game({
+      const newGame = {
         correctAnswers: preguntasCorrectas,
         incorrectAnswers: preguntasFalladas,
         points: puntuacion,
         avgTime: tiempoMedio,
+      };
+
+      try {
+      const response = await fetch('http://localhost:8004/saveGame', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          game: newGame,
+        }),
       });
 
-      //SAVING THE GAME ON THE USERS DATABASE
-
-      // Encontrar el usuario en la base de datos
-      User.findOne({ username }, (err, user) => {
-        if (err) {
-          console.error('Error al encontrar el usuario:', err);
-          // TODO : hacer la UI para el manejo de errores
-        } else {
-
-            newGame.save((err, game) => {
-              
-            if (err) {
-
-              console.error('Error al guardar el juego:', err);
-              // TODO : hacer la UI para el manejo de errores
-            } 
-          else {
-            
-            user.games.push(game._id);
-
-            user.save((err) => {
-            if (err) {
-              console.error('Error al guardar el usuario actualizado:', err);
-              // TODO : hacer la UI para el manejo de errores
-              }
-            });
-          }
-        });
-      
+      if (!response.ok) {
+        throw new Error('Error al guardar el juego');
       }
-    });
 
+      // Si la respuesta es exitosa, marcar el juego como terminado
       setJuegoTerminado(true);
+    } catch (error) {
+      console.error('Error al guardar el juego:', error);
+      // Manejar el error, por ejemplo, mostrando un mensaje al usuario
     }
-  };
+  }
+};
 
   const handleRepetirJuego = () => {
     // Reiniciar el estado para repetir el juego
