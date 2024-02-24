@@ -18,8 +18,11 @@ const JuegoPreguntas = () => {
   const [preguntaActual, setPreguntaActual] = useState("");
   const navigate = useNavigate();
 
-  var preguntasCorrectas=0;
-  var preguntasFalladas=0;
+  //Used for user stats
+  var [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
+  var [preguntasFalladas, setPreguntasFalladas] = useState(0);
+  var [tiempoTotal, setTiempoTotal] = useState(0);
+  var [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
     fetch("http://localhost:8003/questions?tematica=all&n=10")
@@ -81,20 +84,69 @@ const JuegoPreguntas = () => {
   };
 
   const handleSiguientePregunta = () => {
-    if (respuestaSeleccionada === preguntaActual.correcta) {
+    if (respuestaSeleccionada === preguntaActual.respuestaCorrecta) {
       setPuntuacion(puntuacion + 1);
-      preguntasCorrectas++;
-    }else{
-      preguntasFalladas++;
+      setPreguntasCorrectas(preguntasCorrectas + 1);
+    } else {
+      setPreguntasFalladas(preguntasFalladas + 1);
     }
+
+    setTiempoTotal(tiempoTotal+10-tiempoRestante);
+
+
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta]);
     } else {
+      //TODO: Introducir puntos, preguntas correctas, tiempo y preguntas falladas en la BD
+      if (preguntasCorrectas + preguntasFalladas > 0) {
+        setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
+      }
 
-      //TODO: Introducir puntos, preguntas correctas y preguntas falladas en la BD
+      //Now we store the game in the user's DB
+      const username = sessionStorage.getItem('username');
+
+      const newGame = new Game({
+        correctAnswers: preguntasCorrectas,
+        incorrectAnswers: preguntasFalladas,
+        points: puntuacion,
+        avgTime: tiempoMedio,
+      });
+
+      //SAVING THE GAME ON THE USERS DATABASE
+
+      // Encontrar el usuario en la base de datos
+      User.findOne({ username }, (err, user) => {
+        if (err) {
+          console.error('Error al encontrar el usuario:', err);
+          // TODO : hacer la UI para el manejo de errores
+        } else {
+
+            newGame.save((err, game) => {
+              
+            if (err) {
+
+              console.error('Error al guardar el juego:', err);
+              // TODO : hacer la UI para el manejo de errores
+            } 
+          else {
+            
+            user.games.push(game._id);
+
+            user.save((err) => {
+            if (err) {
+              console.error('Error al guardar el usuario actualizado:', err);
+              // TODO : hacer la UI para el manejo de errores
+              }
+            });
+          }
+        });
+      
+      }
+    });
+
       setJuegoTerminado(true);
     }
   };
