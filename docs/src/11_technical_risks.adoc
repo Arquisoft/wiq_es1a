@@ -5,11 +5,11 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [options="header"] 
 |===
-| Priority | Description of Risk/Technical Debt | Suggested Measures 
+| Priority | Description of Risk/Technical Debt | Suggested Measures
 | High     | Potential application malfunctions | Implement unit tests for key components and critical functions, along with extensive testing with real users 
 | Medium   | Slow performance of database queries | Optimize database queries, avoid unnecessary queries 
 | Medium   | Potential unavailability of Wikidata |  Design the UI to handle missing or incomplete data from Wikidata.
 | Low      | Unoptimized styles | Optimize CSS styles to improve application performance and loading times 
 | Low      | Insufficient documentation | Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration 
-| Low     | Vulnerabilities in user authentication | Implement additional security measures, such as password encryption 
+| Low      | Vulnerabilities in user authentication | Implement additional security measures, such as password encryption 
 |===
