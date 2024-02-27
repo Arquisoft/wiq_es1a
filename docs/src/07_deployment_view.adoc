@@ -45,29 +45,14 @@ See https://docs.arc42.org/section-7/[Deployment View] in the arc42 documentatio
 === Infrastructure Level 1
 
 [role="arc42help"]
-****
-Describe (usually in a combination of diagrams, tables, and text):
 
-* distribution of a system to multiple locations, environments, computers, processors, .., as well as physical connections between them
-* important justifications or motivations for this deployment structure
-* quality and/or performance features of this infrastructure
-* mapping of software artifacts to elements of this infrastructure
 
-For multiple environments or alternative deployments please copy and adapt this section of arc42 for all relevant environments.
-****
-
-_**<Overview Diagram>**_
+_**Deployment diagram**_
+image::DeploymentView.svg["Deployment View"]
 
 Motivation::
 
-_<explanation in text form>_
-
-Quality and/or Performance Features::
-
-_<explanation in text form>_
-
-Mapping of Building Blocks to Infrastructure::
-_<description of the mapping>_
+This diagram shows us the process the application goes through when it is deployed.
 
 
 === Infrastructure Level 2
