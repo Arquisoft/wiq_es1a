@@ -48,7 +48,7 @@ See https://docs.arc42.org/section-7/[Deployment View] in the arc42 documentatio
 
 
 _**Deployment diagram**_
-image::DeploymentView.svg["Deployment View"]
+image::DeploymentView.svg[Deployment View]
 
 Motivation::
 
