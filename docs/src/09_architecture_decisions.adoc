@@ -3,66 +3,28 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-design-decisions]]
 == Architecture Decisions
 JavaScript:
-  We will use the JavaScript language to create both the front-end and the backend of the application, is the default technology of the initial project. 
 
-https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScript
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScript[ADR#1]
 
 ReactJS:
-  The base project they have given us uses ReactJS for the front-end of the application, although it is a framework with which we are not familiar.
-We think that is a good oportunity to start using this framework.
 
-https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%232)-ReactJS
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%232)-ReactJS[ADR#2]
 
 NodeJS:
-  We use NodeJS for the back-end of the application, this is the default technology of the initial project and all the group thought it was a good idea to use it.
 
-https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%233)-NodeJS
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%233)-NodeJS[ADR#3]
 
-MongoDB
-  The base project they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, but it seemed like a good idea to learn this GBD system.
+MongoDB:
 
-https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%234)-MongoDB
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%234)-MongoDB[ADR#4]
 
-Docker
-We will use Docker to package the application modules in containers, it is the initial technology of the project.
+Docker:
 
-https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%235)-Docker
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%235)-Docker[ADR#5]
 
 MySQL:
-  The base project that they have given us uses MongoDB for the back-end of the application, a DBMS with which we are not familiar, however MySQL is another database management system that we have used in other subjects. We decided to discard this option to learn how to use 
   
-https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%236)-MySQL
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%236)-MySQL[ADR#6]
 
-Link to all the Architecture Decisions 
 
-https://github.com/Arquisoft/wiq_es1a/wiki/Decisiones-arquitect%C3%B3nicas
 
-[role="arc42help"]
-****
-.Contents
-Important, expensive, large scale or risky architecture decisions including rationales.
-With "decisions" we mean selecting one alternative based on given criteria.
-
-Please use your judgement to decide whether an architectural decision should be documented
-here in this central section or whether you better document it locally
-(e.g. within the white box template of one building block).
-
-Avoid redundancy. 
-Refer to section 4, where you already captured the most important decisions of your architecture.
-
-.Motivation
-Stakeholders of your system should be able to comprehend and retrace your decisions.
-
-.Form
-Various options:
-
-* ADR (https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions[Documenting Architecture Decisions]) for every important decision
-* List or table, ordered by importance and consequences or:
-* more detailed in form of separate sections per decision
-
-.Further Information
-
-See https://docs.arc42.org/section-9/[Architecture Decisions] in the arc42 documentation.
-There you will find links and examples about ADR.
-
-****

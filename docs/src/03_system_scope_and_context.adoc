@@ -4,7 +4,23 @@ ifndef::imagesdir[:imagesdir: ../images]
 == System Scope and Context
 
 === Business Context
-image::businesscontext.png[Business context]
+image::businesscontext.svg[Business context]
+
+|===
+| *Entity* | *_Description_*
+| *_User_* | It's the one that interacts directly with the app.
+| *_WIQ!_* | The web application.
+| *_Wikidata_* | Source from which data is drawn to formulate questions
+|===
 
 === Technical Context
-image::technicalcontext.png[Technical Context]
+image::technicalcontext.svg[Technical Context]
+|===
+| *Entity* | *_Description_*
+| *_User_* | Represents the user interacting with the system. In this case, the user is interacting with the "WIQ!" application through the device and the web browser.
+| *_Device_* | The device used by the user to access the application. This node contains the web browser component that allows the user to interact with the application.
+| *_Cloud_* | Represents the cloud infrastructure, in this case, Azure. This node contains the "WIQ!" component that hosts the application and allows its access through HTTP/HTTPS protocols.
+| *_WIQ!_* | The main application that the user interacts with. It is hosted on the Azure cloud and accesses a MongoDB database to store and retrieve data, as well as interacts with Wikidata through REST.
+| *_Wikidata_* | Source from which data is drawn to formulate questions. The application will request data via "Wikidata Query Service", which allows to retrieve data using SparQL.
+| *_MongoDB_* | The database management system used by the "WIQ!" application to store and retrieve data. In this case, it is used to store data related to the application.
+|===

@@ -43,7 +43,6 @@ See https://docs.arc42.org/section-7/[Deployment View] in the arc42 documentatio
 ****
 
 === Infrastructure Level 1
-image::UML.png[UML]
 
 [role="arc42help"]
 ****
@@ -61,7 +60,14 @@ _**<Overview Diagram>**_
 
 Motivation::
 
-As we can see, this would be the initial diagram of how the classes would relate to each other. We have, in the first place, the 'app' class that is related to 'link', which in turn is related to the different parts of the app.
+_<explanation in text form>_
+
+Quality and/or Performance Features::
+
+_<explanation in text form>_
+
+Mapping of Building Blocks to Infrastructure::
+_<description of the mapping>_
 
 
 === Infrastructure Level 2

@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import Register from './Register';
+import AddUser from './AddUser';
 
 const mockAxios = new MockAdapter(axios);
 
@@ -12,7 +12,7 @@ describe('AddUser component', () => {
   });
 
   it('should add user successfully', async () => {
-    render(<Register />);
+    render(<AddUser />);
 
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);
@@ -35,7 +35,7 @@ describe('AddUser component', () => {
   });
 
   it('should handle error when adding user', async () => {
-    render(<Register />);
+    render(<AddUser />);
 
     const usernameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/i);

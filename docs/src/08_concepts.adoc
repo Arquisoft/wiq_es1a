@@ -90,6 +90,8 @@ Is the state of being protected from danger or harm.
 
 Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.
 
+Generating code makes it easier for the programmer to create functions without wasting a lot of time and simply focusing on the correct implementation of the code, an example is for example generating the getters and setters
+
 === Migration 
 
 Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.
