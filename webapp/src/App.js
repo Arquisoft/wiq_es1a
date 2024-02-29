@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Authenticate from './pages/Authenticate/Authenticate.js';
 import Home from './pages/Home/Home.js';
+import Stats from './pages/Stats/Stats.js';
 import Clasico from './pages/Clasico/Clasico.js';
 import WrongRoute from './pages/WrongRoute/WrongRoute.js';
 import './App.css';
@@ -19,6 +20,7 @@ function App() {
         {/** Rutas privadas */}
         <Route path='/home' element={<Home />} />
         <Route path='/home/clasico' element={<Clasico />} />
+        <Route path='/stats' element={<Stats />} />
 
         {/* Ruta por defecto */}
         <Route path='*' element={<WrongRoute />} />

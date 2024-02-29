@@ -39,9 +39,9 @@ app.post('/login', async (req, res) => {
       // Generate a JWT token
       const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' });
       //Almacenamos el token del usuario para su autentificación
-      sessionStorage.setItem('token', token);
+      //sessionStorage.setItem('token', token);
 
-      sessionStorage.setItem('username', username);
+      //sessionStorage.setItem('username', username);
       
       // Respond with the token and user information
       res.json({ token: token, username: username, createdAt: user.createdAt });
