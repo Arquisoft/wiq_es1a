@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import Nav from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
+import './Stats.css';
+
 
 const Stats = () => {
   const [username, setUsername] = useState('');
@@ -32,11 +34,25 @@ const Stats = () => {
   };
 
   if (isLoading) {
-    return <div>Cargando...</div>;
+    return  <div>
+              <h2> Cargando ... </h2>
+              <p>Se está consultando su búsqueda, espere unos instantes.</p>
+            </div>
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return  <div>
+            <label htmlFor="usernameInput">Nombre de Usuario: </label>
+              <input
+                  type="text"
+                  id="usernameInput"
+                  value={username}
+                  onChange={handleUsernameChange}
+              />
+
+              <h2>Error: {error}</h2>
+              <p>Por favor compruebe si los valores del formulario son correctos e inténtelo de nuevo</p>
+            </div>;
   }
 
   return (
@@ -44,7 +60,7 @@ const Stats = () => {
     <Nav />
     <div>
       <h2>Estadísticas de Usuario</h2>
-      <label htmlFor="usernameInput">Nombre de Usuario: </label>
+      <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
       <input
         type="text"
         id="usernameInput"
@@ -53,13 +69,15 @@ const Stats = () => {
       />
       {stats && (
         <div>
-          <p>Usuario: {stats.username}</p>
-          <p>Juegos Jugados: {stats.nGamesPlayed}</p>
-          <p>Promedio de Puntos: {stats.avgPoints}</p>
-          <p>Puntos Totales: {stats.totalPoints}</p>
-          <p>Preguntas Correctas Totales: {stats.totalCorrectQuestions}</p>
-          <p>Preguntas Incorrectas Totales: {stats.totalIncorrectQuestions}</p>
-          <p>Ratio Correctas/Incorrectas: {stats.ratioCorrectToIncorrect}</p>
+          <hr></hr>
+          <p><strong>Usuario: </strong>{stats.username}</p>
+          <pre>   <strong>Juegos Jugados: </strong>{stats.nGamesPlayed}</pre>
+          <pre>   <strong>Promedio de Puntos: </strong>{stats.avgPoints}</pre>
+          <pre>   <strong>Puntos Totales: </strong>{stats.totalPoints}</pre>
+          <pre>   <strong>Preguntas Correctas Totales: </strong>{stats.totalCorrectQuestions}</pre>
+          <pre>   <strong>Preguntas Incorrectas Totales: </strong>{stats.totalIncorrectQuestions}</pre>
+          <pre>   <strong>Ratio Correctas/Incorrectas: </strong>{stats.ratioCorrectToIncorrect}</pre>
+          <hr></hr>
         </div>
       )}
     </div>
