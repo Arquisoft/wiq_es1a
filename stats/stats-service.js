@@ -56,8 +56,19 @@ app.get("/stats", async (req, res) => {
   }
 });
 
-const server = app.listen(port, () => {
+const server = app.listen(port, async() => {
     console.log(`Stats Service listening at http://localhost:${port}`);
+    statsGetter.getStatsForUser(req.query.user)
+    .then(() => {
+      console.log("Stats loaded successfully!");
+    })
+    .catch((error) => {
+      console.error("Error al cargar las estadísticas", error);
+    });
+  });
+
+cron.schedule("0 3 * * *", async () => {
+    await statsGetter.getStatsForUser(req.query.user);
   });
   
 module.exports = server;

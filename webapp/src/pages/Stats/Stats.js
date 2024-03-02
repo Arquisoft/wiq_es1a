@@ -12,25 +12,26 @@ const Stats = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8004/stats?user=${username}`);
-        setStats(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error.message);
-        setIsLoading(false);
-      }
-    };
 
-    if (username !== '') {
-      fetchStats();
-    }
+  useEffect(() => {
+    fetch(`http://localhost:8004/stats?user=${username}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setStats(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las preguntas:', error);
+        setIsLoading(false);
+      });
   }, [username]);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
+  };
+  
+  const handleSearch = () => {
+    fetchStats();
   };
 
   if (isLoading) {
@@ -49,7 +50,7 @@ const Stats = () => {
                   value={username}
                   onChange={handleUsernameChange}
               />
-
+              <button onClick={handleSearch}>Buscar</button>
               <h2>Error: {error}</h2>
               <p>Por favor compruebe si los valores del formulario son correctos e inténtelo de nuevo</p>
             </div>;
@@ -67,6 +68,7 @@ const Stats = () => {
         value={username}
         onChange={handleUsernameChange}
       />
+      <button onClick={handleSearch}>Buscar</button>
       {stats && (
         <div>
           <hr></hr>
