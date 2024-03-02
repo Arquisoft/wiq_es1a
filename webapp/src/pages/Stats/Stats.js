@@ -73,6 +73,7 @@ const Stats = () => {
               <h2>Error: {error}</h2>
               <p>Por favor compruebe si los valores del formulario son correctos e inténtelo de nuevo</p>
             </div>
+            <Footer />
             </>
   }
 

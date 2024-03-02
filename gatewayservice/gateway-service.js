@@ -9,6 +9,7 @@ const port = 8000;
 const authServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8002';
 const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8001';
 const questionServiceUrl = process.env.QUESTION_SERVICE_URL || 'http://localhost:8003';
+const statsServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8004';
 
 app.use(cors());
 app.use(express.json());
@@ -47,6 +48,26 @@ app.get('/randomQuestion', async (req, res) => {
     // Forward the question request to the question service
     const questionResponse = await axios.get(questionServiceUrl+'/randomQuestion', req.body);
     res.json(questionResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.get('/stats', async (req, res) => {
+  try {
+    // Forward the stats request to the stats service
+    const statsResponse = await axios.get(statsServiceUrl+'/stats', req.body);
+    res.json(statsResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.post('/saveGame', async (req, res) => {
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(statsServiceUrl+'/saveGame', req.body);
+    res.json(gameResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
