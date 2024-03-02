@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import Nav from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
 import './Stats.css';
@@ -11,6 +10,22 @@ const Stats = () => {
   const [stats, setStats] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+
+
+  const fetchStats = () => {
+    setIsLoading(true);
+    fetch(`http://localhost:8004/stats?user=${username}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setStats(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las preguntas:', error);
+        setError(error.message || 'Ha ocurrido un error al obtener las estadísticas');
+        setIsLoading(false);
+      });
+  };
 
 
   useEffect(() => {
@@ -31,7 +46,9 @@ const Stats = () => {
   };
   
   const handleSearch = () => {
-    fetchStats();
+    if (username.trim() !== '') {
+      fetchStats();
+    }
   };
 
   if (isLoading) {
@@ -42,7 +59,9 @@ const Stats = () => {
   }
 
   if (error) {
-    return  <div>
+    return  <>
+        <Nav />
+        <div>
             <label htmlFor="usernameInput">Nombre de Usuario: </label>
               <input
                   type="text"
@@ -53,7 +72,8 @@ const Stats = () => {
               <button onClick={handleSearch}>Buscar</button>
               <h2>Error: {error}</h2>
               <p>Por favor compruebe si los valores del formulario son correctos e inténtelo de nuevo</p>
-            </div>;
+            </div>
+            </>
   }
 
   return (
@@ -69,6 +89,11 @@ const Stats = () => {
         onChange={handleUsernameChange}
       />
       <button onClick={handleSearch}>Buscar</button>
+      {stats === null && !isLoading && (
+          <div>
+            <p>El usuario no ha jugado ninguna partida.</p>
+          </div>
+        )}
       {stats && (
         <div>
           <hr></hr>

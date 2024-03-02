@@ -3,6 +3,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const StatsForUser = require("./model/stats-getter");
 const User = require("../users/user-model.js");
+const cors = require('cors');
+
+const cron = require("node-cron");
 
 const app = express();
 const port = 8004;
@@ -10,6 +13,7 @@ const port = 8004;
 const statsGetter = new StatsForUser();
 
 app.use(bodyParser.json());
+app.use(cors());
 
 app.set("json spaces", 40);
 
