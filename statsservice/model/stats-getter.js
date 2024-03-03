@@ -1,5 +1,6 @@
 const User = require('../../users/userservice/user-model.js');
 
+
 class StatsForUser {
 
     async getStatsForUser(username){

@@ -1,7 +1,7 @@
 // user-service.js
 const express = require("express");
 const bodyParser = require("body-parser");
-const StatsForUser = require("./model/stats-getter");
+const StatsForUser = require("./model/stats-getter.js");
 const User = require("../users/user-model.js");
 const cors = require('cors');
 

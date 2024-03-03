@@ -23,9 +23,9 @@ services:
 
   statsservice:
     container_name: statsservice-${teamname:-defaultASW}
-    image: ghcr.io/arquisoft/wiq_es1a/stats:latest
+    image: ghcr.io/arquisoft/wiq_es1a/statsservice:latest
     profiles: ["dev", "prod"]
-    build: ./stats
+    build: ./statsservice
     depends_on:
       - mongodb
       - userservice
