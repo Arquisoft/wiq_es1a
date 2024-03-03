@@ -14,7 +14,7 @@ const Stats = () => {
 
   const fetchStats = () => {
     setIsLoading(true);
-    fetch(`http://localhost:8004/stats?user=${username}`)
+    fetch(`http://localhost:8001/getstats?user=${username}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);
@@ -27,9 +27,8 @@ const Stats = () => {
       });
   };
 
-
   useEffect(() => {
-    fetch(`http://localhost:8004/stats?user=${username}`)
+    fetch(`http://localhost:8001/getstats?user=${username}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);

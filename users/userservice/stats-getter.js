@@ -1,4 +1,4 @@
-const User = require('../../users/userservice/user-model.js');
+const User = require('./user-model.js');
 
 
 class StatsForUser {
@@ -25,13 +25,13 @@ class StatsForUser {
                 totalIncorrectQuestions += partida.incorrectAnswers;
             }
 
-            const avgPoints = nGamesPlayed > 0 ?
+            var avgPoints = nGamesPlayed > 0 ?
              totalPoints / nGamesPlayed : 0;
 
-            const ratioCorrectToIncorrect = totalIncorrectQuestions !== 0 ?
+            var ratioCorrectToIncorrect = totalIncorrectQuestions !== 0 ?
              totalCorrectQuestions / totalIncorrectQuestions : totalCorrectQuestions;
 
-            const statsJSON = {
+            var statsJSON = {
                 username: username,
                 nGamesPlayed: nGamesPlayed,
                 avgPoints: avgPoints,

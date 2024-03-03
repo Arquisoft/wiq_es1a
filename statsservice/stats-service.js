@@ -1,14 +1,11 @@
 // user-service.js
 const express = require("express");
 const bodyParser = require("body-parser");
-const StatsForUser = require("./model/stats-getter.js");
-const User = require("../users/user-model.js");
 const cors = require('cors');
-
+const axios = require('axios');
 const app = express();
 const port = 8004;
 
-const statsGetter = new StatsForUser();
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -19,44 +16,36 @@ app.post("/saveGame", async (req, res) => {
   try {
     const { username, correctAnswers, incorrectAnswers, points, avgTime } = req.body;
 
-    // Encontrar al usuario en la base de datos
-    const user = await User.findOne({ username });
-
-    if (!user) {
-      return res.status(404).json({ error: "Usuario no encontrado" });
-    }
-
-    // Crear un nuevo juego
-    const newGame = {
+    // Hacer una solicitud al servicio user-service para guardar el juego
+    const response = await axios.post('http://localhost:8001/userSaveGame', {
+      username,
       correctAnswers,
       incorrectAnswers,
       points,
       avgTime
-    };
+    });
 
-    user.games.push(newGame);
-
-    await user.save();
-
-    res.json({ message: "Juego guardado exitosamente" });
+    res.json(response.data);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
+// Ruta para obtener estadísticas
 app.get("/stats", async (req, res) => {
-  if (!statsGetter.existsUser(req.query.user)) {
-    res
-      .status(400)
-      .json({ error: `El usuario no existe` });
-  }
   try {
-    var data = statsGetter.getStatsForUser(req.query.user);
-    res.json(data);
+    const username = req.query.user;
+
+    // Hacer una solicitud al servicio user-service para obtener estadísticas
+    const response = await axios.get(`http://localhost:8001/getstats?user=${username}`);
+
+    res.json(response.data);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: `Error al obtener las estadísticas: ${error.message}`});
   }
 });
+
+
 
 const server = app.listen(port, () => {
   console.log(`Stats Service listening at http://localhost:${port}`);

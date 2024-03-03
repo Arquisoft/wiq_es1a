@@ -73,6 +73,26 @@ app.post('/saveGame', async (req, res) => {
   }
 });
 
+app.get('/getstats', async (req, res) => {
+  try {
+    // Forward the stats request to the stats service
+    const statsResponse = await axios.get(userServiceUrl+'/getstats', req.body);
+    res.json(statsResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.post('/userSaveGame', async (req, res) => {
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(userServiceUrl+'/userSaveGame', req.body);
+    res.json(gameResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
 // Start the gateway service
 const server = app.listen(port, () => {
   console.log(`Gateway Service listening at http://localhost:${port}`);
