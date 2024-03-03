@@ -1,8 +1,8 @@
 {
     "paises": {
         "entity": "Q6256",
-        "props": ["P36", "P35", "P1344", "P37", "P47", "P2250", "P571", "P122", "P1451"],
-        "types": ["str", "str", "str", "str", "str", "num", "date", "str", "str"],
+        "props": ["P36", "P35", "P1344", "P37", "P47", "P2250", "P571", "P122", "P1451", "P41"],
+        "types": ["str", "str", "str", "str", "str", "num", "date", "str", "str", "photo"],
         "preguntas": [
             "¿Cuál es la capital de ", 
             "¿Quién es el jefe de estado de ",
@@ -12,7 +12,8 @@
             "¿Cuál es la esperanza de vida media de ",
             "¿En qué fecha se fundó ",
             "¿Cuál es la forma de gobierno de ",
-            "¿Cuál es el lema de "
+            "¿Cuál es el lema de ",
+            "¿Cuál es la bandera de "
         ]
     },
     "literatura": {

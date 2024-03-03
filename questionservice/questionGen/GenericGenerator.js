@@ -146,6 +146,10 @@ class GenericGenerator {
         questionObj.respuestas = questionObj.respuestas.map(x => Math.floor(x));
         questionObj.correcta = Math.floor(questionObj.correcta);
         break;
+      case "photo":
+        questionObj.respuestas = questionObj.respuestas.map(x => this.#photoFormatter(x));
+        questionObj.correcta = this.#photoFormatter(questionObj.correcta);
+        break;
       default:
         break;
     }
@@ -179,7 +183,11 @@ class GenericGenerator {
     const fechaFormateada = `${dia}/${mes}/${año}${isAC ? ' a.C.' : ''}`;
     
     return fechaFormateada;
-}
+  }
+
+  #photoFormatter(photo){
+    return `<a href="${photo}" ></a>`;
+  }
 
 }
 
