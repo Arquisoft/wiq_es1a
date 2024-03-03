@@ -5,8 +5,6 @@ const StatsForUser = require("./model/stats-getter");
 const User = require("../users/user-model.js");
 const cors = require('cors');
 
-const cron = require("node-cron");
-
 const app = express();
 const port = 8004;
 
@@ -60,19 +58,8 @@ app.get("/stats", async (req, res) => {
   }
 });
 
-const server = app.listen(port, async() => {
-    console.log(`Stats Service listening at http://localhost:${port}`);
-    statsGetter.getStatsForUser(req.query.user)
-    .then(() => {
-      console.log("Stats loaded successfully!");
-    })
-    .catch((error) => {
-      console.error("Error al cargar las estadísticas", error);
-    });
-  });
-
-cron.schedule("0 3 * * *", async () => {
-    await statsGetter.getStatsForUser(req.query.user);
-  });
+const server = app.listen(port, () => {
+  console.log(`Stats Service listening at http://localhost:${port}`);
+});
   
 module.exports = server;

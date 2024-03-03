@@ -1,4 +1,4 @@
-const User = require('../../users/userservice/user-model.js/User');
+const User = require('../../users/userservice/user-model.js');
 
 class StatsForUser {
 
@@ -16,6 +16,7 @@ class StatsForUser {
             var totalPoints = 0;
             var totalCorrectQuestions = 0;
             var totalIncorrectQuestions = 0;
+            var avgTime=0;
 
             for (const partida of partidas){
                 totalPoints += partida.points;
