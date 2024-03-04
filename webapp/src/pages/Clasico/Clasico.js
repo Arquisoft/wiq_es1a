@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Clasico.css";
 import Preguntas from "../../components/Preguntas";
-import { useNavigate } from "react-router-dom";
 import Nav from '../../components/Nav/Nav.js';
 import { Link } from 'react-router-dom';
 import Footer from "../../components/Footer/Footer.js";
@@ -15,7 +14,6 @@ const JuegoPreguntas = () => {
   const [preguntaTerminada, setPreguntaTerminada] = useState(false);
   const [mostrarMenu, setMostrarMenu] = useState(false); // Estado para mostrar el menú al finalizar el juego
   const preguntaActual = Preguntas[indicePregunta];
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (tiempoRestante === 0) {
@@ -46,7 +44,7 @@ const JuegoPreguntas = () => {
   const estiloRespuesta = (respuesta) => {
     if (preguntaTerminada) {
       if (respuesta === preguntaActual.respuestaCorrecta) {
-        return { backgroundColor: "green" };
+        return { backgroundColor: "#10FF00" };
       } else if (respuesta === respuestaSeleccionada) {
         return { backgroundColor: "red" };
       }
