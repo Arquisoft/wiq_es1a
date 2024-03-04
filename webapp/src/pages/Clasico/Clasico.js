@@ -12,13 +12,16 @@ const JuegoPreguntas = () => {
   const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
   const [tiempoRestante, setTiempoRestante] = useState(10);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
+  const [preguntaTerminada, setPreguntaTerminada] = useState(false);
   const [mostrarMenu, setMostrarMenu] = useState(false); // Estado para mostrar el menú al finalizar el juego
   const preguntaActual = Preguntas[indicePregunta];
   const navigate = useNavigate();
 
   useEffect(() => {
     if (tiempoRestante === 0) {
+      setPreguntaTerminada(true);
       setTimeout(() => {
+        setPreguntaTerminada(false);
         handleSiguientePregunta();
       }, 3000);
     }
@@ -26,7 +29,7 @@ const JuegoPreguntas = () => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
-  }, [tiempoRestante, indicePregunta]);
+  }, [tiempoRestante]);
 
   useEffect(() => {
     if (juegoTerminado) {
@@ -41,7 +44,7 @@ const JuegoPreguntas = () => {
   };
 
   const estiloRespuesta = (respuesta) => {
-    if (juegoTerminado) {
+    if (preguntaTerminada) {
       if (respuesta === preguntaActual.respuestaCorrecta) {
         return { backgroundColor: "green" };
       } else if (respuesta === respuestaSeleccionada) {
