@@ -107,7 +107,7 @@ const JuegoPreguntas = () => {
       }
 
       //Now we store the game in the user's DB
-      const username = sessionStorage.getItem('username');
+      const username = localStorage.getItem('username');
       const newGame = {
         correctAnswers: preguntasCorrectas,
         incorrectAnswers: preguntasFalladas,
@@ -116,7 +116,7 @@ const JuegoPreguntas = () => {
       };
 
       try {
-      const response = await fetch('http://localhost:8004/saveGame', {
+      const response = await fetch('http://localhost:8001/saveGame', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -6,7 +6,7 @@ import './Stats.css';
 
 
 const Stats = () => {
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(localStorage.username);
   const [stats, setStats] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
