@@ -3,12 +3,12 @@ import "./Bateria.css";
 import Nav from '../../components/Nav/Nav.js';
 import Footer from "../../components/Footer/Footer.js";
 import Preguntas from "./prueba";
+import { Link } from 'react-router-dom';
 
 const JuegoPreguntas = () => {
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
-  const [respuestaSeleccionada, setRespuestaSeleccionada] = useState("");
-  const [tiempoRestante, setTiempoRestante] = useState(180);
+  const [tiempoRestante, setTiempoRestante] = useState(10);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const preguntaActual = Preguntas[indicePregunta];
 
@@ -22,18 +22,10 @@ const JuegoPreguntas = () => {
     return () => clearInterval(timer);
   }, [tiempoRestante]);
 
-  const handleRespuestaSeleccionada = (respuesta) => {
-    if (!juegoTerminado) {
-      setRespuestaSeleccionada(respuesta);
-      handleSiguientePregunta();
-    }
-  };
-
-  const handleSiguientePregunta = () => {
-    if (respuestaSeleccionada === preguntaActual.correcta) {
+  const handleSiguientePregunta = (respuesta) => {
+    if (respuesta === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
     }
-    setRespuestaSeleccionada(null);
     if (indicePregunta + 1 < Preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
     } else {
@@ -45,32 +37,40 @@ const JuegoPreguntas = () => {
     // Reiniciar el estado para repetir el juego
     setIndicePregunta(0);
     setPuntuacion(0);
-    setRespuestaSeleccionada(null);
-    setTiempoRestante(60);
+    setTiempoRestante(180);
     setJuegoTerminado(false);
   };
+
+  if (juegoTerminado) {
+    return (
+      <>
+        <Nav />
+        <div className="menuContainer">
+          <h2>¡Juego terminado!</h2>
+          <p>
+            Tu puntuación: {puntuacion}
+          </p>
+          <button onClick={handleRepetirJuego}>Repetir Juego</button>
+          <Link to="/home">Volver al Menú Principal</Link>
+        </div>
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>
       <Nav />
       <div className="questionContainer">
-        {juegoTerminado ? (
-          <div className="menuContainer">
-            <h2>¡Juego terminado!</h2>
-            <p>
-              Tu puntuación: {puntuacion}/{Preguntas.length}
-            </p>
-            <button onClick={handleRepetirJuego}>Repetir Juego</button>
-          </div>
-        ) : (
-          <>
             <h2>Pregunta {indicePregunta + 1}:</h2>
             <p>{preguntaActual.pregunta}</p>
             <div className="responsesContainer">
               {preguntaActual.respuestas.map((respuesta, index) => (
                 <button
                   key={index}
-                  onClick={() => handleRespuestaSeleccionada(respuesta)}
+                  onClick={() => {
+                    handleSiguientePregunta(respuesta);
+                  }}
                 >
                   {respuesta}
                 </button>
@@ -78,9 +78,7 @@ const JuegoPreguntas = () => {
             </div>
             <div className="timer">Tiempo restante: {tiempoRestante}</div>
             <div className="points">Puntuación: {puntuacion}</div>
-          </>
-        )}
-      </div>
+          </div>
       <Footer />
     </>
   );
