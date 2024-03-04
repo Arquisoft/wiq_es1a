@@ -26,7 +26,6 @@ app.post("/saveGame", async (req, res) => {
     });
 
     res.json(response.data);
-    };
 
     user.games.push(newGame);
 
