@@ -104,6 +104,7 @@ const Stats = () => {
           <pre>   <strong>Preguntas Correctas Totales: </strong>{stats.totalCorrectQuestions}</pre>
           <pre>   <strong>Preguntas Incorrectas Totales: </strong>{stats.totalIncorrectQuestions}</pre>
           <pre>   <strong>Ratio Correctas/Incorrectas: </strong>{stats.ratioCorrectToIncorrect}</pre>
+          <pre>   <strong>Tiempo por pregunta (s): </strong>{stats.avgTime}</pre>
           <hr></hr>
         </div>
       )}
