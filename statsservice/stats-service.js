@@ -26,6 +26,13 @@ app.post("/saveGame", async (req, res) => {
     });
 
     res.json(response.data);
+    };
+
+    user.games.push(newGame);
+
+    await user.save();
+
+    res.json({ message: "Juego guardado exitosamente" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

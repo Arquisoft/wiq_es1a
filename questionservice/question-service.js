@@ -25,7 +25,9 @@ app.get("/questions", async (req, res) => {
       .json({ error: `El límite de preguntas son ${MAX_QUESTIONS}` });
   }
   try {
-    var data = gen.getQuestions(req.query.tematica, req.query.n);
+    var tematica = req.query.tematica ? req.query.tematica : "all";
+    var n = req.query.n ? req.query.n : 10;
+    var data = gen.getQuestions(tematica, n);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });

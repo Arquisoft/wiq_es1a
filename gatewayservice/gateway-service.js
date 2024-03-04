@@ -43,10 +43,10 @@ app.post('/adduser', async (req, res) => {
   }
 });
 
-app.get('/randomQuestion', async (req, res) => {
+app.get('/questions', async (req, res) => {
   try {
     // Forward the question request to the question service
-    const questionResponse = await axios.get(questionServiceUrl+'/randomQuestion', req.body);
+    const questionResponse = await axios.get(questionServiceUrl+'/questions', req.body);
     res.json(questionResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });

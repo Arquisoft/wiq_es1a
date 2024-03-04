@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Clasico.css";
-import { useNavigate } from "react-router-dom";
+import Preguntas from "../../components/Preguntas";
 import Nav from '../../components/Nav/Nav.js';
 import { Link } from 'react-router-dom';
 import Footer from "../../components/Footer/Footer.js";
@@ -14,10 +14,10 @@ const JuegoPreguntas = () => {
   const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
   const [tiempoRestante, setTiempoRestante] = useState(10);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
+  const [preguntaTerminada, setPreguntaTerminada] = useState(false);
   const [mostrarMenu, setMostrarMenu] = useState(false); // Estado para mostrar el menú al finalizar el juego
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState("");
-  const navigate = useNavigate();
 
   //Used for user stats
   var [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
@@ -47,7 +47,9 @@ const JuegoPreguntas = () => {
 
   useEffect(() => {
     if (tiempoRestante === 0) {
+      setPreguntaTerminada(true);
       setTimeout(() => {
+        setPreguntaTerminada(false);
         handleSiguientePregunta();
       }, 3000);
     }
@@ -55,7 +57,7 @@ const JuegoPreguntas = () => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
-  }, [tiempoRestante, indicePregunta]);
+  }, [tiempoRestante]);
 
   useEffect(() => {
     if (juegoTerminado) {
@@ -70,9 +72,9 @@ const JuegoPreguntas = () => {
   };
 
   const estiloRespuesta = (respuesta) => {
-    if (juegoTerminado) {
+    if (preguntaTerminada) {
       if (respuesta === preguntaActual.correcta) {
-        return { backgroundColor: "green" };
+        return { backgroundColor: "#10FF00" };
       } else if (respuesta === respuestaSeleccionada) {
         return { backgroundColor: "red" };
       }
@@ -130,12 +132,10 @@ const JuegoPreguntas = () => {
         throw new Error('Error al guardar el juego');
       }
 
-      
     } catch (error) {
       console.error('Error al guardar el juego:', error);
       // Manejar el error, por ejemplo, mostrando un mensaje al usuario
     } finally {
-      
       setJuegoTerminado(true);
     }
 
