@@ -10,7 +10,7 @@ import axios from 'axios';
 const JuegoPreguntas = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
-  const [puntuacion, setPuntuacion] = useState(0);
+  var [puntuacion, setPuntuacion] = useState(0);
   const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
   const [tiempoRestante, setTiempoRestante] = useState(10);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
@@ -73,7 +73,7 @@ const JuegoPreguntas = () => {
 
   const estiloRespuesta = (respuesta) => {
     if (preguntaTerminada) {
-      if (respuesta === preguntaActual.respuestaCorrecta) {
+      if (respuesta === preguntaActual.correcta) {
         return { backgroundColor: "#10FF00" };
       } else if (respuesta === respuestaSeleccionada) {
         return { backgroundColor: "red" };
@@ -87,7 +87,7 @@ const JuegoPreguntas = () => {
   };
 
   const handleSiguientePregunta = async () => {
-    if (respuestaSeleccionada === preguntaActual.respuestaCorrecta) {
+    if (respuestaSeleccionada === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
       setPreguntasCorrectas(preguntasCorrectas + 1);
     } else {
@@ -104,40 +104,42 @@ const JuegoPreguntas = () => {
       setPreguntaActual(preguntas[indicePregunta]);
     } else {
 
-      if (preguntasCorrectas + preguntasFalladas > 0) {
-        setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
-      }
-
-      //Now we store the game in the user's DB
-      const username = sessionStorage.getItem('username');
-      const newGame = {
-        correctAnswers: preguntasCorrectas,
-        incorrectAnswers: preguntasFalladas,
-        points: puntuacion,
-        avgTime: tiempoMedio,
-      };
-
       try {
-      const response = await fetch('http://localhost:8004/saveGame', {
+
+        if (preguntasCorrectas + preguntasFalladas > 0) {
+          setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
+        }
+  
+        //Now we store the game in the user's DB
+        const username = localStorage.getItem('username');
+        const newGame = {
+          username: username,
+          correctAnswers: preguntasCorrectas,
+          incorrectAnswers: preguntasFalladas,
+          points: puntuacion,
+          avgTime: tiempoMedio,
+        };
+
+      const response = await fetch('http://localhost:8001/userSaveGame', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          username,
-          game: newGame,
-        }),
+        body: JSON.stringify(newGame),
       });
 
       if (!response.ok) {
         throw new Error('Error al guardar el juego');
       }
+
     } catch (error) {
       console.error('Error al guardar el juego:', error);
       // Manejar el error, por ejemplo, mostrando un mensaje al usuario
     } finally {
       setJuegoTerminado(true);
     }
+
+    
   }
 };
 
@@ -149,6 +151,10 @@ const JuegoPreguntas = () => {
     setTiempoRestante(10);
     setJuegoTerminado(false);
     setMostrarMenu(false);
+    setPreguntasCorrectas(0);
+    setPreguntasFalladas(0);
+    setTiempoMedio(0);
+    setTiempoTotal(0);
   };
 
   if (mostrarMenu) {

@@ -19,11 +19,15 @@ const Login = () => {
 
       // Extract data from the response
       const { createdAt: userCreatedAt } = response.data;
-
+      const { token: token } = response.data;
       setCreatedAt(userCreatedAt);
       setLoginSuccess(true);
 
       setOpenSnackbar(true);
+      localStorage.setItem('token', token);
+
+      localStorage.setItem('username', username);
+      
     } catch (error) {
       setError(error.response.data.error);
     }
