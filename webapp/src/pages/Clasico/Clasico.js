@@ -16,7 +16,8 @@ const JuegoPreguntas = () => {
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [preguntaTerminada, setPreguntaTerminada] = useState(false);
   const [mostrarMenu, setMostrarMenu] = useState(false); // Estado para mostrar el menú al finalizar el juego
-  const preguntaActual = Preguntas[indicePregunta];
+  const [preguntas, setPreguntas] = useState([]);
+  const [preguntaActual, setPreguntaActual] = useState("");
 
   //Used for user stats
   var [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
