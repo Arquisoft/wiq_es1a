@@ -4,8 +4,11 @@ import Preguntas from "../../components/Preguntas";
 import Nav from '../../components/Nav/Nav.js';
 import { Link } from 'react-router-dom';
 import Footer from "../../components/Footer/Footer.js";
+import axios from 'axios';
+
 
 const JuegoPreguntas = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
   const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
@@ -14,6 +17,32 @@ const JuegoPreguntas = () => {
   const [preguntaTerminada, setPreguntaTerminada] = useState(false);
   const [mostrarMenu, setMostrarMenu] = useState(false); // Estado para mostrar el menú al finalizar el juego
   const preguntaActual = Preguntas[indicePregunta];
+
+  //Used for user stats
+  var [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
+  var [preguntasFalladas, setPreguntasFalladas] = useState(0);
+  var [tiempoTotal, setTiempoTotal] = useState(0);
+  var [tiempoMedio, setTiempoMedio] = useState(0);
+
+  useEffect(() => {
+    fetch("http://localhost:8003/questions?tematica=all&n=10")
+      .then((response) => response.json())
+      .then((data) => {
+        setPreguntas(data);
+        //setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las preguntas:', error);
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (preguntas && preguntas.length > 0) {
+      setPreguntaActual(preguntas[0]);
+      setIsLoading(false);
+    }
+  }, [preguntas]);
 
   useEffect(() => {
     if (tiempoRestante === 0) {
@@ -56,18 +85,60 @@ const JuegoPreguntas = () => {
     return {};
   };
 
-  const handleSiguientePregunta = () => {
+  const handleSiguientePregunta = async () => {
     if (respuestaSeleccionada === preguntaActual.respuestaCorrecta) {
       setPuntuacion(puntuacion + 1);
+      setPreguntasCorrectas(preguntasCorrectas + 1);
+    } else {
+      setPreguntasFalladas(preguntasFalladas + 1);
     }
+
+    setTiempoTotal(tiempoTotal+10-tiempoRestante);
+
+
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
-    if (indicePregunta + 1 < Preguntas.length) {
+    if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
+      setPreguntaActual(preguntas[indicePregunta]);
     } else {
+
+      if (preguntasCorrectas + preguntasFalladas > 0) {
+        setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
+      }
+
+      //Now we store the game in the user's DB
+      const username = sessionStorage.getItem('username');
+      const newGame = {
+        correctAnswers: preguntasCorrectas,
+        incorrectAnswers: preguntasFalladas,
+        points: puntuacion,
+        avgTime: tiempoMedio,
+      };
+
+      try {
+      const response = await fetch('http://localhost:8004/saveGame', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          game: newGame,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al guardar el juego');
+      }
+    } catch (error) {
+      console.error('Error al guardar el juego:', error);
+      // Manejar el error, por ejemplo, mostrando un mensaje al usuario
+    } finally {
       setJuegoTerminado(true);
     }
-  };
+  }
+};
 
   const handleRepetirJuego = () => {
     // Reiniciar el estado para repetir el juego
@@ -86,7 +157,7 @@ const JuegoPreguntas = () => {
         <div className="menuContainer">
           <h2>¡Juego terminado!</h2>
           <p>
-            Tu puntuación: {puntuacion}/{Preguntas.length}
+            Tu puntuación: {puntuacion}/{preguntas.length}
           </p>
           <button onClick={handleRepetirJuego}>Repetir Juego</button>
           <Link to="/home">Volver al Menú Principal</Link>
@@ -99,6 +170,9 @@ const JuegoPreguntas = () => {
   return (
     <>
       <Nav />
+      {isLoading? 
+      <span class="loader"></span>
+      : 
       <div className="questionContainer">
         <h2>Pregunta {indicePregunta + 1}:</h2>
         <p>{preguntaActual.pregunta}</p>
@@ -116,7 +190,7 @@ const JuegoPreguntas = () => {
         </div>
         <div className="timer">Tiempo restante: {tiempoRestante}</div>
         <div className="points">Puntuación: {puntuacion}</div>
-      </div>
+      </div> }
       <Footer />
     </>
   );

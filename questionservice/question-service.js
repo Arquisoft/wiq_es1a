@@ -1,5 +1,6 @@
 // user-service.js
 const express = require("express");
+const cors = require('cors');
 const bodyParser = require("body-parser");
 const cron = require("node-cron");
 const GeneratorChooser = require("./questionGen/GeneratorChooser");
@@ -12,6 +13,8 @@ const MAX_QUESTIONS = 10000;
 
 // Middleware to parse JSON in request body
 app.use(bodyParser.json());
+
+app.use(cors());
 
 app.set("json spaces", 40);
 

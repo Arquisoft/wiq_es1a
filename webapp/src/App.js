@@ -7,12 +7,20 @@ import WrongRoute from './pages/WrongRoute/WrongRoute.js';
 import './App.css';
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 
-function App() {
-  const [showLogin, setShowLogin] = useState(true);
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 
-  const handleToggleView = () => {
-    setShowLogin(!showLogin);
-  };
+//Autentificamos que el usuario este registrado en la aplicación
+//const [authenticated, setAuthenticated] = useState(false);
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/** Rutas públicas */}
+        <Route path='/' element={<Authenticate />} />
+
+        {/** Rutas privadas */}
+        <Route path='/home' element={<Home />} />
+        <Route path='/home/clasico' element={<Clasico />} />
 
   return (
     <BrowserRouter>
