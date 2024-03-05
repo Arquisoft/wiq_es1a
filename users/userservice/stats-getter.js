@@ -6,7 +6,7 @@ class StatsForUser {
     async getStatsForUser(username){
         try {
             const user = await User.findOne({ username: username });
-
+            
             if (!user) {
                 throw new Error('Usuario no encontrado');
             }
