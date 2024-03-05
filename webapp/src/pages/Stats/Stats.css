@@ -27,7 +27,10 @@ input, button, a{
 }
 
 body {
-    background-color: #ffffe5;
     font-family: "Times New Roman", serif;
 
+}
+
+h2{
+  text-align: center;
 }
