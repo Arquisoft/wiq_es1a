@@ -107,7 +107,7 @@ const Stats = () => {
             </tr>
             <tr>
               <td><strong>Promedio de Puntos:</strong></td>
-              <td>{stats.avgPoints}</td>
+              <td>{stats.avgPoints.toFixed(2)}</td>
              </tr>
             <tr>
               <td><strong>Puntos Totales:</strong></td>
@@ -123,11 +123,11 @@ const Stats = () => {
             </tr>
             <tr>
               <td><strong>Ratio Correctas/Incorrectas:</strong></td>
-              <td>{stats.ratioCorrectToIncorrect}</td>
+              <td>{stats.ratioCorrectToIncorrect.toFixed(2)}</td>
             </tr>
             <tr>
               <td><strong>Tiempo por pregunta (s):</strong></td>
-              <td>{stats.avgTime}</td>
+              <td>{stats.avgTime.toFixed(2)}</td>
             </tr>
           </table>
         </div>
