@@ -1,47 +1,56 @@
 const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
+const PORT = process.env.PORT || 5000;
 
-const rooms = new Map();
+app.use(bodyParser.json());
+app.use(cors());
 
-io.on('connection', (socket) => {
-    console.log('New client connected:', socket.id);
+// Objeto para almacenar las salas en memoria
+const rooms = {};
 
-    socket.on('joinRoom', (roomId) => {
-        if (!rooms.has(roomId)) {
-            rooms.set(roomId, []);
-        }
-        const players = rooms.get(roomId);
-        players.push(socket.id);
-        rooms.set(roomId, players);
-        socket.join(roomId);
-        io.to(roomId).emit('updatePlayers', players);
-    });
+// Ruta para crear una nueva sala
+app.get('/rooms/create', (req, res) => {
+    const { name } = req.body;
+    const roomId = generateRoomId();
 
-    socket.on('answer', ({ roomId, playerId, optionIndex }) => {
-        io.to(roomId).emit('answer', { playerId, optionIndex });
-    });
+    rooms[roomId] = { name, players: [], questions: [] };
 
-    socket.on('disconnect', () => {
-        console.log('Client disconnected:', socket.id);
-        rooms.forEach((players, roomId) => {
-            const index = players.indexOf(socket.id);
-            if (index !== -1) {
-                players.splice(index, 1);
-                io.to(roomId).emit('updatePlayers', players);
-                if (players.length === 0) {
-                    rooms.delete(roomId);
-                }
-            }
-        });
-    });
+    res.status(201).json({ roomId, name });
 });
 
-const PORT = process.env.PORT || 4000;
-server.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}`);
+app.get('/rooms/info/:roomId', (req, res) => {
+    const { roomId } = req.params;
+
+    if (!rooms[roomId]) {
+        res.status(404).json({ error: 'La sala no existe' });
+    } else {
+        const { name, players } = rooms[roomId];
+        res.status(200).json({ name, players });
+    }
+});
+
+app.get('/rooms/join/:roomId', (req, res) => {
+    const { roomId } = req.params;
+    const { playerName } = req.query;
+
+    if (!rooms[roomId]) {
+        res.status(404).json({ error: 'La sala no existe' });
+    } else {
+        rooms[roomId].players.push(playerName);
+        res.status(200).json({ message: `${playerName} se ha unido a la sala ${roomId}` });
+        console.log(`${playerName} se ha unido a la sala ${roomId}`)
+    }
+});
+
+// Función para generar un ID de sala único
+function generateRoomId() {
+    return Math.random().toString(36).substr(2, 6).toUpperCase();
+}
+
+// Iniciar el servidor
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

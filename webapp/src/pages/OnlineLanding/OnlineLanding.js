@@ -1,83 +1,104 @@
-import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Nav from "../../components/Nav/Nav";
+import Footer from "../../components/Footer/Footer";
 
-const socket = io('http://localhost:4000');
+function OnlineLanding() {
+  const [roomName, setRoomName] = useState("");
+  const [playerName, setPlayerName] = useState("");
+  const [roomIdInput, setRoomIdInput] = useState("");
+  const [roomId, setRoomId] = useState("");
+  const [players, setPlayers] = useState([]);
 
-const Game = () => {
-    const [roomId, setRoomId] = useState('');
-    const [players, setPlayers] = useState([]);
-    const [questionIndex, setQuestionIndex] = useState(0);
-    const [questions, setQuestions] = useState([
-        {
-            question: '¿Cuál es la capital de Francia?',
-            options: ['Londres', 'París', 'Madrid', 'Berlín'],
-            correctAnswer: 1
-        },
-        {
-            question: '¿Cuál es el río más largo del mundo?',
-            options: ['Amazonas', 'Nilo', 'Mississippi', 'Yangtsé'],
-            correctAnswer: 0
-        }
-    ]);
-    const [selectedOption, setSelectedOption] = useState(null);
+  useEffect(() => {
+    if (roomId) {
+      // Obtener información de la sala y jugadores cuando roomId cambie
+      axios
+        .get(`http://localhost:5000/rooms/info/${roomId}`)
+        .then((response) => {
+          setRoomName(response.data.name);
+          setPlayers(response.data.players);
+        })
+        .catch((error) =>
+          console.error("Error al obtener información de la sala:", error)
+        );
+    }
+  }, [roomId]);
 
-    useEffect(() => {
-        // Manejar la actualización de jugadores
-        socket.on('updatePlayers', (updatedPlayers) => {
-            setPlayers(updatedPlayers);
-        });
+  const handleCreateRoom = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/rooms/create", {
+        params: { name: roomName },
+      });
+      setRoomId(response.data.roomId);
+      alert("Sala creada exitosamente");
+    } catch (error) {
+      console.error("Error al crear la sala:", error);
+      alert("Hubo un error al crear la sala");
+    }
+  };
 
-        // Manejar la siguiente pregunta
-        socket.on('nextQuestion', () => {
-            setQuestionIndex(prevIndex => prevIndex + 1);
-            setSelectedOption(null);
-        });
+  const handleJoinRoom = async () => {
+    try {
+      await axios.get(`http://localhost:5000/rooms/join/${roomIdInput}`, {
+        params: { playerName },
+      });
+      setRoomId(roomIdInput);
+      alert(`Te has unido a la sala ${roomIdInput}`);
+    } catch (error) {
+      console.error("Error al unirse a la sala:", error);
+      alert("Hubo un error al unirse a la sala");
+    }
+  };
 
-        return () => {
-            socket.disconnect();
-        };
-    }, []);
-
-    const handleJoinRoom = () => {
-        socket.emit('joinRoom', roomId);
-    };
-
-    const handleAnswer = (optionIndex) => {
-        setSelectedOption(optionIndex);
-        socket.emit('answer', { roomId, playerId: socket.id, optionIndex });
-    };
-
-    return (
+  return (
+    <>
+      <Nav />
+      {roomId ? (
         <div>
-            <h2>Game</h2>
-            {!roomId ? (
-                <div>
-                    <input type="text" placeholder="ID de Sala" value={roomId} onChange={(e) => setRoomId(e.target.value)} />
-                    <button onClick={handleJoinRoom}>Unirse a la Sala</button>
-                </div>
-            ) : (
-                <div>
-                    <h3>Players:</h3>
-                    <ul>
-                        {players.map((player, index) => (
-                            <li key={index}>{player}</li>
-                        ))}
-                    </ul>
-                    {questions.length > 0 && questionIndex < questions.length && (
-                        <div>
-                            <h3>{questions[questionIndex].question}</h3>
-                            <ul>
-                                {questions[questionIndex].options.map((option, index) => (
-                                    <li key={index} onClick={() => handleAnswer(index)}>{option}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
-                    {selectedOption !== null && <p>Waiting for next question...</p>}
-                </div>
-            )}
+          <h2>Lobby de la Sala (ID: {roomId})</h2>
+          <p>Sala: {roomName}</p>
+          <p>Jugadores:</p>
+          <ul>
+            {players.map((player, index) => (
+              <li key={index}>{player}</li>
+            ))}
+          </ul>
         </div>
-    );
-};
+      ) : (
+        <div>
+          <h1>Quiz Game</h1>
+          <div>
+            <h2>Crear Sala</h2>
+            <input
+              type="text"
+              value={roomName}
+              onChange={(e) => setRoomName(e.target.value)}
+              placeholder="Nombre de la sala"
+            />
+            <button onClick={handleCreateRoom}>Crear Sala</button>
+          </div>
+          <div>
+            <h2>Unirse a una Sala</h2>
+            <input
+              type="text"
+              value={roomIdInput}
+              onChange={(e) => setRoomIdInput(e.target.value)}
+              placeholder="ID de la sala"
+            />
+            <input
+              type="text"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value)}
+              placeholder="Nombre del jugador"
+            />
+            <button onClick={handleJoinRoom}>Unirse a la Sala</button>
+          </div>
+        </div>
+      )}
+      <Footer />
+    </>
+  );
+}
 
-export default Game;
+export default OnlineLanding;
