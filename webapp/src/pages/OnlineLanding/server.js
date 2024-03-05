@@ -13,10 +13,10 @@ const rooms = {};
 
 // Ruta para crear una nueva sala
 app.get('/rooms/create', (req, res) => {
-    const { name } = req.body;
+    const { name, playerName } = req.query;
     const roomId = generateRoomId();
 
-    rooms[roomId] = { name, players: [], questions: [] };
+    rooms[roomId] = { name, players: [playerName], questions: [] };
 
     res.status(201).json({ roomId, name });
 });
@@ -41,7 +41,6 @@ app.get('/rooms/join/:roomId', (req, res) => {
     } else {
         rooms[roomId].players.push(playerName);
         res.status(200).json({ message: `${playerName} se ha unido a la sala ${roomId}` });
-        console.log(`${playerName} se ha unido a la sala ${roomId}`)
     }
 });
 

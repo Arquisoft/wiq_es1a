@@ -5,7 +5,6 @@ import Footer from "../../components/Footer/Footer";
 
 function OnlineLanding() {
   const [roomName, setRoomName] = useState("");
-  const [playerName, setPlayerName] = useState("");
   const [roomIdInput, setRoomIdInput] = useState("");
   const [roomId, setRoomId] = useState("");
   const [players, setPlayers] = useState([]);
@@ -28,7 +27,7 @@ function OnlineLanding() {
   const handleCreateRoom = async () => {
     try {
       const response = await axios.get("http://localhost:5000/rooms/create", {
-        params: { name: roomName },
+        params: { name: roomName, playerName: localStorage.getItem('username') },
       });
       setRoomId(response.data.roomId);
       alert("Sala creada exitosamente");
@@ -41,7 +40,7 @@ function OnlineLanding() {
   const handleJoinRoom = async () => {
     try {
       await axios.get(`http://localhost:5000/rooms/join/${roomIdInput}`, {
-        params: { playerName },
+        params: { playerName: localStorage.getItem('username') },
       });
       setRoomId(roomIdInput);
       alert(`Te has unido a la sala ${roomIdInput}`);
@@ -85,12 +84,6 @@ function OnlineLanding() {
               value={roomIdInput}
               onChange={(e) => setRoomIdInput(e.target.value)}
               placeholder="ID de la sala"
-            />
-            <input
-              type="text"
-              value={playerName}
-              onChange={(e) => setPlayerName(e.target.value)}
-              placeholder="Nombre del jugador"
             />
             <button onClick={handleJoinRoom}>Unirse a la Sala</button>
           </div>
