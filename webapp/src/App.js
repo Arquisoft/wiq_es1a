@@ -6,7 +6,7 @@ import Bateria from './pages/Bateria/Bateria.js';
 import WrongRoute from './pages/WrongRoute/WrongRoute.js';
 import Stats from './pages/Stats/Stats.js';
 import './App.css';
-import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
 function App() {
   return (

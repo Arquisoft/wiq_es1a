@@ -30,20 +30,14 @@ const JuegoPreguntas = () => {
       .then((response) => response.json())
       .then((data) => {
         setPreguntas(data);
-        //setIsLoading(false);
+        setPreguntaActual(data[0]);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error al obtener las preguntas:', error);
         setIsLoading(false);
       });
   }, []);
-
-  useEffect(() => {
-    if (preguntas && preguntas.length > 0) {
-      setPreguntaActual(preguntas[0]);
-      setIsLoading(false);
-    }
-  }, [preguntas]);
 
   useEffect(() => {
     if (tiempoRestante === 0) {
@@ -96,12 +90,11 @@ const JuegoPreguntas = () => {
 
     setTiempoTotal(tiempoTotal+10-tiempoRestante);
 
-
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
-      setPreguntaActual(preguntas[indicePregunta]);
+      setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
 
       try {

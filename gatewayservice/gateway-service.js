@@ -18,6 +18,8 @@ app.use(express.json());
 const metricsMiddleware = promBundle({includeMethod: true});
 app.use(metricsMiddleware);
 
+app.set("json spaces", 40);
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
