@@ -10,7 +10,6 @@ A ranking with the maximum score of the user and can be compared with other user
 
 * MongoDB: MongoDB is an open-source NoSQL database that uses a document-based data model for information storage and retrieval.
 * React JS: It's a framework created by Facebook that's widely used to create user interface components. Chosen for the large volume of documentation and the fact that it is the framework used during the previous courses.
-* WikiData: It's a free knowledge base modified by humans as well as machines, and it's where we'll get our questions from.
 * Microsoft Azure: A cloud computing platform that provides infrastructure, platform, and software-as-a-service services to host, manage, and scale online applications and services.
 
 === Design
