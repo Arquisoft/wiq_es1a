@@ -35,6 +35,6 @@ const statsClasicoSchema = new mongoose.Schema({
       },
 });
 
-const StatsClasico = mongoose.model('StatsClasico', userSchema);
+const StatsClasico = mongoose.model('StatsClasico', statsClasicoSchema);
 
 module.exports = StatsClasico
