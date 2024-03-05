@@ -16,7 +16,7 @@ describe('App Routing', () => {
         </Routes>
       </BrowserRouter>
     );
-    expect(screen.getByText(/Authenticate/i)).toBeInTheDocument();
+    expect(screen.getByText(/Regístrate/i)).toBeInTheDocument();
   });
 
   it('renders Home component when path is /home', () => {
@@ -27,7 +27,7 @@ describe('App Routing', () => {
         </Routes>
       </BrowserRouter>
     );
-    expect(screen.getByText(/Home/i)).toBeInTheDocument();
+    expect(screen.getByText(/Bienvenido/i)).toBeInTheDocument();
   });
 
   it('renders Clasico component when path is /home/clasico', () => {
@@ -38,7 +38,7 @@ describe('App Routing', () => {
         </Routes>
       </BrowserRouter>
     );
-    expect(screen.getByText(/Clasico/i)).toBeInTheDocument();
+    expect(screen.getByText(/Pregunta/i)).toBeInTheDocument();
   });
 
   it('renders Bateria component when path is /home/bateria', () => {
@@ -49,7 +49,7 @@ describe('App Routing', () => {
         </Routes>
       </BrowserRouter>
     );
-    expect(screen.getByText(/Bateria/i)).toBeInTheDocument();
+    expect(screen.getByText(/Pregunta/i)).toBeInTheDocument();
   });
 
   it('renders Stats component when path is /stats', () => {
@@ -60,7 +60,7 @@ describe('App Routing', () => {
         </Routes>
       </BrowserRouter>
     );
-    expect(screen.getByText(/Stats/i)).toBeInTheDocument();
+    expect(screen.getByText(/Estadísticas de Usuario/i)).toBeInTheDocument();
   });
 
   it('renders WrongRoute component when path is not recognized', () => {
