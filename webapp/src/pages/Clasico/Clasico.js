@@ -104,8 +104,6 @@ const JuegoPreguntas = () => {
       setPreguntaActual(preguntas[indicePregunta]);
     } else {
 
-      try {
-
         if (preguntasCorrectas + preguntasFalladas > 0) {
           setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
         }
@@ -120,28 +118,26 @@ const JuegoPreguntas = () => {
           avgTime: tiempoMedio,
         };
 
-      const response = await fetch('http://localhost:8001/userSaveGame', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newGame),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error al guardar el juego');
-      }
-
-    } catch (error) {
-      console.error('Error al guardar el juego:', error);
-      // Manejar el error, por ejemplo, mostrando un mensaje al usuario
-    } finally {
-      setJuegoTerminado(true);
-    }
-
-    
-  }
-};
+        fetch('http://localhost:8001/userSaveGame', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newGame),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Error al guardar el juego');
+            }
+            // Si todo va bien, marcamos el juego como terminado
+            setJuegoTerminado(true);
+          })
+          .catch((error) => {
+            console.error('Error al guardar el juego:', error);
+            // Manejar el error, por ejemplo, mostrando un mensaje al usuario
+          });
+        }
+    };
 
   const handleRepetirJuego = () => {
     // Reiniciar el estado para repetir el juego
