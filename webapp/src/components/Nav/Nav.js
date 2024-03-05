@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import './Nav.css';
 
 const Nav = () => {
+    const Logout = () =>{
+        localStorage.removeItem('token')
+    }
     return(
         <nav>
             <h1 className="logo">WIQ!</h1>
@@ -11,6 +14,7 @@ const Nav = () => {
                 <li><Link to="/sobre">Sobre nosotros</Link></li>
                 <li><Link to="/stats">Stats</Link></li>
             </ul>
+            <button onClick={() => Logout()}></button>
         </nav>
     );
 }
