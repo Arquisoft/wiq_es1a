@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const axios = require('axios');
+const StatsClasico = require("./model/stats_clasico_model");
 const app = express();
 const port = 8004;
 
@@ -37,17 +38,52 @@ app.post("/saveGame", async (req, res) => {
   }
 });
 
-// Ruta para obtener estadísticas
+app.post("/saveGame", async (req, res) => {
+  try{
+    const username = req.body.username;
+    const gamemode = req.body.gamemode;
+    const gameData = req.body.gameData;
+
+    if(gamemode==="clasico"){
+      const stats = await StatsClasico.findOne({ username });
+
+      if (!stats) {
+        // Si no existen estadísticas, crear un nuevo documento
+        stats = new StatsClasico({
+          username: username,
+          nGamesPlayed: 1,
+          avgPoints: gameData.points,
+          totalPoints: gameData.points,
+          totalCorrectQuestions: gameData.correctAnswers,
+          totalIncorrectQuestions: gameData.incorrectAnswers,
+          ratioCorrectToIncorrect: gameData.correctAnswers / gameData.incorrectAnswers,
+          avgTime: gameData.avgTime,
+        });
+      } else {
+        stats = statsGetter.calculateNewStatsClasico(gameData);
+      }
+
+      await stats.save();
+  
+      res.json({ message: "Partida guardada exitosamente" });
+
+    }
+  }
+   catch (error) {
+    res.status(400).json({ error: "Error al actualizar estadísticas"});
+  }
+});
+
 app.get("/stats", async (req, res) => {
+  const gamemode = await StatsClasico.findOne({ gamemode:req.query.gamemode });
+  if (!gamemode) {
+    return res.status(404).json({ error: "Gamemode no encontrado" });
+  }
   try {
-    const username = req.query.user;
-
-    // Hacer una solicitud al servicio user-service para obtener estadísticas
-    const response = await axios.get(`http://localhost:8001/getstats?user=${username}`);
-
-    res.json(response.data);
+    var data = await statsGetter.getStatsForUser(req.query.user,gamemode);
+    res.json(data);
   } catch (error) {
-    res.status(400).json({ error: `Error al obtener las estadísticas: ${error.message}`});
+    res.status(400).json({ error: "Error al obtener las estadísticas" });
   }
 });
 

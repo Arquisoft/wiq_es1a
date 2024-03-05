@@ -8,13 +8,14 @@ import './Stats.css';
 const Stats = () => {
   const [username, setUsername] = useState(localStorage.username);
   const [stats, setStats] = useState(null);
+  const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
 
   const fetchStats = () => {
     setIsLoading(true);
-    fetch(`http://localhost:8001/getstats?user=${username}`)
+    fetch(`http://localhost:8004/stats?user=${username}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);
@@ -28,7 +29,7 @@ const Stats = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8001/getstats?user=${username}`)
+    fetch(`http://localhost:8004/stats?user=${username}?gamemode=${gamemode}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);
@@ -94,9 +95,10 @@ const Stats = () => {
             <p>El usuario no ha jugado ninguna partida.</p>
           </div>
         )}
-      {stats && (
-        <div>
-          <table>
+        {stats && gamemode === "clasico" && (
+          <div>
+            <h2><em>Estadísticas de Usuario - Modo Clásico</em></h2>
+            <table>
             <tr>
               <td><strong>Usuario:</strong></td>
               <td>{stats.username}</td>
@@ -130,8 +132,9 @@ const Stats = () => {
               <td>{stats.avgTime.toFixed(2)}</td>
             </tr>
           </table>
-        </div>
-      )}
+          </div>
+        )}
+      
     </div>
     <Footer />
     </>

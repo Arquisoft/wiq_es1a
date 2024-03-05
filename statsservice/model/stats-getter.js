@@ -2,48 +2,57 @@ const User = require('../../users/userservice/user-model.js');
 
 class StatsForUser {
 
-    async getStatsForUser(username){
+    async getStatsForUser(username,gamemode){
+        const statsJSON=null;
+            if(gamemode==="clasico"){
+                statsJSON = await getStatsClasico(username);
+            }
+        return statsJSON;
+            
+    }
+
+    async getStatsClasico(username){
         try {
-            const user = await User.findOne({ username: username });
-
-            if (!user) {
-                throw new Error('Usuario no encontrado');
+            const stats = await StatsClasico.findOne({ username });
+    
+            if (stats) {
+                return {
+                    username: stats.username,
+                    nGamesPlayed: stats.nGamesPlayed,
+                    avgPoints: stats.avgPoints,
+                    totalPoints: stats.totalPoints,
+                    totalCorrectQuestions: stats.totalCorrectQuestions,
+                    totalIncorrectQuestions: stats.totalIncorrectQuestions,
+                    ratioCorrectToIncorrect: stats.ratioCorrectToIncorrect,
+                    avgTime: stats.avgTime
+                };
+            } else {
+                return null; // Si no se encuentran estadísticas para el usuario
             }
-
-            const partidas = user.games;
-
-            var nGamesPlayed = partidas.length;
-            var totalPoints = 0;
-            var totalCorrectQuestions = 0;
-            var totalIncorrectQuestions = 0;
-
-            for (const partida of partidas){
-                totalPoints += partida.points;
-                totalCorrectQuestions += partida.correctAnswers;
-                totalIncorrectQuestions += partida.incorrectAnswers;
-            }
-
-            const avgPoints = nGamesPlayed > 0 ?
-             totalPoints / nGamesPlayed : 0;
-
-            const ratioCorrectToIncorrect = totalIncorrectQuestions !== 0 ?
-             totalCorrectQuestions / totalIncorrectQuestions : totalCorrectQuestions;
-
-            const statsJSON = {
-                username: username,
-                nGamesPlayed: nGamesPlayed,
-                avgPoints: avgPoints,
-                totalPoints: totalPoints,
-                totalCorrectQuestions: totalCorrectQuestions,
-                totalIncorrectQuestions: totalIncorrectQuestions,
-                ratioCorrectToIncorrect: ratioCorrectToIncorrect
-            };
-
-            return statsJSON;
         } catch (error) {
-            console.error('Error al obtener las estadísticas del usuario:', error);
+            console.error('Error al obtener estadísticas:', error);
             throw error;
         }
+    }
+
+    calculateStatsClasico(gameData){
+        const totalGamesPlayed = gameData.nGamesPlayed + 1;
+        const newAvgPoints = (gameData.avgPoints * gameData.nGamesPlayed + gameData.points) / totalGamesPlayed;
+        const newTotalPoints = gameData.totalPoints + gameData.points;
+        const newTotalCorrectQuestions = gameData.totalCorrectQuestions + gameData.correctAnswers;
+        const newTotalIncorrectQuestions = gameData.totalIncorrectQuestions + gameData.incorrectAnswers;
+        const newRatioCorrectToIncorrect = newTotalCorrectQuestions / newTotalIncorrectQuestions;
+        const newAvgTime = (gameData.avgTime * gameData.nGamesPlayed + gameData.avgTime) / totalGamesPlayed;
+
+        return {
+            nGamesPlayed: totalGamesPlayed,
+            avgPoints: newAvgPoints,
+            totalPoints: newTotalPoints,
+            totalCorrectQuestions: newTotalCorrectQuestions,
+            totalIncorrectQuestions: newTotalIncorrectQuestions,
+            ratioCorrectToIncorrect: newRatioCorrectToIncorrect,
+            avgTime: newAvgTime
+        };
     }
 }
 

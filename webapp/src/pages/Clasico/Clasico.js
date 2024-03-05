@@ -111,13 +111,16 @@ const JuegoPreguntas = () => {
         const username = localStorage.getItem('username');
         const newGame = {
           username: username,
-          correctAnswers: preguntasCorrectas,
-          incorrectAnswers: preguntasFalladas,
-          points: puntuacion,
-          avgTime: tiempoMedio,
+          gameMode: "clasico",
+          gameData: {
+            correctAnswers: preguntasCorrectas,
+            incorrectAnswers: preguntasFalladas,
+            points: puntuacion,
+            avgTime: tiempoMedio,
+          },
         };
 
-        fetch('http://localhost:8001/userSaveGame', {
+        fetch('http://localhost:8004/saveGame', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
