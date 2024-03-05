@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./Clasico.css";
-import Preguntas from "../../components/Preguntas";
 import Nav from '../../components/Nav/Nav.js';
 import { Link } from 'react-router-dom';
 import Footer from "../../components/Footer/Footer.js";
-import axios from 'axios';
 
 
 const JuegoPreguntas = () => {

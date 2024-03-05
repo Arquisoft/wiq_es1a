@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Authenticate from './pages/Authenticate/Authenticate.js';
 import Home from './pages/Home/Home.js';
 import Clasico from './pages/Clasico/Clasico.js';
