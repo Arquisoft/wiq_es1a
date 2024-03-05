@@ -80,7 +80,7 @@ const Stats = () => {
     <>
     <Nav />
     <div>
-      <h2>Estadísticas de Usuario</h2>
+      <h2><em>Estadísticas de Usuario</em></h2>
       <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
       <input
         type="text"
