@@ -15,14 +15,14 @@ const Stats = () => {
 
   const fetchStats = () => {
     setIsLoading(true);
-    fetch(`http://localhost:8004/stats?user=${username}`)
+    fetch(`http://localhost:8004/stats?user=${username}?gamemode=${gamemode}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error al obtener las preguntas:', error);
+        console.error('Error al obtener las estadísticas:', error);
         setError(error.message || 'Ha ocurrido un error al obtener las estadísticas');
         setIsLoading(false);
       });
@@ -36,7 +36,7 @@ const Stats = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error al obtener las preguntas:', error);
+        console.error('Error al obtener las estadisticas:', error);
         setIsLoading(false);
       });
   }, [username]);

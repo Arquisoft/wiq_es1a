@@ -1,4 +1,4 @@
-const User = require('../../users/userservice/user-model.js');
+const StatsClasico = require('./stats-clasico-model.js');
 
 class StatsForUser {
 

@@ -5,7 +5,8 @@ async function fetchStats() {
   const username = localStorage.getItem('username');
   const url = 'http://localhost:8004/getstats';
   const params = {
-    user: username
+    user: username,
+    gamemode: "clasico"
   };
 
   try {

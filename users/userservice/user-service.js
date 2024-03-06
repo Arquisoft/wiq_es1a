@@ -4,9 +4,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const User = require('./user-model');
-const StatsForUser = require("./stats-getter.js");
-
-const statsGetter= new StatsForUser();
 
 const app = express();
 const port = 8001;

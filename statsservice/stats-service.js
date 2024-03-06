@@ -3,7 +3,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const axios = require('axios');
-const StatsClasico = require("./model/stats_clasico_model");
+const StatsClasico = require("./model/stats-clasico-model.js");
+const StatsForUser = require("./model/stats-getter.js");
+
+const statsGetter= new StatsForUser();
 const app = express();
 const port = 8004;
 
@@ -12,31 +15,6 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.set("json spaces", 40);
-
-app.post("/saveGame", async (req, res) => {
-  try {
-    const { username, correctAnswers, incorrectAnswers, points, avgTime } = req.body;
-
-    // Hacer una solicitud al servicio user-service para guardar el juego
-    const response = await axios.post('http://localhost:8001/userSaveGame', {
-      username,
-      correctAnswers,
-      incorrectAnswers,
-      points,
-      avgTime
-    });
-
-    res.json(response.data);
-
-    user.games.push(newGame);
-
-    await user.save();
-
-    res.json({ message: "Juego guardado exitosamente" });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-});
 
 app.post("/saveGame", async (req, res) => {
   try{
@@ -75,15 +53,12 @@ app.post("/saveGame", async (req, res) => {
 });
 
 app.get("/stats", async (req, res) => {
-  const gamemode = await StatsClasico.findOne({ gamemode:req.query.gamemode });
-  if (!gamemode) {
-    return res.status(404).json({ error: "Gamemode no encontrado" });
-  }
   try {
-    var data = await statsGetter.getStatsForUser(req.query.user,gamemode);
+    var data = await statsGetter.getStatsForUser(req.query.user,req.query.gamemode);
     res.json(data);
   } catch (error) {
-    res.status(400).json({ error: "Error al obtener las estadísticas" });
+    
+    res.status(400).json({ error: "Error al obtener las estadísticas:"+error.message });
   }
 });
 
