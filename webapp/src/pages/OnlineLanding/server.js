@@ -1,55 +1,50 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const http = require('http');
+const socketIo = require('socket.io');
+
+const PORT = process.env.PORT || 4000;
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
-app.use(bodyParser.json());
-app.use(cors());
-
-// Objeto para almacenar las salas en memoria
-const rooms = {};
-
-// Ruta para crear una nueva sala
-app.get('/rooms/create', (req, res) => {
-    const { name, playerName } = req.query;
-    const roomId = generateRoomId();
-
-    rooms[roomId] = { name, players: [playerName], questions: [] };
-
-    res.status(201).json({ roomId, name });
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
 });
 
-app.get('/rooms/info/:roomId', (req, res) => {
-    const { roomId } = req.params;
+// Almacenar las salas de chat y los usuarios por sala
+const rooms = new Map();
 
-    if (!rooms[roomId]) {
-        res.status(404).json({ error: 'La sala no existe' });
-    } else {
-        const { name, players } = rooms[roomId];
-        res.status(200).json({ name, players });
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  // Unirse a una sala
+  socket.on('joinRoom', (room) => {
+    // Crear la sala si no existe
+    if (!rooms.has(room)) {
+      rooms.set(room, new Set());
     }
+    rooms.get(room).add(socket.id);
+    socket.join(room);
+    console.log(`User ${socket.id} joined room ${room}`);
+  });
+
+  // Enviar mensaje a una sala
+  socket.on('message', ({ room, message }) => {
+    io.to(room).emit('message', message);
+  });
+
+  // Desconexión del usuario
+  socket.on('disconnect', () => {
+    rooms.forEach((users, room) => {
+      if (users.delete(socket.id)) {
+        console.log(`User ${socket.id} left room ${room}`);
+      }
+    });
+  });
 });
 
-app.get('/rooms/join/:roomId', (req, res) => {
-    const { roomId } = req.params;
-    const { playerName } = req.query;
-
-    if (!rooms[roomId]) {
-        res.status(404).json({ error: 'La sala no existe' });
-    } else {
-        rooms[roomId].players.push(playerName);
-        res.status(200).json({ message: `${playerName} se ha unido a la sala ${roomId}` });
-    }
-});
-
-// Función para generar un ID de sala único
-function generateRoomId() {
-    return Math.random().toString(36).substr(2, 6).toUpperCase();
-}
-
-// Iniciar el servidor
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
