@@ -18,9 +18,10 @@ const JuegoPreguntas = () => {
     fetch("http://localhost:8003/questions?tematica=all&n=10000")
       .then((response) => {
         if (!response.ok) {
-          navigate("/home");
+          navigate("/home?error=1");
+          return;
         }
-        response.json();
+        return response.json();
       })
       .then((data) => {
         setPreguntas(data);
@@ -29,7 +30,7 @@ const JuegoPreguntas = () => {
       })
       .catch((error) => {
         console.error("Error al obtener las preguntas:", error);
-        navigate("/home");
+        navigate("/home?error=1");
       });
   }, []);
 
