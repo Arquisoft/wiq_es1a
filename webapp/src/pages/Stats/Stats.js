@@ -81,72 +81,63 @@ const Stats = () => {
 
   return (
     <>
-      <Nav />
-      <div>
-        <h2>Estadísticas de Usuario</h2>
-        <label htmlFor="usernameInput">
-          {" "}
-          <strong>Nombre de Usuario: </strong>
-        </label>
-        <input
-          type="text"
-          id="usernameInput"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-        {stats === null && !isLoading && (
+    <Nav />
+    <div>
+      <h2>Estadísticas de Usuario</h2>
+      <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
+      <input
+        type="text"
+        id="usernameInput"
+        value={username}
+        onChange={handleUsernameChange}
+      />
+      {stats === null && !isLoading && (
           <div>
             <p>El usuario no ha jugado ninguna partida.</p>
           </div>
         )}
-        {stats && (
-          <div>
-            <hr></hr>
-            <p>
-              <strong>Usuario: </strong>
-              {stats.username}
-            </p>
-            <pre>
-              {" "}
-              <strong>Juegos Jugados: </strong>
-              {stats.nGamesPlayed}
-            </pre>
-            <pre>
-              {" "}
-              <strong>Promedio de Puntos: </strong>
-              {stats.avgPoints}
-            </pre>
-            <pre>
-              {" "}
-              <strong>Puntos Totales: </strong>
-              {stats.totalPoints}
-            </pre>
-            <pre>
-              {" "}
-              <strong>Preguntas Correctas Totales: </strong>
-              {stats.totalCorrectQuestions}
-            </pre>
-            <pre>
-              {" "}
-              <strong>Preguntas Incorrectas Totales: </strong>
-              {stats.totalIncorrectQuestions}
-            </pre>
-            <pre>
-              {" "}
-              <strong>Ratio Correctas/Incorrectas: </strong>
-              {stats.ratioCorrectToIncorrect}
-            </pre>
-            <pre>
-              {" "}
-              <strong>Tiempo por pregunta (s): </strong>
-              {stats.avgTime}
-            </pre>
-            <hr></hr>
-          </div>
-        )}
-      </div>
-      <Footer />
+      {stats && (
+        <div>
+          <table>
+            <tr>
+              <td><strong>Usuario:</strong></td>
+              <td>{stats.username}</td>
+            </tr>
+            <tr>
+              <td><strong>Juegos Jugados:</strong></td>
+              <td>{stats.nGamesPlayed}</td>
+            </tr>
+            <tr>
+              <td><strong>Promedio de Puntos:</strong></td>
+              <td>{stats.avgPoints.toFixed(2)}</td>
+             </tr>
+            <tr>
+              <td><strong>Puntos Totales:</strong></td>
+              <td>{stats.totalPoints}</td>
+            </tr>
+            <tr>
+              <td><strong>Preguntas Correctas Totales:</strong></td>
+              <td>{stats.totalCorrectQuestions}</td>
+            </tr>
+            <tr>
+              <td><strong>Preguntas Incorrectas Totales:</strong></td>
+              <td>{stats.totalIncorrectQuestions}</td>
+            </tr>
+            <tr>
+              <td><strong>Ratio Correctas/Incorrectas:</strong></td>
+              <td>{stats.ratioCorrectToIncorrect.toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td><strong>Tiempo por pregunta (s):</strong></td>
+              <td>{stats.avgTime.toFixed(2)}</td>
+            </tr>
+          </table>
+        </div>
+      )}
+    </div>
+    <Footer />
     </>
+    
   );
 };
 
