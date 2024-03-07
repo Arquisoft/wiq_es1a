@@ -33,6 +33,7 @@ const JuegoPreguntas = () => {
       })
       .catch((error) => {
         console.error("Error al obtener las preguntas:", error);
+        alert("Hubo un error al cargar las preguntas");
         navigate("/home");
       });
   }, []);
