@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const JuegoPreguntas = () => {
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
-  const [tiempoRestante, setTiempoRestante] = useState(10);
+  const [tiempoRestante, setTiempoRestante] = useState(180);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const preguntaActual = Preguntas[indicePregunta];
 

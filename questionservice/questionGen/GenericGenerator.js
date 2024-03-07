@@ -145,8 +145,8 @@ class GenericGenerator {
         questionObj.correcta = this.#dateFormatter(questionObj.correcta);
         break;
       case "num":
-        questionObj.respuestas = questionObj.respuestas.map(x => Math.floor(x));
-        questionObj.correcta = Math.floor(questionObj.correcta);
+        questionObj.respuestas = questionObj.respuestas.map(x => parseFloat(x).toFixed(2));
+        questionObj.correcta = parseFloat(questionObj.correcta).toFixed(2);
         break;
       default:
         break;
