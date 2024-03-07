@@ -11,7 +11,7 @@ const JuegoPreguntas = () => {
   const [tiempoRestante, setTiempoRestante] = useState(180);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [preguntas, setPreguntas] = useState([]);
-  const [preguntaActual, setPreguntaActual] = useState("");
+  var preguntaActual = preguntas[indicePregunta];
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const JuegoPreguntas = () => {
       })
       .then((data) => {
         setPreguntas(data);
-        setPreguntaActual(data[0]);
+        preguntaActual = data[0];
         setIsLoading(false);
       })
       .catch((error) => {
@@ -35,10 +35,7 @@ const JuegoPreguntas = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-    if (tiempoRestante === 0 || indicePregunta === preguntas.length) {
+    if (tiempoRestante === 0) {
       setJuegoTerminado(true);
     }
     const timer = setInterval(() => {
@@ -66,16 +63,11 @@ const JuegoPreguntas = () => {
     setJuegoTerminado(false);
   };
 
-  if (juegoTerminado) {
+  if (isLoading) {
     return (
       <>
         <Nav />
-        <div className="menuContainer">
-          <h2>¡Juego terminado!</h2>
-          <p>Tu puntuación: {puntuacion}</p>
-          <button onClick={handleRepetirJuego}>Repetir Juego</button>
-          <Link to="/home">Volver al Menú Principal</Link>
-        </div>
+        <span class="loader"></span>
         <Footer />
       </>
     );
@@ -84,8 +76,13 @@ const JuegoPreguntas = () => {
   return (
     <>
       <Nav />
-      {isLoading ? (
-        <span class="loader"></span>
+      {juegoTerminado ? (
+        <div className="menuContainer">
+        <h2>¡Juego terminado!</h2>
+        <p>Tu puntuación: {puntuacion}</p>
+        <button onClick={handleRepetirJuego}>Repetir Juego</button>
+        <Link to="/home">Volver al Menú Principal</Link>
+      </div>
       ) : (
         <div className="questionContainer">
           <h2>Pregunta {indicePregunta + 1}:</h2>
