@@ -16,9 +16,9 @@ const Home = () => {
         <ul>
           <Link to="clasico">Clásico</Link>
           <Link to="bateria">Batería de sabios</Link>
-          <Link to="descartando">Descartando</Link>
+          {/* <Link to="descartando">Descartando</Link>
           <Link to="pregunta">La pregunta caliente</Link>
-          <Link to="descubriendo">Descubriendo ciudades</Link>
+          <Link to="descubriendo">Descubriendo ciudades</Link> */}
         </ul>
       </div>
       <Footer />
