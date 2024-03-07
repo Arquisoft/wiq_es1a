@@ -102,7 +102,7 @@ const JuegoPreguntas = () => {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta]);
     } else {
-
+        console.log("hola");
         if (preguntasCorrectas + preguntasFalladas > 0) {
           setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
         }
@@ -128,15 +128,17 @@ const JuegoPreguntas = () => {
           body: JSON.stringify(newGame),
         })
           .then((response) => {
+            
             if (!response.ok) {
+              console.log("throw");
               throw new Error('Error al guardar el juego');
             }
-            // Si todo va bien, marcamos el juego como terminado
+            console.log("terminado");
             setJuegoTerminado(true);
           })
           .catch((error) => {
             console.error('Error al guardar el juego:', error);
-            // Manejar el error, por ejemplo, mostrando un mensaje al usuario
+            console.log("errorguardar");
           });
         }
     };
