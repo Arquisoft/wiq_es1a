@@ -128,7 +128,9 @@ class GenericGenerator {
       if (
         !questionObj.respuestas.includes(prop) &&
         !entidad[propiedadPregunta].includes(prop) &&
-        !/^Q\d+/.test(prop)
+        !/^Q\d+/.test(prop) &&
+        entidadLabel != prop
+
       ) {
         questionObj.respuestas.push(prop);
       }
