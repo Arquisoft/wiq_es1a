@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./Bateria.css";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
-import Preguntas from "./prueba";
 import { Link, useNavigate } from "react-router-dom";
 
 const JuegoPreguntas = () => {
@@ -17,7 +16,12 @@ const JuegoPreguntas = () => {
 
   useEffect(() => {
     fetch("http://localhost:8003/questions?tematica=all&n=10000")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          navigate("/home");
+        }
+        response.json();
+      })
       .then((data) => {
         setPreguntas(data);
         setPreguntaActual(data[0]);
@@ -25,16 +29,15 @@ const JuegoPreguntas = () => {
       })
       .catch((error) => {
         console.error("Error al obtener las preguntas:", error);
-        alert("Hubo un error al cargar las preguntas");
         navigate("/home");
       });
   }, []);
 
   useEffect(() => {
-    if(isLoading){
-      return
+    if (isLoading) {
+      return;
     }
-    if (tiempoRestante === 0 || indicePregunta === Preguntas.length) {
+    if (tiempoRestante === 0 || indicePregunta === preguntas.length) {
       setJuegoTerminado(true);
     }
     const timer = setInterval(() => {
@@ -47,7 +50,7 @@ const JuegoPreguntas = () => {
     if (respuesta === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
     }
-    if (indicePregunta + 1 < Preguntas.length) {
+    if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
     } else {
       setJuegoTerminado(true);

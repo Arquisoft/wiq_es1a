@@ -7,6 +7,7 @@ const GeneratorChooser = require("./questionGen/GeneratorChooser");
 
 const app = express();
 const port = 8003;
+let generadoresCargados = false;
 
 const gen = new GeneratorChooser();
 const MAX_QUESTIONS = 10000;
@@ -15,6 +16,13 @@ const MAX_QUESTIONS = 10000;
 app.use(bodyParser.json());
 
 app.use(cors());
+
+app.use((req, res, next) => {
+  if (!generadoresCargados) {
+    return res.status(500).json({ error: "Los generadores de preguntas aún no se han cargado. Por favor, inténtalo de nuevo más tarde." });
+  }
+  next();
+});
 
 app.set("json spaces", 40);
 
@@ -39,6 +47,7 @@ const server = app.listen(port, async () => {
   gen.loadGenerators()
       .then(() => {
         console.log("Generators loaded successfully!");
+        generadoresCargados = true;
       })
       .catch((error) => {
         console.error("Error al cargar los generadores de preguntas:", error);

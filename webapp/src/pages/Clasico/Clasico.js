@@ -25,7 +25,12 @@ const JuegoPreguntas = () => {
 
   useEffect(() => {
     fetch("http://localhost:8003/questions?tematica=all&n=10")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          navigate("/home");
+        }
+        response.json();
+      })
       .then((data) => {
         setPreguntas(data);
         setPreguntaActual(data[0]);
@@ -33,7 +38,6 @@ const JuegoPreguntas = () => {
       })
       .catch((error) => {
         console.error("Error al obtener las preguntas:", error);
-        alert("Hubo un error al cargar las preguntas");
         navigate("/home");
       });
   }, []);
