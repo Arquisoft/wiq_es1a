@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Clasico.css";
-import Nav from '../../components/Nav/Nav.js';
-import { Link } from 'react-router-dom';
+import Nav from "../../components/Nav/Nav.js";
+import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
-
 
 const JuegoPreguntas = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
-  var [puntuacion, setPuntuacion] = useState(0);
+  const [puntuacion, setPuntuacion] = useState(0);
   const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
   const [tiempoRestante, setTiempoRestante] = useState(10);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
@@ -16,24 +15,31 @@ const JuegoPreguntas = () => {
   const [mostrarMenu, setMostrarMenu] = useState(false); // Estado para mostrar el menú al finalizar el juego
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState("");
+  const navigate = useNavigate();
 
   //Used for user stats
-  var [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
-  var [preguntasFalladas, setPreguntasFalladas] = useState(0);
-  var [tiempoTotal, setTiempoTotal] = useState(0);
-  var [tiempoMedio, setTiempoMedio] = useState(0);
+  const [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
+  const [preguntasFalladas, setPreguntasFalladas] = useState(0);
+  const [tiempoTotal, setTiempoTotal] = useState(0);
+  const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
     fetch("http://localhost:8003/questions?tematica=all&n=10")
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          navigate("/home?error=1");
+          return;
+        }
+        return response.json();
+      })
       .then((data) => {
         setPreguntas(data);
         setPreguntaActual(data[0]);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error al obtener las preguntas:', error);
-        setIsLoading(false);
+        console.error("Error al obtener las preguntas:", error);
+        navigate("/home?error=1");
       });
   }, []);
 
@@ -86,7 +92,7 @@ const JuegoPreguntas = () => {
       setPreguntasFalladas(preguntasFalladas + 1);
     }
 
-    setTiempoTotal(tiempoTotal+10-tiempoRestante);
+    setTiempoTotal(tiempoTotal + 10 - tiempoRestante);
 
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
@@ -94,15 +100,15 @@ const JuegoPreguntas = () => {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
-
       try {
-
         if (preguntasCorrectas + preguntasFalladas > 0) {
-          setTiempoMedio(tiempoTotal/(preguntasCorrectas+preguntasFalladas));
+          setTiempoMedio(
+            tiempoTotal / (preguntasCorrectas + preguntasFalladas)
+          );
         }
-  
+
         //Now we store the game in the user's DB
-        const username = localStorage.getItem('username');
+        const username = localStorage.getItem("username");
         const newGame = {
           username: username,
           correctAnswers: preguntasCorrectas,
@@ -111,28 +117,25 @@ const JuegoPreguntas = () => {
           avgTime: tiempoMedio,
         };
 
-      const response = await fetch('http://localhost:8001/userSaveGame', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newGame),
-      });
+        const response = await fetch("http://localhost:8001/userSaveGame", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newGame),
+        });
 
-      if (!response.ok) {
-        throw new Error('Error al guardar el juego');
+        if (!response.ok) {
+          throw new Error("Error al guardar el juego");
+        }
+      } catch (error) {
+        console.error("Error al guardar el juego:", error);
+        // Manejar el error, por ejemplo, mostrando un mensaje al usuario
+      } finally {
+        setJuegoTerminado(true);
       }
-
-    } catch (error) {
-      console.error('Error al guardar el juego:', error);
-      // Manejar el error, por ejemplo, mostrando un mensaje al usuario
-    } finally {
-      setJuegoTerminado(true);
     }
-
-    
-  }
-};
+  };
 
   const handleRepetirJuego = () => {
     // Reiniciar el estado para repetir el juego
@@ -148,18 +151,11 @@ const JuegoPreguntas = () => {
     setTiempoTotal(0);
   };
 
-  if (mostrarMenu) {
+  if (isLoading) {
     return (
       <>
         <Nav />
-        <div className="menuContainer">
-          <h2>¡Juego terminado!</h2>
-          <p>
-            Tu puntuación: {puntuacion}/{preguntas.length}
-          </p>
-          <button onClick={handleRepetirJuego}>Repetir Juego</button>
-          <Link to="/home">Volver al Menú Principal</Link>
-        </div>
+        <span class="loader"></span>
         <Footer />
       </>
     );
@@ -168,27 +164,35 @@ const JuegoPreguntas = () => {
   return (
     <>
       <Nav />
-      {isLoading? 
-      <span class="loader"></span>
-      : 
-      <div className="questionContainer">
-        <h2>Pregunta {indicePregunta + 1}:</h2>
-        <p>{preguntaActual.pregunta}</p>
-        <div className="responsesContainer">
-          {preguntaActual.respuestas.map((respuesta, index) => (
-            <button
-              key={index}
-              onClick={() => handleRespuestaSeleccionada(respuesta)}
-              disabled={tiempoRestante === 0 || juegoTerminado}
-              style={estiloRespuesta(respuesta)}
-            >
-              {respuesta}
-            </button>
-          ))}
+      {mostrarMenu ? (
+        <div className="menuContainer">
+          <h2>¡Juego terminado!</h2>
+          <p>
+            Tu puntuación: {puntuacion}/{preguntas.length}
+          </p>
+          <button onClick={handleRepetirJuego}>Repetir Juego</button>
+          <Link to="/home">Volver al Menú Principal</Link>
         </div>
-        <div className="timer">Tiempo restante: {tiempoRestante}</div>
-        <div className="points">Puntuación: {puntuacion}</div>
-      </div> }
+      ) : (
+        <div className="questionContainer">
+          <h2>Pregunta {indicePregunta + 1}:</h2>
+          <p>{preguntaActual.pregunta}</p>
+          <div className="responsesContainer">
+            {preguntaActual.respuestas.map((respuesta, index) => (
+              <button
+                key={index}
+                onClick={() => handleRespuestaSeleccionada(respuesta)}
+                disabled={tiempoRestante === 0 || juegoTerminado}
+                style={estiloRespuesta(respuesta)}
+              >
+                {respuesta}
+              </button>
+            ))}
+          </div>
+          <div className="timer">Tiempo restante: {tiempoRestante}</div>
+          <div className="points">Puntuación: {puntuacion}</div>
+        </div>
+      )}
       <Footer />
     </>
   );
