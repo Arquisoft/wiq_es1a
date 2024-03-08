@@ -6,12 +6,13 @@ import Footer from "../../components/Footer/Footer";
 const socket = io.connect("http://localhost:4000");
 
 function OnlineLanding() {
-  const playerId = useMemo(() => localStorage.getItem('token'));
-  const playerName = useMemo(() => localStorage.getItem('username'));
+  const playerId = useMemo(() => localStorage.getItem("token"));
+  const playerName = useMemo(() => localStorage.getItem("username"));
   const [roomId, setRoomId] = useState(null);
   const [messages, setMessages] = useState([]);
   const [isReady, setIsReady] = useState(false);
   const [players, setPlayers] = useState([]);
+  const [question, setQuestion] = useState(null);
 
   useEffect(() => {
     socket.on("message", (message) => {
@@ -21,6 +22,10 @@ function OnlineLanding() {
     socket.on("players", (players) => {
       console.log(players);
       setPlayers(players);
+    });
+
+    socket.on("question", (question) => {
+      setQuestion(question);
     });
   }, []);
 
@@ -46,6 +51,31 @@ function OnlineLanding() {
     return {};
   };
 
+  const handleRespuestaSeleccionada = (respuesta) => {
+    socket.emit('submit', playerId, respuesta)
+  };
+
+  if (question) {
+    return (
+      <div className="questionContainer">
+        <h2>Pregunta:</h2>
+        <p>{question.pregunta}</p>
+        <div className="responsesContainer">
+          {question.respuestas.map((respuesta, index) => (
+            <button
+              key={index}
+              onClick={() => handleRespuestaSeleccionada(respuesta)}
+            >
+              {respuesta}
+            </button>
+          ))}
+        </div>
+        {/* <div className="timer">Tiempo restante: {tiempoRestante}</div>
+        <div className="points">Puntuación: {puntuacion}</div> */}
+      </div>
+    );
+  }
+
   return (
     <>
       <Nav />
@@ -64,9 +94,10 @@ function OnlineLanding() {
           <h2>Estás en el lobby de la partida {roomId}</h2>
           <p>Jugadores:</p>
           <ul>
-          {players && players.map(player => {
-            <li>{player.name}</li>
-          })}
+            {players &&
+              players.map((player) => {
+                <li>{player.name}</li>;
+              })}
           </ul>
           <button
             type="button"

@@ -5,6 +5,7 @@ module.exports = class Game {
         this.rounds = 10;
         this.round = 1;
         this.players = new Set();
+        this.answers = []
     }
 
     join(player) {

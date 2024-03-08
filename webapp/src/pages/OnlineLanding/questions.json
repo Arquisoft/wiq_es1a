@@ -1,0 +1,42 @@
+[
+    {
+              "pregunta": "¿Cuál fue el presupuesto (en USD) de la película Duende y misterio del flamenco?",
+              "respuestas": [
+                        254000,
+                        1500000,
+                        4000000,
+                        3708447
+              ],
+              "correcta": 3708447
+    },
+    {
+              "pregunta": "¿Cuál es el género de la obra literaria Conan the Buccaneer?",
+              "respuestas": [
+                        "ciencia ficción",
+                        "fantasía",
+                        "ficción de detectives",
+                        "ficción para jóvenes"
+              ],
+              "correcta": "fantasía"
+    },
+    {
+              "pregunta": "¿Quién es el creador del lenguaje de programación Emacs Lisp?",
+              "respuestas": [
+                        "Martin Odersky",
+                        "Brendan Eich",
+                        "Erik Meijer",
+                        "Richard Stallman"
+              ],
+              "correcta": "Richard Stallman"
+    },
+    {
+              "pregunta": "¿Cuál es la última versión del lenguaje de programación F#?",
+              "respuestas": [
+                        "26.2.2",
+                        "Haskell 2010",
+                        "PostScript 3 (1997)",
+                        "16.8"
+              ],
+              "correcta": "16.8"
+    }
+]
