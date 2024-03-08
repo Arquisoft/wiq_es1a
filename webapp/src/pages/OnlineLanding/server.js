@@ -1,4 +1,6 @@
 const express = require('express');
+const Game = require('./Game');
+const Player = require('./Player');
 const http = require('http');
 const socketIo = require('socket.io');
 
@@ -13,21 +15,47 @@ const io = socketIo(server, {
   }
 });
 
-// Almacenar las salas de chat y los usuarios por sala
+// Store rooms and games
 const rooms = new Map();
 
 io.on('connection', (socket) => {
   console.log('a user connected');
 
   // Unirse a una sala
-  socket.on('joinRoom', (room) => {
-    // Crear la sala si no existe
+  socket.on('joinRoom', (room, playerId, name) => {
+    //Crear la entidad Jugador
+    var player = new Player(playerId, name);
+    var game = null;
+    // Create room if not exists
     if (!rooms.has(room)) {
-      rooms.set(room, new Set());
+      game = new Game();
+      rooms.set(room, new Game(room));
+    } else {
+      game = rooms.get(room);
     }
-    rooms.get(room).add(socket.id);
-    socket.join(room);
-    console.log(`User ${socket.id} joined room ${room}`);
+    //Add player to room
+    game.players.add(player);
+    io.to(room).emit('players', game.players);
+  });
+
+  socket.on('ready', (roomId, playerId) => {
+    let room = rooms.get(roomId);
+    if(room){
+      let player = room.players.find(x => x.id == playerId)
+      if(player){
+        player.ready = true;
+      }
+    }
+  });
+
+  socket.on('notready', (roomId, playerId) => {
+    let room = rooms.get(roomId);
+    if(room){
+      let player = room.players.find(x => x.id == playerId)
+      if(player){
+        player.ready = false;
+      }
+    }
   });
 
   // Enviar mensaje a una sala
