@@ -14,7 +14,7 @@ const Nav = () => {
                 <li><Link to="/sobre">Sobre nosotros</Link></li>
                 <li><Link to="/stats">Stats</Link></li>
             </ul>
-            <button onClick={() => Logout()}></button>
+            <button onClick={() => Logout()}>Desconectarse</button>
         </nav>
     );
 }
