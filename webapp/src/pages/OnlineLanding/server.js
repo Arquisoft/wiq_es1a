@@ -24,6 +24,7 @@ io.on("connection", (socket) => {
 
   // Unirse a una sala
   socket.on('joinRoom', (room, playerId, name) => {
+    socket.join(room);
     //Crear la entidad Jugador
     var player = new Player(playerId, name);
     var game = null;
@@ -36,7 +37,7 @@ io.on("connection", (socket) => {
     }
     //Add player to room
     game.players.push(player);
-    socket.to(room).emit('players', game.players);
+    io.to(room).emit('players', game.players);
   });
 
   socket.on('start', (roomId) => {
