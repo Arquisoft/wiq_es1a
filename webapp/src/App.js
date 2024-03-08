@@ -18,11 +18,10 @@ function App() {
         {/** Rutas públicas */}
         <Route path='/' element={<Authenticate />} />
         <Route path='/login' element={<Authenticate />} />
-      
 
         {/** Rutas privadas */}
         <Route element = {<ProtectedRoute /> }>
-             <Route path='/home' element={<Home />} />
+            <Route path='/home' element={<Home />} />
              <Route path='/sobre' element={<Sobre />} />
              <Route path='/home/clasico' element={<Clasico />} />
              <Route path='/home/bateria' element={<Bateria />} />
