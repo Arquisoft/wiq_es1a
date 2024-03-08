@@ -4,7 +4,7 @@ module.exports = class Game {
         this.maxPlayers = 5;
         this.rounds = 10;
         this.round = 1;
-        this.players = new Set();
+        this.players = [];
         this.answers = []
     }
 

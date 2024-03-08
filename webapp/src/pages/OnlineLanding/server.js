@@ -23,7 +23,7 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   // Unirse a una sala
-  socket.on("joinRoom", (room, playerId, name) => {
+  socket.on('joinRoom', (room, playerId, name) => {
     //Crear la entidad Jugador
     var player = new Player(playerId, name);
     var game = null;
@@ -35,11 +35,11 @@ io.on("connection", (socket) => {
       game = rooms.get(room);
     }
     //Add player to room
-    game.players.add(player);
-    io.to(room).emit("players", game.players);
+    game.players.push(player);
+    socket.to(room).emit('players', game.players);
   });
 
-  socket.on("start", (roomId) => {
+  socket.on('start', (roomId) => {
     var game = rooms.get(roomId);
 
     game.answers.push({
@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
       correcta: question.correcta,
       respuestasUsuarios: [],
     });
-    socket.to(roomId).emit("question", questions[game.round]);
+    socket.to(roomId).emit('question', questions[game.round]);
     game.answers.push({
       pregunta: question.pregunta,
       respuestas: question.respuestas,
@@ -56,15 +56,16 @@ io.on("connection", (socket) => {
       respuestasUsuarios: [],
     });
 
-    socket.on("submit", (userId, respuesta) => {
-      var player = room.players.find((x) => x.id == userId);
+    socket.on('submit', (roomId, userId, respuesta) => {
+      var game = rooms.get(roomId);
+      var player = game.players.find((x) => x.id == userId);
       if (player) {
         var q = questions[game.round];
         game.answers.respuestasUsuarios.push({userId: userId, respuesta: respuesta, correcta: respuesta == q});
       }
       if (game.answers[i].respuestasUsuarios.length == game.players.size) {
         let question = questions[++game.round]
-        socket.to(roomId).emit("question", question);
+        socket.to(roomId).emit('question', question);
         game.answers.push({
           pregunta: question.pregunta,
           respuestas: question.respuestas,
@@ -75,7 +76,7 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("ready", (roomId, playerId) => {
+  socket.on('ready', (roomId, playerId) => {
     let room = rooms.get(roomId);
     if (room) {
       let player = room.players.find((x) => x.id == playerId);
@@ -85,7 +86,7 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("notready", (roomId, playerId) => {
+  socket.on('notready', (roomId, playerId) => {
     let room = rooms.get(roomId);
     if (room) {
       let player = room.players.find((x) => x.id == playerId);
@@ -95,19 +96,14 @@ io.on("connection", (socket) => {
     }
   });
 
-  // Enviar mensaje a una sala
-  socket.on("message", ({ room, message }) => {
-    io.to(room).emit("message", message);
-  });
-
-  // Desconexión del usuario
-  socket.on("disconnect", () => {
-    rooms.forEach((users, room) => {
-      if (users.delete(socket.id)) {
-        console.log(`User ${socket.id} left room ${room}`);
-      }
-    });
-  });
+  // // Desconexión del usuario
+  // socket.on('disconnect', () => {
+  //   rooms.forEach((roomId, room) => {
+  //     if (users.delete(socket.id)) {
+  //       console.log(`User ${socket.id} left room ${room}`);
+  //     }
+  //   });
+  // });
 });
 
 server.listen(PORT, () => {

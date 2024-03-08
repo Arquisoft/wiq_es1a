@@ -1,46 +1,45 @@
 import React, { useState, useEffect, useMemo } from "react";
-import io from "socket.io-client";
 import Nav from "../../components/Nav/Nav";
 import Footer from "../../components/Footer/Footer";
-
-const socket = io.connect("http://localhost:4000");
+import { socket } from "./socket";
 
 function OnlineLanding() {
   const playerId = useMemo(() => localStorage.getItem("token"));
   const playerName = useMemo(() => localStorage.getItem("username"));
   const [roomId, setRoomId] = useState(null);
-  const [messages, setMessages] = useState([]);
   const [isReady, setIsReady] = useState(false);
+  const [inRoom, setInRoom] = useState(false);
   const [players, setPlayers] = useState([]);
   const [question, setQuestion] = useState(null);
 
   useEffect(() => {
-    socket.on("message", (message) => {
-      setMessages([...messages, message]);
-    });
-
-    socket.on("players", (players) => {
+    function onPlayers(players) {
       console.log(players);
       setPlayers(players);
-    });
+    }
 
-    socket.on("question", (question) => {
+    function onQuestion(question) {
       setQuestion(question);
-    });
+    }
+
+    socket.on('players', onPlayers);
+
+    socket.on('question', onQuestion);
   }, []);
 
   useEffect(() => {
     if (isReady) {
-      socket.emit("ready", roomId, playerId);
+      socket.emit('ready', roomId, playerId);
     } else {
-      socket.emit("notready", roomId, playerId);
+      socket.emit('notready', roomId, playerId);
     }
-  }, [roomId]);
+  }, [isReady]);
 
   const handleRoomSubmit = (e) => {
     e.preventDefault();
     if (roomId) {
-      socket.emit("joinRoom", roomId, playerId, playerName);
+      socket.emit('joinRoom', roomId, playerId, playerName);
+      setInRoom(true);
     }
   };
 
@@ -52,7 +51,7 @@ function OnlineLanding() {
   };
 
   const handleRespuestaSeleccionada = (respuesta) => {
-    socket.emit('submit', playerId, respuesta)
+    socket.emit('submit', roomId, playerId, respuesta);
   };
 
   if (question) {
@@ -79,7 +78,7 @@ function OnlineLanding() {
   return (
     <>
       <Nav />
-      {!roomId ? (
+      {!inRoom ? (
         <form onSubmit={handleRoomSubmit}>
           <input
             type="text"
@@ -95,9 +94,7 @@ function OnlineLanding() {
           <p>Jugadores:</p>
           <ul>
             {players &&
-              players.map((player) => {
-                <li>{player.name}</li>;
-              })}
+              players.map((player) => <li>{player.name}</li>)}
           </ul>
           <button
             type="button"
