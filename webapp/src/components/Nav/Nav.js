@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import './Nav.css';
 
 const Nav = () => {
@@ -14,7 +14,9 @@ const Nav = () => {
                 <li><Link to="/sobre">Sobre nosotros</Link></li>
                 <li><Link to="/stats">Stats</Link></li>
             </ul>
+            <Link to="/login">
             <button onClick={() => Logout()}>Desconectarse</button>
+            </Link>
         </nav>
     );
 }
