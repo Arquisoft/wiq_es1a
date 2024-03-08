@@ -11,7 +11,7 @@ const JuegoPreguntas = () => {
   const [tiempoRestante, setTiempoRestante] = useState(180);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [preguntas, setPreguntas] = useState([]);
-  var preguntaActual = preguntas[indicePregunta];
+  const [preguntaActual, setPreguntaActual] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,8 +24,9 @@ const JuegoPreguntas = () => {
         return response.json();
       })
       .then((data) => {
+        console.log("depurando")
         setPreguntas(data);
-        preguntaActual = data[0];
+        setPreguntaActual(data[0]);
         setIsLoading(false);
       })
       .catch((error) => {
@@ -50,6 +51,7 @@ const JuegoPreguntas = () => {
     }
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
+      setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
       setJuegoTerminado(true);
     }
@@ -78,11 +80,11 @@ const JuegoPreguntas = () => {
       <Nav />
       {juegoTerminado ? (
         <div className="menuContainer">
-        <h2>¡Juego terminado!</h2>
-        <p>Tu puntuación: {puntuacion}</p>
-        <button onClick={handleRepetirJuego}>Repetir Juego</button>
-        <Link to="/home">Volver al Menú Principal</Link>
-      </div>
+          <h2>¡Juego terminado!</h2>
+          <p>Tu puntuación: {puntuacion}</p>
+          <button onClick={handleRepetirJuego}>Repetir Juego</button>
+          <Link to="/home">Volver al Menú Principal</Link>
+        </div>
       ) : (
         <div className="questionContainer">
           <h2>Pregunta {indicePregunta + 1}:</h2>
