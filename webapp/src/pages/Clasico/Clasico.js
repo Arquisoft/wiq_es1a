@@ -78,7 +78,7 @@ const JuegoPreguntas = () => {
       }
     } else {
       if (respuesta === respuestaSeleccionada) {
-        return { backgroundColor: "#0F0F0F", color: "#F0F0F0" };
+        return { backgroundColor: "var(--text)", color: "var(--background)" };
       }
     }
     return {};

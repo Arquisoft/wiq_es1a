@@ -5,9 +5,17 @@
   align-items: center;
   text-align: center;
   justify-content: space-between;
-  background-color: #0f0f0f;
-  color: #f0f0f0;
+  background-color: var(--background);
+  color: var(--text);
 
+  --shadow: rgba(0, 255, 192, 1);
+  --borders: #0F0F0F;
+  --background: #F0F0F0;
+  --text: #0F0F0F;
+}
+
+/* Estilos para el tema oscuro */
+#root[data-theme="dark"] {
   --shadow: orange;
   --borders: #F0F0F0;
   --background: #0F0F0F;
@@ -36,15 +44,14 @@ a {
   touch-action: manipulation;
   width: 100%;
   will-change: transform;
-  -webkit-box-shadow: 10px 10px 6px 0px orange;
-  -moz-box-shadow: 10px 10px 6px 0px orange;
-  box-shadow: 5px 5px 6px 0px orange;
+  -webkit-box-shadow: 10px 10px 6px 0px var(--shadow);
+  -moz-box-shadow: 10px 10px 6px 0px var(--shadow);
+  box-shadow: 5px 5px 6px 0px var(--shadow);
 }
 
 input:hover,
 button:hover,
-nav,
 a:hover {
-  -webkit-box-shadow: 0 0 0 0 #000, 0 0 0 2px orange;
-  box-shadow: 0 0 0 0 #000, 0 0 0 2px orange;
+  -webkit-box-shadow: 0 0 0 0 #000, 0 0 0 2px var(--shadow);
+  box-shadow: 0 0 0 0 #000, 0 0 0 2px var(--shadow);
 }
