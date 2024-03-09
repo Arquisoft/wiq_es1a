@@ -15,6 +15,14 @@
 }
 
 /* Estilos para el tema oscuro */
+#root[data-theme="light"] {
+  --shadow: rgba(0, 255, 192, 1);
+  --borders: #0F0F0F;
+  --background: #F0F0F0;
+  --text: #0F0F0F;
+}
+
+/* Estilos para el tema oscuro */
 #root[data-theme="dark"] {
   --shadow: orange;
   --borders: #F0F0F0;

@@ -8,25 +8,22 @@ const Nav = () => {
 
   // Función para alternar entre temas claro y oscuro
   const toggleTheme = () => {
-    const root = document.getElementById('root');
+    const root = document.getElementById("root");
     const currentTheme = root.getAttribute("data-theme");
     const newTheme = currentTheme === "light" ? "dark" : "light";
     root.setAttribute("data-theme", newTheme);
+    setIsDarkTheme((prev) => !prev);
   };
 
   return (
     <nav>
-      <div className="slider-container">
-        <label className="switch">
-          <input
-            type="checkbox"
-            id="theme-toggle"
-            onChange={toggleTheme}
-            checked={isDarkTheme}
-          />
-          <span className="slider round"></span>
-        </label>
-      </div>
+      <input
+        type="checkbox"
+        class="theme-toggle"
+        onChange={toggleTheme}
+        checked={isDarkTheme}
+        value="Texto dentro del input"
+      />
       <h1 className="logo">WIQ!</h1>
       <ul>
         <li>
