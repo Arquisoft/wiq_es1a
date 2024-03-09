@@ -11,7 +11,7 @@ const JuegoPreguntas = () => {
   const [tiempoRestante, setTiempoRestante] = useState(180);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [preguntas, setPreguntas] = useState([]);
-  const [preguntaActual, setPreguntaActual] = useState("");
+  const [preguntaActual, setPreguntaActual] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,6 +24,7 @@ const JuegoPreguntas = () => {
         return response.json();
       })
       .then((data) => {
+        console.log("depurando")
         setPreguntas(data);
         setPreguntaActual(data[0]);
         setIsLoading(false);
@@ -35,10 +36,7 @@ const JuegoPreguntas = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoading) {
-      return;
-    }
-    if (tiempoRestante === 0 || indicePregunta === preguntas.length) {
+    if (tiempoRestante === 0) {
       setJuegoTerminado(true);
     }
     const timer = setInterval(() => {
@@ -53,6 +51,7 @@ const JuegoPreguntas = () => {
     }
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
+      setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
       setJuegoTerminado(true);
     }
@@ -66,16 +65,11 @@ const JuegoPreguntas = () => {
     setJuegoTerminado(false);
   };
 
-  if (juegoTerminado) {
+  if (isLoading) {
     return (
       <>
         <Nav />
-        <div className="menuContainer">
-          <h2>¡Juego terminado!</h2>
-          <p>Tu puntuación: {puntuacion}</p>
-          <button onClick={handleRepetirJuego}>Repetir Juego</button>
-          <Link to="/home">Volver al Menú Principal</Link>
-        </div>
+        <span class="loader"></span>
         <Footer />
       </>
     );
@@ -84,8 +78,13 @@ const JuegoPreguntas = () => {
   return (
     <>
       <Nav />
-      {isLoading ? (
-        <span class="loader"></span>
+      {juegoTerminado ? (
+        <div className="menuContainer">
+          <h2>¡Juego terminado!</h2>
+          <p>Tu puntuación: {puntuacion}</p>
+          <button onClick={handleRepetirJuego}>Repetir Juego</button>
+          <Link to="/home">Volver al Menú Principal</Link>
+        </div>
       ) : (
         <div className="questionContainer">
           <h2>Pregunta {indicePregunta + 1}:</h2>
