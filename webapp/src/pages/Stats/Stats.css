@@ -15,22 +15,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  font-family: 'Arial', sans-serif;
-  color: #333;
-}
-
-p {
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
-  color: #666;
-}
-
 #usernameInput {
   margin-bottom: 2rem;
-  
 }
 
 #usernameInput input[type="text"] {
@@ -44,8 +30,8 @@ table {
   border-radius: 15px;
   border-collapse: collapse;
   background-color: #f9f9f9;
-  box-shadow: 5px 5px 6px 0px rgba(0,255,192,1);
-  border: 1px solid rgba(0,255,192,1);
+  box-shadow: 5px 5px 6px 0px var(--shadow);
+  border: 1px solid var(--borders);
 }
 
 table th,
@@ -58,7 +44,7 @@ table th {
   background-color: #eee;
   font-weight: bold;
   color: #333;
-  box-shadow: 5px 5px 6px 0px rgba(0,255,192,1);
+  box-shadow: 5px 5px 6px 0px var(--shadow);
 }
 
 table td {
