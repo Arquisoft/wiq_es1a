@@ -27,6 +27,7 @@ app.use((req, res, next) => {
 app.set("json spaces", 40);
 
 app.get("/questions", async (req, res) => {
+  console.log(req.query)
   if (req.query.n > MAX_QUESTIONS) {
     res
       .status(400)

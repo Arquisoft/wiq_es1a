@@ -15,7 +15,7 @@ const JuegoPreguntas = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8003/questions?tematica=all&n=10000")
+    fetch("http://localhost:8000/questions?tematica=all&n=9000")
       .then((response) => {
         if (!response.ok) {
           navigate("/home?error=1");
@@ -24,7 +24,6 @@ const JuegoPreguntas = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("depurando")
         setPreguntas(data);
         setPreguntaActual(data[0]);
         setIsLoading(false);

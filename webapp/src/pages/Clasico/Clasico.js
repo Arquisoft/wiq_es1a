@@ -24,7 +24,7 @@ const JuegoPreguntas = () => {
   const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:8003/questions?tematica=all&n=10")
+    fetch("http://localhost:8000/questions?tematica=all&n=10")
       .then((response) => {
         if (!response.ok) {
           navigate("/home?error=1");
