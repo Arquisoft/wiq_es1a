@@ -4,7 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+var r = document.getElementById('root');
+r.setAttribute("data-theme", "light")
+const root = ReactDOM.createRoot(r);
+
 root.render(
   //<React.StrictMode>
     <App />
