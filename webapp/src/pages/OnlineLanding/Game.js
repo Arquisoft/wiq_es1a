@@ -9,12 +9,7 @@ module.exports = class Game {
     }
 
     join(player) {
-        //check if player is allowed to join
-        if (this.status === 'open' && this.players.size < this.maxPlayers) {
-            this.players.add(player);
-            return true;
-        }
-        return false;
+        this.players.push(player);
     }
 
     leave(player) {

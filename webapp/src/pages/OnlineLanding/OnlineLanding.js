@@ -6,7 +6,7 @@ import { socket } from "./socket";
 function OnlineLanding() {
   const playerId = useMemo(() => localStorage.getItem("token"));
   const playerName = useMemo(() => localStorage.getItem("username"));
-  const [roomId, setRoomId] = useState(null);
+  const [roomId, setRoomId] = useState("asd");
   const [isReady, setIsReady] = useState(false);
   const [inRoom, setInRoom] = useState(false);
   const [players, setPlayers] = useState([]);
@@ -14,7 +14,6 @@ function OnlineLanding() {
 
   useEffect(() => {
     function onPlayers(players) {
-      console.log(players);
       setPlayers(players);
     }
 
@@ -22,23 +21,29 @@ function OnlineLanding() {
       setQuestion(question);
     }
 
-    socket.on('players', onPlayers);
+    function onGameStart() {
+      socket.emit("start", roomId);
+    }
 
-    socket.on('question', onQuestion);
+    socket.on("players", onPlayers);
+
+    socket.on("question", onQuestion);
+
+    socket.on("gameStart", onGameStart);
   }, []);
 
   useEffect(() => {
     if (isReady) {
-      socket.emit('ready', roomId, playerId);
+      socket.emit("ready", roomId, playerId);
     } else {
-      socket.emit('notready', roomId, playerId);
+      socket.emit("notready", roomId, playerId);
     }
   }, [isReady]);
 
   const handleRoomSubmit = (e) => {
     e.preventDefault();
     if (roomId) {
-      socket.emit('joinRoom', roomId, playerId, playerName);
+      socket.emit("joinRoom", roomId, playerId, playerName);
       setInRoom(true);
     }
   };
@@ -51,27 +56,31 @@ function OnlineLanding() {
   };
 
   const handleRespuestaSeleccionada = (respuesta) => {
-    socket.emit('submit', roomId, playerId, respuesta);
+    socket.emit("submit", roomId, playerId, respuesta);
   };
 
   if (question) {
     return (
-      <div className="questionContainer">
-        <h2>Pregunta:</h2>
-        <p>{question.pregunta}</p>
-        <div className="responsesContainer">
-          {question.respuestas.map((respuesta, index) => (
-            <button
-              key={index}
-              onClick={() => handleRespuestaSeleccionada(respuesta)}
-            >
-              {respuesta}
-            </button>
-          ))}
-        </div>
-        {/* <div className="timer">Tiempo restante: {tiempoRestante}</div>
+      <>
+        <Nav />
+        <div className="questionContainer">
+          <h2>Pregunta:</h2>
+          <p>{question.pregunta}</p>
+          <div className="responsesContainer">
+            {question.respuestas.map((respuesta, index) => (
+              <button
+                key={index}
+                onClick={() => handleRespuestaSeleccionada(respuesta)}
+              >
+                {respuesta}
+              </button>
+            ))}
+          </div>
+          {/* <div className="timer">Tiempo restante: {tiempoRestante}</div>
         <div className="points">Puntuación: {puntuacion}</div> */}
-      </div>
+        </div>
+        <Footer />
+      </>
     );
   }
 
@@ -92,10 +101,7 @@ function OnlineLanding() {
         <div>
           <h2>Estás en el lobby de la partida {roomId}</h2>
           <p>Jugadores:</p>
-          <ul>
-            {players &&
-              players.map((player) => <li>{player.name}</li>)}
-          </ul>
+          <ul>{players && players.map((player) => <li>{player.name}</li>)}</ul>
           <button
             type="button"
             onClick={() => {

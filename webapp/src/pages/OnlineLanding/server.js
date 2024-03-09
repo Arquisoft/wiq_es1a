@@ -20,10 +20,8 @@ const io = socketIo(server, {
 const rooms = new Map();
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
-
   // Unirse a una sala
-  socket.on('joinRoom', (room, playerId, name) => {
+  socket.on("joinRoom", (room, playerId, name) => {
     socket.join(room);
     //Crear la entidad Jugador
     var player = new Player(playerId, name);
@@ -36,12 +34,13 @@ io.on("connection", (socket) => {
       game = rooms.get(room);
     }
     //Add player to room
-    game.players.push(player);
-    io.to(room).emit('players', game.players);
+    game.join(player);
+    io.to(room).emit("players", game.players);
   });
 
-  socket.on('start', (roomId) => {
+  socket.on("start", (roomId) => {
     var game = rooms.get(roomId);
+    var question = questions[game.round]
 
     game.answers.push({
       pregunta: question.pregunta,
@@ -49,24 +48,25 @@ io.on("connection", (socket) => {
       correcta: question.correcta,
       respuestasUsuarios: [],
     });
-    socket.to(roomId).emit('question', questions[game.round]);
-    game.answers.push({
-      pregunta: question.pregunta,
-      respuestas: question.respuestas,
-      correcta: question.correcta,
-      respuestasUsuarios: [],
-    });
+    io.to(roomId).emit('question', questions[game.round]);
 
     socket.on('submit', (roomId, userId, respuesta) => {
       var game = rooms.get(roomId);
+      console.log(game)
       var player = game.players.find((x) => x.id == userId);
       if (player) {
         var q = questions[game.round];
-        game.answers.respuestasUsuarios.push({userId: userId, respuesta: respuesta, correcta: respuesta == q});
+        game.answers.respuestasUsuarios.push({
+          userId: userId,
+          respuesta: respuesta,
+          correcta: respuesta == q,
+        });
       }
-      if (game.answers[i].respuestasUsuarios.length == game.players.size) {
-        let question = questions[++game.round]
-        socket.to(roomId).emit('question', question);
+      if (
+        game.answers[game.round].respuestasUsuarios.length == game.players.size
+      ) {
+        let question = questions[++game.round];
+        io.to(roomId).emit('question', question);
         game.answers.push({
           pregunta: question.pregunta,
           respuestas: question.respuestas,
@@ -77,17 +77,20 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on('ready', (roomId, playerId) => {
-    let room = rooms.get(roomId);
+  socket.on("ready", (roomId, playerId) => {
+    var room = rooms.get(roomId);
     if (room) {
       let player = room.players.find((x) => x.id == playerId);
       if (player) {
         player.ready = true;
       }
+      if (room.players.every((player) => player)) {
+        io.to(roomId).emit("gameStart");
+      }
     }
   });
 
-  socket.on('notready', (roomId, playerId) => {
+  socket.on("notready", (roomId, playerId) => {
     let room = rooms.get(roomId);
     if (room) {
       let player = room.players.find((x) => x.id == playerId);
