@@ -1,0 +1,53 @@
+/* Stats.css */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#usernameInput {
+  margin-bottom: 2rem;
+}
+
+#usernameInput input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+table {
+  width: 100%;
+  border-radius: 15px;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  box-shadow: 5px 5px 6px 0px var(--shadow);
+  border: 1px solid var(--borders);
+}
+
+table th,
+table td {
+  padding: 0.75rem;
+  text-align: center;
+}
+
+table th {
+  background-color: #eee;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 5px 5px 6px 0px var(--shadow);
+}
+
+table td {
+  font-size: 1rem;
+  color: #555;
+}

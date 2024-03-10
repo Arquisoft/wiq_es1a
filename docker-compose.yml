@@ -11,6 +11,32 @@ services:
     networks:
       - mynetwork
 
+  questionservice:
+      container_name: questionservice-${teamname:-defaultASW}
+      image: ghcr.io/arquisoft/wiq_es1a/questionservice:latest
+      profiles: ["dev", "prod"]
+      build: ./questionservice
+      ports:
+        - "8003:8003"
+      networks:
+        - mynetwork
+
+  statsservice:
+    container_name: statsservice-${teamname:-defaultASW}
+    image: ghcr.io/arquisoft/wiq_es1a/statsservice:latest
+    profiles: ["dev", "prod"]
+    build: ./statsservice
+    depends_on:
+      - mongodb
+      - userservice
+    ports:
+      - "8004:8004"
+    networks:
+      - mynetwork
+    environment:
+      MONGODB_URI: mongodb://mongodb:27017/userdb
+      USER_SERVICE_URL: http://userservice:8001
+
   authservice:
     container_name: authservice-${teamname:-defaultASW}
     image: ghcr.io/arquisoft/wiq_es1a/authservice:latest
@@ -46,13 +72,17 @@ services:
     build: ./gatewayservice
     depends_on:
       - mongodb
+      - statsservice
       - userservice
       - authservice
+      - questionservice
     ports:
       - "8000:8000"
     networks:
       - mynetwork
     environment:
+      STATS_SERVICE_URL: http://statsservice:8004
+      QUESTION_SERVICE_URL: http://questionservice:8003
       AUTH_SERVICE_URL: http://authservice:8002
       USER_SERVICE_URL: http://userservice:8001
 

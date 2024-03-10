@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
-import { useNavigate } from "react-router-dom";
+
+import {useNavigate} from "react-router-dom";
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import './Login.css';
+
 
 const Login = () => {
   const signIn = useSignIn();
@@ -15,6 +17,7 @@ const Login = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate();
 
   const navigate = useNavigate();
 
@@ -26,21 +29,16 @@ const Login = () => {
       console.log(response);
       // Extract data from the response
       const { createdAt: userCreatedAt } = response.data;
-      setToken(response.data.token);
-
-      signIn({
-        auth: {
-          token: token
-        },
-        userState: {name: username}
-      })
+      const { token: token } = response.data;
 
       setCreatedAt(userCreatedAt);
       setLoginSuccess(true);
 
       setOpenSnackbar(true);
+      localStorage.setItem('token', token);
 
-      navigate('/home')
+      localStorage.setItem('username', username);
+
     } catch (error) {
       //console.log(error);
       //setError(error.response.data.error);
@@ -54,14 +52,7 @@ const Login = () => {
   return (
     <div className="login-container">
       {loginSuccess ? (
-        <div>
-          <h1 className="login-header">
-            Hello {username}!
-          </h1>
-          <p className="login-text">
-            Your account was created on {new Date(createdAt).toLocaleDateString()}.
-          </p>
-        </div>
+        navigate("/home")
       ) : (
         <>
           <h1 className="login-header">Login</h1>
