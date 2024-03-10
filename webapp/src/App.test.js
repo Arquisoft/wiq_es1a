@@ -1,7 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import Home from './pages/Home/Home.js';
 import Nav from './components/Nav/Nav.js';
+import Footer from './components/Footer/Footer.js';
 import App from './App';
 
 test('renders welcome mesagge', () => {
@@ -79,6 +80,15 @@ describe('Nav Component', () => {
     // Verificar que la función removeItem se haya llamado con 'token'
     expect(removeItemMock).toHaveBeenCalledWith('token');
 });
+});
+describe('Footer Component', () => {
+  it('renders footer text correctly', () => {
+    render(<Footer />);
+
+    // Verificar que el texto del pie de página esté presente
+    expect(screen.getByText('WIQ!')).toBeInTheDocument();
+    expect(screen.getByText('Copyright 2024 ® Grupo 1A de Arquitectura del Software')).toBeInTheDocument();
+  });
 });
 /*test('renders learn react link', () => {
   render(<App />);
