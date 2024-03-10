@@ -50,8 +50,8 @@ WIQ! is a software by means of which users can emulate being the participants of
 | The application must have a well-defined and structured design, so that it is easy to make modifications and/or extensions.
 
 | *3*
-| *_Privacy_*
-| The application must guarantee the privacy of its users' information, with mechanisms in place to prevent intrusions into the system.
+| *_Availability_*
+| The application must ensure high availability, with mechanisms in place to prevent system failures and ensure continuous access to its services.
 |===
 
 === Stakeholders

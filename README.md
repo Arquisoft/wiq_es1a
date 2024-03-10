@@ -6,7 +6,7 @@
 |Martín Cancio Barrera | UO287561 | [Mi github](https://github.com/CANCI0)
 |Iyán Fernández Riol | UO288231 | [Mi github](https://github.com/iyanfdezz)
 |Rodrigo García Iglesias | UO276396 | [Mi github](https://github.com/Rodrox11)
-|Alfredo Jirout Cid | UO288443 | [Mi github](https://github.com/uo288443)
+|Miguel Olamendi Alonso | UO285032 | [Mi github](https://github.com/uo285032)
 
 ## Introduction to our project
 [![Deploy on release](https://github.com/Arquisoft/wiq_es1a/actions/workflows/release.yml/badge.svg)](https://github.com/Arquisoft/wiq_es1a/actions/workflows/release.yml)

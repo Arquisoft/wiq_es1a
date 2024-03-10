@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Nav from '../../components/Nav/Nav.js';
-import Footer from '../../components/Footer/Footer.js';
-import './Stats.css';
-
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Nav from "../../components/Nav/Nav.js";
+import Footer from "../../components/Footer/Footer.js";
+import "./Stats.css";
 
 const Stats = () => {
   const [username, setUsername] = useState(localStorage.username);
@@ -11,7 +10,6 @@ const Stats = () => {
   const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
 
   const fetchStats = () => {
     setIsLoading(true);
@@ -24,11 +22,13 @@ const Stats = () => {
       .catch((error) => {
         console.error('Error al obtener las estadísticas:', error);
         setError(error.message || 'Ha ocurrido un error al obtener las estadísticas');
+
         setIsLoading(false);
       });
   };
 
   useEffect(() => {
+
     fetch(`http://localhost:8004/stats?user=${username}?gamemode=${gamemode}`)
       .then((response) => response.json())
       .then((data) => {
@@ -44,37 +44,38 @@ const Stats = () => {
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
-  
-  const handleSearch = () => {
-    if (username.trim() !== '') {
-      fetchStats();
-    }
-  };
 
   if (isLoading) {
-    return  <div>
-              <h2> Cargando ... </h2>
-              <p>Se está consultando su búsqueda, espere unos instantes.</p>
-            </div>
+    return (
+      <div>
+        <h2> Cargando ... </h2>
+        <p>Se está consultando su búsqueda, espere unos instantes.</p>
+      </div>
+    );
   }
 
   if (error) {
-    return  <>
+    return (
+      <>
         <Nav />
         <div>
-            <label htmlFor="usernameInput">Nombre de Usuario: </label>
-              <input
-                  type="text"
-                  id="usernameInput"
-                  value={username}
-                  onChange={handleUsernameChange}
-              />
-              <button onClick={handleSearch}>Buscar</button>
-              <h2>Error: {error}</h2>
-              <p>Por favor compruebe si los valores del formulario son correctos e inténtelo de nuevo</p>
-            </div>
-            <Footer />
-            </>
+          <label htmlFor="usernameInput">Nombre de Usuario: </label>
+          <input
+            type="text"
+            id="usernameInput"
+            value={username}
+            onChange={handleUsernameChange}
+            data-testid="usernameInput"
+          />
+          <h2>Error: {error}</h2>
+          <p>
+            Por favor compruebe si los valores del formulario son correctos e
+            inténtelo de nuevo
+          </p>
+        </div>
+        <Footer />
+      </>
+    );
   }
 
   return (
@@ -88,13 +89,13 @@ const Stats = () => {
         id="usernameInput"
         value={username}
         onChange={handleUsernameChange}
+        data-testid="usernameInput"
       />
-      <button onClick={handleSearch}>Buscar</button>
       {stats === null && !isLoading && (
           <div>
             <p>El usuario no ha jugado ninguna partida.</p>
           </div>
-        )}
+        )};
         {stats && gamemode === "clasico" && (
           <div>
             <h2><em>Estadísticas de Usuario - Modo Clásico</em></h2>
@@ -134,7 +135,6 @@ const Stats = () => {
           </table>
           </div>
         )}
-      
     </div>
     <Footer />
     </>

@@ -1,53 +1,53 @@
+/* Stats.css */
 body {
-  background-color: white;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
 }
 
 .container {
-  margin: 0 auto;
-  padding: 20px;
   max-width: 800px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  color: #333;
+#usernameInput {
+  margin-bottom: 2rem;
 }
 
-label {
-  font-weight: bold;
-}
-
-input[type="text"] {
-  padding: 8px;
-  margin-right: 10px;
-}
-
-button {
-  padding: 8px 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
+#usernameInput input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
 }
 
 table {
   width: 100%;
+  border-radius: 15px;
   border-collapse: collapse;
-  text-align: center; /* Centra el texto horizontalmente en la tabla */
+  background-color: #f9f9f9;
+  box-shadow: 5px 5px 6px 0px var(--shadow);
+  border: 1px solid var(--borders);
 }
 
-table, th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+table th,
+table td {
+  padding: 0.75rem;
+  text-align: center;
 }
 
-th {
-  background-color: #f2f2f2;
-}
-
-tfoot {
+table th {
+  background-color: #eee;
   font-weight: bold;
+  color: #333;
+  box-shadow: 5px 5px 6px 0px var(--shadow);
+}
+
+table td {
+  font-size: 1rem;
+  color: #555;
 }
