@@ -55,12 +55,14 @@ const JuegoPreguntas = () => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [tiempoRestante]);
 
   useEffect(() => {
     if (juegoTerminado) {
       setMostrarMenu(true);
     }
+    // eslint-disable-next-line
   }, [juegoTerminado]);
 
   const handleRespuestaSeleccionada = (respuesta) => {
