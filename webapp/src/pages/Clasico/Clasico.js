@@ -119,6 +119,7 @@ const JuegoPreguntas = () => {
             avgTime: tiempoMedio,
           },
         };
+        console.log(JSON.stringify(newGame));
         fetch('http://localhost:8004/saveGame', {
           method: 'POST',
           headers: {
@@ -133,12 +134,13 @@ const JuegoPreguntas = () => {
               throw new Error('Error al guardar el juego');
             }
             console.log("terminado");
-            setJuegoTerminado(true);
+            
           })
           .catch((error) => {
             console.error('Error al guardar el juego:', error);
             console.log("errorguardar");
           });
+          setJuegoTerminado(true);
         }
     };
 

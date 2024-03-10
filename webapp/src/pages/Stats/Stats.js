@@ -95,7 +95,7 @@ const Stats = () => {
           <div>
             <p>El usuario no ha jugado ninguna partida.</p>
           </div>
-        )};
+        )}
         {stats && gamemode === "clasico" && (
           <div>
             <h2><em>Estadísticas de Usuario - Modo Clásico</em></h2>
@@ -140,6 +140,6 @@ const Stats = () => {
     </>
     
   );
-};
+}
 
 export default Stats;

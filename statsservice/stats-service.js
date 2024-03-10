@@ -48,7 +48,7 @@ app.post("/saveGame", async (req, res) => {
     }
   }
    catch (error) {
-    res.status(400).json({ error: "Error al actualizar estadísticas"});
+    res.status(400).json({ error: "Error al guardar juego"+error.message});
   }
 });
 
