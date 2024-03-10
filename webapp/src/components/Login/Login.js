@@ -1,7 +1,6 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 import {useNavigate} from "react-router-dom";
 import './Login.css';
 
@@ -9,10 +8,9 @@ import './Login.css';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
   const [error, setError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
-  const [createdAt, setCreatedAt] = useState('');
+  //const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate();
 
@@ -23,10 +21,10 @@ const Login = () => {
       const response = await axios.post(`${apiEndpoint}/login`, { username, password });
       console.log(response);
       // Extract data from the response
-      const { createdAt: userCreatedAt } = response.data;
+      //const { createdAt: userCreatedAt } = response.data;
       const { token: token } = response.data;
 
-      setCreatedAt(userCreatedAt);
+      //setCreatedAt(userCreatedAt);
       setLoginSuccess(true);
 
       setOpenSnackbar(true);
@@ -36,7 +34,7 @@ const Login = () => {
 
     } catch (error) {
       //console.log(error);
-      //setError(error.response.data.error);
+      setError(error.response.data.error);
     }
   };
 

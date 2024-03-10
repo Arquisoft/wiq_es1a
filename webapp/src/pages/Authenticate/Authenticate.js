@@ -7,9 +7,6 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Footer from '../../components/Footer/Footer.js';
 
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { PrivateRoute, useAuth } from 'react-auth-kit';
-
 function Authenticate() {
   const [showLogin, setShowLogin] = useState(true);
 
