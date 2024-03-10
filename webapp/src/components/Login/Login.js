@@ -17,7 +17,6 @@ const Login = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const navigate = useNavigate();
 
   const navigate = useNavigate();
 
