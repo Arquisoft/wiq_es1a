@@ -8,6 +8,7 @@ import Stats from './pages/Stats/Stats.js';
 import './App.css';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import { ProtectedRoute } from './routers/ProtectedRoute.js';
+import Sobre from './pages/Sobre/Sobre.js';
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
 
         {/** Rutas privadas */}
         <Route element = {<ProtectedRoute /> }>
-             <Route path='/home' element={<Home />} />
+            <Route path='/home' element={<Home />} />
+             <Route path='/sobre' element={<Sobre />} />
              <Route path='/home/clasico' element={<Clasico />} />
              <Route path='/home/bateria' element={<Bateria />} />
              <Route path='/stats' element={<Stats />} />
