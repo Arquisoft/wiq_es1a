@@ -2,20 +2,20 @@ import React from 'react';
 import { render, fireEvent, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import AddUser from './AddUser';
+import Register from './Register';
 
 const mockAxios = new MockAdapter(axios);
 
-describe('AddUser component', () => {
+describe('Register component', () => {
   beforeEach(() => {
     mockAxios.reset();
   });
 
   it('should add user successfully', async () => {
-    render(<AddUser />);
+    render(<Register />);
 
-    const usernameInput = screen.getByLabelText(/Username/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
+    const usernameInput = screen.getByPlaceholderText(/Username/i);
+    const passwordInput = screen.getByPlaceholderText(/Password/i);
     const addUserButton = screen.getByRole('button', { name: /Add User/i });
 
     // Mock the axios.post request to simulate a successful response
@@ -35,10 +35,10 @@ describe('AddUser component', () => {
   });
 
   it('should handle error when adding user', async () => {
-    render(<AddUser />);
+    render(<Register />);
 
-    const usernameInput = screen.getByLabelText(/Username/i);
-    const passwordInput = screen.getByLabelText(/Password/i);
+    const usernameInput = screen.getByPlaceholderText(/Username/i);
+    const passwordInput = screen.getByPlaceholderText(/Password/i);
     const addUserButton = screen.getByRole('button', { name: /Add User/i });
 
     // Mock the axios.post request to simulate an error response
