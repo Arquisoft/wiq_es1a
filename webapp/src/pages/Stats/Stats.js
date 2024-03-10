@@ -52,6 +52,15 @@ const Stats = () => {
 
   if (isLoading) {
     return  <div>
+              <label htmlFor="usernameInput">Nombre de Usuario: </label>
+              <input
+                  type="text"
+                  id="usernameInput"
+                  value={username}
+                  onChange={handleUsernameChange}
+              />
+              <button onClick={handleSearch}>Buscar</button>
+              //prueba
               <h2> Cargando ... </h2>
               <p>Se está consultando su búsqueda, espere unos instantes.</p>
             </div>
@@ -86,7 +95,9 @@ const Stats = () => {
         type="text"
         id="usernameInput"
         value={username}
-        onChange={handleUsernameChange}
+        onChange={handleUsernameChange
+        }
+        data-testid="username-input"
       />
       <button onClick={handleSearch}>Buscar</button>
       {stats === null && !isLoading && (
