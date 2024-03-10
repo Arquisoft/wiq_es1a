@@ -3,6 +3,7 @@ import "./Home.css";
 import Nav from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
 import { Link } from "react-router-dom";
+
 import { useLocation } from "react-router-dom";
 
 const Home = () => {

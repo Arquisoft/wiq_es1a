@@ -43,7 +43,6 @@ See https://docs.arc42.org/section-7/[Deployment View] in the arc42 documentatio
 ****
 
 === Infrastructure Level 1
-image::UML.png[UML]
 
 [role="arc42help"]
 ****
@@ -61,16 +60,14 @@ _**<Overview Diagram>**_
 
 Motivation::
 
-_<Simple structure of how the different parts of the application would work>_
+_<explanation in text form>_
 
 Quality and/or Performance Features::
 
-_<We will have a link to wikidata that will be where we get the different questions, in addition a registration and persistence layer of user and registration data, finally they will be united in the link layer and this will be the one that is directly related to the application>_
+_<explanation in text form>_
 
 Mapping of Building Blocks to Infrastructure::
-_<Quiestion Generator: give us the questions posible answers
-  User service: All the options that users needs
-  Register: create new acounts or login with one>_
+_<description of the mapping>_
 
 
 === Infrastructure Level 2
@@ -82,16 +79,26 @@ Here you can include the internal structure of (some) infrastructure elements fr
 Please copy the structure from level 1 for each selected element.
 ****
 
-==== _<Infrastructure Element 1>_
+==== APP
 
-_<diagram + explanation>_
+"App": It is the part with which the user interacts. This part would be responsible for providing the visual interface and using the rest of the created classes.
 
-==== _<Infrastructure Element 2>_
+==== LINK
 
-_<diagram + explanation>_
+"Link" is the part of the application that connects the rest of the parts. This will facilitate the use of the different parts of the application in the App section.
 
-...
+==== REGISTER
 
-==== _<Infrastructure Element n>_
+"Register" is the part of the application that handles user registration and login. It's very important as it's the first thing a potential user will encounter when they visit our page.
 
-_<diagram + explanation>_
+==== USER SERVICE
+
+"User service" is the part of the application that generates the various services within the application to the user, such as a ranking, correctly answered questions, and so on.
+
+==== QUESTION GENERATOR
+
+"Question generator" is the part of the application that, using the data from Wikidata and some pre-created templates, generates the questions and possible answers of the application.
+
+==== WIKIDATA
+
+Wikidata” is the API that you will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects. 

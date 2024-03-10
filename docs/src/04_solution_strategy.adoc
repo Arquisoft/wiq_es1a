@@ -3,26 +3,27 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-solution-strategy]]
 == Solution Strategy
 
-Elaboramos una aplicacíon en la que los usuarios pueden registrarse para jugar, donde en cada juego tendran que responder varias preguntas, de distintas categorias, donde se guardará
-un ranking con la máxima puntuación del usuario y se podrá comparar con otros usuarios, también tendra una sección que indique su promedio de aciertos y en que categoría acierta más preguntas.
+We developed an application in which users can register to play, where in each game they will have to answer several questions, from different categories, where it will be saved
+A ranking with the maximum score of the user and can be compared with other users, it will also have a section that indicates their correct guess and in which category they get the most questions right.
 
-.Tecnologías usadas para llevar a cabo:
+.Technologies used to carry out:
 
-* MongoDB: MongoDB es una base de datos NoSQL de código abierto que utiliza un modelo de datos basado en documentos para el almacenamiento y recuperación de información.
-* React JS: Es un framework creado por Facebook ampliamente utlizado para crear componentes de la interfaz de usuario. Escogido por el gran volumen de documentación y ser el framework utilizado durante los anteriores cursos.
-* WikiData: Es una base de conocimientos gratuita modificada por seres humanos como por máquinas, y es de donde obtendremos nuestras preguntas.
-* Microsoft Azure: plataforma de computación en la nube que proporciona servicios de infraestructura, plataforma y software como servicio para alojar, administrar y escalar aplicaciones y servicios en línea.
+* MongoDB: MongoDB is an open-source NoSQL database that uses a document-based data model for information storage and retrieval.
+* React JS: It's a framework created by Facebook that's widely used to create user interface components. Chosen for the large volume of documentation and the fact that it is the framework used during the previous courses.
+* WikiData: It's a free knowledge base modified by humans as well as machines, and it's where we'll get our questions from.
+* Microsoft Azure: A cloud computing platform that provides infrastructure, platform, and software-as-a-service services to host, manage, and scale online applications and services.
 
-.Diseño
-La página web diseñada está compuesta por un frontend en React, un backend en Node.js y está documentada usando Asciidoc. Cada usuario tendrá su propia cuenta donde se guardará su información. Las decisiones relacionadas con el diseño se detallan en el punto 9.
+=== Design
+The designed website is composed of a frontend in React, a backend in Node.js and is documented using Asciidoc. Each user will have their own account where their information will be saved. Design-related decisions are detailed in point 9.
 
-.Seguridad
-Garantizamos la seguridad del usuario
+=== Security
+We guarantee the safety of the user
 
-.Testabilidad
-Se realizarán pruebas para cada parte individual de la aplicación, garantizando así el correcto funcionamiento de los diferentes modulos tanto individualmente como de forma conjunta.
+=== Testability
+Tests will be carried out for each individual part of the application, thus ensuring the correct operation of the different modules both individually and together.
 
-.Interfaz
-La interfaz gráfica será elegida entre todos los miembros del equipo, aportando cada uno algún boceto o idea, los cuales serán puestos en común y se decidirá cual se ajusta mejor a la apicación esperada y que elementos de dichos bocetos resultan más adecuados.
-Para ello se tendrá en cuenta la usabilidad y las necesidades de los difentes tipos de usuarios.
+=== Interface
+The graphical interface will be chosen among all the members of the team, each one contributing a sketch or idea, which will be shared and it will be decided which best fits the expected performance and which elements of these sketches are most suitable.
+This will take into account the usability and needs of different types of users.
+
 

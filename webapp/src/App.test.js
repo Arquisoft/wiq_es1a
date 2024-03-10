@@ -90,5 +90,6 @@ describe('Footer Component', () => {
 /*test('renders learn react link', () => {
   render(<App />);
   const linkElement = screen.getByText(/Welcome to wiq_es1a/i);
-  expaect(linkElement).toBeInTheDocument();
+  expect(linkElement).toBeInTheDocument();
 });*/
+

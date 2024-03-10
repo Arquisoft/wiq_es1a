@@ -2,15 +2,23 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+
 import {useNavigate} from "react-router-dom";
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
+import './Login.css';
+
 
 const Login = () => {
+  const signIn = useSignIn();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken] = useState('');
   const [error, setError] = useState('');
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate();
+
   const navigate = useNavigate();
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -18,10 +26,11 @@ const Login = () => {
   const loginUser = async () => {
     try {
       const response = await axios.post(`${apiEndpoint}/login`, { username, password });
-
+      console.log(response);
       // Extract data from the response
       const { createdAt: userCreatedAt } = response.data;
       const { token: token } = response.data;
+
       setCreatedAt(userCreatedAt);
       setLoginSuccess(true);
 
@@ -29,9 +38,10 @@ const Login = () => {
       localStorage.setItem('token', token);
 
       localStorage.setItem('username', username);
-      
+
     } catch (error) {
-      setError(error.response.data.error);
+      //console.log(error);
+      //setError(error.response.data.error);
     }
   };
 
@@ -40,40 +50,43 @@ const Login = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
+    <div className="login-container">
       {loginSuccess ? (
         navigate("/home")
       ) : (
-        <div>
-          <Typography component="h1" variant="h5">
-            Login
-          </Typography>
-          <TextField
-            margin="normal"
-            fullWidth
-            label="Username"
+        <>
+          <h1 className="login-header">Login</h1>
+          <input
+            className="login-input"
+            type="text"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          <TextField
-            margin="normal"
-            fullWidth
-            label="Password"
+          <input
+            className="login-input"
             type="password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button variant="contained" color="primary" onClick={loginUser}>
+          <button className="login-button" onClick={loginUser}>
             Login
-          </Button>
-          <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="Login successful" />
-          {error && (
-            <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
+          </button>
+          {openSnackbar && (
+            <div className="login-snackbar">
+              Login successful
+            </div>
           )}
-        </div>
+          {error && (
+            <div className="login-error">
+              Error: {error}
+            </div>
+          )}
+        </>
       )}
-    </Container>
-  );
-};
+      </div>
+    )
+}  
 
 export default Login;
