@@ -23,7 +23,7 @@ app.post("/saveGame", async (req, res) => {
     const gameData = req.body.gameData;
 
     if(gamemode==="clasico"){
-      const stats = await StatsClasico.findOne({ username });
+      const stats = await StatsClasico.findOne({ username:username });
 
       if (!stats) {
         // Si no existen estadísticas, crear un nuevo documento
@@ -38,7 +38,7 @@ app.post("/saveGame", async (req, res) => {
           avgTime: gameData.avgTime,
         });
       } else {
-        stats = statsGetter.calculateNewStatsClasico(gameData);
+        stats = statsGetter.calculateStatsClasico(gameData);
       }
 
       await stats.save();
