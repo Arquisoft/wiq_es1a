@@ -67,6 +67,7 @@ const Stats = () => {
             id="usernameInput"
             value={username}
             onChange={handleUsernameChange}
+            data-testid="usernameInput"
           />
           <h2>Error: {error}</h2>
           <p>
@@ -89,9 +90,8 @@ const Stats = () => {
         type="text"
         id="usernameInput"
         value={username}
-        onChange={handleUsernameChange
-        }
-        data-testid="username-input"
+        onChange={handleUsernameChange}
+        data-testid="usernameInput"
       />
       {stats === null && !isLoading && (
           <div>
