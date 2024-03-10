@@ -9,23 +9,6 @@ const Stats = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchStats = () => {
-    setIsLoading(true);
-    fetch(`http://localhost:8001/getstats?user=${username}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setStats(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error al obtener las preguntas:", error);
-        setError(
-          error.message || "Ha ocurrido un error al obtener las estadísticas"
-        );
-        setIsLoading(false);
-      });
-  };
-
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       fetch(`http://localhost:8001/getstats?user=${username}`)
@@ -36,6 +19,7 @@ const Stats = () => {
         })
         .catch((error) => {
           console.error("Error al obtener las preguntas:", error);
+          setError(error);
           setIsLoading(false);
         });
     }, 2000);
