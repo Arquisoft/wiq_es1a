@@ -12,7 +12,6 @@
             "¿Cuál es la esperanza de vida media de ",
             "¿En qué fecha se fundó ",
             "¿Cuál es la forma de gobierno de ",
-
             "¿Cuál es el lema de "
         ]
     },
@@ -40,7 +39,7 @@
     "arte": {
         "entity": "Q3305213",
         "props": ["P571", "P135", "P276"],
-        "types": ["str", "str", "str"],
+        "types": ["date", "str", "str"],
         "preguntas": [
             "¿En qué año se pintó la obra ",
             "¿A qué movimiento artístico pertenece la obra ",
