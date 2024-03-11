@@ -24,18 +24,25 @@ const Nav = () => {
   return (
     <nav>
       <h1 className="logo">WIQ!</h1>
-      <Link to="/home">Home</Link>
-      <Link to="/sobre">Sobre nosotros</Link>
-      <Link to="/stats">Stats</Link>
-      <input
-        type="checkbox"
-        class="theme-toggle"
-        onChange={toggleTheme}
-        checked={isDarkTheme}
-      />
-      <button class="disconnect" onClick={() => Logout()}>
-        Desconectarse
-      </button>
+      <div className="menuItems">
+        <Link to="/home">Home</Link>
+        <Link to="/sobre">Sobre nosotros</Link>
+        <Link to="/stats">Stats</Link>
+      </div>
+      <div className="rightItems">
+        <input
+          type="checkbox"
+          class="theme-toggle"
+          onChange={toggleTheme}
+          checked={isDarkTheme}
+        />
+        <button className="profile">
+          Perfil
+        </button>
+        <button className="disconnect" onClick={() => Logout()}>
+          Desconectarse
+        </button>
+      </div>
     </nav>
   );
 };

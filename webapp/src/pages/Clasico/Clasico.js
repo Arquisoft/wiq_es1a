@@ -6,18 +6,20 @@ import Footer from "../../components/Footer/Footer.js";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
+  const SECS_PER_QUESTION = 10
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
   const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
-  const [tiempoRestante, setTiempoRestante] = useState(10);
+  const [tiempoRestante, setTiempoRestante] = useState(SECS_PER_QUESTION);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [preguntaTerminada, setPreguntaTerminada] = useState(false);
   const [mostrarMenu, setMostrarMenu] = useState(false); // Estado para mostrar el menú al finalizar el juego
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState("");
   const navigate = useNavigate();
+  const [progressPercent, setProgressPercent] = useState(100);
 
   //Used for user stats
   const [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
@@ -47,6 +49,7 @@ const JuegoPreguntas = () => {
   },[]);
 
   useEffect(() => {
+    setProgressPercent( tiempoRestante / SECS_PER_QUESTION * 100);
     if (tiempoRestante === 0) {
       setPreguntaTerminada(true);
       setTimeout(() => {
@@ -101,6 +104,8 @@ const JuegoPreguntas = () => {
 
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
+    setProgressPercent(100);
+
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
@@ -196,6 +201,12 @@ const JuegoPreguntas = () => {
           </div>
           <div className="timer">Tiempo restante: {tiempoRestante}</div>
           <div className="points">Puntuación: {puntuacion}</div>
+          <div className="progressBarContainer">
+            <div
+              className="progressBar"
+              style={{ width: `${progressPercent}%` }}
+            ></div>
+          </div>
         </div>
       )}
       <Footer />
