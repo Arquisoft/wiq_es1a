@@ -1,0 +1,8 @@
+.gotoregister,
+.gotologin {
+  box-shadow: none;
+  border: none;
+  text-decoration: underline;
+  padding: 0.2rem;
+  margin-top: 1rem;
+}

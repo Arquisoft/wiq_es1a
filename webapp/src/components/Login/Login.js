@@ -1,41 +1,37 @@
 // src/components/Login.js
-import React, { useState } from 'react';
-import axios from 'axios';
-import {useNavigate} from "react-router-dom";
-import './Login.css';
-
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
   //const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate();
 
-  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+  const apiEndpoint =
+    process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
   const loginUser = async () => {
-    try {
-      const response = await axios.post(`${apiEndpoint}/login`, { username, password });
-      console.log(response);
-      // Extract data from the response
-      //const { createdAt: userCreatedAt } = response.data;
-      const token = response.data;
+    await axios
+      .post(`${apiEndpoint}/login`, { username, password })
+      .then((response) => {
+        const token = response.data;
 
-      //setCreatedAt(userCreatedAt);
-      setLoginSuccess(true);
+        setLoginSuccess(true);
 
-      setOpenSnackbar(true);
-      localStorage.setItem('token', token);
+        setOpenSnackbar(true);
+        localStorage.setItem("token", token);
 
-      localStorage.setItem('username', username);
-
-    } catch (error) {
-      //console.log(error);
-      setError(error.response.data.error);
-    }
+        localStorage.setItem("username", username);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
   };
 
   return (
@@ -63,19 +59,13 @@ const Login = () => {
             Login
           </button>
           {openSnackbar && (
-            <div className="login-snackbar">
-              Login successful
-            </div>
+            <div className="login-snackbar">Login successful</div>
           )}
-          {error && (
-            <div className="login-error">
-              Error: {error}
-            </div>
-          )}
+          {error && <div className="login-error">Error: {error}</div>}
         </>
       )}
-      </div>
-    )
-}  
+    </div>
+  );
+};
 
 export default Login;
