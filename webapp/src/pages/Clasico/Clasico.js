@@ -49,7 +49,17 @@ const JuegoPreguntas = () => {
   },[]);
 
   useEffect(() => {
-    setProgressPercent( tiempoRestante / SECS_PER_QUESTION * 100);
+    setProgressPercent(tiempoRestante / SECS_PER_QUESTION * 100);
+  
+    const timer = setInterval(() => {
+      setTiempoRestante(prevTiempo => (prevTiempo <= 0 ? 0 : prevTiempo - 0.01));
+    }, 10); 
+  
+    return () => clearInterval(timer);
+  }, [tiempoRestante]);
+
+  
+  useEffect(() => {
     if (tiempoRestante === 0) {
       setPreguntaTerminada(true);
       setTimeout(() => {
@@ -199,7 +209,7 @@ const JuegoPreguntas = () => {
               </button>
             ))}
           </div>
-          <div className="timer">Tiempo restante: {tiempoRestante}</div>
+          <div className="timer">Tiempo restante: {Math.floor(tiempoRestante)}</div>
           <div className="points">Puntuación: {puntuacion}</div>
           <div className="progressBarContainer">
             <div
