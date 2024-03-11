@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const statsClasicoSchema = new mongoose.Schema({
+const statsClasico = new mongoose.Schema({
     username: {
       type: String,
       required: true,
@@ -35,6 +35,6 @@ const statsClasicoSchema = new mongoose.Schema({
       },
 });
 
-const StatsClasico = mongoose.model('StatsClasico', statsClasicoSchema);
+const StatsClasico = mongoose.model('StatsClasico', statsClasico);
 
 module.exports = StatsClasico

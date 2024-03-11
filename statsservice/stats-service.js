@@ -75,5 +75,10 @@ app.get("/stats", async (req, res) => {
 const server = app.listen(port, () => {
   console.log(`Stats Service listening at http://localhost:${port}`);
 });
+
+server.on('close', () => {
+  // Close the Mongoose connection
+  mongoose.connection.close();
+});
   
 module.exports = server;

@@ -3,6 +3,7 @@ import "./Clasico.css";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
+import axios from 'axios';
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
@@ -104,7 +105,6 @@ const JuegoPreguntas = () => {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
-        console.log("hola");
 
         if (preguntasCorrectas + preguntasFalladas > 0) {
           setTiempoMedio(
@@ -125,28 +125,17 @@ const JuegoPreguntas = () => {
           },
         };
         console.log(JSON.stringify(newGame));
-        fetch(URL+'/saveGame', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(newGame),
-        })
-          .then((response) => {
-            
-            if (!response.ok) {
-              console.log("throw");
-              throw new Error('Error al guardar el juego');
-            }
-            console.log("terminado");
-            
-          })
-          .catch((error) => {
-            console.error('Error al guardar el juego:', error);
-            console.log("errorguardar");
-          });
-          setJuegoTerminado(true);
-        }
+        
+        try {
+          const response = await axios.post(URL + '/saveGame', newGame);
+          console.log("Solicitud exitosa:", response.data);
+          
+      } catch (error) {
+          console.error('Error al guardar el juego:', error);
+      } finally {
+        setJuegoTerminado(true);
+      }
+      }
     };
 
   const handleRepetirJuego = () => {
