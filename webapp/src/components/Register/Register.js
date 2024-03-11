@@ -34,6 +34,7 @@ const AddUser = () => {
         margin="normal"
         fullWidth
         label="Username"
+        placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
@@ -43,13 +44,14 @@ const AddUser = () => {
         fullWidth
         label="Password"
         type="password"
+        placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button variant="contained" color="primary" onClick={addUser}>
         Add User
       </Button>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User added successfully" />
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User added successfully"/>
       {error && (
         <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
       )}

@@ -4,21 +4,41 @@ import Nav from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
 
 const Sobre = () => {
-    return (
-      <>
-        <Nav />
-        <div className="games-container">
-          <hgroup>
-            <h1>Estos son los diseñadores de la aplicación</h1>
-            <h2>Martin Cancio Barrera - UO287561</h2>
-            <h2>Iyán Fernandez Riol - UO288231</h2>
-            <h2>Rodrigo García Iglesias - UO276396</h2>
-            <h2>Alfredo Jirout Cid - UO288443</h2>
-          </hgroup>         
-        </div>
-        <Footer />
-      </>
-    );
-  };
-  
-  export default Sobre;
+  const designers = [
+    { name: 'Martín Cancio Barrera', id: 'UO287561', github: 'https://github.com/CANCI0' },
+    { name: 'Iyán Fernández Riol', id: 'UO288231', github: 'https://github.com/iyanfdezz' },
+    { name: 'Rodrigo García Iglesias', id: 'UO276396', github: 'https://github.com/Rodrox11' },
+    { name: 'Alfredo Jirout Cid', id: 'UO288443', github: 'https://github.com/UO288443' }
+  ];
+
+  return (
+    <>
+      <Nav />
+      <div className="sobre-container">
+        <h1>Equipo WIQ_es1a</h1>
+        <h2>Nuestro equipo de desarrollo</h2>
+        <table className="designers-table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>UO</th>
+              <th>GitHub</th>
+            </tr>
+          </thead>
+          <tbody>
+            {designers.map((designer, index) => (
+              <tr key={index}>
+                <td>{designer.name}</td>
+                <td>{designer.id}</td>
+                <td><a href={designer.github} target="_blank" rel="noopener noreferrer">Mi GitHub</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <Footer />
+    </>
+  );
+};
+
+export default Sobre;

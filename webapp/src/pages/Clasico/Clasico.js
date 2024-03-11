@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
 
 const JuegoPreguntas = () => {
+  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
+
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
@@ -24,7 +26,7 @@ const JuegoPreguntas = () => {
   const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:8000/questions?tematica=all&n=10")
+    fetch(URL + "/questions?tematica=all&n=10")
       .then((response) => {
         if (!response.ok) {
           navigate("/home?error=1");
@@ -41,7 +43,8 @@ const JuegoPreguntas = () => {
         console.error("Error al obtener las preguntas:", error);
         navigate("/home?error=1");
       });
-  }, []);
+      // eslint-disable-next-line
+  },[]);
 
   useEffect(() => {
     if (tiempoRestante === 0) {
@@ -55,12 +58,14 @@ const JuegoPreguntas = () => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [tiempoRestante]);
 
   useEffect(() => {
     if (juegoTerminado) {
       setMostrarMenu(true);
     }
+    // eslint-disable-next-line
   }, [juegoTerminado]);
 
   const handleRespuestaSeleccionada = (respuesta) => {

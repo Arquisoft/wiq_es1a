@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import "./Stats.css";
 
 const Stats = () => {
+  const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
+
   const [username, setUsername] = useState(localStorage.username);
   const [stats, setStats] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
@@ -28,7 +29,7 @@ const Stats = () => {
   };
 
   useEffect(() => {
-
+    const delayDebounceFn = setTimeout(() => {
     fetch(`http://localhost:8004/stats?user=${username}?gamemode=${gamemode}`)
       .then((response) => response.json())
       .then((data) => {
@@ -39,6 +40,8 @@ const Stats = () => {
         console.error('Error al obtener las estadisticas:', error);
         setIsLoading(false);
       });
+    },2000);
+    return () => clearTimeout(delayDebounceFn);
   }, [username]);
 
   const handleUsernameChange = (event) => {

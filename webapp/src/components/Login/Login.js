@@ -21,7 +21,7 @@ const Login = () => {
       console.log(response);
       // Extract data from the response
       //const { createdAt: userCreatedAt } = response.data;
-      const { token: token } = response.data;
+      const token = response.data;
 
       //setCreatedAt(userCreatedAt);
       setLoginSuccess(true);
@@ -35,10 +35,6 @@ const Login = () => {
       //console.log(error);
       setError(error.response.data.error);
     }
-  };
-
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
   };
 
   return (

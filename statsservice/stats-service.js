@@ -10,6 +10,7 @@ const statsGetter= new StatsForUser();
 const app = express();
 const port = 8004;
 
+const userServiceUrl = process.env.USER_SERVICE_URL || "http://localhost:8001";
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -24,6 +25,7 @@ app.post("/saveGame", async (req, res) => {
 
     if(gamemode==="clasico"){
       const stats = await StatsClasico.findOne({ username:username });
+
 
       if (!stats) {
         // Si no existen estadísticas, crear un nuevo documento
@@ -56,6 +58,7 @@ app.get("/stats", async (req, res) => {
   try {
     var data = await statsGetter.getStatsForUser(req.query.user,req.query.gamemode);
     res.json(data);
+
   } catch (error) {
     
     res.status(400).json({ error: "Error al obtener las estadísticas:"+error.message });
