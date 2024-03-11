@@ -24,14 +24,17 @@ mongoose.connect(mongoUri);
 app.post("/saveGame", async (req, res) => {
   try{
     const username = req.body.username;
-    const gamemode = req.body.gamemode;
+    const gamemode = req.body.gameMode;
     const gameData = req.body.gameData;
 
-    if(gamemode==="clasico"){
-      const stats = await StatsClasico.findOne({ username:username });
 
+    if(gamemode=="clasico"){
+      console.log("statsservice");
+      var stats = await StatsClasico.findOne({ username:username });
+      console.log(stats);
 
       if (!stats) {
+        console.log("no hay stats");
         // Si no existen estadísticas, crear un nuevo documento
         stats = new StatsClasico({
           username: username,

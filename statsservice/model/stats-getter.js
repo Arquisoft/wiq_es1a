@@ -4,7 +4,7 @@ class StatsForUser {
 
     async getStatsForUser(username,gamemode){
         var statsJSON=null;
-            if(gamemode==="clasico"){
+            if(gamemode=="clasico"){
                 statsJSON = await this.getStatsClasico(username);
             }
         return statsJSON;

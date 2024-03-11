@@ -106,11 +106,11 @@ const JuegoPreguntas = () => {
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
 
-        if (preguntasCorrectas + preguntasFalladas > 0) {
-          setTiempoMedio(
-            tiempoTotal / (preguntasCorrectas + preguntasFalladas)
-          );
-        }
+      if (preguntasCorrectas + preguntasFalladas > 0) {
+        setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
+      }
+
+        setTimeout(() => {},2000);
 
         //Now we store the game in the user's DB
         const username = localStorage.getItem("username");
