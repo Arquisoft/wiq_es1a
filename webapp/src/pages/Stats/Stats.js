@@ -14,7 +14,7 @@ const Stats = () => {
 
   const fetchStats = () => {
     setIsLoading(true);
-    fetch(`http://localhost:8004/stats?user=${username}?gamemode=${gamemode}`)
+    fetch(gatewayUrl+`/stats?user=${username}?gamemode=${gamemode}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);
@@ -30,7 +30,7 @@ const Stats = () => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-    fetch(`http://localhost:8004/stats?user=${username}?gamemode=${gamemode}`)
+    fetch(gatewayUrl+`/stats?user=${username}&gamemode=${gamemode}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);

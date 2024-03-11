@@ -5,17 +5,21 @@ const cors = require('cors');
 const axios = require('axios');
 const StatsClasico = require("./model/stats-clasico-model.js");
 const StatsForUser = require("./model/stats-getter.js");
+const mongoose = require('mongoose');
 
 const statsGetter= new StatsForUser();
 const app = express();
 const port = 8004;
 
-const userServiceUrl = process.env.USER_SERVICE_URL || "http://localhost:8001";
+const URL = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
 
 app.use(bodyParser.json());
 app.use(cors());
 
 app.set("json spaces", 40);
+
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/statsdb';
+mongoose.connect(mongoUri);
 
 app.post("/saveGame", async (req, res) => {
   try{
@@ -42,7 +46,8 @@ app.post("/saveGame", async (req, res) => {
       } else {
         stats = statsGetter.calculateStatsClasico(gameData);
       }
-
+      console.log(JSON.stringify(stats));
+      console.log(stats);
       await stats.save();
   
       res.json({ message: "Partida guardada exitosamente" });

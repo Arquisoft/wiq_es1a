@@ -3,9 +3,9 @@ const StatsClasico = require('./stats-clasico-model.js');
 class StatsForUser {
 
     async getStatsForUser(username,gamemode){
-        const statsJSON=null;
+        var statsJSON=null;
             if(gamemode==="clasico"){
-                statsJSON = await getStatsClasico(username);
+                statsJSON = await this.getStatsClasico(username);
             }
         return statsJSON;
             
@@ -13,7 +13,7 @@ class StatsForUser {
 
     async getStatsClasico(username){
         try {
-            const stats = await StatsClasico.findOne({ username });
+            var stats = await StatsClasico.findOne({ username });
     
             if (stats) {
                 return {

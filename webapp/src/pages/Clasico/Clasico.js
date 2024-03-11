@@ -125,7 +125,7 @@ const JuegoPreguntas = () => {
           },
         };
         console.log(JSON.stringify(newGame));
-        fetch('http://localhost:8004/saveGame', {
+        fetch(URL+'/saveGame', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
