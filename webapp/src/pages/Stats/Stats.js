@@ -26,6 +26,7 @@ const Stats = () => {
         });
     }, 2000);
     return () => clearTimeout(delayDebounceFn);
+    // eslint-disable-next-line
   }, [username]);
 
   const handleUsernameChange = (event) => {
