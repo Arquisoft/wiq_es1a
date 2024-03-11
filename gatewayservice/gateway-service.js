@@ -8,9 +8,9 @@ const port = 8000;
 
 const authServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:8002";
 const userServiceUrl = process.env.USER_SERVICE_URL || "http://localhost:8001";
-const questionServiceUrl = process.env.QUESTION_SERVICE_URL || "http://localhost:8003";
+const questionServiceUrl =
+  process.env.QUESTION_SERVICE_URL || "http://localhost:8003";
 const statsServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:8004";
-
 
 app.use(cors());
 app.use(express.json());
@@ -71,7 +71,9 @@ app.get("/questions", async (req, res) => {
 app.get("/stats", async (req, res) => {
   try {
     // Forward the stats request to the stats service
-    const statsResponse = await axios.get(statsServiceUrl + "/stats", req.body);
+    const statsResponse = await axios.get(statsServiceUrl + "/stats", {
+      params: req.query,
+    });
     res.json(statsResponse.data);
   } catch (error) {
     res
@@ -98,10 +100,9 @@ app.post("/saveGame", async (req, res) => {
 app.get("/getstats", async (req, res) => {
   try {
     // Forward the stats request to the stats service
-    const statsResponse = await axios.get(
-      userServiceUrl + "/getstats",
-      req.body
-    );
+    const statsResponse = await axios.get(userServiceUrl + "/getstats", {
+      params: req.query,
+    });
     res.json(statsResponse.data);
   } catch (error) {
     res

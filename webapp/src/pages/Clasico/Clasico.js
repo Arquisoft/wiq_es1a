@@ -6,6 +6,7 @@ import Footer from "../../components/Footer/Footer.js";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
+
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
@@ -121,7 +122,7 @@ const JuegoPreguntas = () => {
           avgTime: tiempoMedio,
         };
 
-        const response = await fetch("http://localhost:8001/userSaveGame", {
+        const response = await fetch(URL + "/userSaveGame", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

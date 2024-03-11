@@ -4,6 +4,8 @@ import Footer from "../../components/Footer/Footer.js";
 import "./Stats.css";
 
 const Stats = () => {
+  const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
+
   const [username, setUsername] = useState(localStorage.username);
   const [stats, setStats] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,7 +13,7 @@ const Stats = () => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      fetch(`http://localhost:8001/getstats?user=${username}`)
+      fetch(gatewayUrl + `/getstats?user=${username}`)
         .then((response) => response.json())
         .then((data) => {
           setStats(data);
