@@ -8,8 +8,7 @@ const port = 8000;
 
 const authServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:8002";
 const userServiceUrl = process.env.USER_SERVICE_URL || "http://localhost:8001";
-const questionServiceUrl =
-  process.env.QUESTION_SERVICE_URL || "http://localhost:8003";
+const questionServiceUrl = process.env.QUESTION_SERVICE_URL || "http://localhost:8003";
 const statsServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:8004";
 
 

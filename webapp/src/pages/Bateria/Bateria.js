@@ -5,6 +5,7 @@ import Footer from "../../components/Footer/Footer.js";
 import { Link, useNavigate } from "react-router-dom";
 
 const JuegoPreguntas = () => {
+  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
@@ -15,7 +16,7 @@ const JuegoPreguntas = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8000/questions?tematica=all&n=9000")
+    fetch(URL + "/questions?tematica=all&n=9000")
       .then((response) => {
         if (!response.ok) {
           navigate("/home?error=1");

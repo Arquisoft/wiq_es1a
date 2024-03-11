@@ -6,6 +6,7 @@ const axios = require('axios');
 const app = express();
 const port = 8004;
 
+const userServiceUrl = process.env.USER_SERVICE_URL || "http://localhost:8001";
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -17,7 +18,7 @@ app.post("/saveGame", async (req, res) => {
     const { username, correctAnswers, incorrectAnswers, points, avgTime } = req.body;
 
     // Hacer una solicitud al servicio user-service para guardar el juego
-    const response = await axios.post('http://localhost:8001/userSaveGame', {
+    const response = await axios.post(userServiceUrl + '/userSaveGame', {
       username,
       correctAnswers,
       incorrectAnswers,
@@ -43,7 +44,7 @@ app.get("/stats", async (req, res) => {
     const username = req.query.user;
 
     // Hacer una solicitud al servicio user-service para obtener estadísticas
-    const response = await axios.get(`http://localhost:8001/getstats?user=${username}`);
+    const response = await axios.get(userServiceUrl + '/getstats?user=${username}');
 
     res.json(response.data);
   } catch (error) {
