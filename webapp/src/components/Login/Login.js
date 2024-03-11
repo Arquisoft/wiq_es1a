@@ -40,7 +40,7 @@ const Login = () => {
         navigate("/home")
       ) : (
         <>
-          <h1 className="login-header">Login</h1>
+          <h1 className="login-header">Identifícate</h1>
           <input
             className="login-input"
             type="text"

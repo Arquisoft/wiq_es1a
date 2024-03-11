@@ -1,43 +1,26 @@
 .logo {
   font-family: oswald, sans-serif;
   width: 100%;
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 700;
   margin: 0;
   text-shadow: 4px 4px 0 var(--shadow);
+  justify-self: baseline;
 }
 
 nav {
-  width: 80vw;
-  display: flex;
-  flex-wrap: wrap;
+  width: 100%;
+  gap: 3rem;
+  display: grid;
+  grid-auto-flow: column;
   border: 3px solid var(--borders);
-  border-radius: 1rem;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
-  margin: 1rem;
-  justify-content: center;
-  -webkit-box-shadow: 10px 10px 5px 0px var(--shadow);
-  -moz-box-shadow: 10px 10px 5px 0px var(--shadow);
-  box-shadow: 10px 10px 5px 0px var(--shadow);
 }
 
-nav ul {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-}
-
-nav li {
-  display: flex;
-  flex-direction: row;
-}
-
-.theme-toggle{
-  width: 5%;
-  height: 10%;
-  margin-left: 90%;
-}
-
-.disconnect{
-  margin-left: 70%;
+nav > *:not(.logo){
+  height: 6.5%;
+  width: 10rem;
+  text-align: center;
 }

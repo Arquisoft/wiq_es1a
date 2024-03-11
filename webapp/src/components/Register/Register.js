@@ -12,15 +12,6 @@ const AddUser = () => {
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const addUser = async () => {
-    try {
-      await axios.post(`${apiEndpoint}/adduser`, { username, password });
-      setOpenSnackbar(true);
-    } catch (error) {
-      setError(error.response.data.error);
-    }
-  };
-
   const handleRegister = () => {
     if (password !== passwordR) {
       setError("Las contraseñas no coinciden");
