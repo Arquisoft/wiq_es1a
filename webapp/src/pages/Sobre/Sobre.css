@@ -1,22 +1,44 @@
-.games-container{
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
-}
-
-ul{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    grid-template-columns: 1fr;
-    list-style-type: none;
-    text-align: center;
-    gap: 1rem;
-    margin: 1rem;
-    padding: 0;
-}
-
-ul li{
+.sobre-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .sobre-container h1 {
+    font-size: 24px;
+  }
+  
+  .sobre-container h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .designers-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .designers-table th, .designers-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .designers-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .designers-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .designers-table a {
     text-decoration: none;
-    
-}
+    color: #333;
+  }
+  
+  .designers-table a:hover {
+    text-decoration: underline;
+  }
+  
