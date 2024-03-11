@@ -19,7 +19,7 @@ const Nav = () => {
 
   const Logout = () => {
     localStorage.removeItem("token");
-    navigate("")
+    navigate("/")
   };
 
   return (
