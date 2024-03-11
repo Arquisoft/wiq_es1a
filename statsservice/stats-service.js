@@ -29,12 +29,10 @@ app.post("/saveGame", async (req, res) => {
 
 
     if(gamemode=="clasico"){
-      console.log("statsservice");
       var stats = await StatsClasico.findOne({ username:username });
       console.log(stats);
 
       if (!stats) {
-        console.log("no hay stats");
         // Si no existen estadísticas, crear un nuevo documento
         stats = new StatsClasico({
           username: username,
@@ -49,8 +47,6 @@ app.post("/saveGame", async (req, res) => {
       } else {
         stats = statsGetter.calculateStatsClasico(gameData);
       }
-      console.log(JSON.stringify(stats));
-      console.log(stats);
       await stats.save();
   
       res.json({ message: "Partida guardada exitosamente" });

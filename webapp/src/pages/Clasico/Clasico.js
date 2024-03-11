@@ -124,7 +124,6 @@ const JuegoPreguntas = () => {
             avgTime: tiempoMedio,
           },
         };
-        console.log(JSON.stringify(newGame));
         
         try {
           const response = await axios.post(URL + '/saveGame', newGame);

@@ -84,8 +84,6 @@ app.get("/stats", async (req, res) => {
 
 app.post("/saveGame", async (req, res) => {
   try {
-    console.log(req.body);
-    console.log("tamos en gateway");
     // Forward the save game request to the stats service
     const gameResponse = await axios.post(
       statsServiceUrl + "/saveGame",
@@ -93,7 +91,6 @@ app.post("/saveGame", async (req, res) => {
     );
     res.json(gameResponse.data);
   } catch (error) {
-    console.log(error);
     res
       .status(error.response.status)
       .json({ error: error.response.data.error });
