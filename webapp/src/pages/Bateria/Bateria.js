@@ -32,6 +32,7 @@ const JuegoPreguntas = () => {
         console.error("Error al obtener las preguntas:", error);
         navigate("/home?error=1");
       });
+      // eslint-disable-next-line
   },[]);
 
   useEffect(() => {
