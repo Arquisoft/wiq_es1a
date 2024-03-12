@@ -17,6 +17,7 @@ const Config = () => {
     });
 
     localStorage.setItem("selectedThemes", JSON.stringify(selectedThemes));
+    console.log(JSON.stringify(selectedThemes))
   };
 
   return (
