@@ -1,9 +1,12 @@
-import React from "react";
+import { React, useState } from "react";
 import "./Config.css";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
 const Config = () => {
+  const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
+
   const handleConfig = () => {
     const checkboxes = document.querySelectorAll(
       '.topicCheckboxes input[type="checkbox"]'
@@ -16,8 +19,15 @@ const Config = () => {
       }
     });
 
-    localStorage.setItem("selectedThemes", JSON.stringify(selectedThemes));
-    console.log(JSON.stringify(selectedThemes))
+    if (selectedThemes.length === 0) {
+      alert("Debe haber al menos una temática seleccionada");
+
+    } else {
+      localStorage.setItem("selectedThemes", JSON.stringify(selectedThemes));
+      console.log(JSON.stringify(selectedThemes));
+
+      alert("Cambios realizados satisfactoriamente");
+    }
   };
 
   return (
