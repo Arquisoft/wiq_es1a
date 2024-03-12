@@ -72,7 +72,6 @@ const JuegoPreguntas = () => {
   const handleRespuestaSeleccionada = (respuesta) => {
     if (!juegoTerminado) {
       setRespuestaSeleccionada(respuesta);
-      setTiempoTotal(tiempoTotal+10-tiempoRestante);
     }
   };
 
@@ -100,7 +99,7 @@ const JuegoPreguntas = () => {
       setPreguntasFalladas(preguntasFalladas + 1);
       console.log("mal");
     }
-
+    setTiempoTotal(tiempoTotal+tiempoRestante);
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
     if (indicePregunta + 1 < preguntas.length) {

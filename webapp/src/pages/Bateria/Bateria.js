@@ -19,7 +19,6 @@ const JuegoPreguntas = () => {
     //Used for user stats
     const [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
     const [preguntasFalladas, setPreguntasFalladas] = useState(0);
-    const [tiempoTotal, setTiempoTotal] = useState(0);
     const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
@@ -46,12 +45,38 @@ const JuegoPreguntas = () => {
   useEffect(() => {
     if (tiempoRestante === 0) {
       setJuegoTerminado(true);
+
+      guardarPartida();
     }
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
   }, [tiempoRestante]);
+
+  const guardarPartida = async () => {
+    if(preguntasCorrectas+preguntasFalladas>0){
+      setTiempoMedio(180/(preguntasCorrectas+preguntasFalladas));
+    }
+    const username = localStorage.getItem("username");
+    const newGame = {
+      username: username,
+      gameMode: "bateria",
+      gameData: {
+        correctAnswers: preguntasCorrectas,
+        incorrectAnswers: preguntasFalladas,
+        points: puntuacion,
+        avgTime: tiempoMedio,
+      },
+    };
+    try {
+      const response = await axios.post(URL + '/saveGame', newGame);
+      console.log("Solicitud exitosa:", response.data);
+      
+    } catch (error) {
+      console.error('Error al guardar el juego:', error);
+    }
+  }
 
   const handleSiguientePregunta = async (respuesta) => {
     if (respuesta === preguntaActual.correcta) {
@@ -65,28 +90,7 @@ const JuegoPreguntas = () => {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
-      setTiempoTotal(180-tiempoRestante);
-      setTiempoMedio(tiempoRestante/(preguntasCorrectas+preguntasFalladas));
       setJuegoTerminado(true);
-      const username = localStorage.getItem("username");
-      const newGame = {
-        username: username,
-        gameMode: "bateria",
-        gameData: {
-          correctAnswers: preguntasCorrectas,
-          incorrectAnswers: preguntasFalladas,
-          points: puntuacion,
-          avgTime: tiempoMedio,
-        },
-      };
-      
-      try {
-        const response = await axios.post(URL + '/saveGame', newGame);
-        console.log("Solicitud exitosa:", response.data);
-        
-    } catch (error) {
-        console.error('Error al guardar el juego:', error);
-    }
     }
   };
 

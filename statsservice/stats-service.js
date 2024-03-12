@@ -27,9 +27,11 @@ app.post("/saveGame", async (req, res) => {
     const gamemode = req.body.gameMode;
     const gameData = req.body.gameData;
 
-
+    console.log(gamemode);
     if(gamemode=="clasico" || gamemode=="bateria"){
       var stats = await Stats.findOne({ username:username, gamemode: gamemode });
+      console.log("guardando stats");
+      console.log(stats);
 
       if (!stats) {
         // Si no existen estadísticas, crear un nuevo documento
@@ -47,6 +49,7 @@ app.post("/saveGame", async (req, res) => {
       } else {
         stats = statsGetter.calculateStats(gameData);
       }
+      console.log(stats);
       await stats.save();
   
       res.json({ message: "Partida guardada exitosamente" });
