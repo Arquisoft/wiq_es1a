@@ -35,35 +35,37 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-      {loginSuccess ? (
-        navigate("/home")
-      ) : (
-        <>
-          <h1 className="login-header">Identifícate</h1>
-          <input
-            className="login-input"
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            className="login-input"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button className="login-button" onClick={loginUser}>
-            Login
-          </button>
-          {openSnackbar && (
-            <div className="login-snackbar">Login successful</div>
-          )}
-          {error && <div className="login-error">Error: {error}</div>}
-        </>
-      )}
+    <div className="main">
+      <div className="login-container">
+        {loginSuccess ? (
+          navigate("/home")
+        ) : (
+          <>
+            <h1 className="login-header">Identifícate</h1>
+            <input
+              className="login-input"
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
+              className="login-input"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button className="login-button" onClick={loginUser}>
+              Login
+            </button>
+            {openSnackbar && (
+              <div className="login-snackbar">Login successful</div>
+            )}
+            {error && <div className="login-error">Error: {error}</div>}
+          </>
+        )}
+      </div>
     </div>
   );
 };

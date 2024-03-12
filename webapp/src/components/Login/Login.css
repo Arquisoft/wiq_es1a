@@ -3,6 +3,7 @@
     grid-template-columns: 1fr;
     gap: 1rem;
     justify-content: center;
+    margin: auto 0;
 }
 
 .login-container h1{
