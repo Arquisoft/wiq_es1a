@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const axios = require('axios');
-const StatsClasico = require("./model/stats-clasico-model.js");
+const Stats = require("./model/stats-model.js");
 const StatsForUser = require("./model/stats-getter.js");
 const mongoose = require('mongoose');
 
@@ -29,11 +29,11 @@ app.post("/saveGame", async (req, res) => {
 
 
     if(gamemode=="clasico"){
-      var stats = await StatsClasico.findOne({ username:username });
+      var stats = await Stats.findOne({ username:username });
 
       if (!stats) {
         // Si no existen estadísticas, crear un nuevo documento
-        stats = new StatsClasico({
+        stats = new Stats({
           username: username,
           nGamesPlayed: 1,
           avgPoints: gameData.points,
@@ -44,7 +44,29 @@ app.post("/saveGame", async (req, res) => {
           avgTime: gameData.avgTime,
         });
       } else {
-        stats = statsGetter.calculateStatsClasico(gameData);
+        stats = statsGetter.calculateStats(gameData);
+      }
+      await stats.save();
+  
+      res.json({ message: "Partida guardada exitosamente" });
+
+    }else if(gamemode=="bateria"){
+      var stats = await Stats.findOne({ username:username });
+
+      if (!stats) {
+        // Si no existen estadísticas, crear un nuevo documento
+        stats = new Stats({
+          username: username,
+          nGamesPlayed: 1,
+          avgPoints: gameData.points,
+          totalPoints: gameData.points,
+          totalCorrectQuestions: gameData.correctAnswers,
+          totalIncorrectQuestions: gameData.incorrectAnswers,
+          ratioCorrect: (gameData.correctAnswers / (gameData.incorrectAnswers+gameData.correctAnswers))*100,
+          avgTime: gameData.avgTime,
+        });
+      } else {
+        stats = statsGetter.calculateStats(gameData);
       }
       await stats.save();
   

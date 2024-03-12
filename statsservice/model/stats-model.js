@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const statsClasico = new mongoose.Schema({
+const stats = new mongoose.Schema({
     username: {
       type: String,
       required: true,
@@ -25,7 +25,7 @@ const statsClasico = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    ratioCorrectToIncorrect: {
+    ratioCorrect: {
         type: Number,
         required: true,
     },
@@ -35,6 +35,6 @@ const statsClasico = new mongoose.Schema({
       },
 });
 
-const StatsClasico = mongoose.model('StatsClasico', statsClasico);
+const Stats = mongoose.model('Stats', stats);
 
-module.exports = StatsClasico
+module.exports = Stats

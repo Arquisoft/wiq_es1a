@@ -1,19 +1,21 @@
-const StatsClasico = require('./stats-clasico-model.js');
+const Stats = require('./stats-model.js');
 
 class StatsForUser {
 
     async getStatsForUser(username,gamemode){
         var statsJSON=null;
             if(gamemode=="clasico"){
-                statsJSON = await this.getStatsClasico(username);
+                statsJSON = await this.getStats(username);
+            }else if(gamemode=="bateria"){
+                statsJSON = await this.getStats(username);
             }
         return statsJSON;
             
     }
 
-    async getStatsClasico(username){
+    async getStats(username){
         try {
-            var stats = await StatsClasico.findOne({ username });
+            var stats = await Stats.findOne({ username });
     
             if (stats) {
                 return {
@@ -35,7 +37,7 @@ class StatsForUser {
         }
     }
 
-    calculateStatsClasico(gameData){
+    calculateStats(gameData){
         const totalGamesPlayed = gameData.nGamesPlayed + 1;
         const newAvgPoints = (gameData.avgPoints * gameData.nGamesPlayed + gameData.points) / totalGamesPlayed;
         const newTotalPoints = gameData.totalPoints + gameData.points;

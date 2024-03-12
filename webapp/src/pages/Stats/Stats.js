@@ -48,6 +48,19 @@ const Stats = () => {
     setUsername(event.target.value);
   };
 
+  const handleGamemodeChange = (mode) => {
+    setGamemode(mode);
+    fetchStats();
+  };
+
+  const getModeName = () => {
+    if(gamemode=="clasico"){
+      return "Clásico";    
+    }else if(gamemode=="bateria"){
+      return "Batería de preguntas";
+    }
+  };
+
   if (isLoading) {
     return (
       <div>
@@ -94,14 +107,18 @@ const Stats = () => {
         onChange={handleUsernameChange}
         data-testid="usernameInput"
       />
+       <div>
+          <button onClick={() => handleGamemodeChange("clasico")}>Clásico</button>
+          <button onClick={() => handleGamemodeChange("bateria")}>Batería de preguntas</button>
+        </div>
       {stats === null && !isLoading && (
           <div>
             <p>El usuario no ha jugado ninguna partida.</p>
           </div>
         )}
-        {stats && gamemode === "clasico" && (
+        {stats && (
           <div>
-            <h2><em>Estadísticas de Usuario - Modo Clásico</em></h2>
+            <h2><em>Estadísticas de Usuario - Modo {getModeName()}</em></h2>
             <table>
             <tr>
               <td><strong>Usuario</strong></td>
@@ -128,7 +145,7 @@ const Stats = () => {
               <td>{stats.totalIncorrectQuestions}</td>
             </tr>
             <tr>
-              <td><strong>Porcentaje de aciertos:</strong></td>
+              <td><strong>Porcentaje de aciertos</strong></td>
               <td>{stats.ratioCorrect.toFixed(2)}%</td>
             </tr>
             <tr>

@@ -3,6 +3,7 @@ import "./Bateria.css";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
@@ -14,6 +15,12 @@ const JuegoPreguntas = () => {
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState(null);
   const navigate = useNavigate();
+
+    //Used for user stats
+    const [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
+    const [preguntasFalladas, setPreguntasFalladas] = useState(0);
+    const [tiempoTotal, setTiempoTotal] = useState(0);
+    const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
     fetch(URL + "/questions?tematica=all&n=9000")
@@ -46,15 +53,40 @@ const JuegoPreguntas = () => {
     return () => clearInterval(timer);
   }, [tiempoRestante]);
 
-  const handleSiguientePregunta = (respuesta) => {
+  const handleSiguientePregunta = async (respuesta) => {
     if (respuesta === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
+      setPreguntasCorrectas(preguntasCorrectas+1);
+    }
+    else{
+      setPreguntasFalladas(preguntasFalladas+1);
     }
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
+      setTiempoTotal(180-tiempoRestante);
+      setTiempoMedio(tiempoRestante/(preguntasCorrectas+preguntasFalladas));
       setJuegoTerminado(true);
+      const username = localStorage.getItem("username");
+      const newGame = {
+        username: username,
+        gameMode: "bateria",
+        gameData: {
+          correctAnswers: preguntasCorrectas,
+          incorrectAnswers: preguntasFalladas,
+          points: puntuacion,
+          avgTime: tiempoMedio,
+        },
+      };
+      
+      try {
+        const response = await axios.post(URL + '/saveGame', newGame);
+        console.log("Solicitud exitosa:", response.data);
+        
+    } catch (error) {
+        console.error('Error al guardar el juego:', error);
+    }
     }
   };
 

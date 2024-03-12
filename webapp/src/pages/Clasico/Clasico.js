@@ -108,9 +108,9 @@ const JuegoPreguntas = () => {
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
       setJuegoTerminado(true);
-    if (preguntasCorrectas + preguntasFalladas > 0) {
-      setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
-    }
+      if (preguntasCorrectas + preguntasFalladas > 0) {
+        setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
+      }
 
       //Now we store the game in the stats DB
       const username = localStorage.getItem("username");
@@ -132,7 +132,7 @@ const JuegoPreguntas = () => {
     } catch (error) {
         console.error('Error al guardar el juego:', error);
     }
-      }
+    }
     };
 
   const handleRepetirJuego = () => {
@@ -189,7 +189,6 @@ const JuegoPreguntas = () => {
           </div>
           <div className="answer">
           <button
-                key={index}
                 onClick={() => setTiempoRestante(0)}
                 disabled={tiempoRestante === 0 || juegoTerminado}
               >
