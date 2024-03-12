@@ -27,7 +27,6 @@ app.use((req, res, next) => {
 app.set("json spaces", 40);
 
 app.get("/questions", async (req, res) => {
-  console.log(req.query)
   if (req.query.n > MAX_QUESTIONS) {
     res
       .status(400)
@@ -37,6 +36,24 @@ app.get("/questions", async (req, res) => {
     var tematica = req.query.tematica ? req.query.tematica : "all";
     var n = req.query.n ? req.query.n : 10;
     var data = gen.getQuestions(tematica, n);
+    res.json(data);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
+app.post("/questions", async (req, res) => {
+  if (req.body.n > MAX_QUESTIONS) {
+    res
+      .status(400)
+      .json({ error: `El límite de preguntas son ${MAX_QUESTIONS}` });
+  }
+  try {
+    console.log(req.body.tematicas)
+    var temp = JSON.parse(req.body.tematicas)
+    var tematicas = temp.length !== 0 ? temp : ["paises", "literatura", "cine", "arte", "programacion"];
+    var n = req.body.n ? req.body.n : 10;
+    var data = gen.getQuestionsPost(tematicas, n);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });

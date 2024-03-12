@@ -8,7 +8,15 @@
     color: var(--text);
 }
 
-.topicCheckboxes input{
+.configContainer div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: end;
+    align-items: center;
+}
+
+.configContainer input{
     appearance: auto;
     box-shadow: none;
+    width: 7rem;
 }

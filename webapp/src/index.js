@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 var r = document.getElementById('root');
 r.setAttribute("data-theme", "light")
 const root = ReactDOM.createRoot(r);
+localStorage.setItem("selectedThemes", JSON.stringify(["paises", "literatura", "cine", "arte", "programacion"]));
 
 root.render(
   //<React.StrictMode>

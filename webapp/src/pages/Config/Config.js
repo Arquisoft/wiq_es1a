@@ -21,10 +21,8 @@ const Config = () => {
 
     if (selectedThemes.length === 0) {
       alert("Debe haber al menos una temática seleccionada");
-
     } else {
       localStorage.setItem("selectedThemes", JSON.stringify(selectedThemes));
-      console.log(JSON.stringify(selectedThemes));
 
       alert("Cambios realizados satisfactoriamente");
     }
@@ -35,24 +33,30 @@ const Config = () => {
       <Nav />
       <div class="configContainer">
         <h2>Configuración</h2>
+        <h3>Temáticas de pregunta</h3>
+        <div class="topicCheckboxes">
+          <label for="paises"> Países</label>
+          <input id="paises" type="checkbox" />
+
+          <label for="literatura"> Literatura</label>
+          <input id="literatura" type="checkbox" />
+
+          <label for="cine"> Cine</label>
+          <input id="cine" type="checkbox" />
+
+          <label for="arte"> Arte</label>
+          <input id="arte" type="checkbox" />
+
+          <label for="programacion"> Programación</label>
+          <input id="programacion" type="checkbox" />
+        </div>
+        <h3>Tiempo</h3>
         <div>
-          <h3>Temáticas de pregunta</h3>
-          <div class="topicCheckboxes">
-            <label for="paises"> Países</label>
-            <input id="paises" type="checkbox" />
+          <label for="paises"> Clásico (entre preguntas)</label>
+          <input id="paises" type="number" min="5" max="20" value="10"/>
 
-            <label for="literatura"> Literatura</label>
-            <input id="literatura" type="checkbox" />
-
-            <label for="cine"> Cine</label>
-            <input id="cine" type="checkbox" />
-
-            <label for="arte"> Arte</label>
-            <input id="arte" type="checkbox" />
-
-            <label for="programacion"> Programación</label>
-            <input id="programacion" type="checkbox" />
-          </div>
+          <label for="literatura"> Batería de sabios (Tiempo total)</label>
+          <input id="literatura" type="number" min="30" max="600" value="30"/>
         </div>
         <button onClick={() => handleConfig()}>Aplicar cambios</button>
       </div>
