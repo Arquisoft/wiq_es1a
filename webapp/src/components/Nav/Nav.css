@@ -1,43 +1,42 @@
-.logo {
-  font-family: oswald, sans-serif;
-  width: 100%;
-  font-size: 5rem;
-  font-weight: 700;
-  margin: 0;
-  text-shadow: 4px 4px 0 var(--shadow);
+nav .logo{
+  margin-left: 3rem;
 }
 
 nav {
-  width: 80vw;
-  display: flex;
-  flex-wrap: wrap;
-  border: 3px solid var(--borders);
-  border-radius: 1rem;
-  padding: 1rem;
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  border-bottom: 3px solid var(--borders);
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav * {
   margin: 1rem;
-  justify-content: center;
-  -webkit-box-shadow: 10px 10px 5px 0px var(--shadow);
-  -moz-box-shadow: 10px 10px 5px 0px var(--shadow);
-  box-shadow: 10px 10px 5px 0px var(--shadow);
 }
 
-nav ul {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
+.menuItems *, .rightItems * {
+  height: 100%;
 }
 
-nav li {
-  display: flex;
-  flex-direction: row;
-}
-
-.theme-toggle{
-  width: 5%;
-  height: 10%;
-  margin-left: 90%;
+.rightItems{
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 2rem;
+  align-items: center;
 }
 
 .disconnect{
-  margin-left: 70%;
+  margin-left: auto;
+}
+
+.theme-toggle{
+  background-size: contain;
+}
+
+.progressBar{
+  background-color: var(--shadow);
+  height: 1rem;
+  border-radius: 1rem;
+  margin-top: 0.5rem;
 }

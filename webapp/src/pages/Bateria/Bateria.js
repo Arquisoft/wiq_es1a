@@ -6,13 +6,16 @@ import { Link, useNavigate } from "react-router-dom";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
+  const TIME = 180;
+
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
-  const [tiempoRestante, setTiempoRestante] = useState(180);
+  const [tiempoRestante, setTiempoRestante] = useState(TIME);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState(null);
+  const [progressPercent, setProgressPercent] = useState(100);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,6 +46,16 @@ const JuegoPreguntas = () => {
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
+    return () => clearInterval(timer);
+  }, [tiempoRestante]);
+
+  useEffect(() => {
+    setProgressPercent(tiempoRestante / TIME * 100);
+  
+    const timer = setInterval(() => {
+      setTiempoRestante(prevTiempo => (prevTiempo <= 0 ? 0 : prevTiempo - 0.01));
+    }, 10); 
+  
     return () => clearInterval(timer);
   }, [tiempoRestante]);
 
@@ -102,8 +115,14 @@ const JuegoPreguntas = () => {
               </button>
             ))}
           </div>
-          <div className="timer">Tiempo restante: {tiempoRestante}</div>
+          <div className="timer">Tiempo restante: {Math.floor(tiempoRestante)}</div>
           <div className="points">Puntuación: {puntuacion}</div>
+          <div className="progressBarContainer">
+            <div
+              className="progressBar"
+              style={{ width: `${progressPercent}%` }}
+            ></div>
+          </div>
         </div>
       )}
       <Footer />

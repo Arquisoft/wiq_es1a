@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
-import AddUser from '../../components/Register/Register';
-import Login from '../../components/Login/Login';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
-import Footer from '../../components/Footer/Footer.js';
+import React, { useState } from "react";
+import AddUser from "../../components/Register/Register";
+import Login from "../../components/Login/Login";
+import Footer from "../../components/Footer/Footer.js";
+import "./Authenticate.css";
 
 function Authenticate() {
   const [showLogin, setShowLogin] = useState(true);
@@ -15,25 +12,24 @@ function Authenticate() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-        Bienvenido a WIQ
-      </Typography>
-      {showLogin ? <Login /> : <AddUser />}
-      <Typography component="div" align="center" sx={{ marginTop: 2 }}>
-        {showLogin ? (
-          <Link name="gotoregister" component="button" variant="body2" onClick={handleToggleView}>
-            ¿No tienes cuenta? Regístrate.
-          </Link>
-        ) : (
-          <Link component="button" variant="body2" onClick={handleToggleView}>
-            Ya tienes cuenta? Inicia sesión.
-          </Link>
-        )}
-      </Typography>
+    <div className="main">
+      <h1 className="logo">WIQ</h1>
+      <div>
+        {showLogin ? <Login /> : <AddUser />}
+        <div>
+          {showLogin ? (
+            <button className="gotoregister" onClick={handleToggleView}>
+              ¿No tienes cuenta? Regístrate.
+            </button>
+          ) : (
+            <button className="gotologin" onClick={handleToggleView}>
+              Ya tienes cuenta? Inicia sesión.
+            </button>
+          )}
+        </div>
+      </div>
       <Footer />
-    </Container>
+    </div>
   );
 }
 
