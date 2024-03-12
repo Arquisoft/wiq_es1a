@@ -30,7 +30,6 @@ app.post("/saveGame", async (req, res) => {
 
     if(gamemode=="clasico"){
       var stats = await StatsClasico.findOne({ username:username });
-      console.log(stats);
 
       if (!stats) {
         // Si no existen estadísticas, crear un nuevo documento
@@ -41,7 +40,7 @@ app.post("/saveGame", async (req, res) => {
           totalPoints: gameData.points,
           totalCorrectQuestions: gameData.correctAnswers,
           totalIncorrectQuestions: gameData.incorrectAnswers,
-          ratioCorrectToIncorrect: gameData.correctAnswers / gameData.incorrectAnswers,
+          ratioCorrect: (gameData.correctAnswers / (gameData.incorrectAnswers+gameData.correctAnswers))*100,
           avgTime: gameData.avgTime,
         });
       } else {

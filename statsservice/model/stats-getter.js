@@ -23,7 +23,7 @@ class StatsForUser {
                     totalPoints: stats.totalPoints,
                     totalCorrectQuestions: stats.totalCorrectQuestions,
                     totalIncorrectQuestions: stats.totalIncorrectQuestions,
-                    ratioCorrectToIncorrect: stats.ratioCorrectToIncorrect,
+                    ratioCorrect: stats.ratioCorrect,
                     avgTime: stats.avgTime
                 };
             } else {
@@ -41,7 +41,7 @@ class StatsForUser {
         const newTotalPoints = gameData.totalPoints + gameData.points;
         const newTotalCorrectQuestions = gameData.totalCorrectQuestions + gameData.correctAnswers;
         const newTotalIncorrectQuestions = gameData.totalIncorrectQuestions + gameData.incorrectAnswers;
-        const newRatioCorrectToIncorrect = newTotalCorrectQuestions / newTotalIncorrectQuestions;
+        const newRatioCorrect = (newTotalCorrectQuestions / (newTotalIncorrectQuestions+newTotalCorrectQuestions))*100;
         const newAvgTime = (gameData.avgTime * gameData.nGamesPlayed + gameData.avgTime) / totalGamesPlayed;
 
         return {
@@ -50,7 +50,7 @@ class StatsForUser {
             totalPoints: newTotalPoints,
             totalCorrectQuestions: newTotalCorrectQuestions,
             totalIncorrectQuestions: newTotalIncorrectQuestions,
-            ratioCorrectToIncorrect: newRatioCorrectToIncorrect,
+            ratioCorrect: newRatioCorrect,
             avgTime: newAvgTime
         };
     }

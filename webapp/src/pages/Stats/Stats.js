@@ -104,32 +104,32 @@ const Stats = () => {
             <h2><em>Estadísticas de Usuario - Modo Clásico</em></h2>
             <table>
             <tr>
-              <td><strong>Usuario:</strong></td>
+              <td><strong>Usuario</strong></td>
               <td>{stats.username}</td>
             </tr>
             <tr>
-              <td><strong>Juegos Jugados:</strong></td>
+              <td><strong>Partidas jugadas</strong></td>
               <td>{stats.nGamesPlayed}</td>
             </tr>
             <tr>
-              <td><strong>Promedio de Puntos:</strong></td>
+              <td><strong>Puntos por partida</strong></td>
               <td>{stats.avgPoints.toFixed(2)}</td>
              </tr>
             <tr>
-              <td><strong>Puntos Totales:</strong></td>
+              <td><strong>Puntos totales</strong></td>
               <td>{stats.totalPoints}</td>
             </tr>
             <tr>
-              <td><strong>Preguntas Correctas Totales:</strong></td>
+              <td><strong>Preguntas correctas totales</strong></td>
               <td>{stats.totalCorrectQuestions}</td>
             </tr>
             <tr>
-              <td><strong>Preguntas Incorrectas Totales:</strong></td>
+              <td><strong>Preguntas incorrectas totales</strong></td>
               <td>{stats.totalIncorrectQuestions}</td>
             </tr>
             <tr>
-              <td><strong>Ratio Correctas/Incorrectas:</strong></td>
-              <td>{stats.ratioCorrectToIncorrect.toFixed(2)}</td>
+              <td><strong>Porcentaje de aciertos:</strong></td>
+              <td>{stats.ratioCorrect.toFixed(2)}%</td>
             </tr>
             <tr>
               <td><strong>Tiempo por pregunta (s):</strong></td>

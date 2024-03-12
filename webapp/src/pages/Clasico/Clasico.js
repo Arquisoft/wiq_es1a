@@ -105,35 +105,34 @@ const JuegoPreguntas = () => {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
+      setJuegoTerminado(true);
+      setTimeout(() => {},1000);
+    if (preguntasCorrectas + preguntasFalladas > 0) {
+      setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
+    }
 
-      if (preguntasCorrectas + preguntasFalladas > 0) {
-        setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
-      }
+      setTimeout(() => {},2000);
 
-        setTimeout(() => {},2000);
-
-        //Now we store the game in the user's DB
-        const username = localStorage.getItem("username");
-        const newGame = {
-          username: username,
-          gameMode: "clasico",
-          gameData: {
-            correctAnswers: preguntasCorrectas,
-            incorrectAnswers: preguntasFalladas,
-            points: puntuacion,
-            avgTime: tiempoMedio,
-          },
-        };
+      //Now we store the game in the stats DB
+      const username = localStorage.getItem("username");
+      const newGame = {
+        username: username,
+        gameMode: "clasico",
+        gameData: {
+          correctAnswers: preguntasCorrectas,
+          incorrectAnswers: preguntasFalladas,
+          points: puntuacion,
+          avgTime: tiempoMedio,
+        },
+      };
+      
+      try {
+        const response = await axios.post(URL + '/saveGame', newGame);
+        console.log("Solicitud exitosa:", response.data);
         
-        try {
-          const response = await axios.post(URL + '/saveGame', newGame);
-          console.log("Solicitud exitosa:", response.data);
-          
-      } catch (error) {
-          console.error('Error al guardar el juego:', error);
-      } finally {
-        setJuegoTerminado(true);
-      }
+    } catch (error) {
+        console.error('Error al guardar el juego:', error);
+    }
       }
     };
 
