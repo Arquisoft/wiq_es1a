@@ -18,8 +18,8 @@ const JuegoPreguntas = () => {
   const [mostrarMenu, setMostrarMenu] = useState(false); // Estado para mostrar el menú al finalizar el juego
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState("");
-  const navigate = useNavigate();
   const [progressPercent, setProgressPercent] = useState(100);
+  const navigate = useNavigate();
 
   //Used for user stats
   const [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
@@ -58,7 +58,6 @@ const JuegoPreguntas = () => {
     return () => clearInterval(timer);
   }, [tiempoRestante]);
 
-  
   useEffect(() => {
     if (tiempoRestante === 0) {
       setPreguntaTerminada(true);
