@@ -41,7 +41,7 @@
     transform: translateY(50%);
     height: 160px;
     width: 10rem;
-    background-color: orange
+    background-color: var(--shadow)
 }
 
 @keyframes drop {
@@ -92,7 +92,7 @@
     font-size: 188px;
     font-weight: 700;
     margin: 0;
-    text-shadow: 4px 4px 0 orange;
+    text-shadow: 4px 4px 0 var(--shadow);
 }
 
 .notfound h2 {
@@ -117,17 +117,17 @@
     display: inline-block;
     font-weight: 400;
     text-transform: uppercase;
-    -webkit-box-shadow: 0 0 0 2px #000,2px 2px 0 2px orange;
-    box-shadow: 0 0 0 2px #000,2px 2px 0 2px orange;
+    -webkit-box-shadow: 0 0 0 2px #000,2px 2px 0 2px var(--shadow);
+    box-shadow: 0 0 0 2px #000,2px 2px 0 2px var(--shadow);
     text-decoration: none;
     -webkit-transition: .2s all;
     transition: .2s all
 }
 
 .notfound a:hover {
-    background-color: orange;
-    -webkit-box-shadow: 0 0 0 0 #000,0 0 0 2px orange;
-    box-shadow: 0 0 0 0 #000,0 0 0 2px orange;
+    background-color: var(--shadow);
+    -webkit-box-shadow: 0 0 0 0 #000,0 0 0 2px var(--shadow);
+    box-shadow: 0 0 0 0 #000,0 0 0 2px var(--shadow);
 }
 
 .notfound-social {
@@ -143,9 +143,9 @@
 }
 
 .notfound-social>a:hover {
-    background-color: orange;
-    -webkit-box-shadow: 0 0 0 0 #000,0 0 0 2px orange;
-    box-shadow: 0 0 0 0 #000,0 0 0 2px orange;
+    background-color: var(--shadow);
+    -webkit-box-shadow: 0 0 0 0 #000,0 0 0 2px var(--shadow);
+    box-shadow: 0 0 0 0 #000,0 0 0 2px var(--shadow);
 }
 
 @media only screen and (max-width: 480px) {

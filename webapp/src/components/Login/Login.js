@@ -42,6 +42,7 @@ const Login = () => {
         ) : (
           <>
             <h1 className="login-header">Identifícate</h1>
+            <label for="login-username">Introduce tu nombre:</label>
             <input
               className="login-input"
               type="text"
@@ -49,6 +50,7 @@ const Login = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
+            <label for="login-password">Introduce tu contraseña:</label>
             <input
               className="login-input"
               type="password"

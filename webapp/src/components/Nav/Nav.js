@@ -28,6 +28,7 @@ const Nav = () => {
         <Link to="/home">Home</Link>
         <Link to="/sobre">Sobre nosotros</Link>
         <Link to="/stats">Stats</Link>
+        <Link to="/ranking">Ránking</Link>
       </div>
       <div className="rightItems">
         <input
@@ -38,6 +39,9 @@ const Nav = () => {
         />
         <button className="profile">
           Perfil
+        </button>
+        <button className="profile">
+          Opciones
         </button>
         <button className="disconnect" onClick={() => Logout()}>
           Desconectarse

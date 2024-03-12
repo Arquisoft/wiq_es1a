@@ -1,10 +1,5 @@
-.logo {
-  font-family: oswald, sans-serif;
-  width: 100%;
-  font-size: 3rem;
-  font-weight: 700;
-  margin: 0;
-  text-shadow: 4px 4px 0 var(--shadow);
+nav .logo{
+  margin-left: 3rem;
 }
 
 nav {
