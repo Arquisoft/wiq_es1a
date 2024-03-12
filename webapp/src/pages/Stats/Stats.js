@@ -29,6 +29,10 @@ const Stats = () => {
   };
 
   useEffect(() => {
+    fetchStats();
+  }, [username, gamemode]);
+
+  useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
     fetch(gatewayUrl+`/stats?user=${username}&gamemode=${gamemode}`)
       .then((response) => response.json())
@@ -50,15 +54,15 @@ const Stats = () => {
 
   const handleGamemodeChange = (mode) => {
     setGamemode(mode);
-    fetchStats();
   };
 
   const getModeName = () => {
     if(gamemode=="clasico"){
       return "Clásico";    
     }else if(gamemode=="bateria"){
-      return "Batería de preguntas";
+      return "Batería de sabios";
     }
+    return gamemode;
   };
 
   if (isLoading) {
@@ -75,7 +79,7 @@ const Stats = () => {
       <>
         <Nav />
         <div>
-          <label htmlFor="usernameInput">Nombre de Usuario: </label>
+          <label htmlFor="usernameInput">Nombre de usuario: </label>
           <input
             type="text"
             id="usernameInput"
@@ -100,17 +104,27 @@ const Stats = () => {
     <div>
       <h2><em>Estadísticas de Usuario</em></h2>
       <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
-      <input
-        type="text"
-        id="usernameInput"
-        value={username}
-        onChange={handleUsernameChange}
-        data-testid="usernameInput"
-      />
-       <div>
-          <button onClick={() => handleGamemodeChange("clasico")}>Clásico</button>
-          <button onClick={() => handleGamemodeChange("bateria")}>Batería de preguntas</button>
-        </div>
+      <div>
+        <input
+          type="radio"
+          id="clasico"
+          name="gamemode"
+          value="clasico"
+          checked={gamemode == "clasico"}
+          onChange={() => handleGamemodeChange("clasico")}
+        />
+        <label htmlFor="clasico">Clásico</label>
+
+        <input
+          type="radio"
+          id="bateria"
+          name="gamemode"
+          value="bateria"
+          checked={gamemode == "bateria"}
+          onChange={() => handleGamemodeChange("bateria")}
+        />
+        <label htmlFor="bateria">Batería de sabios</label>
+      </div>
       {stats === null && !isLoading && (
           <div>
             <p>El usuario no ha jugado ninguna partida.</p>
@@ -118,7 +132,7 @@ const Stats = () => {
         )}
         {stats && (
           <div>
-            <h2><em>Estadísticas de Usuario - Modo {getModeName()}</em></h2>
+            <h2><em>Estadísticas de usuario - Modo {getModeName()}</em></h2>
             <table>
             <tr>
               <td><strong>Usuario</strong></td>

@@ -28,35 +28,14 @@ app.post("/saveGame", async (req, res) => {
     const gameData = req.body.gameData;
 
 
-    if(gamemode=="clasico"){
-      var stats = await Stats.findOne({ username:username });
+    if(gamemode=="clasico" || gamemode=="bateria"){
+      var stats = await Stats.findOne({ username:username, gamemode: gamemode });
 
       if (!stats) {
         // Si no existen estadísticas, crear un nuevo documento
         stats = new Stats({
           username: username,
-          nGamesPlayed: 1,
-          avgPoints: gameData.points,
-          totalPoints: gameData.points,
-          totalCorrectQuestions: gameData.correctAnswers,
-          totalIncorrectQuestions: gameData.incorrectAnswers,
-          ratioCorrect: (gameData.correctAnswers / (gameData.incorrectAnswers+gameData.correctAnswers))*100,
-          avgTime: gameData.avgTime,
-        });
-      } else {
-        stats = statsGetter.calculateStats(gameData);
-      }
-      await stats.save();
-  
-      res.json({ message: "Partida guardada exitosamente" });
-
-    }else if(gamemode=="bateria"){
-      var stats = await Stats.findOne({ username:username });
-
-      if (!stats) {
-        // Si no existen estadísticas, crear un nuevo documento
-        stats = new Stats({
-          username: username,
+          gamemode: gamemode,
           nGamesPlayed: 1,
           avgPoints: gameData.points,
           totalPoints: gameData.points,

@@ -4,18 +4,16 @@ class StatsForUser {
 
     async getStatsForUser(username,gamemode){
         var statsJSON=null;
-            if(gamemode=="clasico"){
-                statsJSON = await this.getStats(username);
-            }else if(gamemode=="bateria"){
-                statsJSON = await this.getStats(username);
+            if(gamemode=="clasico" || gamemode=="bateria"){
+                statsJSON = await this.getStats(username,gamemode);
             }
         return statsJSON;
             
     }
 
-    async getStats(username){
+    async getStats(username,gamemode){
         try {
-            var stats = await Stats.findOne({ username });
+            var stats = await Stats.findOne({ username:username,gamemode:gamemode });
     
             if (stats) {
                 return {

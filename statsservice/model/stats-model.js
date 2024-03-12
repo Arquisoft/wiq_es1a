@@ -5,6 +5,10 @@ const stats = new mongoose.Schema({
       type: String,
       required: true,
     },
+    gamemode: {
+        type: String,
+        required: true,
+      },
     nGamesPlayed: {
         type: Number,
         required: true,
