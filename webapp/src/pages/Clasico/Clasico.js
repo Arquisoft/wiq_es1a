@@ -95,8 +95,10 @@ const JuegoPreguntas = () => {
     if (respuestaSeleccionada === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
       setPreguntasCorrectas(preguntasCorrectas + 1);
+      console.log("bien");
     } else {
       setPreguntasFalladas(preguntasFalladas + 1);
+      console.log("mal");
     }
 
     setRespuestaSeleccionada(null);
@@ -106,12 +108,9 @@ const JuegoPreguntas = () => {
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
       setJuegoTerminado(true);
-      setTimeout(() => {},1000);
     if (preguntasCorrectas + preguntasFalladas > 0) {
       setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
     }
-
-      setTimeout(() => {},2000);
 
       //Now we store the game in the stats DB
       const username = localStorage.getItem("username");
@@ -188,6 +187,16 @@ const JuegoPreguntas = () => {
               </button>
             ))}
           </div>
+          <div className="answer">
+          <button
+                key={index}
+                onClick={() => setTiempoRestante(0)}
+                disabled={tiempoRestante === 0 || juegoTerminado}
+              >
+              Responder
+              </button>
+          </div>
+          
           <div className="timer">Tiempo restante: {tiempoRestante}</div>
           <div className="points">Puntuación: {puntuacion}</div>
         </div>
