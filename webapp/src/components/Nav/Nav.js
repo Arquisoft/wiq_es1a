@@ -16,6 +16,10 @@ const Nav = () => {
     setIsDarkTheme((prev) => !prev);
   };
 
+  const handleConfig = () => {
+    navigate("/config");
+  }
+
   const Logout = () => {
     localStorage.removeItem("token");
     navigate("/");
@@ -40,7 +44,7 @@ const Nav = () => {
         <button className="profile">
           Perfil
         </button>
-        <button className="profile">
+        <button className="profile" onClick={() => handleConfig()}>
           Opciones
         </button>
         <button className="disconnect" onClick={() => Logout()}>

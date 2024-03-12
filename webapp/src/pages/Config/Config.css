@@ -1,0 +1,14 @@
+.topicCheckboxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: end;
+}
+
+.topicCheckboxes label{
+    color: var(--text);
+}
+
+.topicCheckboxes input{
+    appearance: auto;
+    box-shadow: none;
+}
