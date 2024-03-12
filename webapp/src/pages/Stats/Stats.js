@@ -54,6 +54,7 @@ const Stats = () => {
 
   const handleGamemodeChange = (mode) => {
     setGamemode(mode);
+    fetchStats();
   };
 
   const getModeName = () => {
@@ -102,28 +103,28 @@ const Stats = () => {
     <>
     <Nav />
     <div>
-      <h2><em>Estadísticas de Usuario</em></h2>
+      <h2><em>Estadísticas de Usuario  - Modo {getModeName()}</em></h2>
       <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
+      <input
+            type="text"
+            id="usernameInput"
+            value={username}
+            onChange={handleUsernameChange}
+            data-testid="usernameInput"
+          />
       <div>
-        <input
-          type="radio"
-          id="clasico"
-          name="gamemode"
-          value="clasico"
-          checked={gamemode == "clasico"}
-          onChange={() => handleGamemodeChange("clasico")}
-        />
-        <label htmlFor="clasico">Clásico</label>
-
-        <input
-          type="radio"
-          id="bateria"
-          name="gamemode"
-          value="bateria"
-          checked={gamemode == "bateria"}
-          onChange={() => handleGamemodeChange("bateria")}
-        />
-        <label htmlFor="bateria">Batería de sabios</label>
+        <button
+          className={gamemode === "clasico" ? "active" : ""}
+          onClick={() => handleGamemodeChange("clasico")}
+        >
+        Clásico
+        </button>
+        <button
+          className={gamemode === "bateria" ? "active" : ""}
+          onClick={() => handleGamemodeChange("bateria")}
+        >
+          Batería de sabios
+        </button>
       </div>
       {stats === null && !isLoading && (
           <div>
