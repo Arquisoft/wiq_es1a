@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./Clasico.css";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import Footer from "../../components/Footer/Footer.js";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
-  const SECS_PER_QUESTION = 10;
+  const SECS_PER_QUESTION = useMemo(localStorage.getItem("clasicoTime"));
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
