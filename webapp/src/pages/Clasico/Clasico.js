@@ -90,7 +90,7 @@ const JuegoPreguntas = () => {
     return {};
   };
 
-  const handleSiguientePregunta = async () => {
+  const handleSiguientePregunta = () => {
     if (respuestaSeleccionada === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
       setPreguntasCorrectas(preguntasCorrectas + 1);
@@ -110,29 +110,34 @@ const JuegoPreguntas = () => {
       if (preguntasCorrectas + preguntasFalladas > 0) {
         setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
       }
-
-      //Now we store the game in the stats DB
-      const username = localStorage.getItem("username");
-      const newGame = {
-        username: username,
-        gameMode: "clasico",
-        gameData: {
-          correctAnswers: preguntasCorrectas,
-          incorrectAnswers: preguntasFalladas,
-          points: puntuacion,
-          avgTime: tiempoMedio,
-        },
-      };
-      
-      try {
-        const response = await axios.post(URL + '/saveGame', newGame);
-        console.log("Solicitud exitosa:", response.data);
-        
-    } catch (error) {
-        console.error('Error al guardar el juego:', error);
-    }
+      guardarPartida();
     }
     };
+
+  const guardarPartida = async () => {
+    
+
+    //Now we store the game in the stats DB
+    const username = localStorage.getItem("username");
+    const newGame = {
+      username: username,
+      gameMode: "clasico",
+      gameData: {
+        correctAnswers: preguntasCorrectas,
+        incorrectAnswers: preguntasFalladas,
+        points: puntuacion,
+        avgTime: tiempoMedio,
+      },
+    };
+    
+    try {
+      const response = await axios.post(URL + '/saveGame', newGame);
+      console.log("Solicitud exitosa:", response.data);
+      
+    } catch (error) {
+      console.error('Error al guardar el juego:', error);
+    }
+  }
 
   const handleRepetirJuego = () => {
     // Reiniciar el estado para repetir el juego

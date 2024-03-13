@@ -54,6 +54,25 @@ class StatsForUser {
             avgTime: newAvgTime
         };
     }
+
+    async getRanking(gamemode) {
+        try {
+            var stats = await Stats.find({gamemode:gamemode}).sort({ avgPoints: -1 }).limit(10);
+    
+            if (stats && stats.length > 0) {
+                return stats.map(stat => ({
+                    username: stat.username,
+                    avgPoints: stat.avgPoints
+                }));
+            } else {
+                return null;
+            }
+        } catch (error) {
+            console.error('Error al obtener estadísticas:', error);
+            throw error;
+        }
+    }
+    
 }
 
 module.exports = StatsForUser;

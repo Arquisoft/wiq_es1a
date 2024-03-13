@@ -97,6 +97,19 @@ app.post("/saveGame", async (req, res) => {
   }
 });
 
+app.get("/ranking", async (req, res) => {
+  try {
+    const statsResponse = await axios.get(statsServiceUrl + "/ranking", {
+      params: req.query,
+    });
+    res.json(statsResponse.data);
+  } catch (error) {
+    res
+      .status(error.response.status)
+      .json({ error: error.response.data.error });
+  }
+});
+
 // Start the gateway service
 const server = app.listen(port, () => {
   console.log(`Gateway Service listening at http://localhost:${port}`);

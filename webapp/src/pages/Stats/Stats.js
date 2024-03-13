@@ -8,6 +8,7 @@ const Stats = () => {
 
   const [username, setUsername] = useState(localStorage.username);
   const [stats, setStats] = useState(null);
+  const [ranking, setRanking] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,8 +29,25 @@ const Stats = () => {
       });
   };
 
+  const fetchRanking = () => {
+    setIsLoading(true);
+    fetch(gatewayUrl+`/ranking?gamemode=${gamemode}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setRanking(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error al obtener el ranking:', error);
+        setError(error.message || 'Ha ocurrido un error al obtener las estadísticas');
+
+        setIsLoading(false);
+      });
+  };
+
   useEffect(() => {
     fetchStats();
+    fetchRanking();
   }, [username, gamemode]);
 
   useEffect(() => {
@@ -44,7 +62,20 @@ const Stats = () => {
         console.error('Error al obtener las estadisticas:', error);
         setIsLoading(false);
       });
+      fetch(gatewayUrl+`/ranking?gamemode=${gamemode}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setRanking(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error al obtener el ranking:', error);
+        setError(error.message || 'Ha ocurrido un error al obtener el ranking');
+
+        setIsLoading(false);
+      });
     },2000);
+
     return () => clearTimeout(delayDebounceFn);
   }, [username]);
 
@@ -133,7 +164,7 @@ const Stats = () => {
         )}
         {stats && (
           <div>
-            <h2><em>Estadísticas de usuario - Modo {getModeName()}</em></h2>
+            <h2>Estadísticas de usuario - Modo {getModeName()}</h2>
             <table>
             <tr>
               <td><strong>Usuario</strong></td>
@@ -170,6 +201,27 @@ const Stats = () => {
           </table>
           </div>
         )}
+        {ranking && ranking.length > 0 && (
+                <div>
+                    <h2>Ranking - Modo {getModeName()}</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Puntos promedio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {ranking.map((stat, index) => (
+                                <tr key={index}>
+                                    <td>{stat.username}</td>
+                                    <td>{stat.avgPoints.toFixed(2)}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
     </div>
     <Footer />
     </>

@@ -72,6 +72,17 @@ app.get("/stats", async (req, res) => {
   }
 });
 
+app.get("/ranking", async (req, res) => {
+  try {
+    var data = await statsGetter.getRanking(req.query.gamemode);
+    res.json(data);
+
+  } catch (error) {
+    
+    res.status(400).json({ error: "Error al obtener el ranking: "+error.message });
+  }
+});
+
 
 
 const server = app.listen(port, () => {
