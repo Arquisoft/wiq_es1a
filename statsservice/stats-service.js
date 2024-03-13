@@ -47,7 +47,7 @@ app.post("/saveGame", async (req, res) => {
           avgTime: gameData.avgTime,
         });
       } else {
-        stats = statsGetter.calculateStats(gameData);
+        stats = statsGetter.calculateStats(username,gamemode,gameData);
       }
       console.log(stats);
       await stats.save();

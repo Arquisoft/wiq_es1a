@@ -18,6 +18,7 @@ class StatsForUser {
             if (stats) {
                 return {
                     username: stats.username,
+                    gamemode: stats.gamemode,
                     nGamesPlayed: stats.nGamesPlayed,
                     avgPoints: stats.avgPoints,
                     totalPoints: stats.totalPoints,
@@ -35,7 +36,7 @@ class StatsForUser {
         }
     }
 
-    calculateStats(gameData){
+    calculateStats(username,gamemode,gameData){
         const totalGamesPlayed = gameData.nGamesPlayed + 1;
         const newAvgPoints = (gameData.avgPoints * gameData.nGamesPlayed + gameData.points) / totalGamesPlayed;
         const newTotalPoints = gameData.totalPoints + gameData.points;
@@ -45,6 +46,8 @@ class StatsForUser {
         const newAvgTime = (gameData.avgTime * gameData.nGamesPlayed + gameData.avgTime) / totalGamesPlayed;
 
         return {
+            username:username,
+            gamemode: gamemode,
             nGamesPlayed: totalGamesPlayed,
             avgPoints: newAvgPoints,
             totalPoints: newTotalPoints,
