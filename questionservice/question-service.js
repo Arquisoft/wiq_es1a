@@ -15,18 +15,16 @@ const MAX_QUESTIONS = 10000;
 // Middleware to parse JSON in request body
 app.use(bodyParser.json());
 // support encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors());
 
 app.use((req, res, next) => {
   if (!generadoresCargados) {
-    return res
-      .status(500)
-      .json({
-        error:
-          "Los generadores de preguntas aún no se han cargado. Por favor, inténtalo de nuevo más tarde.",
-      });
+    return res.status(500).json({
+      error:
+        "Los generadores de preguntas aún no se han cargado. Por favor, inténtalo de nuevo más tarde.",
+    });
   }
   next();
 });

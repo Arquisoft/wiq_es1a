@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./routers/ProtectedRoute.js";
 import Sobre from "./pages/Sobre/Sobre.js";
 import Config from "./pages/Config/Config.js";
+import Descubriendo from "./pages/Descubriendo/Descubriendo.js";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/home/clasico" element={<Clasico />} />
           <Route path="/home/bateria" element={<Bateria />} />
+          <Route path="/home/descubriendo" element={<Descubriendo />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/config" element={<Config />} />
         </Route>

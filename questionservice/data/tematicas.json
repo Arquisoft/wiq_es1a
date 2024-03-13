@@ -56,5 +56,18 @@
             "¿Cuál es la última versión del lenguaje de programación ",
             "¿Cuál es una de las extensiones usadas por el lenguaje de programación "
         ]
+    },
+    "descubriendo": {
+        "entity": "Q6256",
+        "props": ["P1082", "P37", "P36", "P6", "P2132", "P47"],
+        "types": ["str", "str", "str", "str", "str", "str"],
+        "preguntas": [
+            "Su población es de ",
+            "Una de sus lenguas oficiales es el ",
+            "Su capital es ",
+            "Su jefe de estado es ",
+            "Su PIB per cápita (en USD) es de",
+            "Comparte frontera con"
+        ]
     }
 }      
