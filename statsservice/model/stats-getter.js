@@ -16,6 +16,8 @@ class StatsForUser {
             var stats = await Stats.findOne({ username:username,gamemode:gamemode });
     
             if (stats) {
+                console.log("estas son las stats");
+                console.log(stats);
                 return {
                     username: stats.username,
                     gamemode: stats.gamemode,
@@ -37,6 +39,8 @@ class StatsForUser {
     }
 
     calculateStats(username,gamemode,gameData){
+        console.log("este es el game data");
+        console.log(gameData);
         const totalGamesPlayed = gameData.nGamesPlayed + 1;
         const newAvgPoints = (gameData.avgPoints * gameData.nGamesPlayed + gameData.points) / totalGamesPlayed;
         const newTotalPoints = gameData.totalPoints + gameData.points;
@@ -44,6 +48,14 @@ class StatsForUser {
         const newTotalIncorrectQuestions = gameData.totalIncorrectQuestions + gameData.incorrectAnswers;
         const newRatioCorrect = (newTotalCorrectQuestions / (newTotalIncorrectQuestions+newTotalCorrectQuestions))*100;
         const newAvgTime = (gameData.avgTime * gameData.nGamesPlayed + gameData.avgTime) / totalGamesPlayed;
+
+        console.log(totalGamesPlayed);
+        console.log(newAvgPoints);
+        console.log(newTotalPoints);
+        console.log(newTotalCorrectQuestions);
+        console.log(newTotalIncorrectQuestions);
+        console.log(newRatioCorrect);
+        console.log(newAvgTime);
 
         return {
             username:username,

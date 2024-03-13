@@ -48,6 +48,7 @@ app.post("/saveGame", async (req, res) => {
         });
       } else {
         stats = statsGetter.calculateStats(username,gamemode,gameData);
+        //el fallo está aqui
       }
       console.log(stats);
       await stats.save();
