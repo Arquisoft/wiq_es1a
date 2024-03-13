@@ -50,11 +50,13 @@ const Descubriendo = () => {
           "Uno de sus idiomas oficiales es el ",
           "Su capital es ",
           "Su jefe de gobierno es ",
-          "Su PIB per cápita (en USD) es ",
+          "Su PIB per cápita (en USD $M) es ",
           "Comparte frontera con ",
         ];
 
-        const props = Object.values(data.results.bindings[0]).map(x => x.value);
+        const props = Object.values(data.results.bindings[0]).map(
+          (x) => x.value
+        );
         setCountry(props[0]);
         props.shift();
 
@@ -87,7 +89,7 @@ const Descubriendo = () => {
     setMostrarMenu(null);
     setHintIndex(0);
     setIsLoading(true);
-    setRepetirJuego(prev => !prev);
+    setRepetirJuego((prev) => !prev);
   };
 
   if (isLoading) {
@@ -110,18 +112,16 @@ const Descubriendo = () => {
           <Link to="/home">Volver al Menú Principal</Link>
         </div>
       ) : (
-        <div className="questionContainer">
+        <div className="hintContainer">
           <h2>Pista {hintIndex + 1}:</h2>
           <p>{actualHint}</p>
-          <div className="responsesContainer">
-            <input
-              type="text"
-              value={response}
-              onChange={(e) => setResponse(e.target.value)}
-              placeholder="Escribe tu respuesta"
-            />
-            <input type="button" onClick={handleSubmit}></input>
-          </div>
+          <input
+            type="text"
+            value={response}
+            onChange={(e) => setResponse(e.target.value)}
+            placeholder="Escribe tu respuesta"
+          />
+          <input type="button" value="Enviar respuesta" onClick={handleSubmit}></input>
         </div>
       )}
       <Footer />
