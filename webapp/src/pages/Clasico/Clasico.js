@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import "./Clasico.css";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
 
 const JuegoPreguntas = () => {
-  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
-  const SECS_PER_QUESTION = 10
+  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
+  const SECS_PER_QUESTION = useMemo(() => localStorage.getItem("clasicoTime"));
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -28,11 +28,17 @@ const JuegoPreguntas = () => {
   const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
-    fetch(URL + "/questions?tematica=all&n=10")
+    fetch(URL + "/questions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes"), n: localStorage.getItem("clasicoPreguntas") })
+    })
       .then((response) => {
         if (!response.ok) {
           navigate("/home?error=1");
-          return;
+          throw new Error("Error en la solicitud");
         }
         return response.json();
       })
@@ -45,16 +51,18 @@ const JuegoPreguntas = () => {
         console.error("Error al obtener las preguntas:", error);
         navigate("/home?error=1");
       });
-      // eslint-disable-next-line
-  },[]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
-    setProgressPercent(tiempoRestante / SECS_PER_QUESTION * 100);
-  
+    setProgressPercent((tiempoRestante / SECS_PER_QUESTION) * 100);
+
     const timer = setInterval(() => {
-      setTiempoRestante(prevTiempo => (prevTiempo <= 0 ? 0 : prevTiempo - 0.01));
-    }, 10); 
-  
+      setTiempoRestante((prevTiempo) =>
+        prevTiempo <= 0 ? 0 : prevTiempo - 0.01
+      );
+    }, 10);
+
     return () => clearInterval(timer);
   }, [tiempoRestante]);
 
@@ -208,7 +216,9 @@ const JuegoPreguntas = () => {
               </button>
             ))}
           </div>
-          <div className="timer">Tiempo restante: {Math.floor(tiempoRestante)}</div>
+          <div className="timer">
+            Tiempo restante: {Math.floor(tiempoRestante)}
+          </div>
           <div className="points">Puntuación: {puntuacion}</div>
           <div className="progressBarContainer">
             <div
