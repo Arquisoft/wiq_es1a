@@ -6,7 +6,7 @@ import Footer from "../../components/Footer/Footer.js";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
-  const SECS_PER_QUESTION = useMemo(localStorage.getItem("clasicoTime"));
+  const SECS_PER_QUESTION = useMemo(() => localStorage.getItem("clasicoTime"));
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -33,7 +33,7 @@ const JuegoPreguntas = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes"), n: 10 }),
+      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes"), n: localStorage.getItem("clasicoPreguntas") })
     })
       .then((response) => {
         if (!response.ok) {

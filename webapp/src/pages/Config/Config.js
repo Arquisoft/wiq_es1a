@@ -6,8 +6,15 @@ import Footer from "../../components/Footer/Footer.js";
 const Config = () => {
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
-  const [clasicoTime, setClasicoTime] = useState(10);
-  const [bateriaTime, setBateriaTime] = useState(180);
+  const [clasicoTime, setClasicoTime] = useState(
+    localStorage.getItem("clasicoTime")
+  );
+  const [clasicoPreguntas, setClasicoPreguntas] = useState(
+    localStorage.getItem("clasicoPreguntas")
+  );
+  const [bateriaTime, setBateriaTime] = useState(
+    localStorage.getItem("bateriaTime")
+  );
 
   const handleConfig = () => {
     const checkboxes = document.querySelectorAll(
@@ -26,6 +33,7 @@ const Config = () => {
     } else {
       localStorage.setItem("selectedThemes", JSON.stringify(selectedThemes));
       localStorage.setItem("clasicoTime", clasicoTime);
+      localStorage.setItem("clasicoPreguntas", clasicoPreguntas);
       localStorage.setItem("bateriaTime", bateriaTime);
 
       alert("Cambios realizados satisfactoriamente");
@@ -34,6 +42,10 @@ const Config = () => {
 
   const handleClasicoChange = (event) => {
     setClasicoTime(parseInt(event.target.value));
+  };
+
+  const handleClasicoPreguntas = (event) => {
+    setClasicoPreguntas(parseInt(event.target.value));
   };
 
   const handleBateriaChange = (event) => {
@@ -62,9 +74,8 @@ const Config = () => {
           <label htmlFor="programacion"> Programación</label>
           <input id="programacion" type="checkbox" />
         </div>
-        <h3>Tiempo</h3>
         <div>
-          <label htmlFor="clasico"> Clásico (entre preguntas)</label>
+          <label htmlFor="clasico"> Tiempo entre preguntas (Clásico)</label>
           <input
             id="clasico"
             value={clasicoTime}
@@ -73,8 +84,19 @@ const Config = () => {
             max="20"
             onChange={handleClasicoChange}
           />
-
-          <label htmlFor="bateria"> Batería de sabios (Tiempo total)</label>
+          <label htmlFor="clasicoPreguntas">
+            {" "}
+            Número de preguntas (Clásico)
+          </label>
+          <input
+            id="clasicoPreguntas"
+            value={clasicoPreguntas}
+            type="number"
+            min="1"
+            max="1000"
+            onChange={handleClasicoPreguntas}
+          />
+          <label htmlFor="bateria">Tiempo total (Batería de sabios)</label>
           <input
             id="bateria"
             value={bateriaTime}
