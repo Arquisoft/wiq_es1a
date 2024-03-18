@@ -27,7 +27,6 @@ app.post("/saveGame", async (req, res) => {
     const gamemode = req.body.gameMode;
     const gameData = req.body.gameData;
 
-    console.log(gamemode);
     if (gamemode == "clasico" || gamemode == "bateria") {
       // Buscar las estadísticas existentes del usuario y modo de juego
       let stats = await Stats.findOne({ username: username, gamemode: gamemode });
@@ -48,7 +47,7 @@ app.post("/saveGame", async (req, res) => {
 
         await stats.save();
       } else {
-        
+
         await Stats.updateOne(
           { username: username, gamemode: gamemode },
           {

@@ -37,8 +37,6 @@ class StatsForUser {
     }
 
     async calculateStats(username,gamemode,gameData,stats){
-        console.log("este es el game data");
-        console.log(gameData);
 
         
         const totalGamesPlayed = stats.nGamesPlayed + 1;
@@ -48,14 +46,6 @@ class StatsForUser {
         const newTotalIncorrectQuestions = stats.totalIncorrectQuestions + gameData.incorrectAnswers;
         const newRatioCorrect = (newTotalCorrectQuestions / (newTotalIncorrectQuestions+newTotalCorrectQuestions))*100;
         const newAvgTime = (stats.avgTime * stats.nGamesPlayed + gameData.avgTime) / totalGamesPlayed;
-
-        console.log(totalGamesPlayed);
-        console.log(newAvgPoints);
-        console.log(newTotalPoints);
-        console.log(newTotalCorrectQuestions);
-        console.log(newTotalIncorrectQuestions);
-        console.log(newRatioCorrect);
-        console.log(newAvgTime);
 
         return {
             username:username,
