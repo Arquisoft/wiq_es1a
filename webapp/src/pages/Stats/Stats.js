@@ -15,7 +15,7 @@ const Stats = () => {
 
   const fetchStats = () => {
     setIsLoading(true);
-    fetch(gatewayUrl+`/stats?user=${username}?gamemode=${gamemode}`)
+    fetch(gatewayUrl+`/stats?user=${username}&gamemode=${gamemode}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);
@@ -24,7 +24,6 @@ const Stats = () => {
       .catch((error) => {
         console.error('Error al obtener las estadísticas:', error);
         setError(error.message || 'Ha ocurrido un error al obtener las estadísticas');
-
         setIsLoading(false);
       });
   };
@@ -39,45 +38,19 @@ const Stats = () => {
       })
       .catch((error) => {
         console.error('Error al obtener el ranking:', error);
-        setError(error.message || 'Ha ocurrido un error al obtener las estadísticas');
-
+        setError(error.message || 'Ha ocurrido un error al obtener el ranking');
         setIsLoading(false);
       });
   };
-
-  useEffect(() => {
-    fetchStats();
-    fetchRanking();
-  }, [username, gamemode]);
-
+  
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-    fetch(gatewayUrl+`/stats?user=${username}&gamemode=${gamemode}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setStats(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error al obtener las estadisticas:', error);
-        setIsLoading(false);
-      });
-      fetch(gatewayUrl+`/ranking?gamemode=${gamemode}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setRanking(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error al obtener el ranking:', error);
-        setError(error.message || 'Ha ocurrido un error al obtener el ranking');
-
-        setIsLoading(false);
-      });
-    },2000);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [username]);
+      fetchStats();
+      fetchRanking();
+      },2000);
+  
+      return () => clearTimeout(delayDebounceFn);
+  }, [username, gamemode]);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -85,6 +58,7 @@ const Stats = () => {
 
   const handleGamemodeChange = (mode) => {
     setGamemode(mode);
+    // Llama a fetchStats() para actualizar las estadísticas cuando se cambia el modo de juego
     fetchStats();
   };
 
@@ -230,3 +204,4 @@ const Stats = () => {
 }
 
 export default Stats;
+
