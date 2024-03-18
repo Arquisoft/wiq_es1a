@@ -3,6 +3,7 @@ import "./Clasico.css";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
+import axios from 'axios';
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
@@ -109,16 +110,16 @@ const JuegoPreguntas = () => {
     return {};
   };
 
-  const handleSiguientePregunta = async () => {
+  const handleSiguientePregunta = () => {
     if (respuestaSeleccionada === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
       setPreguntasCorrectas(preguntasCorrectas + 1);
+      console.log("bien");
     } else {
       setPreguntasFalladas(preguntasFalladas + 1);
+      console.log("mal");
     }
-
-    setTiempoTotal(tiempoTotal + 10 - tiempoRestante);
-
+    setTiempoTotal(tiempoTotal+tiempoRestante);
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
     setProgressPercent(100);
@@ -127,42 +128,38 @@ const JuegoPreguntas = () => {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
-      try {
-        if (preguntasCorrectas + preguntasFalladas > 0) {
-          setTiempoMedio(
-            tiempoTotal / (preguntasCorrectas + preguntasFalladas)
-          );
-        }
-
-        //Now we store the game in the user's DB
-        const username = localStorage.getItem("username");
-        const newGame = {
-          username: username,
-          correctAnswers: preguntasCorrectas,
-          incorrectAnswers: preguntasFalladas,
-          points: puntuacion,
-          avgTime: tiempoMedio,
-        };
-
-        const response = await fetch(URL + "/userSaveGame", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newGame),
-        });
-
-        if (!response.ok) {
-          throw new Error("Error al guardar el juego");
-        }
-      } catch (error) {
-        console.error("Error al guardar el juego:", error);
-        // Manejar el error, por ejemplo, mostrando un mensaje al usuario
-      } finally {
-        setJuegoTerminado(true);
+      setJuegoTerminado(true);
+      if (preguntasCorrectas + preguntasFalladas > 0) {
+        setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
       }
+      guardarPartida();
     }
-  };
+    };
+
+  const guardarPartida = async () => {
+    
+
+    //Now we store the game in the stats DB
+    const username = localStorage.getItem("username");
+    const newGame = {
+      username: username,
+      gameMode: "clasico",
+      gameData: {
+        correctAnswers: preguntasCorrectas,
+        incorrectAnswers: preguntasFalladas,
+        points: puntuacion,
+        avgTime: tiempoMedio,
+      },
+    };
+    
+    try {
+      const response = await axios.post(URL + '/saveGame', newGame);
+      console.log("Solicitud exitosa:", response.data);
+      
+    } catch (error) {
+      console.error('Error al guardar el juego:', error);
+    }
+  }
 
   const handleRepetirJuego = () => {
     // Reiniciar el estado para repetir el juego
@@ -216,6 +213,16 @@ const JuegoPreguntas = () => {
               </button>
             ))}
           </div>
+          <div className="answer">
+          <button
+                onClick={() => setTiempoRestante(0)}
+                disabled={tiempoRestante === 0 || juegoTerminado}
+              >
+              Responder
+              </button>
+          </div>
+          
+          <div className="timer">Tiempo restante: {tiempoRestante}</div>
           <div className="timer">
             Tiempo restante: {Math.floor(tiempoRestante)}
           </div>

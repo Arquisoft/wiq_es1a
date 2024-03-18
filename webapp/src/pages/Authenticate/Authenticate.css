@@ -1,3 +1,16 @@
+.auth-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .auth-title {
+    margin-bottom: 20px;
+  }
+  
+  .auth-link {
+    margin-top: 20px;
+  }
+  
 .gotoregister,
 .gotologin {
   box-shadow: none;

@@ -66,7 +66,6 @@ button{
   will-change: transform;
   margin: 0;
 }
-
 /* HTML: <div class="loader"></div> */
 .loader {
   width: 50px;

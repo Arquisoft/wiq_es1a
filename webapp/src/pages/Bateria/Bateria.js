@@ -3,6 +3,7 @@ import "./Bateria.css";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
@@ -17,6 +18,11 @@ const JuegoPreguntas = () => {
   const [preguntaActual, setPreguntaActual] = useState(null);
   const [progressPercent, setProgressPercent] = useState(100);
   const navigate = useNavigate();
+
+    //Used for user stats
+    const [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
+    const [preguntasFalladas, setPreguntasFalladas] = useState(0);
+    const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
     fetch(URL + "/questions", {
@@ -48,12 +54,38 @@ const JuegoPreguntas = () => {
   useEffect(() => {
     if (tiempoRestante === 0) {
       setJuegoTerminado(true);
+
+      guardarPartida();
     }
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
   }, [tiempoRestante]);
+
+  const guardarPartida = async () => {
+    if(preguntasCorrectas+preguntasFalladas>0){
+      setTiempoMedio(180/(preguntasCorrectas+preguntasFalladas));
+    }
+    const username = localStorage.getItem("username");
+    const newGame = {
+      username: username,
+      gameMode: "bateria",
+      gameData: {
+        correctAnswers: preguntasCorrectas,
+        incorrectAnswers: preguntasFalladas,
+        points: puntuacion,
+        avgTime: tiempoMedio,
+      },
+    };
+    try {
+      const response = await axios.post(URL + '/saveGame', newGame);
+      console.log("Solicitud exitosa:", response.data);
+      
+    } catch (error) {
+      console.error('Error al guardar el juego:', error);
+    }
+  }
 
   useEffect(() => {
     setProgressPercent(tiempoRestante / TIME * 100);
@@ -65,9 +97,13 @@ const JuegoPreguntas = () => {
     return () => clearInterval(timer);
   }, [tiempoRestante]);
 
-  const handleSiguientePregunta = (respuesta) => {
+  const handleSiguientePregunta = async (respuesta) => {
     if (respuesta === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
+      setPreguntasCorrectas(preguntasCorrectas+1);
+    }
+    else{
+      setPreguntasFalladas(preguntasFalladas+1);
     }
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
