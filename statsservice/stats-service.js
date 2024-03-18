@@ -22,16 +22,15 @@ const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/statsdb';
 mongoose.connect(mongoUri);
 
 app.post("/saveGame", async (req, res) => {
-  try{
+  try {
     const username = req.body.username;
     const gamemode = req.body.gameMode;
     const gameData = req.body.gameData;
 
     console.log(gamemode);
-    if(gamemode=="clasico" || gamemode=="bateria"){
-      var stats = await Stats.findOne({ username:username, gamemode: gamemode });
-      console.log("guardando stats");
-      console.log(stats);
+    if (gamemode == "clasico" || gamemode == "bateria") {
+      // Buscar las estadísticas existentes del usuario y modo de juego
+      let stats = await Stats.findOne({ username: username, gamemode: gamemode });
 
       if (!stats) {
         // Si no existen estadísticas, crear un nuevo documento
@@ -43,28 +42,43 @@ app.post("/saveGame", async (req, res) => {
           totalPoints: gameData.points,
           totalCorrectQuestions: gameData.correctAnswers,
           totalIncorrectQuestions: gameData.incorrectAnswers,
-          ratioCorrect: (gameData.correctAnswers / (gameData.incorrectAnswers+gameData.correctAnswers))*100,
+          ratioCorrect: (gameData.correctAnswers / (gameData.incorrectAnswers + gameData.correctAnswers)) * 100,
           avgTime: gameData.avgTime,
         });
-      } else {
-        stats = statsGetter.calculateStats(username,gamemode,gameData);
-        //el fallo está aqui
-      }
-      console.log(stats);
-      await stats.save();
-  
-      res.json({ message: "Partida guardada exitosamente" });
 
+        await stats.save();
+      } else {
+        
+        await Stats.updateOne(
+          { username: username, gamemode: gamemode },
+          {
+            $inc: {
+              nGamesPlayed: 1,
+              totalPoints: gameData.points,
+              totalCorrectQuestions: gameData.correctAnswers,
+              totalIncorrectQuestions: gameData.incorrectAnswers,
+            },
+            $set: {
+              avgPoints: (stats.avgPoints * stats.nGamesPlayed + gameData.points) / (stats.nGamesPlayed + 1),
+              ratioCorrect: ((stats.totalCorrectQuestions + gameData.correctAnswers) / (stats.totalIncorrectQuestions + stats.totalCorrectQuestions + gameData.incorrectAnswers + gameData.correctAnswers)) * 100,
+              avgTime: (stats.avgTime * stats.nGamesPlayed + gameData.avgTime) / (stats.nGamesPlayed + 1),
+            }
+          }
+        );
+      }
+
+      res.json({ message: "Partida guardada exitosamente" });
     }
-  }
-   catch (error) {
-    res.status(400).json({ error: "Error al guardar juego"+error.message});
+  } catch (error) {
+    res.status(400).json({ error: "Error al guardar juego" + error.message });
   }
 });
+
 
 app.get("/stats", async (req, res) => {
   try {
     var data = await statsGetter.getStatsForUser(req.query.user,req.query.gamemode);
+
     res.json(data);
 
   } catch (error) {

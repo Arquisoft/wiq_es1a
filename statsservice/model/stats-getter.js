@@ -16,8 +16,6 @@ class StatsForUser {
             var stats = await Stats.findOne({ username:username,gamemode:gamemode });
     
             if (stats) {
-                console.log("estas son las stats");
-                console.log(stats);
                 return {
                     username: stats.username,
                     gamemode: stats.gamemode,
@@ -38,16 +36,18 @@ class StatsForUser {
         }
     }
 
-    calculateStats(username,gamemode,gameData){
+    async calculateStats(username,gamemode,gameData,stats){
         console.log("este es el game data");
         console.log(gameData);
-        const totalGamesPlayed = gameData.nGamesPlayed + 1;
-        const newAvgPoints = (gameData.avgPoints * gameData.nGamesPlayed + gameData.points) / totalGamesPlayed;
-        const newTotalPoints = gameData.totalPoints + gameData.points;
-        const newTotalCorrectQuestions = gameData.totalCorrectQuestions + gameData.correctAnswers;
-        const newTotalIncorrectQuestions = gameData.totalIncorrectQuestions + gameData.incorrectAnswers;
+
+        
+        const totalGamesPlayed = stats.nGamesPlayed + 1;
+        const newAvgPoints = (stats.avgPoints * stats.nGamesPlayed + gameData.points) / totalGamesPlayed;
+        const newTotalPoints = stats.totalPoints + gameData.points;
+        const newTotalCorrectQuestions = stats.totalCorrectQuestions + gameData.correctAnswers;
+        const newTotalIncorrectQuestions = stats.totalIncorrectQuestions + gameData.incorrectAnswers;
         const newRatioCorrect = (newTotalCorrectQuestions / (newTotalIncorrectQuestions+newTotalCorrectQuestions))*100;
-        const newAvgTime = (gameData.avgTime * gameData.nGamesPlayed + gameData.avgTime) / totalGamesPlayed;
+        const newAvgTime = (stats.avgTime * stats.nGamesPlayed + gameData.avgTime) / totalGamesPlayed;
 
         console.log(totalGamesPlayed);
         console.log(newAvgPoints);
