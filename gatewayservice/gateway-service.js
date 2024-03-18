@@ -68,6 +68,21 @@ app.get("/questions", async (req, res) => {
   }
 });
 
+app.post("/questions", async (req, res) => {
+  try {
+    // Forward the question request to the question service
+    const questionResponse = await axios.post(
+      questionServiceUrl + "/questions",
+      { body: req.body }
+    );
+    res.json(questionResponse.data);
+  } catch (error) {
+    res
+      .status(error.response.status)
+      .json({ error: error.response.data.error });
+  }
+});
+
 app.get("/stats", async (req, res) => {
   try {
     // Forward the stats request to the stats service

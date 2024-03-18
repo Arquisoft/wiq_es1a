@@ -7,13 +7,16 @@ import axios from 'axios';
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
+  const TIME = localStorage.getItem("bateriaTime");
+
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
-  const [tiempoRestante, setTiempoRestante] = useState(180);
+  const [tiempoRestante, setTiempoRestante] = useState(TIME);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState(null);
+  const [progressPercent, setProgressPercent] = useState(100);
   const navigate = useNavigate();
 
     //Used for user stats
@@ -22,11 +25,17 @@ const JuegoPreguntas = () => {
     const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
-    fetch(URL + "/questions?tematica=all&n=9000")
+    fetch(URL + "/questions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes"), n: 9000 }),
+    })
       .then((response) => {
         if (!response.ok) {
           navigate("/home?error=1");
-          return;
+          throw new Error("Error en la solicitud");
         }
         return response.json();
       })
@@ -39,8 +48,8 @@ const JuegoPreguntas = () => {
         console.error("Error al obtener las preguntas:", error);
         navigate("/home?error=1");
       });
-      // eslint-disable-next-line
-  },[]);
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (tiempoRestante === 0) {
@@ -77,6 +86,16 @@ const JuegoPreguntas = () => {
       console.error('Error al guardar el juego:', error);
     }
   }
+
+  useEffect(() => {
+    setProgressPercent(tiempoRestante / TIME * 100);
+  
+    const timer = setInterval(() => {
+      setTiempoRestante(prevTiempo => (prevTiempo <= 0 ? 0 : prevTiempo - 0.01));
+    }, 10); 
+  
+    return () => clearInterval(timer);
+  }, [tiempoRestante]);
 
   const handleSiguientePregunta = async (respuesta) => {
     if (respuesta === preguntaActual.correcta) {
@@ -138,8 +157,14 @@ const JuegoPreguntas = () => {
               </button>
             ))}
           </div>
-          <div className="timer">Tiempo restante: {tiempoRestante}</div>
+          <div className="timer">Tiempo restante: {Math.floor(tiempoRestante)}</div>
           <div className="points">Puntuación: {puntuacion}</div>
+          <div className="progressBarContainer">
+            <div
+              className="progressBar"
+              style={{ width: `${progressPercent}%` }}
+            ></div>
+          </div>
         </div>
       )}
       <Footer />

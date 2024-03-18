@@ -65,3 +65,12 @@ a:hover {
   -webkit-box-shadow: 0 0 0 0 #000, 0 0 0 2px var(--shadow);
   box-shadow: 0 0 0 0 #000, 0 0 0 2px var(--shadow);
 }
+
+.logo {
+  font-family: oswald, sans-serif;
+  width: 100%;
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 4px 4px 0 var(--shadow);
+}

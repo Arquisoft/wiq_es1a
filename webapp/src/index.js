@@ -7,6 +7,10 @@ import reportWebVitals from './reportWebVitals';
 var r = document.getElementById('root');
 r.setAttribute("data-theme", "light")
 const root = ReactDOM.createRoot(r);
+localStorage.setItem("selectedThemes", JSON.stringify(["paises", "literatura", "cine", "arte", "programacion"]));
+localStorage.setItem("clasicoTime", 10);
+localStorage.setItem("clasicoPreguntas", 10);
+localStorage.setItem("bateriaTime", 180);
 
 root.render(
   //<React.StrictMode>

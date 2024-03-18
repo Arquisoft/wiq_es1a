@@ -9,6 +9,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./routers/ProtectedRoute.js";
 import Sobre from "./pages/Sobre/Sobre.js";
+import Config from "./pages/Config/Config.js";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/home/clasico" element={<Clasico />} />
           <Route path="/home/bateria" element={<Bateria />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/config" element={<Config />} />
         </Route>
 
         {/* Ruta por defecto */}
