@@ -13,6 +13,11 @@ const Stats = () => {
   const [filterBy, setFilterby] = useState("avgPoints");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [displayOptions, setDisplayOptions] = useState([
+    { value: "avgPoints", label: "Puntos promedio" },
+    { value: "totalPoints", label: "Puntos totales" },
+    { value: "ratioCorrect", label: "Ratio de aciertos" }
+  ]);
 
   const fetchStats = () => {
     setIsLoading(true);
@@ -205,6 +210,14 @@ const getDisplayValue = (stat) => {
         {ranking && ranking.length > 0 && (
         <div>
           <h2>Ranking - Modo {getModeName()}</h2>
+          <div>
+            <label htmlFor="displaySelector">Mostrar:</label>
+            <select id="displaySelector" onChange={handleDisplayChange}>
+                {displayOptions.map(option => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+            </select>
+        </div>
           <table>
             <thead>
                 <tr>
