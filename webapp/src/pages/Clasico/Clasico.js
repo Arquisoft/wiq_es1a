@@ -115,10 +115,8 @@ const JuegoPreguntas = () => {
     if (respuestaSeleccionada === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
       setPreguntasCorrectas(preguntasCorrectas + 1);
-      console.log("bien");
     } else {
       setPreguntasFalladas(preguntasFalladas + 1);
-      console.log("mal");
     }
     setTiempoTotal(tiempoTotal+tiempoRestante);
     setRespuestaSeleccionada(null);
@@ -223,7 +221,7 @@ const JuegoPreguntas = () => {
               </button>
           </div>
           
-          <div className="timer">Tiempo restante: {tiempoRestante}</div>
+          <div className="timer">Tiempo restante: {parseFloat(tiempoRestante).toFixed(2).toString()}</div>
           <div className="timer">
             Tiempo restante: {Math.floor(tiempoRestante)}
           </div>
