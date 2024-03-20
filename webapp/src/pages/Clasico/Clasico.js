@@ -56,7 +56,8 @@ const JuegoPreguntas = () => {
   }, []);
 
   useEffect(() => {
-    setProgressPercent((tiempoRestante / SECS_PER_QUESTION) * 100);
+    const roundedProgressPercent = ((tiempoRestante / SECS_PER_QUESTION) * 100).toFixed(2);
+    setProgressPercent(roundedProgressPercent);
 
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) =>
