@@ -7,8 +7,7 @@ const Sobre = () => {
   const designers = [
     { name: 'Martín Cancio Barrera', id: 'UO287561', github: 'https://github.com/CANCI0' },
     { name: 'Iyán Fernández Riol', id: 'UO288231', github: 'https://github.com/iyanfdezz' },
-    { name: 'Rodrigo García Iglesias', id: 'UO276396', github: 'https://github.com/Rodrox11' },
-    { name: 'Alfredo Jirout Cid', id: 'UO288443', github: 'https://github.com/UO288443' }
+    { name: 'Rodrigo García Iglesias', id: 'UO276396', github: 'https://github.com/Rodrox11' }
   ];
 
   return (
