@@ -88,7 +88,7 @@ app.get("/stats", async (req, res) => {
 
 app.get("/ranking", async (req, res) => {
   try {
-    var data = await statsGetter.getRanking(req.query.gamemode);
+    var data = await statsGetter.getRanking(req.query.gamemode,req.query.filterBy);
     res.json(data);
 
   } catch (error) {

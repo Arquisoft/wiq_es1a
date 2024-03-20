@@ -10,8 +10,14 @@ const Stats = () => {
   const [stats, setStats] = useState(null);
   const [ranking, setRanking] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
+  const [filterBy, setFilterby] = useState("avgPoints");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [displayOptions, setDisplayOptions] = useState([
+    { value: "avgPoints", label: "Puntos promedio" },
+    { value: "totalPoints", label: "Puntos totales" },
+    { value: "ratioCorrect", label: "Ratio de aciertos" }
+  ]);
 
   const fetchStats = () => {
     setIsLoading(true);
@@ -30,7 +36,7 @@ const Stats = () => {
 
   const fetchRanking = () => {
     setIsLoading(true);
-    fetch(gatewayUrl+`/ranking?gamemode=${gamemode}`)
+    fetch(gatewayUrl+`/ranking?gamemode=${gamemode}&filterBy=${filterBy}`)
       .then((response) => response.json())
       .then((data) => {
         setRanking(data);
@@ -61,6 +67,32 @@ const Stats = () => {
     // Llama a fetchStats() para actualizar las estadísticas cuando se cambia el modo de juego
     fetchStats();
   };
+
+  const getDisplayedField = () => {
+    switch (filterBy) {
+        case "avgPoints":
+            return "Puntos promedio";
+        case "totalPoints":
+            return "Puntos totales";
+        case "ratioCorrect":
+            return "Ratio de aciertos";
+        default:
+            return "";
+    }
+  }
+
+const getDisplayValue = (stat) => {
+    switch (filterBy) {
+        case "avgPoints":
+            return stat.avgPoints.toFixed(2);
+        case "totalPoints":
+            return stat.totalPoints;
+        case "ratioCorrect":
+            return stat.ratioCorrect.toFixed(2);
+        default:
+            return "";
+    }
+}
 
   const getModeName = () => {
     if(gamemode=="clasico"){
@@ -176,26 +208,35 @@ const Stats = () => {
           </div>
         )}
         {ranking && ranking.length > 0 && (
-                <div>
-                    <h2>Ranking - Modo {getModeName()}</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Puntos promedio</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {ranking.map((stat, index) => (
-                                <tr key={index}>
-                                    <td>{stat.username}</td>
-                                    <td>{stat.avgPoints.toFixed(2)}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
+        <div>
+          <h2>Ranking - Modo {getModeName()}</h2>
+          <div>
+            <label htmlFor="displaySelector">Mostrar:</label>
+            <select id="displaySelector" onChange={handleDisplayChange}>
+                {displayOptions.map(option => (
+                    <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+            </select>
+        </div>
+          <table>
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>{getDisplayedField()}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {ranking.map((stat, index) => (
+                    <tr key={index}>
+                        <td>{stat.username}</td>
+                        <td>{getDisplayValue(stat)}</td>
+                    </tr>
+                ))}
+            </tbody>
+          </table>
+      </div>
+      )}
+
     </div>
     <Footer />
     </>
