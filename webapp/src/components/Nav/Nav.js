@@ -26,7 +26,7 @@ const Nav = () => {
       <Box textAlign="center" ml={3}>
         <Heading as="h1" size="xl" color={textColor}>WIQ</Heading>
       </Box>
-      <Flex className="menuItems">
+      <Flex gap={3}>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/home")}>Home</Button>
         <Popover>
           <PopoverTrigger>
@@ -45,6 +45,7 @@ const Nav = () => {
             </PopoverBody>
           </PopoverContent>
         </Popover>
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
       </Flex>
       <Flex className="rightItems" alignItems="center">
         <Button variant="link" color={textColor} mr={4} onClick={() => handleConfig()}>Opciones</Button>
