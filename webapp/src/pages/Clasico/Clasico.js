@@ -112,34 +112,46 @@ const JuegoPreguntas = () => {
   };
 
   const handleSiguientePregunta = () => {
-    if (respuestaSeleccionada === preguntaActual.correcta) {
+    if (respuestaSeleccionada === preguntaActual.correcta) { 
+      const newCorrectQuestions=preguntasCorrectas+1;
       setPuntuacion(puntuacion + 1);
-      setPreguntasCorrectas(preguntasCorrectas + 1);
+      setPreguntasCorrectas(newCorrectQuestions);
+      console.log("bien")
     } else {
-      setPreguntasFalladas(preguntasFalladas + 1);
+      const newIncorrectQuestions=preguntasFalladas+1;
+      setPreguntasFalladas(newIncorrectQuestions);
+      console.log("mal")
     }
     setTiempoTotal(tiempoTotal+tiempoRestante);
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
     setProgressPercent(100);
 
-    if (indicePregunta + 1 < preguntas.length) {
+    if (indicePregunta+1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
       setJuegoTerminado(true);
       if (preguntasCorrectas + preguntasFalladas > 0) {
         const preguntasTotales=preguntasCorrectas+preguntasFalladas;
+        console.log(preguntasCorrectas);
+        console.log(preguntasFalladas);
         const tMedio=tiempoTotal/preguntasTotales;
         setTiempoMedio(tMedio);
+        
       }
-      guardarPartida();
     }
+    
     };
+
+    useEffect(() => {
+      if (juegoTerminado) {
+        guardarPartida();
+      }
+    }, [juegoTerminado]);
 
   const guardarPartida = async () => {
     
-
     //Now we store the game in the stats DB
     const username = localStorage.getItem("username");
     const newGame = {
