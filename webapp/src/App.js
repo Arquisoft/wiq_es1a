@@ -1,5 +1,4 @@
 import React from "react";
-import Authenticate from "./pages/Authenticate/Authenticate.js";
 import Home from "./pages/Home/Home.js";
 import Clasico from "./pages/Clasico/Clasico.js";
 import Bateria from "./pages/Bateria/Bateria.js";
@@ -11,7 +10,6 @@ import Sobre from "./pages/Sobre/Sobre.js";
 import Config from "./pages/Config/Config.js";
 import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register.js";
-import { Flex } from '@chakra-ui/react';
 
 function App() {
   return (

@@ -7,7 +7,7 @@ const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
   const textColor = isDarkTheme ? "white" : "teal.500";
-
+  const bgColor = isDarkTheme ? 'gray.700' : 'gray.200';
   const handleConfig = () => {
     navigate("/config");
   };
@@ -22,11 +22,12 @@ const Nav = () => {
   };
 
   return (
-    <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" p={4}>
-      <Box textAlign="center" mb={8} mt={3} ml={3}>
+    <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" p={4} bg={bgColor}>
+      <Box textAlign="center" ml={3}>
         <Heading as="h1" size="xl" color={textColor}>WIQ</Heading>
       </Box>
-      <Flex className="menuItems" mr={4}>
+      <Flex className="menuItems">
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/home")}>Home</Button>
         <Popover>
           <PopoverTrigger>
             <Button variant="link" color={textColor}>

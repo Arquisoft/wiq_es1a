@@ -4,10 +4,14 @@ import {
   Flex,
   Heading,
   Checkbox,
-  Input,
   Button,
   FormLabel,
-  Stack
+  Stack,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -47,28 +51,22 @@ const Config = () => {
     }
   };
 
-  const handleClasicoChange = (event) => {
-    setClasicoTime(parseInt(event.target.value));
+  const handleClasicoChange = (valueString) => {
+    setClasicoTime(parseInt(valueString)); // Convertir el valor a entero
   };
 
-  const handleClasicoPreguntas = (event) => {
-    setClasicoPreguntas(parseInt(event.target.value));
+  const handleClasicoPreguntasChange = (valueString) => {
+    setClasicoPreguntas(parseInt(valueString)); // Convertir el valor a entero
   };
 
-  const handleBateriaChange = (event) => {
-    setBateriaTime(parseInt(event.target.value));
+  const handleBateriaChange = (valueString) => {
+    setBateriaTime(parseInt(valueString)); // Convertir el valor a entero
   };
 
   return (
     <>
       <Nav />
-      <Flex
-        direction="column"
-        align="center"
-        justify="center"
-        h="70vh"
-        w="70vw"
-      >
+      <Flex direction="column" align="center" justify="center">
         <Box className="configContainer">
           <Heading as="h2" mb={4}>
             Configuración
@@ -104,40 +102,58 @@ const Config = () => {
               {" "}
               Tiempo entre preguntas (Clásico)
             </FormLabel>
-            <Input
+            <NumberInput
               id="clasico"
               value={clasicoTime}
               type="number"
-              min="5"
-              max="20"
+              min={5}
+              max={50}
               onChange={handleClasicoChange}
               mb={2}
-            />
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
             <FormLabel htmlFor="clasicoPreguntas">
               {" "}
               Número de preguntas (Clásico)
             </FormLabel>
-            <Input
-              id="clasicoPreguntas"
+            <NumberInput
+              id="clasico"
               value={clasicoPreguntas}
               type="number"
-              min="1"
-              max="1000"
-              onChange={handleClasicoPreguntas}
+              min={1}
+              max={1000}
+              onChange={handleClasicoPreguntasChange}
               mb={2}
-            />
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
             <FormLabel htmlFor="bateria">
               Tiempo total (Batería de sabios)
             </FormLabel>
-            <Input
+            <NumberInput
               id="bateria"
               value={bateriaTime}
               type="number"
-              min="30"
-              max="600"
+              min={30}
+              max={600}
               onChange={handleBateriaChange}
-              mb={4}
-            />
+              mb={2}
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
           </Box>
           <Button colorScheme="teal" onClick={handleConfig} mb={4}>
             Aplicar cambios

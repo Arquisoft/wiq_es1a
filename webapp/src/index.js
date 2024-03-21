@@ -7,7 +7,6 @@ import './themes.js';
 import './index.css';
 
 var r = document.getElementById("root");
-r.setAttribute("data-theme", "light");
 const root = ReactDOM.createRoot(r);
 
 localStorage.setItem(

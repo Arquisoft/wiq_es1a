@@ -3,7 +3,7 @@ import { Box, Heading, Text, useColorMode } from '@chakra-ui/react';
 
 const Footer = () => {
     const { colorMode } = useColorMode();
-    const bgColor = { light: 'gray.200', dark: 'gray.900' };
+    const bgColor = { light: 'gray.200', dark: 'gray.700' };
     const textColor = { light: 'black', dark: 'white' };
 
     return(

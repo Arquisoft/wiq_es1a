@@ -2,12 +2,14 @@ import React, { useState, useEffect, useMemo } from "react";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
-import { Box, Flex, Heading, Button, Grid } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Grid, useColorMode } from "@chakra-ui/react";
 import axios from "axios";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
   const SECS_PER_QUESTION = useMemo(() => localStorage.getItem("clasicoTime"));
+  const { colorMode } = useColorMode();
+  const isDarkTheme = colorMode === "dark";
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -68,6 +70,7 @@ const JuegoPreguntas = () => {
     }, 10);
 
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [tiempoRestante]);
 
   useEffect(() => {
@@ -107,7 +110,7 @@ const JuegoPreguntas = () => {
       }
     } else {
       if (respuesta === respuestaSeleccionada) {
-        return { backgroundColor: "#333333", color: "#F0F0F0" };
+        return isDarkTheme? { color: "#333333", backgroundColor: "#F0F0F0" } : { backgroundColor: "#333333", color: "#F0F0F0" };
       }
     }
     return {};
@@ -189,11 +192,11 @@ const JuegoPreguntas = () => {
     <>
       <Nav />
       <Flex justify="center" align="center" h="70vh">
-        <Box p={4} borderWidth="1px" borderRadius="lg" boxShadow="lg">
+        <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
           {mostrarMenu ? (
             <Box textAlign="center">
               <Heading as="h2">¡Juego terminado!</Heading>
-              <p>
+              <p p={2}>
                 Tu puntuación: {puntuacion}/{preguntas.length}
               </p>
               <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>

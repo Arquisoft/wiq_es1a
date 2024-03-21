@@ -10,6 +10,10 @@ import {
   Alert,
   AlertIcon,
   Link,
+  useColorMode,
+  Flex,
+  Spacer,
+  Switch
 } from "@chakra-ui/react";
 import Footer from "../Footer/Footer";
 
@@ -17,6 +21,9 @@ const apiEndpoint =
   process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
 const AddUser = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const isDarkTheme = colorMode === "dark";
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordR, setPasswordR] = useState("");
@@ -36,11 +43,15 @@ const AddUser = () => {
 
   return (
     <>
-      <Box textAlign="center" mb={8} mt={3}>
-        <Heading as="h1" size="xl" color="teal.500">
+      <Flex alignItems="center" justifyContent="space-between" mt={4}>
+        <Spacer flex={0}/>
+        <Heading pl={6} as="h1" size="xl" color="teal.500">
           WIQ
         </Heading>
-      </Box>
+        <Box pr={5}>
+          <Switch isChecked={isDarkTheme} onChange={toggleColorMode} />
+        </Box>
+      </Flex>
       <Box
         maxW="md"
         mx="auto"
