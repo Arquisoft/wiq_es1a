@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import { Box, Button, Heading, Link } from "@chakra-ui/react";
 import AddUser from "../../components/Register/Register";
 import Login from "../../components/Login/Login";
-import Footer from "../../components/Footer/Footer.js";
-import "./Authenticate.css";
+import Footer from "../../components/Footer/Footer";
 
 function Authenticate() {
   const [showLogin, setShowLogin] = useState(true);
@@ -12,24 +12,15 @@ function Authenticate() {
   };
 
   return (
-    <div className="main">
-      <h1 className="logo">WIQ</h1>
-      <div>
+    <Box className="main">
+      <Box textAlign="center" mb={8}  mt={3}>
+        <Heading as="h1" size="xl" color="teal.500">WIQ</Heading>
+      </Box>
+      <Box>
         {showLogin ? <Login /> : <AddUser />}
-        <div>
-          {showLogin ? (
-            <button className="gotoregister" onClick={handleToggleView}>
-              ¿No tienes cuenta? Regístrate.
-            </button>
-          ) : (
-            <button className="gotologin" onClick={handleToggleView}>
-              Ya tienes cuenta? Inicia sesión.
-            </button>
-          )}
-        </div>
-      </div>
+      </Box>
       <Footer />
-    </div>
+    </Box>
   );
 }
 

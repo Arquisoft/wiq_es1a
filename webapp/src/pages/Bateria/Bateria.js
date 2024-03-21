@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./Bateria.css";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { Link, useNavigate } from "react-router-dom";

@@ -1,33 +1,46 @@
 import React from "react";
-import "./Home.css";
 import Nav from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
-import { Link } from "react-router-dom";
-
-import { useLocation } from "react-router-dom";
+import { Box, Heading, Button, Flex, Spacer } from '@chakra-ui/react';
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const error = searchParams.get("error");
+  const navigate = useNavigate();
+
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
 
   return (
     <>
       <Nav />
-      <div className="games-container">
-        <hgroup>
-          <h1>Bienvenido</h1>
-          <h2>Selecciona un modo de juego</h2>
-        </hgroup>         
-        <ul>
-          <Link to="clasico">Clásico</Link>
-          <Link to="bateria">Batería de sabios</Link>
-          {/* <Link to="descartando">Descartando</Link>
-          <Link to="pregunta">La pregunta caliente</Link>
-          <Link to="descubriendo">Descubriendo ciudades</Link> */}
-        </ul>
-        {error && <p>Hubo un error al cargar las preguntas. Inténtalo más tarde</p>}
-      </div>
+      <Flex direction="column" align="center" justify="center" h="70vh">
+        <Heading as="h1" mb={2}>¡Bienvenido a WIQ!</Heading>
+        <Heading as="h2" size="md" mb={6}>Elige el modo de juego</Heading>
+        <Box>
+          <Button
+            size="lg"
+            colorScheme="teal"
+            variant="outline"
+            mb={4}
+            onClick={() => handleNavigate("/home/clasico")}
+          >
+            Clásico
+          </Button>
+        </Box>
+        <Box>
+          <Button
+            size="lg"
+            colorScheme="teal"
+            variant="outline"
+            mb={4}
+            onClick={() => handleNavigate("/home/bateria")}
+          >
+            Batería de sabios
+          </Button>
+        </Box>
+        {/* Agrega más modos de juego aquí */}
+      </Flex>
       <Footer />
     </>
   );
