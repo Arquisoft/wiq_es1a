@@ -137,7 +137,7 @@ const Ranking = () => {
           </tr>
         </thead>
         <tbody>
-          {ranking.map((stat, index) => (
+          {ranking && ranking.map((stat, index) => (
             <tr key={index}>
               <td>{stat.username}</td>
               <td>{getDisplayValue(stat)}</td>
