@@ -58,16 +58,39 @@ class StatsForUser {
             ratioCorrect: newRatioCorrect,
             avgTime: newAvgTime
         };
-    }
+    };
 
-    async getRanking(gamemode) {
+    async getRanking(gamemode, filterBy) {
         try {
-            var stats = await Stats.find({gamemode:gamemode}).sort({ avgPoints: -1 }).limit(10);
+            let sortBy, displayField;
+    
+            switch (filterBy) {
+                case "avgPoints":
+                    sortBy = { avgPoints: -1 };
+                    displayField = "avgPoints";
+                    break;
+                case "totalPoints":
+                    sortBy = { totalPoints: -1 };
+                    displayField = "totalPoints";
+                    break;
+                case "ratioCorrect":
+                    sortBy = { ratioCorrect: -1 };
+                    displayField = "ratioCorrect";
+                    break;
+                    case "avgTime":
+                    sortBy = { avgTime: -1 };
+                    displayField = "avgTime";
+                    break;
+                default:
+                    return null;
+            }
+    
+            const stats = await Stats.find({ gamemode: gamemode }).sort(sortBy).limit(10);
     
             if (stats && stats.length > 0) {
                 return stats.map(stat => ({
                     username: stat.username,
-                    avgPoints: stat.avgPoints
+                    [displayField]: stat[displayField]
                 }));
             } else {
                 return null;
@@ -77,6 +100,7 @@ class StatsForUser {
             throw error;
         }
     }
+    
     
 }
 

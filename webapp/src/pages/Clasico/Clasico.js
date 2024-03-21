@@ -56,7 +56,8 @@ const JuegoPreguntas = () => {
   }, []);
 
   useEffect(() => {
-    setProgressPercent((tiempoRestante / SECS_PER_QUESTION) * 100);
+    const roundedProgressPercent = ((tiempoRestante / SECS_PER_QUESTION) * 100).toFixed(2);
+    setProgressPercent(roundedProgressPercent);
 
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) =>
@@ -111,34 +112,46 @@ const JuegoPreguntas = () => {
   };
 
   const handleSiguientePregunta = () => {
-    if (respuestaSeleccionada === preguntaActual.correcta) {
+    if (respuestaSeleccionada === preguntaActual.correcta) { 
+      const newCorrectQuestions=preguntasCorrectas+1;
       setPuntuacion(puntuacion + 1);
-      setPreguntasCorrectas(preguntasCorrectas + 1);
-      console.log("bien");
+      setPreguntasCorrectas(newCorrectQuestions);
+      console.log("bien")
     } else {
-      setPreguntasFalladas(preguntasFalladas + 1);
-      console.log("mal");
+      const newIncorrectQuestions=preguntasFalladas+1;
+      setPreguntasFalladas(newIncorrectQuestions);
+      console.log("mal")
     }
     setTiempoTotal(tiempoTotal+tiempoRestante);
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
     setProgressPercent(100);
 
-    if (indicePregunta + 1 < preguntas.length) {
+    if (indicePregunta+1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
       setJuegoTerminado(true);
       if (preguntasCorrectas + preguntasFalladas > 0) {
-        setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
+        const preguntasTotales=preguntasCorrectas+preguntasFalladas;
+        console.log(preguntasCorrectas);
+        console.log(preguntasFalladas);
+        const tMedio=tiempoTotal/preguntasTotales;
+        setTiempoMedio(tMedio);
+        
       }
-      guardarPartida();
     }
+    
     };
+
+    useEffect(() => {
+      if (juegoTerminado) {
+        guardarPartida();
+      }
+    }, [juegoTerminado]);
 
   const guardarPartida = async () => {
     
-
     //Now we store the game in the stats DB
     const username = localStorage.getItem("username");
     const newGame = {
@@ -215,17 +228,17 @@ const JuegoPreguntas = () => {
           </div>
           <div className="answer">
           <button
-                onClick={() => setTiempoRestante(0)}
+                onClick={() => {
+                  setTiempoTotal(tiempoTotal+tiempoRestante);
+                  setTiempoRestante(0);
+                }}
                 disabled={tiempoRestante === 0 || juegoTerminado}
               >
               Responder
               </button>
           </div>
           
-          <div className="timer">Tiempo restante: {tiempoRestante}</div>
-          <div className="timer">
-            Tiempo restante: {Math.floor(tiempoRestante)}
-          </div>
+          <div className="timer">Tiempo restante: {parseFloat(tiempoRestante).toFixed(2).toString()}</div>
           <div className="points">Puntuación: {puntuacion}</div>
           <div className="progressBarContainer">
             <div

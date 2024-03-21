@@ -54,7 +54,11 @@ const JuegoPreguntas = () => {
   useEffect(() => {
     if (tiempoRestante === 0) {
       setJuegoTerminado(true);
-
+      if(preguntasCorrectas+preguntasFalladas>0){
+        const preguntasTotales=preguntasCorrectas+preguntasFalladas;
+        const tMedio=180/preguntasTotales;
+        setTiempoMedio(tMedio);
+      }
       guardarPartida();
     }
     const timer = setInterval(() => {
@@ -64,9 +68,7 @@ const JuegoPreguntas = () => {
   }, [tiempoRestante]);
 
   const guardarPartida = async () => {
-    if(preguntasCorrectas+preguntasFalladas>0){
-      setTiempoMedio(180/(preguntasCorrectas+preguntasFalladas));
-    }
+    
     const username = localStorage.getItem("username");
     const newGame = {
       username: username,

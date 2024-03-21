@@ -5,6 +5,7 @@ import Clasico from "./pages/Clasico/Clasico.js";
 import Bateria from "./pages/Bateria/Bateria.js";
 import WrongRoute from "./pages/WrongRoute/WrongRoute.js";
 import Stats from "./pages/Stats/Stats.js";
+import Ranking from "./pages/Ranking/Ranking.js";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProtectedRoute } from "./routers/ProtectedRoute.js";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/home/clasico" element={<Clasico />} />
           <Route path="/home/bateria" element={<Bateria />} />
           <Route path="/stats" element={<Stats />} />
+          <Route path="/ranking" element={<Ranking />} />
           <Route path="/config" element={<Config />} />
         </Route>
 

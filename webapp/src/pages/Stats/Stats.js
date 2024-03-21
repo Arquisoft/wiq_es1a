@@ -8,7 +8,6 @@ const Stats = () => {
 
   const [username, setUsername] = useState(localStorage.username);
   const [stats, setStats] = useState(null);
-  const [ranking, setRanking] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -27,26 +26,10 @@ const Stats = () => {
         setIsLoading(false);
       });
   };
-
-  const fetchRanking = () => {
-    setIsLoading(true);
-    fetch(gatewayUrl+`/ranking?gamemode=${gamemode}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setRanking(data);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error al obtener el ranking:', error);
-        setError(error.message || 'Ha ocurrido un error al obtener el ranking');
-        setIsLoading(false);
-      });
-  };
   
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
       fetchStats();
-      fetchRanking();
       },2000);
   
       return () => clearTimeout(delayDebounceFn);
@@ -175,27 +158,6 @@ const Stats = () => {
           </table>
           </div>
         )}
-        {ranking && ranking.length > 0 && (
-                <div>
-                    <h2>Ranking - Modo {getModeName()}</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Usuario</th>
-                                <th>Puntos promedio</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {ranking.map((stat, index) => (
-                                <tr key={index}>
-                                    <td>{stat.username}</td>
-                                    <td>{stat.avgPoints.toFixed(2)}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-            )}
     </div>
     <Footer />
     </>
