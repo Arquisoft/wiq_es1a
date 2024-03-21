@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
-import { Box, Flex, Heading, Button, Grid, useColorMode } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Grid, useColorMode, Text, Image } from "@chakra-ui/react";
 import axios from "axios";
 
 const JuegoPreguntas = () => {
@@ -199,6 +199,12 @@ const JuegoPreguntas = () => {
               <p p={2}>
                 Tu puntuación: {puntuacion}/{preguntas.length}
               </p>
+              {preguntasFalladas === 0 ? (
+                <Box>
+                  <Image src="/jordi.png" alt="Jordi Hurtado" />
+                  <Text>¡Has acertado todas! Eres la cuenta secundaria de Jordi Hurtado.</Text>
+                </Box>
+              ) : null}
               <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
                 Repetir Juego
               </Button>
@@ -224,7 +230,7 @@ const JuegoPreguntas = () => {
                   </Button>
                 ))}
               </Grid>
-
+  
               <Flex justify="center" mt={4}>
                 <Button
                   onClick={() => setTiempoRestante(0)}
@@ -239,11 +245,7 @@ const JuegoPreguntas = () => {
                 <p>Tiempo restante: {Math.floor(tiempoRestante)}</p>
                 <p>Puntuación: {puntuacion}</p>
                 <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
-                  <Box
-                    bg="teal.500"
-                    h="4px"
-                    width={`${progressPercent}%`}
-                  ></Box>
+                  <Box bg="teal.500" h="4px" width={`${progressPercent}%`}></Box>
                 </Box>
               </Box>
             </Box>
@@ -252,7 +254,7 @@ const JuegoPreguntas = () => {
       </Flex>
       <Footer />
     </>
-  );
+  );  
 };
 
 export default JuegoPreguntas;
