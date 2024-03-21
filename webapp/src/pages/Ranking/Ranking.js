@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Nav from "../../components/Nav/Nav.js";
+import Footer from "../../components/Footer/Footer.js";
 
 const Ranking = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
@@ -8,7 +10,8 @@ const Ranking = () => {
   const [displayOptions] = useState([
     { value: "avgPoints", label: "Puntos promedio" },
     { value: "totalPoints", label: "Puntos totales" },
-    { value: "ratioCorrect", label: "Ratio de aciertos" }
+    { value: "ratioCorrect", label: "Ratio de aciertos" },
+    { value: "avgTime", label: "Tiempo por pregunta (s)" }
   ]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -53,7 +56,9 @@ const Ranking = () => {
       case "totalPoints":
         return "Puntos totales";
       case "ratioCorrect":
-        return "Ratio de aciertos";
+        return "Ratio de aciertos (%)";
+        case "avgTime":
+        return "Tiempo por pregunta (s)";
       default:
         return "";
     }
@@ -62,11 +67,13 @@ const Ranking = () => {
   const getDisplayValue = (stat) => {
     switch (filterBy) {
       case "avgPoints":
-        return stat.avgPoints.toFixed(2);
+        return Math.round(stat.avgPoints * 100) / 100;
       case "totalPoints":
         return stat.totalPoints;
       case "ratioCorrect":
-        return stat.ratioCorrect.toFixed(2);
+        return Math.round(stat.ratioCorrect * 100) / 100;
+        case "avgTime":
+        return Math.round(stat.avgTime * 100) / 100;
       default:
         return "";
     }
@@ -96,8 +103,10 @@ const Ranking = () => {
   }
 
   return (
+    <>
+    <Nav/>
     <div>
-      <h2>Ranking - Modo {gamemode}</h2>
+      <h2>Ranking - Modo {getModeName()}</h2>
       <div>
         <label htmlFor="displaySelector">Mostrar:</label>
         <select id="displaySelector" onChange={handleDisplayChange}>
@@ -137,6 +146,8 @@ const Ranking = () => {
         </tbody>
       </table>
     </div>
+    <Footer/>
+    </>
   );
 };
 
