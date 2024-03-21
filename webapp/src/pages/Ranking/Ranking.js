@@ -11,7 +11,8 @@ const Ranking = () => {
     { value: "avgPoints", label: "Puntos promedio" },
     { value: "totalPoints", label: "Puntos totales" },
     { value: "ratioCorrect", label: "Ratio de aciertos" },
-    { value: "avgTime", label: "Tiempo por pregunta (s)" }
+    { value: "avgTime", label: "Tiempo por pregunta (s)" },
+    { value: "avgPoints", label: "Reestablecer por defecto" }
   ]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -57,7 +58,7 @@ const Ranking = () => {
         return "Puntos totales";
       case "ratioCorrect":
         return "Ratio de aciertos (%)";
-        case "avgTime":
+      case "avgTime":
         return "Tiempo por pregunta (s)";
       default:
         return "";
