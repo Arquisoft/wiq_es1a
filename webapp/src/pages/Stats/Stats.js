@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
-import "./Stats.css";
 
 const Stats = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
