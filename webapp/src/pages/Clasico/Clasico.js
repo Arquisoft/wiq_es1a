@@ -129,7 +129,9 @@ const JuegoPreguntas = () => {
     } else {
       setJuegoTerminado(true);
       if (preguntasCorrectas + preguntasFalladas > 0) {
-        setTiempoMedio(tiempoTotal / (preguntasCorrectas + preguntasFalladas));
+        const preguntasTotales=preguntasCorrectas+preguntasFalladas;
+        const tMedio=tiempoTotal/preguntasTotales;
+        setTiempoMedio(tMedio);
       }
       guardarPartida();
     }
@@ -214,7 +216,10 @@ const JuegoPreguntas = () => {
           </div>
           <div className="answer">
           <button
-                onClick={() => setTiempoRestante(0)}
+                onClick={() => {
+                  setTiempoTotal(tiempoTotal+tiempoRestante);
+                  setTiempoRestante(0);
+                }}
                 disabled={tiempoRestante === 0 || juegoTerminado}
               >
               Responder
@@ -222,9 +227,6 @@ const JuegoPreguntas = () => {
           </div>
           
           <div className="timer">Tiempo restante: {parseFloat(tiempoRestante).toFixed(2).toString()}</div>
-          <div className="timer">
-            Tiempo restante: {Math.floor(tiempoRestante)}
-          </div>
           <div className="points">Puntuación: {puntuacion}</div>
           <div className="progressBarContainer">
             <div
