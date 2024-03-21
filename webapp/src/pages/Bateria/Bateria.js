@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { Link, useNavigate } from "react-router-dom";
-import { Box, Flex, Heading, Button, Grid } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Grid, Spinner } from "@chakra-ui/react";
 import axios from 'axios';
 
 const JuegoPreguntas = () => {
@@ -125,7 +125,14 @@ const JuegoPreguntas = () => {
     return (
       <>
         <Nav />
-        <span class="loader"></span>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='teal.500'
+          size='xl'
+          margin='auto'
+        />
         <Footer />
       </>
     );
