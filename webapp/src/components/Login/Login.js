@@ -1,15 +1,31 @@
-// src/components/Login.js
-import React, { useState } from 'react';
-import axios from 'axios';
-import {useNavigate} from "react-router-dom";
-import './Login.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {
+  Link,
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Heading,
+  Alert,
+  AlertIcon,
+  useColorMode,
+  Switch,
+  Flex,
+  Spacer,
+} from "@chakra-ui/react";
+import Footer from "../Footer/Footer";
 
 const Login = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
+  const isDarkTheme = colorMode === "dark";
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
-  //const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const navigate = useNavigate();
 
@@ -17,58 +33,99 @@ const Login = () => {
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
   const loginUser = async () => {
-    await axios
-      .post(`${apiEndpoint}/login`, { username, password })
-      .then((response) => {
-        const token = response.data;
-
-        setLoginSuccess(true);
-
-        setOpenSnackbar(true);
-        localStorage.setItem("token", token);
-
-        localStorage.setItem("username", username);
-      })
-      .catch((err) => {
-        setError(err.message);
+    try {
+      const response = await axios.post(`${apiEndpoint}/login`, {
+        username,
+        password,
       });
+      const token = response.data;
+
+      setLoginSuccess(true);
+      setOpenSnackbar(true);
+      localStorage.setItem("token", token);
+      localStorage.setItem("username", username);
+      navigate("/home");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
-    <div className="main">
-      <div className="login-container">
-        {loginSuccess ? (
-          navigate("/home")
-        ) : (
+    <>
+      <Flex alignItems="center" justifyContent="space-between" mt={4}>
+        <Spacer flex={0}/>
+        <Heading pl={6} as="h1" size="xl" color="teal.500">
+          WIQ
+        </Heading>
+        <Box pr={5}>
+          <Switch isChecked={isDarkTheme} onChange={toggleColorMode} />
+        </Box>
+      </Flex>
+
+      <Box
+        maxW="md"
+        mx="auto"
+        mt={8}
+        p={6}
+        borderWidth={1}
+        borderRadius={8}
+        boxShadow="lg"
+      >
+        {!loginSuccess && (
           <>
-            <h1 className="login-header">Identifícate</h1>
-            <label for="login-username">Introduce tu nombre:</label>
-            <input
-              className="login-input"
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <label for="login-password">Introduce tu contraseña:</label>
-            <input
-              className="login-input"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button className="login-button" onClick={loginUser}>
+            <Heading as="h1" size="xl" mb={4}>
+              Identifícate
+            </Heading>
+            <FormControl>
+              <FormLabel htmlFor="login-username">
+                Introduce tu nombre:
+              </FormLabel>
+              <Input
+                id="login-username"
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel htmlFor="login-password">
+                Introduce tu contraseña:
+              </FormLabel>
+              <Input
+                id="login-password"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </FormControl>
+            <Button mt={4} colorScheme="blue" onClick={loginUser}>
               Login
-            </button>
+            </Button>
+            <Box mt={4}>
+              ¿No tienes cuenta?{" "}
+              <Link color="teal.500" href="/register">
+                Regístrate
+              </Link>
+            </Box>
             {openSnackbar && (
-              <div className="login-snackbar">Login successful</div>
+              <Alert status="success" mt={4}>
+                <AlertIcon />
+                Login successful
+              </Alert>
             )}
-            {error && <div className="login-error">Error: {error}</div>}
+            {error && (
+              <Alert status="error" mt={4}>
+                <AlertIcon />
+                Error: {error}
+              </Alert>
+            )}
           </>
         )}
-      </div>
-    </div>
+      </Box>
+      <Footer />
+    </>
   );
 };
 

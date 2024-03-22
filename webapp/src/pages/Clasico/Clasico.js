@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useMemo } from "react";
-import "./Clasico.css";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
-import axios from 'axios';
+import { Box, Flex, Heading, Button, Grid, useColorMode, Text, Image } from "@chakra-ui/react";
+import axios from "axios";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
   const SECS_PER_QUESTION = useMemo(() => localStorage.getItem("clasicoTime"));
+  const { colorMode } = useColorMode();
+  const isDarkTheme = colorMode === "dark";
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -34,7 +36,10 @@ const JuegoPreguntas = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes"), n: localStorage.getItem("clasicoPreguntas") })
+      body: JSON.stringify({
+        tematicas: localStorage.getItem("selectedThemes"),
+        n: localStorage.getItem("clasicoPreguntas"),
+      }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -66,6 +71,7 @@ const JuegoPreguntas = () => {
     }, 10);
 
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [tiempoRestante]);
 
   useEffect(() => {
@@ -105,7 +111,7 @@ const JuegoPreguntas = () => {
       }
     } else {
       if (respuesta === respuestaSeleccionada) {
-        return { backgroundColor: "var(--text)", color: "var(--background)" };
+        return isDarkTheme? { color: "#333333", backgroundColor: "#F0F0F0" } : { backgroundColor: "#333333", color: "#F0F0F0" };
       }
     }
     return {};
@@ -122,7 +128,7 @@ const JuegoPreguntas = () => {
       setPreguntasFalladas(newIncorrectQuestions);
       console.log("mal")
     }
-    setTiempoTotal(tiempoTotal+tiempoRestante);
+    setTiempoTotal(tiempoTotal + tiempoRestante);
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
     setProgressPercent(100);
@@ -151,7 +157,6 @@ const JuegoPreguntas = () => {
     }, [juegoTerminado]);
 
   const guardarPartida = async () => {
-    
     //Now we store the game in the stats DB
     const username = localStorage.getItem("username");
     const newGame = {
@@ -164,15 +169,14 @@ const JuegoPreguntas = () => {
         avgTime: tiempoMedio,
       },
     };
-    
+
     try {
-      const response = await axios.post(URL + '/saveGame', newGame);
+      const response = await axios.post(URL + "/saveGame", newGame);
       console.log("Solicitud exitosa:", response.data);
-      
     } catch (error) {
-      console.error('Error al guardar el juego:', error);
+      console.error("Error al guardar el juego:", error);
     }
-  }
+  };
 
   const handleRepetirJuego = () => {
     // Reiniciar el estado para repetir el juego
@@ -201,56 +205,70 @@ const JuegoPreguntas = () => {
   return (
     <>
       <Nav />
-      {mostrarMenu ? (
-        <div className="menuContainer">
-          <h2>¡Juego terminado!</h2>
-          <p>
-            Tu puntuación: {puntuacion}/{preguntas.length}
-          </p>
-          <button onClick={handleRepetirJuego}>Repetir Juego</button>
-          <Link to="/home">Volver al Menú Principal</Link>
-        </div>
-      ) : (
-        <div className="questionContainer">
-          <h2>Pregunta {indicePregunta + 1}:</h2>
-          <p>{preguntaActual.pregunta}</p>
-          <div className="responsesContainer">
-            {preguntaActual.respuestas.map((respuesta, index) => (
-              <button
-                key={index}
-                onClick={() => handleRespuestaSeleccionada(respuesta)}
-                disabled={tiempoRestante === 0 || juegoTerminado}
-                style={estiloRespuesta(respuesta)}
-              >
-                {respuesta}
-              </button>
-            ))}
-          </div>
-          <div className="answer">
-          <button
-                onClick={() => {
-                  setTiempoTotal(tiempoTotal+tiempoRestante);
-                  setTiempoRestante(0);
-                }}
-                disabled={tiempoRestante === 0 || juegoTerminado}
-              >
-              Responder
-              </button>
-          </div>
-          
-          <div className="timer">Tiempo restante: {parseFloat(tiempoRestante).toFixed(2).toString()}</div>
-          <div className="points">Puntuación: {puntuacion}</div>
-          <div className="progressBarContainer">
-            <div
-              className="progressBar"
-              style={{ width: `${progressPercent}%` }}
-            ></div>
-          </div>
-        </div>
-      )}
+      <Flex justify="center" align="center" h="70vh">
+        <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
+          {mostrarMenu ? (
+            <Box textAlign="center">
+              <Heading as="h2">¡Juego terminado!</Heading>
+              <p p={2}>
+                Tu puntuación: {puntuacion}/{preguntas.length}
+              </p>
+              {preguntasFalladas === 0 ? (
+                <Box>
+                  <Image src="/jordi.png" alt="Jordi Hurtado" />
+                  <Text>¡Has acertado todas! Eres la cuenta secundaria de Jordi Hurtado.</Text>
+                </Box>
+              ) : null}
+              <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
+                Repetir Juego
+              </Button>
+              <Link to="/home" style={{ marginLeft: "10px" }}>
+                Volver al Menú Principal
+              </Link>
+            </Box>
+          ) : (
+            <Box>
+              <Heading as="h2" mb={4}>
+                Pregunta {indicePregunta + 1}
+              </Heading>
+              <p>{preguntaActual.pregunta}</p>
+              <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
+                {preguntaActual.respuestas.map((respuesta, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handleRespuestaSeleccionada(respuesta)}
+                    disabled={tiempoRestante === 0 || juegoTerminado}
+                    style={estiloRespuesta(respuesta)}
+                  >
+                    {respuesta}
+                  </Button>
+                ))}
+              </Grid>
+  
+              <Flex justify="center" mt={4}>
+                <Button
+                  onClick={() => setTiempoRestante(0)}
+                  disabled={tiempoRestante === 0 || juegoTerminado}
+                  colorScheme="teal"
+                  m={2}
+                >
+                  Responder
+                </Button>
+              </Flex>
+              <Box textAlign="center" mt={4}>
+                <p>Tiempo restante: {Math.floor(tiempoRestante)}</p>
+                <p>Puntuación: {puntuacion}</p>
+                <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
+                  <Box bg="teal.500" h="4px" width={`${progressPercent}%`}></Box>
+                </Box>
+              </Box>
+            </Box>
+          )}
+        </Box>
+      </Flex>
       <Footer />
     </>
-  );
+  );  
 };
 
 export default JuegoPreguntas;

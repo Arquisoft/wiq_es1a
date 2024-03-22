@@ -1,11 +1,22 @@
 import React, { useState } from "react";
-import "./Config.css";
+import {
+  Box,
+  Flex,
+  Heading,
+  Checkbox,
+  Button,
+  FormLabel,
+  Stack,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper
+} from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
 const Config = () => {
-  const [error, setError] = useState("");
-  const [info, setInfo] = useState("");
   const [clasicoTime, setClasicoTime] = useState(
     localStorage.getItem("clasicoTime")
   );
@@ -40,74 +51,115 @@ const Config = () => {
     }
   };
 
-  const handleClasicoChange = (event) => {
-    setClasicoTime(parseInt(event.target.value));
+  const handleClasicoChange = (valueString) => {
+    setClasicoTime(parseInt(valueString)); // Convertir el valor a entero
   };
 
-  const handleClasicoPreguntas = (event) => {
-    setClasicoPreguntas(parseInt(event.target.value));
+  const handleClasicoPreguntasChange = (valueString) => {
+    setClasicoPreguntas(parseInt(valueString)); // Convertir el valor a entero
   };
 
-  const handleBateriaChange = (event) => {
-    setBateriaTime(parseInt(event.target.value));
+  const handleBateriaChange = (valueString) => {
+    setBateriaTime(parseInt(valueString)); // Convertir el valor a entero
   };
 
   return (
     <>
       <Nav />
-      <div className="configContainer">
-        <h2>Configuración</h2>
-        <h3>Temáticas de pregunta</h3>
-        <div className="topicCheckboxes">
-          <label htmlFor="paises"> Países</label>
-          <input id="paises" type="checkbox" />
+      <Flex direction="column" align="center" justify="center">
+        <Box className="configContainer">
+          <Heading as="h2" mb={4}>
+            Configuración
+          </Heading>
+          <FormLabel htmlFor="clasico"> Temáticas de preguntas</FormLabel>
+          <Box
+            display="grid"
+            gridTemplateColumns="repeat(auto-fit, minmax(150px, 1fr))"
+            gridGap={4}
+            alignItems="start"
+          >
+            <Stack spacing={5} direction="row">
+              <Checkbox id="paises" mb={2}>
+                Países
+              </Checkbox>
+              <Checkbox id="literatura" mb={2}>
+                Literatura
+              </Checkbox>
+              <Checkbox id="cine" mb={2}>
+                Cine
+              </Checkbox>
+              <Checkbox id="arte" mb={2}>
+                Arte
+              </Checkbox>
+              <Checkbox id="programacion" mb={2}>
+                Programación
+              </Checkbox>
+            </Stack>
+          </Box>
 
-          <label htmlFor="literatura"> Literatura</label>
-          <input id="literatura" type="checkbox" />
-
-          <label htmlFor="cine"> Cine</label>
-          <input id="cine" type="checkbox" />
-
-          <label htmlFor="arte"> Arte</label>
-          <input id="arte" type="checkbox" />
-
-          <label htmlFor="programacion"> Programación</label>
-          <input id="programacion" type="checkbox" />
-        </div>
-        <div>
-          <label htmlFor="clasico"> Tiempo entre preguntas (Clásico)</label>
-          <input
-            id="clasico"
-            value={clasicoTime}
-            type="number"
-            min="5"
-            max="20"
-            onChange={handleClasicoChange}
-          />
-          <label htmlFor="clasicoPreguntas">
-            {" "}
-            Número de preguntas (Clásico)
-          </label>
-          <input
-            id="clasicoPreguntas"
-            value={clasicoPreguntas}
-            type="number"
-            min="1"
-            max="1000"
-            onChange={handleClasicoPreguntas}
-          />
-          <label htmlFor="bateria">Tiempo total (Batería de sabios)</label>
-          <input
-            id="bateria"
-            value={bateriaTime}
-            type="number"
-            min="30"
-            max="600"
-            onChange={handleBateriaChange}
-          />
-        </div>
-        <button onClick={handleConfig}>Aplicar cambios</button>
-      </div>
+          <Box>
+            <FormLabel htmlFor="clasico">
+              {" "}
+              Tiempo entre preguntas (Clásico)
+            </FormLabel>
+            <NumberInput
+              id="clasico"
+              value={clasicoTime}
+              type="number"
+              min={5}
+              max={50}
+              onChange={handleClasicoChange}
+              mb={2}
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+            <FormLabel htmlFor="clasicoPreguntas">
+              {" "}
+              Número de preguntas (Clásico)
+            </FormLabel>
+            <NumberInput
+              id="clasico"
+              value={clasicoPreguntas}
+              type="number"
+              min={1}
+              max={1000}
+              onChange={handleClasicoPreguntasChange}
+              mb={2}
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+            <FormLabel htmlFor="bateria">
+              Tiempo total (Batería de sabios)
+            </FormLabel>
+            <NumberInput
+              id="bateria"
+              value={bateriaTime}
+              type="number"
+              min={30}
+              max={600}
+              onChange={handleBateriaChange}
+              mb={2}
+            >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          </Box>
+          <Button colorScheme="teal" onClick={handleConfig} mb={4}>
+            Aplicar cambios
+          </Button>
+        </Box>
+      </Flex>
       <Footer />
     </>
   );

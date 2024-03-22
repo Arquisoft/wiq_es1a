@@ -1,12 +1,16 @@
 import React from 'react';
-import './Footer.css';
+import { Box, Heading, Text, useColorMode } from '@chakra-ui/react';
 
 const Footer = () => {
+    const { colorMode } = useColorMode();
+    const bgColor = { light: 'gray.200', dark: 'gray.700' };
+    const textColor = { light: 'black', dark: 'white' };
+
     return(
-        <footer className="footer">
-            <h2>WIQ!</h2>
-            <p>Copyright 2024 ® Grupo 1A de Arquitectura del Software</p>
-        </footer>
+        <Box as="footer" textAlign="center" p={4} bg={bgColor[colorMode]} color={textColor[colorMode]} position="sticky" bottom="0" width="100%">
+            <Heading as="h2" fontSize="xl">WIQ!</Heading>
+            <Text fontSize="sm" mt={2}>Copyright 2024 ® Grupo 1A de Arquitectura del Software</Text>
+        </Box>
     );
 }
 

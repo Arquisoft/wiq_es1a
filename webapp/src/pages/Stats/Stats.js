@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Input, Button, Heading, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
-import "./Stats.css";
 
 const Stats = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
@@ -57,7 +57,7 @@ const Stats = () => {
   if (isLoading) {
     return (
       <div>
-        <h2> Cargando ... </h2>
+        <Heading as="h2"> Cargando ... </Heading>
         <p>Se está consultando su búsqueda, espere unos instantes.</p>
       </div>
     );
@@ -69,14 +69,14 @@ const Stats = () => {
         <Nav />
         <div>
           <label htmlFor="usernameInput">Nombre de usuario: </label>
-          <input
+          <Input
             type="text"
             id="usernameInput"
             value={username}
             onChange={handleUsernameChange}
             data-testid="usernameInput"
           />
-          <h2>Error: {error}</h2>
+          <Heading as="h2">Error: {error}</Heading>
           <p>
             Por favor compruebe si los valores del formulario son correctos e
             inténtelo de nuevo
@@ -91,9 +91,9 @@ const Stats = () => {
     <>
     <Nav />
     <div>
-      <h2><em>Estadísticas de Usuario  - Modo {getModeName()}</em></h2>
+      <Heading as="h2"><em>Estadísticas de Usuario  - Modo {getModeName()}</em></Heading>
       <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
-      <input
+      <Input
             type="text"
             id="usernameInput"
             value={username}
@@ -101,18 +101,18 @@ const Stats = () => {
             data-testid="usernameInput"
           />
       <div>
-        <button
+        <Button
           className={gamemode === "clasico" ? "active" : ""}
           onClick={() => handleGamemodeChange("clasico")}
         >
         Clásico
-        </button>
-        <button
+        </Button>
+        <Button
           className={gamemode === "bateria" ? "active" : ""}
           onClick={() => handleGamemodeChange("bateria")}
         >
           Batería de sabios
-        </button>
+        </Button>
       </div>
       {stats === null && !isLoading && (
           <div>
@@ -121,41 +121,45 @@ const Stats = () => {
         )}
         {stats && (
           <div>
-            <h2>Estadísticas de usuario - Modo {getModeName()}</h2>
-            <table>
-            <tr>
-              <td><strong>Usuario</strong></td>
-              <td>{stats.username}</td>
-            </tr>
-            <tr>
-              <td><strong>Partidas jugadas</strong></td>
-              <td>{stats.nGamesPlayed}</td>
-            </tr>
-            <tr>
-              <td><strong>Puntos por partida</strong></td>
-              <td>{stats.avgPoints.toFixed(2)}</td>
-             </tr>
-            <tr>
-              <td><strong>Puntos totales</strong></td>
-              <td>{stats.totalPoints}</td>
-            </tr>
-            <tr>
-              <td><strong>Preguntas correctas totales</strong></td>
-              <td>{stats.totalCorrectQuestions}</td>
-            </tr>
-            <tr>
-              <td><strong>Preguntas incorrectas totales</strong></td>
-              <td>{stats.totalIncorrectQuestions}</td>
-            </tr>
-            <tr>
-              <td><strong>Porcentaje de aciertos</strong></td>
-              <td>{stats.ratioCorrect.toFixed(2)}%</td>
-            </tr>
-            <tr>
-              <td><strong>Tiempo por pregunta (s):</strong></td>
-              <td>{stats.avgTime.toFixed(2)}</td>
-            </tr>
-          </table>
+            <Heading as="h2">Estadísticas de usuario - Modo {getModeName()}</Heading>
+            <Table>
+            <Thead>
+              <Tr>
+                <Th><strong>Usuario</strong></Th>
+                <Th>{stats.username}</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td><strong>Partidas jugadas</strong></Td>
+                <Td>{stats.nGamesPlayed}</Td>
+              </Tr>
+              <Tr>
+                <Td><strong>Puntos por partida</strong></Td>
+                <Td>{stats.avgPoints.toFixed(2)}</Td>
+               </Tr>
+              <Tr>
+                <Td><strong>Puntos totales</strong></Td>
+                <Td>{stats.totalPoints}</Td>
+              </Tr>
+              <Tr>
+                <Td><strong>Preguntas correctas totales</strong></Td>
+                <Td>{stats.totalCorrectQuestions}</Td>
+              </Tr>
+              <Tr>
+                <Td><strong>Preguntas incorrectas totales</strong></Td>
+                <Td>{stats.totalIncorrectQuestions}</Td>
+              </Tr>
+              <Tr>
+                <Td><strong>Porcentaje de aciertos</strong></Td>
+                <Td>{stats.ratioCorrect.toFixed(2)}%</Td>
+              </Tr>
+              <Tr>
+                <Td><strong>Tiempo por pregunta (s):</strong></Td>
+                <Td>{stats.avgTime.toFixed(2)}</Td>
+              </Tr>
+            </Tbody>
+          </Table>
           </div>
         )}
     </div>
@@ -166,4 +170,3 @@ const Stats = () => {
 }
 
 export default Stats;
-
