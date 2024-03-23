@@ -1,57 +1,59 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./Nav.css";
+import React from "react";
+import { Box, Button, Heading, Switch, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverHeader, PopoverBody, Text, Flex, useColorMode } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
-  // Definimos el estado para controlar el tema actual
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const navigate = useNavigate();
-
-  // Función para alternar entre temas claro y oscuro
-  const toggleTheme = () => {
-    const root = document.getElementById("root");
-    const currentTheme = root.getAttribute("data-theme");
-    const newTheme = currentTheme === "light" ? "dark" : "light";
-    root.setAttribute("data-theme", newTheme);
-    setIsDarkTheme((prev) => !prev);
-  };
-
+  const { colorMode, toggleColorMode } = useColorMode();
+  const isDarkTheme = colorMode === "dark";
+  const textColor = isDarkTheme ? "white" : "teal.500";
+  const bgColor = isDarkTheme ? 'gray.700' : 'gray.200';
   const handleConfig = () => {
     navigate("/config");
-  }
+  };
 
-  const Logout = () => {
+  const logout = () => {
     localStorage.removeItem("token");
     navigate("/");
   };
 
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
+
   return (
-    <nav>
-      <h1 className="logo">WIQ!</h1>
-      <div className="menuItems">
-        <Link to="/home">Home</Link>
-        <Link to="/sobre">Sobre nosotros</Link>
-        <Link to="/stats">Stats</Link>
-        <Link to="/ranking">Ránking</Link>
-      </div>
-      <div className="rightItems">
-        <input
-          type="checkbox"
-          class="theme-toggle"
-          onChange={toggleTheme}
-          checked={isDarkTheme}
-        />
-        <button className="profile">
-          Perfil
-        </button>
-        <button className="profile" onClick={() => handleConfig()}>
-          Opciones
-        </button>
-        <button className="disconnect" onClick={() => Logout()}>
-          Desconectarse
-        </button>
-      </div>
-    </nav>
+    <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" p={4} bg={bgColor}>
+      <Box textAlign="center" ml={3}>
+        <Heading as="h1" size="xl" color={textColor}>WIQ</Heading>
+      </Box>
+      <Flex gap={3}>
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/home")}>Home</Button>
+        <Popover>
+          <PopoverTrigger>
+            <Button variant="link" color={textColor}>
+              Modos de Juego
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader>Modos de Juego</PopoverHeader>
+            <PopoverBody>
+              <Text cursor="pointer" onClick={() => handleNavigate("/home/clasico")} color={textColor}>Clásico</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/home/bateria")} color={textColor}>Batería de sabios</Text>
+              {/* Agrega más modos de juego aquí */}
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
+      </Flex>
+      <Flex className="rightItems" alignItems="center">
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleConfig()}>Opciones</Button>
+        <Button variant="link" color={textColor} onClick={() => logout()}>Desconectarse</Button>
+        <Switch isChecked={isDarkTheme} onChange={toggleColorMode} ml={4} />
+      </Flex>
+    </Box>
   );
 };
 

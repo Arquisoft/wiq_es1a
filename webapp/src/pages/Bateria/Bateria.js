@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Bateria.css";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { Link, useNavigate } from "react-router-dom";
+import { Box, Flex, Heading, Button, Grid, Spinner } from "@chakra-ui/react";
 import axios from 'axios';
 
 const JuegoPreguntas = () => {
@@ -54,7 +54,11 @@ const JuegoPreguntas = () => {
   useEffect(() => {
     if (tiempoRestante === 0) {
       setJuegoTerminado(true);
-
+      if(preguntasCorrectas+preguntasFalladas>0){
+        const preguntasTotales=preguntasCorrectas+preguntasFalladas;
+        const tMedio=180/preguntasTotales;
+        setTiempoMedio(tMedio);
+      }
       guardarPartida();
     }
     const timer = setInterval(() => {
@@ -64,9 +68,7 @@ const JuegoPreguntas = () => {
   }, [tiempoRestante]);
 
   const guardarPartida = async () => {
-    if(preguntasCorrectas+preguntasFalladas>0){
-      setTiempoMedio(180/(preguntasCorrectas+preguntasFalladas));
-    }
+    
     const username = localStorage.getItem("username");
     const newGame = {
       username: username,
@@ -125,7 +127,14 @@ const JuegoPreguntas = () => {
     return (
       <>
         <Nav />
-        <span class="loader"></span>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='teal.500'
+          size='xl'
+          margin='auto'
+        />
         <Footer />
       </>
     );
@@ -134,39 +143,54 @@ const JuegoPreguntas = () => {
   return (
     <>
       <Nav />
-      {juegoTerminado ? (
-        <div className="menuContainer">
-          <h2>¡Juego terminado!</h2>
-          <p>Tu puntuación: {puntuacion}</p>
-          <button onClick={handleRepetirJuego}>Repetir Juego</button>
-          <Link to="/home">Volver al Menú Principal</Link>
-        </div>
-      ) : (
-        <div className="questionContainer">
-          <h2>Pregunta {indicePregunta + 1}:</h2>
-          <p>{preguntaActual.pregunta}</p>
-          <div className="responsesContainer">
-            {preguntaActual.respuestas.map((respuesta, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  handleSiguientePregunta(respuesta);
-                }}
-              >
-                {respuesta}
-              </button>
-            ))}
-          </div>
-          <div className="timer">Tiempo restante: {Math.floor(tiempoRestante)}</div>
-          <div className="points">Puntuación: {puntuacion}</div>
-          <div className="progressBarContainer">
-            <div
-              className="progressBar"
-              style={{ width: `${progressPercent}%` }}
-            ></div>
-          </div>
-        </div>
-      )}
+      <Flex justify="center" align="center" h="70vh">
+        <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
+          {juegoTerminado ? (
+            <Box textAlign="center">
+              <Heading as="h2">¡Juego terminado!</Heading>
+              <p p={2}>
+                Tu puntuación: {puntuacion}
+              </p>
+              <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
+                Repetir Juego
+              </Button>
+              <Link to="/home" style={{ marginLeft: "10px" }}>
+                Volver al Menú Principal
+              </Link>
+            </Box>
+          ) : (
+            <Box>
+              <Heading as="h2" mb={4}>
+                Pregunta {indicePregunta + 1}
+              </Heading>
+              <p>{preguntaActual.pregunta}</p>
+              <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
+                {preguntaActual.respuestas.map((respuesta, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handleSiguientePregunta(respuesta)}
+                    disabled={tiempoRestante === 0 || juegoTerminado}
+                  >
+                    {respuesta}
+                  </Button>
+                ))}
+              </Grid>
+
+              <Box textAlign="center" mt={4}>
+                <p>Tiempo restante: {Math.floor(tiempoRestante)}</p>
+                <p>Puntuación: {puntuacion}</p>
+                <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
+                  <Box
+                    bg="teal.500"
+                    h="4px"
+                    width={`${progressPercent}%`}
+                  ></Box>
+                </Box>
+              </Box>
+            </Box>
+          )}
+        </Box>
+      </Flex>
       <Footer />
     </>
   );
