@@ -33,7 +33,7 @@ services:
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/statsdb
+      MONGODB_STATS_URI: mongodb://mongodb:27017/statsdb
 
   authservice:
     container_name: authservice-${teamname:-defaultASW}
