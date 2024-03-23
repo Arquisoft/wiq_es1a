@@ -18,7 +18,7 @@ app.use(cors());
 
 app.set("json spaces", 40);
 
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/statsdb';
+const mongoUri = process.env.MONGODB_STATS_URI || 'mongodb://localhost:27017/statsdb';
 mongoose.connect(mongoUri);
 
 app.post("/saveGame", async (req, res) => {
