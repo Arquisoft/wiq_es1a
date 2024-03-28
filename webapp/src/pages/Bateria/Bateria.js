@@ -87,6 +87,12 @@ const JuegoPreguntas = () => {
     } catch (error) {
       console.error('Error al guardar el juego:', error);
     }
+    try {
+      const response = await axios.post(URL + "/saveGameList", newGame);
+      console.log("Solicitud exitosa:", response.data);
+    } catch (error) {
+      console.error("Error al guardar el juego:", error);
+    }
   }
 
   useEffect(() => {
