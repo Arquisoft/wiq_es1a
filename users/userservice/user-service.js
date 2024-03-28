@@ -54,6 +54,28 @@ app.get('/userInfo', async (req, res) => {
           res.status(400).json({ error: error.message }); 
       }});
 
+app.post("/saveGameList", async (req, res) => {
+  try {
+    const username = req.body.username;
+    const gamemode = req.body.gameMode;
+    const gameData = req.body.gameData;
+
+      let user = await User.findOne({ username: username });
+
+      if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+      const gameDataWithGamemode = { ...gameData, gamemode };
+      user.games.push(gameDataWithGamemode);
+
+      await user.save();
+
+      res.json({ message: "Partida guardada exitosamente" });
+  } catch (error) {
+    res.status(400).json({ error: "Error al guardar partida en la lista: " + error.message });
+  }
+});
+
 const server = app.listen(port, () => {
   console.log(`User Service listening at http://localhost:${port}`);
 });

@@ -1,5 +1,7 @@
-import { Box, VStack, Heading, Text, Center, Spinner } from "@chakra-ui/react";
+import { Box, VStack, Heading, Text, Center, Spinner, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import Nav from "../../components/Nav/Nav.js";
+import Footer from "../../components/Footer/Footer.js";
 import axios from "axios";
 
 const Perfil = () => {
@@ -24,6 +26,8 @@ const Perfil = () => {
   }, []);
 
   return (
+    <>
+    <Nav/>
     <Center py={8}>
       <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg">
         <VStack p={8} align="start" spacing={6}>
@@ -43,12 +47,44 @@ const Perfil = () => {
                 <strong>Fecha de creación de la cuenta:</strong>{" "}
                 {new Date(userData.createdAt).toLocaleString()}
               </Text>
+              <Heading as="h2" size="md">
+                Partidas Recientes
+              </Heading>
+              {userData.games.length > 0 ? (
+                <Table variant="simple">
+                  <Thead>
+                    <Tr>
+                      <Th>Modo de Juego</Th>
+                      <Th>Respuestas Correctas</Th>
+                      <Th>Respuestas Incorrectas</Th>
+                      <Th>Puntos</Th>
+                      <Th>Tiempo Promedio</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
+                    {userData.games.slice(0, 10).map((game, index) => (
+                      <Tr key={index}>
+                        <Td>{game.gamemode}</Td>
+                        <Td>{game.correctAnswers}</Td>
+                        <Td>{game.incorrectAnswers}</Td>
+                        <Td>{game.points}</Td>
+                        <Td>{game.avgTime} segundos</Td>
+                      </Tr>
+                    ))}
+                  </Tbody>
+                </Table>
+              ) : (
+                <Text>No hay partidas recientes.</Text>
+              )}
             </>
           )}
         </VStack>
       </Box>
     </Center>
+    <Footer/>
+    </>
   );
 };
 
 export default Perfil;
+

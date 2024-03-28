@@ -91,7 +91,6 @@ const Stats = () => {
     <>
     <Nav />
     <div>
-      <Heading as="h2"><em>Estadísticas de Usuario  - Modo {getModeName()}</em></Heading>
       <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
       <Input
             type="text"

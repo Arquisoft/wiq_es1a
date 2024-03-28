@@ -68,6 +68,21 @@ app.get("/userInfo", async (req, res) => {
   }
 });
 
+app.post("/saveGameList", async (req, res) => {
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/saveGameList",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    res
+      .status(error.response.status)
+      .json({ error: error.response.data.error });
+  }
+});
+
 app.get("/questions", async (req, res) => {
   try {
     // Forward the question request to the question service
