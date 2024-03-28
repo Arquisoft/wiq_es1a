@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema({
       default: Date.now, 
     },
     games: [{
+      gamemode: String,
       correctAnswers: Number,
       incorrectAnswers: Number,
       points: Number,
