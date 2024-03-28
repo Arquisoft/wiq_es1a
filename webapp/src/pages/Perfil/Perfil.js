@@ -6,12 +6,21 @@ const Perfil = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [username,setUsername]=useState(localStorage.username);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios.get(gatewayUrl+"/userInfo").then((response) => {
-      setUserData(response.data);
-      setLoading(false);
-    });
+    fetch(gatewayUrl + `/userInfo?user=${username}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUserData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error al obtener el perfil:', error);
+        setError(error.message || 'Ha ocurrido un error al obtener el perfil');
+        setLoading(false);
+      });
   }, []);
 
   return (

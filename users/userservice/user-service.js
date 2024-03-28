@@ -48,9 +48,7 @@ app.post('/adduser', async (req, res) => {
 
 app.get('/userInfo', async (req, res) => {
       try {
-  
-          const user = await User.findOne(localStorage.username);
-  
+          const user = await User.findOne({username:req.query.user});
           res.json(user);
       } catch (error) {
           res.status(400).json({ error: error.message }); 
