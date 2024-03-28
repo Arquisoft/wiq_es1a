@@ -47,6 +47,7 @@ const Nav = () => {
         </Popover>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
       </Flex>
       <Flex className="rightItems" alignItems="center">
         <Button variant="link" color={textColor} mr={4} onClick={() => handleConfig()}>Opciones</Button>

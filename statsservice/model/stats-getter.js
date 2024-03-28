@@ -78,7 +78,7 @@ class StatsForUser {
                     displayField = "ratioCorrect";
                     break;
                     case "avgTime":
-                    sortBy = { avgTime: -1 };
+                    sortBy = { avgTime: 1 };
                     displayField = "avgTime";
                     break;
                 default:

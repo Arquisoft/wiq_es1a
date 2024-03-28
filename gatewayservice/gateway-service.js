@@ -53,6 +53,21 @@ app.post("/adduser", async (req, res) => {
   }
 });
 
+app.get("/userInfo", async (req, res) => {
+  try {
+    // Forward the question request to the user service
+    const userResponse = await axios.get(
+      userServiceUrl + "/userInfo",
+      { params: req.query }
+    );
+    res.json(userResponse.data);
+  } catch (error) {
+    res
+      .status(error.response.status)
+      .json({ error: error.response.data.error });
+  }
+});
+
 app.get("/questions", async (req, res) => {
   try {
     // Forward the question request to the question service

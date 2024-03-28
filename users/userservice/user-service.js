@@ -46,6 +46,16 @@ app.post('/adduser', async (req, res) => {
         res.status(400).json({ error: error.message }); 
     }});
 
+app.get('/userInfo', async (req, res) => {
+      try {
+  
+          const user = await User.findOne(localStorage.username);
+  
+          res.json(user);
+      } catch (error) {
+          res.status(400).json({ error: error.message }); 
+      }});
+
 const server = app.listen(port, () => {
   console.log(`User Service listening at http://localhost:${port}`);
 });

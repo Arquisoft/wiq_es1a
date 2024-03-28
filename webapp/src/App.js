@@ -12,6 +12,7 @@ import Sobre from "./pages/Sobre/Sobre.js";
 import Config from "./pages/Config/Config.js";
 import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register.js";
+import Perfil from "./pages/Perfil/Perfil.js";
 
 function App() {
   return (
@@ -29,17 +30,9 @@ function App() {
           <Route path="/home/bateria" element={<Bateria />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/ranking" element={<Ranking />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="/config" element={<Config />} />
         </Route>
-          {/** Rutas privadas */}
-          <Route element={<ProtectedRoute />}>
-            <Route path="/home" element={<Home />} />
-            <Route path="/sobre" element={<Sobre />} />
-            <Route path="/home/clasico" element={<Clasico />} />
-            <Route path="/home/bateria" element={<Bateria />} />
-            <Route path="/stats" element={<Stats />} />
-            <Route path="/config" element={<Config />} />
-          </Route>
 
           {/* Ruta por defecto */}
           <Route path="*" element={<WrongRoute />} />
