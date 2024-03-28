@@ -29,7 +29,7 @@ const Perfil = () => {
     <>
     <Nav/>
     <Center py={8}>
-      <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg">
+      <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg" width="100%">
         <VStack p={8} align="start" spacing={6}>
           <Heading as="h1" size="lg">
             Detalles del Usuario
@@ -50,6 +50,7 @@ const Perfil = () => {
               <Heading as="h2" size="md">
                 Partidas Recientes
               </Heading>
+              <div style={{ width: '100%' }}>
               {userData.games.length > 0 ? (
                 <Table variant="simple">
                   <Thead>
@@ -76,6 +77,8 @@ const Perfil = () => {
               ) : (
                 <Text>No hay partidas recientes.</Text>
               )}
+              </div>
+              
             </>
           )}
         </VStack>

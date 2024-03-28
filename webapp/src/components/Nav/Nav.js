@@ -22,7 +22,7 @@ const Nav = () => {
   };
 
   return (
-    <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" p={4} bg={bgColor}>
+    <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" p={4} bg={bgColor} width="100%">
       <Box textAlign="center" ml={3}>
         <Heading as="h1" size="xl" color={textColor}>WIQ</Heading>
       </Box>
