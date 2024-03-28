@@ -305,8 +305,13 @@ components:
       properties:
         username:
           type: string
+        password:
+          type: string
         createdAt:
-          type: Date
+          type: string
+          format: date-time
+        games:
+          $ref: '#/components/schemas/GameList'
 
     UserInfo:
       type: object
@@ -314,7 +319,10 @@ components:
         username:
           type: string
         createdAt:
-          type: Date
+          type: string
+          format: date-time
+        games:
+          $ref: '#/components/schemas/GameList'
 
     GameList:
       type: object
