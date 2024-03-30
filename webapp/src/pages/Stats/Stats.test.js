@@ -1,66 +1,97 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Stats from './Stats';
 
-jest.mock('axios', () => ({
-  get: jest.fn(() =>
-    Promise.resolve({
-      data: {
-        username: 'testUser',
-        nGamesPlayed: 5,
-        avgPoints: 20,
-        totalPoints: 100,
-        totalCorrectQuestions: 30,
-        totalIncorrectQuestions: 10,
-        ratioCorrectToIncorrect: 3,
-        avgTime: 10,
-      },
-    })
-  ),
-}));
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({ 
+      username: 'testUser',
+      nGamesPlayed: 10,
+      avgPoints: 25.5,
+      totalPoints: 255,
+      totalCorrectQuestions: 200,
+      totalIncorrectQuestions: 50,
+      ratioCorrect: 80,
+      avgTime: 10
+    }),
+  })
+);
 
 describe('Stats component', () => {
-  it('renders username input field', () => {
-    render(<Stats />);
-    expect(screen.getByLabelText('Nombre de Usuario:')).toBeInTheDocument();
+
+  test('renders stats after loading', async () => {
+    const { getByText } = render(
+      <MemoryRouter>
+        <Stats />
+      </MemoryRouter>
+    );
+    await waitFor(() => expect(getByText('Estadísticas de testUser - modo Clásico')).toBeInTheDocument());
+    expect(getByText('Partidas jugadas')).toBeInTheDocument();
+    expect(getByText('Puntos por partida')).toBeInTheDocument();
   });
 
-  it('renders loading message initially', () => {
-    render(<Stats />);
-    expect(screen.getByText(/Cargando .../i)).toBeInTheDocument();
+  test('updates stats when changing username', async () => {
+    const { getByLabelText, getByText } = render(
+      <MemoryRouter>
+        <Stats />
+      </MemoryRouter>
+    );
+    await waitFor(() => expect(getByText('Estadísticas de testUser - modo Clásico')).toBeInTheDocument());
+    fireEvent.change(getByLabelText('Nombre de usuario:'), { target: { value: 'newUser' } });
+    fireEvent.click(getByText('Clásico'));
+    await waitFor(() => expect(getByText('Estadísticas de newUser - modo Clásico')).toBeInTheDocument());
   });
 
-  it('fetches stats on search button click', async () => {
-    render(<Stats />);
-    const searchButton = screen.getByRole('button', { name: /Buscar/i });
-    fireEvent.click(searchButton);
-    await waitFor(() => expect(screen.getByText(/Usuario: testUser/i)).toBeInTheDocument());
+  test('renders error message if stats fetch fails', async () => {
+    global.fetch.mockImplementationOnce(() => Promise.reject('fetch failed'));
+    const { getByText } = render(
+      <MemoryRouter>
+        <Stats />
+      </MemoryRouter>
+    );
+    await waitFor(() => expect(getByText('El usuario no ha jugado ninguna partida.')).toBeInTheDocument());
   });
 
-  it('handles error correctly', async () => {
-    // Mocking axios.get to simulate an error
-    jest.spyOn(console, 'error').mockImplementation(() => {});
-    jest.spyOn(console, 'log').mockImplementation(() => {});
-    jest.mock('axios', () => ({
-      get: jest.fn(() => Promise.reject(new Error('Request failed'))),
-    }));
-
-    render(<Stats />);
-    const searchButton = screen.getByRole('button', { name: /Buscar/i });
-    fireEvent.click(searchButton);
-    await waitFor(() => expect(screen.getByText(/Error: Request failed/i)).toBeInTheDocument());
+  test('renders message for user with no stats', async () => {
+    global.fetch.mockImplementationOnce(() => Promise.resolve({ json: () => null }));
+    const { getByText } = render(
+      <MemoryRouter>
+        <Stats />
+      </MemoryRouter>
+    );
+    await waitFor(() => expect(getByText('El usuario no ha jugado ninguna partida.')).toBeInTheDocument());
   });
 
-  it('displays stats correctly', async () => {
-    render(<Stats />);
-    const searchButton = screen.getByRole('button', { name: /Buscar/i });
-    fireEvent.click(searchButton);
-    await waitFor(() => expect(screen.getByText(/Juegos Jugados: 5/i)).toBeInTheDocument());
-    expect(screen.getByText(/Promedio de Puntos: 20/i)).toBeInTheDocument();
-    expect(screen.getByText(/Puntos Totales: 100/i)).toBeInTheDocument();
-    expect(screen.getByText(/Preguntas Correctas Totales: 30/i)).toBeInTheDocument();
-    expect(screen.getByText(/Preguntas Incorrectas Totales: 10/i)).toBeInTheDocument();
-    expect(screen.getByText(/Ratio Correctas\/Incorrectas: 3/i)).toBeInTheDocument();
-    expect(screen.getByText(/Tiempo por pregunta \(s\): 10/i)).toBeInTheDocument();
+  test('updates stats when clicking game mode buttons', async () => {
+    const { getByRole, getByText } = render(
+      <MemoryRouter>
+        <Stats />
+      </MemoryRouter>
+    );
+  
+    await waitFor(() => expect(getByText('Estadísticas de testUser - modo Clásico')).toBeInTheDocument());
+  
+    const bateriaButton = getByRole('button', { name: /Batería de sabios/i });
+    fireEvent.click(bateriaButton);
+  
+    await waitFor(() => expect(getByText('Estadísticas de testUser - modo Batería de sabios')).toBeInTheDocument());
+  });
+
+  test('updates username state when input changes with timeout', async () => {
+    const { getByLabelText } = render(
+      <MemoryRouter>
+        <Stats />
+      </MemoryRouter>
+    );
+  
+    fireEvent.change(getByLabelText('Nombre de usuario:'), { target: { value: 'newUser' } });
+  
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledWith(expect.stringContaining('user=newUser'));
+    });
   });
 });
+
+

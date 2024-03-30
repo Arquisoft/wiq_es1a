@@ -9,7 +9,7 @@ const Stats = () => {
   const [username, setUsername] = useState(localStorage.username);
   const [stats, setStats] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const fetchStats = () => {
