@@ -91,7 +91,7 @@ const Stats = () => {
     <>
     <Nav />
     <div>
-      <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
+      <label htmlFor="usernameInput"> <strong>Nombre de usuario: </strong></label>
       <Input
             type="text"
             id="usernameInput"
@@ -120,14 +120,8 @@ const Stats = () => {
         )}
         {stats && (
           <div>
-            <Heading as="h2">Estadísticas de usuario - Modo {getModeName()}</Heading>
+            <Heading as="h2">Estadísticas de {stats.username} - modo {getModeName()}</Heading>
             <Table>
-            <Thead>
-              <Tr>
-                <Th><strong>Usuario</strong></Th>
-                <Th>{stats.username}</Th>
-              </Tr>
-            </Thead>
             <Tbody>
               <Tr>
                 <Td><strong>Partidas jugadas</strong></Td>
