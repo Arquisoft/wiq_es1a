@@ -32,30 +32,31 @@ const Login = () => {
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
-  const loginUser = async () => {
-    try {
-      const response = await axios.post(`${apiEndpoint}/login`, {
+  const loginUser = () => {
+    axios
+      .post(`${apiEndpoint}/login`, {
         username,
         password,
-      });
-      const token = response.data;
+      })
+      .then((response) => {
+        const token = response.data;
 
-      setLoginSuccess(true);
-      setOpenSnackbar(true);
-      localStorage.setItem("token", token);
-      localStorage.setItem("username", username);
-      navigate("/home");
-    } catch (err) {
-      setError(err.message);
-    }
+        setLoginSuccess(true);
+        setOpenSnackbar(true);
+        localStorage.setItem("token", token);
+        localStorage.setItem("username", username);
+        navigate("/home");
+      })
+      .catch((err) => {
+        console.log(err);
+        setError(err.response.data.error);
+      });
   };
 
   return (
     <>
       <Flex alignItems="center" justifyContent="space-between" mt={4} w="100%">
-        <Box pr={5}>
-          
-        </Box>
+        <Box pr={5}></Box>
         <Heading pl={6} as="h1" size="xl" color="teal.500">
           WIQ
         </Heading>
