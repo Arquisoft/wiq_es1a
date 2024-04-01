@@ -18,13 +18,13 @@ import Footer from "../../components/Footer/Footer.js";
 
 const Config = () => {
   const [clasicoTime, setClasicoTime] = useState(
-    localStorage.getItem("clasicoTime")
+    localStorage.getItem("clasicoTime") || 10
   );
   const [clasicoPreguntas, setClasicoPreguntas] = useState(
-    localStorage.getItem("clasicoPreguntas")
+    localStorage.getItem("clasicoPreguntas") || 10
   );
   const [bateriaTime, setBateriaTime] = useState(
-    localStorage.getItem("bateriaTime")
+    localStorage.getItem("bateriaTime") || 180
   );
 
   const handleConfig = () => {
@@ -122,7 +122,7 @@ const Config = () => {
               Número de preguntas (Clásico)
             </FormLabel>
             <NumberInput
-              id="clasico"
+              id="clasicoPreguntas"
               value={clasicoPreguntas}
               type="number"
               min={1}
