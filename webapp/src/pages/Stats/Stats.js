@@ -6,7 +6,7 @@ import Footer from "../../components/Footer/Footer.js";
 const Stats = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
 
-  const [username, setUsername] = useState(localStorage.username);
+  const [username, setUsername] = useState(localStorage.username || 'test');
   const [stats, setStats] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(false);
@@ -28,11 +28,7 @@ const Stats = () => {
   };
   
   useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      fetchStats();
-      },2000);
-  
-      return () => clearTimeout(delayDebounceFn);
+    fetchStats(); // Eliminamos el retardo para la primera llamada
   }, [username, gamemode]);
 
   const handleUsernameChange = (event) => {
