@@ -23,8 +23,8 @@ const Nav = () => {
 
   return (
     <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" p={4} bg={bgColor} width="100%">
-      <Box textAlign="center" ml={3}>
-        <Heading as="h1" size="xl" color={textColor}>WIQ</Heading>
+      <Box textAlign="center" ml={3} width="25%" justifyContent="start">
+        <Heading as="h1" size="xl" color={textColor} textAlign="start">WIQ</Heading>
       </Box>
       <Flex gap={3}>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/home")}>Home</Button>
@@ -49,7 +49,7 @@ const Nav = () => {
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
       </Flex>
-      <Flex className="rightItems" alignItems="center">
+      <Flex width="25%"  className="rightItems" justifyContent="end">
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/sobre")}>Sobre nosotros</Button>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleConfig()}>Opciones</Button>
         <Button variant="link" color={textColor} onClick={() => logout()}>Desconectarse</Button>
