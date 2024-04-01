@@ -8,6 +8,7 @@ import {
   Tr,
   Td,
   Box,
+  Flex
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -111,9 +112,9 @@ const Stats = () => {
           {" "}
           <strong>Nombre de usuario: </strong>
         </label>
-        <Box display="flex" columnGap="1rem">
+        <Flex columnGap="1rem" justifyContent="space-between">
           <Input
-            width="80%"
+            width="85%"
             type="text"
             id="usernameInput"
             value={username}
@@ -121,8 +122,8 @@ const Stats = () => {
             data-testid="usernameInput"
           />
           <Button onClick={handleSearch}>Buscar</Button>
-        </Box>
-        <Box display="flex" columnGap="1rem" justifyContent="center" marginTop="1rem">
+        </Flex>
+        <Flex rowGap="0.5rem" justifyContent="center" m="0.5rem 0" flexDirection="column">
           <Button
             className={gamemode === "clasico" ? "active" : ""}
             onClick={() => handleGamemodeChange("clasico")}
@@ -135,7 +136,7 @@ const Stats = () => {
           >
             Batería de sabios
           </Button>
-        </Box>
+        </Flex>
         {stats === null && !isLoading && (
           <p mt="10rem">El usuario no ha jugado ninguna partida.</p>
         )}
