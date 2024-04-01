@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Table, Thead, Tbody, Tr, Th, Td, Link, Center, Heading } from "@chakra-ui/react";
+import { Flex, Table, Thead, Tbody, Tr, Th, Td, Link, Center, Heading } from "@chakra-ui/react";
 import Nav from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
 
@@ -13,7 +13,7 @@ const Sobre = () => {
   return (
     <>
       <Nav />
-      <Box className="sobre-container">
+      <Flex flexDirection="column" rowGap="1rem">
         <Heading as="h1">Equipo WIQ_es1a</Heading>
         <Heading as="h2" size="md">Nuestro equipo de desarrollo</Heading>
         <Table className="designers-table">
@@ -34,7 +34,7 @@ const Sobre = () => {
             ))}
           </Tbody>
         </Table>
-      </Box>
+      </Flex>
       <Footer />
     </>
   );

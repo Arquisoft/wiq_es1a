@@ -1,39 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { Input, Button, Heading, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import {
+  Input,
+  Button,
+  Heading,
+  Table,
+  Tbody,
+  Tr,
+  Td,
+  Box,
+} from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
 const Stats = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
 
-  const [username, setUsername] = useState(localStorage.username || 'error');
+  const [username, setUsername] = useState(localStorage.username || "error");
   const [stats, setStats] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [fetched,setFetched] = useState(false);
+  const [fetched, setFetched] = useState(false);
 
   const fetchStats = () => {
     setIsLoading(true);
-    fetch(gatewayUrl+`/stats?user=${username}&gamemode=${gamemode}`)
+    fetch(gatewayUrl + `/stats?user=${username}&gamemode=${gamemode}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error al obtener las estadísticas:', error);
-        setError(error.message || 'Ha ocurrido un error al obtener las estadísticas');
+        console.error("Error al obtener las estadísticas:", error);
+        setError(
+          error.message || "Ha ocurrido un error al obtener las estadísticas"
+        );
         setIsLoading(false);
       });
   };
-  
+
   useEffect(() => {
-    if(!fetched){
+    if (!fetched) {
       fetchStats();
       setFetched(true);
     }
-      
   }, [username, gamemode]);
 
   const handleUsernameChange = (event) => {
@@ -51,9 +61,9 @@ const Stats = () => {
   };
 
   const getModeName = () => {
-    if(gamemode=="clasico"){
-      return "Clásico";    
-    }else if(gamemode=="bateria"){
+    if (gamemode == "clasico") {
+      return "Clásico";
+    } else if (gamemode == "bateria") {
       return "Batería de sabios";
     }
     return gamemode;
@@ -72,7 +82,7 @@ const Stats = () => {
     return (
       <>
         <Nav />
-        <div>
+        <Box>
           <label htmlFor="usernameInput">Nombre de usuario: </label>
           <Input
             type="text"
@@ -83,11 +93,11 @@ const Stats = () => {
           />
           <Button onClick={handleSearch}>Buscar</Button>
           <Heading as="h2">Error: {error}</Heading>
-          <p>
+          <p marginTop="1rem">
             Por favor compruebe si los valores del formulario son correctos e
             inténtelo de nuevo
           </p>
-        </div>
+        </Box>
         <Footer />
       </>
     );
@@ -95,10 +105,15 @@ const Stats = () => {
 
   return (
     <>
-    <Nav />
-    <div>
-      <label htmlFor="usernameInput"> <strong>Nombre de usuario: </strong></label>
-      <Input
+      <Nav />
+      <Box>
+        <label htmlFor="usernameInput">
+          {" "}
+          <strong>Nombre de usuario: </strong>
+        </label>
+        <Box display="flex" columnGap="1rem">
+          <Input
+            width="80%"
             type="text"
             id="usernameInput"
             value={username}
@@ -106,67 +121,81 @@ const Stats = () => {
             data-testid="usernameInput"
           />
           <Button onClick={handleSearch}>Buscar</Button>
-      <div>
-        <Button
-          className={gamemode === "clasico" ? "active" : ""}
-          onClick={() => handleGamemodeChange("clasico")}
-        >
-        Clásico
-        </Button>
-        <Button
-          className={gamemode === "bateria" ? "active" : ""}
-          onClick={() => handleGamemodeChange("bateria")}
-        >
-          Batería de sabios
-        </Button>
-      </div>
-      {stats === null && !isLoading && (
-          <div>
-            <p>El usuario no ha jugado ninguna partida.</p>
-          </div>
+        </Box>
+        <Box display="flex" columnGap="1rem" justifyContent="center" marginTop="1rem">
+          <Button
+            className={gamemode === "clasico" ? "active" : ""}
+            onClick={() => handleGamemodeChange("clasico")}
+          >
+            Clásico
+          </Button>
+          <Button
+            className={gamemode === "bateria" ? "active" : ""}
+            onClick={() => handleGamemodeChange("bateria")}
+          >
+            Batería de sabios
+          </Button>
+        </Box>
+        {stats === null && !isLoading && (
+          <p mt="10rem">El usuario no ha jugado ninguna partida.</p>
         )}
         {stats && (
           <div>
-            <Heading as="h2">Estadísticas de {stats.username} - modo {getModeName()}</Heading>
+            <Heading as="h2">
+              Estadísticas de {stats.username} - modo {getModeName()}
+            </Heading>
             <Table>
-            <Tbody>
-              <Tr>
-                <Td><strong>Partidas jugadas</strong></Td>
-                <Td>{stats.nGamesPlayed}</Td>
-              </Tr>
-              <Tr>
-                <Td><strong>Puntos por partida</strong></Td>
-                <Td>{stats.avgPoints.toFixed(2)}</Td>
-               </Tr>
-              <Tr>
-                <Td><strong>Puntos totales</strong></Td>
-                <Td>{stats.totalPoints}</Td>
-              </Tr>
-              <Tr>
-                <Td><strong>Preguntas correctas totales</strong></Td>
-                <Td>{stats.totalCorrectQuestions}</Td>
-              </Tr>
-              <Tr>
-                <Td><strong>Preguntas incorrectas totales</strong></Td>
-                <Td>{stats.totalIncorrectQuestions}</Td>
-              </Tr>
-              <Tr>
-                <Td><strong>Porcentaje de aciertos</strong></Td>
-                <Td>{stats.ratioCorrect.toFixed(2)}%</Td>
-              </Tr>
-              <Tr>
-                <Td><strong>Tiempo por pregunta (s):</strong></Td>
-                <Td>{stats.avgTime.toFixed(2)}</Td>
-              </Tr>
-            </Tbody>
-          </Table>
+              <Tbody>
+                <Tr>
+                  <Td>
+                    <strong>Partidas jugadas</strong>
+                  </Td>
+                  <Td>{stats.nGamesPlayed}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Puntos por partida</strong>
+                  </Td>
+                  <Td>{stats.avgPoints.toFixed(2)}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Puntos totales</strong>
+                  </Td>
+                  <Td>{stats.totalPoints}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Preguntas correctas totales</strong>
+                  </Td>
+                  <Td>{stats.totalCorrectQuestions}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Preguntas incorrectas totales</strong>
+                  </Td>
+                  <Td>{stats.totalIncorrectQuestions}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Porcentaje de aciertos</strong>
+                  </Td>
+                  <Td>{stats.ratioCorrect.toFixed(2)}%</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Tiempo por pregunta (s):</strong>
+                  </Td>
+                  <Td>{stats.avgTime.toFixed(2)}</Td>
+                </Tr>
+              </Tbody>
+            </Table>
           </div>
         )}
-    </div>
-    <Footer />
+      </Box>
+      <Footer />
     </>
-    
   );
-}
+};
 
 export default Stats;
