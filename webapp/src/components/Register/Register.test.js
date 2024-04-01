@@ -1,59 +1,86 @@
-import React from 'react';
-import { render, fireEvent, screen, waitFor } from '@testing-library/react';
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
-import Register from './Register';
+import React from "react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import AddUser from "./AddUser";
+import axios from "axios";
 
-const mockAxios = new MockAdapter(axios);
+jest.mock("axios");
 
-describe('Register component', () => {
-  beforeEach(() => {
-    mockAxios.reset();
+describe("AddUser Component", () => {
+  test("renders registration form correctly", () => {
+    render(<AddUser />);
+
+    // Verificar que los elementos del formulario se rendericen correctamente
+    expect(screen.getByText("Regístrate")).toBeInTheDocument();
+    expect(screen.getByLabelText("Introduce tu nombre:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Introduce tu contraseña:")).toBeInTheDocument();
+    expect(screen.getByLabelText("Vuelve a introducir la contraseña:")).toBeInTheDocument();
+    expect(screen.getByText("Registrarse")).toBeInTheDocument();
+    expect(screen.getByText("¿Ya tienes cuenta?")).toBeInTheDocument();
   });
 
-  it('should add user successfully', async () => {
-    render(<Register />);
+  test("handles user registration successfully", async () => {
+    const mockSuccessResponse = { data: "Usuario registrado exitosamente" };
+    axios.post.mockResolvedValueOnce(mockSuccessResponse);
 
-    const usernameInput = screen.getByPlaceholderText(/Username/i);
-    const passwordInput = screen.getByPlaceholderText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Add User/i });
+    render(<AddUser />);
 
-    // Mock the axios.post request to simulate a successful response
-    mockAxios.onPost('http://localhost:8000/adduser').reply(200);
+    // Simular la entrada de datos del usuario
+    fireEvent.change(screen.getByLabelText("Introduce tu nombre:"), {
+      target: { value: "testUser" },
+    });
+    fireEvent.change(screen.getByLabelText("Introduce tu contraseña:"), {
+      target: { value: "testPassword" },
+    });
+    fireEvent.change(screen.getByLabelText("Vuelve a introducir la contraseña:"), {
+      target: { value: "testPassword" },
+    });
 
-    // Simulate user input
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+    // Simular clic en el botón de registro
+    fireEvent.click(screen.getByText("Registrarse"));
 
-    // Trigger the add user button click
-    fireEvent.click(addUserButton);
-
-    // Wait for the Snackbar to be open
+    // Esperar a que se complete la solicitud y se muestre la confirmación
     await waitFor(() => {
-      expect(screen.getByText(/User added successfully/i)).toBeInTheDocument();
+      expect(screen.getByText("Usuario registrado exitosamente")).toBeInTheDocument();
+    });
+
+    // Verificar que se haya llamado correctamente a la función post de axios
+    expect(axios.post).toHaveBeenCalledWith("http://localhost:8000/adduser", {
+      username: "testUser",
+      password: "testPassword",
     });
   });
 
-  it('should handle error when adding user', async () => {
-    render(<Register />);
+  test("handles user registration failure", async () => {
+    const errorMessage = "Error al registrar usuario";
+    const mockErrorResponse = { response: { data: { error: errorMessage } } };
+    axios.post.mockRejectedValueOnce(mockErrorResponse);
 
-    const usernameInput = screen.getByPlaceholderText(/Username/i);
-    const passwordInput = screen.getByPlaceholderText(/Password/i);
-    const addUserButton = screen.getByRole('button', { name: /Add User/i });
+    render(<AddUser />);
 
-    // Mock the axios.post request to simulate an error response
-    mockAxios.onPost('http://localhost:8000/adduser').reply(500, { error: 'Internal Server Error' });
+    // Simular la entrada de datos del usuario
+    fireEvent.change(screen.getByLabelText("Introduce tu nombre:"), {
+      target: { value: "testUser" },
+    });
+    fireEvent.change(screen.getByLabelText("Introduce tu contraseña:"), {
+      target: { value: "testPassword" },
+    });
+    fireEvent.change(screen.getByLabelText("Vuelve a introducir la contraseña:"), {
+      target: { value: "testPassword" },
+    });
 
-    // Simulate user input
-    fireEvent.change(usernameInput, { target: { value: 'testUser' } });
-    fireEvent.change(passwordInput, { target: { value: 'testPassword' } });
+    // Simular clic en el botón de registro
+    fireEvent.click(screen.getByText("Registrarse"));
 
-    // Trigger the add user button click
-    fireEvent.click(addUserButton);
-
-    // Wait for the error Snackbar to be open
+    // Esperar a que se muestre el mensaje de error
     await waitFor(() => {
-      expect(screen.getByText(/Error: Internal Server Error/i)).toBeInTheDocument();
+      expect(screen.getByText(`Error: ${errorMessage}`)).toBeInTheDocument();
+    });
+
+    // Verificar que se haya llamado correctamente a la función post de axios
+    expect(axios.post).toHaveBeenCalledWith("http://localhost:8000/adduser", {
+      username: "testUser",
+      password: "testPassword",
     });
   });
 });

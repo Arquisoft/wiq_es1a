@@ -14,7 +14,7 @@ test('renders 404 message', () => {
   expect(getByText('Página no encontrada')).toBeInTheDocument();
   expect(getByText('La página que estabas buscando no está disponible')).toBeInTheDocument();
 
-  expect('Link').toBeInTheDocument();
+  expect(getByRole('link')).toBeInTheDocument();
 });
 
 test('renders "Página no encontrada" message', () => {
@@ -33,6 +33,6 @@ test('renders link to home page', () => {
       <WrongRoute />
     </Router>
   );
-  const homeLink = screen.getByRole('link', { name: /página principal/i });
-  expect(homeLink).toHaveAttribute('href', '/login');
+  const homeLink = screen.getByRole('link', { name: /Página principal/i });
+  expect(homeLink).toHaveAttribute('href', '/home');
 });
