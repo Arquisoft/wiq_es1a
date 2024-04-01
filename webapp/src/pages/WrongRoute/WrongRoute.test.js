@@ -4,13 +4,17 @@ import WrongRoute from './WrongRoute';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 test('renders 404 message', () => {
-  render(
+  const { getByText, getByRole } =render(
     <Router>
       <WrongRoute />
     </Router>
   );
   const errorMessage = screen.getByText(/404/i);
-  expect(errorMessage).toBeInTheDocument();
+  expect(getByText('404')).toBeInTheDocument();
+  expect(getByText('Página no encontrada')).toBeInTheDocument();
+  expect(getByText('La página que estabas buscando no está disponible')).toBeInTheDocument();
+
+  expect('Link').toBeInTheDocument();
 });
 
 test('renders "Página no encontrada" message', () => {
