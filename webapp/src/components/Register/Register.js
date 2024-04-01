@@ -38,7 +38,14 @@ const AddUser = () => {
     axios
       .post(`${apiEndpoint}/adduser`, { username, password })
       .then(() => setOpenSnackbar(true))
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+        if (error.response && error.response.data && error.response.data.error) {
+          setError(error.response.data.error);
+        } else {
+          setError("Ha ocurrido un error. Por favor, inténtalo de nuevo.");
+        }
+      });
+      
   };
 
   return (
