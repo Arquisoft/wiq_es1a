@@ -8,7 +8,7 @@ const Perfil = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [username,setUsername]=useState(localStorage.username);
+  const [username,setUsername]=useState(localStorage.username || 'error');
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -27,61 +27,69 @@ const Perfil = () => {
 
   return (
     <>
-    <Nav/>
-    <Center py={8}>
-      <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg">
-        <VStack p={8} align="start" spacing={6}>
-          <Heading as="h1" size="lg">
-            Detalles del Usuario
-          </Heading>
-          {loading ? (
-            <Center>
-              <Spinner />
-            </Center>
-          ) : (
-            <>
-              <Text>
-                <strong>Nombre de Usuario:</strong> {userData.username}
-              </Text>
-              <Text>
-                <strong>Fecha de creación de la cuenta:</strong>{" "}
-                {new Date(userData.createdAt).toLocaleString()}
-              </Text>
-              <Heading as="h2" size="md">
-                Partidas Recientes
-              </Heading>
-              {userData.games.length > 0 ? (
-                <Table variant="simple">
-                  <Thead>
-                    <Tr>
-                      <Th>Modo de Juego</Th>
-                      <Th>Respuestas Correctas</Th>
-                      <Th>Respuestas Incorrectas</Th>
-                      <Th>Puntos</Th>
-                      <Th>Tiempo Promedio</Th>
-                    </Tr>
-                  </Thead>
-                  <Tbody>
-                    {userData.games.slice(0, 10).map((game, index) => (
-                      <Tr key={index}>
-                        <Td>{game.gamemode}</Td>
-                        <Td>{game.correctAnswers}</Td>
-                        <Td>{game.incorrectAnswers}</Td>
-                        <Td>{game.points}</Td>
-                        <Td>{game.avgTime} segundos</Td>
-                      </Tr>
-                    ))}
-                  </Tbody>
-                </Table>
-              ) : (
-                <Text>No hay partidas recientes.</Text>
-              )}
-            </>
-          )}
-        </VStack>
-      </Box>
-    </Center>
-    <Footer/>
+      <Nav />
+      <Center py={8}>
+        <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg" width="100%">
+          <VStack p={8} align="start" spacing={6}>
+            <Heading as="h1" size="lg">
+              Perfil del usuario
+            </Heading>
+            {loading ? (
+              <Center>
+                <Spinner />
+              </Center>
+            ) : error ? (
+              <Text>Error: {error}</Text>
+            ) : (
+              <>
+                {userData && (
+                  <>
+                    <Text>
+                      <strong>Nombre de usuario:</strong> {userData.username}
+                    </Text>
+                    <Text>
+                      <strong>Fecha de creación de la cuenta:</strong>{" "}
+                      {new Date(userData.createdAt).toLocaleString()}
+                    </Text>
+                    <Heading as="h2" size="md">
+                      Partidas Recientes
+                    </Heading>
+                    <div style={{ width: '100%' }}>
+                      {userData.games.length > 0 ? (
+                        <Table variant="simple">
+                          <Thead>
+                            <Tr>
+                              <Th>Modo de juego</Th>
+                              <Th>Respuestas correctas</Th>
+                              <Th>Respuestas incorrectas</Th>
+                              <Th>Puntos</Th>
+                              <Th>Tiempo promedio</Th>
+                            </Tr>
+                          </Thead>
+                          <Tbody>
+                            {userData.games.slice(0, 10).map((game, index) => (
+                              <Tr key={index}>
+                                <Td>{game.gamemode}</Td>
+                                <Td>{game.correctAnswers}</Td>
+                                <Td>{game.incorrectAnswers}</Td>
+                                <Td>{game.points}</Td>
+                                <Td>{game.avgTime} segundos</Td>
+                              </Tr>
+                            ))}
+                          </Tbody>
+                        </Table>
+                      ) : (
+                        <Text>No hay partidas recientes.</Text>
+                      )}
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+          </VStack>
+        </Box>
+      </Center>
+      <Footer />
     </>
   );
 };

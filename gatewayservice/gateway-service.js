@@ -2,7 +2,9 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const promBundle = require("express-prom-bundle");
-
+const YAML = require('yaml');
+const fs = require("fs");
+const swaggerUi = require('swagger-ui-express'); 
 const app = express();
 const port = 8000;
 
@@ -154,6 +156,21 @@ app.get("/ranking", async (req, res) => {
       .json({ error: error.response.data.error });
   }
 });
+
+openapiPath='./openapi.yaml'
+if (fs.existsSync(openapiPath)) {
+  const file = fs.readFileSync(openapiPath, 'utf8');
+
+  // Parse the YAML content into a JavaScript object representing the Swagger document
+  const swaggerDocument = YAML.parse(file);
+
+  // Serve the Swagger UI documentation at the '/api-doc' endpoint
+  // This middleware serves the Swagger UI files and sets up the Swagger UI page
+  // It takes the parsed Swagger document as input
+  app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+} else {
+  console.log("Not configuring OpenAPI. Configuration file not present.")
+}
 
 // Start the gateway service
 const server = app.listen(port, () => {

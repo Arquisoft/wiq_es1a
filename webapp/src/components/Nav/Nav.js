@@ -22,7 +22,7 @@ const Nav = () => {
   };
 
   return (
-    <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" p={4} bg={bgColor}>
+    <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" p={4} bg={bgColor} width="100%">
       <Box textAlign="center" ml={3}>
         <Heading as="h1" size="xl" color={textColor}>WIQ</Heading>
       </Box>
@@ -50,6 +50,7 @@ const Nav = () => {
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
       </Flex>
       <Flex className="rightItems" alignItems="center">
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/sobre")}>Sobre nosotros</Button>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleConfig()}>Opciones</Button>
         <Button variant="link" color={textColor} onClick={() => logout()}>Desconectarse</Button>
         <Switch isChecked={isDarkTheme} onChange={toggleColorMode} ml={4} />

@@ -6,11 +6,12 @@ import Footer from "../../components/Footer/Footer.js";
 const Stats = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
 
-  const [username, setUsername] = useState(localStorage.username);
+  const [username, setUsername] = useState(localStorage.username || 'error');
   const [stats, setStats] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [fetched,setFetched] = useState(false);
 
   const fetchStats = () => {
     setIsLoading(true);
@@ -28,11 +29,11 @@ const Stats = () => {
   };
   
   useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
+    if(!fetched){
       fetchStats();
-      },2000);
-  
-      return () => clearTimeout(delayDebounceFn);
+      setFetched(true);
+    }
+      
   }, [username, gamemode]);
 
   const handleUsernameChange = (event) => {
@@ -42,6 +43,10 @@ const Stats = () => {
   const handleGamemodeChange = (mode) => {
     setGamemode(mode);
     // Llama a fetchStats() para actualizar las estadísticas cuando se cambia el modo de juego
+    fetchStats();
+  };
+
+  const handleSearch = () => {
     fetchStats();
   };
 
@@ -76,6 +81,7 @@ const Stats = () => {
             onChange={handleUsernameChange}
             data-testid="usernameInput"
           />
+          <Button onClick={handleSearch}>Buscar</Button>
           <Heading as="h2">Error: {error}</Heading>
           <p>
             Por favor compruebe si los valores del formulario son correctos e
@@ -91,7 +97,7 @@ const Stats = () => {
     <>
     <Nav />
     <div>
-      <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
+      <label htmlFor="usernameInput"> <strong>Nombre de usuario: </strong></label>
       <Input
             type="text"
             id="usernameInput"
@@ -99,6 +105,7 @@ const Stats = () => {
             onChange={handleUsernameChange}
             data-testid="usernameInput"
           />
+          <Button onClick={handleSearch}>Buscar</Button>
       <div>
         <Button
           className={gamemode === "clasico" ? "active" : ""}
@@ -120,14 +127,8 @@ const Stats = () => {
         )}
         {stats && (
           <div>
-            <Heading as="h2">Estadísticas de usuario - Modo {getModeName()}</Heading>
+            <Heading as="h2">Estadísticas de {stats.username} - modo {getModeName()}</Heading>
             <Table>
-            <Thead>
-              <Tr>
-                <Th><strong>Usuario</strong></Th>
-                <Th>{stats.username}</Th>
-              </Tr>
-            </Thead>
             <Tbody>
               <Tr>
                 <Td><strong>Partidas jugadas</strong></Td>

@@ -108,7 +108,7 @@ const Ranking = () => {
     <>
     <Nav/>
     <div>
-      <Heading as="h2">Ranking - Modo {getModeName()}</Heading>
+      <Heading as="h2">Ranking - modo {getModeName()}</Heading>
       <Select id="displaySelector" onChange={handleDisplayChange}>
         {displayOptions.map(option => (
           <option key={option.value} value={option.value}>{option.label}</option>
