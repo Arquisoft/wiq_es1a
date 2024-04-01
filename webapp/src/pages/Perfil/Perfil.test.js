@@ -33,4 +33,42 @@ describe('Perfil Component', () => {
       expect(screen.getByText('35')).toBeInTheDocument();
     });
   });
+
+  test('displays an error message when profile loading fails', async () => {
+    jest.spyOn(global, 'fetch').mockRejectedValueOnce(new Error('Failed to fetch'));
+  
+    render(
+      <MemoryRouter>
+        <Perfil />
+      </MemoryRouter>
+    );
+  
+    await waitFor(() => {
+      expect(screen.getByText('Error: Failed to fetch')).toBeInTheDocument();
+    });
+  });
+
+  test('displays a message when there are no recent games', async () => {
+    const mockUserData = {
+      username: 'testUser',
+      createdAt: new Date(),
+      games: []
+    };
+  
+    jest.spyOn(global, 'fetch').mockResolvedValueOnce({
+      json: jest.fn().mockResolvedValueOnce(mockUserData),
+    });
+  
+    render(
+      <MemoryRouter>
+        <Perfil />
+      </MemoryRouter>
+    );
+  
+    await waitFor(() => {
+      expect(screen.getByText('No hay partidas recientes.')).toBeInTheDocument();
+    });
+  });
+  
+  
 });

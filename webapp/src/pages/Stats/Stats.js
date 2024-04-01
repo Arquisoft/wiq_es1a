@@ -6,7 +6,7 @@ import Footer from "../../components/Footer/Footer.js";
 const Stats = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
 
-  const [username, setUsername] = useState(localStorage.username || 'test');
+  const [username, setUsername] = useState(localStorage.username || 'error');
   const [stats, setStats] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(false);
