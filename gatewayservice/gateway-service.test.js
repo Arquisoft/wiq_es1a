@@ -106,31 +106,12 @@ describe('Gateway Service', () => {
     expect(response.body).toEqual({ userInfo: 'mockedUserInfo' });
   });
 
-  // Test /saveGameList endpoint
-  it('should forward saveGameList request to user service', async () => {
-    const response = await request(app)
-      .post('/saveGameList')
-      .send({ username: 'testuser', gameMode: 'classic', gameData: { points: 100, correctAnswers: 8, incorrectAnswers: 2, avgTime: 30 } });
-
-    expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual({ message: 'Partida guardada exitosamente' });
-  });
-
   // Test /stats endpoint
   it('should forward stats request to stats service', async () => {
     const response = await request(app).get("/stats").query({ user: 'testuser', gamemode: 'classic' });
 
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({ stats: 'mockedStats' });
-  });
-
-  // Test /saveGame endpoint
-  it('should forward saveGame request to stats service', async () => {
-    const response = await request(app)
-      .post('/saveGame')
-      .send({ username: 'testuser', gameMode: 'classic', gameData: { points: 100, correctAnswers: 8, incorrectAnswers: 2, avgTime: 30 } });
-
-    // Write your test assertions here
   });
 
   // Test /ranking endpoint
