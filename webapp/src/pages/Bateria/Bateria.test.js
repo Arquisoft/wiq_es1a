@@ -15,7 +15,7 @@ jest.mock("axios", () => ({
   }),
 }));
 
-describe("JuegoPreguntas Component", () => {
+describe("Bateria Component", () => {
   beforeEach(() => {
     const mockQuestions = [
       {
@@ -30,7 +30,7 @@ describe("JuegoPreguntas Component", () => {
       },
     ];
 
-    jest.spyOn(global, "fetch").mockResolvedValue({
+    jest.spyOn(global, "fetch").mockResolvedValueOnce({
       ok: true,
       json: () => Promise.resolve(mockQuestions),
     });
@@ -38,7 +38,6 @@ describe("JuegoPreguntas Component", () => {
 
   afterEach(() => {
     global.fetch.mockClear();
-    delete global.fetch;
   });
 
   test("renders game questions correctly", async () => {
