@@ -94,8 +94,3 @@ describe('Footer Component', () => {
     expect(screen.getByText('Copyright 2024 ® Grupo 1A de Arquitectura del Software')).toBeInTheDocument();
   });
 });
-/*test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Welcome to wiq_es1a/i);
-  expaect(linkElement).toBeInTheDocument();
-});*/

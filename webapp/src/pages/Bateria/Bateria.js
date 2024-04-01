@@ -30,7 +30,7 @@ const JuegoPreguntas = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes"), n: 9000 }),
+      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes") || "paises", n: 9000 }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -134,6 +134,7 @@ const JuegoPreguntas = () => {
       <>
         <Nav />
         <Spinner
+          data-testid="spinner"
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'
