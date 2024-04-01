@@ -1,20 +1,29 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-import AddUser from "./AddUser";
+import Register from "./Register";
 import axios from "axios";
+import { BrowserRouter as Router } from "react-router-dom";
 
 jest.mock("axios");
 
-describe("AddUser Component", () => {
+describe("Register Component", () => {
   test("renders registration form correctly", () => {
-    render(<AddUser />);
+    render(
+      <Router>
+        <Register />
+      </Router>
+    );
 
     // Verificar que los elementos del formulario se rendericen correctamente
     expect(screen.getByText("Regístrate")).toBeInTheDocument();
     expect(screen.getByLabelText("Introduce tu nombre:")).toBeInTheDocument();
-    expect(screen.getByLabelText("Introduce tu contraseña:")).toBeInTheDocument();
-    expect(screen.getByLabelText("Vuelve a introducir la contraseña:")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Introduce tu contraseña:")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Vuelve a introducir la contraseña:")
+    ).toBeInTheDocument();
     expect(screen.getByText("Registrarse")).toBeInTheDocument();
     expect(screen.getByText("¿Ya tienes cuenta?")).toBeInTheDocument();
   });
@@ -23,7 +32,11 @@ describe("AddUser Component", () => {
     const mockSuccessResponse = { data: "Usuario registrado exitosamente" };
     axios.post.mockResolvedValueOnce(mockSuccessResponse);
 
-    render(<AddUser />);
+    render(
+      <Router>
+        <Register />
+      </Router>
+    );
 
     // Simular la entrada de datos del usuario
     fireEvent.change(screen.getByLabelText("Introduce tu nombre:"), {
@@ -32,16 +45,21 @@ describe("AddUser Component", () => {
     fireEvent.change(screen.getByLabelText("Introduce tu contraseña:"), {
       target: { value: "testPassword" },
     });
-    fireEvent.change(screen.getByLabelText("Vuelve a introducir la contraseña:"), {
-      target: { value: "testPassword" },
-    });
+    fireEvent.change(
+      screen.getByLabelText("Vuelve a introducir la contraseña:"),
+      {
+        target: { value: "testPassword" },
+      }
+    );
 
     // Simular clic en el botón de registro
     fireEvent.click(screen.getByText("Registrarse"));
 
     // Esperar a que se complete la solicitud y se muestre la confirmación
     await waitFor(() => {
-      expect(screen.getByText("Usuario registrado exitosamente")).toBeInTheDocument();
+      expect(
+        screen.getByText("Usuario registrado exitosamente")
+      ).toBeInTheDocument();
     });
 
     // Verificar que se haya llamado correctamente a la función post de axios
@@ -56,7 +74,11 @@ describe("AddUser Component", () => {
     const mockErrorResponse = { response: { data: { error: errorMessage } } };
     axios.post.mockRejectedValueOnce(mockErrorResponse);
 
-    render(<AddUser />);
+    render(
+      <Router>
+        <Register />
+      </Router>
+    );
 
     // Simular la entrada de datos del usuario
     fireEvent.change(screen.getByLabelText("Introduce tu nombre:"), {
@@ -65,9 +87,12 @@ describe("AddUser Component", () => {
     fireEvent.change(screen.getByLabelText("Introduce tu contraseña:"), {
       target: { value: "testPassword" },
     });
-    fireEvent.change(screen.getByLabelText("Vuelve a introducir la contraseña:"), {
-      target: { value: "testPassword" },
-    });
+    fireEvent.change(
+      screen.getByLabelText("Vuelve a introducir la contraseña:"),
+      {
+        target: { value: "testPassword" },
+      }
+    );
 
     // Simular clic en el botón de registro
     fireEvent.click(screen.getByText("Registrarse"));
