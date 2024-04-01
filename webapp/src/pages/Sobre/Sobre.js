@@ -16,7 +16,7 @@ const Sobre = () => {
       <Flex flexDirection="column" rowGap="1rem">
         <Heading as="h1">Equipo WIQ_es1a</Heading>
         <Heading as="h2" size="md">Nuestro equipo de desarrollo</Heading>
-        <Table className="designers-table">
+        <Table className="designers-table" id="designers-table">
           <Thead>
             <Tr>
               <Th>Nombre</Th>
