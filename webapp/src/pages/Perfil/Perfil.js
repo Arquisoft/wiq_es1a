@@ -54,7 +54,7 @@ const Perfil = () => {
                     <Heading as="h2" size="md">
                       Partidas Recientes
                     </Heading>
-                    <div style={{ width: '100%' }}>
+                    <div style={{ width: '100%'}}>
                       {userData.games.length > 0 ? (
                         <Table variant="simple">
                           <Thead>

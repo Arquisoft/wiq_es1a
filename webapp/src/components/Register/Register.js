@@ -38,13 +38,15 @@ const AddUser = () => {
     axios
       .post(`${apiEndpoint}/adduser`, { username, password })
       .then(() => setOpenSnackbar(true))
-      .catch((error) => setError(error.message));
+      .catch((err) => setError(err.response.data.error));
   };
 
   return (
     <>
-      <Flex alignItems="center" justifyContent="space-between" mt={4}>
-        <Spacer flex={0}/>
+      <Flex alignItems="center" justifyContent="space-between" mt={4} w="100%">
+        <Box pr={5}>
+          
+        </Box>
         <Heading pl={6} as="h1" size="xl" color="teal.500">
           WIQ
         </Heading>

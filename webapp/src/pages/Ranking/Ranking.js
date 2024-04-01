@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Select, Button, Heading, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { Select, Button, Heading, Table, Thead, Tbody, Tr, Th, Td, Flex } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
@@ -107,7 +107,7 @@ const Ranking = () => {
   return (
     <>
     <Nav/>
-    <div>
+    <Flex flexDirection="column" rowGap="1rem">
       <Heading as="h2">Ranking - modo {getModeName()}</Heading>
       <Select id="displaySelector" onChange={handleDisplayChange}>
         {displayOptions.map(option => (
@@ -142,7 +142,7 @@ const Ranking = () => {
           ))}
         </Tbody>
       </Table>
-    </div>
+    </Flex>
     <Footer/>
     </>
   );
