@@ -19,8 +19,8 @@ test('renders game modes', () => {
       <Home />
     </Router>
   );
-  const classicLink = screen.getByText(/Modo Clásico/i);
-  const batteryLink = screen.getByText(/Batería de Sabios/i);
+  const classicLink = screen.getByText('Modo Clásico');
+  const batteryLink = screen.getByText('Batería de sabios');
 
   expect(classicLink).toBeInTheDocument();
   expect(batteryLink).toBeInTheDocument();
