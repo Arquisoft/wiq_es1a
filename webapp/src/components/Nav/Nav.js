@@ -27,17 +27,17 @@ const Nav = () => {
         <Heading as="h1" size="xl" color={textColor} textAlign="start">WIQ</Heading>
       </Box>
       <Flex gap={3}>
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/home")}>Home</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/home")}>Home</Button>
         <Popover>
           <PopoverTrigger>
-            <Button variant="link" color={textColor}>
+            <Button p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} variant="link" color={textColor}>
               Modos de Juego
             </Button>
           </PopoverTrigger>
           <PopoverContent>
             <PopoverArrow />
             <PopoverCloseButton />
-            <PopoverHeader>Modos de Juego</PopoverHeader>
+            <PopoverHeader >Modos de Juego</PopoverHeader>
             <PopoverBody>
               <Text cursor="pointer" onClick={() => handleNavigate("/home/clasico")} color={textColor}>Clásico</Text>
               <Text cursor="pointer" onClick={() => handleNavigate("/home/bateria")} color={textColor}>Batería de sabios</Text>
@@ -45,15 +45,15 @@ const Nav = () => {
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
       </Flex>
       <Flex width="25%"  className="rightItems" justifyContent="end">
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/sobre")}>Sobre nosotros</Button>
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleConfig()}>Opciones</Button>
-        <Button variant="link" color={textColor} onClick={() => logout()}>Desconectarse</Button>
-        <Switch isChecked={isDarkTheme} onChange={toggleColorMode} ml={4} />
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/sobre")}>Sobre nosotros</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleConfig()}>Opciones</Button>
+        <Button variant="link" color={textColor} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => logout()}>Desconectarse</Button>
+        <Switch isChecked={isDarkTheme} onChange={toggleColorMode} ml={4} alignSelf="center"/>
       </Flex>
     </Box>
   );
