@@ -11,6 +11,7 @@ const Stats = () => {
   const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [fetched,setFetched] = useState(false);
 
   const fetchStats = () => {
     setIsLoading(true);
@@ -28,7 +29,11 @@ const Stats = () => {
   };
   
   useEffect(() => {
-    fetchStats(); // Eliminamos el retardo para la primera llamada
+    if(!fetched){
+      fetchStats();
+      setFetched(true);
+    }
+      
   }, [username, gamemode]);
 
   const handleUsernameChange = (event) => {
@@ -38,6 +43,10 @@ const Stats = () => {
   const handleGamemodeChange = (mode) => {
     setGamemode(mode);
     // Llama a fetchStats() para actualizar las estadísticas cuando se cambia el modo de juego
+    fetchStats();
+  };
+
+  const handleSearch = () => {
     fetchStats();
   };
 
@@ -72,6 +81,7 @@ const Stats = () => {
             onChange={handleUsernameChange}
             data-testid="usernameInput"
           />
+          <Button onClick={handleSearch}>Buscar</Button>
           <Heading as="h2">Error: {error}</Heading>
           <p>
             Por favor compruebe si los valores del formulario son correctos e
@@ -95,6 +105,7 @@ const Stats = () => {
             onChange={handleUsernameChange}
             data-testid="usernameInput"
           />
+          <Button onClick={handleSearch}>Buscar</Button>
       <div>
         <Button
           className={gamemode === "clasico" ? "active" : ""}

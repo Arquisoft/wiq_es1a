@@ -128,6 +128,9 @@ describe('Stats component', () => {
   
     const newUsername = 'newUser';
     localStorage.setItem('username', newUsername);
+
+    const searchbutton=await screen.findByText('Buscar');
+    userEvent.click(searchbutton);
   
     render(
       <Router>
@@ -173,6 +176,7 @@ describe('Stats component', () => {
         <Stats />
       </Router>
     );
+  
     await waitFor(() => {
       expect(screen.queryByText('Estadísticas de testUser - modo Batería de sabios')).toBeInTheDocument();
     });
