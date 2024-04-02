@@ -80,6 +80,7 @@ const AddUser = () => {
           </FormLabel>
           <Input
             id="register-username"
+            name="username"
             type="text"
             placeholder="Nombre de usuario"
             value={username}
@@ -92,6 +93,7 @@ const AddUser = () => {
           </FormLabel>
           <Input
             id="register-password"
+            name="password"
             type="password"
             placeholder="Contraseña"
             value={password}
