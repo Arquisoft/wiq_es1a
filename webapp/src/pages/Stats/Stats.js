@@ -23,9 +23,9 @@ const Stats = () => {
   const [error, setError] = useState(null);
   const [fetched, setFetched] = useState(false);
 
-  const fetchStats = () => {
+  const fetchStats = (mode) => {
     setIsLoading(true);
-    fetch(gatewayUrl + `/stats?user=${username}&gamemode=${gamemode}`)
+    fetch(gatewayUrl + `/stats?user=${username}&gamemode=${mode}`)
       .then((response) => response.json())
       .then((data) => {
         setStats(data);
@@ -42,7 +42,7 @@ const Stats = () => {
 
   useEffect(() => {
     if (!fetched) {
-      fetchStats();
+      fetchStats(gamemode);
       setFetched(true);
     }
     // eslint-disable-next-line
@@ -52,14 +52,16 @@ const Stats = () => {
     setUsername(event.target.value);
   };
 
-  const handleGamemodeChange = (mode) => {
+  const handleGamemodeChange = async (mode) => {
+    if (mode === gamemode) return;
+  
     setGamemode(mode);
-    // Llama a fetchStats() para actualizar las estadísticas cuando se cambia el modo de juego
-    fetchStats();
+    fetchStats(mode);
   };
+  
 
   const handleSearch = () => {
-    fetchStats();
+    fetchStats(gamemode);
   };
 
   const getModeName = () => {
