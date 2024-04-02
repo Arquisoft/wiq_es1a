@@ -45,6 +45,7 @@ const Ranking = () => {
 
   useEffect(() => {
     fetchRanking();
+    // eslint-disable-next-line
   }, [gamemode, filterBy]);
 
   const handleDisplayChange = (event) => {

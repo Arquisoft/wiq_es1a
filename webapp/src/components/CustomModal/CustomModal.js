@@ -16,7 +16,7 @@ const CustomModal = ({ title, text, route }) => {
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody textAlign='justify'>
             {text}
           </ModalBody>
 

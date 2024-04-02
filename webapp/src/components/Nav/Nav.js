@@ -8,6 +8,7 @@ const Nav = () => {
   const isDarkTheme = colorMode === "dark";
   const textColor = isDarkTheme ? "white" : "teal.500";
   const bgColor = isDarkTheme ? 'gray.700' : 'gray.200';
+  
   const handleConfig = () => {
     navigate("/config");
   };

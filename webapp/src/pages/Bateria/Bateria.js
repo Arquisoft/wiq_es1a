@@ -59,15 +59,22 @@ const JuegoPreguntas = () => {
         const tMedio=TIME/preguntasTotales;
         setTiempoMedio(tMedio);
       }
-      if (juegoTerminado && tiempoMedio!=0) {
-        guardarPartida();
-      }
     }
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [tiempoRestante]);
+
+  useEffect(() => {
+    if (juegoTerminado && tiempoMedio!=0) {
+      guardarPartida();
+    }
+    // eslint-disable-next-line
+  }, [juegoTerminado, tiempoMedio]);
+
+  
 
   const guardarPartida = async () => {
     
@@ -105,6 +112,7 @@ const JuegoPreguntas = () => {
     }, 10); 
   
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [tiempoRestante]);
 
   const handleSiguientePregunta = async (respuesta) => {
