@@ -30,6 +30,7 @@ const Login = () => {
 
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
+    console.log(process.env.REACT_APP_API_ENDPOINT);
 
   const loginUser = () => {
     axios
