@@ -151,7 +151,7 @@ const JuegoPreguntas = () => {
     };
 
     useEffect(() => {
-      if (juegoTerminado) {
+      if (juegoTerminado && tiempoMedio!=0) {
         guardarPartida();
       }
     }, [juegoTerminado]);

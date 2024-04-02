@@ -56,10 +56,12 @@ const JuegoPreguntas = () => {
       setJuegoTerminado(true);
       if(preguntasCorrectas+preguntasFalladas>0){
         const preguntasTotales=preguntasCorrectas+preguntasFalladas;
-        const tMedio=180/preguntasTotales;
+        const tMedio=TIME/preguntasTotales;
         setTiempoMedio(tMedio);
       }
-      guardarPartida();
+      if (juegoTerminado && tiempoMedio!=0) {
+        guardarPartida();
+      }
     }
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
