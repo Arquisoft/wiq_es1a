@@ -46,7 +46,7 @@ defineFeature(feature, (test) => {
     });
 
     then("A confirmation message should be shown in the screen", async () => {
-      //await page.waitForNavigation({ waitUntil: "networkidle0" });
+      await page.waitForTimeout(1000);
       const url = page.url();
       expect(url).toContain("/home");
       browser.close();
