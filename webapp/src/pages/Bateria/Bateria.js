@@ -52,7 +52,7 @@ const JuegoPreguntas = () => {
   }, []);
 
   useEffect(() => {
-    if (tiempoRestante === 0) {
+    if (tiempoRestante == 0) {
       setJuegoTerminado(true);
       if(preguntasCorrectas+preguntasFalladas>0){
         const preguntasTotales=preguntasCorrectas+preguntasFalladas;
@@ -186,7 +186,7 @@ const JuegoPreguntas = () => {
                   <Button
                     key={index}
                     onClick={() => handleSiguientePregunta(respuesta)}
-                    disabled={tiempoRestante === 0 || juegoTerminado}
+                    disabled={tiempoRestante == 0 || juegoTerminado}
                   >
                     {respuesta}
                   </Button>
