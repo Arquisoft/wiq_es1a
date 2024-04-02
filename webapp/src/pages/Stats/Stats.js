@@ -63,9 +63,9 @@ const Stats = () => {
   };
 
   const getModeName = () => {
-    if (gamemode == "clasico") {
+    if (gamemode === "clasico") {
       return "Clásico";
-    } else if (gamemode == "bateria") {
+    } else if (gamemode === "bateria") {
       return "Batería de sabios";
     }
     return gamemode;

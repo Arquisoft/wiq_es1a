@@ -2,13 +2,13 @@ import { Box, VStack, Heading, Text, Center, Spinner, Table, Thead, Tbody, Tr, T
 import React, { useEffect, useState } from "react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
-import axios from "axios";
 
 const Perfil = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
+  const username = localStorage.username || 'error';
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [username,setUsername]=useState(localStorage.username || 'error');
+
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const Perfil = () => {
                                 <Td>{game.correctAnswers}</Td>
                                 <Td>{game.incorrectAnswers}</Td>
                                 <Td>{game.points}</Td>
-                                <Td>{game.avgTime} segundos</Td>
+                                <Td>{parseFloat(game.avgTime).toFixed(2)} segundos</Td>
                               </Tr>
                             ))}
                           </Tbody>
