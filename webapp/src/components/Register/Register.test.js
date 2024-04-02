@@ -7,6 +7,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 jest.mock("axios");
 
+const password = process.env.REGISTER_PASSWORD || "testpassword";
+
 describe("Register Component", () => {
   const mockSuccessResponse = { data: "Usuario registrado exitosamente" };
   const mockErrorResponse = { response: { data: { error: "Error al registrar usuario" } } };
@@ -58,7 +60,7 @@ describe("Register Component", () => {
     expect(screen.getByText("Usuario registrado exitosamente")).toBeInTheDocument();
     expect(axios.post).toHaveBeenCalledWith("http://localhost:8000/adduser", {
       username: "testUser",
-      password: process.env.REGISTER_PASSWORD,
+      password: password
     });
   });
 
@@ -77,7 +79,7 @@ describe("Register Component", () => {
     expect(screen.getByText("Error: Error al registrar usuario")).toBeInTheDocument();
     expect(axios.post).toHaveBeenCalledWith("http://localhost:8000/adduser", {
       username: "testUser",
-      password: process.env.REGISTER_PASSWORD,
+      password: password,
     });
   });
 });
