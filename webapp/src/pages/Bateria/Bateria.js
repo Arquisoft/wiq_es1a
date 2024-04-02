@@ -59,9 +59,6 @@ const JuegoPreguntas = () => {
         const tMedio=TIME/preguntasTotales;
         setTiempoMedio(tMedio);
       }
-      if (juegoTerminado && tiempoMedio !== 0) {
-        guardarPartida();
-      }
     }
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
@@ -69,6 +66,15 @@ const JuegoPreguntas = () => {
     return () => clearInterval(timer);
     // eslint-disable-next-line
   }, [tiempoRestante]);
+
+  useEffect(() => {
+    if (juegoTerminado && tiempoMedio!=0) {
+      guardarPartida();
+    }
+    // eslint-disable-next-line
+  }, [juegoTerminado, tiempoMedio]);
+
+  
 
   const guardarPartida = async () => {
     
