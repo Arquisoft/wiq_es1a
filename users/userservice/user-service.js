@@ -9,7 +9,20 @@ const app = express();
 const port = 8001;
 
 const cors = require('cors');
-app.use(cors());
+
+const corsOptions = {
+  origin: [
+    process.env.AUTH_SERVICE_URL || "http://localhost:8000",
+    process.env.USER_SERVICE_URL || "http://localhost:8001",
+    process.env.QUESTION_SERVICE_URL || "http://localhost:8002",
+    process.env.STATS_SERVICE_URL || "http://localhost:8003",
+    process.env.GATEWAY_SERVICE_URL || "http://localhost:8004",
+    process.env.MONGODB_URI || "mongodb://localhost:27017/userdb",
+    process.env.MONGODB_STATS_URI || "mongodb://localhost:27017/statsdb"
+  ],
+};
+
+app.use(cors(corsOptions));
 
 // Middleware to parse JSON in request body
 app.use(bodyParser.json());
