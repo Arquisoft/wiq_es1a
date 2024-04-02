@@ -74,7 +74,7 @@ const Perfil = () => {
                                 <Td>{game.correctAnswers}</Td>
                                 <Td>{game.incorrectAnswers}</Td>
                                 <Td>{game.points}</Td>
-                                <Td>{game.avgTime} segundos</Td>
+                                <Td>{parseFloat(game.avgTime).toFixed(2)} segundos</Td>
                               </Tr>
                             ))}
                           </Tbody>
