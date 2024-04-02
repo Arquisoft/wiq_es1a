@@ -40,6 +40,13 @@ function validateRequiredFields(req, requiredFields) {
     }
 }
 
+function checkInput(input) {
+  if (typeof input !== 'string') {
+    throw new Error('Input debe ser una cadena de texto');
+  }
+  return input.trim();
+};
+
 app.post('/adduser', async (req, res) => {
     try {
         // Check if required fields are present in the request body
@@ -61,7 +68,8 @@ app.post('/adduser', async (req, res) => {
 
 app.get('/userInfo', async (req, res) => {
       try {
-          const user = await User.findOne({username:req.query.user});
+          const username = checkInput(req.query.user);
+          const user = await User.findOne({username:username});
           res.json(user);
       } catch (error) {
           res.status(400).json({ error: error.message }); 
@@ -69,8 +77,8 @@ app.get('/userInfo', async (req, res) => {
 
 app.post("/saveGameList", async (req, res) => {
   try {
-    const username = req.body.username;
-    const gamemode = req.body.gameMode;
+    const username = checkInput(req.body.username);
+    const gamemode = checkInput(req.body.gameMode);
     const gameData = req.body.gameData;
 
       let user = await User.findOne({ username: username });
