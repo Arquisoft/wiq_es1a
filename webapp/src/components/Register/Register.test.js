@@ -58,7 +58,7 @@ describe("Register Component", () => {
     expect(screen.getByText("Usuario registrado exitosamente")).toBeInTheDocument();
     expect(axios.post).toHaveBeenCalledWith("http://localhost:8000/adduser", {
       username: "testUser",
-      password: "testPassword",
+      password: process.env.REGISTER_PASSWORD,
     });
   });
 
@@ -77,7 +77,7 @@ describe("Register Component", () => {
     expect(screen.getByText("Error: Error al registrar usuario")).toBeInTheDocument();
     expect(axios.post).toHaveBeenCalledWith("http://localhost:8000/adduser", {
       username: "testUser",
-      password: "testPassword",
+      password: process.env.REGISTER_PASSWORD,
     });
   });
 });
