@@ -28,15 +28,17 @@ app.get("/health", (req, res) => {
   res.json({ status: "OK" });
 });
 
+returnError = (res, error) => {
+  res.status(error.response.status).json({ error: error.response.data.error });
+}
+
 app.post("/login", async (req, res) => {
   try {
     // Forward the login request to the authentication service
     const authResponse = await axios.post(authServiceUrl + "/login", req.body);
     res.json(authResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -49,9 +51,7 @@ app.post("/adduser", async (req, res) => {
     );
     res.json(userResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -64,9 +64,7 @@ app.get("/userInfo", async (req, res) => {
     );
     res.json(userResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -79,9 +77,7 @@ app.post("/saveGameList", async (req, res) => {
     );
     res.json(gameResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -94,9 +90,7 @@ app.get("/questions", async (req, res) => {
     );
     res.json(questionResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -109,9 +103,7 @@ app.post("/questions", async (req, res) => {
     );
     res.json(questionResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -123,9 +115,7 @@ app.get("/stats", async (req, res) => {
     });
     res.json(statsResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -138,9 +128,7 @@ app.post("/saveGame", async (req, res) => {
     );
     res.json(gameResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -151,9 +139,7 @@ app.get("/ranking", async (req, res) => {
     });
     res.json(statsResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
