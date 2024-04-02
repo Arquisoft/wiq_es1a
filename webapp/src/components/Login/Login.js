@@ -13,8 +13,7 @@ import {
   AlertIcon,
   useColorMode,
   Switch,
-  Flex,
-  Spacer,
+  Flex
 } from "@chakra-ui/react";
 import Footer from "../Footer/Footer";
 

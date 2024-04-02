@@ -74,7 +74,7 @@ const JuegoPreguntas = () => {
   }, [tiempoRestante]);
 
   useEffect(() => {
-    if (tiempoRestante == 0) {
+    if (tiempoRestante === 0) {
       const newTTotal=tiempoTotal+(SECS_PER_QUESTION);
       setTiempoTotal(newTTotal);
       setPreguntaTerminada(true);
@@ -224,7 +224,7 @@ const JuegoPreguntas = () => {
               <p p={2}>
                 Tu puntuación: {puntuacion}/{preguntas.length}
               </p>
-              {preguntasFalladas == 0 ? (
+              {preguntasFalladas === 0 ? (
                 <Box>
                   <Image src="/jordi.png" alt="Jordi Hurtado" />
                   <Text>¡Has acertado todas! Eres la cuenta secundaria de Jordi Hurtado.</Text>
@@ -248,7 +248,7 @@ const JuegoPreguntas = () => {
                   <Button
                     key={index}
                     onClick={() => handleRespuestaSeleccionada(respuesta)}
-                    disabled={tiempoRestante == 0 || juegoTerminado}
+                    disabled={tiempoRestante === 0 || juegoTerminado}
                     style={estiloRespuesta(respuesta)}
                   >
                     {respuesta}
@@ -262,7 +262,7 @@ const JuegoPreguntas = () => {
                     const newTTotal=tiempoTotal+(SECS_PER_QUESTION-tiempoRestante);
                     setTiempoTotal(newTTotal);
                     setTiempoRestante(0)}}
-                  disabled={tiempoRestante == 0 || juegoTerminado}
+                  disabled={tiempoRestante === 0 || juegoTerminado}
                   colorScheme="teal"
                   m={2}
                 >

@@ -12,7 +12,6 @@ import {
   Link,
   useColorMode,
   Flex,
-  Spacer,
   Switch
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
