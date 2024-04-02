@@ -59,7 +59,7 @@ const JuegoPreguntas = () => {
         const tMedio=TIME/preguntasTotales;
         setTiempoMedio(tMedio);
       }
-      if (juegoTerminado && tiempoMedio!=0) {
+      if (juegoTerminado && tiempoMedio !== 0) {
         guardarPartida();
       }
     }

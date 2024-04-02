@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
@@ -7,7 +7,7 @@ import axios from "axios";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
-  const SECS_PER_QUESTION = useMemo(() => localStorage.getItem("clasicoTime"));
+  const SECS_PER_QUESTION = localStorage.getItem("clasicoTime");
   const { colorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
 
@@ -150,7 +150,7 @@ const JuegoPreguntas = () => {
     };
 
     useEffect(() => {
-      if (juegoTerminado && tiempoMedio!=0) {
+      if (juegoTerminado && tiempoMedio !== 0) {
         guardarPartida();
       }
       // eslint-disable-next-line

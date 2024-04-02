@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Table, Thead, Tbody, Tr, Th, Td, Link, Center, Heading } from "@chakra-ui/react";
+import { Flex, Table, Thead, Tbody, Tr, Th, Td, Link, Heading } from "@chakra-ui/react";
 import Nav from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
 
