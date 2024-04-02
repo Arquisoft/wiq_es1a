@@ -58,8 +58,6 @@ const JuegoPreguntas = () => {
         const preguntasTotales=preguntasCorrectas+preguntasFalladas;
         const tMedio=TIME/preguntasTotales;
         setTiempoMedio(tMedio);
-        console.log(tMedio)
-        console.log(juegoTerminado)
       }
     }
     const timer = setInterval(() => {

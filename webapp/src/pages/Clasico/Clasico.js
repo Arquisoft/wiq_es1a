@@ -139,11 +139,8 @@ const JuegoPreguntas = () => {
       setJuegoTerminado(true);
       if (preguntasCorrectas + preguntasFalladas > 0) {
         const preguntasTotales=preguntasCorrectas+preguntasFalladas;
-        console.log(preguntasCorrectas);
-        console.log(preguntasFalladas);
         const tMedio=tiempoTotal/preguntasTotales;
         setTiempoMedio(tMedio);
-        console.log(tMedio);
       }
     }
     
@@ -263,9 +260,7 @@ const JuegoPreguntas = () => {
                 <Button
                   onClick={() => {
                     const newTTotal=tiempoTotal+(SECS_PER_QUESTION-tiempoRestante);
-                    console.log(newTTotal);
                     setTiempoTotal(newTTotal);
-                    console.log(tiempoTotal);
                     setTiempoRestante(0)}}
                   disabled={tiempoRestante === 0 || juegoTerminado}
                   colorScheme="teal"
