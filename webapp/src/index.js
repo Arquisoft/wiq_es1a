@@ -1,17 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ChakraProvider } from "@chakra-ui/react";
+import './themes.js';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-var r = document.getElementById('root');
-r.setAttribute("data-theme", "light")
+var r = document.getElementById("root");
 const root = ReactDOM.createRoot(r);
 
+localStorage.setItem(
+  "selectedThemes",
+  JSON.stringify(["paises", "literatura", "cine", "arte", "programacion"])
+);
+localStorage.setItem("clasicoTime", 10);
+localStorage.setItem("clasicoPreguntas", 10);
+localStorage.setItem("bateriaTime", 180);
+
 root.render(
-  //<React.StrictMode>
+  <ChakraProvider>
     <App />
-  //</React.StrictMode>
+  </ChakraProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

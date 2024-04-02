@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
-import "./Clasico.css";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
+import { Box, Flex, Heading, Button, Grid, useColorMode, Text, Image, Spinner } from "@chakra-ui/react";
+import axios from "axios";
 
 const JuegoPreguntas = () => {
-  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
+  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
+  const SECS_PER_QUESTION = localStorage.getItem("clasicoTime");
+  const { colorMode } = useColorMode();
+  const isDarkTheme = colorMode === "dark";
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
   const [puntuacion, setPuntuacion] = useState(0);
   const [respuestaSeleccionada, setRespuestaSeleccionada] = useState(null);
-  const [tiempoRestante, setTiempoRestante] = useState(10);
+  const [tiempoRestante, setTiempoRestante] = useState(SECS_PER_QUESTION);
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [preguntaTerminada, setPreguntaTerminada] = useState(false);
   const [mostrarMenu, setMostrarMenu] = useState(false); // Estado para mostrar el menú al finalizar el juego
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState("");
+  const [progressPercent, setProgressPercent] = useState(100);
   const navigate = useNavigate();
 
   //Used for user stats
@@ -26,11 +31,20 @@ const JuegoPreguntas = () => {
   const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
-    fetch(URL + "/questions?tematica=all&n=10")
+    fetch(URL + "/questions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tematicas: localStorage.getItem("selectedThemes"),
+        n: localStorage.getItem("clasicoPreguntas"),
+      }),
+    })
       .then((response) => {
         if (!response.ok) {
           navigate("/home?error=1");
-          return;
+          throw new Error("Error en la solicitud");
         }
         return response.json();
       })
@@ -40,14 +54,29 @@ const JuegoPreguntas = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error al obtener las preguntas:", error);
         navigate("/home?error=1");
       });
-      // eslint-disable-next-line
-  },[]);
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    const roundedProgressPercent = ((tiempoRestante / SECS_PER_QUESTION) * 100).toFixed(2);
+    setProgressPercent(roundedProgressPercent);
+
+    const timer = setInterval(() => {
+      setTiempoRestante((prevTiempo) =>
+        prevTiempo <= 0 ? 0 : prevTiempo - 0.01
+      );
+    }, 10);
+
+    return () => clearInterval(timer);
+    // eslint-disable-next-line
+  }, [tiempoRestante]);
 
   useEffect(() => {
     if (tiempoRestante === 0) {
+      const newTTotal=tiempoTotal+(SECS_PER_QUESTION);
+      setTiempoTotal(newTTotal);
       setPreguntaTerminada(true);
       setTimeout(() => {
         setPreguntaTerminada(false);
@@ -83,62 +112,72 @@ const JuegoPreguntas = () => {
       }
     } else {
       if (respuesta === respuestaSeleccionada) {
-        return { backgroundColor: "var(--text)", color: "var(--background)" };
+        return isDarkTheme? { color: "#333333", backgroundColor: "#F0F0F0" } : { backgroundColor: "#333333", color: "#F0F0F0" };
       }
     }
     return {};
   };
 
-  const handleSiguientePregunta = async () => {
-    if (respuestaSeleccionada === preguntaActual.correcta) {
+  const handleSiguientePregunta = () => {
+    if (respuestaSeleccionada === preguntaActual.correcta) { 
+      const newCorrectQuestions=preguntasCorrectas+1;
       setPuntuacion(puntuacion + 1);
-      setPreguntasCorrectas(preguntasCorrectas + 1);
+      setPreguntasCorrectas(newCorrectQuestions);
     } else {
-      setPreguntasFalladas(preguntasFalladas + 1);
+      const newIncorrectQuestions=preguntasFalladas+1;
+      setPreguntasFalladas(newIncorrectQuestions);
     }
-
-    setTiempoTotal(tiempoTotal + 10 - tiempoRestante);
-
+    setTiempoTotal(tiempoTotal + tiempoRestante);
     setRespuestaSeleccionada(null);
     setTiempoRestante(10);
-    if (indicePregunta + 1 < preguntas.length) {
+    setProgressPercent(100);
+
+    if (indicePregunta+1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
     } else {
-      try {
-        if (preguntasCorrectas + preguntasFalladas > 0) {
-          setTiempoMedio(
-            tiempoTotal / (preguntasCorrectas + preguntasFalladas)
-          );
-        }
-
-        //Now we store the game in the user's DB
-        const username = localStorage.getItem("username");
-        const newGame = {
-          username: username,
-          correctAnswers: preguntasCorrectas,
-          incorrectAnswers: preguntasFalladas,
-          points: puntuacion,
-          avgTime: tiempoMedio,
-        };
-
-        const response = await fetch(URL + "/userSaveGame", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newGame),
-        });
-
-        if (!response.ok) {
-          throw new Error("Error al guardar el juego");
-        }
-      } catch (error) {
-        console.error("Error al guardar el juego:", error);
-        // Manejar el error, por ejemplo, mostrando un mensaje al usuario
-      } finally {
-        setJuegoTerminado(true);
+      setJuegoTerminado(true);
+      if (preguntasCorrectas + preguntasFalladas > 0) {
+        const preguntasTotales=preguntasCorrectas+preguntasFalladas;
+        const tMedio=tiempoTotal/preguntasTotales;
+        setTiempoMedio(tMedio);
       }
+    }
+    
+    };
+
+    useEffect(() => {
+      if (juegoTerminado && tiempoMedio !== 0) {
+        guardarPartida();
+      }
+      // eslint-disable-next-line
+    }, [juegoTerminado]);
+
+  const guardarPartida = async () => {
+    //Now we store the game in the stats DB
+    const username = localStorage.getItem("username");
+    const newGame = {
+      username: username,
+      gameMode: "clasico",
+      gameData: {
+        correctAnswers: preguntasCorrectas,
+        incorrectAnswers: preguntasFalladas,
+        points: puntuacion,
+        avgTime: tiempoMedio,
+      },
+    };
+
+    try {
+      const response = await axios.post(URL + "/saveGameList", newGame);
+      console.log("Solicitud exitosa:", response.data);
+    } catch (error) {
+      console.error("Error al guardar el juego en la lista de partidas:", error);
+    }
+    try {
+      const response = await axios.post(URL + "/saveGame", newGame);
+      console.log("Solicitud exitosa:", response.data);
+    } catch (error) {
+      console.error("Error al guardar el juego:", error);
     }
   };
 
@@ -160,7 +199,15 @@ const JuegoPreguntas = () => {
     return (
       <>
         <Nav />
-        <span class="loader"></span>
+        <Spinner
+          data-testid="spinner"
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='teal.500'
+          size='xl'
+          margin='auto'
+        />
         <Footer />
       </>
     );
@@ -169,38 +216,73 @@ const JuegoPreguntas = () => {
   return (
     <>
       <Nav />
-      {mostrarMenu ? (
-        <div className="menuContainer">
-          <h2>¡Juego terminado!</h2>
-          <p>
-            Tu puntuación: {puntuacion}/{preguntas.length}
-          </p>
-          <button onClick={handleRepetirJuego}>Repetir Juego</button>
-          <Link to="/home">Volver al Menú Principal</Link>
-        </div>
-      ) : (
-        <div className="questionContainer">
-          <h2>Pregunta {indicePregunta + 1}:</h2>
-          <p>{preguntaActual.pregunta}</p>
-          <div className="responsesContainer">
-            {preguntaActual.respuestas.map((respuesta, index) => (
-              <button
-                key={index}
-                onClick={() => handleRespuestaSeleccionada(respuesta)}
-                disabled={tiempoRestante === 0 || juegoTerminado}
-                style={estiloRespuesta(respuesta)}
-              >
-                {respuesta}
-              </button>
-            ))}
-          </div>
-          <div className="timer">Tiempo restante: {tiempoRestante}</div>
-          <div className="points">Puntuación: {puntuacion}</div>
-        </div>
-      )}
+      <Flex justify="center" align="center" h="70vh">
+        <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
+          {mostrarMenu ? (
+            <Box textAlign="center">
+              <Heading as="h2">¡Juego terminado!</Heading>
+              <p p={2}>
+                Tu puntuación: {puntuacion}/{preguntas.length}
+              </p>
+              {preguntasFalladas === 0 ? (
+                <Box>
+                  <Image src="/jordi.png" alt="Jordi Hurtado" />
+                  <Text>¡Has acertado todas! Eres la cuenta secundaria de Jordi Hurtado.</Text>
+                </Box>
+              ) : null}
+              <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
+                Repetir Juego
+              </Button>
+              <Link to="/home" style={{ marginLeft: "10px" }}>
+                Volver al Menú Principal
+              </Link>
+            </Box>
+          ) : (
+            <Box>
+              <Heading as="h2" mb={4}>
+                Pregunta {indicePregunta + 1}
+              </Heading>
+              <p>{preguntaActual.pregunta}</p>
+              <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
+                {preguntaActual.respuestas.map((respuesta, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => handleRespuestaSeleccionada(respuesta)}
+                    disabled={tiempoRestante === 0 || juegoTerminado}
+                    style={estiloRespuesta(respuesta)}
+                  >
+                    {respuesta}
+                  </Button>
+                ))}
+              </Grid>
+  
+              <Flex justify="center" mt={4}>
+                <Button
+                  onClick={() => {
+                    const newTTotal=tiempoTotal+(SECS_PER_QUESTION-tiempoRestante);
+                    setTiempoTotal(newTTotal);
+                    setTiempoRestante(0)}}
+                  disabled={tiempoRestante === 0 || juegoTerminado}
+                  colorScheme="teal"
+                  m={2}
+                >
+                  Responder
+                </Button>
+              </Flex>
+              <Box textAlign="center" mt={4}>
+                <p>Tiempo restante: {Math.floor(tiempoRestante)}</p>
+                <p>Puntuación: {puntuacion}</p>
+                <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
+                  <Box bg="teal.500" h="4px" width={`${progressPercent}%`}></Box>
+                </Box>
+              </Box>
+            </Box>
+          )}
+        </Box>
+      </Flex>
       <Footer />
     </>
-  );
+  );  
 };
 
 export default JuegoPreguntas;

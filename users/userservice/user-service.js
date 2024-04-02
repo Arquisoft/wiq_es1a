@@ -4,9 +4,6 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const User = require('./user-model');
-const StatsForUser = require("./stats-getter.js");
-
-const statsGetter= new StatsForUser();
 
 const app = express();
 const port = 8001;
@@ -49,48 +46,35 @@ app.post('/adduser', async (req, res) => {
         res.status(400).json({ error: error.message }); 
     }});
 
-    app.post("/userSaveGame", async (req, res) => {
+app.get('/userInfo', async (req, res) => {
       try {
-        const { username, correctAnswers, incorrectAnswers, points, avgTime } = req.body;
-    
-        // Encontrar al usuario en la base de datos
-        const user = await User.findOne({ username });
-    
-        if (!user) {
-          return res.status(404).json({ error: "Usuario no encontrado" });
-        }
-    
-        // Crear un nuevo juego
-        const newGame = {
-          correctAnswers,
-          incorrectAnswers,
-          points,
-          avgTime
-        };
-    
-        user.games.push(newGame);
-    
-        await user.save();
-    
-        res.json({ message: "Partida guardada exitosamente" });
+          const user = await User.findOne({username:req.query.user});
+          res.json(user);
       } catch (error) {
-        res.status(400).json({ error: "Error al guardar partida"});
-      }
-    });
-    
-    app.get("/getstats", async (req, res) => {
-      const user = await User.findOne({ username:req.query.user });
-    
+          res.status(400).json({ error: error.message }); 
+      }});
+
+app.post("/saveGameList", async (req, res) => {
+  try {
+    const username = req.body.username;
+    const gamemode = req.body.gameMode;
+    const gameData = req.body.gameData;
+
+      let user = await User.findOne({ username: username });
+
       if (!user) {
         return res.status(404).json({ error: "Usuario no encontrado" });
       }
-      try {
-        var data = await statsGetter.getStatsForUser(req.query.user);
-        res.json(data);
-      } catch (error) {
-        res.status(400).json({ error: "Error al obtener las estadísticas" });
-      }
-    });
+      const gameDataWithGamemode = { ...gameData, gamemode };
+      user.games.push(gameDataWithGamemode);
+
+      await user.save();
+
+      res.json({ message: "Partida guardada exitosamente" });
+  } catch (error) {
+    res.status(400).json({ error: "Error al guardar partida en la lista: " + error.message });
+  }
+});
 
 const server = app.listen(port, () => {
   console.log(`User Service listening at http://localhost:${port}`);

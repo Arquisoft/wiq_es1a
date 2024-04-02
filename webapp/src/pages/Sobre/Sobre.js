@@ -1,5 +1,5 @@
 import React from "react";
-import "./Sobre.css";
+import { Flex, Table, Thead, Tbody, Tr, Th, Td, Link, Heading } from "@chakra-ui/react";
 import Nav from '../../components/Nav/Nav.js';
 import Footer from '../../components/Footer/Footer.js';
 
@@ -7,35 +7,34 @@ const Sobre = () => {
   const designers = [
     { name: 'Martín Cancio Barrera', id: 'UO287561', github: 'https://github.com/CANCI0' },
     { name: 'Iyán Fernández Riol', id: 'UO288231', github: 'https://github.com/iyanfdezz' },
-    { name: 'Rodrigo García Iglesias', id: 'UO276396', github: 'https://github.com/Rodrox11' },
-    { name: 'Alfredo Jirout Cid', id: 'UO288443', github: 'https://github.com/UO288443' }
+    { name: 'Rodrigo García Iglesias', id: 'UO276396', github: 'https://github.com/Rodrox11' }
   ];
 
   return (
     <>
       <Nav />
-      <div className="sobre-container">
-        <h1>Equipo WIQ_es1a</h1>
-        <h2>Nuestro equipo de desarrollo</h2>
-        <table className="designers-table">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>UO</th>
-              <th>GitHub</th>
-            </tr>
-          </thead>
-          <tbody>
+      <Flex flexDirection="column" rowGap="1rem">
+        <Heading as="h1">Equipo WIQ_es1a</Heading>
+        <Heading as="h2" size="md">Nuestro equipo de desarrollo</Heading>
+        <Table className="designers-table" id="designers-table">
+          <Thead>
+            <Tr>
+              <Th>Nombre</Th>
+              <Th>UO</Th>
+              <Th>GitHub</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
             {designers.map((designer, index) => (
-              <tr key={index}>
-                <td>{designer.name}</td>
-                <td>{designer.id}</td>
-                <td><a href={designer.github} target="_blank" rel="noopener noreferrer">Mi GitHub</a></td>
-              </tr>
+              <Tr key={index}>
+                <Td>{designer.name}</Td>
+                <Td>{designer.id}</Td>
+                <Td><Link href={designer.github} isExternal>Mi GitHub</Link></Td>
+              </Tr>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </Tbody>
+        </Table>
+      </Flex>
       <Footer />
     </>
   );

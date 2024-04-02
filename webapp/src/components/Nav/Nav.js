@@ -1,50 +1,62 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "./Nav.css";
+import React from "react";
+import { Box, Button, Heading, Switch, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverHeader, PopoverBody, Text, Flex, useColorMode } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Nav = () => {
-  // Definimos el estado para controlar el tema actual
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const { colorMode, toggleColorMode } = useColorMode();
+  const isDarkTheme = colorMode === "dark";
+  const textColor = isDarkTheme ? "white" : "teal.500";
+  const bgColor = isDarkTheme ? 'gray.700' : 'gray.200';
   
-  // Función para alternar entre temas claro y oscuro
-  const toggleTheme = () => {
-    
-    const root = document.getElementById("root");
-    const currentTheme = root.getAttribute("data-theme");
-    const newTheme = currentTheme === "light" ? "dark" : "light";
-    root.setAttribute("data-theme", newTheme);
-    setIsDarkTheme((prev) => !prev);
+  const handleConfig = () => {
+    navigate("/config");
   };
 
-  const Logout = () => {
+  const logout = () => {
     localStorage.removeItem("token");
-    navigate("/")
+    navigate("/");
+  };
+
+  const handleNavigate = (path) => {
+    navigate(path);
   };
 
   return (
-    <nav>
-      <input
-        type="checkbox"
-        class="theme-toggle"
-        onChange={toggleTheme}
-        checked={isDarkTheme}
-        value="Texto dentro del input"
-      />
-      <h1 className="logo">WIQ!</h1>
-      <ul>
-        <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
-          <Link to="/sobre">Sobre nosotros</Link>
-        </li>
-        <li>
-          <Link to="/stats">Stats</Link>
-        </li>
-      </ul>
-      <button class="disconnect" onClick={() => Logout()}>Desconectarse</button>
-    </nav>
+    <Box as="nav" display="flex" alignItems="center" justifyContent="space-between" p={4} bg={bgColor} width="100%">
+      <Box textAlign="center" ml={3} width="25%" justifyContent="start">
+        <Heading as="h1" size="xl" color={textColor} textAlign="start">WIQ</Heading>
+      </Box>
+      <Flex gap={3}>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/home")}>Home</Button>
+        <Popover>
+          <PopoverTrigger>
+            <Button p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} variant="link" color={textColor}>
+              Modos de Juego
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader >Modos de Juego</PopoverHeader>
+            <PopoverBody>
+              <Text cursor="pointer" onClick={() => handleNavigate("/home/clasico")} color={textColor}>Clásico</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/home/bateria")} color={textColor}>Batería de sabios</Text>
+              {/* Agrega más modos de juego aquí */}
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
+      </Flex>
+      <Flex width="25%"  className="rightItems" justifyContent="end">
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/sobre")}>Sobre nosotros</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleConfig()}>Opciones</Button>
+        <Button variant="link" color={textColor} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => logout()}>Desconectarse</Button>
+        <Switch isChecked={isDarkTheme} onChange={toggleColorMode} ml={4} alignSelf="center"/>
+      </Flex>
+    </Box>
   );
 };
 

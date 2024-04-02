@@ -1,0 +1,367 @@
+openapi: 3.0.0
+info:
+  title: Gateway Service API
+  version: 1.0.0
+  description: API gateway for managing authentication, user information, game statistics, and questions.
+
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+
+paths:
+  /health:
+    get:
+      summary: Health Check
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: OK
+
+  /login:
+    post:
+      summary: Authenticate User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /adduser:
+    post:
+      summary: Add User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: User added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /userInfo:
+    get:
+      summary: Get User Information
+      parameters:
+        - in: query
+          name: userId
+          schema:
+            type: string
+          description: ID of the user to retrieve information for
+      responses:
+        '200':
+          description: User information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserInfo'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /saveGameList:
+    post:
+      summary: Save Game List
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameList'
+      responses:
+        '200':
+          description: Game list saved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /questions:
+    get:
+      summary: Get Questions
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Category of questions to retrieve
+      responses:
+        '200':
+          description: Questions retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QuestionList'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      summary: Add Question
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Question'
+      responses:
+        '200':
+          description: Question added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /stats:
+    get:
+      summary: Get Statistics
+      parameters:
+        - in: query
+          name: userId
+          schema:
+            type: string
+          description: ID of the user to retrieve statistics for
+      responses:
+        '200':
+          description: Statistics retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stats'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /saveGame:
+    post:
+      summary: Save Game
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Game'
+      responses:
+        '200':
+          description: Game saved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessMessage'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /ranking:
+    get:
+      summary: Get Ranking
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Category to filter the ranking
+      responses:
+        '200':
+          description: Ranking retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RankingList'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    AuthResponse:
+      type: object
+      properties:
+        token:
+          type: string
+
+    User:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        games:
+          $ref: '#/components/schemas/GameList'
+
+    UserInfo:
+      type: object
+      properties:
+        username:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        games:
+          $ref: '#/components/schemas/GameList'
+
+    GameList:
+      type: object
+      properties:
+        games:
+          type: array
+          items:
+            type: object
+
+    QuestionList:
+      type: array
+      items:
+        type: object
+
+    Question:
+      type: object
+      properties:
+
+    Stats:
+      type: object
+      properties:
+
+    Game:
+      type: object
+      properties:
+
+    SuccessMessage:
+      type: object
+      properties:
+        message:
+          type: string
+
+    RankingList:
+      type: array
+      items:
+        type: object
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string

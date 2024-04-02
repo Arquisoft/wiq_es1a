@@ -1,50 +1,107 @@
-const User = require('../../users/userservice/user-model.js');
+const Stats = require('./stats-model.js');
 
 class StatsForUser {
 
-    async getStatsForUser(username){
+    async getStatsForUser(username,gamemode){
+        var statsJSON=null;
+            if(gamemode=="clasico" || gamemode=="bateria"){
+                statsJSON = await this.getStats(username,gamemode);
+            }
+        return statsJSON;
+            
+    }
+
+    async getStats(username,gamemode){
         try {
-            const user = await User.findOne({ username: username });
-
-            if (!user) {
-                throw new Error('Usuario no encontrado');
+            var stats = await Stats.findOne({ username:username,gamemode:gamemode });
+    
+            if (stats) {
+                return {
+                    username: stats.username,
+                    gamemode: stats.gamemode,
+                    nGamesPlayed: stats.nGamesPlayed,
+                    avgPoints: stats.avgPoints,
+                    totalPoints: stats.totalPoints,
+                    totalCorrectQuestions: stats.totalCorrectQuestions,
+                    totalIncorrectQuestions: stats.totalIncorrectQuestions,
+                    ratioCorrect: stats.ratioCorrect,
+                    avgTime: stats.avgTime
+                };
+            } else {
+                return null; // Si no se encuentran estadísticas para el usuario
             }
-
-            const partidas = user.games;
-
-            var nGamesPlayed = partidas.length;
-            var totalPoints = 0;
-            var totalCorrectQuestions = 0;
-            var totalIncorrectQuestions = 0;
-
-            for (const partida of partidas){
-                totalPoints += partida.points;
-                totalCorrectQuestions += partida.correctAnswers;
-                totalIncorrectQuestions += partida.incorrectAnswers;
-            }
-
-            const avgPoints = nGamesPlayed > 0 ?
-             totalPoints / nGamesPlayed : 0;
-
-            const ratioCorrectToIncorrect = totalIncorrectQuestions !== 0 ?
-             totalCorrectQuestions / totalIncorrectQuestions : totalCorrectQuestions;
-
-            const statsJSON = {
-                username: username,
-                nGamesPlayed: nGamesPlayed,
-                avgPoints: avgPoints,
-                totalPoints: totalPoints,
-                totalCorrectQuestions: totalCorrectQuestions,
-                totalIncorrectQuestions: totalIncorrectQuestions,
-                ratioCorrectToIncorrect: ratioCorrectToIncorrect
-            };
-
-            return statsJSON;
         } catch (error) {
-            console.error('Error al obtener las estadísticas del usuario:', error);
+            console.error('Error al obtener estadísticas:', error);
             throw error;
         }
     }
+
+    async calculateStats(username,gamemode,gameData,stats){
+
+        
+        const totalGamesPlayed = stats.nGamesPlayed + 1;
+        const newAvgPoints = (stats.avgPoints * stats.nGamesPlayed + gameData.points) / totalGamesPlayed;
+        const newTotalPoints = stats.totalPoints + gameData.points;
+        const newTotalCorrectQuestions = stats.totalCorrectQuestions + gameData.correctAnswers;
+        const newTotalIncorrectQuestions = stats.totalIncorrectQuestions + gameData.incorrectAnswers;
+        const newRatioCorrect = (newTotalCorrectQuestions / (newTotalIncorrectQuestions+newTotalCorrectQuestions))*100;
+        const newAvgTime = (stats.avgTime * stats.nGamesPlayed + gameData.avgTime) / totalGamesPlayed;
+
+        return {
+            username:username,
+            gamemode: gamemode,
+            nGamesPlayed: totalGamesPlayed,
+            avgPoints: newAvgPoints,
+            totalPoints: newTotalPoints,
+            totalCorrectQuestions: newTotalCorrectQuestions,
+            totalIncorrectQuestions: newTotalIncorrectQuestions,
+            ratioCorrect: newRatioCorrect,
+            avgTime: newAvgTime
+        };
+    };
+
+    async getRanking(gamemode, filterBy) {
+        try {
+            let sortBy, displayField;
+    
+            switch (filterBy) {
+                case "avgPoints":
+                    sortBy = { avgPoints: -1 };
+                    displayField = "avgPoints";
+                    break;
+                case "totalPoints":
+                    sortBy = { totalPoints: -1 };
+                    displayField = "totalPoints";
+                    break;
+                case "ratioCorrect":
+                    sortBy = { ratioCorrect: -1 };
+                    displayField = "ratioCorrect";
+                    break;
+                    case "avgTime":
+                    sortBy = { avgTime: 1 };
+                    displayField = "avgTime";
+                    break;
+                default:
+                    return null;
+            }
+    
+            const stats = await Stats.find({ gamemode: gamemode }).sort(sortBy).limit(10);
+    
+            if (stats && stats.length > 0) {
+                return stats.map(stat => ({
+                    username: stat.username,
+                    [displayField]: stat[displayField]
+                }));
+            } else {
+                return null;
+            }
+        } catch (error) {
+            console.error('Error al obtener estadísticas:', error);
+            throw error;
+        }
+    }
+    
+    
 }
 
 module.exports = StatsForUser;

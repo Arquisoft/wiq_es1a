@@ -39,6 +39,12 @@ describe('Gateway Service', () => {
           }
         ],
       });
+    } else if (url.endsWith('/stats')) {
+      return Promise.resolve({ data: { stats: 'mockedStats' } });
+    } else if (url.endsWith('/userInfo')) {
+      return Promise.resolve({ data: { userInfo: 'mockedUserInfo' } });
+    } else if (url.endsWith('/ranking')) {
+      return Promise.resolve({ data: { ranking: 'mockedRanking' } });
     }
   });
 
@@ -88,5 +94,31 @@ describe('Gateway Service', () => {
         correcta: "Helsinki"
       }
     ]);
+  });
+
+  // Test /userInfo endpoint
+  it('should forward userInfo request to user service', async () => {
+    const response = await request(app)
+      .get('/userInfo')
+      .query({ user: 'testuser' });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ userInfo: 'mockedUserInfo' });
+  });
+
+  // Test /stats endpoint
+  it('should forward stats request to stats service', async () => {
+    const response = await request(app).get("/stats").query({ user: 'testuser', gamemode: 'classic' });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ stats: 'mockedStats' });
+  });
+
+  // Test /ranking endpoint
+  it('should forward ranking request to stats service', async () => {
+    const response = await request(app).get("/ranking").query({ gamemode: 'classic', filterBy: 'all' });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ ranking: 'mockedRanking' });
   });
 });

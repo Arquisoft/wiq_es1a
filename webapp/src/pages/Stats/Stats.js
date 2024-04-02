@@ -1,42 +1,80 @@
 import React, { useState, useEffect } from "react";
+import {
+  Input,
+  Button,
+  Heading,
+  Table,
+  Tbody,
+  Tr,
+  Td,
+  Box,
+  Flex
+} from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
-import "./Stats.css";
 
 const Stats = () => {
   const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
 
-  const [username, setUsername] = useState(localStorage.username);
+  const [username, setUsername] = useState(localStorage.username || "error");
   const [stats, setStats] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [gamemode, setGamemode] = useState("clasico");
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [fetched, setFetched] = useState(false);
+
+  const fetchStats = () => {
+    setIsLoading(true);
+    fetch(gatewayUrl + `/stats?user=${username}&gamemode=${gamemode}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setStats(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error al obtener las estadísticas:", error);
+        setError(
+          error.message || "Ha ocurrido un error al obtener las estadísticas"
+        );
+        setIsLoading(false);
+      });
+  };
 
   useEffect(() => {
-    const delayDebounceFn = setTimeout(() => {
-      fetch(gatewayUrl + `/getstats?user=${username}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setStats(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error al obtener las preguntas:", error);
-          setError(error);
-          setIsLoading(false);
-        });
-    }, 2000);
-    return () => clearTimeout(delayDebounceFn);
+    if (!fetched) {
+      fetchStats();
+      setFetched(true);
+    }
     // eslint-disable-next-line
-  }, [username]);
+  }, [username, gamemode]);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
   };
 
+  const handleGamemodeChange = (mode) => {
+    setGamemode(mode);
+    // Llama a fetchStats() para actualizar las estadísticas cuando se cambia el modo de juego
+    fetchStats();
+  };
+
+  const handleSearch = () => {
+    fetchStats();
+  };
+
+  const getModeName = () => {
+    if (gamemode === "clasico") {
+      return "Clásico";
+    } else if (gamemode === "bateria") {
+      return "Batería de sabios";
+    }
+    return gamemode;
+  };
+
   if (isLoading) {
     return (
       <div>
-        <h2> Cargando ... </h2>
+        <Heading as="h2"> Cargando ... </Heading>
         <p>Se está consultando su búsqueda, espere unos instantes.</p>
       </div>
     );
@@ -46,21 +84,22 @@ const Stats = () => {
     return (
       <>
         <Nav />
-        <div>
-          <label htmlFor="usernameInput">Nombre de Usuario: </label>
-          <input
+        <Box>
+          <label htmlFor="usernameInput">Nombre de usuario: </label>
+          <Input
             type="text"
             id="usernameInput"
             value={username}
             onChange={handleUsernameChange}
             data-testid="usernameInput"
           />
-          <h2>Error: {error}</h2>
-          <p>
+          <Button onClick={handleSearch}>Buscar</Button>
+          <Heading as="h2">Error: {error}</Heading>
+          <p marginTop="1rem">
             Por favor compruebe si los valores del formulario son correctos e
             inténtelo de nuevo
           </p>
-        </div>
+        </Box>
         <Footer />
       </>
     );
@@ -68,64 +107,96 @@ const Stats = () => {
 
   return (
     <>
-    <Nav />
-    <div>
-      <h2>Estadísticas de Usuario</h2>
-      <label htmlFor="usernameInput"> <strong>Nombre de Usuario: </strong></label>
-      <input
-        type="text"
-        id="usernameInput"
-        value={username}
-        onChange={handleUsernameChange}
-        data-testid="usernameInput"
-      />
-      {stats === null && !isLoading && (
+      <Nav />
+      <Box>
+        <label htmlFor="usernameInput">
+          {" "}
+          <strong>Nombre de usuario: </strong>
+        </label>
+        <Flex columnGap="1rem" justifyContent="space-between">
+          <Input
+            width="85%"
+            type="text"
+            id="usernameInput"
+            value={username}
+            onChange={handleUsernameChange}
+            data-testid="usernameInput"
+          />
+          <Button onClick={handleSearch}>Buscar</Button>
+        </Flex>
+        <Flex rowGap="0.5rem" justifyContent="center" m="0.5rem 0" flexDirection="column">
+          <Button
+            className={gamemode === "clasico" ? "active" : ""}
+            onClick={() => handleGamemodeChange("clasico")}
+          >
+            Clásico
+          </Button>
+          <Button
+            className={gamemode === "bateria" ? "active" : ""}
+            onClick={() => handleGamemodeChange("bateria")}
+          >
+            Batería de sabios
+          </Button>
+        </Flex>
+        {stats === null && !isLoading && (
+          <p mt="10rem">El usuario no ha jugado ninguna partida.</p>
+        )}
+        {stats && (
           <div>
-            <p>El usuario no ha jugado ninguna partida.</p>
+            <Heading as="h2">
+              Estadísticas de {stats.username} - modo {getModeName()}
+            </Heading>
+            <Table>
+              <Tbody>
+                <Tr>
+                  <Td>
+                    <strong>Partidas jugadas</strong>
+                  </Td>
+                  <Td>{stats.nGamesPlayed}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Puntos por partida</strong>
+                  </Td>
+                  <Td>{stats.avgPoints.toFixed(2)}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Puntos totales</strong>
+                  </Td>
+                  <Td>{stats.totalPoints}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Preguntas correctas totales</strong>
+                  </Td>
+                  <Td>{stats.totalCorrectQuestions}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Preguntas incorrectas totales</strong>
+                  </Td>
+                  <Td>{stats.totalIncorrectQuestions}</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Porcentaje de aciertos</strong>
+                  </Td>
+                  <Td>{stats.ratioCorrect.toFixed(2)}%</Td>
+                </Tr>
+                <Tr>
+                  <Td>
+                    <strong>Tiempo por pregunta (s):</strong>
+                  </Td>
+                  <Td>{stats.avgTime.toFixed(2)}</Td>
+                </Tr>
+              </Tbody>
+            </Table>
           </div>
         )}
-      {stats && (
-        <div>
-          <table>
-            <tr>
-              <td><strong>Usuario:</strong></td>
-              <td>{stats.username}</td>
-            </tr>
-            <tr>
-              <td><strong>Juegos Jugados:</strong></td>
-              <td>{stats.nGamesPlayed}</td>
-            </tr>
-            <tr>
-              <td><strong>Promedio de Puntos:</strong></td>
-              <td>{stats.avgPoints.toFixed(2)}</td>
-             </tr>
-            <tr>
-              <td><strong>Puntos Totales:</strong></td>
-              <td>{stats.totalPoints}</td>
-            </tr>
-            <tr>
-              <td><strong>Preguntas Correctas Totales:</strong></td>
-              <td>{stats.totalCorrectQuestions}</td>
-            </tr>
-            <tr>
-              <td><strong>Preguntas Incorrectas Totales:</strong></td>
-              <td>{stats.totalIncorrectQuestions}</td>
-            </tr>
-            <tr>
-              <td><strong>Ratio Correctas/Incorrectas:</strong></td>
-              <td>{stats.ratioCorrectToIncorrect.toFixed(2)}</td>
-            </tr>
-            <tr>
-              <td><strong>Tiempo por pregunta (s):</strong></td>
-              <td>{stats.avgTime.toFixed(2)}</td>
-            </tr>
-          </table>
-        </div>
-      )}
-    </div>
-    <Footer />
+      </Box>
+      <Footer />
     </>
-    
   );
 };
 

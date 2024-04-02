@@ -28,14 +28,12 @@ services:
     build: ./statsservice
     depends_on:
       - mongodb
-      - userservice
     ports:
       - "8004:8004"
     networks:
       - mynetwork
     environment:
-      MONGODB_URI: mongodb://mongodb:27017/userdb
-      USER_SERVICE_URL: http://userservice:8001
+      MONGODB_STATS_URI: mongodb://mongodb:27017/statsdb
 
   authservice:
     container_name: authservice-${teamname:-defaultASW}

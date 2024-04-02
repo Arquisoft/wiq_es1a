@@ -12,6 +12,7 @@ async function startServer() {
     const mongoUri = mongoserver.getUri();
     process.env.MONGODB_URI = mongoUri;
     userservice = await require("../../users/userservice/user-service");
+    statsservice = await require("../../stats/stats-service");
     authservice = await require("../../users/authservice/auth-service");
     gatewayservice = await require("../../gatewayservice/gateway-service");
   }

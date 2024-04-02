@@ -27,4 +27,31 @@ describe('User Service', () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('username', 'testuser');
   });
+
+  it('should return user info on GET /userInfo', async () => {
+
+    // Realizar la solicitud GET /userInfo
+    const response = await request(app).get('/userInfo').query({ user: 'testuser' });
+
+    // Verificar la respuesta
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty('username', 'testuser');
+  });
+
+  it('should save game data for the user on POST /saveGameList', async () => {
+
+    // Datos de la partida a guardar
+    const gameData = {
+      username: 'testuser',
+      gameMode: 'classic',
+      gameData: { points: 100, correctAnswers: 8, incorrectAnswers: 2, avgTime: 30 }
+    };
+
+    // Realizar la solicitud POST /saveGameList
+    const response = await request(app).post('/saveGameList').send(gameData);
+
+    // Verificar la respuesta
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({ message: 'Partida guardada exitosamente' });
+  });
 });

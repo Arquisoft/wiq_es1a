@@ -1,5 +1,4 @@
 import React from "react";
-import "./WrongRoute.css";
 import { Link } from 'react-router-dom';
 
 const WrongRoute = () => {
@@ -19,7 +18,7 @@ const WrongRoute = () => {
         <p>
           La página que estabas buscando no está disponible
         </p>
-        <Link to="/login">Página principal</Link>
+        <Link to="/home">Página principal</Link>
       </div>
     </div>
   );

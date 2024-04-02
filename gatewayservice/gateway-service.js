@@ -2,7 +2,9 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const promBundle = require("express-prom-bundle");
-
+const YAML = require('yaml');
+const fs = require("fs");
+const swaggerUi = require('swagger-ui-express'); 
 const app = express();
 const port = 8000;
 
@@ -10,7 +12,7 @@ const authServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:8002";
 const userServiceUrl = process.env.USER_SERVICE_URL || "http://localhost:8001";
 const questionServiceUrl =
   process.env.QUESTION_SERVICE_URL || "http://localhost:8003";
-const statsServiceUrl = process.env.AUTH_SERVICE_URL || "http://localhost:8004";
+const statsServiceUrl = process.env.STATS_SERVICE_URL || "http://localhost:8004";
 
 app.use(cors());
 app.use(express.json());
@@ -53,12 +55,57 @@ app.post("/adduser", async (req, res) => {
   }
 });
 
+app.get("/userInfo", async (req, res) => {
+  try {
+    // Forward the question request to the user service
+    const userResponse = await axios.get(
+      userServiceUrl + "/userInfo",
+      { params: req.query }
+    );
+    res.json(userResponse.data);
+  } catch (error) {
+    res
+      .status(error.response.status)
+      .json({ error: error.response.data.error });
+  }
+});
+
+app.post("/saveGameList", async (req, res) => {
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/saveGameList",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    res
+      .status(error.response.status)
+      .json({ error: error.response.data.error });
+  }
+});
+
 app.get("/questions", async (req, res) => {
   try {
     // Forward the question request to the question service
     const questionResponse = await axios.get(
       questionServiceUrl + "/questions",
       { params: req.query }
+    );
+    res.json(questionResponse.data);
+  } catch (error) {
+    res
+      .status(error.response.status)
+      .json({ error: error.response.data.error });
+  }
+});
+
+app.post("/questions", async (req, res) => {
+  try {
+    // Forward the question request to the question service
+    const questionResponse = await axios.post(
+      questionServiceUrl + "/questions",
+      { body: req.body }
     );
     res.json(questionResponse.data);
   } catch (error) {
@@ -97,10 +144,9 @@ app.post("/saveGame", async (req, res) => {
   }
 });
 
-app.get("/getstats", async (req, res) => {
+app.get("/ranking", async (req, res) => {
   try {
-    // Forward the stats request to the stats service
-    const statsResponse = await axios.get(userServiceUrl + "/getstats", {
+    const statsResponse = await axios.get(statsServiceUrl + "/ranking", {
       params: req.query,
     });
     res.json(statsResponse.data);
@@ -111,20 +157,20 @@ app.get("/getstats", async (req, res) => {
   }
 });
 
-app.post("/userSaveGame", async (req, res) => {
-  try {
-    // Forward the save game request to the stats service
-    const gameResponse = await axios.post(
-      userServiceUrl + "/userSaveGame",
-      req.body
-    );
-    res.json(gameResponse.data);
-  } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
-  }
-});
+openapiPath='./openapi.yaml'
+if (fs.existsSync(openapiPath)) {
+  const file = fs.readFileSync(openapiPath, 'utf8');
+
+  // Parse the YAML content into a JavaScript object representing the Swagger document
+  const swaggerDocument = YAML.parse(file);
+
+  // Serve the Swagger UI documentation at the '/api-doc' endpoint
+  // This middleware serves the Swagger UI files and sets up the Swagger UI page
+  // It takes the parsed Swagger document as input
+  app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+} else {
+  console.log("Not configuring OpenAPI. Configuration file not present.")
+}
 
 // Start the gateway service
 const server = app.listen(port, () => {
