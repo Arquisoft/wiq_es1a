@@ -45,6 +45,7 @@ const Stats = () => {
       fetchStats();
       setFetched(true);
     }
+    // eslint-disable-next-line
   }, [username, gamemode]);
 
   const handleUsernameChange = (event) => {

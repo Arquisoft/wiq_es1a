@@ -67,6 +67,7 @@ const JuegoPreguntas = () => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [tiempoRestante]);
 
   const guardarPartida = async () => {
@@ -105,6 +106,7 @@ const JuegoPreguntas = () => {
     }, 10); 
   
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [tiempoRestante]);
 
   const handleSiguientePregunta = async (respuesta) => {

@@ -23,6 +23,7 @@ const Perfil = () => {
         setError(error.message || 'Ha ocurrido un error al obtener el perfil');
         setLoading(false);
       });
+      // eslint-disable-next-line
   }, []);
 
   return (

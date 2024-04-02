@@ -154,6 +154,7 @@ const JuegoPreguntas = () => {
       if (juegoTerminado && tiempoMedio!=0) {
         guardarPartida();
       }
+      // eslint-disable-next-line
     }, [juegoTerminado]);
 
   const guardarPartida = async () => {
