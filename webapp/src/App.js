@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./pages/Home/Home.js";
 import Clasico from "./pages/Clasico/Clasico.js";
 import Bateria from "./pages/Bateria/Bateria.js";
@@ -13,6 +13,7 @@ import Config from "./pages/Config/Config.js";
 import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register.js";
 import Perfil from "./pages/Perfil/Perfil.js";
+
 
 function App() {
   useEffect(() => {
