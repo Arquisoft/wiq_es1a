@@ -15,6 +15,9 @@ import Register from "./components/Register/Register.js";
 import Perfil from "./pages/Perfil/Perfil.js";
 
 function App() {
+  useEffect(() => {
+    document.title = "WIQ!";
+  }, []);
   return (
       <BrowserRouter>
         <Routes>
