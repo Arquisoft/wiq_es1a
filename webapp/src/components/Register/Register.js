@@ -15,6 +15,7 @@ import {
   Spacer,
   Switch
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
 
 const apiEndpoint =
@@ -29,6 +30,7 @@ const AddUser = () => {
   const [passwordR, setPasswordR] = useState("");
   const [error, setError] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const navigate = useNavigate();
 
   const handleRegister = () => {
     if (password !== passwordR) {
@@ -37,7 +39,13 @@ const AddUser = () => {
     }
     axios
       .post(`${apiEndpoint}/adduser`, { username, password })
-      .then(() => setOpenSnackbar(true))
+      .then((response) => {
+        const { token } = response.data;
+        setOpenSnackbar(true);
+        localStorage.setItem("token", token);
+        localStorage.setItem("username", username);
+        navigate("/home");
+      })
       .catch((err) => setError(err.response.data.error));
   };
 
