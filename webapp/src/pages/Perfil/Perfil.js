@@ -4,7 +4,7 @@ import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
 const Perfil = () => {
-  const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
+  const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
   const username = localStorage.username || 'error';
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
