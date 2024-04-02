@@ -30,7 +30,7 @@ const JuegoPreguntas = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes"), n: 9000 }),
+      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes") || "paises", n: 9000 }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -56,10 +56,12 @@ const JuegoPreguntas = () => {
       setJuegoTerminado(true);
       if(preguntasCorrectas+preguntasFalladas>0){
         const preguntasTotales=preguntasCorrectas+preguntasFalladas;
-        const tMedio=180/preguntasTotales;
+        const tMedio=TIME/preguntasTotales;
         setTiempoMedio(tMedio);
       }
-      guardarPartida();
+      if (juegoTerminado && tiempoMedio!=0) {
+        guardarPartida();
+      }
     }
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
@@ -134,6 +136,7 @@ const JuegoPreguntas = () => {
       <>
         <Nav />
         <Spinner
+          data-testid="spinner"
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'

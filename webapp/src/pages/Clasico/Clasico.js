@@ -76,6 +76,8 @@ const JuegoPreguntas = () => {
 
   useEffect(() => {
     if (tiempoRestante === 0) {
+      const newTTotal=tiempoTotal+(SECS_PER_QUESTION);
+      setTiempoTotal(newTTotal);
       setPreguntaTerminada(true);
       setTimeout(() => {
         setPreguntaTerminada(false);
@@ -122,11 +124,9 @@ const JuegoPreguntas = () => {
       const newCorrectQuestions=preguntasCorrectas+1;
       setPuntuacion(puntuacion + 1);
       setPreguntasCorrectas(newCorrectQuestions);
-      console.log("bien")
     } else {
       const newIncorrectQuestions=preguntasFalladas+1;
       setPreguntasFalladas(newIncorrectQuestions);
-      console.log("mal")
     }
     setTiempoTotal(tiempoTotal + tiempoRestante);
     setRespuestaSeleccionada(null);
@@ -144,14 +144,14 @@ const JuegoPreguntas = () => {
         console.log(preguntasFalladas);
         const tMedio=tiempoTotal/preguntasTotales;
         setTiempoMedio(tMedio);
-        
+        console.log(tMedio);
       }
     }
     
     };
 
     useEffect(() => {
-      if (juegoTerminado) {
+      if (juegoTerminado && tiempoMedio!=0) {
         guardarPartida();
       }
     }, [juegoTerminado]);
@@ -253,7 +253,12 @@ const JuegoPreguntas = () => {
   
               <Flex justify="center" mt={4}>
                 <Button
-                  onClick={() => setTiempoRestante(0)}
+                  onClick={() => {
+                    const newTTotal=tiempoTotal+(SECS_PER_QUESTION-tiempoRestante);
+                    console.log(newTTotal);
+                    setTiempoTotal(newTTotal);
+                    console.log(tiempoTotal);
+                    setTiempoRestante(0)}}
                   disabled={tiempoRestante === 0 || juegoTerminado}
                   colorScheme="teal"
                   m={2}

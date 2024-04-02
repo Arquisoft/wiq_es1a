@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -11,26 +11,39 @@ import {
   NumberInputField,
   NumberInputStepper,
   NumberIncrementStepper,
-  NumberDecrementStepper
+  NumberDecrementStepper,
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
+import { useNavigate } from "react-router-dom";
 
 const Config = () => {
+  useEffect(() => {
+    // Obtener el estado de los checkboxes desde el localStorage
+    const selectedThemes = JSON.parse(localStorage.getItem("selectedThemes")) || [];
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach((checkbox) => {
+      // Verificar si el checkbox debe estar marcado según el localStorage
+      if (selectedThemes.includes(checkbox.id)) {
+        checkbox.click();
+      }
+    });
+  }, []);
+  const navigate = useNavigate();
+
   const [clasicoTime, setClasicoTime] = useState(
-    localStorage.getItem("clasicoTime")
+    localStorage.getItem("clasicoTime") || 10
   );
   const [clasicoPreguntas, setClasicoPreguntas] = useState(
-    localStorage.getItem("clasicoPreguntas")
+    localStorage.getItem("clasicoPreguntas") || 10
   );
   const [bateriaTime, setBateriaTime] = useState(
-    localStorage.getItem("bateriaTime")
+    localStorage.getItem("bateriaTime") || 180
   );
 
   const handleConfig = () => {
-    const checkboxes = document.querySelectorAll(
-      '.topicCheckboxes input[type="checkbox"]'
-    );
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const selectedThemes = [];
 
     checkboxes.forEach((checkbox) => {
@@ -48,6 +61,7 @@ const Config = () => {
       localStorage.setItem("bateriaTime", bateriaTime);
 
       alert("Cambios realizados satisfactoriamente");
+      navigate("/home");
     }
   };
 
@@ -122,7 +136,7 @@ const Config = () => {
               Número de preguntas (Clásico)
             </FormLabel>
             <NumberInput
-              id="clasico"
+              id="clasicoPreguntas"
               value={clasicoPreguntas}
               type="number"
               min={1}
