@@ -134,6 +134,7 @@ const CalculadoraHumana = () => {
               </Heading>
               <Input
                 type="number"
+                title="number"
                 value={valSubmit}
                 onChange={(e) => setValSubmit(e.target.value)}
                 onKeyDown={handleKeyDown}
