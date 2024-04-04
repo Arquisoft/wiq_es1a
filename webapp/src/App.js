@@ -13,6 +13,7 @@ import Config from "./pages/Config/Config.js";
 import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register.js";
 import Perfil from "./pages/Perfil/Perfil.js";
+import UsersPage from "./pages/Social/UsersPage.js";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/home/bateria" element={<Bateria />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/ranking" element={<Ranking />} />
+          <Route path="/social" element={<UsersPage />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/config" element={<Config />} />
         </Route>

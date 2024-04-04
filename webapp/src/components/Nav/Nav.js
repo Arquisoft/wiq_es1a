@@ -45,6 +45,7 @@ const Nav = () => {
             </PopoverBody>
           </PopoverContent>
         </Popover>
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/social")}>Social</Button>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
