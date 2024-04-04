@@ -90,10 +90,13 @@ const CalculadoraHumana = () => {
     let num1 = Math.floor(Math.random() * 10 + 1);
     let operation = `${valSubmit} ${operator} ${num1}`;
     if (operator === "/") {
+      if(valSubmit === 0){
+        return `${valSubmit} ${operator} ${1}`;
+      }
       let numCandidates = findDivisors(valSubmit);
       let num2 =
         numCandidates[Math.floor(Math.random() * numCandidates.length)];
-      operation = `${valSubmit} ${operator} ${num2}`;
+      return `${valSubmit} ${operator} ${num2}`;
     }
     return operation;
   };
@@ -139,7 +142,7 @@ const CalculadoraHumana = () => {
                 onChange={(e) => setValSubmit(e.target.value)}
                 onKeyDown={handleKeyDown}
               />
-              <Button onClick={() => handleAnswer(Number(valSubmit))}>
+              <Button mt={3} onClick={() => handleAnswer(Number(valSubmit))}>
                 {" "}
                 Enviar{" "}
               </Button>
