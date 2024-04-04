@@ -20,7 +20,7 @@ const generateRandomOperation = () => {
 
 function findDivisors(num) {
   const divisors = [];
-  const sqrtNum = Math.sqrt(num);
+  const sqrtNum = Math.sqrt(Math.abs(num));
 
   for (let i = 1; i <= sqrtNum; i++) {
     if (num % i === 0) {
@@ -69,6 +69,7 @@ const CalculadoraHumana = () => {
   }, [tiempoRestante]);
 
   const handleAnswer = (valSubmit) => {
+    setValSubmit("");
     valSubmit = Number(valSubmit);
 
     let evalued = eval(operation);
