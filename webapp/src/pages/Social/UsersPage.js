@@ -35,6 +35,7 @@ const UsersPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [friends, setFriends] = useState([]);
+  const currentUser = localStorage.getItem('username');
 
   useEffect(() => {
     fetchUsers();
@@ -42,7 +43,7 @@ const UsersPage = () => {
 
   const fetchUsers = () => {
     setIsLoading(true);
-    fetch('http://localhost:8001/users', {
+    fetch(`http://localhost:8001/users/search?search=${searchQuery}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -50,7 +51,9 @@ const UsersPage = () => {
     })
     .then((response) => response.json())
     .then((data) => {
-      setUsers(data);
+      // Filtrar el usuario actual de la lista de usuarios
+      const filteredUsers = data.filter(user => user.username !== currentUser);
+      setUsers(filteredUsers);
       setIsLoading(false);
     })
     .catch((error) => {
@@ -59,7 +62,6 @@ const UsersPage = () => {
       setIsLoading(false);
     });
   };
-  
 
   const handleAddFriend = (user) => {
     // Verifica si el usuario ya está en la lista de amigos
@@ -78,7 +80,7 @@ const UsersPage = () => {
   return (
     <>
       <Nav />
-      <div>
+      <div style={{ marginBottom: '20px' }}> {/* Agrega un margen inferior al contenedor del componente de búsqueda */}
         <Heading as="h2">Buscar Usuarios</Heading>
         <Input
           type="text"
@@ -86,8 +88,9 @@ const UsersPage = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Buscar por nombre de usuario"
         />
-        <Button onClick={fetchUsers}>Buscar</Button>
-
+        <Button onClick={fetchUsers} ml={2}>Buscar</Button> {/* Agrega un margen a la izquierda del botón de búsqueda */}
+      </div>
+      <div>
         {isLoading && <p>Cargando usuarios...</p>}
         {error && <p>Error al cargar usuarios: {error}</p>}
         <UserList users={users} handleAddFriend={handleAddFriend} />
@@ -96,5 +99,6 @@ const UsersPage = () => {
     </>
   );
 };
+
 
 export default UsersPage;
