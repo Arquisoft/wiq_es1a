@@ -16,11 +16,14 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
+import { useTranslation } from "react-i18next";
 
 const apiEndpoint =
   process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
 const AddUser = () => {
+  const { t } = useTranslation();
+
   const { colorMode, toggleColorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
 
@@ -33,7 +36,7 @@ const AddUser = () => {
 
   const handleRegister = () => {
     if (password !== passwordR) {
-      setError("Las contraseñas no coinciden");
+      setError(t('components.register.registerError'));
       return;
     }
     axios
@@ -71,59 +74,59 @@ const AddUser = () => {
         boxShadow="lg"
       >
         <Heading as="h1" size="xl" mb={4}>
-          Regístrate
+          {t('components.register.title')}
         </Heading>
         <FormControl>
           <FormLabel htmlFor="register-username">
-            Introduce tu nombre:
+            {t('components.register.nameLabel')}
           </FormLabel>
           <Input
             id="register-username"
             name="username"
             type="text"
-            placeholder="Nombre de usuario"
+            placeholder={t('components.register.namePlaceholder')}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </FormControl>
         <FormControl mt={4}>
           <FormLabel htmlFor="register-password">
-            Introduce tu contraseña:
+          {t('components.register.passwordLabel')}
           </FormLabel>
           <Input
             id="register-password"
             name="password"
             type="password"
-            placeholder="Contraseña"
+            placeholder={t('components.register.passwordPlaceholder')}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormControl>
         <FormControl mt={4}>
           <FormLabel htmlFor="register-pass2">
-            Vuelve a introducir la contraseña:
+          {t('components.register.password2Placeholder')}
           </FormLabel>
           <Input
             id="register-pass2"
             type="password"
-            placeholder="Repetir contraseña"
+            placeholder={t('components.register.passwordPlaceholder')}
             value={passwordR}
             onChange={(e) => setPasswordR(e.target.value)}
           />
         </FormControl>
         <Button mt={4} colorScheme="blue" onClick={handleRegister}>
-          Registrarse
+          {t('components.register.passwordPlaceholder')}
         </Button>
         <Box mt={4}>
-          ¿Ya tienes cuenta?{" "}
+          {t('components.register.loginText')}{" "}
           <Link color="teal.500" href="/login">
-            Inicia sesión
+            {t('components.register.loginLink')}
           </Link>
         </Box>
         {openSnackbar && (
           <Alert status="success" mt={4}>
             <AlertIcon />
-            Usuario registrado exitosamente
+            {t('components.register.registerAlert')}
           </Alert>
         )}
         {error && (

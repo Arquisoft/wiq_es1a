@@ -1,16 +1,44 @@
 {
     "components": {
-        "footer":{
-            "copyright": "Copyright 2024 ® Grupo 1A de Arquitectura del Software"
+        "footer": {
+            "copyright": "Copyright 2024 ® Group 1A of Software Architecture"
         },
-        "login":{
-            
+        "login": {
+            "title": "Log in",
+            "nameLabel": "Enter your name",
+            "namePlaceholder": "Name",
+            "passwordPlaceholder": "Password",
+            "passwordLabel": "Enter your password",
+            "loginButton": "Log in",
+            "registerText": "Don't have an account?",
+            "registerLink": "Register",
+            "loginAlert": "Login successful"
         },
-        "nav":{
-            
+        "nav": {
+            "home": "Home",
+            "gameModes": "Game Modes",
+            "classic": "Classic",
+            "wisebattery": "Wise Battery",
+            "humancalculator": "Human Calculator",
+            "stats": "Statistics",
+            "ranking": "Ranking",
+            "profile": "Profile",
+            "about": "About Us",
+            "options": "Options",
+            "disconnect": "Disconnect"
         },
-        "register":{
-            
+        "register": {
+            "title": "Register",
+            "nameLabel": "Enter your name",
+            "namePlaceholder": "Name",
+            "passwordPlaceholder": "Password",
+            "passwordLabel": "Enter your password",
+            "password2Label": "Re-enter the password",
+            "registerButton": "Register",
+            "loginText": "Already have an account?",
+            "loginLink": "Log in",
+            "registerAlert": "User registered successfully",
+            "registerError": "Passwords do not match"
         }
     }
 }

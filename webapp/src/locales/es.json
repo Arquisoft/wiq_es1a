@@ -4,13 +4,41 @@
             "copyright": "Copyright 2024 ® Grupo 1A de Arquitectura del Software"
         },
         "login":{
-            
+            "title": "Identifícate",
+            "nameLabel": "Introduce tu nombre",
+            "namePlaceholder": "Nombre",
+            "passwordPlaceholder": "Contraseña",
+            "passwordLabel": "Introduce tu contraseña",
+            "loginButton": "Iniciar sesión",
+            "registerText": "¿No tienes cuenta?",
+            "registerLink": "Regístrate",
+            "loginAlert": "Inicio de sesión exitoso"
         },
         "nav":{
-            
+            "home": "Inicio",
+            "gameModes": "Modos de juego",
+            "classic": "Clásico",
+            "wisebattery": "Batería de sabios",
+            "humancalculator": "Calculadora humana",
+            "stats": "Estadísticas",
+            "ranking": "Ranking",
+            "profile": "Perfil",
+            "about": "Sobre nosotros",
+            "options": "Opciones",
+            "desconnect": "Desconectar"
         },
         "register":{
-            
+            "title": "Regístrate",
+            "nameLabel": "Introduce tu nombre",
+            "namePlaceholder": "Nombre",
+            "passwordPlaceholder": "Contraseña",
+            "passwordLabel": "Introduce tu contraseña",
+            "password2Label": "Vuelve a introducir la contraseña",
+            "registerButton": "Registrarse",
+            "loginText": "¿Ya tienes cuenta?",
+            "loginLink": "Inicia sesión",
+            "registerAlert": "Usuario registrado exitosamente",
+            "registerError": "Las contraseñas no coinciden"
         }
     }
 }
