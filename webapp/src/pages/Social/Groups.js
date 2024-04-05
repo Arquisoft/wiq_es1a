@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Typography, List, ListItem, ListItemText, Button, Snackbar, Box, Divider } from '@mui/material';
-import { SessionContext } from '../SessionContext';
+import { Container, Typography, List, ListItem, ListItemText, Button, Snackbar, Box, Divider, TextField } from '@mui/material';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8001';
 
@@ -10,7 +9,7 @@ const Groups = () => {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const { username } = useContext(SessionContext);
+  const username = localStorage.getItem('username'); // Obtener el nombre de usuario del localStorage
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +27,7 @@ const Groups = () => {
     try {
       await axios.post(`${apiEndpoint}/group/add`, {
         name: name,
-        username: username
+        username: username // Pasar el nombre de usuario a la solicitud
       });
       setOpenSnackbar(true);
     } catch (error) {

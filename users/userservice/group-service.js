@@ -1,9 +1,18 @@
 const express = require('express');
-const router = express.Router();
-const { Group, User, UserGroup } = require('./user-model'); // Importa los modelos de usuario y grupo
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const { Group, User, UserGroup } = require('./user-model');
+
+const app = express();
+const port = 8001;
+
+app.use(bodyParser.json());
+
+const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/userdb';
+mongoose.connect(mongoUri);
 
 // Obtener la lista de grupos en la base de datos
-router.get('/list', async (req, res) => {
+app.get('/group/list', async (req, res) => {
     try {
         const allGroups = await Group.find();
         res.json({ groups: allGroups });
@@ -13,7 +22,7 @@ router.get('/list', async (req, res) => {
 });
 
 // Obtener un grupo por su nombre
-router.get('/:name', async (req, res) => {
+app.get('/group/:name', async (req, res) => {
     try {
         const groupName = req.params.name;
         const group = await Group.findOne({ name: groupName });
@@ -31,7 +40,7 @@ router.get('/:name', async (req, res) => {
 });
 
 // Crear un nuevo grupo
-router.post('/add', async (req, res) => {
+app.post('/group/add', async (req, res) => {
     try {
         const { name, userId } = req.body;
 
@@ -56,9 +65,9 @@ router.post('/add', async (req, res) => {
 });
 
 // Unirse a un grupo existente
-router.post('/join', async (req, res) => {
+app.post('/group/join', async (req, res) => {
     try {
-        const { groupName, userId } = req.body;
+        const { groupId, userId } = req.body;
 
         // Verifica si el usuario existe
         const user = await User.findById(userId);
@@ -67,19 +76,19 @@ router.post('/join', async (req, res) => {
         }
 
         // Verifica si el grupo existe
-        const group = await Group.findOne({ name: groupName });
+        const group = await Group.findById(groupId);
         if (!group) {
             return res.status(404).json({ error: 'Group not found' });
         }
 
         // Verifica si el usuario ya es miembro del grupo
-        const existingMembership = await UserGroup.findOne({ user: userId, group: group._id });
+        const existingMembership = await UserGroup.findOne({ user: userId, group: groupId });
         if (existingMembership) {
             return res.status(400).json({ error: 'User already a member of this group' });
         }
 
         // Agrega al usuario como miembro del grupo
-        const userGroup = new UserGroup({ user: userId, group: group._id });
+        const userGroup = new UserGroup({ user: userId, group: groupId });
         await userGroup.save();
 
         res.json({ message: 'User joined the group successfully' });
@@ -88,4 +97,14 @@ router.post('/join', async (req, res) => {
     }
 });
 
-module.exports = router;
+const server = app.listen(port, () => {
+    console.log(`User Service listening at http://localhost:${port}`);
+});
+
+// Listen for the 'close' event on the Express.js server
+server.on('close', () => {
+    // Close the Mongoose connection
+    mongoose.connection.close();
+});
+
+module.exports = server;
