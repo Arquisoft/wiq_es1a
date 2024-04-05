@@ -20,8 +20,12 @@ const userSchema = new mongoose.Schema({
       points: Number,
       avgTime: Number
     }],
+    friends: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }]
 });
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User
+module.exports = User;
