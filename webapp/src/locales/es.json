@@ -1,62 +1,97 @@
 {
-    "components": {
-        "footer":{
-            "copyright": "Copyright 2024 ® Grupo 1A de Arquitectura del Software"
-        },
-        "login":{
-            "title": "Identifícate",
-            "nameLabel": "Introduce tu nombre",
-            "namePlaceholder": "Nombre",
-            "passwordPlaceholder": "Contraseña",
-            "passwordLabel": "Introduce tu contraseña",
-            "loginButton": "Iniciar sesión",
-            "registerText": "¿No tienes cuenta?",
-            "registerLink": "Regístrate",
-            "loginAlert": "Inicio de sesión exitoso"
-        },
-        "nav":{
-            "home": "Inicio",
-            "gameModes": "Modos de juego",
-            "classic": "Clásico",
-            "wisebattery": "Batería de sabios",
-            "humancalculator": "Calculadora humana",
-            "stats": "Estadísticas",
-            "ranking": "Ranking",
-            "profile": "Perfil",
-            "about": "Sobre nosotros",
-            "options": "Opciones",
-            "disconnect": "Desconectar"
-        },
-        "register":{
-            "title": "Regístrate",
-            "nameLabel": "Introduce tu nombre",
-            "namePlaceholder": "Nombre",
-            "passwordPlaceholder": "Contraseña",
-            "passwordLabel": "Introduce tu contraseña",
-            "password2Label": "Vuelve a introducir la contraseña",
-            "registerButton": "Registrarse",
-            "loginText": "¿Ya tienes cuenta?",
-            "loginLink": "Inicia sesión",
-            "registerAlert": "Usuario registrado exitosamente",
-            "registerError": "Las contraseñas no coinciden"
-        }
+  "components": {
+    "footer": {
+      "copyright": "Copyright 2024 ® Grupo 1A de Arquitectura del Software"
     },
-    "pages": {
-        "wisebattery": {
-            "finished": "¡Juego terminado!",
-            "score": "Tu puntuación:",
-            "playAgain": "Jugar de nuevo",
-            "back": "Volver al menú",
-            "question": "Pregunta",
-            "time": "Tiempo restante:"
-        },
-        "humancalculator": {
-            "finished": "¡Juego terminado!",
-            "score": "Tu puntuación:",
-            "playAgain": "Jugar de nuevo",
-            "back": "Volver al menú",
-            "question": "Pregunta",
-            "time": "Tiempo restante:"
-        }
+    "login": {
+      "title": "Identifícate",
+      "nameLabel": "Introduce tu nombre",
+      "namePlaceholder": "Nombre",
+      "passwordPlaceholder": "Contraseña",
+      "passwordLabel": "Introduce tu contraseña",
+      "loginButton": "Iniciar sesión",
+      "registerText": "¿No tienes cuenta?",
+      "registerLink": "Regístrate",
+      "loginAlert": "Inicio de sesión exitoso"
+    },
+    "nav": {
+      "home": "Inicio",
+      "gameModes": "Modos de juego",
+      "classic": "Clásico",
+      "wisebattery": "Batería de sabios",
+      "humancalculator": "Calculadora humana",
+      "stats": "Estadísticas",
+      "ranking": "Ranking",
+      "profile": "Perfil",
+      "about": "Sobre nosotros",
+      "options": "Opciones",
+      "disconnect": "Desconectar"
+    },
+    "register": {
+      "title": "Regístrate",
+      "nameLabel": "Introduce tu nombre",
+      "namePlaceholder": "Nombre",
+      "passwordPlaceholder": "Contraseña",
+      "passwordLabel": "Introduce tu contraseña",
+      "password2Label": "Vuelve a introducir la contraseña",
+      "registerButton": "Registrarse",
+      "loginText": "¿Ya tienes cuenta?",
+      "loginLink": "Inicia sesión",
+      "registerAlert": "Usuario registrado exitosamente",
+      "registerError": "Las contraseñas no coinciden"
     }
+  },
+  "pages": {
+    "classic": {
+      "finished": "¡Juego terminado!",
+      "score": "Tu puntuación:",
+      "playAgain": "Jugar de nuevo",
+      "back": "Volver al menú",
+      "question": "Pregunta",
+      "time": "Tiempo restante:",
+      "easterEgg": "¡Has acertado todas! Eres la cuenta secundaria de Jordi Hurtado.",
+      "answer": "Responder"
+    },
+    "wisebattery": {
+      "finished": "¡Juego terminado!",
+      "score": "Tu puntuación:",
+      "playAgain": "Jugar de nuevo",
+      "back": "Volver al menú",
+      "question": "Pregunta",
+      "time": "Tiempo restante:"
+    },
+    "humancalculator": {
+      "finished": "¡Juego terminado!",
+      "score": "Tu puntuación:",
+      "playAgain": "Jugar de nuevo",
+      "back": "Volver al menú",
+      "question": "Pregunta",
+      "time": "Tiempo restante:"
+    },
+    "config": {
+      "title": "Configuración",
+      "language": "Idioma",
+      "topics": "Temáticas de preguntas",
+      "countries": "Países",
+      "literature": "Literatura",
+      "cinema": "Cine",
+      "art": "Arte",
+      "programming": "Programación",
+      "save": "Aplicar cambios",
+      "timeBetweenClassic": "Tiempo entre preguntas (Clásico)",
+      "questionCountClassic": "Número de preguntas (Clásico)",
+      "totalTimeBattery": "Tiempo total (Batería de sabios)"
+    },
+    "home": {
+      "title": "¡Bienvenido a WIQ!",
+      "choose": "Elige el modo de juego",
+      "classic": "Modo clásico",
+      "classicDescription": "En el modo Clásico, tendrás que responder un número determinado de preguntas en un tiempo limitado. ¡Demuestra tus conocimientos y rapidez para superar este desafío!",
+      "wisebattery": "Batería de sabios",
+      "wisebatteryDescription": "En el modo Batería de Sabios, pondrás a prueba tu conocimiento respondiendo todas las preguntas que puedas en un tiempo fijo. Cuantas más preguntas aciertes, ¡mejor será tu puntuación! ¿Estás listo para este desafío cronometrado?",
+      "humancalculator": "Calculadora humana",
+      "humancalculatorDescription": "En el modo Calculadora Humana, tendrás que resolver operaciones matemáticas en un tiempo limitado. ¡Demuestra tus habilidades matemáticas y rapidez para superar este desafío!",
+      "error": "Hubo un error al cargar las preguntas. Por favor, inténtalo más tarde."
+    }
+  }
 }

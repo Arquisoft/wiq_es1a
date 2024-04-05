@@ -12,7 +12,6 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
-  Select,
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -89,14 +88,14 @@ const Config = () => {
       <Flex direction="column" align="center" justify="center">
         <Box className="configContainer">
           <Heading as="h2" mb={4}>
-            Configuración
+            {i18n('pages.config.title')}
           </Heading>
-          <FormLabel htmlFor="idioma"> Idioma</FormLabel>
+          <FormLabel htmlFor="idioma">{i18n('pages.config.language')}</FormLabel>
           <Flex direction="row" align="center" justify="space-around">
             <Button colorScheme="teal" onClick={() => i18n.changeLanguage("es")}>Español</Button>
             <Button colorScheme="teal" onClick={() => i18n.changeLanguage("en")}>English</Button>
           </Flex>
-          <FormLabel htmlFor="clasico"> Temáticas de preguntas</FormLabel>
+          <FormLabel htmlFor="clasico">{i18n('pages.config.topics')}</FormLabel>
           <Box
             display="grid"
             gridTemplateColumns="repeat(auto-fit, minmax(150px, 1fr))"
@@ -105,19 +104,19 @@ const Config = () => {
           >
             <Stack spacing={5} direction="row">
               <Checkbox id="paises" mb={2}>
-                Países
+                {i18n('pages.config.countries')}
               </Checkbox>
               <Checkbox id="literatura" mb={2}>
-                Literatura
+                {i18n('pages.config.literature')}
               </Checkbox>
               <Checkbox id="cine" mb={2}>
-                Cine
+                {i18n('pages.config.cinema')}
               </Checkbox>
               <Checkbox id="arte" mb={2}>
-                Arte
+                {i18n('pages.config.art')}
               </Checkbox>
               <Checkbox id="programacion" mb={2}>
-                Programación
+                {i18n('pages.config.programming')}
               </Checkbox>
             </Stack>
           </Box>
@@ -125,7 +124,7 @@ const Config = () => {
           <Box>
             <FormLabel htmlFor="clasico">
               {" "}
-              Tiempo entre preguntas (Clásico)
+              {i18n('pages.config.timeBetweenClassic')}
             </FormLabel>
             <NumberInput
               id="clasico"
@@ -144,7 +143,7 @@ const Config = () => {
             </NumberInput>
             <FormLabel htmlFor="clasicoPreguntas">
               {" "}
-              Número de preguntas (Clásico)
+              {i18n('pages.config.questionCountClassic')}
             </FormLabel>
             <NumberInput
               id="clasicoPreguntas"
@@ -162,7 +161,7 @@ const Config = () => {
               </NumberInputStepper>
             </NumberInput>
             <FormLabel htmlFor="bateria">
-              Tiempo total (Batería de sabios)
+              {i18n('pages.config.totalTimeBattery')}
             </FormLabel>
             <NumberInput
               id="bateria"
@@ -181,7 +180,7 @@ const Config = () => {
             </NumberInput>
           </Box>
           <Button colorScheme="teal" onClick={handleConfig} mb={4}>
-            Aplicar cambios
+            {i18n('pages.config.save')}
           </Button>
         </Box>
       </Flex>
