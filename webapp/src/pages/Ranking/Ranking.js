@@ -117,6 +117,7 @@ const Ranking = () => {
       <Select id="displaySelector" onChange={handleDisplayChange}>
         {displayOptions.map(option => {
           if (gamemode === "calculadora" && option.value === "ratioCorrect") {
+            return null;
           }
           return <option key={option.value} value={option.value}>{option.label}</option>;
         })}
