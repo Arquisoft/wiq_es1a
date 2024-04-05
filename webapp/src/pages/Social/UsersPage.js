@@ -19,7 +19,11 @@ const UserList = ({ users, handleAddFriend }) => {
             <Tr key={user._id}>
               <Td>{user.username}</Td>
               <Td>
-                <Button onClick={() => handleAddFriend(user)}>Agregar como amigo</Button>
+                {user.isFriend ? (
+                  <span>Amigo</span>
+                ) : (
+                  <Button onClick={() => handleAddFriend(user)}>Agregar como amigo</Button>
+                )}
               </Td>
             </Tr>
           ))}
@@ -28,6 +32,7 @@ const UserList = ({ users, handleAddFriend }) => {
     </div>
   );
 };
+
 
 const UsersPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -52,8 +57,12 @@ const UsersPage = () => {
     .then((response) => response.json())
     .then((data) => {
       // Filtrar el usuario actual de la lista de usuarios
-      const filteredUsers = data.filter(user => user.username !== currentUser);
-      setUsers(filteredUsers);
+      const updatedUsers = data.filter(user => user.username !== currentUser);
+      // Verificar si cada usuario es amigo o no
+      updatedUsers.forEach(user => {
+        user.isFriend = friends.some(friend => friend._id === user._id);
+      });
+      setUsers(updatedUsers);
       setIsLoading(false);
     })
     .catch((error) => {
@@ -63,20 +72,47 @@ const UsersPage = () => {
     });
   };
 
-  const handleAddFriend = (user) => {
-    // Verifica si el usuario ya está en la lista de amigos
-    if (friends.find(friend => friend._id === user._id)) {
-      console.log(`El usuario ${user.username} ya está en tu lista de amigos.`);
-      return;
+  const handleAddFriend = async (user) => {
+    try {
+      // Verifica si el usuario ya está en la lista de amigos
+      if (friends.find(friend => friend._id === user._id)) {
+        console.log(`El usuario ${user.username} ya está en tu lista de amigos.`);
+        return;
+      }
+  
+      // Realizar la solicitud HTTP POST al endpoint '/users/add-friend'
+      const response = await fetch('http://localhost:8001/users/add-friend', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId: currentUser, // ID del usuario actual
+          friendId: user._id // ID del amigo que se está agregando
+        })
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error al agregar amigo');
+      }
+  
+      // Agrega el usuario a la lista de amigos localmente
+      setFriends(prevFriends => [...prevFriends, user]);
+      // Actualiza el estado de isFriend del usuario
+      setUsers(prevUsers => {
+        return prevUsers.map(u => {
+          if (u._id === user._id) {
+            return { ...u, isFriend: true };
+          }
+          return u;
+        });
+      });
+    } catch (error) {
+      console.error('Error al agregar amigo:', error);
+      // Manejar el error según sea necesario
     }
-
-    // Agrega el usuario a la lista de amigos
-    setFriends(prevFriends => [...prevFriends, user]);
-
-    // Aquí puedes implementar la lógica para enviar una solicitud al backend para agregar el usuario como amigo
-    console.log(`Agregando usuario ${user.username} como amigo...`);
   };
-
+  
   return (
     <>
       <Nav />
@@ -100,5 +136,5 @@ const UsersPage = () => {
   );
 };
 
-
 export default UsersPage;
+
