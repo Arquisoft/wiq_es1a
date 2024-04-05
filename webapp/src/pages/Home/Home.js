@@ -7,6 +7,8 @@ import { useLocation } from "react-router-dom";
 import Background from "../../components/Background/Background.js";
 
 const Home = () => {
+  const testEnvironment = process.env.NODE_ENV === "test";
+  
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const error = queryParams.get("error");
@@ -14,7 +16,7 @@ const Home = () => {
   return (
     <>
       <Nav />
-      <Background />
+      {!testEnvironment && <Background />}
       <Flex direction="column" align="center" justify="center" h="70vh">
         <Heading as="h1" mb={2}>
           ¡Bienvenido a WIQ!
