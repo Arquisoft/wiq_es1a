@@ -33,7 +33,6 @@ const UserList = ({ users, handleAddFriend }) => {
   );
 };
 
-
 const UsersPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState([]);
@@ -137,4 +136,3 @@ const UsersPage = () => {
 };
 
 export default UsersPage;
-
