@@ -27,7 +27,7 @@ app.post("/saveGame", async (req, res) => {
     const gamemode = req.body.gameMode;
     const gameData = req.body.gameData;
 
-    if (gamemode == "clasico" || gamemode == "bateria") {
+    if (gamemode == "clasico" || gamemode == "bateria" || gamemode =="calculadora") {
       // Buscar las estadísticas existentes del usuario y modo de juego
       let stats = await Stats.findOne({ username: username, gamemode: gamemode });
 
