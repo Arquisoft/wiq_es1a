@@ -37,6 +37,7 @@ function findDivisors(num) {
 
 const CalculadoraHumana = () => {
   const TIME = 60;
+  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
   const [valSubmit, setValSubmit] = useState("");
   const [puntuacion, setPuntuacion] = useState(0);
@@ -120,6 +121,10 @@ const CalculadoraHumana = () => {
       let newOperation = generateOperation(valSubmit);
       setOperation(newOperation);
     } else {
+      if(puntuacion>0){
+        const tMedio=TIME/puntuacion;
+        setTiempoMedio(tMedio);
+      }
       setJuegoTerminado(true);
     }
   };
