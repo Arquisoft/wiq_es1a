@@ -65,7 +65,7 @@ const JuegoPreguntas = () => {
     }, 1000);
     return () => clearInterval(timer);
     // eslint-disable-next-line
-  }, [tiempoRestante]);
+  }, [tiempoRestante, preguntasCorrectas, preguntasFalladas]);
 
   useEffect(() => {
     if (juegoTerminado && tiempoMedio !== 0) {
