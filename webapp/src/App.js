@@ -13,6 +13,7 @@ import Config from "./pages/Config/Config.js";
 import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register.js";
 import Perfil from "./pages/Perfil/Perfil.js";
+import CalculadoraHumana from "./pages/Calculadora/Calculadora.js";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/home/clasico" element={<Clasico />} />
           <Route path="/home/bateria" element={<Bateria />} />
+          <Route path="/home/calculadora" element={<CalculadoraHumana />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/ranking" element={<Ranking />} />
           <Route path="/perfil" element={<Perfil />} />

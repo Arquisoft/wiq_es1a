@@ -40,6 +40,16 @@ const Home = () => {
             route="/home/bateria"
           />
         </Box>
+        <Box p={2}>
+          <CustomModal
+            title="Calculadora Humana"
+            text="
+              En el modo Calculadora Humana, tendrás que resolver operaciones matemáticas en un tiempo limitado. 
+              ¡Demuestra tus habilidades matemáticas y rapidez para superar este desafío!
+            "
+            route="/home/calculadora"
+          />
+        </Box>
         {error && (
           <Box mb={4} color="red">
             Hubo un error al cargar las preguntas. Por favor, inténtalo más tarde.
