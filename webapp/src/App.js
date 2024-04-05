@@ -15,7 +15,6 @@ import Register from "./components/Register/Register.js";
 import Perfil from "./pages/Perfil/Perfil.js";
 import CalculadoraHumana from "./pages/Calculadora/Calculadora.js";
 
-
 function App() {
   useEffect(() => {
     document.title = "WIQ!";

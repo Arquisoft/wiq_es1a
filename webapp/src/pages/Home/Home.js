@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer.js";
 import CustomModal from "../../components/CustomModal/CustomModal.js";
 import { Box, Heading, Flex } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
+import Background from "../../components/Background/Background.js";
 
 const Home = () => {
   const location = useLocation();
@@ -13,6 +14,7 @@ const Home = () => {
   return (
     <>
       <Nav />
+      <Background />
       <Flex direction="column" align="center" justify="center" h="70vh">
         <Heading as="h1" mb={2}>
           ¡Bienvenido a WIQ!
