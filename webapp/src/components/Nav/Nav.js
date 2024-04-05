@@ -56,7 +56,7 @@ const Nav = () => {
       <Flex width="25%"  className="rightItems" justifyContent="end">
         <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/sobre")}>{t('components.nav.about')}</Button>
         <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleConfig()}>{t('components.nav.options')}</Button>
-        <Button variant="link" color={textColor} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => logout()}>{t('components.nav.desconnect')}</Button>
+        <Button variant="link" color={textColor} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => logout()}>{t('components.nav.disconnect')}</Button>
         <Switch isChecked={isDarkTheme} onChange={toggleColorMode} ml={4} alignSelf="center"/>
       </Flex>
     </Box>

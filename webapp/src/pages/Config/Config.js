@@ -92,14 +92,10 @@ const Config = () => {
             Configuración
           </Heading>
           <FormLabel htmlFor="idioma"> Idioma</FormLabel>
-          <Select id="idioma" mb="1rem">
-            <option onClick={() => i18n.changeLanguage("es")}>
-              Español
-            </option>
-            <option onClick={() => i18n.changeLanguage("en")}>
-              English
-            </option>
-          </Select>
+          <Flex direction="row" align="center" justify="space-around">
+            <Button colorScheme="teal" onClick={() => i18n.changeLanguage("es")}>Español</Button>
+            <Button colorScheme="teal" onClick={() => i18n.changeLanguage("en")}>English</Button>
+          </Flex>
           <FormLabel htmlFor="clasico"> Temáticas de preguntas</FormLabel>
           <Box
             display="grid"

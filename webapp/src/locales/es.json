@@ -25,7 +25,7 @@
             "profile": "Perfil",
             "about": "Sobre nosotros",
             "options": "Opciones",
-            "desconnect": "Desconectar"
+            "disconnect": "Desconectar"
         },
         "register":{
             "title": "Regístrate",
@@ -39,6 +39,24 @@
             "loginLink": "Inicia sesión",
             "registerAlert": "Usuario registrado exitosamente",
             "registerError": "Las contraseñas no coinciden"
+        }
+    },
+    "pages": {
+        "wisebattery": {
+            "finished": "¡Juego terminado!",
+            "score": "Tu puntuación:",
+            "playAgain": "Jugar de nuevo",
+            "back": "Volver al menú",
+            "question": "Pregunta",
+            "time": "Tiempo restante:"
+        },
+        "humancalculator": {
+            "finished": "¡Juego terminado!",
+            "score": "Tu puntuación:",
+            "playAgain": "Jugar de nuevo",
+            "back": "Volver al menú",
+            "question": "Pregunta",
+            "time": "Tiempo restante:"
         }
     }
 }

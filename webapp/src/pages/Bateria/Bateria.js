@@ -4,10 +4,13 @@ import Footer from "../../components/Footer/Footer.js";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Flex, Heading, Button, Grid, Spinner } from "@chakra-ui/react";
 import axios from 'axios';
+import { useTranslation } from "react-i18next";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
   const TIME = localStorage.getItem("bateriaTime");
+
+  const { t } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -164,21 +167,21 @@ const JuegoPreguntas = () => {
         <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
           {juegoTerminado ? (
             <Box textAlign="center">
-              <Heading as="h2">¡Juego terminado!</Heading>
+              <Heading as="h2">{t('pages.wisebattery.finished')}</Heading>
               <p p={2}>
-                Tu puntuación: {puntuacion}
+                {t('pages.wisebattery.score')} {puntuacion}
               </p>
               <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
-                Repetir Juego
+                {t('pages.wisebattery.score')}
               </Button>
               <Link to="/home" style={{ marginLeft: "10px" }}>
-                Volver al Menú Principal
+                {t('pages.wisebattery.back')}
               </Link>
             </Box>
           ) : (
             <Box>
               <Heading as="h2" mb={4}>
-                Pregunta {indicePregunta + 1}
+              {t('pages.wisebattery.question')} {indicePregunta + 1}
               </Heading>
               <p>{preguntaActual.pregunta}</p>
               <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
@@ -194,8 +197,8 @@ const JuegoPreguntas = () => {
               </Grid>
 
               <Box textAlign="center" mt={4}>
-                <p>Tiempo restante: {Math.floor(tiempoRestante)}</p>
-                <p>Puntuación: {puntuacion}</p>
+                <p>{t('pages.wisebattery.time')} {Math.floor(tiempoRestante)}</p>
+                <p>{t('pages.wisebattery.score')} {puntuacion}</p>
                 <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
                   <Box
                     bg="teal.500"
