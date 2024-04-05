@@ -39,6 +39,8 @@ const Ranking = () => {
       return "Clásico";    
     } else if(gamemode === "bateria"){
       return "Batería de sabios";
+    } else if(gamemode === "calculadora"){
+      return "Calculadora humana";
     }
     return gamemode;
   };
@@ -59,6 +61,7 @@ const Ranking = () => {
       case "totalPoints":
         return "Puntos totales";
       case "ratioCorrect":
+        if (gamemode === "calculadora") return null;
         return "Ratio de aciertos (%)";
       case "avgTime":
         return "Tiempo por pregunta (s)";
@@ -74,6 +77,7 @@ const Ranking = () => {
       case "totalPoints":
         return stat.totalPoints;
       case "ratioCorrect":
+        if (gamemode === "calculadora") return null;
         return Math.round(stat.ratioCorrect * 100) / 100;
       case "avgTime":
         return Math.round(stat.avgTime * 100) / 100;
@@ -127,6 +131,12 @@ const Ranking = () => {
       >
         Batería de sabios
       </Button>
+      <Button
+        className={gamemode === "calculadora" ? "active" : ""}
+        onClick={() => handleGamemodeChange("calculadora")}
+      >
+        Calculadora humana
+      </Button>
       <Table>
         <Thead>
           <Tr>
@@ -150,5 +160,6 @@ const Ranking = () => {
 };
 
 export default Ranking;
+
 
 
