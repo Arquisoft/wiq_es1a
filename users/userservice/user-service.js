@@ -72,6 +72,76 @@ app.get('/users/search', async (req, res) => {
   }
 });
 
+app.post('/users/add-friend', async (req, res) => {
+  try {
+    const { userId, friendId } = req.body;
+
+    // Buscar el usuario por userId
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Buscar el amigo por friendId
+    const friend = await User.findById(friendId);
+    if (!friend) {
+      return res.status(404).json({ error: 'Friend not found' });
+    }
+
+    // Verificar si el amigo ya está en la lista de amigos del usuario
+    if (user.friends.includes(friendId)) {
+      return res.status(400).json({ error: 'Friend already added' });
+    }
+
+    // Agregar el amigo a la lista de amigos del usuario
+    user.friends.push(friendId);
+    await user.save();
+
+    res.json({ message: 'Friend added successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Function to get user ID from username
+async function getUserIdFromUsername(username) {
+  try {
+    // Find the user by username in the database
+    const user = await User.findOne({ username });
+    if (!user) {
+      throw new Error('User not found');
+    }
+    // Return the user ID
+    return user._id;
+  } catch (error) {
+    throw new Error('Error getting user ID from username: ' + error.message);
+  }
+}
+
+// Route to get friends of the authenticated user
+app.get('/users/friends/:username', async (req, res) => {
+  try {
+    const { username } = req.params;
+
+    // Obtén el ID de usuario del nombre de usuario
+    const userId = await getUserIdFromUsername(username);
+
+    // Busca al usuario por su ID
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Popula la lista de amigos del usuario
+    await user.populate('friends').execPopulate();
+
+    // Devuelve la lista de amigos
+    res.json({ friends: user.friends });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 app.get('/userInfo', async (req, res) => {
       try {
           const user = await User.findOne({username:req.query.user});
