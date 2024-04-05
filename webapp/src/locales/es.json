@@ -1,0 +1,16 @@
+{
+    "components": {
+        "footer":{
+            "copyright": "Copyright 2024 ® Grupo 1A de Arquitectura del Software"
+        },
+        "login":{
+            
+        },
+        "nav":{
+            
+        },
+        "register":{
+            
+        }
+    }
+}
