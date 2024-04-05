@@ -3,6 +3,7 @@ import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { Link } from "react-router-dom";
 import { Box, Flex, Heading, Button, Input } from "@chakra-ui/react";
+import axios from 'axios';
 
 const generateRandomOperation = () => {
   let operators = ["+", "-", "*", "/"];
@@ -36,6 +37,7 @@ function findDivisors(num) {
 
 const CalculadoraHumana = () => {
   const TIME = 60;
+  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
   const [valSubmit, setValSubmit] = useState("");
   const [puntuacion, setPuntuacion] = useState(0);
@@ -44,16 +46,22 @@ const CalculadoraHumana = () => {
   const [juegoTerminado, setJuegoTerminado] = useState(false);
   const [progressPercent, setProgressPercent] = useState(100);
 
+  const [tiempoMedio, setTiempoMedio] = useState(0);
+
   useEffect(() => {
     if (tiempoRestante === 0) {
       setJuegoTerminado(true);
+      if(puntuacion>0){
+        const tMedio=TIME/puntuacion;
+        setTiempoMedio(tMedio);
+      }
     }
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
     // eslint-disable-next-line
-  }, [tiempoRestante]);
+  }, [tiempoRestante, puntuacion]);
 
   useEffect(() => {
     setProgressPercent((tiempoRestante / TIME) * 100);
@@ -68,6 +76,41 @@ const CalculadoraHumana = () => {
     // eslint-disable-next-line
   }, [tiempoRestante]);
 
+  useEffect(() => {
+    if (juegoTerminado && tiempoMedio !== 0) {
+      guardarPartida();
+    }
+    // eslint-disable-next-line
+  }, [juegoTerminado, tiempoMedio]);
+
+  const guardarPartida = async () => {
+    
+    const username = localStorage.getItem("username");
+    const newGame = {
+      username: username,
+      gameMode: "calculadora",
+      gameData: {
+        correctAnswers: 0,
+        incorrectAnswers: 0,
+        points: puntuacion,
+        avgTime: tiempoMedio,
+      },
+    };
+    try {
+      const response = await axios.post(URL + '/saveGame', newGame);
+      console.log("Solicitud exitosa:", response.data);
+      
+    } catch (error) {
+      console.error('Error al guardar el juego:', error);
+    }
+    try {
+      const response = await axios.post(URL + "/saveGameList", newGame);
+      console.log("Solicitud exitosa:", response.data);
+    } catch (error) {
+      console.error("Error al guardar el juego:", error);
+    }
+  }
+
   const handleAnswer = (valSubmit) => {
     setValSubmit("");
     valSubmit = Number(valSubmit);
@@ -78,6 +121,10 @@ const CalculadoraHumana = () => {
       let newOperation = generateOperation(valSubmit);
       setOperation(newOperation);
     } else {
+      if(puntuacion>0){
+        const tMedio=(TIME-tiempoRestante)/puntuacion;
+        setTiempoMedio(tMedio);
+      }
       setJuegoTerminado(true);
     }
   };

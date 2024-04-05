@@ -39,6 +39,8 @@ const Ranking = () => {
       return "Clásico";    
     } else if(gamemode === "bateria"){
       return "Batería de sabios";
+    } else if(gamemode === "calculadora"){
+      return "Calculadora humana";
     }
     return gamemode;
   };
@@ -59,6 +61,7 @@ const Ranking = () => {
       case "totalPoints":
         return "Puntos totales";
       case "ratioCorrect":
+        if (gamemode === "calculadora") return null;
         return "Ratio de aciertos (%)";
       case "avgTime":
         return "Tiempo por pregunta (s)";
@@ -74,6 +77,7 @@ const Ranking = () => {
       case "totalPoints":
         return stat.totalPoints;
       case "ratioCorrect":
+        if (gamemode === "calculadora") return null;
         return Math.round(stat.ratioCorrect * 100) / 100;
       case "avgTime":
         return Math.round(stat.avgTime * 100) / 100;
@@ -111,9 +115,12 @@ const Ranking = () => {
     <Flex flexDirection="column" rowGap="1rem">
       <Heading as="h2">Ranking - modo {getModeName()}</Heading>
       <Select id="displaySelector" onChange={handleDisplayChange}>
-        {displayOptions.map(option => (
-          <option key={option.value} value={option.value}>{option.label}</option>
-        ))}
+        {displayOptions.map(option => {
+          if (gamemode === "calculadora" && option.value === "ratioCorrect") {
+            return null;
+          }
+          return <option key={option.value} value={option.value}>{option.label}</option>;
+        })}
       </Select>
       <Button
         className={gamemode === "clasico" ? "active" : ""}
@@ -126,6 +133,12 @@ const Ranking = () => {
         onClick={() => handleGamemodeChange("bateria")}
       >
         Batería de sabios
+      </Button>
+      <Button
+        className={gamemode === "calculadora" ? "active" : ""}
+        onClick={() => handleGamemodeChange("calculadora")}
+      >
+        Calculadora humana
       </Button>
       <Table>
         <Thead>
@@ -150,5 +163,6 @@ const Ranking = () => {
 };
 
 export default Ranking;
+
 
 

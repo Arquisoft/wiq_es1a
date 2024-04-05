@@ -58,7 +58,6 @@ const Stats = () => {
     setGamemode(mode);
     fetchStats(mode);
   };
-  
 
   const handleSearch = () => {
     fetchStats(gamemode);
@@ -69,6 +68,8 @@ const Stats = () => {
       return "Clásico";
     } else if (gamemode === "bateria") {
       return "Batería de sabios";
+    } else if (gamemode === "calculadora") {
+      return "Calculadora humana";
     }
     return gamemode;
   };
@@ -139,6 +140,12 @@ const Stats = () => {
           >
             Batería de sabios
           </Button>
+          <Button
+            className={gamemode === "calculadora" ? "active" : ""}
+            onClick={() => handleGamemodeChange("calculadora")}
+          >
+            Calculadora humana
+          </Button>
         </Flex>
         {stats === null && !isLoading && (
           <p mt="10rem">El usuario no ha jugado ninguna partida.</p>
@@ -162,36 +169,40 @@ const Stats = () => {
                   </Td>
                   <Td>{stats.avgPoints.toFixed(2)}</Td>
                 </Tr>
-                <Tr>
-                  <Td>
-                    <strong>Puntos totales</strong>
-                  </Td>
-                  <Td>{stats.totalPoints}</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <strong>Preguntas correctas totales</strong>
-                  </Td>
-                  <Td>{stats.totalCorrectQuestions}</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <strong>Preguntas incorrectas totales</strong>
-                  </Td>
-                  <Td>{stats.totalIncorrectQuestions}</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <strong>Porcentaje de aciertos</strong>
-                  </Td>
-                  <Td>{stats.ratioCorrect.toFixed(2)}%</Td>
-                </Tr>
-                <Tr>
-                  <Td>
-                    <strong>Tiempo por pregunta (s):</strong>
-                  </Td>
-                  <Td>{stats.avgTime.toFixed(2)}</Td>
-                </Tr>
+                    <Tr>
+                      <Td>
+                        <strong>Puntos totales</strong>
+                      </Td>
+                      <Td>{stats.totalPoints}</Td>
+                    </Tr>
+                  {gamemode !== "calculadora" && (
+                  <>
+                    <Tr>
+                      <Td>
+                        <strong>Preguntas correctas totales</strong>
+                      </Td>
+                      <Td>{stats.totalCorrectQuestions}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>
+                        <strong>Preguntas incorrectas totales</strong>
+                      </Td>
+                      <Td>{stats.totalIncorrectQuestions}</Td>
+                    </Tr>
+                    <Tr>
+                      <Td>
+                        <strong>Porcentaje de aciertos</strong>
+                      </Td>
+                      <Td>{stats.ratioCorrect.toFixed(2)}%</Td>
+                    </Tr>
+                    </>
+                  )}
+                    <Tr>
+                      <Td>
+                        <strong>Tiempo por pregunta (s):</strong>
+                      </Td>
+                      <Td>{stats.avgTime.toFixed(2)}</Td>
+                    </Tr>
               </Tbody>
             </Table>
           </div>
@@ -203,3 +214,4 @@ const Stats = () => {
 };
 
 export default Stats;
+

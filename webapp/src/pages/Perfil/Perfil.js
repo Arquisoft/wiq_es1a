@@ -69,13 +69,13 @@ const Perfil = () => {
                           </Thead>
                           <Tbody>
                             {userData.games.slice(0, 10).map((game, index) => (
-                              <Tr key={index}>
-                                <Td>{game.gamemode}</Td>
-                                <Td>{game.correctAnswers}</Td>
-                                <Td>{game.incorrectAnswers}</Td>
-                                <Td>{game.points}</Td>
-                                <Td>{parseFloat(game.avgTime).toFixed(2)} segundos</Td>
-                              </Tr>
+                            <Tr key={index}>
+                              <Td>{game.gamemode}</Td>
+                              <Td>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
+                              <Td>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
+                              <Td>{game.points}</Td>
+                              <Td>{parseFloat(game.avgTime).toFixed(2)} segundos</Td>
+                            </Tr>
                             ))}
                           </Tbody>
                         </Table>
