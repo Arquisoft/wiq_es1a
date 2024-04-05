@@ -122,7 +122,7 @@ const CalculadoraHumana = () => {
       setOperation(newOperation);
     } else {
       if(puntuacion>0){
-        const tMedio=TIME/puntuacion;
+        const tMedio=(TIME-tiempoRestante)/puntuacion;
         setTiempoMedio(tMedio);
       }
       setJuegoTerminado(true);
