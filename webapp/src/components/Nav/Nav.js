@@ -45,7 +45,23 @@ const Nav = () => {
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/social")}>Social</Button>
+        <Popover>
+          <PopoverTrigger>
+            <Button variant="link" color={textColor}>
+              Social
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader>Social</PopoverHeader>
+            <PopoverBody>
+              <Text cursor="pointer" onClick={() => handleNavigate("/social/usuarios")} color={textColor}>Usuarios</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/social/amigos")} color={textColor}>Amigos</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/social/grupos")} color={textColor}>Grupos</Text>
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
         <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
