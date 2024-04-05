@@ -30,8 +30,11 @@ app.post("/saveGame", async (req, res) => {
     if (gamemode == "clasico" || gamemode == "bateria" || gamemode =="calculadora") {
       // Buscar las estadísticas existentes del usuario y modo de juego
       let stats = await Stats.findOne({ username: username, gamemode: gamemode });
-
       if (!stats) {
+        var ratioCorrect=0;
+        if(gameData.incorrectAnswers + gameData.correctAnswers>0){
+          ratioCorrect=(gameData.correctAnswers / (gameData.incorrectAnswers + gameData.correctAnswers)) * 100;
+        }
         // Si no existen estadísticas, crear un nuevo documento
         stats = new Stats({
           username: username,
@@ -41,10 +44,9 @@ app.post("/saveGame", async (req, res) => {
           totalPoints: gameData.points,
           totalCorrectQuestions: gameData.correctAnswers,
           totalIncorrectQuestions: gameData.incorrectAnswers,
-          ratioCorrect: (gameData.correctAnswers / (gameData.incorrectAnswers + gameData.correctAnswers)) * 100,
+          ratioCorrect: ratioCorrect,
           avgTime: gameData.avgTime,
         });
-
         await stats.save();
       } else {
 
