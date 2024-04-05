@@ -74,5 +74,21 @@ describe('Ranking component', () => {
       expect(screen.getByText('Ranking - modo Batería de sabios')).toBeInTheDocument();
     });
   });
+
+  test('changes gamemode when clicking on mode buttons, clicks on Human Calculator button', async () => {
+    global.fetch.mockResolvedValueOnce({ json: () => Promise.resolve(mockData) });
+  
+    renderComponent();
+  
+    await assertRankingTableWithData();
+  
+    const calculatorButton = screen.getByRole('button', { name: 'Calculadora humana' });
+    fireEvent.click(calculatorButton);
+  
+    await waitFor(() => {
+      expect(screen.getByText('Ranking - modo Calculadora humana')).toBeInTheDocument();
+      expect(screen.queryByText('Ratio de aciertos (%)')).toBeNull(); // Asegura que no se muestra la opción de filtrar por ratio de aciertos
+    });
+  });
 });
 
