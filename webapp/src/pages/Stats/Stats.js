@@ -12,9 +12,12 @@ import {
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
+import { useTranslation } from "react-i18next";
 
 const Stats = () => {
   const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
+
+  const { t } = useTranslation();
 
   const [username, setUsername] = useState(localStorage.username || "error");
   const [stats, setStats] = useState(null);
@@ -77,8 +80,8 @@ const Stats = () => {
   if (isLoading) {
     return (
       <div>
-        <Heading as="h2"> Cargando ... </Heading>
-        <p>Se está consultando su búsqueda, espere unos instantes.</p>
+        <Heading as="h2">{t('pages.stats.loading')}</Heading>
+        <p>{t('pages.stats.loadingText')}</p>
       </div>
     );
   }
@@ -88,7 +91,7 @@ const Stats = () => {
       <>
         <Nav />
         <Box>
-          <label htmlFor="usernameInput">Nombre de usuario: </label>
+          <label htmlFor="usernameInput">{t('pages.stats.username')}</label>
           <Input
             type="text"
             id="usernameInput"
@@ -96,11 +99,10 @@ const Stats = () => {
             onChange={handleUsernameChange}
             data-testid="usernameInput"
           />
-          <Button onClick={handleSearch}>Buscar</Button>
+          <Button onClick={handleSearch}>{t('pages.stats.search')}</Button>
           <Heading as="h2">Error: {error}</Heading>
           <p marginTop="1rem">
-            Por favor compruebe si los valores del formulario son correctos e
-            inténtelo de nuevo
+            {t('pages.stats.searchText')}
           </p>
         </Box>
         <Footer />
@@ -114,7 +116,7 @@ const Stats = () => {
       <Box>
         <label htmlFor="usernameInput">
           {" "}
-          <strong>Nombre de usuario: </strong>
+          <strong>{t('pages.stats.username')} </strong>
         </label>
         <Flex columnGap="1rem" justifyContent="space-between">
           <Input
@@ -125,53 +127,53 @@ const Stats = () => {
             onChange={handleUsernameChange}
             data-testid="usernameInput"
           />
-          <Button onClick={handleSearch}>Buscar</Button>
+          <Button onClick={handleSearch}>{t('pages.stats.search')}</Button>
         </Flex>
         <Flex rowGap="0.5rem" justifyContent="center" m="0.5rem 0" flexDirection="column">
           <Button
             className={gamemode === "clasico" ? "active" : ""}
             onClick={() => handleGamemodeChange("clasico")}
           >
-            Clásico
+            {t('pages.stats.classic')}
           </Button>
           <Button
             className={gamemode === "bateria" ? "active" : ""}
             onClick={() => handleGamemodeChange("bateria")}
           >
-            Batería de sabios
+            {t('pages.stats.wisebattery')}
           </Button>
           <Button
             className={gamemode === "calculadora" ? "active" : ""}
             onClick={() => handleGamemodeChange("calculadora")}
           >
-            Calculadora humana
+            {t('pages.stats.humancalculator')}
           </Button>
         </Flex>
         {stats === null && !isLoading && (
-          <p mt="10rem">El usuario no ha jugado ninguna partida.</p>
+          <p mt="10rem">{t('pages.stats.noStats')}</p>
         )}
         {stats && (
           <div>
             <Heading as="h2">
-              Estadísticas de {stats.username} - modo {getModeName()}
+              {t('pages.stats.stats')} {stats.username} - {t('pages.stats.mode')} {getModeName()}
             </Heading>
             <Table>
               <Tbody>
                 <Tr>
                   <Td>
-                    <strong>Partidas jugadas</strong>
+                    <strong>{t('pages.stats.gamesPlayed')}</strong>
                   </Td>
                   <Td>{stats.nGamesPlayed}</Td>
                 </Tr>
                 <Tr>
                   <Td>
-                    <strong>Puntos por partida</strong>
+                    <strong>{t('pages.stats.pointsPerGame')}</strong>
                   </Td>
                   <Td>{stats.avgPoints.toFixed(2)}</Td>
                 </Tr>
                     <Tr>
                       <Td>
-                        <strong>Puntos totales</strong>
+                        <strong>{t('pages.stats.totalpoints')}</strong>
                       </Td>
                       <Td>{stats.totalPoints}</Td>
                     </Tr>
@@ -179,19 +181,19 @@ const Stats = () => {
                   <>
                     <Tr>
                       <Td>
-                        <strong>Preguntas correctas totales</strong>
+                        <strong>{t('pages.stats.totalCorrect')}</strong>
                       </Td>
                       <Td>{stats.totalCorrectQuestions}</Td>
                     </Tr>
                     <Tr>
                       <Td>
-                        <strong>Preguntas incorrectas totales</strong>
+                        <strong>{t('pages.stats.totalIncorrect')}</strong>
                       </Td>
                       <Td>{stats.totalIncorrectQuestions}</Td>
                     </Tr>
                     <Tr>
                       <Td>
-                        <strong>Porcentaje de aciertos</strong>
+                        <strong>{t('pages.stats.correctRatio')}</strong>
                       </Td>
                       <Td>{stats.ratioCorrect.toFixed(2)}%</Td>
                     </Tr>
@@ -199,7 +201,7 @@ const Stats = () => {
                   )}
                     <Tr>
                       <Td>
-                        <strong>Tiempo por pregunta (s):</strong>
+                        <strong>{t('pages.stats.avgTime')}</strong>
                       </Td>
                       <Td>{stats.avgTime.toFixed(2)}</Td>
                     </Tr>
