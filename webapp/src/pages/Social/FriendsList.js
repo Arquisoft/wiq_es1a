@@ -8,17 +8,25 @@ const FriendList = () => {
     const [friends, setFriends] = useState([]);
     const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
-    useEffect(() => {
-        const fetchFriends = async () => {
-            try {
-                const username = localStorage.getItem('username');
-                const response = await axios.get(`${apiEndpoint}/friends/?user=${username}`);
-                setFriends(response.data.friends);
-            } catch (error) {
-                console.error('Error fetching friends:', error);
-            }
-        };
+    const fetchFriends = async () => {
+        const username = localStorage.getItem('username');
+        setIsLoading(true);
+        fetch(gatewayUrl + `${apiEndpoint}/friends?user=${username}`)
+        .then((response) => response.json())
+        .then((data) => {
+            setFriends(data);
+            setIsLoading(false);
+        })
+        .catch((error) => {
+            console.error("Error al obtener los amigos:", error);
+            setError(
+            error.message || "Ha ocurrido un error al obtener los amigos"
+            );
+            setIsLoading(false);
+        });
+    };
 
+    useEffect(() => {
         fetchFriends();
     }, []);
 

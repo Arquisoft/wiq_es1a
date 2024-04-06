@@ -49,7 +49,7 @@ const UsersPage = () => {
 
   const fetchUsers = () => {
     setIsLoading(true);
-    fetch(apiEndpoint + `/users/search`, {
+    fetch(`${apiEndpoint}/users/search?username=${currentUser}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -57,10 +57,8 @@ const UsersPage = () => {
     })
     .then((response) => response.json())
     .then((data) => {
-      // Filtrar el usuario actual de la lista de usuarios
-      const updatedUsers = data.filter(user => user.username !== currentUser);
       // Filtrar usuarios que no son amigos
-      const filteredUsers = updatedUsers.filter(user => !friends.some(friend => friend._id === user._id));
+      const filteredUsers = data.filter(user => !friends.some(friend => friend._id === user._id));
       // Verificar si cada usuario es amigo o no
       filteredUsers.forEach(user => {
         user.isFriend = friends.some(friend => friend._id === user._id);
@@ -84,7 +82,7 @@ const UsersPage = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: localStorage.username, // Nombre de usuario del usuario actual
+          username: currentUser, // Nombre de usuario del usuario actual
           friendUsername: user.username // Nombre de usuario del amigo que se está agregando
         })
       });

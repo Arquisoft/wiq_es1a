@@ -84,8 +84,19 @@ app.get('/users', async (req, res) => {
 
 app.get('/users/search', async (req, res) => {
   try {
-    // No hay un término de búsqueda específico, por lo que simplemente obtenemos todos los usuarios
-    const users = await User.find({});
+    const { username } = req.query;
+    // Encuentra al usuario actual
+    const currentUser = await User.findOne({ username });
+    if (!currentUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // Encuentra los amigos del usuario actual
+    const currentUserFriends = currentUser.friends;
+
+    // Encuentra todos los usuarios que no son amigos del usuario actual
+    const users = await User.find({ username: { $ne: username, $nin: currentUserFriends } });
+
     res.json(users);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
@@ -93,36 +104,28 @@ app.get('/users/search', async (req, res) => {
 });
 
 
+
 app.post('/users/add-friend', async (req, res) => {
   try {
-    const { username, friendUsername } = req.body;
+    const username = req.body.username;
+    const friendUsername = req.body.friendUsername;
 
-// Buscar el usuario por su nombre de usuario
-const user = await User.findOne({ username });
-if (!user) {
-  return res.status(404).json({ error: 'User not found' });
-}
+    // Buscar el usuario por su nombre de usuario
+    const user = await User.findOne({ username:username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
 
-// Buscar al amigo por su nombre de usuario
-const friend = await User.findOne({ username: friendUsername });
-if (!friend) {
-  return res.status(404).json({ error: 'Friend not found' });
-}
+    // Verificar si el amigo ya está en la lista de amigos del usuario
+    if (user.friends.includes(friendUsername)) {
+      return res.status(400).json({ error: 'Friend already added' });
+    }
 
-// Verificar si el amigo ya está en la lista de amigos del usuario
-if (user.friends.includes(friend._id)) {
-  return res.status(400).json({ error: 'Friend already added' });
-}
+    // Agregar al amigo a la lista de amigos del usuario
+    user.friends.push(friendUsername);
+    await user.save();
 
-// Agregar al amigo a la lista de amigos del usuario
-user.friends.push(friend._id);
-await user.save();
-
-// También actualizar la lista de amigos del amigo
-friend.friends.push(user._id);
-await friend.save();
-
-res.json({ message: 'Friend added successfully' });
+    res.json({ message: 'Friend added successfully' });
   } catch (error) {
     console.error('Error adding friend:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -130,25 +133,22 @@ res.json({ message: 'Friend added successfully' });
 });
 
 // Route to get friends of the authenticated user
-app.get('/users/friends', async (req, res) => {
+app.get('/friends', async (req, res) => {
   try {
-    const username  = req.query.user;
+    const  username  = req.query.user;
 
-    // Busca al usuario por su ID
+    // Buscar al usuario por su nombre de usuario
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(500).json({ error: 'User not found' });
     }
-
-    // Popula la lista de amigos del usuario
-    await user.populate('friends').execPopulate();
-
     // Devuelve la lista de amigos
     res.json({ friends: user.friends });
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 app.get('/userInfo', async (req, res) => {
       try {

@@ -21,9 +21,9 @@ const userSchema = new mongoose.Schema({
       avgTime: Number
     }],
     friends: [{
-      type: mongoose.Schema.Types.ObjectId,
+      type: String,
       ref: 'User'
-    }]
+  }]
 });
 
 const User = mongoose.model('User', userSchema);
