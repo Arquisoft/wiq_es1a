@@ -107,7 +107,7 @@ const UsersPage = () => {
       }
 
       // Agregar el usuario a la lista de amigos localmente
-      setFriends((prevFriends) => [...prevFriends, user]);
+      setUsers((prevFriends) => [...prevFriends, user]);
       // Actualizar el estado de isFriend del usuario
       setUsers((prevUsers) => {
         return prevUsers.map((u) => {

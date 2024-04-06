@@ -63,6 +63,7 @@ const FriendList = () => {
 
   useEffect(() => {
     fetchFriends();
+    // eslint-disable-next-line
   }, [friendReload]);
 
   if (isLoading) {
