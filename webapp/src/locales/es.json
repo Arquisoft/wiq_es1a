@@ -20,6 +20,8 @@
       "classic": "Clásico",
       "wisebattery": "Batería de sabios",
       "humancalculator": "Calculadora humana",
+      "users": "Usuarios",
+      "friends": "Amigos",
       "stats": "Estadísticas",
       "ranking": "Ranking",
       "profile": "Perfil",
@@ -39,6 +41,19 @@
       "loginLink": "Inicia sesión",
       "registerAlert": "Usuario registrado exitosamente",
       "registerError": "Las contraseñas no coinciden"
+    },
+    "profile":{
+      "profile": "Perfil de usuario",
+      "name": "Nombre de usuario",
+      "date": "Fecha de creación de la cuenta",
+      "recentGames": "Partidas recientes",
+      "gameMode": "Modo de juego",
+      "correct": "Respuestas correctas",
+      "incorrect": "Respuestas incorrectas",
+      "score": "Puntos",
+      "avgTime": "Tiempo promedio",
+      "seconds": "segundos",
+      "noGames": "No hay partidas recientes."
     }
   },
   "pages": {
@@ -155,6 +170,23 @@
       "title": "Página no encontrada",
       "message": "La página que estabas buscando no está disponible",
       "home": "Volver al inicio"
+    },
+    "userspage": {
+      "list": "Lista de usuarios",
+      "user": "Usuario",
+      "actions": "Acciones",
+      "friend": "Amigo",
+      "addFriend": "Añadir amigo",
+      "loading": "Cargando usuarios ...",
+      "error": "Error al cargar los usuarios: "
+    },
+    "friendlist": {
+      "loading": "Cargando ...",
+      "loadingText": "Se está consultando su búsqueda, espere unos instantes.",
+      "list": "Lista de amigos",
+      "profile": "Ver perfil",
+      "delete": "Eliminar amigo",
+      "noFriends": "No tienes amigos actualmente."
     }
   }
 }

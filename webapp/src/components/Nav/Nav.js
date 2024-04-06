@@ -49,9 +49,25 @@ const Nav = () => {
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/stats")}>{t('components.nav.stats')}</Button>
-        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/ranking")}>{t('components.nav.ranking')}</Button>
-        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/perfil")}>{t('components.nav.profile')}</Button>
+        <Popover>
+          <PopoverTrigger>
+            <Button variant="link" _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} color={textColor}>
+              Social
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader>Social</PopoverHeader>
+            <PopoverBody>
+              <Text cursor="pointer" onClick={() => handleNavigate("/social/usuarios")} color={textColor}>{t('components.nav.users')}</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/social/amigos")} color={textColor}>{t('components.nav.friends')}</Text>
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
+        <Button variant="link" _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>{t('components.nav.stats')}</Button>
+        <Button variant="link" _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
+        <Button variant="link" _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>{t('components.nav.profile')}</Button>
       </Flex>
       <Flex width="25%"  className="rightItems" justifyContent="end">
         <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/sobre")}>{t('components.nav.about')}</Button>

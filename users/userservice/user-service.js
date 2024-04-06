@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const User = require('./user-model');
+const { Group, User, UserGroup } = require('./user-model');
 
 const app = express();
 const port = 8001;
@@ -52,6 +52,12 @@ app.post('/adduser', async (req, res) => {
         // Check if required fields are present in the request body
         validateRequiredFields(req, ['username', 'password']);
 
+        // Check if the username already exists
+        const existingUser = await User.findOne({ username: req.body.username });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Username already exists. Please choose a different username.' });
+        }
+
         // Encrypt the password before saving it
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
@@ -65,6 +71,109 @@ app.post('/adduser', async (req, res) => {
     } catch (error) {
         res.status(400).json({ error: error.message }); 
     }});
+
+// Route to get all users
+app.get('/users', async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.get('/users/search', async (req, res) => {
+  try {
+    const { username } = req.query;
+    // Encuentra al usuario actual
+    const currentUser = await User.findOne({ username });
+    if (!currentUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    // Encuentra los amigos del usuario actual
+    const currentUserFriends = currentUser.friends;
+
+    // Encuentra todos los usuarios que no son amigos del usuario actual
+    const users = await User.find({ username: { $ne: username, $nin: currentUserFriends } });
+
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/users/add-friend', async (req, res) => {
+  try {
+    const username = req.body.username;
+    const friendUsername = req.body.friendUsername;
+
+    // Buscar el usuario por su nombre de usuario
+    const user = await User.findOne({ username:username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Verificar si el amigo ya está en la lista de amigos del usuario
+    if (user.friends.includes(friendUsername)) {
+      return res.status(400).json({ error: 'Friend already added' });
+    }
+
+    // Agregar al amigo a la lista de amigos del usuario
+    user.friends.push(friendUsername);
+    await user.save();
+
+    res.json({ message: 'Friend added successfully' });
+  } catch (error) {
+    console.error('Error adding friend:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+app.post('/users/remove-friend', async (req, res) => {
+  try {
+    const username = req.body.username;
+    const friendUsername = req.body.friendUsername;
+
+    // Buscar el usuario por su nombre de usuario
+    const user = await User.findOne({ username: username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Verificar si el amigo está en la lista de amigos del usuario
+    if (!user.friends.includes(friendUsername)) {
+      return res.status(400).json({ error: 'Friend not found in the user\'s friend list' });
+    }
+
+    // Eliminar al amigo de la lista de amigos del usuario
+    user.friends = user.friends.filter(friend => friend !== friendUsername);
+    await user.save();
+
+    res.json({ message: 'Friend removed successfully' });
+  } catch (error) {
+    console.error('Error removing friend:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Route to get friends of the authenticated user
+app.get('/friends', async (req, res) => {
+  try {
+    const  username  = req.query.user;
+
+    // Buscar al usuario por su nombre de usuario
+    const user = await User.findOne({ username });
+    if (!user) {
+      return res.status(500).json({ error: 'User not found' });
+    }
+    // Devuelve la lista de amigos
+    res.json({ friends: user.friends });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 app.get('/userInfo', async (req, res) => {
       try {

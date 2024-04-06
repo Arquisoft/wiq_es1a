@@ -41,6 +41,7 @@ const AddUser = () => {
     }
     axios
       .post(`${apiEndpoint}/adduser`, { username, password })
+
       .then((response) => {
         const { token } = response.data;
         setOpenSnackbar(true);
@@ -49,6 +50,7 @@ const AddUser = () => {
         navigate("/home");
       })
       .catch((err) => setError(err.response.data.error));
+
   };
 
   return (

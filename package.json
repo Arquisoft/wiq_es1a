@@ -6,6 +6,6 @@
     "cross-fetch": "^4.0.0",
     "date-fns": "^3.3.1",
     "react-auth-kit": "^3.0.2-alpha.19",
-    "react-scripts": "^5.0.1"
+    "react-scripts": "^3.0.1"
   }
 }
