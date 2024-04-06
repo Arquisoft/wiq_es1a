@@ -1,5 +1,6 @@
 import { Box, VStack, Heading, Text, Center, Spinner, Table, Thead, Tbody, Tr, Th, Td, Avatar } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Perfil = (username) => {
   const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
@@ -7,6 +8,8 @@ const Perfil = (username) => {
   const [loading, setLoading] = useState(true);
 
   const [error, setError] = useState(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch(gatewayUrl + `/userInfo?user=${username.username}`)
@@ -28,7 +31,7 @@ const Perfil = (username) => {
         <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg" width="100%">
           <VStack p={8} align="start" spacing={6}>
             <Heading as="h1" size="lg">
-              Perfil del usuario
+              {t('components.profile.profile')}
             </Heading>
             {loading ? (
               <Center>
@@ -42,25 +45,25 @@ const Perfil = (username) => {
                   <>
                     <Avatar name={username.username} />
                     <Text>
-                      <strong>Nombre de usuario:</strong> {userData.username}
+                      <strong>{t('components.profile.name')}</strong> {userData.username}
                     </Text>
                     <Text>
-                      <strong>Fecha de creación de la cuenta:</strong>{" "}
+                      <strong>{t('components.profile.date')}</strong>{" "}
                       {new Date(userData.createdAt).toLocaleString()}
                     </Text>
                     <Heading as="h2" size="md">
-                      Partidas Recientes
+                      {t('components.profile.recentGames')}z
                     </Heading>
                     <div style={{ width: '100%'}}>
                       {userData.games.length > 0 ? (
                         <Table variant="simple">
                           <Thead>
                             <Tr>
-                              <Th>Modo de juego</Th>
-                              <Th>Respuestas correctas</Th>
-                              <Th>Respuestas incorrectas</Th>
-                              <Th>Puntos</Th>
-                              <Th>Tiempo promedio</Th>
+                              <Th>{t('components.profile.gameMode')}</Th>
+                              <Th>{t('components.profile.correct')}</Th>
+                              <Th>{t('components.profile.incorrect')}</Th>
+                              <Th>{t('components.profile.score')}</Th>
+                              <Th>{t('components.profile.avgTime')}</Th>
                             </Tr>
                           </Thead>
                           <Tbody>
@@ -70,13 +73,13 @@ const Perfil = (username) => {
                               <Td>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
                               <Td>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
                               <Td>{game.points}</Td>
-                              <Td>{parseFloat(game.avgTime).toFixed(2)} segundos</Td>
+                              <Td>{parseFloat(game.avgTime).toFixed(2)} {t('components.profile.seconds')}</Td>
                             </Tr>
                             ))}
                           </Tbody>
                         </Table>
                       ) : (
-                        <Text>No hay partidas recientes.</Text>
+                        <Text>{t('components.profile.noGames')}</Text>
                       )}
                     </div>
                   </>

@@ -14,16 +14,19 @@ import {
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
+import { useTranslation } from "react-i18next";
 
 const UserList = ({ users, handleAddFriend }) => {
+  const { t } = useTranslation();
+
   return (
     <div>
-      <Heading as="h2">Lista de Usuarios</Heading>
+      <Heading as="h2">{t('pages.userspage.list')}</Heading>
       <Table>
         <Thead>
           <Tr>
-            <Th textAlign="center">Usuario</Th>
-            <Th>Acciones</Th>
+            <Th textAlign="center">{t('pages.userspage.user')}</Th>
+            <Th>{t('pages.userspage.actions')}</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -37,10 +40,10 @@ const UserList = ({ users, handleAddFriend }) => {
               </Td>
               <Td>
                 {user.isFriend ? (
-                  <span>Amigo</span>
+                  <span>{t('pages.userspage.friend')}</span>
                 ) : (
                   <Button onClick={() => handleAddFriend(user)}>
-                    Agregar como amigo
+                    {t('pages.userspage.addFriend')}
                   </Button>
                 )}
               </Td>
@@ -58,11 +61,13 @@ const UsersPage = () => {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [friends, setFriends] = useState([]);
   const currentUser = localStorage.getItem("username");
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetchUsers();
+    // eslint-disable-next-line
   }, []);
 
   const fetchUsers = () => {
@@ -127,8 +132,8 @@ const UsersPage = () => {
     <>
       <Nav />
       <div>
-        {isLoading && <p>Cargando usuarios...</p>}
-        {error && <p>Error al cargar usuarios: {error}</p>}
+        {isLoading && <p>{t('pages.userspage.loading')}</p>}
+        {error && <p>{t('pages.userspage.error')} {error}</p>}
         <UserList users={users} handleAddFriend={handleAddFriend} />
       </div>
       <Footer />

@@ -13,8 +13,11 @@ import {
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import Profile from "../../components/Profile/Profile.js";
+import { useTranslation } from "react-i18next";
 
 const FriendList = () => {
+  const { t } = useTranslation();
+
   const [isLoading, setIsLoading] = useState(false);
   const [friends, setFriends] = useState([]);
   const [friend, setFriend] = useState("");
@@ -69,8 +72,8 @@ const FriendList = () => {
   if (isLoading) {
     return (
       <div>
-        <Heading as="h2"> Cargando ... </Heading>
-        <p>Se está consultando su búsqueda, espere unos instantes.</p>
+        <Heading as="h2">{t('pages.friendlist.loading')}</Heading>
+        <p>{t('pages.friendlist.loadingText')}</p>
       </div>
     );
   }
@@ -86,7 +89,7 @@ const FriendList = () => {
       ) : (
         <Container maxW="md">
           <Heading as="h1" size="xl" margin="1rem">
-            Lista de amigos
+            {t('pages.friendlist.list')}
           </Heading>
           {friends.length > 0 ? (
             <List display="flex" flexDirection="column" spacing={3}>
@@ -102,10 +105,10 @@ const FriendList = () => {
                       <Text>{friend}</Text>
                     </Flex>
                     <Button onClick={() => setFriend(friend)}>
-                      Ver perfil
+                      {t('pages.friendlist.profile')}
                     </Button>
                     <Button onClick={() => handleRemoveFriend(friend)}>
-                      Eliminar amigo
+                      {t('pages.friendlist.delete')}
                     </Button>
                   </ListItem>
                   {index !== friends.length - 1 && <Divider />}
@@ -114,7 +117,7 @@ const FriendList = () => {
             </List>
           ) : (
             <Text fontSize="xl" textAlign="center">
-              No tienes amigos actualmente.
+              {t('pages.friendlist.noFriends')}
             </Text>
           )}
         </Container>
