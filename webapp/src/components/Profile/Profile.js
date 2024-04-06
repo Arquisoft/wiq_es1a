@@ -52,7 +52,7 @@ const Perfil = (username) => {
                       {new Date(userData.createdAt).toLocaleString()}
                     </Text>
                     <Heading as="h2" size="md">
-                      {t('components.profile.recentGames')}z
+                      {t('components.profile.recentGames')}
                     </Heading>
                     <div style={{ width: '100%'}}>
                       {userData.games.length > 0 ? (
