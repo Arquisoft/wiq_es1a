@@ -1,0 +1,160 @@
+{
+  "components": {
+    "footer": {
+      "copyright": "Copyright 2024 ® Grupo 1A de Arquitectura del Software"
+    },
+    "login": {
+      "title": "Identifícate",
+      "nameLabel": "Introduce tu nombre",
+      "namePlaceholder": "Nombre",
+      "passwordPlaceholder": "Contraseña",
+      "passwordLabel": "Introduce tu contraseña",
+      "loginButton": "Iniciar sesión",
+      "registerText": "¿No tienes cuenta?",
+      "registerLink": "Regístrate",
+      "loginAlert": "Inicio de sesión exitoso"
+    },
+    "nav": {
+      "home": "Inicio",
+      "gameModes": "Modos de juego",
+      "classic": "Clásico",
+      "wisebattery": "Batería de sabios",
+      "humancalculator": "Calculadora humana",
+      "stats": "Estadísticas",
+      "ranking": "Ranking",
+      "profile": "Perfil",
+      "about": "Sobre nosotros",
+      "options": "Opciones",
+      "disconnect": "Desconectar"
+    },
+    "register": {
+      "title": "Regístrate",
+      "nameLabel": "Introduce tu nombre",
+      "namePlaceholder": "Nombre",
+      "passwordPlaceholder": "Contraseña",
+      "passwordLabel": "Introduce tu contraseña",
+      "password2Label": "Vuelve a introducir la contraseña",
+      "registerButton": "Registrarse",
+      "loginText": "¿Ya tienes cuenta?",
+      "loginLink": "Inicia sesión",
+      "registerAlert": "Usuario registrado exitosamente",
+      "registerError": "Las contraseñas no coinciden"
+    }
+  },
+  "pages": {
+    "classic": {
+      "finished": "¡Juego terminado!",
+      "score": "Tu puntuación:",
+      "playAgain": "Jugar de nuevo",
+      "back": "Volver al menú",
+      "question": "Pregunta",
+      "time": "Tiempo restante:",
+      "easterEgg": "¡Has acertado todas! Eres la cuenta secundaria de Jordi Hurtado.",
+      "answer": "Responder"
+    },
+    "wisebattery": {
+      "finished": "¡Juego terminado!",
+      "score": "Tu puntuación:",
+      "playAgain": "Jugar de nuevo",
+      "back": "Volver al menú",
+      "question": "Pregunta",
+      "time": "Tiempo restante:"
+    },
+    "humancalculator": {
+      "finished": "¡Juego terminado!",
+      "score": "Tu puntuación:",
+      "playAgain": "Jugar de nuevo",
+      "back": "Volver al menú",
+      "question": "Pregunta",
+      "time": "Tiempo restante:"
+    },
+    "config": {
+      "title": "Configuración",
+      "language": "Idioma",
+      "topics": "Temáticas de preguntas",
+      "countries": "Países",
+      "literature": "Literatura",
+      "cinema": "Cine",
+      "art": "Arte",
+      "programming": "Programación",
+      "save": "Aplicar cambios",
+      "timeBetweenClassic": "Tiempo entre preguntas (Clásico)",
+      "questionCountClassic": "Número de preguntas (Clásico)",
+      "totalTimeBattery": "Tiempo total (Batería de sabios)"
+    },
+    "home": {
+      "title": "¡Bienvenido a WIQ!",
+      "choose": "Elige el modo de juego",
+      "classic": "Clásico",
+      "classicDescription": "En el modo Clásico, tendrás que responder un número determinado de preguntas en un tiempo limitado. ¡Demuestra tus conocimientos y rapidez para superar este desafío!",
+      "wisebattery": "Batería de sabios",
+      "wisebatteryDescription": "En el modo Batería de Sabios, pondrás a prueba tu conocimiento respondiendo todas las preguntas que puedas en un tiempo fijo. Cuantas más preguntas aciertes, ¡mejor será tu puntuación! ¿Estás listo para este desafío cronometrado?",
+      "humancalculator": "Calculadora humana",
+      "humancalculatorDescription": "En el modo Calculadora Humana, tendrás que resolver operaciones matemáticas en un tiempo limitado. ¡Demuestra tus habilidades matemáticas y rapidez para superar este desafío!",
+      "error": "Hubo un error al cargar las preguntas. Por favor, inténtalo más tarde."
+    },
+    "profile": {
+      "title": "Perfil",
+      "nameLabel": "Nombre de usuario:",
+      "dateLabel": "Fecha de creación de la cuenta:",
+      "recentGames": "Partidas recientes",
+      "gameMode": "Modo de juego",
+      "correct": "Respuestas correctas",
+      "incorrect": "Respuestas incorrectas",
+      "score": "Puntos",
+      "avgTime": "Tiempo promedio",
+      "seconds": "segundos",
+      "noGames": "No has jugado ninguna partida aún."
+    },
+    "ranking": {
+      "loading": "Cargando ...",
+      "loadingText": "Se está consultando el ranking, espere unos instantes.",
+      "error": "Error:",
+      "errorLabel": "Ha ocurrido un error al obtener el ranking",
+      "rank-mode": "Ranking - modo",
+      "classic": "Clásico",
+      "wisebattery": "Batería de sabios",
+      "humancalculator": "Calculadora humana",
+      "user": "Usuario",
+      "avgPoints": "Puntos promedio",
+      "totalPoints": "Puntos totales",
+      "ratioCorrect": "Ratio de aciertos (%)",
+      "avgTime": "Tiempo por pregunta (s):",
+      "reboot": "Restablecer por defecto",
+      "errorText": "Ha ocurrido un error al obtener el ranking"
+    },
+    "about": {
+        "title": "Equipo WIQ_es1a",
+        "description": "Nuestro equipo de desarrollo",
+        "name": "Nombre",
+        "uo": "UO",
+        "github": "GitHub",
+        "mygithub": "Mi GitHub"
+    },
+    "stats": {
+        "loading": "Cargando ...",
+        "loadingText": "Se están consultando las estadísticas, espere unos instantes.",
+        "username": "Nombre de usuario",
+        "search": "Buscar",
+        "searchText": "Por favor compruebe si los valores del formulario son correctos e inténtelo de nuevo",
+        "classic": "Clásico",
+        "wisebattery": "Batería de sabios",
+        "humancalculator": "Calculadora humana",
+        "noStats": "El usuario no ha jugado ninguna partida.",
+        "stats": "Estadísticas de",
+        "mode": "Modo",
+        "gamesPlayed": "Partidas jugadas",
+        "pointsPerGame": "Puntos por partida",
+        "totalpoints": "Puntos totales",
+        "totalCorrect": "Preguntas correctas totales",
+        "totalIncorrect": "Preguntas incorrectas totales",
+        "correctRatio": "Porcentaje de aciertos",
+        "avgTime": "Tiempo por pregunta (s)"
+    },
+    "wrongroute": {
+      "title": "Página no encontrada",
+      "message": "La página que estabas buscando no está disponible",
+      "home": "Volver al inicio"
+    }
+  }
+}

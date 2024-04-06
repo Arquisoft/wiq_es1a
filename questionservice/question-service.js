@@ -39,10 +39,14 @@ app.get("/questions", async (req, res) => {
       .status(400)
       .json({ error: `El límite de preguntas son ${MAX_QUESTIONS}` });
   }
+  if(locale !== "en" && locale !== "es"){
+    locale = "es";
+  }
   try {
     var tematica = req.query.tematica ? req.query.tematica : "all";
     var n = req.query.n ? req.query.n : 10;
-    var data = gen.getQuestions(tematica, n);
+    var locale = req.query.locale ? req.query.locale : "es";
+    var data = gen.getQuestions(tematica, n, locale);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -50,7 +54,10 @@ app.get("/questions", async (req, res) => {
 });
 
 app.post("/questions", async (req, res) => {
-  const { tematicas, n } = req.body.body;
+  const { tematicas, n, locale } = req.body.body;
+  if(locale !== "en" && locale !== "es"){
+    locale = "es";
+  }
   if (!n || n > MAX_QUESTIONS) {
     res
       .status(400)
@@ -64,7 +71,7 @@ app.post("/questions", async (req, res) => {
         ? temas
         : ["paises", "literatura", "cine", "arte", "programacion"];
     const cantidadPreguntas = parseInt(n, 10);
-    const data = gen.getQuestionsPost(tematicasValidas, cantidadPreguntas);
+    const data = gen.getQuestionsPost(tematicasValidas, cantidadPreguntas, locale);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });

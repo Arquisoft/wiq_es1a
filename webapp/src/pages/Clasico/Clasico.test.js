@@ -3,6 +3,8 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Clasico from "./Clasico";
 import { MemoryRouter } from "react-router-dom";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../../i18n.js";
 
 beforeEach(() => {
   jest.resetAllMocks();
@@ -29,9 +31,11 @@ describe("Clasico Component", () => {
     });
 
     render(
-      <MemoryRouter>
-        <Clasico />
-      </MemoryRouter>
+      <I18nextProvider i18n={i18n}>
+        <MemoryRouter>
+          <Clasico />
+        </MemoryRouter>
+      </I18nextProvider>
     );
 
     // Verificar que las preguntas se rendericen correctamente
@@ -72,7 +76,9 @@ describe("Clasico Component", () => {
     fireEvent.click(screen.getByText("Nilo"));
 
     // Verificar que la respuesta seleccionada se resalte correctamente
-    expect(screen.getByText("Amazonas")).toHaveStyle('backgroundColor: "#10FF00"');
+    expect(screen.getByText("Amazonas")).toHaveStyle(
+      'backgroundColor: "#10FF00"'
+    );
 
     // Simular el siguiente paso del juego
     fireEvent.click(screen.getByText("Responder"));
@@ -80,13 +86,15 @@ describe("Clasico Component", () => {
     await waitFor(
       () => {
         expect(screen.getByText("¡Juego terminado!")).toBeInTheDocument();
-        expect(screen.getByText("Repetir Juego")).toBeInTheDocument();
-        expect(screen.getByText("Volver al Menú Principal")).toBeInTheDocument();
+        expect(screen.getByText("Jugar de nuevo")).toBeInTheDocument();
+        expect(
+          screen.getByText("Volver al menú")
+        ).toBeInTheDocument();
       },
       { timeout: 30000 }
     );
 
-    fireEvent.click(screen.getByText("Repetir Juego"));
+    fireEvent.click(screen.getByText("Jugar de nuevo"));
   }, 50000);
 
   test("renders game questions and handles errors", async () => {
@@ -99,9 +107,11 @@ describe("Clasico Component", () => {
     );
 
     render(
-      <MemoryRouter>
-        <Clasico />
-      </MemoryRouter>
+      <I18nextProvider i18n={i18n}>
+        <MemoryRouter>
+          <Clasico />
+        </MemoryRouter>
+      </I18nextProvider>
     );
 
     await waitFor(

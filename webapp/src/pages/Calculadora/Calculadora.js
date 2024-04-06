@@ -4,6 +4,7 @@ import Footer from "../../components/Footer/Footer.js";
 import { Link } from "react-router-dom";
 import { Box, Flex, Heading, Button, Input } from "@chakra-ui/react";
 import axios from 'axios';
+import { useTranslation } from "react-i18next";
 
 const generateRandomOperation = () => {
   let operators = ["+", "-", "*", "/"];
@@ -38,6 +39,8 @@ function findDivisors(num) {
 const CalculadoraHumana = () => {
   const TIME = 60;
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
+
+  const { t } = useTranslation();
 
   const [valSubmit, setValSubmit] = useState("");
   const [puntuacion, setPuntuacion] = useState(0);
@@ -168,13 +171,13 @@ const CalculadoraHumana = () => {
         <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
           {juegoTerminado ? (
             <Box textAlign="center">
-              <Heading as="h2">¡Juego terminado!</Heading>
+              <Heading as="h2">{t('pages.humancalculator.finished')}</Heading>
               <p p={2}>Tu puntuación: {puntuacion}</p>
               <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
-                Repetir Juego
+                {t('pages.humancalculator.playAgain')}
               </Button>
               <Link to="/home" style={{ marginLeft: "10px" }}>
-                Volver al Menú Principal
+                {t('pages.humancalculator.again')}
               </Link>
             </Box>
           ) : (
@@ -194,8 +197,8 @@ const CalculadoraHumana = () => {
                 Enviar{" "}
               </Button>
               <Box textAlign="center" mt={4}>
-                <p>Tiempo restante: {Math.floor(tiempoRestante)}</p>
-                <p>Puntuación: {puntuacion}</p>
+                <p>{t('pages.humancalculator.time')} {Math.floor(tiempoRestante)}</p>
+                <p>{t('pages.humancalculator.score')} {puntuacion}</p>
                 <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
                   <Box
                     bg="teal.500"

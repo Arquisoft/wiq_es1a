@@ -16,8 +16,10 @@ import {
   Flex
 } from "@chakra-ui/react";
 import Footer from "../Footer/Footer";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   const { colorMode, toggleColorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
 
@@ -77,28 +79,28 @@ const Login = () => {
         {!loginSuccess && (
           <>
             <Heading as="h1" size="xl" mb={4}>
-              Identifícate
+              {t('components.login.title')}
             </Heading>
             <FormControl>
               <FormLabel htmlFor="login-username">
-                Introduce tu nombre:
+              {t('components.login.nameLabel')}
               </FormLabel>
               <Input
                 id="login-username"
                 type="text"
-                placeholder="Username"
+                placeholder={t('components.login.namePlaceholder')}
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel htmlFor="login-password">
-                Introduce tu contraseña:
+              {t('components.login.passwordLabel')}
               </FormLabel>
               <Input
                 id="login-password"
                 type="password"
-                placeholder="Password"
+                placeholder={t('components.login.passwordPlaceholder')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -107,15 +109,15 @@ const Login = () => {
               Login
             </Button>
             <Box mt={4}>
-              ¿No tienes cuenta?{" "}
+            {t('components.login.registerText')}{" "}
               <Link color="teal.500" href="/register">
-                Regístrate
+              {t('components.login.registerLink')}
               </Link>
             </Box>
             {openSnackbar && (
               <Alert status="success" mt={4}>
                 <AlertIcon />
-                Login successful
+                {t('components.login.loginAlert')}
               </Alert>
             )}
             {error && (

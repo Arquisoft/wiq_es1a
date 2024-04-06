@@ -6,7 +6,7 @@ import "./Background.css";
 
 const Background = () => {
     const [ init, setInit ] = useState(false);
-    const { colorMode, toggleColorMode } = useColorMode();
+    const { colorMode } = useColorMode();
     const isDarkTheme = colorMode === "dark";
     const particlesColor = isDarkTheme ? "#FFFFFF" : "#000000";
     const bgColor = isDarkTheme ? '#1A202C' : '#FFFFFF';
