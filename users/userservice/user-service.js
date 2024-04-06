@@ -84,13 +84,14 @@ app.get('/users', async (req, res) => {
 
 app.get('/users/search', async (req, res) => {
   try {
-    const searchTerm = req.query.search; // Obtener el término de búsqueda de la consulta de la URL
-    const users = await User.find({ username: { $regex: searchTerm, $options: 'i' } }); // Realizar la búsqueda en la base de datos
+    // No hay un término de búsqueda específico, por lo que simplemente obtenemos todos los usuarios
+    const users = await User.find({});
     res.json(users);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 app.post('/users/add-friend', async (req, res) => {
   try {

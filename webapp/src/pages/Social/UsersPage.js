@@ -36,7 +36,6 @@ const UserList = ({ users, handleAddFriend }) => {
 
 const UsersPage = () => {
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
-  const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -49,7 +48,7 @@ const UsersPage = () => {
 
   const fetchUsers = () => {
     setIsLoading(true);
-    fetch(apiEndpoint+`/users/search?search=${searchQuery}`, {
+    fetch(apiEndpoint + `/users/search`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -117,16 +116,6 @@ const UsersPage = () => {
   return (
     <>
       <Nav />
-      <div style={{ marginBottom: '20px' }}> {/* Agrega un margen inferior al contenedor del componente de búsqueda */}
-        <Heading as="h2">Buscar Usuarios</Heading>
-        <Input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Buscar por nombre de usuario"
-        />
-        <Button onClick={fetchUsers} ml={2}>Buscar</Button> {/* Agrega un margen a la izquierda del botón de búsqueda */}
-      </div>
       <div>
         {isLoading && <p>Cargando usuarios...</p>}
         {error && <p>Error al cargar usuarios: {error}</p>}
