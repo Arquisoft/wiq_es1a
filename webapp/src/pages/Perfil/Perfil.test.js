@@ -41,7 +41,7 @@ describe("Perfil Component", () => {
     await waitFor(() => {
       expect(screen.getByText("testUser")).toBeInTheDocument();
       expect(
-        screen.getByText(/Fecha de creación de la cuenta:/i)
+        screen.getByText(/Fecha de creación de la cuenta/i)
       ).toBeInTheDocument();
       expect(screen.getByText("Partidas recientes")).toBeInTheDocument();
       expect(screen.getByText("clasico")).toBeInTheDocument();
@@ -90,38 +90,34 @@ describe("Perfil Component", () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText("No has jugado ninguna partida aún.")
+        screen.getByText("No hay partidas recientes.")
       ).toBeInTheDocument();
     });
   });
 });
 
-  test('displays recent calculator game data', async () => {
-    const mockUserData = {
-      username: 'testUser',
-      createdAt: new Date(),
-      games: [
-        { gamemode: 'calculadora', points: 15, avgTime: 8.5 }
-      ]
-    };
-  
-    jest.spyOn(global, 'fetch').mockResolvedValueOnce({
-      json: jest.fn().mockResolvedValueOnce(mockUserData),
-    });
-  
-    render(
-      <MemoryRouter>
-        <Perfil />
-      </MemoryRouter>
-    );
-  
-    await waitFor(() => {
-      expect(screen.getByText('calculadora')).toBeInTheDocument();
-      const dashCells = screen.getAllByText('-');
-      expect(dashCells.length).toBe(2);
-      expect(screen.getByText('15')).toBeInTheDocument();
-      expect(screen.getByText('8.50 segundos')).toBeInTheDocument();
-    });
+test("displays recent calculator game data", async () => {
+  const mockUserData = {
+    username: "testUser",
+    createdAt: new Date(),
+    games: [{ gamemode: "calculadora", points: 15, avgTime: 8.5 }],
+  };
+
+  jest.spyOn(global, "fetch").mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValueOnce(mockUserData),
   });
-  
+
+  render(
+    <MemoryRouter>
+      <Perfil />
+    </MemoryRouter>
+  );
+
+  await waitFor(() => {
+    expect(screen.getByText("calculadora")).toBeInTheDocument();
+    const dashCells = screen.getAllByText("-");
+    expect(dashCells.length).toBe(2);
+    expect(screen.getByText("15")).toBeInTheDocument();
+    expect(screen.getByText("8.50 segundos")).toBeInTheDocument();
+  });
 });
