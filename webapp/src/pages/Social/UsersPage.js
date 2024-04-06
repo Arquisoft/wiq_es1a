@@ -82,7 +82,7 @@ const UsersPage = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          username: user.username, // Nombre de usuario del usuario actual
+          username: localStorage.username, // Nombre de usuario del usuario actual
           friendUsername: user.username // Nombre de usuario del amigo que se está agregando
         })
       });
