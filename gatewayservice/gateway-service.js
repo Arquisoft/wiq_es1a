@@ -160,6 +160,19 @@ app.post("/users/add-friend", async (req, res) => {
   }
 });
 
+app.post("/users/remove-friend", async (req, res) => {
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/users/remove-friend",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
+});
+
 app.get("/questions", async (req, res) => {
   try {
     // Forward the question request to the question service

@@ -7,7 +7,8 @@ import {
   Divider,
   Heading,
   Button,
-  Avatar
+  Avatar,
+  Flex
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -17,6 +18,7 @@ const FriendList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [friends, setFriends] = useState([]);
   const [friend, setFriend] = useState("");
+  const [friendReload, setFriendReload] = useState(false);
   const currentUser = localStorage.getItem("username");
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
@@ -35,8 +37,8 @@ const FriendList = () => {
         setIsLoading(false);
       });
   };
-  
-  const handleRemoveFriend = async (user) => {
+
+  const handleRemoveFriend = async (friend) => {
     try {
       // Realizar la solicitud HTTP POST al endpoint '/users/remove-friend'
       const response = await fetch(apiEndpoint + "/users/remove-friend", {
@@ -46,33 +48,22 @@ const FriendList = () => {
         },
         body: JSON.stringify({
           username: currentUser, // Nombre de usuario del usuario actual
-          friendUsername: user.username, // Nombre de usuario del amigo que se está eliminando
+          friendUsername: friend, // Nombre de usuario del amigo que se está eliminando
         }),
       });
-  
+
       if (!response.ok) {
         throw new Error("Error al eliminar amigo");
       }
-  
-      // Eliminar al usuario de la lista de amigos localmente
-      setFriends((prevFriends) => prevFriends.filter(friend => friend._id !== user._id));
-      // Actualizar el estado de isFriend del usuario
-      setFriends((prevFriends) => {
-        return prevFriends.map((u) => {
-          if (u._id === user._id) {
-            return { ...u, isFriend: false };
-          }
-          return u;
-        });
-      });
+      setFriendReload(!friendReload);
     } catch (error) {
       console.error("Error al eliminar amigo:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchFriends();
-  }, []);
+  }, [friendReload]);
 
   if (isLoading) {
     return (
@@ -100,11 +91,21 @@ const FriendList = () => {
             <List display="flex" flexDirection="column" spacing={3}>
               {friends.map((friend, index) => (
                 <div key={friend._id}>
-                  <ListItem m="1rem" display="flex" justifyContent="space-around">
-                    <Avatar name={friend} />
-                    <Text alignSelf="center">{friend}</Text>
-                    <Button onClick={() => setFriend(friend)}>Ver perfil</Button>
-                    <Button onClick={() => handleRemoveFriend(friend)}>Eliminar amigo</Button>
+                  <ListItem
+                    m="1rem"
+                    display="flex"
+                    justifyContent="space-around"
+                  >
+                    <Flex flexDirection="column" alignItems="center">
+                      <Avatar name={friend} />
+                      <Text>{friend}</Text>
+                    </Flex>
+                    <Button onClick={() => setFriend(friend)}>
+                      Ver perfil
+                    </Button>
+                    <Button onClick={() => handleRemoveFriend(friend)}>
+                      Eliminar amigo
+                    </Button>
                   </ListItem>
                   {index !== friends.length - 1 && <Divider />}
                 </div>
