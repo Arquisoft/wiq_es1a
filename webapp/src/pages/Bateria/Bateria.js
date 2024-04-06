@@ -10,7 +10,7 @@ const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
   const TIME = localStorage.getItem("bateriaTime");
 
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -33,7 +33,7 @@ const JuegoPreguntas = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes") || "paises", n: 9000 }),
+      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes") || "paises", n: 9000, locale: i18n.language }),
     })
       .then((response) => {
         if (!response.ok) {
