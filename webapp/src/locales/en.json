@@ -4,14 +4,14 @@
       "copyright": "Copyright 2024 ® Software Architecture Group 1A"
     },
     "login": {
-      "title": "Log In",
+      "title": "Log in",
       "nameLabel": "Enter your name",
       "namePlaceholder": "Name",
       "passwordPlaceholder": "Password",
       "passwordLabel": "Enter your password",
-      "loginButton": "Log In",
+      "loginButton": "Log in",
       "registerText": "Don't have an account?",
-      "registerLink": "Register",
+      "registerLink": "Sign up",
       "loginAlert": "Login successful"
     },
     "nav": {
@@ -30,45 +30,58 @@
       "disconnect": "Disconnect"
     },
     "register": {
-      "title": "Register",
+      "title": "Sign up",
       "nameLabel": "Enter your name",
       "namePlaceholder": "Name",
       "passwordPlaceholder": "Password",
       "passwordLabel": "Enter your password",
       "password2Label": "Re-enter password",
-      "registerButton": "Register",
+      "registerButton": "Sign up",
       "loginText": "Already have an account?",
-      "loginLink": "Log In",
+      "loginLink": "Log in",
       "registerAlert": "User registered successfully",
       "registerError": "Passwords do not match"
+    },
+    "profile": {
+      "profile": "User Profile",
+      "name": "User Name",
+      "date": "Account Creation Date",
+      "recentGames": "Recent Games",
+      "gameMode": "Game Mode",
+      "correct": "Correct Answers",
+      "incorrect": "Incorrect Answers",
+      "score": "Score",
+      "avgTime": "Average Time",
+      "seconds": "seconds",
+      "noGames": "No recent games."
     }
   },
   "pages": {
     "classic": {
       "finished": "Game Over!",
-      "score": "Your score:",
+      "score": "Your Score:",
       "playAgain": "Play Again",
       "back": "Back to Menu",
       "question": "Question",
-      "time": "Time remaining:",
-      "easterEgg": "You've got them all right! You're Jordi Hurtado's alternate account.",
+      "time": "Time Remaining:",
+      "easterEgg": "You got them all right! You are Jordi Hurtado's secondary account.",
       "answer": "Answer"
     },
     "wisebattery": {
       "finished": "Game Over!",
-      "score": "Your score:",
+      "score": "Your Score:",
       "playAgain": "Play Again",
       "back": "Back to Menu",
       "question": "Question",
-      "time": "Time remaining:"
+      "time": "Time Remaining:"
     },
     "humancalculator": {
       "finished": "Game Over!",
-      "score": "Your score:",
+      "score": "Your Score:",
       "playAgain": "Play Again",
       "back": "Back to Menu",
       "question": "Question",
-      "time": "Time remaining:"
+      "time": "Time Remaining:"
     },
     "config": {
       "title": "Settings",
@@ -80,25 +93,25 @@
       "art": "Art",
       "programming": "Programming",
       "save": "Apply Changes",
-      "timeBetweenClassic": "Time between questions (Classic)",
-      "questionCountClassic": "Number of questions (Classic)",
-      "totalTimeBattery": "Total time (Wise Battery)"
+      "timeBetweenClassic": "Time Between Questions (Classic)",
+      "questionCountClassic": "Number of Questions (Classic)",
+      "totalTimeBattery": "Total Time (Wise Battery)"
     },
     "home": {
       "title": "Welcome to WIQ!",
-      "choose": "Choose game mode",
+      "choose": "Choose a Game Mode",
       "classic": "Classic",
-      "classicDescription": "In Classic mode, you have to answer a set number of questions within a limited time. Show your knowledge and speed to overcome this challenge!",
+      "classicDescription": "In Classic mode, you will have to answer a set number of questions within a limited time. Show off your knowledge and speed to overcome this challenge!",
       "wisebattery": "Wise Battery",
-      "wisebatteryDescription": "In Wise Battery mode, test your knowledge by answering as many questions as you can within a fixed time. The more questions you answer correctly, the higher your score! Are you ready for this timed challenge?",
+      "wisebatteryDescription": "In Wise Battery mode, you will test your knowledge by answering as many questions as you can within a fixed time. The more questions you get right, the better your score! Are you ready for this timed challenge?",
       "humancalculator": "Human Calculator",
-      "humancalculatorDescription": "In Human Calculator mode, you have to solve mathematical operations within a limited time. Show off your math skills and speed to overcome this challenge!",
-      "error": "There was an error loading questions. Please try again later."
+      "humancalculatorDescription": "In Human Calculator mode, you will have to solve mathematical operations within a limited time. Showcase your math skills and speed to overcome this challenge!",
+      "error": "There was an error loading the questions. Please try again later."
     },
     "profile": {
       "title": "Profile",
       "nameLabel": "Username:",
-      "dateLabel": "Account creation date:",
+      "dateLabel": "Account Creation Date:",
       "recentGames": "Recent Games",
       "gameMode": "Game Mode",
       "correct": "Correct Answers",
@@ -110,9 +123,9 @@
     },
     "ranking": {
       "loading": "Loading...",
-      "loadingText": "Retrieving ranking, please wait a moment.",
+      "loadingText": "Ranking is being queried, please wait a moment.",
       "error": "Error:",
-      "errorLabel": "An error occurred while retrieving ranking",
+      "errorLabel": "An error occurred while retrieving the ranking",
       "rank-mode": "Ranking - Mode",
       "classic": "Classic",
       "wisebattery": "Wise Battery",
@@ -123,7 +136,7 @@
       "ratioCorrect": "Correct Ratio (%)",
       "avgTime": "Time per Question (s):",
       "reboot": "Reset to Default",
-      "errorText": "An error occurred while retrieving ranking"
+      "errorText": "An error occurred while retrieving the ranking"
     },
     "about": {
       "title": "WIQ_es1a Team",
@@ -135,22 +148,22 @@
     },
     "stats": {
       "loading": "Loading...",
-      "loadingText": "Retrieving statistics, please wait a moment.",
+      "loadingText": "Statistics are being queried, please wait a moment.",
       "username": "Username",
       "search": "Search",
       "searchText": "Please check if the form values are correct and try again",
       "classic": "Classic",
       "wisebattery": "Wise Battery",
       "humancalculator": "Human Calculator",
-      "noStats": "The user hasn't played any games.",
-      "stats": "Statistics for",
+      "noStats": "User has not played any games.",
+      "stats": "Statistics of",
       "mode": "Mode",
       "gamesPlayed": "Games Played",
-      "pointsPerGame": "Points per Game",
+      "pointsPerGame": "Points Per Game",
       "totalpoints": "Total Points",
       "totalCorrect": "Total Correct Answers",
       "totalIncorrect": "Total Incorrect Answers",
-      "correctRatio": "Correct Percentage",
+      "correctRatio": "Correct Ratio",
       "avgTime": "Time per Question (s)"
     },
     "wrongroute": {
@@ -159,20 +172,20 @@
       "home": "Back to Home"
     },
     "userspage": {
-      "list": "User list",
+      "list": "User List",
       "user": "User",
       "actions": "Actions",
       "friend": "Friend",
-      "addFriend": "Add friend",
+      "addFriend": "Add Friend",
       "loading": "Loading users...",
       "error": "Error loading users: "
     },
     "friendlist": {
       "loading": "Loading...",
       "loadingText": "Your search is being processed, please wait a moment.",
-      "list": "Friend list",
-      "profile": "View profile",
-      "delete": "Delete friend",
+      "list": "Friend List",
+      "profile": "View Profile",
+      "delete": "Delete Friend",
       "noFriends": "You currently have no friends."
     }
   }
