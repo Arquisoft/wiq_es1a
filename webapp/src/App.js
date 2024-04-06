@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./pages/Home/Home.js";
 import Clasico from "./pages/Clasico/Clasico.js";
 import Bateria from "./pages/Bateria/Bateria.js";
@@ -13,8 +13,12 @@ import Config from "./pages/Config/Config.js";
 import Login from "./components/Login/Login.js";
 import Register from "./components/Register/Register.js";
 import Perfil from "./pages/Perfil/Perfil.js";
+import CalculadoraHumana from "./pages/Calculadora/Calculadora.js";
 
 function App() {
+  useEffect(() => {
+    document.title = "WIQ!";
+  }, []);
   return (
       <BrowserRouter>
         <Routes>
@@ -28,6 +32,7 @@ function App() {
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/home/clasico" element={<Clasico />} />
           <Route path="/home/bateria" element={<Bateria />} />
+          <Route path="/home/calculadora" element={<CalculadoraHumana />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/ranking" element={<Ranking />} />
           <Route path="/perfil" element={<Perfil />} />

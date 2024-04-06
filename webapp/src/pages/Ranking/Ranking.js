@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Select, Button, Heading, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { Select, Button, Heading, Table, Thead, Tbody, Tr, Th, Td, Flex } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
 const Ranking = () => {
-  const gatewayUrl = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
+  const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
   const [ranking, setRanking] = useState([]);
   const [filterBy, setFilterBy] = useState("avgPoints");
@@ -39,12 +39,15 @@ const Ranking = () => {
       return "Clásico";    
     } else if(gamemode === "bateria"){
       return "Batería de sabios";
+    } else if(gamemode === "calculadora"){
+      return "Calculadora humana";
     }
     return gamemode;
   };
 
   useEffect(() => {
     fetchRanking();
+    // eslint-disable-next-line
   }, [gamemode, filterBy]);
 
   const handleDisplayChange = (event) => {
@@ -58,6 +61,7 @@ const Ranking = () => {
       case "totalPoints":
         return "Puntos totales";
       case "ratioCorrect":
+        if (gamemode === "calculadora") return null;
         return "Ratio de aciertos (%)";
       case "avgTime":
         return "Tiempo por pregunta (s)";
@@ -73,6 +77,7 @@ const Ranking = () => {
       case "totalPoints":
         return stat.totalPoints;
       case "ratioCorrect":
+        if (gamemode === "calculadora") return null;
         return Math.round(stat.ratioCorrect * 100) / 100;
       case "avgTime":
         return Math.round(stat.avgTime * 100) / 100;
@@ -107,12 +112,15 @@ const Ranking = () => {
   return (
     <>
     <Nav/>
-    <div>
-      <Heading as="h2">Ranking - Modo {getModeName()}</Heading>
+    <Flex flexDirection="column" rowGap="1rem">
+      <Heading as="h2">Ranking - modo {getModeName()}</Heading>
       <Select id="displaySelector" onChange={handleDisplayChange}>
-        {displayOptions.map(option => (
-          <option key={option.value} value={option.value}>{option.label}</option>
-        ))}
+        {displayOptions.map(option => {
+          if (gamemode === "calculadora" && option.value === "ratioCorrect") {
+            return null;
+          }
+          return <option key={option.value} value={option.value}>{option.label}</option>;
+        })}
       </Select>
       <Button
         className={gamemode === "clasico" ? "active" : ""}
@@ -125,6 +133,12 @@ const Ranking = () => {
         onClick={() => handleGamemodeChange("bateria")}
       >
         Batería de sabios
+      </Button>
+      <Button
+        className={gamemode === "calculadora" ? "active" : ""}
+        onClick={() => handleGamemodeChange("calculadora")}
+      >
+        Calculadora humana
       </Button>
       <Table>
         <Thead>
@@ -142,12 +156,13 @@ const Ranking = () => {
           ))}
         </Tbody>
       </Table>
-    </div>
+    </Flex>
     <Footer/>
     </>
   );
 };
 
 export default Ranking;
+
 
 

@@ -16,15 +16,15 @@ const CustomModal = ({ title, text, route }) => {
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody textAlign='justify'>
             {text}
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
+            <Button variant='ghost' mr={3} onClick={onClose}>
               Cerrar
             </Button>
-            <Button variant='ghost' onClick={() => navigate(route)}>Jugar</Button>
+            <Button colorScheme='blue' onClick={() => navigate(route)}>Jugar</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

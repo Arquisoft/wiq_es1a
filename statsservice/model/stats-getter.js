@@ -4,7 +4,7 @@ class StatsForUser {
 
     async getStatsForUser(username,gamemode){
         var statsJSON=null;
-            if(gamemode=="clasico" || gamemode=="bateria"){
+            if(gamemode=="clasico" || gamemode=="bateria" || gamemode=="calculadora"){
                 statsJSON = await this.getStats(username,gamemode);
             }
         return statsJSON;

@@ -30,7 +30,7 @@ const JuegoPreguntas = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes"), n: 9000 }),
+      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes") || "paises", n: 9000 }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -56,16 +56,25 @@ const JuegoPreguntas = () => {
       setJuegoTerminado(true);
       if(preguntasCorrectas+preguntasFalladas>0){
         const preguntasTotales=preguntasCorrectas+preguntasFalladas;
-        const tMedio=180/preguntasTotales;
+        const tMedio=TIME/preguntasTotales;
         setTiempoMedio(tMedio);
       }
-      guardarPartida();
     }
     const timer = setInterval(() => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
-  }, [tiempoRestante]);
+    // eslint-disable-next-line
+  }, [tiempoRestante, preguntasCorrectas, preguntasFalladas]);
+
+  useEffect(() => {
+    if (juegoTerminado && tiempoMedio !== 0) {
+      guardarPartida();
+    }
+    // eslint-disable-next-line
+  }, [juegoTerminado, tiempoMedio]);
+
+  
 
   const guardarPartida = async () => {
     
@@ -103,6 +112,7 @@ const JuegoPreguntas = () => {
     }, 10); 
   
     return () => clearInterval(timer);
+    // eslint-disable-next-line
   }, [tiempoRestante]);
 
   const handleSiguientePregunta = async (respuesta) => {
@@ -134,6 +144,7 @@ const JuegoPreguntas = () => {
       <>
         <Nav />
         <Spinner
+          data-testid="spinner"
           thickness='4px'
           speed='0.65s'
           emptyColor='gray.200'

@@ -1,66 +1,170 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Stats from './Stats';
+import { BrowserRouter as Router } from 'react-router-dom';
+import userEvent from '@testing-library/user-event';
 
-jest.mock('axios', () => ({
-  get: jest.fn(() =>
-    Promise.resolve({
-      data: {
-        username: 'testUser',
-        nGamesPlayed: 5,
-        avgPoints: 20,
-        totalPoints: 100,
-        totalCorrectQuestions: 30,
-        totalIncorrectQuestions: 10,
-        ratioCorrectToIncorrect: 3,
-        avgTime: 10,
-      },
-    })
-  ),
-}));
+const userData = {
+  username: 'testUser',
+  nGamesPlayed: 10,
+  avgPoints: 7.00,
+  totalPoints: 70,
+  totalCorrectQuestions: 20,
+  totalIncorrectQuestions: 5,
+  ratioCorrect: 80.00,
+  avgTime: 15.00
+};
+
+const renderComponentWithRouter = () => {
+  render(
+    <Router>
+      <Stats />
+    </Router>
+  );
+};
 
 describe('Stats component', () => {
-  it('renders username input field', () => {
-    render(<Stats />);
-    expect(screen.getByLabelText('Nombre de Usuario:')).toBeInTheDocument();
+  beforeEach(() => {
+    localStorage.clear();
   });
 
-  it('renders loading message initially', () => {
-    render(<Stats />);
-    expect(screen.getByText(/Cargando .../i)).toBeInTheDocument();
+  test('renders user statistics', async () => {
+    renderComponentWithRouter();
+
+    await waitFor(() => {
+      expect(screen.queryByText('Cargando ...')).not.toBeInTheDocument();
+    });
+
+    const statisticWordArray = screen.getAllByText(/Estadísticas/i);
+    statisticWordArray.forEach(statisticWord => {
+      expect(statisticWord).toBeInTheDocument();
+    });
   });
 
-  it('fetches stats on search button click', async () => {
-    render(<Stats />);
-    const searchButton = screen.getByRole('button', { name: /Buscar/i });
-    fireEvent.click(searchButton);
-    await waitFor(() => expect(screen.getByText(/Usuario: testUser/i)).toBeInTheDocument());
+  test('fetches user statistics and displays them', async () => {
+    localStorage.setItem('username', 'testUser');
+  
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(userData)
+    });
+  
+    renderComponentWithRouter();
+  
+    const table = await screen.findByRole('table');
+    expect(table).toBeInTheDocument();
+  
+    const columnHeaders = ['Partidas jugadas', 'Puntos por partida', 'Puntos totales', 'Preguntas correctas totales', 'Preguntas incorrectas totales', 'Porcentaje de aciertos', 'Tiempo por pregunta (s):'];
+    columnHeaders.forEach(headerText => {
+      const headerElement = screen.getByText(headerText);
+      expect(headerElement).toBeInTheDocument();
+    });
+    Object.entries(userData).forEach(([key, value]) => {
+      if (key !== 'username') {
+        if (key === 'avgPoints'  || key === 'avgTime') {
+          expect(screen.getByText(value.toFixed(2))).toBeInTheDocument();
+        } else if(key==='ratioCorrect'){
+          expect(screen.getByText(value.toFixed(2) + "%")).toBeInTheDocument();
+        } else {
+          expect(screen.getByText(value.toString())).toBeInTheDocument();
+        }
+      }
+    });
+  });
+  
+
+  test('displays an error message when fetching statistics fails', async () => {
+    const userId = 'testUser';
+    localStorage.setItem('username', userId);
+
+    global.fetch = jest.fn().mockRejectedValue(new Error('Failed to fetch'));
+
+    renderComponentWithRouter();
+
+    await screen.findByText("Error: Failed to fetch");
   });
 
-  it('handles error correctly', async () => {
-    // Mocking axios.get to simulate an error
-    jest.spyOn(console, 'error').mockImplementation(() => {});
-    jest.spyOn(console, 'log').mockImplementation(() => {});
-    jest.mock('axios', () => ({
-      get: jest.fn(() => Promise.reject(new Error('Request failed'))),
-    }));
+  test('updates user statistics when username changes', async () => {
+    localStorage.setItem('username', 'testUser');
 
-    render(<Stats />);
-    const searchButton = screen.getByRole('button', { name: /Buscar/i });
-    fireEvent.click(searchButton);
-    await waitFor(() => expect(screen.getByText(/Error: Request failed/i)).toBeInTheDocument());
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(userData)
+    });
+
+    renderComponentWithRouter();
+
+    await screen.findByRole('table');
+
+    const newUsername = 'newUser';
+    localStorage.setItem('username', newUsername);
+
+    const searchButton = await screen.findByText('Buscar');
+    userEvent.click(searchButton);
+
+    renderComponentWithRouter();
+
+    expect(fetch).toHaveBeenCalledWith(expect.stringContaining(newUsername));
   });
 
-  it('displays stats correctly', async () => {
-    render(<Stats />);
-    const searchButton = screen.getByRole('button', { name: /Buscar/i });
-    fireEvent.click(searchButton);
-    await waitFor(() => expect(screen.getByText(/Juegos Jugados: 5/i)).toBeInTheDocument());
-    expect(screen.getByText(/Promedio de Puntos: 20/i)).toBeInTheDocument();
-    expect(screen.getByText(/Puntos Totales: 100/i)).toBeInTheDocument();
-    expect(screen.getByText(/Preguntas Correctas Totales: 30/i)).toBeInTheDocument();
-    expect(screen.getByText(/Preguntas Incorrectas Totales: 10/i)).toBeInTheDocument();
-    expect(screen.getByText(/Ratio Correctas\/Incorrectas: 3/i)).toBeInTheDocument();
-    expect(screen.getByText(/Tiempo por pregunta \(s\): 10/i)).toBeInTheDocument();
+  test('updates user statistics when game mode changes', async () => {
+    localStorage.setItem('username', 'testUser');
+
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(userData)
+    });
+
+    renderComponentWithRouter();
+    await screen.findByRole('table');
+
+    const modeButton = screen.getByRole('button', { name: /Batería de sabios/i });
+    userEvent.click(modeButton);
+
+    renderComponentWithRouter();
+
+    await waitFor(() => {
+      expect(screen.queryByText('Estadísticas de testUser - modo Batería de sabios')).toBeInTheDocument();
+    });
   });
+
+  test('fetches and displays user statistics for Human Calculator mode', async () => {
+    localStorage.setItem('username', 'testUser');
+  
+    userData.ratioCorrect=0;
+    userData.totalCorrectQuestions=0;
+    userData.totalIncorrectQuestions=0;
+  
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(userData)
+    });
+  
+    renderComponentWithRouter();
+  
+    await waitFor(() => {
+      expect(screen.queryByText('Cargando ...')).not.toBeInTheDocument();
+    });
+  
+    const modeButton = screen.getByRole('button', { name: /Calculadora humana/i });
+    userEvent.click(modeButton);
+  
+    const table = await screen.findByRole('table');
+    expect(table).toBeInTheDocument();
+  
+    const columnHeaders = ['Partidas jugadas', 'Puntos por partida', 'Puntos totales', 'Tiempo por pregunta (s):'];
+    columnHeaders.forEach(headerText => {
+      const headerElement = screen.getByText(headerText);
+      expect(headerElement).toBeInTheDocument();
+    });
+  
+    Object.entries(userData).forEach(([key, value]) => {
+      if (key !== 'username') {
+        if (key === 'avgPoints' || key === 'avgTime') {
+          const valueElements = screen.getAllByText(value.toFixed(2));
+          expect(valueElements.length).toBeGreaterThan(0);
+        } else {
+          const valueElements = screen.getAllByText(value.toString());
+          expect(valueElements.length).toBeGreaterThan(0);
+        }
+      }
+  });
+});
+  
 });

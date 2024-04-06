@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "../../components/Nav/Nav.js";
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
-import { Box, Flex, Heading, Button, Grid, useColorMode, Text, Image } from "@chakra-ui/react";
+import { Box, Flex, Heading, Button, Grid, useColorMode, Text, Image, Spinner } from "@chakra-ui/react";
 import axios from "axios";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
-  const SECS_PER_QUESTION = useMemo(() => localStorage.getItem("clasicoTime"));
+  const SECS_PER_QUESTION = localStorage.getItem("clasicoTime");
   const { colorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
 
@@ -54,7 +54,6 @@ const JuegoPreguntas = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error al obtener las preguntas:", error);
         navigate("/home?error=1");
       });
     // eslint-disable-next-line
@@ -76,6 +75,8 @@ const JuegoPreguntas = () => {
 
   useEffect(() => {
     if (tiempoRestante === 0) {
+      const newTTotal=tiempoTotal+(SECS_PER_QUESTION);
+      setTiempoTotal(newTTotal);
       setPreguntaTerminada(true);
       setTimeout(() => {
         setPreguntaTerminada(false);
@@ -122,11 +123,9 @@ const JuegoPreguntas = () => {
       const newCorrectQuestions=preguntasCorrectas+1;
       setPuntuacion(puntuacion + 1);
       setPreguntasCorrectas(newCorrectQuestions);
-      console.log("bien")
     } else {
       const newIncorrectQuestions=preguntasFalladas+1;
       setPreguntasFalladas(newIncorrectQuestions);
-      console.log("mal")
     }
     setTiempoTotal(tiempoTotal + tiempoRestante);
     setRespuestaSeleccionada(null);
@@ -140,20 +139,18 @@ const JuegoPreguntas = () => {
       setJuegoTerminado(true);
       if (preguntasCorrectas + preguntasFalladas > 0) {
         const preguntasTotales=preguntasCorrectas+preguntasFalladas;
-        console.log(preguntasCorrectas);
-        console.log(preguntasFalladas);
         const tMedio=tiempoTotal/preguntasTotales;
         setTiempoMedio(tMedio);
-        
       }
     }
     
     };
 
     useEffect(() => {
-      if (juegoTerminado) {
+      if (juegoTerminado && tiempoMedio !== 0) {
         guardarPartida();
       }
+      // eslint-disable-next-line
     }, [juegoTerminado]);
 
   const guardarPartida = async () => {
@@ -202,7 +199,15 @@ const JuegoPreguntas = () => {
     return (
       <>
         <Nav />
-        <span class="loader"></span>
+        <Spinner
+          data-testid="spinner"
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='teal.500'
+          size='xl'
+          margin='auto'
+        />
         <Footer />
       </>
     );
@@ -253,7 +258,10 @@ const JuegoPreguntas = () => {
   
               <Flex justify="center" mt={4}>
                 <Button
-                  onClick={() => setTiempoRestante(0)}
+                  onClick={() => {
+                    const newTTotal=tiempoTotal+(SECS_PER_QUESTION-tiempoRestante);
+                    setTiempoTotal(newTTotal);
+                    setTiempoRestante(0)}}
                   disabled={tiempoRestante === 0 || juegoTerminado}
                   colorScheme="teal"
                   m={2}

@@ -3,11 +3,20 @@ import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import CustomModal from "../../components/CustomModal/CustomModal.js";
 import { Box, Heading, Flex } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
+import Background from "../../components/Background/Background.js";
 
 const Home = () => {
+  const testEnvironment = process.env.NODE_ENV === "test";
+  
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const error = queryParams.get("error");
+
   return (
     <>
       <Nav />
+      {!testEnvironment && <Background />}
       <Flex direction="column" align="center" justify="center" h="70vh">
         <Heading as="h1" mb={2}>
           ¡Bienvenido a WIQ!
@@ -16,13 +25,13 @@ const Home = () => {
           Elige el modo de juego
         </Heading>
         <Box p={2}>
-          <CustomModal 
-            title="Modo Clásico" 
+          <CustomModal
+            title="Modo Clásico"
             text="
               En el modo Clásico, tendrás que responder un número determinado de preguntas en un tiempo limitado. 
               ¡Demuestra tus conocimientos y rapidez para superar este desafío!
-            " 
-            route="/home/clasico" 
+            "
+            route="/home/clasico"
           />
         </Box>
         <Box p={2}>
@@ -35,7 +44,21 @@ const Home = () => {
             route="/home/bateria"
           />
         </Box>
-        {/* Agrega más modos de juego aquí */}
+        <Box p={2}>
+          <CustomModal
+            title="Calculadora Humana"
+            text="
+              En el modo Calculadora Humana, tendrás que resolver operaciones matemáticas en un tiempo limitado. 
+              ¡Demuestra tus habilidades matemáticas y rapidez para superar este desafío!
+            "
+            route="/home/calculadora"
+          />
+        </Box>
+        {error && (
+          <Box mb={4} color="red">
+            Hubo un error al cargar las preguntas. Por favor, inténtalo más tarde.
+          </Box>
+        )}
       </Flex>
       <Footer />
     </>

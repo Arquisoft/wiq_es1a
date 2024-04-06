@@ -9,7 +9,20 @@ const app = express();
 const port = 8001;
 
 const cors = require('cors');
-app.use(cors());
+
+const corsOptions = {
+  origin: [
+    process.env.AUTH_SERVICE_URL || "http://localhost:8000",
+    process.env.USER_SERVICE_URL || "http://localhost:8001",
+    process.env.QUESTION_SERVICE_URL || "http://localhost:8002",
+    process.env.STATS_SERVICE_URL || "http://localhost:8003",
+    process.env.GATEWAY_SERVICE_URL || "http://localhost:8004",
+    process.env.MONGODB_URI || "mongodb://localhost:27017/userdb",
+    process.env.MONGODB_STATS_URI || "mongodb://localhost:27017/statsdb"
+  ],
+};
+
+app.use(cors(corsOptions));
 
 // Middleware to parse JSON in request body
 app.use(bodyParser.json());
@@ -26,6 +39,13 @@ function validateRequiredFields(req, requiredFields) {
       }
     }
 }
+
+function checkInput(input) {
+  if (typeof input !== 'string') {
+    throw new Error('Input debe ser una cadena de texto');
+  }
+  return input.trim();
+};
 
 app.post('/adduser', async (req, res) => {
     try {
@@ -54,7 +74,8 @@ app.post('/adduser', async (req, res) => {
 
 app.get('/userInfo', async (req, res) => {
       try {
-          const user = await User.findOne({username:req.query.user});
+          const username = checkInput(req.query.user);
+          const user = await User.findOne({username:username});
           res.json(user);
       } catch (error) {
           res.status(400).json({ error: error.message }); 
@@ -62,8 +83,8 @@ app.get('/userInfo', async (req, res) => {
 
 app.post("/saveGameList", async (req, res) => {
   try {
-    const username = req.body.username;
-    const gamemode = req.body.gameMode;
+    const username = checkInput(req.body.username);
+    const gamemode = checkInput(req.body.gameMode);
     const gameData = req.body.gameData;
 
       let user = await User.findOne({ username: username });

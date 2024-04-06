@@ -2,7 +2,9 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 const promBundle = require("express-prom-bundle");
-
+const YAML = require('yaml');
+const fs = require("fs");
+const swaggerUi = require('swagger-ui-express'); 
 const app = express();
 const port = 8000;
 
@@ -26,15 +28,17 @@ app.get("/health", (req, res) => {
   res.json({ status: "OK" });
 });
 
+returnError = (res, error) => {
+  res.status(error.response.status).json({ error: error.response.data.error });
+}
+
 app.post("/login", async (req, res) => {
   try {
     // Forward the login request to the authentication service
     const authResponse = await axios.post(authServiceUrl + "/login", req.body);
     res.json(authResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -47,9 +51,7 @@ app.post("/adduser", async (req, res) => {
     );
     res.json(userResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -62,9 +64,7 @@ app.get("/userInfo", async (req, res) => {
     );
     res.json(userResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -77,9 +77,7 @@ app.post("/saveGameList", async (req, res) => {
     );
     res.json(gameResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -92,9 +90,7 @@ app.get("/questions", async (req, res) => {
     );
     res.json(questionResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -107,9 +103,7 @@ app.post("/questions", async (req, res) => {
     );
     res.json(questionResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -121,9 +115,7 @@ app.get("/stats", async (req, res) => {
     });
     res.json(statsResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -136,9 +128,7 @@ app.post("/saveGame", async (req, res) => {
     );
     res.json(gameResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
 
@@ -149,11 +139,24 @@ app.get("/ranking", async (req, res) => {
     });
     res.json(statsResponse.data);
   } catch (error) {
-    res
-      .status(error.response.status)
-      .json({ error: error.response.data.error });
+    returnError(res, error);
   }
 });
+
+openapiPath='./openapi.yaml'
+if (fs.existsSync(openapiPath)) {
+  const file = fs.readFileSync(openapiPath, 'utf8');
+
+  // Parse the YAML content into a JavaScript object representing the Swagger document
+  const swaggerDocument = YAML.parse(file);
+
+  // Serve the Swagger UI documentation at the '/api-doc' endpoint
+  // This middleware serves the Swagger UI files and sets up the Swagger UI page
+  // It takes the parsed Swagger document as input
+  app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+} else {
+  console.log("Not configuring OpenAPI. Configuration file not present.")
+}
 
 // Start the gateway service
 const server = app.listen(port, () => {
