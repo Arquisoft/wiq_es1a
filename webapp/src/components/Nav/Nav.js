@@ -46,9 +46,26 @@ const Nav = () => {
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
-        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
-        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
+        <Popover>
+          <PopoverTrigger>
+            <Button variant="link" color={textColor}>
+              Social
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <PopoverArrow />
+            <PopoverCloseButton />
+            <PopoverHeader>Social</PopoverHeader>
+            <PopoverBody>
+              <Text cursor="pointer" onClick={() => handleNavigate("/social/usuarios")} color={textColor}>Usuarios</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/social/amigos")} color={textColor}>Amigos</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/social/grupos")} color={textColor}>Grupos</Text>
+            </PopoverBody>
+          </PopoverContent>
+        </Popover>
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
+        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
       </Flex>
       <Flex width="25%"  className="rightItems" justifyContent="end">
         <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/sobre")}>Sobre nosotros</Button>
