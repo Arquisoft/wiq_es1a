@@ -15,7 +15,7 @@ const FriendList = () => {
         fetch(`${apiEndpoint}/friends?user=${username}`)
         .then((response) => response.json())
         .then((data) => {
-            setFriends(data);
+            setFriends(data.friends);
             setIsLoading(false);
         })
         .catch((error) => {
