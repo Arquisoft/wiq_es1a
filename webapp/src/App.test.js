@@ -55,7 +55,7 @@ describe("Nav Component", () => {
     expect(getByText("WIQ")).toBeInTheDocument();
 
     // Verificar que los enlaces estén presentes
-    expect(getByText("Home")).toBeInTheDocument();
+    expect(getByText("Inicio")).toBeInTheDocument();
     //expect(getByText('Modos de Juego')).toBeInTheDocument();
     expect(getByText("Estadísticas")).toBeInTheDocument();
     expect(getByText("Ranking")).toBeInTheDocument();
@@ -65,7 +65,7 @@ describe("Nav Component", () => {
     expect(getByText("Opciones")).toBeInTheDocument();
 
     // Verificar que el botón de logout esté presente y que sea un enlace al login
-    const logoutButton = getByRole("button", { name: /Desconectarse/i });
+    const logoutButton = getByRole("button", { name: /Desconectar/i });
     expect(logoutButton).toBeInTheDocument();
     //expect(logoutButton.closest('a')).toHaveAttribute('href', '/login');
   });
@@ -86,7 +86,7 @@ describe("Nav Component", () => {
         </Router>
       </I18nextProvider>
     );
-    const logoutButton = getByRole("button", { name: /Desconectarse/i });
+    const logoutButton = getByRole("button", { name: /Desconectar/i });
 
     // Simular clic en el botón de logout
     fireEvent.click(logoutButton);

@@ -104,7 +104,7 @@ const AddUser = () => {
         </FormControl>
         <FormControl mt={4}>
           <FormLabel htmlFor="register-pass2">
-          {t('components.register.password2Placeholder')}
+          {t('components.register.password2Label')}
           </FormLabel>
           <Input
             id="register-pass2"
@@ -115,7 +115,7 @@ const AddUser = () => {
           />
         </FormControl>
         <Button mt={4} colorScheme="blue" onClick={handleRegister}>
-          {t('components.register.passwordPlaceholder')}
+          {t('components.register.registerButton')}
         </Button>
         <Box mt={4}>
           {t('components.register.loginText')}{" "}
