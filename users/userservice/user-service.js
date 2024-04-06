@@ -103,8 +103,6 @@ app.get('/users/search', async (req, res) => {
   }
 });
 
-
-
 app.post('/users/add-friend', async (req, res) => {
   try {
     const username = req.body.username;

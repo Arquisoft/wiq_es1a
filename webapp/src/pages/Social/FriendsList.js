@@ -20,7 +20,6 @@ const FriendList = () => {
         })
         .catch((error) => {
             console.error("Error al obtener los amigos:", error);
-
             setIsLoading(false);
         });
     };
@@ -50,7 +49,7 @@ const FriendList = () => {
                     {friends.map((friend, index) => (
                         <div key={friend._id}>
                             <ListItem>
-                                <Text>{friend.username}</Text>
+                                <Text>{friend}</Text>
                             </ListItem>
                             {index !== friends.length - 1 && <Divider />}
                         </div>

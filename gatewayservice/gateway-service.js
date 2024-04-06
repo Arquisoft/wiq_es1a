@@ -29,6 +29,7 @@ app.get("/health", (req, res) => {
 });
 
 returnError = (res, error) => {
+  console.log(error);
   res.status(error.response.status).json({ error: error.response.data.error });
 }
 
