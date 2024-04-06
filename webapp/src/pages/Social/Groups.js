@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Box, Text, List, ListItem, Button, Divider, Input, Snackbar } from '@chakra-ui/react';
+import { Container, Box, Text, List, ListItem, Button, Divider, Input, Alert } from '@chakra-ui/react';
 
 const Groups = () => {
   const [groups, setGroups] = useState([]);
   const [name, setName] = useState('');
   const [error, setError] = useState('');
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
   const username = localStorage.getItem('username');
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -29,7 +30,8 @@ const Groups = () => {
         name: name,
         username: username
       });
-      setOpenSnackbar(true);
+      setAlertMessage('Group created successfully');
+      setOpenAlert(true);
     } catch (error) {
       setError(error.response.data.error);
     }
@@ -44,8 +46,8 @@ const Groups = () => {
     }
   };
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
+  const handleCloseAlert = () => {
+    setOpenAlert(false);
   };
 
   return (
@@ -60,13 +62,13 @@ const Groups = () => {
           onChange={(e) => setName(e.target.value)}
         />
         <Button colorScheme="blue" onClick={addGroup} mb="4">Create</Button>
-        <Snackbar isOpen={openSnackbar} onClose={handleCloseSnackbar} placement="bottom" colorScheme="green">
-          Group created successfully
-        </Snackbar>
+        <Alert status="success" variant="subtle" mt="2" isOpen={openAlert} onClose={handleCloseAlert}>
+          {alertMessage}
+        </Alert>
         {error && (
-          <Snackbar isOpen={!!error} onClose={() => setError('')} placement="bottom" colorScheme="red">
+          <Alert status="error" variant="subtle" mt="2">
             {`Error: ${error}`}
-          </Snackbar>
+          </Alert>
         )}
       </Box>
 
@@ -86,4 +88,3 @@ const Groups = () => {
 };
 
 export default Groups;
-
