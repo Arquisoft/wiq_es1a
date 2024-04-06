@@ -81,6 +81,84 @@ app.post("/saveGameList", async (req, res) => {
   }
 });
 
+app.get("/friends", async (req, res) => {
+  try {
+    // Forward the question request to the user service
+    const userResponse = await axios.get(
+      userServiceUrl + "/friends",
+      { params: req.query }
+    );
+    res.json(userResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
+});
+
+app.post("/group/add", async (req, res) => {
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/group/add",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
+});
+
+app.post("/group/join", async (req, res) => {
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/group/join",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
+});
+
+app.get("/group/list", async (req, res) => {
+  try {
+    // Forward the question request to the user service
+    const userResponse = await axios.get(
+      userServiceUrl + "/group/list",
+      { params: req.query }
+    );
+    res.json(userResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
+});
+
+app.get("/users/search", async (req, res) => {
+  try {
+    // Forward the question request to the user service
+    const userResponse = await axios.get(
+      userServiceUrl + "/users/search",
+      { params: req.query }
+    );
+    res.json(userResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
+});
+
+app.post("/users/add-friend", async (req, res) => {
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/users/add-friend",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
+});
+
 app.get("/questions", async (req, res) => {
   try {
     // Forward the question request to the question service

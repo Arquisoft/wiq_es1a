@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, List, ListItem, ListItemText, Button, Snackbar, Box, Divider, TextField } from '@mui/material';
 
-const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8001';
+
 
 const Groups = () => {
   const [groups, setGroups] = useState([]);
@@ -10,6 +10,8 @@ const Groups = () => {
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const username = localStorage.getItem('username'); // Obtener el nombre de usuario del localStorage
+
+  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
   useEffect(() => {
     const fetchData = async () => {

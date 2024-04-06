@@ -4,6 +4,7 @@ import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
 const UserList = ({ users, handleAddFriend }) => {
+  
   return (
     <div>
       <Heading as="h2">Lista de Usuarios</Heading>
@@ -34,6 +35,7 @@ const UserList = ({ users, handleAddFriend }) => {
 };
 
 const UsersPage = () => {
+  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
   const [searchQuery, setSearchQuery] = useState('');
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,7 +49,7 @@ const UsersPage = () => {
 
   const fetchUsers = () => {
     setIsLoading(true);
-    fetch(`http://localhost:8001/users/search?search=${searchQuery}`, {
+    fetch(apiEndpoint+`/users/search?search=${searchQuery}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -80,7 +82,7 @@ const UsersPage = () => {
       }
   
       // Realizar la solicitud HTTP POST al endpoint '/users/add-friend'
-      const response = await fetch('http://localhost:8001/users/add-friend', {
+      const response = await fetch(apiEndpoint+'/users/add-friend', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

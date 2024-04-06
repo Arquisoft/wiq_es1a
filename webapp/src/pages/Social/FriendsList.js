@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
 
-const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8001'; // El puerto del backend es 8001
 
 const FriendList = () => {
     const [friends, setFriends] = useState([]);
+    const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
     useEffect(() => {
         const fetchFriends = async () => {
@@ -14,7 +14,7 @@ const FriendList = () => {
                 const username = localStorage.getItem('username');
 
                 // Hacer una solicitud al backend para obtener la lista de amigos del usuario autenticado
-                const response = await axios.get(`${apiEndpoint}/users/friends/${username}`);
+                const response = await axios.get(`${apiEndpoint}/friends/${username}`);
 
                 // Establecer la lista de amigos en el estado
                 setFriends(response.data.friends);
