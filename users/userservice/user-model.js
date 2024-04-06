@@ -26,6 +26,8 @@ const userSchema = new mongoose.Schema({
     }]
 });
 
+const User = mongoose.model('User', userSchema);
+
 // Modelo para el grupo
 const groupSchema = new mongoose.Schema({
   name: {

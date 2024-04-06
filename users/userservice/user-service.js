@@ -139,9 +139,9 @@ async function getUserIdFromUsername(username) {
 }
 
 // Route to get friends of the authenticated user
-app.get('/users/friends/:username', async (req, res) => {
+app.get('/users/friends', async (req, res) => {
   try {
-    const { username } = req.params;
+    const { username } = req.query.user;
 
     // Obtén el ID de usuario del nombre de usuario
     const userId = await getUserIdFromUsername(username);
