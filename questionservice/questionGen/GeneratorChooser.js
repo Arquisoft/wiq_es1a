@@ -42,12 +42,12 @@ class GeneratorChooser {
     }
   }
 
-  getQuestionsPost(tematicas, n) {
+  getQuestionsPost(tematicas, n, locale) {
     var questions = [];
     for (let i = 0; i < n; i++) {
       let rand = Math.floor(Math.random() * tematicas.length);
       let randTematica = tematicas[rand];
-      let q = this.generators.get(randTematica).generateRandomQuestions(1);
+      let q = this.generators.get(randTematica).generateRandomQuestions(1, locale);
       questions.push(q);
     }
     return questions.flat();

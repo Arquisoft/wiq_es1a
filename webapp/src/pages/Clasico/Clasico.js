@@ -12,7 +12,7 @@ const JuegoPreguntas = () => {
   const { colorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
 
-  const { t } = useTranslation();
+  const { t, i18n} = useTranslation();
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -42,6 +42,7 @@ const JuegoPreguntas = () => {
       body: JSON.stringify({
         tematicas: localStorage.getItem("selectedThemes"),
         n: localStorage.getItem("clasicoPreguntas"),
+        locale: i18n.language
       }),
     })
       .then((response) => {
