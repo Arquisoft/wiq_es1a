@@ -161,7 +161,16 @@ describe("Stats component", () => {
     const table = await screen.findByRole('table');
     expect(table).toBeInTheDocument();
   
-    const columnHeaders = ['Partidas jugadas', 'Puntos por partida', 'Puntos totales', 'Tiempo por pregunta (s):'];
+    const columnHeaders = [
+      "Partidas jugadas",
+      "Puntos por partida",
+      "Puntos totales",
+      "Preguntas correctas totales",
+      "Preguntas incorrectas totales",
+      "Porcentaje de aciertos",
+      "Tiempo por pregunta (s)",
+    ];
+    
     columnHeaders.forEach(headerText => {
       const headerElement = screen.getByText(headerText);
       expect(headerElement).toBeInTheDocument();
