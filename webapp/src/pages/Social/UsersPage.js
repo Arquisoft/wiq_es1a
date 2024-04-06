@@ -59,11 +59,13 @@ const UsersPage = () => {
     .then((data) => {
       // Filtrar el usuario actual de la lista de usuarios
       const updatedUsers = data.filter(user => user.username !== currentUser);
+      // Filtrar usuarios que no son amigos
+      const filteredUsers = updatedUsers.filter(user => !friends.some(friend => friend._id === user._id));
       // Verificar si cada usuario es amigo o no
-      updatedUsers.forEach(user => {
+      filteredUsers.forEach(user => {
         user.isFriend = friends.some(friend => friend._id === user._id);
       });
-      setUsers(updatedUsers);
+      setUsers(filteredUsers);
       setIsLoading(false);
     })
     .catch((error) => {
