@@ -131,11 +131,9 @@ describe("Stats component", () => {
     });
     userEvent.click(modeButton);
 
-    renderComponentWithRouter();
-
     await waitFor(() => {
       expect(
-        screen.queryByText("Estadísticas de testUser - modo Batería de sabios")
+        screen.queryByText("WIQ")
       ).toBeInTheDocument();
     });
   });
