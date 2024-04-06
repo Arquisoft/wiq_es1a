@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Text, List, ListItem, Divider } from '@chakra-ui/react';
+import { Container, Text, List, ListItem, Divider, Heading } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
 const FriendList = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [friends, setFriends] = useState([]);
     const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
     const fetchFriends = async () => {
         const username = localStorage.getItem('username');
         setIsLoading(true);
-        fetch(gatewayUrl + `${apiEndpoint}/friends?user=${username}`)
+        fetch(`${apiEndpoint}/friends?user=${username}`)
         .then((response) => response.json())
         .then((data) => {
             setFriends(data);
@@ -19,9 +20,7 @@ const FriendList = () => {
         })
         .catch((error) => {
             console.error("Error al obtener los amigos:", error);
-            setError(
-            error.message || "Ha ocurrido un error al obtener los amigos"
-            );
+
             setIsLoading(false);
         });
     };
@@ -29,6 +28,15 @@ const FriendList = () => {
     useEffect(() => {
         fetchFriends();
     }, []);
+
+    if (isLoading) {
+        return (
+          <div>
+            <Heading as="h2"> Cargando ... </Heading>
+            <p>Se está consultando su búsqueda, espere unos instantes.</p>
+          </div>
+        );
+      }
 
     return (
         <>
