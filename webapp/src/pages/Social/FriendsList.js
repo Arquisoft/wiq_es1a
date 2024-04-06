@@ -6,7 +6,8 @@ import {
   ListItem,
   Divider,
   Heading,
-  Button
+  Button,
+  Avatar
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -52,20 +53,22 @@ const FriendList = () => {
       <Nav />
       {friend ? (
         <>
-            <Profile username={friend}/>
-            <Button onClick={() => setFriend('')}>Volver</Button>
+          <Profile username={friend} />
+          <Button onClick={() => setFriend("")}>Volver</Button>
         </>
       ) : (
         <Container maxW="md">
-          <Text fontSize="3xl" textAlign="center" mb="4">
-            Lista de Amigos
-          </Text>
+          <Heading as="h1" size="xl" margin="1rem">
+            Lista de amigos
+          </Heading>
           {friends.length > 0 ? (
-            <List spacing={3}>
+            <List display="flex" flexDirection="column" gap="1rem" spacing={3}>
               {friends.map((friend, index) => (
                 <div key={friend._id}>
-                  <ListItem>
-                    <Text onClick={() => setFriend(friend)}>{friend}</Text>
+                  <ListItem display="flex">
+                    <Avatar name={friend} />
+                    <Text alignSelf="center">{friend}</Text>
+                    <Button onClick={() => setFriend(friend)}>Ver perfil</Button>
                   </ListItem>
                   {index !== friends.length - 1 && <Divider />}
                 </div>

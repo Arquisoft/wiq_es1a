@@ -31,7 +31,7 @@ const Nav = () => {
         <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/home")}>Home</Button>
         <Popover>
           <PopoverTrigger>
-            <Button p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} variant="link" color={textColor}>
+            <Button p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} variant="link" color={textColor}>
               Modos de Juego
             </Button>
           </PopoverTrigger>
@@ -48,7 +48,7 @@ const Nav = () => {
         </Popover>
         <Popover>
           <PopoverTrigger>
-            <Button variant="link" color={textColor}>
+            <Button variant="link" _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} color={textColor}>
               Social
             </Button>
           </PopoverTrigger>
@@ -63,9 +63,9 @@ const Nav = () => {
             </PopoverBody>
           </PopoverContent>
         </Popover>
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
-        <Button variant="link" color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
+        <Button variant="link" _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} color={textColor} mr={4} onClick={() => handleNavigate("/stats")}>Estadísticas</Button>
+        <Button variant="link" _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} color={textColor} mr={4} onClick={() => handleNavigate("/ranking")}>Ranking</Button>
+        <Button variant="link" _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
       </Flex>
       <Flex width="25%"  className="rightItems" justifyContent="end">
         <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/sobre")}>Sobre nosotros</Button>
