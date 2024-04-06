@@ -129,31 +129,13 @@ res.json({ message: 'Friend added successfully' });
   }
 });
 
-// Function to get user ID from username
-async function getUserIdFromUsername(username) {
-  try {
-    // Find the user by username in the database
-    const user = await User.findOne({ username });
-    if (!user) {
-      throw new Error('User not found');
-    }
-    // Return the user ID
-    return user._id;
-  } catch (error) {
-    throw new Error('Error getting user ID from username: ' + error.message);
-  }
-}
-
 // Route to get friends of the authenticated user
 app.get('/users/friends', async (req, res) => {
   try {
-    const { username } = req.query.user;
-
-    // Obtén el ID de usuario del nombre de usuario
-    const userId = await getUserIdFromUsername(username);
+    const username  = req.query.user;
 
     // Busca al usuario por su ID
-    const user = await User.findById(userId);
+    const user = await User.findOne({ username });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }

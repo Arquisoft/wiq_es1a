@@ -12,7 +12,7 @@ const FriendList = () => {
         const fetchFriends = async () => {
             try {
                 const username = localStorage.getItem('username');
-                const response = await axios.get(`${apiEndpoint}/friends/${username}`);
+                const response = await axios.get(`${apiEndpoint}/friends/?user=${username}`);
                 setFriends(response.data.friends);
             } catch (error) {
                 console.error('Error fetching friends:', error);
