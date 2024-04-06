@@ -153,7 +153,7 @@ class GenericGenerator {
     }
 
     questionObj.pregunta =
-      this.preguntasMap.get(propiedadPregunta) + entidadLabel + "?";
+      this.preguntasMap.get(propiedadPregunta).replace('%', entidadLabel);
 
     return questionObj;
   }
