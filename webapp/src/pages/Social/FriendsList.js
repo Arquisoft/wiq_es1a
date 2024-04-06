@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Text, List, ListItem, Divider } from '@chakra-ui/react';
+import Nav from "../../components/Nav/Nav.js";
+import Footer from "../../components/Footer/Footer.js";
 
 const FriendList = () => {
     const [friends, setFriends] = useState([]);
@@ -21,6 +23,8 @@ const FriendList = () => {
     }, []);
 
     return (
+        <>
+        <Nav/>
         <Container maxW="md">
             <Text fontSize="3xl" textAlign="center" mb="4">
                 Lista de Amigos
@@ -42,6 +46,9 @@ const FriendList = () => {
                 </Text>
             )}
         </Container>
+        <Footer/>
+        </>  
+        
     );
 };
 

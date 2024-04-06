@@ -95,31 +95,36 @@ app.get('/users/search', async (req, res) => {
 
 app.post('/users/add-friend', async (req, res) => {
   try {
-    const { userId, friendId } = req.body;
+    const { username, friendUsername } = req.body;
 
-    // Buscar el usuario por userId
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
+// Buscar el usuario por su nombre de usuario
+const user = await User.findOne({ username });
+if (!user) {
+  return res.status(404).json({ error: 'User not found' });
+}
 
-    // Buscar el amigo por friendId
-    const friend = await User.findById(friendId);
-    if (!friend) {
-      return res.status(404).json({ error: 'Friend not found' });
-    }
+// Buscar al amigo por su nombre de usuario
+const friend = await User.findOne({ username: friendUsername });
+if (!friend) {
+  return res.status(404).json({ error: 'Friend not found' });
+}
 
-    // Verificar si el amigo ya está en la lista de amigos del usuario
-    if (user.friends.includes(friendId)) {
-      return res.status(400).json({ error: 'Friend already added' });
-    }
+// Verificar si el amigo ya está en la lista de amigos del usuario
+if (user.friends.includes(friend._id)) {
+  return res.status(400).json({ error: 'Friend already added' });
+}
 
-    // Agregar el amigo a la lista de amigos del usuario
-    user.friends.push(friendId);
-    await user.save();
+// Agregar al amigo a la lista de amigos del usuario
+user.friends.push(friend._id);
+await user.save();
 
-    res.json({ message: 'Friend added successfully' });
+// También actualizar la lista de amigos del amigo
+friend.friends.push(user._id);
+await friend.save();
+
+res.json({ message: 'Friend added successfully' });
   } catch (error) {
+    console.error('Error adding friend:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

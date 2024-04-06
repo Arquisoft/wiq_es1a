@@ -31,6 +31,7 @@ const UserList = ({ users, handleAddFriend }) => {
         </Tbody>
       </Table>
     </div>
+    
   );
 };
 
@@ -74,12 +75,6 @@ const UsersPage = () => {
 
   const handleAddFriend = async (user) => {
     try {
-      // Verifica si el usuario ya está en la lista de amigos
-      if (friends.find(friend => friend._id === user._id)) {
-        console.log(`El usuario ${user.username} ya está en tu lista de amigos.`);
-        return;
-      }
-  
       // Realizar la solicitud HTTP POST al endpoint '/users/add-friend'
       const response = await fetch(apiEndpoint+'/users/add-friend', {
         method: 'POST',
@@ -87,8 +82,8 @@ const UsersPage = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          userId: currentUser, // ID del usuario actual
-          friendId: user._id // ID del amigo que se está agregando
+          username: user.username, // Nombre de usuario del usuario actual
+          friendUsername: user.username // Nombre de usuario del amigo que se está agregando
         })
       });
   
@@ -96,9 +91,9 @@ const UsersPage = () => {
         throw new Error('Error al agregar amigo');
       }
   
-      // Agrega el usuario a la lista de amigos localmente
+      // Agregar el usuario a la lista de amigos localmente
       setFriends(prevFriends => [...prevFriends, user]);
-      // Actualiza el estado de isFriend del usuario
+      // Actualizar el estado de isFriend del usuario
       setUsers(prevUsers => {
         return prevUsers.map(u => {
           if (u._id === user._id) {
@@ -112,6 +107,7 @@ const UsersPage = () => {
       // Manejar el error según sea necesario
     }
   };
+
   
   return (
     <>

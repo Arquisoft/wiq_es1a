@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Box, Text, List, ListItem, Button, Divider, Input, Alert } from '@chakra-ui/react';
+import Nav from "../../components/Nav/Nav.js";
+import Footer from "../../components/Footer/Footer.js";
 
 const Groups = () => {
   const [groups, setGroups] = useState([]);
@@ -51,6 +53,8 @@ const Groups = () => {
   };
 
   return (
+    <>
+    <Nav/>
     <Container maxW="xs" mt="8">
       <Box>
         <Text fontSize="2xl" fontWeight="bold" mb="4">Create a Group</Text>
@@ -84,6 +88,9 @@ const Groups = () => {
         </List>
       </Box>
     </Container>
+    <Footer/>
+    </>
+    
   );
 };
 
