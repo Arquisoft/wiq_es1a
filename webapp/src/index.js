@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import './themes.js';
 import './index.css';
+import i18n from './i18n.js';
 
 var r = document.getElementById("root");
 const root = ReactDOM.createRoot(r);

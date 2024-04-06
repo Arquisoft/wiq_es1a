@@ -1,27 +1,36 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import Home from './Home';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import Home from "./Home";
+import { BrowserRouter as Router } from "react-router-dom";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../../i18n.js";
 
-test('renders welcome message', () => {
+test("renders welcome message", () => {
   render(
-    <Router>
-      <Home />
-    </Router>
+    <I18nextProvider i18n={i18n}>
+      <Router>
+        <Home />
+      </Router>
+    </I18nextProvider>
   );
   const welcomeElement = screen.getByText(/Bienvenido/i);
   expect(welcomeElement).toBeInTheDocument();
 });
 
-test('renders game modes', () => {
+test("renders game modes", () => {
   render(
-    <Router>
-      <Home />
-    </Router>
+    <I18nextProvider i18n={i18n}>
+      <Router>
+        <Home />
+      </Router>
+    </I18nextProvider>
   );
-  const classicLink = screen.getByText('Modo Clásico');
-  const batteryLink = screen.getByText('Batería de sabios');
 
-  expect(classicLink).toBeInTheDocument();
-  expect(batteryLink).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Clásico" })).toBeInTheDocument();
+  expect(
+    screen.getByRole("button", { name: "Batería de sabios" })
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole("button", { name: "Calculadora humana" })
+  ).toBeInTheDocument();
 });

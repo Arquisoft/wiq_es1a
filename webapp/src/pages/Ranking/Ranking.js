@@ -2,18 +2,21 @@ import React, { useState, useEffect } from "react";
 import { Select, Button, Heading, Table, Thead, Tbody, Tr, Th, Td, Flex } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
+import { useTranslation } from "react-i18next"; 
 
 const Ranking = () => {
   const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
+  const { t } = useTranslation();
+
   const [ranking, setRanking] = useState([]);
   const [filterBy, setFilterBy] = useState("avgPoints");
   const [displayOptions] = useState([
-    { value: "avgPoints", label: "Puntos promedio" },
-    { value: "totalPoints", label: "Puntos totales" },
-    { value: "ratioCorrect", label: "Ratio de aciertos" },
-    { value: "avgTime", label: "Tiempo por pregunta (s)" },
-    { value: "avgPoints", label: "Reestablecer por defecto" }
+    { value: "avgPoints", label: `${t('pages.ranking.avgPoints')}` },
+    { value: "totalPoints", label: `${t('pages.ranking.totalPoints')}` },
+    { value: "ratioCorrect", label: `${t('pages.ranking.ratioCorrect')}` },
+    { value: "avgTime", label: `${t('pages.ranking.avgTime')}` },
+    { value: "avgPoints", label: `${t('pages.ranking.reboot')}` },
   ]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,8 +31,7 @@ const Ranking = () => {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error('Error al obtener el ranking:', error);
-        setError(error.message || 'Ha ocurrido un error al obtener el ranking');
+        setError(error.message || `${t('pages.ranking.errorText')}`);
         setIsLoading(false);
       });
   };
@@ -57,14 +59,14 @@ const Ranking = () => {
   const getDisplayedField = () => {
     switch (filterBy) {
       case "avgPoints":
-        return "Puntos promedio";
+        return `${t('pages.ranking.avgPoints')}`;
       case "totalPoints":
-        return "Puntos totales";
+        return `${t('pages.ranking.totalPoints')}`;
       case "ratioCorrect":
         if (gamemode === "calculadora") return null;
-        return "Ratio de aciertos (%)";
+        return `${t('pages.ranking.ratioCorrect')}`;
       case "avgTime":
-        return "Tiempo por pregunta (s)";
+        return `${t('pages.ranking.avgTime')}`;
       default:
         return "";
     }
@@ -94,8 +96,8 @@ const Ranking = () => {
   if (isLoading) {
     return (
       <div>
-        <Heading as="h2">Cargando ...</Heading>
-        <p>Se está consultando el ranking, espere unos instantes.</p>
+        <Heading as="h2">{t('pages.ranking.loading')}</Heading>
+        <p>{t('pages.ranking.loadingText')}</p>
       </div>
     );
   }
@@ -103,8 +105,8 @@ const Ranking = () => {
   if (error) {
     return (
       <div>
-        <Heading as="h2">Error: {error}</Heading>
-        <p>Ha ocurrido un error al obtener el ranking</p>
+        <Heading as="h2">{t('pages.ranking.error')} {error}</Heading>
+        <p>{t('pages.ranking.errorLabel')}</p>
       </div>
     );
   }
@@ -113,7 +115,7 @@ const Ranking = () => {
     <>
     <Nav/>
     <Flex flexDirection="column" rowGap="1rem">
-      <Heading as="h2">Ranking - modo {getModeName()}</Heading>
+      <Heading as="h2">{t('pages.ranking.rank-mode')} {getModeName()}</Heading>
       <Select id="displaySelector" onChange={handleDisplayChange}>
         {displayOptions.map(option => {
           if (gamemode === "calculadora" && option.value === "ratioCorrect") {
@@ -126,24 +128,24 @@ const Ranking = () => {
         className={gamemode === "clasico" ? "active" : ""}
         onClick={() => handleGamemodeChange("clasico")}
       >
-      Clásico
+      {t('pages.ranking.classic')}
       </Button>
       <Button
         className={gamemode === "bateria" ? "active" : ""}
         onClick={() => handleGamemodeChange("bateria")}
       >
-        Batería de sabios
+        {t('pages.ranking.wisebattery')}
       </Button>
       <Button
         className={gamemode === "calculadora" ? "active" : ""}
         onClick={() => handleGamemodeChange("calculadora")}
       >
-        Calculadora humana
+        {t('pages.ranking.humancalculator')}
       </Button>
       <Table>
         <Thead>
           <Tr>
-            <Th>Usuario</Th>
+            <Th>{t('pages.ranking.user')}</Th>
             <Th>{getDisplayedField()}</Th>
           </Tr>
         </Thead>

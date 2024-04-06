@@ -2,12 +2,16 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import CalculadoraHumana from "./Calculadora";
 import { MemoryRouter } from "react-router-dom";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../../i18n.js";
 
 test("renders the game screen", () => {
   render(
-    <MemoryRouter>
-      <CalculadoraHumana />
-    </MemoryRouter>
+    <I18nextProvider i18n={i18n}>
+      <MemoryRouter>
+        <CalculadoraHumana />
+      </MemoryRouter>
+    </I18nextProvider>
   );
 
   // Check if the game screen is rendered
@@ -20,9 +24,11 @@ test("renders the game screen", () => {
 
 test("handles correct answer", () => {
   render(
-    <MemoryRouter>
-      <CalculadoraHumana />
-    </MemoryRouter>
+    <I18nextProvider i18n={i18n}>
+      <MemoryRouter>
+        <CalculadoraHumana />
+      </MemoryRouter>
+    </I18nextProvider>
   );
 
   // Get the initial score
@@ -34,7 +40,9 @@ test("handles correct answer", () => {
   );
 
   // Get the initial operation
-  var initialOperation = screen.getByText(/(\d+)\s*([-+*/])\s*(\d+)/).textContent;
+  var initialOperation = screen.getByText(
+    /(\d+)\s*([-+*/])\s*(\d+)/
+  ).textContent;
   initialOperation = initialOperation.substring(1, initialOperation.length - 1);
 
   // Get the input field and submit button
@@ -60,7 +68,7 @@ test("handles correct answer", () => {
 
   // Enter the correct answer and submit
   fireEvent.change(inputField, { target: { value: eval(nextOperation) } });
-  fireEvent.keyDown(inputField, { key: 'Enter', code: 'Enter' });
+  fireEvent.keyDown(inputField, { key: "Enter", code: "Enter" });
 
   // Check if the score has increased
   updatedScore = parseInt(
@@ -74,9 +82,11 @@ test("handles correct answer", () => {
 
 test("handles incorrect answer", () => {
   render(
-    <MemoryRouter>
-      <CalculadoraHumana />
-    </MemoryRouter>
+    <I18nextProvider i18n={i18n}>
+      <MemoryRouter>
+        <CalculadoraHumana />
+      </MemoryRouter>
+    </I18nextProvider>
   );
 
   // Get the initial score
@@ -107,9 +117,11 @@ test("handles incorrect answer", () => {
 
 test("handles game over", () => {
   render(
-    <MemoryRouter>
-      <CalculadoraHumana />
-    </MemoryRouter>
+    <I18nextProvider i18n={i18n}>
+      <MemoryRouter>
+        <CalculadoraHumana />
+      </MemoryRouter>
+    </I18nextProvider>
   );
 
   // Get the initial score
@@ -143,7 +155,7 @@ test("handles game over", () => {
   );
   expect(updatedScore).toBe(initialScore);
 
-  screen.getByText(/repetir juego/i).click();
+  screen.getByText(/jugar de nuevo/i).click();
 
   waitFor(() => {
     expect(screen.getByText(/¿/i)).toBeInTheDocument();

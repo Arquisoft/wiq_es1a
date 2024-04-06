@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const WrongRoute = () => {
+
+  const { t } = useTranslation();
+
   return (
     <div id="notfound">
       <div class="notfound-bg">
@@ -14,11 +18,11 @@ const WrongRoute = () => {
         <div class="notfound-404">
           <h1>404</h1>
         </div>
-        <h2>Página no encontrada</h2>
+        <h2>{t('pages.wrongroute.title')}</h2>
         <p>
-          La página que estabas buscando no está disponible
+          {t('pages.wrongroute.message')}
         </p>
-        <Link to="/home">Página principal</Link>
+        <Link to="/home">{t('pages.wrongroute.home')}</Link>
       </div>
     </div>
   );

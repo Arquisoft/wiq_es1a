@@ -4,15 +4,42 @@
         "props": ["P36", "P35", "P1344", "P37", "P47", "P2250", "P571", "P122", "P1451"],
         "types": ["str", "str", "str", "str", "str", "num", "date", "str", "str"],
         "preguntas": [
-            "¿Cuál es la capital de ", 
-            "¿Quién es el jefe de estado de ",
-            "¿En qué evento histórico participó ",
-            "¿Cuál es uno de los idiomas oficiales de ",
-            "¿Con qué país comparte frontera ",
-            "¿Cuál es la esperanza de vida media de ",
-            "¿En qué fecha se fundó ",
-            "¿Cuál es la forma de gobierno de ",
-            "¿Cuál es el lema de "
+            {
+                "es": "¿Cuál es la capital de %?",
+                "en": "What is the capital of %?"
+            },
+            {
+                "es": "¿Quién es el jefe de estado de % ?",
+                "en": "Who is the head of state of %?"
+            },
+            {
+                "es": "¿En qué evento histórico participó % ?",
+                "en": "In what historical event did % participate?"
+            },
+            {
+                "es": "¿Cuál es uno de los idiomas oficiales de % ?",
+                "en": "What is one of the official languages of %?"
+            },
+            {
+                "es": "¿Con qué país comparte frontera % ?",
+                "en": "Which country shares a border with %?"
+            },
+            {
+                "es": "¿Cuál es la esperanza de vida media de % ?",
+                "en": "What is the average life expectancy of %?"
+            },
+            {
+                "es": "¿En qué fecha se fundó % ?",
+                "en": "On what date was % founded?"
+            },
+            {
+                "es": "¿Cuál es la forma de gobierno de % ?",
+                "en": "What is the form of government of %?"
+            },
+            {
+                "es": "¿Cuál es el lema de % ?",
+                "en": "What is the motto of %?"
+            }
         ]
     },
     "literatura": {
@@ -20,10 +47,22 @@
         "props": ["P50", "P577", "P136", "P674"],
         "types": ["str", "date", "str", "str"],
         "preguntas": [
-            "¿Quién es el autor de la obra literaria ",
-            "¿Cuál fue la fecha de publicación de la obra literaria ",
-            "¿Cuál es el género de la obra literaria ",
-            "¿Cuál es uno de los personajes de la obra literaria "
+            {
+                "es": "¿Quién es el autor de la obra literaria % ?",
+                "en": "Who is the author of the literary work %?"
+            },
+            {
+                "es": "¿Cuál fue la fecha de publicación de la obra literaria % ?",
+                "en": "What was the publication date of the literary work %?"
+            },
+            {
+                "es": "¿Cuál es el género de la obra literaria % ?",
+                "en": "What is the genre of the literary work %?"
+            },
+            {
+                "es": "¿Cuál es uno de los personajes de la obra literaria % ?",
+                "en": "Who is one of the characters in the literary work %?"
+            }
         ]
     },
     "cine": {
@@ -31,9 +70,18 @@
         "props": ["P577", "P57", "P2130"],
         "types": ["date", "str", "num"],
         "preguntas": [
-            "¿En qué fecha se estrenó el film ",
-            "¿Quién es director de la película ",
-            "¿Cuál fue el presupuesto (en USD) de la película "
+            {
+                "es": "¿En qué fecha se estrenó el film % ?",
+                "en": "On what date was the film % released?"
+            },
+            {
+                "es": "¿Quién es director de la película % ?",
+                "en": "Who is the director of the movie %?"
+            },
+            {
+                "es": "¿Cuál fue el presupuesto (en USD) de la película % ?",
+                "en": "What was the budget (in USD) of the movie %?"
+            }
         ]
     },
     "arte": {
@@ -41,9 +89,18 @@
         "props": ["P571", "P135", "P276"],
         "types": ["date", "str", "str"],
         "preguntas": [
-            "¿En qué año se pintó la obra ",
-            "¿A qué movimiento artístico pertenece la obra ",
-            "¿Dónde está exhibida la obra "
+            {
+                "es": "¿En qué año se pintó la obra % ?",
+                "en": "In what year was the artwork % painted?"
+            },
+            {
+                "es": "¿A qué movimiento artístico pertenece la obra % ?",
+                "en": "To which artistic movement does the artwork % belong?"
+            },
+            {
+                "es": "¿Dónde está exhibida la obra % ?",
+                "en": "Where is the artwork % exhibited?"
+            }
         ]
     },
     "programacion": {
@@ -51,10 +108,22 @@
         "props": ["P571", "P287", "P348", "P1195"],
         "types": ["date", "str", "str", "str"],
         "preguntas": [
-            "¿En qué fecha se creó el lenguaje de programación ",
-            "¿Quién es el creador del lenguaje de programación ",
-            "¿Cuál es la última versión del lenguaje de programación ",
-            "¿Cuál es una de las extensiones usadas por el lenguaje de programación "
+            {
+                "es": "¿En qué fecha se creó el lenguaje de programación % ?",
+                "en": "On what date was the programming language % created?"
+            },
+            {
+                "es": "¿Quién es el creador del lenguaje de programación % ?",
+                "en": "Who is the creator of the programming language %?"
+            },
+            {
+                "es": "¿Cuál es la última versión del lenguaje de programación % ?",
+                "en": "What is the latest version of the programming language %?"
+            },
+            {
+                "es": "¿Cuál es una de las extensiones usadas por el lenguaje de programación % ?",
+                "en": "What is one of the extensions used by the programming language %?"
+            }
         ]
     }
-}      
+}

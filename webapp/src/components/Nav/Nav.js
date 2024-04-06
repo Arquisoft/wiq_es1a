@@ -1,8 +1,11 @@
 import React from "react";
 import { Box, Button, Heading, Switch, Popover, PopoverTrigger, PopoverContent, PopoverArrow, PopoverCloseButton, PopoverHeader, PopoverBody, Text, Flex, useColorMode } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Nav = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
@@ -28,21 +31,21 @@ const Nav = () => {
         <Heading as="h1" size="xl" color={textColor} textAlign="start">WIQ</Heading>
       </Box>
       <Flex gap={3}>
-        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/home")}>Home</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/home")}>{t("components.nav.home")}</Button>
         <Popover>
           <PopoverTrigger>
-            <Button p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} variant="link" color={textColor}>
-              Modos de Juego
+            <Button p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} variant="link" color={textColor}>
+              {t("components.nav.gameModes")}
             </Button>
           </PopoverTrigger>
           <PopoverContent>
             <PopoverArrow />
             <PopoverCloseButton />
-            <PopoverHeader >Modos de Juego</PopoverHeader>
+            <PopoverHeader >{t("components.nav.gameModes")}</PopoverHeader>
             <PopoverBody>
-              <Text cursor="pointer" onClick={() => handleNavigate("/home/clasico")} color={textColor}>Clásico</Text>
-              <Text cursor="pointer" onClick={() => handleNavigate("/home/bateria")} color={textColor}>Batería de sabios</Text>
-              {/* Agrega más modos de juego aquí */}
+              <Text cursor="pointer" onClick={() => handleNavigate("/home/clasico")} color={textColor}>{t('components.nav.classic')}</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/home/bateria")} color={textColor}>{t('components.nav.wisebattery')}</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/home/calculadora")} color={textColor}>{t('components.nav.humancalculator')}</Text>
             </PopoverBody>
           </PopoverContent>
         </Popover>
@@ -67,9 +70,9 @@ const Nav = () => {
         <Button variant="link" _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} color={textColor} mr={4} onClick={() => handleNavigate("/perfil")}>Perfil</Button>
       </Flex>
       <Flex width="25%"  className="rightItems" justifyContent="end">
-        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/sobre")}>Sobre nosotros</Button>
-        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleConfig()}>Opciones</Button>
-        <Button variant="link" color={textColor} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => logout()}>Desconectarse</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/sobre")}>{t('components.nav.about')}</Button>
+        <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleConfig()}>{t('components.nav.options')}</Button>
+        <Button variant="link" color={textColor} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => logout()}>{t('components.nav.disconnect')}</Button>
         <Switch isChecked={isDarkTheme} onChange={toggleColorMode} ml={4} alignSelf="center"/>
       </Flex>
     </Box>
