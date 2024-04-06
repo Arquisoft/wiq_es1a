@@ -65,7 +65,7 @@ const FriendList = () => {
             <List display="flex" flexDirection="column" gap="1rem" spacing={3}>
               {friends.map((friend, index) => (
                 <div key={friend._id}>
-                  <ListItem display="flex">
+                  <ListItem display="flex" justifyContent="space-around">
                     <Avatar name={friend} />
                     <Text alignSelf="center">{friend}</Text>
                     <Button onClick={() => setFriend(friend)}>Ver perfil</Button>

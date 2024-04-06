@@ -1,4 +1,4 @@
-import { Box, VStack, Heading, Text, Center, Spinner, Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
+import { Box, VStack, Heading, Text, Center, Spinner, Table, Thead, Tbody, Tr, Th, Td, Avatar } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 
 const Perfil = (username) => {
@@ -12,7 +12,6 @@ const Perfil = (username) => {
     fetch(gatewayUrl + `/userInfo?user=${username.username}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log('Perfil del usuario:', data);
         setUserData(data);
         setLoading(false);
       })
@@ -41,6 +40,7 @@ const Perfil = (username) => {
               <>
                 {userData && (
                   <>
+                    <Avatar name={username.username} />
                     <Text>
                       <strong>Nombre de usuario:</strong> {userData.username}
                     </Text>
