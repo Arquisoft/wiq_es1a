@@ -137,4 +137,47 @@ describe("Stats component", () => {
       ).toBeInTheDocument();
     });
   });
+
+  test('fetches and displays user statistics for Human Calculator mode', async () => {
+    localStorage.setItem('username', 'testUser');
+  
+    userData.ratioCorrect=0;
+    userData.totalCorrectQuestions=0;
+    userData.totalIncorrectQuestions=0;
+  
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(userData)
+    });
+  
+    renderComponentWithRouter();
+  
+    await waitFor(() => {
+      expect(screen.queryByText('Cargando ...')).not.toBeInTheDocument();
+    });
+  
+    const modeButton = screen.getByRole('button', { name: /Calculadora humana/i });
+    userEvent.click(modeButton);
+  
+    const table = await screen.findByRole('table');
+    expect(table).toBeInTheDocument();
+  
+    const columnHeaders = ['Partidas jugadas', 'Puntos por partida', 'Puntos totales', 'Tiempo por pregunta (s):'];
+    columnHeaders.forEach(headerText => {
+      const headerElement = screen.getByText(headerText);
+      expect(headerElement).toBeInTheDocument();
+    });
+  
+    Object.entries(userData).forEach(([key, value]) => {
+      if (key !== 'username') {
+        if (key === 'avgPoints' || key === 'avgTime') {
+          const valueElements = screen.getAllByText(value.toFixed(2));
+          expect(valueElements.length).toBeGreaterThan(0);
+        } else {
+          const valueElements = screen.getAllByText(value.toString());
+          expect(valueElements.length).toBeGreaterThan(0);
+        }
+      }
+  });
+});
+  
 });
