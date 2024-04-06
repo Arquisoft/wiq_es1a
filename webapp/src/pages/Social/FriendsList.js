@@ -17,6 +17,7 @@ const FriendList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [friends, setFriends] = useState([]);
   const [friend, setFriend] = useState("");
+  const currentUser = localStorage.getItem("username");
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
@@ -34,7 +35,41 @@ const FriendList = () => {
         setIsLoading(false);
       });
   };
-
+  
+  const handleRemoveFriend = async (user) => {
+    try {
+      // Realizar la solicitud HTTP POST al endpoint '/users/remove-friend'
+      const response = await fetch(apiEndpoint + "/users/remove-friend", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: currentUser, // Nombre de usuario del usuario actual
+          friendUsername: user.username, // Nombre de usuario del amigo que se está eliminando
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al eliminar amigo");
+      }
+  
+      // Eliminar al usuario de la lista de amigos localmente
+      setFriends((prevFriends) => prevFriends.filter(friend => friend._id !== user._id));
+      // Actualizar el estado de isFriend del usuario
+      setFriends((prevFriends) => {
+        return prevFriends.map((u) => {
+          if (u._id === user._id) {
+            return { ...u, isFriend: false };
+          }
+          return u;
+        });
+      });
+    } catch (error) {
+      console.error("Error al eliminar amigo:", error);
+    }
+  };
+  
   useEffect(() => {
     fetchFriends();
   }, []);
@@ -62,13 +97,14 @@ const FriendList = () => {
             Lista de amigos
           </Heading>
           {friends.length > 0 ? (
-            <List display="flex" flexDirection="column" gap="1rem" spacing={3}>
+            <List display="flex" flexDirection="column" spacing={3}>
               {friends.map((friend, index) => (
                 <div key={friend._id}>
-                  <ListItem display="flex" justifyContent="space-around">
+                  <ListItem m="1rem" display="flex" justifyContent="space-around">
                     <Avatar name={friend} />
                     <Text alignSelf="center">{friend}</Text>
                     <Button onClick={() => setFriend(friend)}>Ver perfil</Button>
+                    <Button onClick={() => handleRemoveFriend(friend)}>Eliminar amigo</Button>
                   </ListItem>
                   {index !== friends.length - 1 && <Divider />}
                 </div>

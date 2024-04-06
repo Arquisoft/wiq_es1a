@@ -130,6 +130,33 @@ app.post('/users/add-friend', async (req, res) => {
   }
 });
 
+app.post('/users/remove-friend', async (req, res) => {
+  try {
+    const username = req.body.username;
+    const friendUsername = req.body.friendUsername;
+
+    // Buscar el usuario por su nombre de usuario
+    const user = await User.findOne({ username: username });
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Verificar si el amigo está en la lista de amigos del usuario
+    if (!user.friends.includes(friendUsername)) {
+      return res.status(400).json({ error: 'Friend not found in the user\'s friend list' });
+    }
+
+    // Eliminar al amigo de la lista de amigos del usuario
+    user.friends = user.friends.filter(friend => friend !== friendUsername);
+    await user.save();
+
+    res.json({ message: 'Friend removed successfully' });
+  } catch (error) {
+    console.error('Error removing friend:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // Route to get friends of the authenticated user
 app.get('/friends', async (req, res) => {
   try {
