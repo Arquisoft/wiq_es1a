@@ -85,7 +85,7 @@
     "home": {
       "title": "¡Bienvenido a WIQ!",
       "choose": "Elige el modo de juego",
-      "classic": "Modo clásico",
+      "classic": "Clásico",
       "classicDescription": "En el modo Clásico, tendrás que responder un número determinado de preguntas en un tiempo limitado. ¡Demuestra tus conocimientos y rapidez para superar este desafío!",
       "wisebattery": "Batería de sabios",
       "wisebatteryDescription": "En el modo Batería de Sabios, pondrás a prueba tu conocimiento respondiendo todas las preguntas que puedas en un tiempo fijo. Cuantas más preguntas aciertes, ¡mejor será tu puntuación! ¿Estás listo para este desafío cronometrado?",

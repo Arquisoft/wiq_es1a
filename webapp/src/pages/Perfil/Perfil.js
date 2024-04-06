@@ -83,7 +83,7 @@ const Perfil = () => {
                           </Tbody>
                         </Table>
                       ) : (
-                        <Text>{t('pages.profile.nogames')}</Text>
+                        <Text>{t('pages.profile.noGames')}</Text>
                       )}
                     </div>
                   </>

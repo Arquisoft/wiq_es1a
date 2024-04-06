@@ -172,7 +172,7 @@ const JuegoPreguntas = () => {
                 {t('pages.wisebattery.score')} {puntuacion}
               </p>
               <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
-                {t('pages.wisebattery.score')}
+                {t('pages.wisebattery.playAgain')}
               </Button>
               <Link to="/home" style={{ marginLeft: "10px" }}>
                 {t('pages.wisebattery.back')}
