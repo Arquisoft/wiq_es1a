@@ -5,7 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../i18n.js";
 
-// Mock the fetch function
+// Mock de la función fetch
 const mockData = [
   { _id: "1", username: "user1", isFriend: false },
   { _id: "2", username: "user2", isFriend: true },
@@ -92,8 +92,6 @@ describe("UsersPage", () => {
       expect(screen.getByText("user1")).toBeInTheDocument();
     });
 
-    expect(screen.getByRole("button", { name: /Añadir amigo/i })).toBeInTheDocument();
-
     fireEvent.click(
       screen.getAllByRole("button", { name: /Añadir amigo/i })[0]
     );
@@ -103,3 +101,4 @@ describe("UsersPage", () => {
     });
   });
 });
+
