@@ -130,7 +130,7 @@ describe("Register Component", () => {
     fireEvent.click(screen.getByText("Registrarse"));
 
     expect(
-      screen.getByText("Las contraseñas no coinciden")
+      screen.getByText("Error: Las contraseñas no coinciden")
     ).toBeInTheDocument();
   });
 });
