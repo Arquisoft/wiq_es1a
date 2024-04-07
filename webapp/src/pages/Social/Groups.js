@@ -17,7 +17,7 @@ const Groups = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiEndpoint}/group/list`);
+        const response = await axios.get(`${apiEndpoint}/groups`);
         setGroups(response.data.groups);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -28,7 +28,7 @@ const Groups = () => {
 
   const addGroup = async () => {
     try {
-      await axios.post(`${apiEndpoint}/group/add`, {
+      await axios.post(`${apiEndpoint}/groups`, {
         name: name,
         username: username
       });
@@ -41,7 +41,7 @@ const Groups = () => {
 
   const handleJoinGroup = async (groupId) => {
     try {
-      await axios.post(`${apiEndpoint}/group/join`, { groupId });
+      await axios.post(`${apiEndpoint}/groups/${groupId}/join`, { username });
       setGroups(prevGroups => prevGroups.filter(group => group._id !== groupId));
     } catch (error) {
       console.error('Error joining group:', error);
@@ -80,7 +80,7 @@ const Groups = () => {
         <Text fontSize="3xl" fontWeight="bold" mb="4">GROUPS</Text>
         <List>
           {groups.map((group) => (
-            <ListItem key={group.name} display="flex" justifyContent="space-between" alignItems="center" mb="2">
+            <ListItem key={group._id} display="flex" justifyContent="space-between" alignItems="center" mb="2">
               <Text>{group.name}</Text>
               <Button colorScheme="blue" onClick={() => handleJoinGroup(group._id)}>Join</Button>
             </ListItem>
@@ -95,3 +95,4 @@ const Groups = () => {
 };
 
 export default Groups;
+
