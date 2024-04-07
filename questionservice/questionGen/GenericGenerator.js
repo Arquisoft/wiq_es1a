@@ -89,7 +89,7 @@ class GenericGenerator {
       });
   }
 
-  generateRandomQuestion() {
+  generateRandomQuestion(locale) {
     // Elegir aleatoriamente una entidad del array
     var entidades = Object.keys(this.data);
     const entidadLabel =
@@ -151,18 +151,17 @@ class GenericGenerator {
       default:
         break;
     }
-
     questionObj.pregunta =
-      this.preguntasMap.get(propiedadPregunta) + entidadLabel + "?";
-
+      this.preguntasMap.get(propiedadPregunta)[locale].replace('%', entidadLabel);
+    
     return questionObj;
   }
 
-  generateRandomQuestions(n) {
+  generateRandomQuestions(n, locale) {
     const questions = [];
 
     for (let i = 0; i < n; i++) {
-      const question = this.generateRandomQuestion();
+      const question = this.generateRandomQuestion(locale);
       questions.push(question);
     }
 

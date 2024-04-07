@@ -1,96 +1,201 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { BrowserRouter as Router} from 'react-router-dom';
-import Home from './pages/Home/Home.js';
-import Nav from './components/Nav/Nav.js';
-import Footer from './components/Footer/Footer.js';
-import App from './App';
+import { render, screen, fireEvent } from "@testing-library/react";
+import { BrowserRouter as Router } from "react-router-dom";
+import Home from "./pages/Home/Home.js";
+import Nav from "./components/Nav/Nav.js";
+import Footer from "./components/Footer/Footer.js";
+import App from "./App";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n.js";
 
-describe('App Component', () => {
-  test('renders login page by default', () => {
+describe("App Component", () => {
+  test("renders login page by default", () => {
     render(
-      <App />
+      <I18nextProvider i18n={i18n}>
+        <App />
+      </I18nextProvider>
     );
 
-    const loginPage = screen.getByText('Login');
+    const loginPage = screen.getByText("Login");
     expect(loginPage).toBeInTheDocument();
   });
-
 });
 
-describe('Home Component', () => {
-  test('renders welcome message and game links', () => {
+describe("Home Component", () => {
+  test("renders welcome message and game links", () => {
     const { getByText, getByRole } = render(
-      <Router>
-        <Home />
-      </Router>
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Home />
+        </Router>
+      </I18nextProvider>
     );
 
     // Verifica que el mensaje de bienvenida esté presente
-    expect(getByText('¡Bienvenido a WIQ!')).toBeInTheDocument();
-    expect(getByText('Elige el modo de juego')).toBeInTheDocument();
+    expect(getByText("¡Bienvenido a WIQ!")).toBeInTheDocument();
+    expect(getByText("Elige el modo de juego")).toBeInTheDocument();
 
     // Verifica el texto de cada enlace
-    expect(screen.getByText('Clásico')).toBeInTheDocument();
-    expect(screen.getByText('Batería de sabios')).toBeInTheDocument();
+    expect(getByRole("button", { name: "Clásico" })).toBeInTheDocument();
+    expect(getByRole("button", { name: "Batería de sabios" })).toBeInTheDocument();
+    expect(getByRole("button", { name: "Calculadora humana" })).toBeInTheDocument();
   });
 });
 
-describe('Nav Component', () => {
-  it('renders Nav component with links and logout button', () => {
-    const { getByText, getByRole } = render( 
-    <Router>
-      <Nav />
-    </Router>
-  );
+describe("Nav Component", () => {
+  test("renders Nav component with links and logout button", () => {
+    const { getByText, getByRole } = render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
 
     // Verificar que el logo esté presente
-    expect(getByText('WIQ')).toBeInTheDocument();
-
-    // Verificar que los enlaces estén presentes
-    expect(getByText('Home')).toBeInTheDocument();
-    //expect(getByText('Modos de Juego')).toBeInTheDocument();
-    expect(getByText('Estadísticas')).toBeInTheDocument();
-    expect(getByText('Ranking')).toBeInTheDocument();
-    expect(getByText('Perfil')).toBeInTheDocument();
-
-    expect(getByText('Sobre nosotros')).toBeInTheDocument();
-    expect(getByText('Opciones')).toBeInTheDocument();
+    expect(screen.getByText("WIQ")).toBeInTheDocument();
+    expect(screen.getByText("Inicio")).toBeInTheDocument();
+    expect(screen.getByText("Estadísticas")).toBeInTheDocument();
+    expect(screen.getByText("Ranking")).toBeInTheDocument();
+    expect(screen.getByText("Perfil")).toBeInTheDocument();
+    expect(screen.getByText("Sobre nosotros")).toBeInTheDocument();
+    expect(screen.getByText("Opciones")).toBeInTheDocument();
+    expect(screen.getByText("Clásico")).toBeInTheDocument();
+    expect(screen.getByText("Batería de sabios")).toBeInTheDocument();
+    expect(screen.getByText("Calculadora humana")).toBeInTheDocument();
+    const socialLinks = screen.queryAllByText("Social");
+    expect(socialLinks.length).toBe(2);
+    expect(screen.getByText("Usuarios")).toBeInTheDocument();
+    expect(screen.getByText("Amigos")).toBeInTheDocument();
 
     // Verificar que el botón de logout esté presente y que sea un enlace al login
-    const logoutButton = getByRole('button', { name: /Desconectarse/i });
+    const logoutButton = getByRole("button", { name: /Desconectar/i });
     expect(logoutButton).toBeInTheDocument();
     //expect(logoutButton.closest('a')).toHaveAttribute('href', '/login');
   });
 
-  it('calls localStorage.removeItem when logout button is clicked', () => {
-    // Mock de localStorage.removeItem
+  test("calls localStorage.removeItem when logout button is clicked", () => {
     const removeItemMock = jest.fn();
-    Object.defineProperty(window, 'localStorage', {
-        value: { removeItem: removeItemMock },
-        writable: true
+    Object.defineProperty(window, "localStorage", {
+      value: { removeItem: removeItemMock },
+      writable: true,
     });
 
-    // Renderizar el componente Nav
-    const { getByRole } = render( 
-      <Router>
-        <Nav />
-      </Router>
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
     );
-    const logoutButton = getByRole('button', { name: /Desconectarse/i });
 
-    // Simular clic en el botón de logout
+    const logoutButton = screen.getByRole("button", { name: /Desconectar/i });
     fireEvent.click(logoutButton);
 
-    // Verificar que la función removeItem se haya llamado con 'token'
-    expect(removeItemMock).toHaveBeenCalledWith('token');
+    expect(removeItemMock).toHaveBeenCalledWith("token");
+  });
+
+  test("navigates to /home when Home button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const homeButton = screen.getByText("Inicio");
+    fireEvent.click(homeButton);
+
+    expect(window.location.pathname).toBe("/home");
+  });
+
+  test("navigates to /stats when Estadísticas button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const statsButton = screen.getByText("Estadísticas");
+    fireEvent.click(statsButton);
+
+    expect(window.location.pathname).toBe("/stats");
+  });
+
+  test("navigates to /ranking when Ranking button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const rankingButton = screen.getByText("Ranking");
+    fireEvent.click(rankingButton);
+
+    expect(window.location.pathname).toBe("/ranking");
+  });
+
+  test("navigates to /perfil when Perfil button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const perfilButton = screen.getByText("Perfil");
+    fireEvent.click(perfilButton);
+
+    expect(window.location.pathname).toBe("/perfil");
+  });
+
+  test("navigates to /sobre when Sobre nosotros button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const aboutButton = screen.getByText("Sobre nosotros");
+    fireEvent.click(aboutButton);
+
+    expect(window.location.pathname).toBe("/sobre");
+  });
+
+  test("navigates to /config when Opciones button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const optionsButton = screen.getByText("Opciones");
+    fireEvent.click(optionsButton);
+
+    expect(window.location.pathname).toBe("/config");
+  });
 });
-});
-describe('Footer Component', () => {
-  it('renders footer text correctly', () => {
-    render(<Footer />);
+describe("Footer Component", () => {
+  it("renders footer text correctly", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Footer />
+      </I18nextProvider>
+    );
 
     // Verificar que el texto del pie de página esté presente
-    expect(screen.getByText('WIQ!')).toBeInTheDocument();
-    expect(screen.getByText('Copyright 2024 ® Grupo 1A de Arquitectura del Software')).toBeInTheDocument();
+    expect(screen.getByText("WIQ!")).toBeInTheDocument();
+    expect(
+      screen.getByText("Copyright 2024 ® Grupo 1A de Arquitectura del Software")
+    ).toBeInTheDocument();
   });
 });

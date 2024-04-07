@@ -1,0 +1,192 @@
+{
+  "components": {
+    "footer": {
+      "copyright": "Copyright 2024 ® Software Architecture Group 1A"
+    },
+    "login": {
+      "title": "Log in",
+      "nameLabel": "Enter your name",
+      "namePlaceholder": "Name",
+      "passwordPlaceholder": "Password",
+      "passwordLabel": "Enter your password",
+      "loginButton": "Log in",
+      "registerText": "Don't have an account?",
+      "registerLink": "Sign up",
+      "loginAlert": "Login successful"
+    },
+    "nav": {
+      "home": "Home",
+      "gameModes": "Game Modes",
+      "classic": "Classic",
+      "wisebattery": "Wise Battery",
+      "humancalculator": "Human Calculator",
+      "users": "Users",
+      "friends": "Friends",
+      "stats": "Statistics",
+      "ranking": "Ranking",
+      "profile": "Profile",
+      "about": "About Us",
+      "options": "Options",
+      "disconnect": "Disconnect"
+    },
+    "register": {
+      "title": "Sign up",
+      "nameLabel": "Enter your name",
+      "namePlaceholder": "Name",
+      "passwordPlaceholder": "Password",
+      "passwordLabel": "Enter your password",
+      "password2Label": "Re-enter password",
+      "registerButton": "Sign up",
+      "loginText": "Already have an account?",
+      "loginLink": "Log in",
+      "registerAlert": "User registered successfully",
+      "registerError": "Passwords do not match"
+    },
+    "profile": {
+      "profile": "User Profile",
+      "name": "User Name",
+      "date": "Account Creation Date",
+      "recentGames": "Recent Games",
+      "gameMode": "Game Mode",
+      "correct": "Correct Answers",
+      "incorrect": "Incorrect Answers",
+      "score": "Score",
+      "avgTime": "Average Time",
+      "seconds": "seconds",
+      "noGames": "No recent games."
+    }
+  },
+  "pages": {
+    "classic": {
+      "finished": "Game Over!",
+      "score": "Your Score:",
+      "playAgain": "Play Again",
+      "back": "Back to Menu",
+      "question": "Question",
+      "time": "Time Remaining:",
+      "easterEgg": "You got them all right! You are Jordi Hurtado's secondary account.",
+      "answer": "Answer"
+    },
+    "wisebattery": {
+      "finished": "Game Over!",
+      "score": "Your Score:",
+      "playAgain": "Play Again",
+      "back": "Back to Menu",
+      "question": "Question",
+      "time": "Time Remaining:"
+    },
+    "humancalculator": {
+      "finished": "Game Over!",
+      "score": "Your Score:",
+      "playAgain": "Play Again",
+      "back": "Back to Menu",
+      "question": "Question",
+      "time": "Time Remaining:"
+    },
+    "config": {
+      "title": "Settings",
+      "language": "Language",
+      "topics": "Question Topics",
+      "countries": "Countries",
+      "literature": "Literature",
+      "cinema": "Cinema",
+      "art": "Art",
+      "programming": "Programming",
+      "save": "Apply Changes",
+      "timeBetweenClassic": "Time Between Questions (Classic)",
+      "questionCountClassic": "Number of Questions (Classic)",
+      "totalTimeBattery": "Total Time (Wise Battery)"
+    },
+    "home": {
+      "title": "Welcome to WIQ!",
+      "choose": "Choose a Game Mode",
+      "classic": "Classic",
+      "classicDescription": "In Classic mode, you will have to answer a set number of questions within a limited time. Show off your knowledge and speed to overcome this challenge!",
+      "wisebattery": "Wise Battery",
+      "wisebatteryDescription": "In Wise Battery mode, you will test your knowledge by answering as many questions as you can within a fixed time. The more questions you get right, the better your score! Are you ready for this timed challenge?",
+      "humancalculator": "Human Calculator",
+      "humancalculatorDescription": "In Human Calculator mode, you will have to solve mathematical operations within a limited time. Showcase your math skills and speed to overcome this challenge!",
+      "error": "There was an error loading the questions. Please try again later."
+    },
+    "profile": {
+      "title": "Profile",
+      "nameLabel": "Username:",
+      "dateLabel": "Account Creation Date:",
+      "recentGames": "Recent Games",
+      "gameMode": "Game Mode",
+      "correct": "Correct Answers",
+      "incorrect": "Incorrect Answers",
+      "score": "Score",
+      "avgTime": "Average Time",
+      "seconds": "seconds",
+      "noGames": "You haven't played any games yet."
+    },
+    "ranking": {
+      "loading": "Loading...",
+      "loadingText": "Ranking is being queried, please wait a moment.",
+      "error": "Error:",
+      "errorLabel": "An error occurred while retrieving the ranking",
+      "rank-mode": "Ranking - Mode",
+      "classic": "Classic",
+      "wisebattery": "Wise Battery",
+      "humancalculator": "Human Calculator",
+      "user": "User",
+      "avgPoints": "Average Points",
+      "totalPoints": "Total Points",
+      "ratioCorrect": "Correct Ratio (%)",
+      "avgTime": "Time per Question (s):",
+      "reboot": "Reset to Default",
+      "errorText": "An error occurred while retrieving the ranking"
+    },
+    "about": {
+      "title": "WIQ_es1a Team",
+      "description": "Our development team",
+      "name": "Name",
+      "uo": "University",
+      "github": "GitHub",
+      "mygithub": "My GitHub"
+    },
+    "stats": {
+      "loading": "Loading...",
+      "loadingText": "Statistics are being queried, please wait a moment.",
+      "username": "Username",
+      "search": "Search",
+      "searchText": "Please check if the form values are correct and try again",
+      "classic": "Classic",
+      "wisebattery": "Wise Battery",
+      "humancalculator": "Human Calculator",
+      "noStats": "User has not played any games.",
+      "stats": "Statistics of",
+      "mode": "Mode",
+      "gamesPlayed": "Games Played",
+      "pointsPerGame": "Points Per Game",
+      "totalpoints": "Total Points",
+      "totalCorrect": "Total Correct Answers",
+      "totalIncorrect": "Total Incorrect Answers",
+      "correctRatio": "Correct Ratio",
+      "avgTime": "Time per Question (s)"
+    },
+    "wrongroute": {
+      "title": "Page Not Found",
+      "message": "The page you were looking for is not available",
+      "home": "Back to Home"
+    },
+    "userspage": {
+      "list": "User List",
+      "user": "User",
+      "actions": "Actions",
+      "friend": "Friend",
+      "addFriend": "Add Friend",
+      "loading": "Loading users...",
+      "error": "Error loading users: "
+    },
+    "friendlist": {
+      "loading": "Loading...",
+      "loadingText": "Your search is being processed, please wait a moment.",
+      "list": "Friend List",
+      "profile": "View Profile",
+      "delete": "Delete Friend",
+      "noFriends": "You currently have no friends."
+    }
+  }
+}

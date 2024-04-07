@@ -16,11 +16,15 @@ import {
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Config = () => {
+  const { t, i18n} = useTranslation();
+
   useEffect(() => {
     // Obtener el estado de los checkboxes desde el localStorage
-    const selectedThemes = JSON.parse(localStorage.getItem("selectedThemes")) || [];
+    const selectedThemes =
+      JSON.parse(localStorage.getItem("selectedThemes")) || [];
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
     checkboxes.forEach((checkbox) => {
@@ -84,9 +88,14 @@ const Config = () => {
       <Flex direction="column" align="center" justify="center">
         <Box className="configContainer">
           <Heading as="h2" mb={4}>
-            Configuración
+            {t('pages.config.title')}
           </Heading>
-          <FormLabel htmlFor="clasico"> Temáticas de preguntas</FormLabel>
+          <FormLabel htmlFor="idioma">{t('pages.config.language')}</FormLabel>
+          <Flex direction="row" align="center" justify="space-around">
+            <Button colorScheme="teal" onClick={() => i18n.changeLanguage("es")}>Español</Button>
+            <Button colorScheme="teal" onClick={() => i18n.changeLanguage("en")}>English</Button>
+          </Flex>
+          <FormLabel htmlFor="clasico">{t('pages.config.topics')}</FormLabel>
           <Box
             display="grid"
             gridTemplateColumns="repeat(auto-fit, minmax(150px, 1fr))"
@@ -95,19 +104,19 @@ const Config = () => {
           >
             <Stack spacing={5} direction="row">
               <Checkbox id="paises" mb={2}>
-                Países
+                {t('pages.config.countries')}
               </Checkbox>
               <Checkbox id="literatura" mb={2}>
-                Literatura
+                {t('pages.config.literature')}
               </Checkbox>
               <Checkbox id="cine" mb={2}>
-                Cine
+                {t('pages.config.cinema')}
               </Checkbox>
               <Checkbox id="arte" mb={2}>
-                Arte
+                {t('pages.config.art')}
               </Checkbox>
               <Checkbox id="programacion" mb={2}>
-                Programación
+                {t('pages.config.programming')}
               </Checkbox>
             </Stack>
           </Box>
@@ -115,7 +124,7 @@ const Config = () => {
           <Box>
             <FormLabel htmlFor="clasico">
               {" "}
-              Tiempo entre preguntas (Clásico)
+              {t('pages.config.timeBetweenClassic')}
             </FormLabel>
             <NumberInput
               id="clasico"
@@ -134,7 +143,7 @@ const Config = () => {
             </NumberInput>
             <FormLabel htmlFor="clasicoPreguntas">
               {" "}
-              Número de preguntas (Clásico)
+              {t('pages.config.questionCountClassic')}
             </FormLabel>
             <NumberInput
               id="clasicoPreguntas"
@@ -152,7 +161,7 @@ const Config = () => {
               </NumberInputStepper>
             </NumberInput>
             <FormLabel htmlFor="bateria">
-              Tiempo total (Batería de sabios)
+              {t('pages.config.totalTimeBattery')}
             </FormLabel>
             <NumberInput
               id="bateria"
@@ -171,7 +180,7 @@ const Config = () => {
             </NumberInput>
           </Box>
           <Button colorScheme="teal" onClick={handleConfig} mb={4}>
-            Aplicar cambios
+            {t('pages.config.save')}
           </Button>
         </Box>
       </Flex>

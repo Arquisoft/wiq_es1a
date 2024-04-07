@@ -4,12 +4,15 @@ import { Link, useNavigate } from "react-router-dom";
 import Footer from "../../components/Footer/Footer.js";
 import { Box, Flex, Heading, Button, Grid, useColorMode, Text, Image, Spinner } from "@chakra-ui/react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const JuegoPreguntas = () => {
   const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
   const SECS_PER_QUESTION = localStorage.getItem("clasicoTime");
   const { colorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
+
+  const { t, i18n} = useTranslation();
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -39,6 +42,7 @@ const JuegoPreguntas = () => {
       body: JSON.stringify({
         tematicas: localStorage.getItem("selectedThemes"),
         n: localStorage.getItem("clasicoPreguntas"),
+        locale: i18n.language
       }),
     })
       .then((response) => {
@@ -220,27 +224,27 @@ const JuegoPreguntas = () => {
         <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
           {mostrarMenu ? (
             <Box textAlign="center">
-              <Heading as="h2">¡Juego terminado!</Heading>
+              <Heading as="h2">{t('pages.classic.finished')}</Heading>
               <p p={2}>
-                Tu puntuación: {puntuacion}/{preguntas.length}
+                {t('pages.classic.score')} {puntuacion}/{preguntas.length}
               </p>
               {preguntasFalladas === 0 ? (
                 <Box>
                   <Image src="/jordi.png" alt="Jordi Hurtado" />
-                  <Text>¡Has acertado todas! Eres la cuenta secundaria de Jordi Hurtado.</Text>
+                  <Text>{t('pages.classic.easterEgg')}</Text>
                 </Box>
               ) : null}
               <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
-                Repetir Juego
+                {t('pages.classic.playAgain')}
               </Button>
               <Link to="/home" style={{ marginLeft: "10px" }}>
-                Volver al Menú Principal
+                {t('pages.classic.back')}
               </Link>
             </Box>
           ) : (
             <Box>
               <Heading as="h2" mb={4}>
-                Pregunta {indicePregunta + 1}
+              {t('pages.classic.question')} {indicePregunta + 1}
               </Heading>
               <p>{preguntaActual.pregunta}</p>
               <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
@@ -266,11 +270,11 @@ const JuegoPreguntas = () => {
                   colorScheme="teal"
                   m={2}
                 >
-                  Responder
+                  {t('pages.classic.answer')}
                 </Button>
               </Flex>
               <Box textAlign="center" mt={4}>
-                <p>Tiempo restante: {Math.floor(tiempoRestante)}</p>
+                <p>{t('pages.classic.time')} {Math.floor(tiempoRestante)}</p>
                 <p>Puntuación: {puntuacion}</p>
                 <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
                   <Box bg="teal.500" h="4px" width={`${progressPercent}%`}></Box>
