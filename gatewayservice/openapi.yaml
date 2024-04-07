@@ -84,19 +84,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/AuthResponse"
+              example:
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE1MTYyMzkwMjJ9.1
+                username: test
+                createdAt: 2021-06-01T00:00:00Z
         "400":
           description: Invalid request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+              example:
+                error: Username already exists. Please choose a different username.
 
   /userInfo:
     get:
@@ -473,8 +473,6 @@ components:
           items:
             type: object
 
-
-
     Game:
       type: object
       properties:
@@ -569,3 +567,14 @@ components:
             type: integer
           avgTime: 
             type: number
+    
+    RegisterResponse:
+      type: object
+      properties:
+        username:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        token:
+          type: string

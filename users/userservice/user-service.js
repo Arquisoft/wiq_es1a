@@ -3,7 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const { Group, User, UserGroup } = require('./user-model');
+const jwt = require('jsonwebtoken');
+const { User } = require('./user-model');
 
 const app = express();
 const port = 8001;
@@ -67,7 +68,14 @@ app.post('/adduser', async (req, res) => {
         });
 
         await newUser.save();
-        res.json(newUser);
+
+        const token = jwt.sign({ userId: newUser._id }, 'your-secret-key', { expiresIn: '1h' });
+
+        res.json({
+          username: newUser.username,
+          createdAt: newUser.createdAt,
+          token: token
+        });
     } catch (error) {
         res.status(400).json({ error: error.message }); 
     }});
