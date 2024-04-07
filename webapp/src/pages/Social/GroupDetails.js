@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Box, Text, Heading, List, ListItem, Avatar } from '@chakra-ui/react';
+import { Container, Box, Text, Heading, Table, Thead, Tbody, Tr, Th, Td, Avatar, Link } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
@@ -32,26 +32,36 @@ const GroupDetails = () => {
     <>
       <Nav/>
       <Container maxW="md" mt="8">
-        <Heading as="h1" mb="4">Detalles del grupo</Heading>
+        <Heading as="h1" mb="4">Detalles del grupo: {group.name}</Heading>
         {group ? (
           <Box>
-            <Text fontSize="lg" fontWeight="bold" mb="2">Nombre:</Text>
-            <Text fontSize="xl" mb="4">{group.name}</Text>
-
             <Text fontSize="lg" fontWeight="bold" mb="4">
               Creado por {group.members.length > 0 ? group.members[0] : ''} el {new Date(group.createdAt).toLocaleDateString()}
             </Text>
-
+  
             <Text fontSize="lg" fontWeight="bold" mb="2">Participantes ({group.members.length}) :</Text>
-            <List>
-              {group.members.map((member, index) => (
-                <ListItem key={index}>
-                  <Avatar size="sm" name={member} mr={2} />
-                  {member}{" "}
-                  <Link color="blue.500" onClick={() => redirectToProfile(member)}>Ver perfil</Link>
-                </ListItem>
-              ))}
-            </List>
+            <Table variant="striped" colorScheme="blue">
+              <Thead>
+                <Tr>
+                  <Th>Avatar</Th>
+                  <Th>Nombre</Th>
+                  <Th>Ver perfil</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {group.members.map((member, index) => (
+                  <Tr key={index}>
+                    <Td>
+                      <Avatar size="sm" name={member} />
+                    </Td>
+                    <Td>{member}</Td>
+                    <Td>
+                      <Link color="blue.500" onClick={() => redirectToProfile(member)}>Ver perfil</Link>
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
           </Box>
         ) : (
           <Text>Loading...</Text>
