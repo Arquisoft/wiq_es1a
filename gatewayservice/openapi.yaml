@@ -180,6 +180,216 @@ paths:
                 $ref: "#/components/schemas/Error"
               example:
                 error: Usuario no encontrado
+  /friends:
+    get:
+      summary: Get Friends of User
+      parameters:
+        - in: query
+          name: name
+          schema:
+            type: string
+          description: Username for which to retrieve friends
+      responses:
+        "200":
+          description: Friends retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FriendList"
+              example:
+                friends:
+                  - test1
+                  - test2
+                  - test3
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: User not found
+        "500":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
+
+  /users/search:
+    get:
+      summary: Search Users
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          description: Username to search for his non-friends
+      responses:
+        "200":
+          description: Friends retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FriendListArray"
+              example:
+                friends:
+                  - username: test1
+                    password: test1
+                    createdAt: 2021-06-01T00:00:00Z
+                    games: 
+                      - correctAnswers: 10
+                        incorrectAnswers: 5
+                        points: 10
+                        avgTime: 10
+                        _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                      - correctAnswers: 2
+                        incorrectAnswers: 12
+                        points: 15
+                        avgTime: 7
+                        _id: 65ea02cf891b09479a383477
+                  - username: test2
+                    password: test2
+                    createdAt: 2021-06-01T00:00:00Z
+                    games:
+                      - correctAnswers: 10
+                        incorrectAnswers: 5
+                        points: 10
+                        avgTime: 10
+                        _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                      - correctAnswers: 2
+                        incorrectAnswers: 12
+                        points: 15
+                        avgTime: 7
+                        _id: 65ea02cf891b09479a383477
+                  - username: test3
+                    password: test3
+                    createdAt: 2021-06-01T00:00:00Z
+                    games:
+                      - correctAnswers: 10
+                        incorrectAnswers: 5
+                        points: 10
+                        avgTime: 10
+                        _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                      - correctAnswers: 2
+                        incorrectAnswers: 12
+                        points: 15
+                        avgTime: 7
+                        _id: 65ea02cf891b09479a383477
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: User not found
+        "500":
+          description: Invalid request (questions limit exceeded)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
+
+  /users/add-friend:
+    post:
+      summary: Get Questions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                friendUsername:
+                  type: string
+      responses:
+        "200":
+          description: Friends added successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessMessage"
+              example:
+                message: Friends added successfully
+        "400":
+          description: Friend already added
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Friend already added
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: User not found
+        "500":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
+  
+  /users/remove-friend:
+    post:
+      summary: Get Questions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                friendUsername:
+                  type: string
+      responses:
+        "200":
+          description: Friends added successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessMessage"
+              example:
+                message: Friends removed successfully
+        "400":
+          description: Friend not found in the user's friend list
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Friend not found in the user's friend list
+        "404":
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: User not found
+        "500":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
 
   /questions:
     get:
@@ -578,3 +788,19 @@ components:
           format: date-time
         token:
           type: string
+
+    FriendList:
+      type: object
+      properties:
+        friends:
+          type: array
+          items:
+            type: string
+
+    FriendListArray:
+      type: array
+      properties:
+        friends:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"

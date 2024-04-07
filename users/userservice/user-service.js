@@ -133,7 +133,6 @@ app.post('/users/add-friend', async (req, res) => {
 
     res.json({ message: 'Friend added successfully' });
   } catch (error) {
-    console.error('Error adding friend:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -173,7 +172,7 @@ app.get('/friends', async (req, res) => {
     // Buscar al usuario por su nombre de usuario
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(500).json({ error: 'User not found' });
+      return res.status(404).json({ error: 'User not found' });
     }
     // Devuelve la lista de amigos
     res.json({ friends: user.friends });
