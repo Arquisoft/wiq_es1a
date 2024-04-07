@@ -52,18 +52,20 @@ describe("Nav Component", () => {
     );
 
     // Verificar que el logo esté presente
-    expect(getByText("WIQ")).toBeInTheDocument();
-
-    // Verificar que los enlaces estén presentes
-    expect(getByText("Inicio")).toBeInTheDocument();
-    expect(getByText("WIQ")).toBeInTheDocument();
-
-    expect(getByText("Inicio")).toBeInTheDocument();
-    expect(getByText("Estadísticas")).toBeInTheDocument();
-    expect(getByText("Ranking")).toBeInTheDocument();
-    expect(getByText("Perfil")).toBeInTheDocument();
-    expect(getByText("Sobre nosotros")).toBeInTheDocument();
-    expect(getByText("Opciones")).toBeInTheDocument();
+    expect(screen.getByText("WIQ")).toBeInTheDocument();
+    expect(screen.getByText("Inicio")).toBeInTheDocument();
+    expect(screen.getByText("Estadísticas")).toBeInTheDocument();
+    expect(screen.getByText("Ranking")).toBeInTheDocument();
+    expect(screen.getByText("Perfil")).toBeInTheDocument();
+    expect(screen.getByText("Sobre nosotros")).toBeInTheDocument();
+    expect(screen.getByText("Opciones")).toBeInTheDocument();
+    expect(screen.getByText("Clásico")).toBeInTheDocument();
+    expect(screen.getByText("Batería de sabios")).toBeInTheDocument();
+    expect(screen.getByText("Calculadora humana")).toBeInTheDocument();
+    const socialLinks = screen.queryAllByText("Social");
+    expect(socialLinks.length).toBe(2);
+    expect(screen.getByText("Usuarios")).toBeInTheDocument();
+    expect(screen.getByText("Amigos")).toBeInTheDocument();
 
     // Verificar que el botón de logout esté presente y que sea un enlace al login
     const logoutButton = getByRole("button", { name: /Desconectar/i });
