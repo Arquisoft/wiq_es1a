@@ -189,9 +189,9 @@ app.get('/group/list', async (req, res) => {
 });
 
 // Obtener un grupo por su nombre
-app.get('/group/:groupid', async (req, res) => {
+app.get('/group/:groupName', async (req, res) => {
   try {
-      const groupName = req.params.name;
+      const groupName = req.params.groupName;
       const group = await Group.findOne({ name: groupName });
 
       if (!group) {
@@ -203,6 +203,7 @@ app.get('/group/:groupid', async (req, res) => {
       res.status(400).json({ error: error.message });
   }
 });
+
 
 // Crear un nuevo grupo
 app.post('/group/add', async (req, res) => {
