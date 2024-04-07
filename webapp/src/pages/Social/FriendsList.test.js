@@ -23,7 +23,7 @@ const renderComponent = () => {
   });
 };
 
-const checkFriends = async (friends) => {
+const checkFriends = async () => {
   await waitFor(() => {
     expect(screen.getByText("Friend 1")).toBeInTheDocument();
     expect(screen.getByText("Friend 2")).toBeInTheDocument();
@@ -50,7 +50,11 @@ describe("FriendList Component", () => {
 
     renderComponent();
 
-    await checkFriends();
+    await waitFor(() => {
+      expect(screen.getByText("Lista de amigos")).toBeInTheDocument();
+      expect(screen.getByText("Friend 1")).toBeInTheDocument();
+      expect(screen.getByText("Friend 2")).toBeInTheDocument();
+    });
   });
 
   test("renders no friends message", async () => {
@@ -98,9 +102,13 @@ describe("FriendList Component", () => {
       json: jest.fn().mockResolvedValueOnce(data),
     });
 
-    await checkFriends();
+    checkFriends();
 
-    fireEvent.click(screen.getAllByRole("button", { name: /Ver perfil/i })[0]);
+    await waitFor(() => {
+      fireEvent.click(
+        screen.getAllByRole("button", { name: /Ver perfil/i })[0]
+      );
+    });
 
     await waitFor(() => {
       expect(screen.getByText("Perfil de usuario")).toBeInTheDocument();
@@ -118,13 +126,14 @@ describe("FriendList Component", () => {
 
     renderComponent();
 
-    await checkFriends();
+    checkFriends();
+    await waitFor(() => {
+      fireEvent.click(
+        screen.getAllByRole("button", { name: /eliminar amigo/i })[0]
+      );
+    });
 
-    fireEvent.click(
-      screen.getAllByRole("button", { name: /eliminar amigo/i })[0]
-    );
-
-    await checkFriends();
+    checkFriends();
   });
 
   test("fetch returns error", async () => {
@@ -148,15 +157,17 @@ describe("FriendList Component", () => {
 
     renderComponent();
 
-    await checkFriends();
+    checkFriends();
 
     jest
       .spyOn(global, "fetch")
       .mockRejectedValueOnce(new Error("Failed to fetch"));
 
-    fireEvent.click(
-      screen.getAllByRole("button", { name: /eliminar amigo/i })[0]
-    );
+    await waitFor(() => {
+      fireEvent.click(
+        screen.getAllByRole("button", { name: /eliminar amigo/i })[0]
+      );
+    });
 
     expect(screen.getByText("Friend 3")).toBeInTheDocument();
   });
