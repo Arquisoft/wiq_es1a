@@ -39,13 +39,13 @@ app.get("/questions", async (req, res) => {
       .status(400)
       .json({ error: `El límite de preguntas son ${MAX_QUESTIONS}` });
   }
-  if(locale !== "en" && locale !== "es"){
-    locale = "es";
+  if(req.query.locale !== "en" && req.query.locale !== "es"){
+    req.query.locale = "es";
   }
   try {
     var tematica = req.query.tematica ? req.query.tematica : "all";
     var n = req.query.n ? req.query.n : 10;
-    var locale = req.query.locale ? req.query.locale : "es";
+    var locale = req.query.locale;
     var data = gen.getQuestions(tematica, n, locale);
     res.json(data);
   } catch (error) {
