@@ -116,7 +116,7 @@ const Ranking = () => {
     <Nav/>
     <Flex flexDirection="column" rowGap="1rem">
       <Heading as="h2">{t('pages.ranking.rank-mode')} {getModeName()}</Heading>
-      <Select id="displaySelector" onChange={handleDisplayChange}>
+      <Select id="displaySelector" data-testid="combobox" onChange={handleDisplayChange}>
         {displayOptions.map(option => {
           if (gamemode === "calculadora" && option.value === "ratioCorrect") {
             return null;
