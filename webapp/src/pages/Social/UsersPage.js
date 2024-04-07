@@ -10,7 +10,7 @@ import {
   Th,
   Td,
   Flex,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -21,12 +21,12 @@ const UserList = ({ users, handleAddFriend }) => {
 
   return (
     <div>
-      <Heading as="h2">{t('pages.userspage.list')}</Heading>
+      <Heading as="h2">{t("pages.userspage.list")}</Heading>
       <Table>
         <Thead>
           <Tr>
-            <Th textAlign="center">{t('pages.userspage.user')}</Th>
-            <Th>{t('pages.userspage.actions')}</Th>
+            <Th textAlign="center">{t("pages.userspage.user")}</Th>
+            <Th>{t("pages.userspage.actions")}</Th>
           </Tr>
         </Thead>
         <Tbody>
@@ -34,16 +34,16 @@ const UserList = ({ users, handleAddFriend }) => {
             <Tr key={user._id}>
               <Td>
                 <Flex flexDirection="column" alignItems="center">
-                  <Avatar name={user.username}/>
+                  <Avatar name={user.username} />
                   <Text>{user.username}</Text>
                 </Flex>
               </Td>
               <Td>
                 {user.isFriend ? (
-                  <span>{t('pages.userspage.friend')}</span>
+                  <span>{t("pages.userspage.friend")}</span>
                 ) : (
                   <Button onClick={() => handleAddFriend(user)}>
-                    {t('pages.userspage.addFriend')}
+                    {t("pages.userspage.addFriend")}
                   </Button>
                 )}
               </Td>
@@ -70,22 +70,14 @@ const UsersPage = () => {
     // eslint-disable-next-line
   }, []);
 
-  const fetchUsers = () => {
-    setIsLoading(true);
-    fetch(`${apiEndpoint}/users/search?username=${currentUser}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+  const fetchUsers = async () => {
+    fetch(`${apiEndpoint}/users/search?username=${currentUser}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setUsers(data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching users:", error);
         setError(
           error.message || "Ha ocurrido un error al obtener los usuarios"
         );
@@ -132,8 +124,12 @@ const UsersPage = () => {
     <>
       <Nav />
       <div>
-        {isLoading && <p>{t('pages.userspage.loading')}</p>}
-        {error && <p>{t('pages.userspage.error')} {error}</p>}
+        {isLoading && <p>{t("pages.userspage.loading")}</p>}
+        {error && (
+          <p>
+            {t("pages.userspage.error")} {error}
+          </p>
+        )}
         <UserList users={users} handleAddFriend={handleAddFriend} />
       </div>
       <Footer />
