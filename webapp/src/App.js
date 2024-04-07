@@ -44,7 +44,7 @@ function App() {
           <Route path="/social/amigos" element={<FriendList />} />
           <Route path="/social/grupos" element={<Groups />} />
           <Route path="/social/misgrupos" element={<UserGroups />} />
-          <Route path="/social/grupo/:groupid" element={<GroupDetails />} />
+          <Route path="/social/grupo/:groupName" element={<GroupDetails />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/config" element={<Config />} />
         </Route>

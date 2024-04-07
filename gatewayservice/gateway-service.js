@@ -134,9 +134,9 @@ app.get("/group/list", async (req, res) => {
   }
 });
 
-app.get('/group/:groupid', async (req, res) => {
+app.get('/group/:groupName', async (req, res) => {
   try {
-    const groupName = req.params.name;
+    const groupName = req.params.groupName;
     const userResponse = await axios.get(`${userServiceUrl}/group/${groupName}`);
     res.json(userResponse.data);
   } catch (error) {
