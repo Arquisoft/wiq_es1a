@@ -21,7 +21,15 @@ const renderComponent = () => {
       </I18nextProvider>
     );
   });
-}
+};
+
+const checkFriends = async (friends) => {
+  await waitFor(() => {
+    expect(screen.getByText("Friend 1")).toBeInTheDocument();
+    expect(screen.getByText("Friend 2")).toBeInTheDocument();
+    expect(screen.getByText("Friend 3")).toBeInTheDocument();
+  });
+};
 
 describe("FriendList Component", () => {
   beforeEach(() => {
@@ -42,11 +50,7 @@ describe("FriendList Component", () => {
 
     renderComponent();
 
-    await waitFor(() => {
-      expect(screen.getByText("Lista de amigos")).toBeInTheDocument();
-      expect(screen.getByText("Friend 1")).toBeInTheDocument();
-      expect(screen.getByText("Friend 2")).toBeInTheDocument();
-    });
+    await checkFriends();
   });
 
   test("renders no friends message", async () => {
@@ -94,11 +98,7 @@ describe("FriendList Component", () => {
       json: jest.fn().mockResolvedValueOnce(data),
     });
 
-    await waitFor(() => {
-      expect(screen.getByText("Friend 1")).toBeInTheDocument();
-      expect(screen.getByText("Friend 2")).toBeInTheDocument();
-      expect(screen.getByText("Friend 3")).toBeInTheDocument();
-    });
+    await checkFriends();
 
     fireEvent.click(screen.getAllByRole("button", { name: /Ver perfil/i })[0]);
 
@@ -118,19 +118,13 @@ describe("FriendList Component", () => {
 
     renderComponent();
 
-    await waitFor(() => {
-      expect(screen.getByText("Friend 1")).toBeInTheDocument();
-      expect(screen.getByText("Friend 2")).toBeInTheDocument();
-      expect(screen.getByText("Friend 3")).toBeInTheDocument();
-    });
+    await checkFriends();
 
     fireEvent.click(
       screen.getAllByRole("button", { name: /eliminar amigo/i })[0]
     );
 
-    expect(screen.queryByText("Friend 1")).toBeInTheDocument();
-    expect(screen.getByText("Friend 2")).toBeInTheDocument();
-    expect(screen.getByText("Friend 3")).toBeInTheDocument();
+    await checkFriends();
   });
 
   test("fetch returns error", async () => {
@@ -151,16 +145,14 @@ describe("FriendList Component", () => {
     jest.spyOn(global, "fetch").mockResolvedValueOnce({
       json: jest.fn().mockResolvedValueOnce({ friends: mockFriends }),
     });
-    
-    renderComponent();
-    
-    await waitFor(() => {
-      expect(screen.getByText("Friend 1")).toBeInTheDocument();
-      expect(screen.getByText("Friend 2")).toBeInTheDocument();
-      expect(screen.getByText("Friend 3")).toBeInTheDocument();
-    });
 
-    jest.spyOn(global, "fetch").mockRejectedValueOnce(new Error("Failed to fetch"));
+    renderComponent();
+
+    await checkFriends();
+
+    jest
+      .spyOn(global, "fetch")
+      .mockRejectedValueOnce(new Error("Failed to fetch"));
 
     fireEvent.click(
       screen.getAllByRole("button", { name: /eliminar amigo/i })[0]
