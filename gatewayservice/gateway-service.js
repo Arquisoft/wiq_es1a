@@ -17,7 +17,7 @@ const statsServiceUrl = process.env.STATS_SERVICE_URL || "http://localhost:8004"
 app.use(cors());
 app.use(express.json());
 
-// Prometheus configuration
+//Prometheus configuration
 const metricsMiddleware = promBundle({ includeMethod: true });
 app.use(metricsMiddleware);
 
@@ -33,79 +33,179 @@ returnError = (res, error) => {
   res.status(error.response.status).json({ error: error.response.data.error });
 }
 
-// Function to handle forwarding requests
-const forwardRequest = async (req, res, serviceUrl, endpoint) => {
+app.post("/login", async (req, res) => {
   try {
-    const response = await axios({
-      method: req.method,
-      url: `${serviceUrl}${endpoint}`,
-      data: req.body,
-      params: req.query
-    });
-    res.json(response.data);
+    // Forward the login request to the authentication service
+    const authResponse = await axios.post(authServiceUrl + "/login", req.body);
+    res.json(authResponse.data);
   } catch (error) {
     returnError(res, error);
   }
-}
-
-// Define routes with forwarding
-app.post("/login", async (req, res) => {
-  await forwardRequest(req, res, authServiceUrl, '/login');
 });
 
 app.post("/adduser", async (req, res) => {
-  await forwardRequest(req, res, userServiceUrl, '/adduser');
+  try {
+    // Forward the add user request to the user service
+    const userResponse = await axios.post(
+      userServiceUrl + "/adduser",
+      req.body
+    );
+    res.json(userResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.get("/userInfo", async (req, res) => {
-  await forwardRequest(req, res, userServiceUrl, '/userInfo');
+  try {
+    // Forward the question request to the user service
+    const userResponse = await axios.get(
+      userServiceUrl + "/userInfo",
+      { params: req.query }
+    );
+    res.json(userResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.post("/saveGameList", async (req, res) => {
-  await forwardRequest(req, res, userServiceUrl, '/saveGameList');
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/saveGameList",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.get("/friends", async (req, res) => {
-  await forwardRequest(req, res, userServiceUrl, '/friends');
+  try {
+    // Forward the question request to the user service
+    const userResponse = await axios.get(
+      userServiceUrl + "/friends",
+      { params: req.query }
+    );
+    res.json(userResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.get("/users/search", async (req, res) => {
-  await forwardRequest(req, res, userServiceUrl, '/users/search');
+  try {
+    // Forward the question request to the user service
+    const userResponse = await axios.get(
+      userServiceUrl + "/users/search",
+      { params: req.query }
+    );
+    res.json(userResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.post("/users/add-friend", async (req, res) => {
-  await forwardRequest(req, res, userServiceUrl, '/users/add-friend');
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/users/add-friend",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.post("/users/remove-friend", async (req, res) => {
-  await forwardRequest(req, res, userServiceUrl, '/users/remove-friend');
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/users/remove-friend",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.get("/questions", async (req, res) => {
-  await forwardRequest(req, res, questionServiceUrl, '/questions');
+  try {
+    // Forward the question request to the question service
+    const questionResponse = await axios.get(
+      questionServiceUrl + "/questions",
+      { params: req.query }
+    );
+    res.json(questionResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.post("/questions", async (req, res) => {
-  await forwardRequest(req, res, questionServiceUrl, '/questions');
+  try {
+    // Forward the question request to the question service
+    const questionResponse = await axios.post(
+      questionServiceUrl + "/questions",
+      { body: req.body }
+    );
+    res.json(questionResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.get("/stats", async (req, res) => {
-  await forwardRequest(req, res, statsServiceUrl, '/stats');
+  try {
+    // Forward the stats request to the stats service
+    const statsResponse = await axios.get(statsServiceUrl + "/stats", {
+      params: req.query,
+    });
+    res.json(statsResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.post("/saveGame", async (req, res) => {
-  await forwardRequest(req, res, statsServiceUrl, '/saveGame');
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      statsServiceUrl + "/saveGame",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
 app.get("/ranking", async (req, res) => {
-  await forwardRequest(req, res, statsServiceUrl, '/ranking');
+  try {
+    const statsResponse = await axios.get(statsServiceUrl + "/ranking", {
+      params: req.query,
+    });
+    res.json(statsResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
 });
 
-// Serve OpenAPI documentation if available
-const openapiPath='./openapi.yaml'
+openapiPath='./openapi.yaml'
 if (fs.existsSync(openapiPath)) {
   const file = fs.readFileSync(openapiPath, 'utf8');
+
+  // Parse the YAML content into a JavaScript object representing the Swagger document
   const swaggerDocument = YAML.parse(file);
+
+  // Serve the Swagger UI documentation at the '/api-doc' endpoint
+  // This middleware serves the Swagger UI files and sets up the Swagger UI page
+  // It takes the parsed Swagger document as input
   app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 } else {
   console.log("Not configuring OpenAPI. Configuration file not present.")
@@ -117,4 +217,3 @@ const server = app.listen(port, () => {
 });
 
 module.exports = server;
-
