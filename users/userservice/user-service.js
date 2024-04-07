@@ -53,8 +53,10 @@ app.post("/adduser", async (req, res) => {
     // Check if required fields are present in the request body
     validateRequiredFields(req, ["username", "password"]);
 
+    const username = req.body.username;
+
     // Check if the username already exists
-    const existingUser = await User.findOne({ username: req.body.username });
+    const existingUser = await User.findOne({ username: username });
     if (existingUser) {
       return res
         .status(400)
@@ -107,11 +109,12 @@ app.get("/users/search", async (req, res) => {
     }
 
     // Encuentra los amigos del usuario actual
+    const un = username;
     const currentUserFriends = currentUser.friends;
 
     // Encuentra todos los usuarios que no son amigos del usuario actual
     const users = await User.find({
-      username: { $ne: username, $nin: currentUserFriends },
+      username: { $ne: un, $nin: currentUserFriends },
     });
 
     res.json(users);
