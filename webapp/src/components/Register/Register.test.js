@@ -78,7 +78,7 @@ describe("Register Component", () => {
     ).toBeInTheDocument();
     expect(axios.post).toHaveBeenCalledWith(`${apiEndpoint}/adduser`, {
       username: "testUser",
-      password: "testPassword",
+      password: password,
     });
   });
 
@@ -101,7 +101,7 @@ describe("Register Component", () => {
     ).toBeInTheDocument();
     expect(axios.post).toHaveBeenCalledWith(`${apiEndpoint}/adduser`, {
       username: "testUser",
-      password: "testPassword",
+      password: password,
     });
   });
 

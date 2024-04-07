@@ -5,6 +5,8 @@ const { User } = require("./user-model");
 let mongoServer;
 let app;
 
+const password = "testpassword";
+
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
   const mongoUri = mongoServer.getUri();
@@ -21,7 +23,7 @@ describe("User Service", () => {
   it("should add a new user on POST /adduser", async () => {
     const newUser = {
       username: "testuser",
-      password: "testpassword",
+      password: password,
     };
 
     const response = await request(app).post("/adduser").send(newUser);
@@ -44,7 +46,7 @@ describe("User Service", () => {
   it("should add a new user on POST /adduser", async () => {
     const newUser = {
       username: "testuser",
-      password: "testpassword",
+      password: password,
     };
 
     await request(app).post("/adduser").send(newUser);
