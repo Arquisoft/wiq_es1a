@@ -29,24 +29,18 @@ const JuegoPreguntas = () => {
 
   useEffect(() => {
     fetchQuestions();
+    handleTimer();
   }, []);
 
   useEffect(() => {
-    handleTime();
-  }, [tiempoRestante, preguntasCorrectas, preguntasFalladas]);
-
-  useEffect(() => {
-    if (juegoTerminado && tiempoMedio !== 0) {
-      guardarPartida();
+    if (tiempoRestante === 0) {
+      setJuegoTerminado(true);
+      if(preguntasCorrectas + preguntasFalladas > 0) {
+        const preguntasTotales = preguntasCorrectas + preguntasFalladas;
+        const tMedio = TIME / preguntasTotales;
+        setTiempoMedio(tMedio);
+      }
     }
-  }, [juegoTerminado, tiempoMedio]);
-
-  useEffect(() => {
-    setProgressPercent(tiempoRestante / TIME * 100);
-    const timer = setInterval(() => {
-      setTiempoRestante(prevTiempo => (prevTiempo <= 0 ? 0 : prevTiempo - 0.01));
-    }, 10); 
-    return () => clearInterval(timer);
   }, [tiempoRestante]);
 
   const fetchQuestions = () => {
@@ -75,17 +69,9 @@ const JuegoPreguntas = () => {
       });
   };
 
-  const handleTime = () => {
-    if (tiempoRestante === 0) {
-      setJuegoTerminado(true);
-      if(preguntasCorrectas + preguntasFalladas > 0) {
-        const preguntasTotales = preguntasCorrectas + preguntasFalladas;
-        const tMedio = TIME / preguntasTotales;
-        setTiempoMedio(tMedio);
-      }
-    }
+  const handleTimer = () => {
     const timer = setInterval(() => {
-      setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
+      setTiempoRestante(prevTiempo => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
   };
@@ -105,7 +91,6 @@ const JuegoPreguntas = () => {
     try {
       const response = await axios.post(URL + '/saveGame', newGame);
       console.log("Solicitud exitosa:", response.data);
-      
     } catch (error) {
       console.error('Error al guardar el juego:', error);
     }
@@ -120,9 +105,9 @@ const JuegoPreguntas = () => {
   const handleSiguientePregunta = async (respuesta) => {
     if (respuesta === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
-      setPreguntasCorrectas(preguntasCorrectas+1);
+      setPreguntasCorrectas(preguntasCorrectas + 1);
     } else {
-      setPreguntasFalladas(preguntasFalladas+1);
+      setPreguntasFalladas(preguntasFalladas + 1);
     }
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
