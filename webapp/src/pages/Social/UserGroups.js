@@ -28,40 +28,21 @@ const UserGroups = () => {
     }
   };
 
-  const addGroup = async () => {
+  const seeGroupDetails = async (groupId) => {
     try {
-      await axios.post(`${apiEndpoint}/group/add`, {
-        name: name,
-        username: username
-      });
-      setAlertMessage('Group created successfully');
-      setOpenAlert(true);
-    } catch (error) {
-      setError(error.response.data.error);
-    }
-  };
-
-  const handleJoinGroup = (groupId) => {
-    fetch(`${apiEndpoint}/group/join`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        groupId: groupId,
-        username: localStorage.getItem('username')
-      })
-    })
-    .then(response => {
+      const response = await fetch(`${apiEndpoint}/group/${groupId}`);
+      const data = await response.json();
+  
       if (!response.ok) {
-        throw new Error('Failed to join group');
+        throw new Error('Failed to see group details');
       }
-      
-      setGroups(prevGroups => prevGroups.filter(group => group._id !== groupId));
-    })
-    .catch(error => {
-      console.error('Error joining group:', error);
-    });
+  
+      const { group } = data;
+  
+      setGroups(prevGroups => prevGroups.filter(existingGroup => existingGroup._id !== group._id));
+    } catch (error) {
+      console.error('Error seeing group details:', error);
+    }
   };
 
   return (

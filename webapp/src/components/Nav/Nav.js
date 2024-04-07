@@ -60,6 +60,7 @@ const Nav = () => {
               <Text cursor="pointer" onClick={() => handleNavigate("/social/usuarios")} color={textColor}>Usuarios</Text>
               <Text cursor="pointer" onClick={() => handleNavigate("/social/amigos")} color={textColor}>Amigos</Text>
               <Text cursor="pointer" onClick={() => handleNavigate("/social/grupos")} color={textColor}>Grupos</Text>
+              <Text cursor="pointer" onClick={() => handleNavigate("/social/misgrupos")} color={textColor}>Mis grupos</Text>
             </PopoverBody>
           </PopoverContent>
         </Popover>
