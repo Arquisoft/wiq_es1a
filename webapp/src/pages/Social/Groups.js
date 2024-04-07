@@ -17,7 +17,7 @@ const Groups = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${apiEndpoint}/groups`);
+        const response = await axios.get(`${apiEndpoint}/group/list`);
         setGroups(response.data.groups);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -28,7 +28,7 @@ const Groups = () => {
 
   const addGroup = async () => {
     try {
-      await axios.post(`${apiEndpoint}/group/create`, {
+      await axios.post(`${apiEndpoint}/group/add`, {
         name: name,
         username: username
       });

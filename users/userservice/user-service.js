@@ -179,7 +179,7 @@ app.post("/saveGameList", async (req, res) => {
   }
 });
 
-app.get('/groups', async (req, res) => {
+app.get('/group/list', async (req, res) => {
   try {
       const allGroups = await Group.find();
       res.json({ groups: allGroups });
@@ -205,7 +205,7 @@ app.get('/group/:name', async (req, res) => {
 });
 
 // Crear un nuevo grupo
-app.post('/group/create', async (req, res) => {
+app.post('/group/add', async (req, res) => {
   try {
       const name= req.body.name;
       const username= req.body.username;
