@@ -30,8 +30,8 @@ const UserGroups = () => {
     }
   };
 
-  const seeGroupDetails = async (groupId) => {
-    navigate(`/group/${groupId}`);
+  const seeGroupDetails = (groupId) => {
+    navigate(`/social/grupo/${groupId}`);
   };
 
   return (

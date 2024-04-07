@@ -189,7 +189,7 @@ app.get('/group/list', async (req, res) => {
 });
 
 // Obtener un grupo por su nombre
-app.get('/group/:name', async (req, res) => {
+app.get('/group/:groupid', async (req, res) => {
   try {
       const groupName = req.params.name;
       const group = await Group.findOne({ name: groupName });
