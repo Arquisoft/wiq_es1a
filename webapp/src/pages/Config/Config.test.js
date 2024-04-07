@@ -33,6 +33,13 @@ describe("Config Component", () => {
     expect(
       screen.getByText("Tiempo total (Batería de sabios)")
     ).toBeInTheDocument();
-    expect(screen.getByText("Aplicar cambios")).toBeInTheDocument();
+    const button = screen.getByText("Aplicar cambios");
+    expect(button).toBeInTheDocument();
+    button.click();
+
+    const checks = screen.getAllByRole("checkbox");
+    console.log(checks)
+    checks[0].checked = true;
+    button.click();
   });
 });
