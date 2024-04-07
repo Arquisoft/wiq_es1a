@@ -7,10 +7,11 @@ import axios from 'axios';
 import { useTranslation } from "react-i18next";
 
 const JuegoPreguntas = () => {
-  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000"
+  const URL = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
   const TIME = localStorage.getItem("bateriaTime");
 
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
   const [indicePregunta, setIndicePregunta] = useState(0);
@@ -20,14 +21,35 @@ const JuegoPreguntas = () => {
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState(null);
   const [progressPercent, setProgressPercent] = useState(100);
-  const navigate = useNavigate();
 
-    //Used for user stats
-    const [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
-    const [preguntasFalladas, setPreguntasFalladas] = useState(0);
-    const [tiempoMedio, setTiempoMedio] = useState(0);
+  //Used for user stats
+  const [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
+  const [preguntasFalladas, setPreguntasFalladas] = useState(0);
+  const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
+    fetchQuestions();
+  }, []);
+
+  useEffect(() => {
+    handleTime();
+  }, [tiempoRestante, preguntasCorrectas, preguntasFalladas]);
+
+  useEffect(() => {
+    if (juegoTerminado && tiempoMedio !== 0) {
+      guardarPartida();
+    }
+  }, [juegoTerminado, tiempoMedio]);
+
+  useEffect(() => {
+    setProgressPercent(tiempoRestante / TIME * 100);
+    const timer = setInterval(() => {
+      setTiempoRestante(prevTiempo => (prevTiempo <= 0 ? 0 : prevTiempo - 0.01));
+    }, 10); 
+    return () => clearInterval(timer);
+  }, [tiempoRestante]);
+
+  const fetchQuestions = () => {
     fetch(URL + "/questions", {
       method: "POST",
       headers: {
@@ -51,15 +73,14 @@ const JuegoPreguntas = () => {
         console.error("Error al obtener las preguntas:", error);
         navigate("/home?error=1");
       });
-    // eslint-disable-next-line
-  }, []);
+  };
 
-  useEffect(() => {
+  const handleTime = () => {
     if (tiempoRestante === 0) {
       setJuegoTerminado(true);
-      if(preguntasCorrectas+preguntasFalladas>0){
-        const preguntasTotales=preguntasCorrectas+preguntasFalladas;
-        const tMedio=TIME/preguntasTotales;
+      if(preguntasCorrectas + preguntasFalladas > 0) {
+        const preguntasTotales = preguntasCorrectas + preguntasFalladas;
+        const tMedio = TIME / preguntasTotales;
         setTiempoMedio(tMedio);
       }
     }
@@ -67,20 +88,9 @@ const JuegoPreguntas = () => {
       setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
-    // eslint-disable-next-line
-  }, [tiempoRestante, preguntasCorrectas, preguntasFalladas]);
-
-  useEffect(() => {
-    if (juegoTerminado && tiempoMedio !== 0) {
-      guardarPartida();
-    }
-    // eslint-disable-next-line
-  }, [juegoTerminado, tiempoMedio]);
-
-  
+  };
 
   const guardarPartida = async () => {
-    
     const username = localStorage.getItem("username");
     const newGame = {
       username: username,
@@ -105,25 +115,13 @@ const JuegoPreguntas = () => {
     } catch (error) {
       console.error("Error al guardar el juego:", error);
     }
-  }
-
-  useEffect(() => {
-    setProgressPercent(tiempoRestante / TIME * 100);
-  
-    const timer = setInterval(() => {
-      setTiempoRestante(prevTiempo => (prevTiempo <= 0 ? 0 : prevTiempo - 0.01));
-    }, 10); 
-  
-    return () => clearInterval(timer);
-    // eslint-disable-next-line
-  }, [tiempoRestante]);
+  };
 
   const handleSiguientePregunta = async (respuesta) => {
     if (respuesta === preguntaActual.correcta) {
       setPuntuacion(puntuacion + 1);
       setPreguntasCorrectas(preguntasCorrectas+1);
-    }
-    else{
+    } else {
       setPreguntasFalladas(preguntasFalladas+1);
     }
     if (indicePregunta + 1 < preguntas.length) {
@@ -135,7 +133,6 @@ const JuegoPreguntas = () => {
   };
 
   const handleRepetirJuego = () => {
-    // Reiniciar el estado para repetir el juego
     setIndicePregunta(0);
     setPuntuacion(0);
     setTiempoRestante(180);
