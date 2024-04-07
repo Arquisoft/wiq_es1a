@@ -118,6 +118,7 @@ const CalculadoraHumana = () => {
     setValSubmit("");
     valSubmit = Number(valSubmit);
 
+    // eslint-disable-next-line no-eval
     let evalued = eval(operation);
     if (valSubmit === evalued) {
       setPuntuacion(puntuacion + 1);

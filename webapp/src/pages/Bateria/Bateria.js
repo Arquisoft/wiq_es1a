@@ -28,6 +28,7 @@ const JuegoPreguntas = () => {
   const [tiempoMedio, setTiempoMedio] = useState(0);
 
   useEffect(() => {
+    setProgressPercent(100);
     fetchQuestions();
     handleTimer();
     // eslint-disable-next-line

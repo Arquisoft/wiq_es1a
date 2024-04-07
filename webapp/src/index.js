@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import './themes.js';
 import './index.css';
+// eslint-disable-next-line no-unused-vars
 import i18n from './i18n.js';
 
 var r = document.getElementById("root");
