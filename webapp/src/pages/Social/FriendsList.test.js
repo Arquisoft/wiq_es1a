@@ -11,21 +11,25 @@ import FriendList from "./FriendsList.js";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../i18n.js";
 
+const renderComponent = () => {
+  act(() => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <MemoryRouter>
+          <FriendList />
+        </MemoryRouter>
+      </I18nextProvider>
+    );
+  });
+}
+
 describe("FriendList Component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   test("renders loading state", () => {
-    act(() => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <MemoryRouter>
-            <FriendList />
-          </MemoryRouter>
-        </I18nextProvider>
-      );
-    });
+    renderComponent();
 
     expect(screen.getByText("Cargando ...")).toBeInTheDocument();
   });
@@ -36,15 +40,7 @@ describe("FriendList Component", () => {
       json: jest.fn().mockResolvedValueOnce({ friends: mockFriends }),
     });
 
-    act(() => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <MemoryRouter>
-            <FriendList />
-          </MemoryRouter>
-        </I18nextProvider>
-      );
-    });
+    renderComponent();
 
     await waitFor(() => {
       expect(screen.getByText("Lista de amigos")).toBeInTheDocument();
@@ -58,15 +54,8 @@ describe("FriendList Component", () => {
       json: jest.fn().mockResolvedValueOnce({ friends: [] }),
     });
 
-    act(() => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <MemoryRouter>
-            <FriendList />
-          </MemoryRouter>
-        </I18nextProvider>
-      );
-    });
+    renderComponent();
+
     await waitFor(() => {
       expect(
         screen.getByText("No tienes amigos actualmente.")
@@ -80,15 +69,7 @@ describe("FriendList Component", () => {
       json: jest.fn().mockResolvedValueOnce({ friends: mockFriends }),
     });
 
-    act(() => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <MemoryRouter>
-            <FriendList />
-          </MemoryRouter>
-        </I18nextProvider>
-      );
-    });
+    renderComponent();
 
     const data = {
       username: "admin",
@@ -135,15 +116,7 @@ describe("FriendList Component", () => {
     });
     jest.spyOn(global, "fetch").mockResolvedValueOnce({ ok: true });
 
-    act(() => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <MemoryRouter>
-            <FriendList />
-          </MemoryRouter>
-        </I18nextProvider>
-      );
-    });
+    renderComponent();
 
     await waitFor(() => {
       expect(screen.getByText("Friend 1")).toBeInTheDocument();
@@ -163,15 +136,8 @@ describe("FriendList Component", () => {
   test("fetch returns error", async () => {
     global.fetch.mockRejectedValue(new Error("Failed to fetch"));
     jest.spyOn(global, "fetch").mockResolvedValueOnce({ ok: false });
-    act(() => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <MemoryRouter>
-            <FriendList />
-          </MemoryRouter>
-        </I18nextProvider>
-      );
-    });
+
+    renderComponent();
 
     await waitFor(() => {
       expect(
@@ -186,15 +152,8 @@ describe("FriendList Component", () => {
       json: jest.fn().mockResolvedValueOnce({ friends: mockFriends }),
     });
     
-    act(() => {
-      render(
-        <I18nextProvider i18n={i18n}>
-          <MemoryRouter>
-            <FriendList />
-          </MemoryRouter>
-        </I18nextProvider>
-      );
-    });
+    renderComponent();
+    
     await waitFor(() => {
       expect(screen.getByText("Friend 1")).toBeInTheDocument();
       expect(screen.getByText("Friend 2")).toBeInTheDocument();
