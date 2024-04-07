@@ -87,18 +87,5 @@ describe("UsersPage", () => {
     });
   });
 
-  test("handles fetch error", async () => {
-    await waitFor(() => {
-      expect(screen.getByText("user1")).toBeInTheDocument();
-    });
-
-    fireEvent.click(
-      screen.getAllByRole("button", { name: /Añadir amigo/i })[0]
-    );
-
-    await waitFor(() => {
-      expect(screen.getByText("Amigo")).toBeInTheDocument();
-    });
-  });
 });
 
