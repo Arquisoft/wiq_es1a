@@ -56,11 +56,12 @@ describe("Nav Component", () => {
 
     // Verificar que los enlaces estén presentes
     expect(getByText("Inicio")).toBeInTheDocument();
-    //expect(getByText('Modos de Juego')).toBeInTheDocument();
+    expect(getByText("WIQ")).toBeInTheDocument();
+
+    expect(getByText("Inicio")).toBeInTheDocument();
     expect(getByText("Estadísticas")).toBeInTheDocument();
     expect(getByText("Ranking")).toBeInTheDocument();
     expect(getByText("Perfil")).toBeInTheDocument();
-
     expect(getByText("Sobre nosotros")).toBeInTheDocument();
     expect(getByText("Opciones")).toBeInTheDocument();
 
