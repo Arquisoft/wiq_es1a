@@ -104,4 +104,33 @@ describe("Register Component", () => {
       password: "testPassword",
     });
   });
+
+  test("passwords do not match", async () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Register />
+        </Router>
+      </I18nextProvider>
+    );
+
+    fireEvent.change(screen.getByLabelText("Introduce tu nombre"), {
+      target: { value: "testUser" },
+    });
+    fireEvent.change(screen.getByLabelText("Introduce tu contraseña"), {
+      target: { value: "testPassword" },
+    });
+    fireEvent.change(
+      screen.getByLabelText("Vuelve a introducir la contraseña"),
+      {
+        target: { value: "differentPassword" },
+      }
+    );
+
+    fireEvent.click(screen.getByText("Registrarse"));
+
+    expect(
+      screen.getByText("Las contraseñas no coinciden")
+    ).toBeInTheDocument();
+  });
 });
