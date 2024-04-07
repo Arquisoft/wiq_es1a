@@ -28,7 +28,7 @@ const Groups = () => {
 
   const addGroup = async () => {
     try {
-      await axios.post(`${apiEndpoint}/groups`, {
+      await axios.post(`${apiEndpoint}/group/create`, {
         name: name,
         username: username
       });

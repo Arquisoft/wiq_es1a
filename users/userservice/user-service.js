@@ -205,16 +205,18 @@ app.get('/group/:name', async (req, res) => {
 });
 
 // Crear un nuevo grupo
-app.post('/groups', async (req, res) => {
+app.post('/group/create', async (req, res) => {
   try {
-      const { name, username } = req.body;
+      const name= req.body.name;
+      const username= req.body.username;
 
-      const user = await User.findOne({ username });
+      const user = await User.findOne({ username:username });
       if (!user) {
           return res.status(404).json({ error: 'User not found' });
       }
 
-      const newGroup = new Group({ name, members: [username] });
+      const newGroup = new Group({ name: name,
+         members: [username] });
       await newGroup.save();
 
       res.json({ message: 'Group created successfully' });
