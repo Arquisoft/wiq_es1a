@@ -39,24 +39,14 @@ const groupSchema = new mongoose.Schema({
       type: Date,
       default: Date.now
   },
+  members: [{
+    type: String,
+    required: true
+  }]
 });
 
 const Group = mongoose.model('Group', groupSchema);
 
-// Modelo para la relación entre usuarios y grupos
-const userGroupSchema = new mongoose.Schema({
-  user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true
-  },
-  group: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Group',
-      required: true
-  },
-});
 
-const UserGroup = mongoose.model('UserGroup', userGroupSchema);
 
-module.exports = { User, Group, UserGroup };
+module.exports = { User, Group };
