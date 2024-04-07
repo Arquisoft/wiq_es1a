@@ -32,7 +32,7 @@ const GroupDetails = () => {
     <>
       <Nav/>
       <Container maxW="md" mt="8">
-        <Heading as="h1" mb="4">Detalles del grupo: {group.name}</Heading>
+        <Heading as="h1" mb="4">Detalles del grupo: {groupName}</Heading>
         {group ? (
           <Box>
             <Text fontSize="lg" fontWeight="bold" mb="4">
