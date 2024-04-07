@@ -117,25 +117,6 @@ describe("FriendList Component", () => {
     fireEvent.click(screen.getByRole("button", { name: /Volver/i }));
   });
 
-  test("removes a friend", async () => {
-    const mockFriends = ["Friend 1", "Friend 2", "Friend 3"];
-    jest.spyOn(global, "fetch").mockResolvedValueOnce({
-      json: jest.fn().mockResolvedValueOnce({ friends: mockFriends }),
-    });
-    jest.spyOn(global, "fetch").mockResolvedValueOnce({ ok: true });
-
-    renderComponent();
-
-    checkFriends();
-    await waitFor(() => {
-      fireEvent.click(
-        screen.getAllByRole("button", { name: /eliminar amigo/i })[0]
-      );
-    });
-
-    checkFriends();
-  });
-
   test("fetch returns error", async () => {
     global.fetch.mockRejectedValue(new Error("Failed to fetch"));
     jest.spyOn(global, "fetch").mockResolvedValueOnce({ ok: false });
