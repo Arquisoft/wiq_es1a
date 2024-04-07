@@ -92,8 +92,10 @@ describe("UsersPage", () => {
       expect(screen.getByText("user1")).toBeInTheDocument();
     });
 
+    expect(screen.getByRole("button", { name: /Añadir amigo/i })).toBeInTheDocument();
+
     fireEvent.click(
-      screen.getAllByRole("button", { name: /Añadior amigo/i })[0]
+      screen.getAllByRole("button", { name: /Añadir amigo/i })[0]
     );
 
     await waitFor(() => {
