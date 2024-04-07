@@ -96,48 +96,48 @@ describe("Stats component", () => {
 
   test("updates user statistics when username changes", async () => {
     localStorage.setItem("username", "testUser");
-
+  
     global.fetch = jest.fn().mockResolvedValue({
       json: jest.fn().mockResolvedValue(userData),
     });
-
+  
     renderComponentWithRouter();
-
+  
     await screen.findByRole("table");
-
+  
     const newUsername = "newUser";
     localStorage.setItem("username", newUsername);
-
+  
     const searchButton = await screen.findByText("Buscar");
     userEvent.click(searchButton);
-
+  
     renderComponentWithRouter();
-
+  
     expect(fetch).toHaveBeenCalledWith(expect.stringContaining(newUsername));
   });
-
+  
   test("updates user statistics when game mode changes", async () => {
     localStorage.setItem("username", "testUser");
-
+  
     global.fetch = jest.fn().mockResolvedValue({
       json: jest.fn().mockResolvedValue(userData),
     });
-
+  
     renderComponentWithRouter();
     await screen.findByRole("table");
-
+  
     const modeButton = screen.getByRole("button", {
       name: /Batería de sabios/i,
     });
     userEvent.click(modeButton);
-
+  
     await waitFor(() => {
       expect(
         screen.queryByText("WIQ")
       ).toBeInTheDocument();
     });
   });
-
+  
   test('fetches and displays user statistics for Human Calculator mode', async () => {
     localStorage.setItem('username', 'testUser');
   
@@ -186,34 +186,33 @@ describe("Stats component", () => {
           expect(valueElements.length).toBeGreaterThan(0);
         }
       }
+    });
   });
-});
-
-
-
-test("displays a message when no stats are available", async () => {
-  localStorage.setItem("username", "testUser");
-
-  global.fetch = jest.fn().mockResolvedValueOnce({
-    json: jest.fn().mockResolvedValue(null), // Simula que no hay estadísticas disponibles
+  
+  test("displays a message when no stats are available", async () => {
+    localStorage.setItem("username", "testUser");
+  
+    global.fetch = jest.fn().mockResolvedValueOnce({
+      json: jest.fn().mockResolvedValue(null), // Simula que no hay estadísticas disponibles
+    });
+  
+    renderComponentWithRouter();
+    await waitFor(() => {
+      expect(screen.getByText("El usuario no ha jugado ninguna partida.")).toBeInTheDocument();
+    });
   });
-
-  renderComponentWithRouter();
-  await waitFor(() => {
-    expect(screen.getByText("El usuario no ha jugado ninguna partida.")).toBeInTheDocument();
+  
+  test("displays loading message while fetching stats", async () => {
+    localStorage.setItem("username", "testUser");
+  
+    global.fetch = jest.fn().mockResolvedValueOnce(new Promise(() => {})); // Simula una promesa pendiente
+  
+    renderComponentWithRouter();
+  
+    await waitFor(() => {
+      expect(screen.getByText("Cargando ...")).toBeInTheDocument();
+    });
   });
-});
-
-test("displays loading message while fetching stats", async () => {
-  localStorage.setItem("username", "testUser");
-
-  global.fetch = jest.fn().mockResolvedValueOnce(new Promise(() => {})); // Simula una promesa pendiente
-
-  renderComponentWithRouter();
-
-  await waitFor(() => {
-    expect(screen.getByText("Cargando ...")).toBeInTheDocument();
-  });
-});
+  
   
 });
