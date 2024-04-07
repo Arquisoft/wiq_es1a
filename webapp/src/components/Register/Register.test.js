@@ -10,6 +10,8 @@ import i18n from "../../i18n.js";
 jest.mock("axios");
 
 const password = process.env.REGISTER_PASSWORD || "testpassword";
+const apiEndpoint =
+  process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
 describe("Register Component", () => {
   const mockSuccessResponse = { data: "Usuario registrado exitosamente" };
@@ -75,9 +77,9 @@ describe("Register Component", () => {
     expect(
       screen.getByText("Usuario registrado exitosamente")
     ).toBeInTheDocument();
-    expect(axios.post).toHaveBeenCalledWith("http://localhost:8000/adduser", {
+    expect(axios.post).toHaveBeenCalledWith(`${apiEndpoint}/adduser`, {
       username: "testUser",
-      password: password,
+      password: "testPassword",
     });
   });
 
@@ -98,9 +100,9 @@ describe("Register Component", () => {
     expect(
       screen.getByText("Error: Error al registrar usuario")
     ).toBeInTheDocument();
-    expect(axios.post).toHaveBeenCalledWith("http://localhost:8000/adduser", {
+    expect(axios.post).toHaveBeenCalledWith(`${apiEndpoint}/adduser`, {
       username: "testUser",
-      password: password,
+      password: "testPassword",
     });
   });
 });

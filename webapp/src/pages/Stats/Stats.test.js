@@ -188,5 +188,32 @@ describe("Stats component", () => {
       }
   });
 });
+
+
+
+test("displays a message when no stats are available", async () => {
+  localStorage.setItem("username", "testUser");
+
+  global.fetch = jest.fn().mockResolvedValueOnce({
+    json: jest.fn().mockResolvedValue(null), // Simula que no hay estadísticas disponibles
+  });
+
+  renderComponentWithRouter();
+  await waitFor(() => {
+    expect(screen.getByText("El usuario no ha jugado ninguna partida.")).toBeInTheDocument();
+  });
+});
+
+test("displays loading message while fetching stats", async () => {
+  localStorage.setItem("username", "testUser");
+
+  global.fetch = jest.fn().mockResolvedValueOnce(new Promise(() => {})); // Simula una promesa pendiente
+
+  renderComponentWithRouter();
+
+  await waitFor(() => {
+    expect(screen.getByText("Cargando ...")).toBeInTheDocument();
+  });
+});
   
 });
