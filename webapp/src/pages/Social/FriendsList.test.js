@@ -162,6 +162,7 @@ describe("FriendList Component", () => {
 
   test("fetch returns error", async () => {
     global.fetch.mockRejectedValue(new Error("Failed to fetch"));
+    jest.spyOn(global, "fetch").mockResolvedValueOnce({ ok: false });
     act(() => {
       render(
         <I18nextProvider i18n={i18n}>
