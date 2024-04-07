@@ -42,7 +42,7 @@ describe("Home Component", () => {
 });
 
 describe("Nav Component", () => {
-  it("renders Nav component with links and logout button", () => {
+  test("renders Nav component with links and logout button", () => {
     const { getByText, getByRole } = render(
       <I18nextProvider i18n={i18n}>
         <Router>
@@ -73,29 +73,115 @@ describe("Nav Component", () => {
     //expect(logoutButton.closest('a')).toHaveAttribute('href', '/login');
   });
 
-  it("calls localStorage.removeItem when logout button is clicked", () => {
-    // Mock de localStorage.removeItem
+  test("calls localStorage.removeItem when logout button is clicked", () => {
     const removeItemMock = jest.fn();
     Object.defineProperty(window, "localStorage", {
       value: { removeItem: removeItemMock },
       writable: true,
     });
 
-    // Renderizar el componente Nav
-    const { getByRole } = render(
+    render(
       <I18nextProvider i18n={i18n}>
         <Router>
           <Nav />
         </Router>
       </I18nextProvider>
     );
-    const logoutButton = getByRole("button", { name: /Desconectar/i });
 
-    // Simular clic en el botón de logout
+    const logoutButton = screen.getByRole("button", { name: /Desconectar/i });
     fireEvent.click(logoutButton);
 
-    // Verificar que la función removeItem se haya llamado con 'token'
     expect(removeItemMock).toHaveBeenCalledWith("token");
+  });
+
+  test("navigates to /home when Home button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const homeButton = screen.getByText("Inicio");
+    fireEvent.click(homeButton);
+
+    expect(window.location.pathname).toBe("/home");
+  });
+
+  test("navigates to /stats when Estadísticas button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const statsButton = screen.getByText("Estadísticas");
+    fireEvent.click(statsButton);
+
+    expect(window.location.pathname).toBe("/stats");
+  });
+
+  test("navigates to /ranking when Ranking button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const rankingButton = screen.getByText("Ranking");
+    fireEvent.click(rankingButton);
+
+    expect(window.location.pathname).toBe("/ranking");
+  });
+
+  test("navigates to /perfil when Perfil button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const perfilButton = screen.getByText("Perfil");
+    fireEvent.click(perfilButton);
+
+    expect(window.location.pathname).toBe("/perfil");
+  });
+
+  test("navigates to /sobre when Sobre nosotros button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const aboutButton = screen.getByText("Sobre nosotros");
+    fireEvent.click(aboutButton);
+
+    expect(window.location.pathname).toBe("/sobre");
+  });
+
+  test("navigates to /config when Opciones button is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const optionsButton = screen.getByText("Opciones");
+    fireEvent.click(optionsButton);
+
+    expect(window.location.pathname).toBe("/config");
   });
 });
 describe("Footer Component", () => {
