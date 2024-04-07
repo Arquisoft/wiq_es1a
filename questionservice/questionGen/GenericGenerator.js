@@ -151,10 +151,9 @@ class GenericGenerator {
       default:
         break;
     }
-
     questionObj.pregunta =
       this.preguntasMap.get(propiedadPregunta)[locale].replace('%', entidadLabel);
-
+    
     return questionObj;
   }
 

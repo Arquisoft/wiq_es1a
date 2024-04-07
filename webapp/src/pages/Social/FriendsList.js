@@ -108,8 +108,7 @@ const FriendList = () => {
                       {t('pages.friendlist.profile')}
                     </Button>
                     <Button onClick={() => handleRemoveFriend(friend)}>
-                      {t('pages.friendlist.delete')}
-                    </Button>
+                      {t('pages.friendlist.delete')}</Button>
                   </ListItem>
                   {index !== friends.length - 1 && <Divider />}
                 </div>
