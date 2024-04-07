@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Container, Box, Text, List, ListItem, Button, Input, Alert } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
+import { useNavigate } from "react-router-dom";
 
 const UserGroups = () => {
   const [groups, setGroups] = useState([]);
@@ -11,6 +12,7 @@ const UserGroups = () => {
   const [openAlert, setOpenAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const username = localStorage.getItem('username');
+  const navigate = useNavigate();
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -29,20 +31,7 @@ const UserGroups = () => {
   };
 
   const seeGroupDetails = async (groupId) => {
-    try {
-      const response = await fetch(`${apiEndpoint}/group/${groupId}`);
-      const data = await response.json();
-  
-      if (!response.ok) {
-        throw new Error('Failed to see group details');
-      }
-  
-      const { group } = data;
-  
-      setGroups(prevGroups => prevGroups.filter(existingGroup => existingGroup._id !== group._id));
-    } catch (error) {
-      console.error('Error seeing group details:', error);
-    }
+    navigate(`/group/${groupId}`);
   };
 
   return (
