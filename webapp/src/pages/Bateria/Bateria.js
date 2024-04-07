@@ -30,7 +30,15 @@ const JuegoPreguntas = () => {
   useEffect(() => {
     fetchQuestions();
     handleTimer();
+    // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if (juegoTerminado && tiempoMedio !== 0) {
+      guardarPartida();
+    }
+    // eslint-disable-next-line
+  }, [juegoTerminado, tiempoMedio]);
 
   useEffect(() => {
     if (tiempoRestante === 0) {
@@ -41,6 +49,7 @@ const JuegoPreguntas = () => {
         setTiempoMedio(tMedio);
       }
     }
+    // eslint-disable-next-line
   }, [tiempoRestante]);
 
   const fetchQuestions = () => {
