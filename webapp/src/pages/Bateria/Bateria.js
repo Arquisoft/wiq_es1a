@@ -89,11 +89,11 @@ const JuegoPreguntas = () => {
       },
     };
 
-    saveGame("/saveGame");
-    saveGame("/saveGameList");
+    saveGame("/saveGame", newGame);
+    saveGame("/saveGameList", newGame);
   };
 
-  const saveGame = async (endpoint) => {
+  const saveGame = async (endpoint, newGame) => {
     try {
       const response = await axios.post(URL + endpoint, newGame);
       console.log("Solicitud exitosa:", response.data);
