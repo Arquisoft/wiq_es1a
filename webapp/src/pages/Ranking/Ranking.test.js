@@ -87,19 +87,49 @@ describe("Ranking component", () => {
     });
   });
 
-  test('changes gamemode when clicking on mode buttons, clicks on Human Calculator button', async () => {
-    global.fetch.mockResolvedValueOnce({ json: () => Promise.resolve(mockData) });
-  
+  test("changes gamemode when clicking on mode buttons, clicks on Human Calculator button", async () => {
+    global.fetch.mockResolvedValueOnce({
+      json: () => Promise.resolve(mockData),
+    });
+
     renderComponent();
-  
+
     await assertRankingTableWithData();
-  
-    const calculatorButton = screen.getByRole('button', { name: 'Calculadora humana' });
+
+    const calculatorButton = screen.getByRole("button", {
+      name: "Calculadora humana",
+    });
     fireEvent.click(calculatorButton);
-  
+
     await waitFor(() => {
-      expect(screen.getByText('Ranking - modo Calculadora humana')).toBeInTheDocument();
-      expect(screen.queryByText('Ratio de aciertos (%)')).toBeNull(); // Asegura que no se muestra la opción de filtrar por ratio de aciertos
+      expect(
+        screen.getByText("Ranking - modo Calculadora humana")
+      ).toBeInTheDocument();
+      expect(screen.queryByText("Ratio de aciertos (%)")).toBeNull(); // Asegura que no se muestra la opción de filtrar por ratio de aciertos
+    });
+  });
+
+  test("changes filterBy when selecting a different option", async () => {
+    global.fetch.mockResolvedValueOnce({
+      json: () => Promise.resolve(mockData),
+    });
+
+    renderComponent();
+
+    await assertRankingTableWithData();
+
+    const filterBySelect = screen.getByTestId("combobox");
+    fireEvent.change(filterBySelect, { target: { value: "avgPoints" } });
+    fireEvent.change(filterBySelect, { target: { value: "totalPoints" } });
+    fireEvent.change(filterBySelect, { target: { value: "ratioCorrect" } });
+    fireEvent.change(filterBySelect, { target: { value: "avgTime" } });
+
+    await waitFor(() => {
+      const calculatorButton = screen.getByRole("button", {
+        name: "Calculadora humana",
+      });
+      fireEvent.click(calculatorButton);
+      fireEvent.change(filterBySelect, { target: { value: "ratioCorrect" } });
     });
   });
 });
