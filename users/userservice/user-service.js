@@ -178,7 +178,7 @@ app.get('/friends', async (req, res) => {
 app.get('/userInfo', async (req, res) => {
       try {
           const username = checkInput(req.query.user);
-          const user = await User.findOne({username:username});
+          const user = await User.findOne({username:username}, {username: 1, createdAt: 1, games: 1});
           res.json(user);
       } catch (error) {
           res.status(400).json({ error: error.message }); 

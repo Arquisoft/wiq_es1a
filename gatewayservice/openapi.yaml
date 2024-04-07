@@ -7,6 +7,8 @@ info:
 servers:
   - url: http://localhost:8000
     description: Local development server
+  - url: http://51.142.183.63:8000
+    description: Production server
 
 paths:
   /health:
@@ -33,6 +35,9 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/LoginRequest"
+            example:
+              username: testUsername
+              password: testPassword
       responses:
         "200":
           description: Successful authentication
@@ -40,18 +45,26 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/AuthResponse"
+              example:
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJpYXQiOjE1MTYyMzkwMjJ9.1
+                username: test
+                createdAt: 2021-06-01T00:00:00Z
         "400":
           description: Invalid request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+              example:
+                error: Invalid credentials
         "403":
           description: Forbidden
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
 
   /adduser:
     post:
@@ -61,7 +74,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/User"
+              $ref: "#/components/schemas/LoginRequest"
+            example:
+              username: testUsername
+              password: testPassword
       responses:
         "200":
           description: User added successfully
@@ -87,10 +103,10 @@ paths:
       summary: Get User Information
       parameters:
         - in: query
-          name: userId
+          name: username
           schema:
             type: string
-          description: ID of the user to retrieve information for
+          description: Username for which to retrieve information
       responses:
         "200":
           description: User information retrieved successfully
@@ -98,14 +114,23 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserInfo"
+              example:
+                _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                username: testUsername
+                createdAt: 2021-06-01T00:00:00Z
+                games:
+                  - correctAnswers: 10
+                    incorrectAnswers: 5
+                    points: 10
+                    avgTime: 10
+                    _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                  - correctAnswers: 2
+                    incorrectAnswers: 12
+                    points: 15
+                    avgTime: 7
+                    _id: 65ea02cf891b09479a383477
         "400":
           description: Invalid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Forbidden
           content:
             application/json:
               schema:
@@ -120,6 +145,18 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/GameList"
+            example:
+              username: testUsername
+              gameMode: clasico
+              gameData:
+                - correctAnswers: 10
+                  incorrectAnswers: 5
+                  points: 10
+                  avgTime: 10
+                - correctAnswers: 2
+                  incorrectAnswers: 12
+                  points: 15
+                  avgTime: 7
       responses:
         "200":
           description: Game list saved successfully
@@ -128,17 +165,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/SuccessMessage"
         "400":
-          description: Invalid request
+          description: User not found
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-        "403":
-          description: Forbidden
+              example:
+                error: Error al guardar partida en la lista
+        "404":
+          description: Invalid request (questions limit exceeded)
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+              example:
+                error: Usuario no encontrado
 
   /questions:
     get:
@@ -148,17 +189,21 @@ paths:
           name: tematica
           schema:
             type: string
+            enum: [paises, literatura, cine, arte, programacion]
           description: Category of questions to retrieve
         - in: query
           name: n
           schema:
-            type: string
+            type: integer
+            maximum: 10000
           description: Questions to retrieve
         - in: query
           name: locale
           schema:
             type: string
+            enum: [en, es]
           description: Locale of questions to retrieve
+
       responses:
         "200":
           description: Questions retrieved successfully
@@ -166,6 +211,85 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/QuestionList"
+              example:
+                - pregunta: ¿Cuál es la forma de gobierno de Ecuador?
+                  respuestas:
+                    [
+                      "presidencialismo",
+                      "federación",
+                      "monarquía constitucional",
+                      "monarquía",
+                    ]
+                  correcta: "presidencialismo"
+                - pregunta: ¿En qué evento histórico participó Sudáfrica?
+                  respuestas:
+                    [
+                      "Bloque BASIC",
+                      "Acuerdo de Prespa",
+                      "Tratado de Amistad",
+                      "anexión de Crimea por Rusia",
+                    ]
+                  correcta: "Bloque BASIC"
+        "400":
+          description: Invalid request (questions limit exceeded)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: El límite de preguntas son 10000
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: El límite de preguntas son 10000
+
+    post:
+      summary: Get Questions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tematicas:
+                  type: string
+                  enum: [paises, literatura, cine, arte, programacion]
+                n:
+                  type: integer
+                locale:
+                  type: string
+                  enum: [en, es]
+      responses:
+        "200":
+          description: Questions retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuestionList"
+              example:
+                - pregunta: ¿Cuál es la forma de gobierno de Ecuador?
+                  respuestas:
+                    [
+                      "presidencialismo",
+                      "federación",
+                      "monarquía constitucional",
+                      "monarquía",
+                    ]
+                  correcta: "presidencialismo"
+                - pregunta: ¿En qué evento histórico participó Sudáfrica?
+                  respuestas:
+                    [
+                      "Bloque BASIC",
+                      "Acuerdo de Prespa",
+                      "Tratado de Amistad",
+                      "anexión de Crimea por Rusia",
+                    ]
+                  correcta: "Bloque BASIC"
         "400":
           description: Invalid request (questions limit exceeded)
           content:
@@ -179,43 +303,21 @@ paths:
               example:
                 - error: Los generadores de preguntas aún no se han cargado. Por favor, inténtalo de nuevo más tarde.
 
-    post:
-      summary: Add Question
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Question"
-      responses:
-        "200":
-          description: Question added successfully
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/SuccessMessage"
-        "400":
-          description: Invalid request
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-
   /stats:
     get:
       summary: Get Statistics
       parameters:
         - in: query
-          name: userId
+          name: user
           schema:
             type: string
-          description: ID of the user to retrieve statistics for
+          description: Username for which to retrieve statistics
+        - in: query
+          name: gamemode
+          schema:
+            type: string
+            enum: [clasico, bateria, calculadora]
+          description: Game mode for which to retrieve statistics
       responses:
         "200":
           description: Statistics retrieved successfully
@@ -223,18 +325,24 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Stats"
+              example:
+                username: admin
+                gamemode: clasico
+                nGamesPlayed: 17
+                avgPoints: 0.5882352941176471
+                totalPoints: 10
+                totalCoorectQuestions: 10
+                totalIncorrectQuestions: 156
+                ratioCorrect: 6.024096385542169
+                avgTime: 10
         "400":
           description: Invalid request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+              example:
+                error: Error al obtener las estadísticas
 
   /saveGame:
     post:
@@ -270,10 +378,15 @@ paths:
       summary: Get Ranking
       parameters:
         - in: query
-          name: category
+          name: gamemode
           schema:
             type: string
-          description: Category to filter the ranking
+            description: Game mode for which to retrieve ranking
+        - in: query
+          name: filterBy
+          schema:
+            type: string
+            enum: [avgPoints, totalPoints, ratioCorrect, avgTime, avgPoints]        
       responses:
         "200":
           description: Ranking retrieved successfully
@@ -281,18 +394,21 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/RankingList"
+              example:
+                - username: test1
+                  avgPoints: 0.5882352941176471
+                - username: test2
+                  avgPoints: 0.6782352941176471
+                - username: test3
+                  avgPoints: 0.1232352941176471
         "400":
           description: Invalid request
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
-        "403":
-          description: Forbidden
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
+              example:
+                error: Error al obtener el ranking
 
 components:
   schemas:
@@ -303,6 +419,17 @@ components:
           type: string
         password:
           type: string
+
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        username:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
 
     AuthResponse:
       type: object
@@ -326,13 +453,17 @@ components:
     UserInfo:
       type: object
       properties:
+        _id:
+          type: string
         username:
           type: string
         createdAt:
           type: string
           format: date-time
         games:
-          $ref: "#/components/schemas/GameList"
+          type: array
+          items:
+            $ref: "#/components/schemas/Game"
 
     GameList:
       type: object
@@ -341,6 +472,22 @@ components:
           type: array
           items:
             type: object
+
+
+
+    Game:
+      type: object
+      properties:
+        correctAnswers:
+          type: integer
+        incorrectAnswers:
+          type: integer
+        points:
+          type: integer
+        avgTime:
+          type: number
+        _id:
+          type: string  
 
     QuestionList:
       type: array
@@ -354,10 +501,24 @@ components:
     Stats:
       type: object
       properties:
-
-    Game:
-      type: object
-      properties:
+        username:
+          type: string
+        gamemode:
+          type: string
+        nGamesPlayed:
+          type: integer
+        avgPoints:
+          type: number
+        totalPoints:
+          type: integer
+        totalCoorectQuestions:
+          type: integer
+        totalIncorrectQuestions:
+          type: integer
+        ratioCorrect:
+          type: number
+        avgTime:
+          type: number
 
     SuccessMessage:
       type: object
@@ -369,9 +530,42 @@ components:
       type: array
       items:
         type: object
+        properties:
+          username:
+            type: string
+          avgPoints:
+            optional: true
+            type: number
+          totalPoints:
+            optional: true
+            type: integer
+          ratioCorrect:
+            optional: true
+            type: number
+          avgTime:
+            optional: true
+            type: number
 
     Error:
       type: object
       properties:
         error:
           type: string
+
+    Save:
+      type: object
+      properties:
+        username:
+          type: string
+        gameMode:
+          type: string
+          enum: [clasico, bateria, calculadora]
+        gameData:
+          correctAnswers: 
+            type: integer
+          incorrectAnswers: 
+            type: integer
+          points: 
+            type: integer
+          avgTime: 
+            type: number

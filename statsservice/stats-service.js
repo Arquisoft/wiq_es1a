@@ -83,7 +83,6 @@ app.get("/stats", async (req, res) => {
     res.json(data);
 
   } catch (error) {
-    
     res.status(400).json({ error: "Error al obtener las estadísticas:"+error.message });
   }
 });
