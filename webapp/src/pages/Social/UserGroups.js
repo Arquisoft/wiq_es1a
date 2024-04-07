@@ -4,7 +4,7 @@ import { Container, Box, Text, List, ListItem, Button, Input, Alert } from '@cha
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
-const Groups = () => {
+const UserGroups = () => {
   const [groups, setGroups] = useState([]);
   const [name, setName] = useState('');
   const [error, setError] = useState('');
@@ -21,7 +21,7 @@ const Groups = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${apiEndpoint}/group/list`);
-      const userGroups = response.data.groups.filter(group => !group.members.includes(username));
+      const userGroups = response.data.groups.filter(group => group.members.includes(username));
       setGroups(userGroups);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -63,43 +63,18 @@ const Groups = () => {
       console.error('Error joining group:', error);
     });
   };
-  
-
-  const handleCloseAlert = () => {
-    setOpenAlert(false);
-  };
 
   return (
     <>
       <Nav/>
       <Container maxW="xs" mt="8">
-        <Box>
-          <Text fontSize="2xl" fontWeight="bold" mb="4">Crea un grupo</Text>
-          <Input
-            name="name"
-            mb="4"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Button colorScheme="blue" onClick={addGroup} mb="4">Crear</Button>
-          <Alert status="success" variant="subtle" mt="2" isOpen={openAlert} onClose={handleCloseAlert}>
-            {alertMessage}
-          </Alert>
-          {error && (
-            <Alert status="error" variant="subtle" mt="2">
-              {`Error: ${error}`}
-            </Alert>
-          )}
-        </Box>
-
         <Box mt="8">
-          <Text fontSize="3xl" fontWeight="bold" mb="4">Grupos a los que puedes unirte</Text>
+          <Text fontSize="3xl" fontWeight="bold" mb="4">Tus grupos</Text>
           <List>
             {groups.map((group) => (
               <ListItem key={group._id} display="flex" justifyContent="space-between" alignItems="center" mb="2">
                 <Text>{group.name}</Text>
-                <Button colorScheme="blue" onClick={() => handleJoinGroup(group._id)}>Join</Button>
+                <Button colorScheme="blue" onClick={() => seeGroupDetails(group._id)}>Join</Button>
               </ListItem>
             ))}
           </List>
@@ -110,6 +85,4 @@ const Groups = () => {
   );
 };
 
-export default Groups;
-
-
+export default UserGroups;

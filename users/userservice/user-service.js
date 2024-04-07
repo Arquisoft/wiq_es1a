@@ -226,9 +226,10 @@ app.post('/group/add', async (req, res) => {
 });
 
 // Unirse a un grupo existente
-app.post('/groups/:groupId/join', async (req, res) => {
+app.post('/group/join', async (req, res) => {
   try {
-      const { groupId, username } = req.body;
+      const groupId=req.body.groupId;
+      const username=req.body.username;
 
       const user = await User.findOne({ username });
       if (!user) {
