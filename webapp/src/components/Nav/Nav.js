@@ -31,7 +31,7 @@ const Nav = () => {
         <Button variant="link" color={textColor} mr={4} p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} onClick={() => handleNavigate("/home")}>Home</Button>
         <Popover>
           <PopoverTrigger>
-            <Button p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} p={4} variant="link" color={textColor}>
+            <Button p={2} _hover={{ backgroundColor: 'gray.400', color: 'white' }} variant="link" color={textColor}>
               Modos de Juego
             </Button>
           </PopoverTrigger>

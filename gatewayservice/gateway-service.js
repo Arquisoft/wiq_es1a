@@ -134,6 +134,16 @@ app.get("/group/list", async (req, res) => {
   }
 });
 
+app.get('/group/:name', async (req, res) => {
+  try {
+    const groupName = req.params.name;
+    const userResponse = await axios.get(`${userServiceUrl}/group/${groupName}`);
+    res.json(userResponse.data);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 app.get("/users/search", async (req, res) => {
   try {
     // Forward the question request to the user service

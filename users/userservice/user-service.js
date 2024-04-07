@@ -210,6 +210,15 @@ app.post('/group/add', async (req, res) => {
       const name= req.body.name;
       const username= req.body.username;
 
+      if (!name) {
+        return res.status(400).json({ error: 'Group name cannot be empty' });
+      }
+
+      const existingGroup = await Group.findOne({ name: name });
+      if (existingGroup) {
+        return res.status(400).json({ error: 'Group name already exists' });
+      }
+
       const user = await User.findOne({ username:username });
       if (!user) {
           return res.status(404).json({ error: 'User not found' });

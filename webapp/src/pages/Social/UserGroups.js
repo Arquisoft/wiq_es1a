@@ -55,7 +55,7 @@ const UserGroups = () => {
             {groups.map((group) => (
               <ListItem key={group._id} display="flex" justifyContent="space-between" alignItems="center" mb="2">
                 <Text>{group.name}</Text>
-                <Button colorScheme="blue" onClick={() => seeGroupDetails(group._id)}>Join</Button>
+                <Button colorScheme="blue" onClick={() => seeGroupDetails(group._id)}>Ver grupo</Button>
               </ListItem>
             ))}
           </List>
