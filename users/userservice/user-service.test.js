@@ -130,6 +130,30 @@ describe("User Service", () => {
     );
   });
 
+  it("should return error 400 on POST /users/add-friend", async () => {
+    const friend = {
+      username: "testuser1",
+      friend: "testfriend",
+    };
+
+    const response = await request(app).post("/users/add-friend").send(friend);
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({error: "User not found"});
+  });
+
+  it("should return error 404 on POST /users/add-friend", async () => {
+    const friend = {
+      username: "testuser",
+      friend: "testfriend",
+    };
+
+    await request(app).post("/users/add-friend").send(friend);
+    const response = await request(app).post("/users/add-friend").send(friend);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({error: "Friend already added"});
+  });
+
   it("should remove friend on POST /users/remove-friend", async () => {
     const friend = {
       username: "testuser",
@@ -154,9 +178,25 @@ describe("User Service", () => {
     expect(response.body).toHaveProperty("friends");
   });
 
+  it("should return error on GET /users/friends", async () => {
+    const response = await request(app)
+      .get("/friends")
+      .query({ user: "testuser1" });
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({error: "User not found"});
+  });
+
   it("should get all users on GET /users", async () => {
     const response = await request(app).get("/users");
     expect(response.status).toBe(200);
     expect(response.body).toHaveLength(1);
+  });
+
+  it("should search for users on GET /users/search", async () => {
+    const response = await request(app)
+      .get("/users/search")
+      .query({ search: "test" });
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({error: "User not found"});
   });
 });
