@@ -3,7 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const { Group, User, UserGroup } = require('./user-model');
+const jwt = require('jsonwebtoken');
+const { User } = require('./user-model');
 
 const app = express();
 const port = 8001;
@@ -67,7 +68,14 @@ app.post('/adduser', async (req, res) => {
         });
 
         await newUser.save();
-        res.json(newUser);
+
+        const token = jwt.sign({ userId: newUser._id }, 'your-secret-key', { expiresIn: '1h' });
+
+        res.json({
+          username: newUser.username,
+          createdAt: newUser.createdAt,
+          token: token
+        });
     } catch (error) {
         res.status(400).json({ error: error.message }); 
     }});
@@ -125,7 +133,6 @@ app.post('/users/add-friend', async (req, res) => {
 
     res.json({ message: 'Friend added successfully' });
   } catch (error) {
-    console.error('Error adding friend:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -165,7 +172,7 @@ app.get('/friends', async (req, res) => {
     // Buscar al usuario por su nombre de usuario
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(500).json({ error: 'User not found' });
+      return res.status(404).json({ error: 'User not found' });
     }
     // Devuelve la lista de amigos
     res.json({ friends: user.friends });
@@ -178,7 +185,7 @@ app.get('/friends', async (req, res) => {
 app.get('/userInfo', async (req, res) => {
       try {
           const username = checkInput(req.query.user);
-          const user = await User.findOne({username:username});
+          const user = await User.findOne({username:username}, {username: 1, createdAt: 1, games: 1});
           res.json(user);
       } catch (error) {
           res.status(400).json({ error: error.message }); 

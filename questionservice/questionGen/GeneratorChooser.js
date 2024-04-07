@@ -27,18 +27,18 @@ class GeneratorChooser {
     }
   }
 
-  getQuestions(tematica, n) {
+  getQuestions(tematica, n, locale) {
     if (tematica === "all") {
       var questions = [];
       for (let i = 0; i < n; i++) {
         let rand = Math.floor(Math.random() * this.tematicas.length);
         let randTematica = this.tematicas[rand];
-        let q = this.generators.get(randTematica).generateRandomQuestions(1);
+        let q = this.generators.get(randTematica).generateRandomQuestions(1, locale);
         questions.push(q);
       }
       return questions.flat();
     } else {
-      return this.generators.get(tematica).generateRandomQuestions(n);
+      return this.generators.get(tematica).generateRandomQuestions(n, locale);
     }
   }
 
