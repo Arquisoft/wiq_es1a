@@ -160,7 +160,7 @@ app.post('/users/remove-friend', async (req, res) => {
 // Route to get friends of the authenticated user
 app.get('/friends', async (req, res) => {
   try {
-    const  username  = req.query.user;
+    const username  = req.query.user;
 
     // Buscar al usuario por su nombre de usuario
     const user = await User.findOne({ username });
