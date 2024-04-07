@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Box, Text, Heading, List, ListItem } from '@chakra-ui/react';
+import { Container, Box, Text, Heading, List, ListItem, Avatar } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
@@ -9,6 +9,7 @@ const GroupDetails = () => {
   const [group, setGroup] = useState(null);
   const { groupName } = useParams();
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchGroupDetails = async () => {
@@ -23,6 +24,10 @@ const GroupDetails = () => {
     fetchGroupDetails();
   }, [groupName]);
 
+  const redirectToProfile = (username) => {
+    navigate(`/perfil?user=${username}`);
+  };
+
   return (
     <>
       <Nav/>
@@ -33,17 +38,17 @@ const GroupDetails = () => {
             <Text fontSize="lg" fontWeight="bold" mb="2">Nombre:</Text>
             <Text fontSize="xl" mb="4">{group.name}</Text>
 
-            <Text fontSize="lg" fontWeight="bold" mb="2">Creado por:</Text>
-            <Text fontSize="xl" mb="4">{group.members.length > 0 ? group.members[0] : ''}</Text>
+            <Text fontSize="lg" fontWeight="bold" mb="4">
+              Creado por {group.members.length > 0 ? group.members[0] : ''} el {new Date(group.createdAt).toLocaleDateString()}
+            </Text>
 
-            <Text fontSize="lg" fontWeight="bold" mb="2">Fecha de creación:</Text>
-            <Text fontSize="xl" mb="4">{new Date(group.createdAt).toLocaleDateString()}</Text>
-
-            <Text fontSize="lg" fontWeight="bold" mb="2">Participantes ({group.members.length}):</Text>
+            <Text fontSize="lg" fontWeight="bold" mb="2">Participantes ({group.members.length}) :</Text>
             <List>
               {group.members.map((member, index) => (
                 <ListItem key={index}>
-                  {member}
+                  <Avatar size="sm" name={member} mr={2} />
+                  {member}{" "}
+                  <Link color="blue.500" onClick={() => redirectToProfile(member)}>Ver perfil</Link>
                 </ListItem>
               ))}
             </List>
