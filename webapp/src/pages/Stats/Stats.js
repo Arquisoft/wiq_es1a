@@ -113,7 +113,7 @@ const Stats = () => {
   return (
     <>
       <Nav />
-      <Box>
+      <Box maxWidth={"90%"}>
         <label htmlFor="usernameInput">
           {" "}
           <strong>{t('pages.stats.username')} </strong>

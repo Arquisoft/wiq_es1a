@@ -27,9 +27,9 @@ const Perfil = (username) => {
 
   return (
     <>
-      <Center py={8}>
+      <Center py={8} maxWidth={"90%"}>
         <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg" width="100%">
-          <VStack p={8} align="start" spacing={6}>
+          <VStack p={8} align="center" spacing={6}>
             <Heading as="h1" size="lg">
               {t('components.profile.profile')}
             </Heading>
@@ -44,7 +44,7 @@ const Perfil = (username) => {
                 {userData && (
                   <>
                     <Avatar name={username.username} />
-                    <Text>
+                    <Text justifyContent={"center"}>
                       <strong>{t('components.profile.name')}</strong> {userData.username}
                     </Text>
                     <Text>

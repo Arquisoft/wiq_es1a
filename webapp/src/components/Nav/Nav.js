@@ -31,8 +31,6 @@ import {
   IconButton,
   useBreakpointValue,
   FormLabel,
-  Input,
-  Select,
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
@@ -56,14 +54,6 @@ const Nav = () => {
 
   const closeDrawer = () => {
     setIsDrawerOpen(false);
-  };
-  const handleConfig = () => {
-    navigate("/config");
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
   };
 
   const handleNavigate = (path) => {
