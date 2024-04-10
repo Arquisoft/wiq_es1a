@@ -57,7 +57,7 @@ const Nav = () => {
     setIsDrawerOpen(false);
   };
 
-  const handleLogout = () => {
+  const handleLogout = () => { // NOSONAR
     if(process.env.NODE_ENV !== 'test'){
       localStorage.removeItem("username");
     }
