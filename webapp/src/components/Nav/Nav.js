@@ -79,7 +79,6 @@ const Nav = () => {
       p={4}
       bg={bgColor}
       width="100%"
-      flexDirection={{ base: "column", lg: "row" }}
     >
       <Heading
         width={"25%"}
@@ -95,7 +94,6 @@ const Nav = () => {
       {isLargeScreen ? (
         <Flex
           gap={3}
-          flexDirection={{ base: "column", lg: "row" }}
           order={{ base: 3, lg: 2 }}
         >
           <Button
