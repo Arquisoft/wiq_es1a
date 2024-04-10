@@ -213,13 +213,14 @@ app.post("/saveGameList", async (req, res) => {
     const username = checkInput(req.body.username);
     const gamemode = checkInput(req.body.gameMode);
     const gameData = req.body.gameData;
+    const questions = req.body.questions;
 
     let user = await User.findOne({ username: username });
 
     if (!user) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
-    const gameDataWithGamemode = { ...gameData, gamemode };
+    const gameDataWithGamemode = { ...gameData, gamemode, questions };
     user.games.push(gameDataWithGamemode);
 
     await user.save();

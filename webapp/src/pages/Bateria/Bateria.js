@@ -27,6 +27,8 @@ const JuegoPreguntas = () => {
   const [preguntasFalladas, setPreguntasFalladas] = useState(0);
   const [tiempoMedio, setTiempoMedio] = useState(0);
 
+  const questionsToSave = [];
+
   useEffect(() => {
     setProgressPercent(100);
     fetchQuestions();
@@ -97,6 +99,7 @@ const JuegoPreguntas = () => {
         points: puntuacion,
         avgTime: tiempoMedio,
       },
+      questions: questionsToSave
     };
 
     saveGame("/saveGame", newGame);
@@ -119,6 +122,15 @@ const JuegoPreguntas = () => {
     } else {
       setPreguntasFalladas(preguntasFalladas + 1);
     }
+
+    const pregunta = {
+      pregunta: preguntaActual.pregunta,
+      respuestas: preguntaActual.respuestas,
+      correcta: preguntaActual.correcta,
+      respuesta: respuestaSeleccionada,
+    };
+    questionsToSave.push(pregunta);
+
     if (indicePregunta + 1 < preguntas.length) {
       setIndicePregunta(indicePregunta + 1);
       setPreguntaActual(preguntas[indicePregunta + 1]);
