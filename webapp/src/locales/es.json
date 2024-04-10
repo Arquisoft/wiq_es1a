@@ -25,9 +25,11 @@
       "stats": "Estadísticas",
       "ranking": "Ranking",
       "profile": "Perfil",
+      "myprofile": "Mi perfil",
       "about": "Sobre nosotros",
       "options": "Opciones",
-      "disconnect": "Desconectar"
+      "disconnect": "Desconectar",
+      "api": "API docs"
     },
     "register": {
       "title": "Regístrate",

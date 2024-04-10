@@ -15,6 +15,12 @@ import {
   Flex,
   useColorMode,
   Avatar,
+  Menu,
+  MenuItem,
+  MenuButton,
+  MenuList,
+  MenuGroup,
+  MenuDivider,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -23,12 +29,15 @@ const Nav = () => {
   const { t } = useTranslation();
 
   const username = localStorage.getItem("username");
- 
+
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
   const textColor = isDarkTheme ? "white" : "teal.500";
   const bgColor = isDarkTheme ? "gray.700" : "gray.200";
+
+  const currentLocation = window.location;
+  const otherPortUrl = `${currentLocation.protocol}//${currentLocation.hostname}:8000/api-doc`;
 
   const handleConfig = () => {
     navigate("/config");
@@ -52,13 +61,12 @@ const Nav = () => {
       p={4}
       bg={bgColor}
       width="100%"
+      flexDirection={{base:"column", lg: "row"}}
     >
-      <Box textAlign="center" ml={3} width="25%" justifyContent="start">
-        <Heading as="h1" size="xl" color={textColor} textAlign="start">
-          WIQ
-        </Heading>
-      </Box>
-      <Flex gap={3}>
+      <Heading width={"25%"} as="h1" size="xl" color={textColor} ml={3} textAlign={{base:"center", lg: "start"}}>
+        WIQ
+      </Heading>
+      <Flex gap={3} flexDirection={{base:"column", lg: "row"}}>
         <Button
           variant="link"
           color={textColor}
@@ -162,43 +170,30 @@ const Nav = () => {
         </Button>
       </Flex>
       <Flex width="25%" className="rightItems" justifyContent="end">
-        <Button
-          variant="link"
-          color={textColor}
-          p={2}
-          _hover={{ backgroundColor: "gray.400", color: "white" }}
-          onClick={() => handleNavigate("/sobre")}
-        >
-          {t("components.nav.about")}
-        </Button>
-        <Button
-          variant="link"
-          color={textColor}
-          p={2}
-          _hover={{ backgroundColor: "gray.400", color: "white" }}
-          onClick={() => handleConfig()}
-        >
-          {t("components.nav.options")}
-        </Button>
-        <Flex
-          _hover={{ backgroundColor: "gray.400", color: "white" }}
-          onClick={() => handleNavigate("/perfil")}
-          p={4}
-          alignItems={"center"}
-          gap={"1rem"}
-        >
-          <Text alignItems="center">{username}</Text>
-          <Avatar name={username} />
-        </Flex>
-        <Button
-          variant="link"
-          color={textColor}
-          p={4}
-          _hover={{ backgroundColor: "gray.400", color: "white" }}
-          onClick={() => logout()}
-        >
-          {t("components.nav.disconnect")}
-        </Button>
+        <Menu>
+          <MenuButton>
+            <Flex
+              _hover={{ backgroundColor: "gray.400", color: "white" }}
+              p={4}
+              alignItems={"center"}
+              gap={"1rem"}
+            >
+              <Text alignItems="center">{username}</Text>
+              <Avatar name={username} />
+            </Flex>
+          </MenuButton>
+          <MenuList>
+            <MenuGroup title={t("components.nav.profile")}>
+              <MenuItem onClick={() => handleNavigate("/perfil")}>{t("components.nav.myprofile")}</MenuItem>
+              <MenuItem onClick={() => handleNavigate("/config")}>{t("components.nav.options")}</MenuItem>
+            </MenuGroup>
+            <MenuDivider />
+            <MenuGroup title="Ayuda">
+              <MenuItem><a href={otherPortUrl}>{t("components.nav.api")}</a></MenuItem>
+              <MenuItem onClick={() => handleNavigate("/sobre")}>{t("components.nav.about")}</MenuItem>
+            </MenuGroup>
+          </MenuList>
+        </Menu>
         <Switch
           isChecked={isDarkTheme}
           onChange={toggleColorMode}
