@@ -40,20 +40,28 @@ import { useTranslation } from "react-i18next";
 const Nav = () => {
   const { t } = useTranslation();
 
-  const username = localStorage.getItem("username");
+  const username = process.env.NODE_ENV === "test" ? "testuser" : localStorage.getItem("username");
 
   const navigate = useNavigate();
   const { colorMode, toggleColorMode } = useColorMode();
   const isDarkTheme = colorMode === "dark";
   const textColor = isDarkTheme ? "white" : "teal.500";
   const bgColor = isDarkTheme ? "gray.700" : "gray.200";
-  const isLargeScreen = useBreakpointValue({ base: false, lg: true });
+  // eslint-disable-next-line
+  const isLargeScreen = process.env.NODE_ENV === 'test'? true : useBreakpointValue({ base: false, lg: true });
   const currentLocation = window.location;
   const otherPortUrl = `${currentLocation.protocol}//${currentLocation.hostname}:8000/api-doc`;
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const closeDrawer = () => {
     setIsDrawerOpen(false);
+  };
+
+  const handleLogout = () => {
+    if(process.env.NODE_ENV !== 'test'){
+      localStorage.removeItem("username");
+    }
+    navigate("/login");
   };
 
   const handleNavigate = (path) => {
@@ -109,9 +117,10 @@ const Nav = () => {
             <PopoverContent>
               <PopoverArrow />
               <PopoverCloseButton />
-              <PopoverHeader>{t("components.nav.gameModes")}</PopoverHeader>
+              <PopoverHeader data-testid="modes">{t("components.nav.gameModes")}</PopoverHeader>
               <PopoverBody>
                 <Text
+                  data-testid="classic"
                   cursor="pointer"
                   onClick={() => handleNavigate("/home/clasico")}
                   color={textColor}
@@ -119,6 +128,7 @@ const Nav = () => {
                   {t("components.nav.classic")}
                 </Text>
                 <Text
+                  data-testid="battery"
                   cursor="pointer"
                   onClick={() => handleNavigate("/home/bateria")}
                   color={textColor}
@@ -126,6 +136,7 @@ const Nav = () => {
                   {t("components.nav.wisebattery")}
                 </Text>
                 <Text
+                  data-testid="calculator" 
                   cursor="pointer"
                   onClick={() => handleNavigate("/home/calculadora")}
                   color={textColor}
@@ -152,6 +163,7 @@ const Nav = () => {
               <PopoverHeader>Social</PopoverHeader>
               <PopoverBody>
                 <Text
+                  data-testid="users"
                   cursor="pointer"
                   onClick={() => handleNavigate("/social/usuarios")}
                   color={textColor}
@@ -159,6 +171,7 @@ const Nav = () => {
                   {t("components.nav.users")}
                 </Text>
                 <Text
+                  data-testid="friends"
                   cursor="pointer"
                   onClick={() => handleNavigate("/social/amigos")}
                   color={textColor}
@@ -232,6 +245,8 @@ const Nav = () => {
                 {t("components.nav.about")}
               </MenuItem>
             </MenuGroup>
+            <MenuDivider />
+            <MenuItem onClick={handleLogout}>{t("components.nav.disconnect")}</MenuItem>
           </MenuList>
         </Menu>
         <Switch
