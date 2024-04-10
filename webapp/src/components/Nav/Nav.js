@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useState } from "react";
 import {
   Box,
   Button,
@@ -21,7 +21,21 @@ import {
   MenuList,
   MenuGroup,
   MenuDivider,
+  Drawer,
+  DrawerBody,
+  Link,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  IconButton,
+  useBreakpointValue,
+  FormLabel,
+  Input,
+  Select,
+  Stack,
 } from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -35,10 +49,14 @@ const Nav = () => {
   const isDarkTheme = colorMode === "dark";
   const textColor = isDarkTheme ? "white" : "teal.500";
   const bgColor = isDarkTheme ? "gray.700" : "gray.200";
-
+  const isLargeScreen = useBreakpointValue({ base: false, lg: true });
   const currentLocation = window.location;
   const otherPortUrl = `${currentLocation.protocol}//${currentLocation.hostname}:8000/api-doc`;
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const closeDrawer = () => {
+    setIsDrawerOpen(false);
+  };
   const handleConfig = () => {
     navigate("/config");
   };
@@ -61,114 +79,141 @@ const Nav = () => {
       p={4}
       bg={bgColor}
       width="100%"
-      flexDirection={{base:"column", lg: "row"}}
+      flexDirection={{ base: "column", lg: "row" }}
     >
-      <Heading width={"25%"} as="h1" size="xl" color={textColor} ml={{base:0, lg: 3}} textAlign={{base:"center", lg: "start"}}>
+      <Heading
+        width={"25%"}
+        as="h1"
+        size="xl"
+        color={textColor}
+        ml={{ base: 0, lg: 3 }}
+        textAlign={{ base: "center", lg: "start" }}
+      >
         WIQ
       </Heading>
-      <Flex gap={3} flexDirection={{base:"column", lg: "row"}} order={{base: 3, lg: 2}}>
-        <Button
-          variant="link"
-          color={textColor}
-          p={2}
-          _hover={{ backgroundColor: "gray.400", color: "white" }}
-          onClick={() => handleNavigate("/home")}
+
+      {isLargeScreen ? (
+        <Flex
+          gap={3}
+          flexDirection={{ base: "column", lg: "row" }}
+          order={{ base: 3, lg: 2 }}
         >
-          {t("components.nav.home")}
-        </Button>
-        <Popover>
-          <PopoverTrigger>
-            <Button
-              p={2}
-              _hover={{ backgroundColor: "gray.400", color: "white" }}
-              variant="link"
-              color={textColor}
-            >
-              {t("components.nav.gameModes")}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverHeader>{t("components.nav.gameModes")}</PopoverHeader>
-            <PopoverBody>
-              <Text
-                cursor="pointer"
-                onClick={() => handleNavigate("/home/clasico")}
+          <Button
+            variant="link"
+            color={textColor}
+            p={2}
+            _hover={{ backgroundColor: "gray.400", color: "white" }}
+            onClick={() => handleNavigate("/home")}
+          >
+            {t("components.nav.home")}
+          </Button>
+          <Popover>
+            <PopoverTrigger>
+              <Button
+                p={2}
+                _hover={{ backgroundColor: "gray.400", color: "white" }}
+                variant="link"
                 color={textColor}
               >
-                {t("components.nav.classic")}
-              </Text>
-              <Text
-                cursor="pointer"
-                onClick={() => handleNavigate("/home/bateria")}
+                {t("components.nav.gameModes")}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverHeader>{t("components.nav.gameModes")}</PopoverHeader>
+              <PopoverBody>
+                <Text
+                  cursor="pointer"
+                  onClick={() => handleNavigate("/home/clasico")}
+                  color={textColor}
+                >
+                  {t("components.nav.classic")}
+                </Text>
+                <Text
+                  cursor="pointer"
+                  onClick={() => handleNavigate("/home/bateria")}
+                  color={textColor}
+                >
+                  {t("components.nav.wisebattery")}
+                </Text>
+                <Text
+                  cursor="pointer"
+                  onClick={() => handleNavigate("/home/calculadora")}
+                  color={textColor}
+                >
+                  {t("components.nav.humancalculator")}
+                </Text>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+          <Popover>
+            <PopoverTrigger>
+              <Button
+                variant="link"
+                _hover={{ backgroundColor: "gray.400", color: "white" }}
+                p={4}
                 color={textColor}
               >
-                {t("components.nav.wisebattery")}
-              </Text>
-              <Text
-                cursor="pointer"
-                onClick={() => handleNavigate("/home/calculadora")}
-                color={textColor}
-              >
-                {t("components.nav.humancalculator")}
-              </Text>
-            </PopoverBody>
-          </PopoverContent>
-        </Popover>
-        <Popover>
-          <PopoverTrigger>
-            <Button
-              variant="link"
-              _hover={{ backgroundColor: "gray.400", color: "white" }}
-              p={4}
-              color={textColor}
-            >
-              Social
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent>
-            <PopoverArrow />
-            <PopoverCloseButton />
-            <PopoverHeader>Social</PopoverHeader>
-            <PopoverBody>
-              <Text
-                cursor="pointer"
-                onClick={() => handleNavigate("/social/usuarios")}
-                color={textColor}
-              >
-                {t("components.nav.users")}
-              </Text>
-              <Text
-                cursor="pointer"
-                onClick={() => handleNavigate("/social/amigos")}
-                color={textColor}
-              >
-                {t("components.nav.friends")}
-              </Text>
-            </PopoverBody>
-          </PopoverContent>
-        </Popover>
-        <Button
-          variant="link"
-          _hover={{ backgroundColor: "gray.400", color: "white" }}
-          p={4}
+                Social
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverCloseButton />
+              <PopoverHeader>Social</PopoverHeader>
+              <PopoverBody>
+                <Text
+                  cursor="pointer"
+                  onClick={() => handleNavigate("/social/usuarios")}
+                  color={textColor}
+                >
+                  {t("components.nav.users")}
+                </Text>
+                <Text
+                  cursor="pointer"
+                  onClick={() => handleNavigate("/social/amigos")}
+                  color={textColor}
+                >
+                  {t("components.nav.friends")}
+                </Text>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
+          <Button
+            variant="link"
+            _hover={{ backgroundColor: "gray.400", color: "white" }}
+            p={4}
+            color={textColor}
+            onClick={() => handleNavigate("/stats")}
+          >
+            {t("components.nav.stats")}
+          </Button>
+          <Button
+            variant="link"
+            _hover={{ backgroundColor: "gray.400", color: "white" }}
+            p={4}
+            color={textColor}
+            onClick={() => handleNavigate("/ranking")}
+          >
+            Ranking
+          </Button>
+        </Flex>
+      ) : (
+        <IconButton
+          aria-label="Abrir menú"
+          icon={<HamburgerIcon />}
           color={textColor}
-          onClick={() => handleNavigate("/stats")}
-        >
-          {t("components.nav.stats")}
-        </Button>
-        <Button
-          variant="link"
-          _hover={{ backgroundColor: "gray.400", color: "white" }}
-          p={4}
-          color={textColor}
-          onClick={() => handleNavigate("/ranking")}
-        >
-          Ranking
-        </Button>
-      </Flex>
-      <Flex width="25%" className="rightItems" justifyContent="end" order={{base:2, lg: 3}}>
+          onClick={() => setIsDrawerOpen(true)}
+          display={{ base: "flex", lg: "none" }}
+        />
+      )}
+      <Flex
+        width="25%"
+        className="rightItems"
+        justifyContent="end"
+        order={{ base: 2, lg: 3 }}
+      >
         <Menu>
           <MenuButton>
             <Flex
@@ -177,19 +222,27 @@ const Nav = () => {
               alignItems={"center"}
               gap={"1rem"}
             >
-              <Text alignItems="center">{username}</Text>
+              {isLargeScreen && <Text alignItems="center">{username}</Text>}
               <Avatar name={username} />
             </Flex>
           </MenuButton>
           <MenuList>
             <MenuGroup title={t("components.nav.profile")}>
-              <MenuItem onClick={() => handleNavigate("/perfil")}>{t("components.nav.myprofile")}</MenuItem>
-              <MenuItem onClick={() => handleNavigate("/config")}>{t("components.nav.options")}</MenuItem>
+              <MenuItem onClick={() => handleNavigate("/perfil")}>
+                {t("components.nav.myprofile")}
+              </MenuItem>
+              <MenuItem onClick={() => handleNavigate("/config")}>
+                {t("components.nav.options")}
+              </MenuItem>
             </MenuGroup>
             <MenuDivider />
             <MenuGroup title="Ayuda">
-              <MenuItem><a href={otherPortUrl}>{t("components.nav.api")}</a></MenuItem>
-              <MenuItem onClick={() => handleNavigate("/sobre")}>{t("components.nav.about")}</MenuItem>
+              <MenuItem>
+                <a href={otherPortUrl}>{t("components.nav.api")}</a>
+              </MenuItem>
+              <MenuItem onClick={() => handleNavigate("/sobre")}>
+                {t("components.nav.about")}
+              </MenuItem>
             </MenuGroup>
           </MenuList>
         </Menu>
@@ -200,6 +253,56 @@ const Nav = () => {
           alignSelf="center"
         />
       </Flex>
+      {!isLargeScreen && (
+        <Drawer placement="left" onClose={closeDrawer} isOpen={isDrawerOpen}>
+          <DrawerOverlay>
+            <DrawerContent>
+              <DrawerCloseButton />
+              <DrawerHeader>WIQ</DrawerHeader>
+              <DrawerBody>
+                <Stack spacing="24px">
+                  <Link href="/home/clasico">
+                    {t("components.nav.home")}
+                  </Link>
+
+                  <Box>
+                    <FormLabel htmlFor="url">
+                      {t("components.nav.gameModes")}
+                    </FormLabel>
+                    <Flex flexDirection={"column"}>
+                      <Link href="/home/clasico">
+                        {t("components.nav.classic")}
+                      </Link>
+                      <Link href="/home/clasico">
+                        {t("components.nav.wisebattery")}
+                      </Link>
+                      <Link href="/home/clasico">
+                        {t("components.nav.humancalculator")}
+                      </Link>
+                    </Flex>
+                  </Box>
+
+                  <Box>
+                    <FormLabel htmlFor="owner">
+                      {t("components.nav.social")}
+                    </FormLabel>
+                    <Flex flexDirection={"column"}>
+                      <Link href="/social/usuarios">
+                        {t("components.nav.users")}
+                      </Link>
+                      <Link href="/social/amigos">
+                        {t("components.nav.friends")}
+                      </Link>
+                      <Link href="/stats">{t("components.nav.stats")}</Link>
+                      <Link href="/ranking">{t("components.nav.ranking")}</Link>
+                    </Flex>
+                  </Box>
+                </Stack>
+              </DrawerBody>
+            </DrawerContent>
+          </DrawerOverlay>
+        </Drawer>
+      )}
     </Box>
   );
 };
