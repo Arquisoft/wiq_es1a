@@ -63,14 +63,13 @@ const Nav = () => {
       width="100%"
       flexDirection={{base:"column", lg: "row"}}
     >
-      <Heading width={"25%"} as="h1" size="xl" color={textColor} ml={3} textAlign={{base:"center", lg: "start"}}>
+      <Heading width={"25%"} as="h1" size="xl" color={textColor} ml={{base:0, lg: 3}} textAlign={{base:"center", lg: "start"}}>
         WIQ
       </Heading>
-      <Flex gap={3} flexDirection={{base:"column", lg: "row"}}>
+      <Flex gap={3} flexDirection={{base:"column", lg: "row"}} order={{base: 3, lg: 2}}>
         <Button
           variant="link"
           color={textColor}
-          mr={4}
           p={2}
           _hover={{ backgroundColor: "gray.400", color: "white" }}
           onClick={() => handleNavigate("/home")}
@@ -169,7 +168,7 @@ const Nav = () => {
           Ranking
         </Button>
       </Flex>
-      <Flex width="25%" className="rightItems" justifyContent="end">
+      <Flex width="25%" className="rightItems" justifyContent="end" order={{base:2, lg: 3}}>
         <Menu>
           <MenuButton>
             <Flex
