@@ -59,11 +59,11 @@ const Perfil = (username) => {
                         <Table variant="simple">
                           <Thead>
                             <Tr>
-                              <Th>{t('components.profile.gameMode')}</Th>
-                              <Th>{t('components.profile.correct')}</Th>
-                              <Th>{t('components.profile.incorrect')}</Th>
-                              <Th>{t('components.profile.score')}</Th>
-                              <Th>{t('components.profile.avgTime')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.gameMode')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.correct')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.incorrect')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.score')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.avgTime')}</Th>
                             </Tr>
                           </Thead>
                           <Tbody>

@@ -261,10 +261,10 @@ const Nav = () => {
                       <Link href="/home/clasico">
                         {t("components.nav.classic")}
                       </Link>
-                      <Link href="/home/clasico">
+                      <Link href="/home/bateria">
                         {t("components.nav.wisebattery")}
                       </Link>
-                      <Link href="/home/clasico">
+                      <Link href="/home/calculadora">
                         {t("components.nav.humancalculator")}
                       </Link>
                     </Flex>
