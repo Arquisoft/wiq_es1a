@@ -54,7 +54,7 @@ const Perfil = (username) => {
                     <Heading as="h2" size="md">
                       {t('components.profile.recentGames')}
                     </Heading>
-                    <div style={{ width: '100%'}}>
+                    <Box overflowX={"scroll"} width={'100%'}>
                       {userData.games.length > 0 ? (
                         <Table variant="simple">
                           <Thead>
@@ -69,11 +69,11 @@ const Perfil = (username) => {
                           <Tbody>
                             {userData.games.slice(0, 10).map((game, index) => (
                             <Tr key={index}>
-                              <Td>{game.gamemode}</Td>
-                              <Td>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
-                              <Td>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
-                              <Td>{game.points}</Td>
-                              <Td>{parseFloat(game.avgTime).toFixed(2)} {t('components.profile.seconds')}</Td>
+                              <Td textAlign={"center"}>{game.gamemode}</Td>
+                              <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
+                              <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
+                              <Td textAlign={"center"}>{game.points}</Td>
+                              <Td textAlign={"center"}>{parseFloat(game.avgTime).toFixed(2)} {t('components.profile.seconds')}</Td>
                             </Tr>
                             ))}
                           </Tbody>
@@ -81,7 +81,7 @@ const Perfil = (username) => {
                       ) : (
                         <Text>{t('components.profile.noGames')}</Text>
                       )}
-                    </div>
+                    </Box>
                   </>
                 )}
               </>
