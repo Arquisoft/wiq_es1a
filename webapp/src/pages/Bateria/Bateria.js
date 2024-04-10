@@ -3,7 +3,7 @@ import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { Link, useNavigate } from "react-router-dom";
 import { Box, Flex, Heading, Button, Grid, Spinner } from "@chakra-ui/react";
-import axios from 'axios';
+import axios from "axios";
 import { useTranslation } from "react-i18next";
 
 const JuegoPreguntas = () => {
@@ -32,9 +32,36 @@ const JuegoPreguntas = () => {
   useEffect(() => {
     setProgressPercent(100);
     fetchQuestions();
-    handleTimer();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    const roundedProgressPercent = (
+      (tiempoRestante / TIME) *
+      100
+    ).toFixed(2);
+    setProgressPercent(roundedProgressPercent);
+
+    const timer = setInterval(() => {
+      setTiempoRestante((prevTiempo) =>
+        prevTiempo <= 0 ? 0 : prevTiempo - 0.01
+      );
+    }, 10);
+
+    return () => clearInterval(timer);
+    // eslint-disable-next-line
+  }, [tiempoRestante]);
+
+  useEffect(() => {
+    if (tiempoRestante === 0) {
+      setJuegoTerminado(true);
+    }
+    const timer = setInterval(() => {
+      setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
+    }, 1000);
+    return () => clearInterval(timer);
+    // eslint-disable-next-line
+  }, [tiempoRestante]);
 
   useEffect(() => {
     if (juegoTerminado && tiempoMedio !== 0) {
@@ -46,7 +73,7 @@ const JuegoPreguntas = () => {
   useEffect(() => {
     if (tiempoRestante === 0) {
       setJuegoTerminado(true);
-      if(preguntasCorrectas + preguntasFalladas > 0) {
+      if (preguntasCorrectas + preguntasFalladas > 0) {
         const preguntasTotales = preguntasCorrectas + preguntasFalladas;
         const tMedio = TIME / preguntasTotales;
         setTiempoMedio(tMedio);
@@ -61,7 +88,11 @@ const JuegoPreguntas = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ tematicas: localStorage.getItem("selectedThemes") || "paises", n: 9000, locale: i18n.language }),
+      body: JSON.stringify({
+        tematicas: localStorage.getItem("selectedThemes") || "paises",
+        n: 9000,
+        locale: i18n.language,
+      }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -83,7 +114,7 @@ const JuegoPreguntas = () => {
 
   const handleTimer = () => {
     const timer = setInterval(() => {
-      setTiempoRestante(prevTiempo => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
+      setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
   };
@@ -99,7 +130,7 @@ const JuegoPreguntas = () => {
         points: puntuacion,
         avgTime: tiempoMedio,
       },
-      questions: questionsToSave
+      questions: questionsToSave,
     };
 
     saveGame("/saveGame", newGame);
@@ -111,9 +142,9 @@ const JuegoPreguntas = () => {
       const response = await axios.post(URL + endpoint, newGame);
       console.log("Solicitud exitosa:", response.data);
     } catch (error) {
-      console.error('Error al guardar el juego:', error);
+      console.error("Error al guardar el juego:", error);
     }
-  }
+  };
 
   const handleSiguientePregunta = async (respuesta) => {
     if (respuesta === preguntaActual.correcta) {
@@ -127,7 +158,7 @@ const JuegoPreguntas = () => {
       pregunta: preguntaActual.pregunta,
       respuestas: preguntaActual.respuestas,
       correcta: preguntaActual.correcta,
-      respuesta: respuestaSeleccionada,
+      respuesta: respuesta,
     };
     questionsToSave.push(pregunta);
 
@@ -152,12 +183,12 @@ const JuegoPreguntas = () => {
         <Nav />
         <Spinner
           data-testid="spinner"
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='teal.500'
-          size='xl'
-          margin='auto'
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="teal.500"
+          size="xl"
+          margin="auto"
         />
         <Footer />
       </>
@@ -168,26 +199,32 @@ const JuegoPreguntas = () => {
     <>
       <Nav />
       <Flex justify="center" align="center" h="70vh">
-        <Box p={6} borderWidth="1px" maxWidth={"90%"} borderRadius="lg" boxShadow="lg">
+        <Box
+          p={6}
+          borderWidth="1px"
+          maxWidth={"90%"}
+          borderRadius="lg"
+          boxShadow="lg"
+        >
           {juegoTerminado ? (
             <Box textAlign="center">
-              <Heading as="h2">{t('pages.wisebattery.finished')}</Heading>
+              <Heading as="h2">{t("pages.wisebattery.finished")}</Heading>
               <p p={2}>
-                {t('pages.wisebattery.score')} {puntuacion}
+                {t("pages.wisebattery.score")} {puntuacion}
               </p>
               <Flex flexDirection={"column"}>
                 <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
-                  {t('pages.wisebattery.playAgain')}
+                  {t("pages.wisebattery.playAgain")}
                 </Button>
                 <Link to="/home" style={{ marginLeft: "10px" }}>
-                  {t('pages.wisebattery.back')}
+                  {t("pages.wisebattery.back")}
                 </Link>
               </Flex>
             </Box>
           ) : (
             <Box>
               <Heading as="h2" mb={4}>
-              {t('pages.wisebattery.question')} {indicePregunta + 1}
+                {t("pages.wisebattery.question")} {indicePregunta + 1}
               </Heading>
               <p>{preguntaActual.pregunta}</p>
               <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
@@ -207,8 +244,12 @@ const JuegoPreguntas = () => {
               </Grid>
 
               <Box textAlign="center" mt={4}>
-                <p>{t('pages.wisebattery.time')} {Math.floor(tiempoRestante)}</p>
-                <p>{t('pages.wisebattery.score')} {puntuacion}</p>
+                <p>
+                  {t("pages.wisebattery.time")} {Math.floor(tiempoRestante)}
+                </p>
+                <p>
+                  {t("pages.wisebattery.score")} {puntuacion}
+                </p>
                 <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
                   <Box
                     bg="teal.500"

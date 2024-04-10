@@ -18,7 +18,18 @@ const userSchema = new mongoose.Schema({
       correctAnswers: Number,
       incorrectAnswers: Number,
       points: Number,
-      avgTime: Number
+      avgTime: Number,
+      questions: [{
+        pregunta: String,
+        respuestas: [
+          String,
+          String,
+          String,
+          String
+        ],
+        correcta: String,
+        respuesta: String
+      }]
     }],
     friends: [{
       type: String,
