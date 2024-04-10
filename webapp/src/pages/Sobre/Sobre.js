@@ -10,6 +10,7 @@ import {
   Link,
   Heading,
   Avatar,
+  Text
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -52,7 +53,7 @@ const Sobre = () => {
                       }
                     />
                   </Flex>
-                  {designer.name}
+                  <Text textAlign={"center"}>{designer.name}</Text>
                 </Td>
                 <Td>{designer.id}</Td>
                 <Td>
@@ -60,7 +61,7 @@ const Sobre = () => {
                     href={"https://github.com/" + designer.github}
                     isExternal
                   >
-                    {t("pages.about.mygithub")}
+                    <Text textAlign={"center"}>{t("pages.about.mygithub")}</Text>
                   </Link>
                 </Td>
               </Tr>

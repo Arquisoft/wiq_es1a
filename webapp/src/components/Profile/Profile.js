@@ -27,9 +27,9 @@ const Perfil = (username) => {
 
   return (
     <>
-      <Center py={8}>
+      <Center py={8} maxWidth={"90%"}>
         <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg" width="100%">
-          <VStack p={8} align="start" spacing={6}>
+          <VStack p={8} align="center" spacing={6}>
             <Heading as="h1" size="lg">
               {t('components.profile.profile')}
             </Heading>
@@ -44,7 +44,7 @@ const Perfil = (username) => {
                 {userData && (
                   <>
                     <Avatar name={username.username} />
-                    <Text>
+                    <Text justifyContent={"center"}>
                       <strong>{t('components.profile.name')}</strong> {userData.username}
                     </Text>
                     <Text>
@@ -54,26 +54,26 @@ const Perfil = (username) => {
                     <Heading as="h2" size="md">
                       {t('components.profile.recentGames')}
                     </Heading>
-                    <div style={{ width: '100%'}}>
+                    <Box overflowX={"scroll"} width={'100%'}>
                       {userData.games.length > 0 ? (
                         <Table variant="simple">
                           <Thead>
                             <Tr>
-                              <Th>{t('components.profile.gameMode')}</Th>
-                              <Th>{t('components.profile.correct')}</Th>
-                              <Th>{t('components.profile.incorrect')}</Th>
-                              <Th>{t('components.profile.score')}</Th>
-                              <Th>{t('components.profile.avgTime')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.gameMode')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.correct')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.incorrect')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.score')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.avgTime')}</Th>
                             </Tr>
                           </Thead>
                           <Tbody>
                             {userData.games.slice(0, 10).map((game, index) => (
                             <Tr key={index}>
-                              <Td>{game.gamemode}</Td>
-                              <Td>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
-                              <Td>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
-                              <Td>{game.points}</Td>
-                              <Td>{parseFloat(game.avgTime).toFixed(2)} {t('components.profile.seconds')}</Td>
+                              <Td textAlign={"center"}>{game.gamemode}</Td>
+                              <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
+                              <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
+                              <Td textAlign={"center"}>{game.points}</Td>
+                              <Td textAlign={"center"}>{parseFloat(game.avgTime).toFixed(2)} {t('components.profile.seconds')}</Td>
                             </Tr>
                             ))}
                           </Tbody>
@@ -81,7 +81,7 @@ const Perfil = (username) => {
                       ) : (
                         <Text>{t('components.profile.noGames')}</Text>
                       )}
-                    </div>
+                    </Box>
                   </>
                 )}
               </>

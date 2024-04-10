@@ -156,19 +156,21 @@ const JuegoPreguntas = () => {
     <>
       <Nav />
       <Flex justify="center" align="center" h="70vh">
-        <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
+        <Box p={6} borderWidth="1px" maxWidth={"90%"} borderRadius="lg" boxShadow="lg">
           {juegoTerminado ? (
             <Box textAlign="center">
               <Heading as="h2">{t('pages.wisebattery.finished')}</Heading>
               <p p={2}>
                 {t('pages.wisebattery.score')} {puntuacion}
               </p>
-              <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
-                {t('pages.wisebattery.playAgain')}
-              </Button>
-              <Link to="/home" style={{ marginLeft: "10px" }}>
-                {t('pages.wisebattery.back')}
-              </Link>
+              <Flex flexDirection={"column"}>
+                <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
+                  {t('pages.wisebattery.playAgain')}
+                </Button>
+                <Link to="/home" style={{ marginLeft: "10px" }}>
+                  {t('pages.wisebattery.back')}
+                </Link>
+              </Flex>
             </Box>
           ) : (
             <Box>
@@ -182,6 +184,10 @@ const JuegoPreguntas = () => {
                     key={index}
                     onClick={() => handleSiguientePregunta(respuesta)}
                     disabled={tiempoRestante === 0 || juegoTerminado}
+                    whiteSpace={"normal"}
+                    padding={"1rem"}
+                    height={"fit-content"}
+                    minHeight={"3rem"}
                   >
                     {respuesta}
                   </Button>

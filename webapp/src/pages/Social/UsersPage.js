@@ -21,7 +21,7 @@ const UserList = ({ users, handleAddFriend }) => {
 
   return (
     <div>
-      <Heading as="h2">{t("pages.userspage.list")}</Heading>
+      <Heading mt={"1.5rem"} as="h2">{t("pages.userspage.list")}</Heading>
       <Table>
         <Thead>
           <Tr>

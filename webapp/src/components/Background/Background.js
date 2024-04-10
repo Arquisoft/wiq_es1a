@@ -18,16 +18,11 @@ const Background = () => {
             setInit(true);
         });
     }, []);
-
-    const particlesLoaded = (container) => {
-        console.log(container);
-    };
  
     return (
         <>
             { init && <Particles
                 id="tsparticles"
-                particlesLoaded={particlesLoaded}
                 options={{
                     background: {
                         color: {

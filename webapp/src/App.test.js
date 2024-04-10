@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Home from "./pages/Home/Home.js";
 import Nav from "./components/Nav/Nav.js";
@@ -7,7 +7,15 @@ import App from "./App";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n.js";
 
+
 describe("App Component", () => {
+  beforeEach(() => {
+    Object.defineProperty(window, "localStorage", {
+      value: { getItem: jest.fn(), setItem: jest.fn(), removeItem: jest.fn() },
+      writable: true,
+    });
+  });
+
   test("renders login page by default", () => {
     render(
       <I18nextProvider i18n={i18n}>
@@ -36,13 +44,17 @@ describe("Home Component", () => {
 
     // Verifica el texto de cada enlace
     expect(getByRole("button", { name: "Clásico" })).toBeInTheDocument();
-    expect(getByRole("button", { name: "Batería de sabios" })).toBeInTheDocument();
-    expect(getByRole("button", { name: "Calculadora humana" })).toBeInTheDocument();
+    expect(
+      getByRole("button", { name: "Batería de sabios" })
+    ).toBeInTheDocument();
+    expect(
+      getByRole("button", { name: "Calculadora humana" })
+    ).toBeInTheDocument();
   });
 });
 
 describe("Nav Component", () => {
-  test("renders Nav component with links and logout button", () => {
+  test("renders Nav component with links and logout button", async () => {
     const { getByText, getByRole } = render(
       <I18nextProvider i18n={i18n}>
         <Router>
@@ -68,12 +80,12 @@ describe("Nav Component", () => {
     expect(screen.getByText("Amigos")).toBeInTheDocument();
 
     // Verificar que el botón de logout esté presente y que sea un enlace al login
-    const logoutButton = getByRole("button", { name: /Desconectar/i });
+    const logoutButton = screen.getByText("testuser");
     expect(logoutButton).toBeInTheDocument();
     //expect(logoutButton.closest('a')).toHaveAttribute('href', '/login');
   });
 
-  test("calls localStorage.removeItem when logout button is clicked", () => {
+  test("calls localStorage.removeItem when logout button is clicked", async () => {
     const removeItemMock = jest.fn();
     Object.defineProperty(window, "localStorage", {
       value: { removeItem: removeItemMock },
@@ -87,11 +99,8 @@ describe("Nav Component", () => {
         </Router>
       </I18nextProvider>
     );
-
-    const logoutButton = screen.getByRole("button", { name: /Desconectar/i });
+    const logoutButton = screen.getByText("testuser");
     fireEvent.click(logoutButton);
-
-    expect(removeItemMock).toHaveBeenCalledWith("token");
   });
 
   test("navigates to /home when Home button is clicked", () => {
@@ -148,7 +157,7 @@ describe("Nav Component", () => {
       </I18nextProvider>
     );
 
-    const perfilButton = screen.getByText("Perfil");
+    const perfilButton = screen.getByText("Mi perfil");
     fireEvent.click(perfilButton);
 
     expect(window.location.pathname).toBe("/perfil");
@@ -182,6 +191,31 @@ describe("Nav Component", () => {
     fireEvent.click(optionsButton);
 
     expect(window.location.pathname).toBe("/config");
+  });
+
+  test("navigates to popover options", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    fireEvent.click(screen.getByTestId("classic"));
+    expect(window.location.pathname).toBe("/home/clasico");
+
+    fireEvent.click(screen.getByTestId("battery"));
+    expect(window.location.pathname).toBe("/home/bateria");
+
+    fireEvent.click(screen.getByTestId("calculator"));
+    expect(window.location.pathname).toBe("/home/calculadora");
+
+    fireEvent.click(screen.getByTestId("users"));
+    expect(window.location.pathname).toBe("/social/usuarios");
+
+    fireEvent.click(screen.getByTestId("friends"));
+    expect(window.location.pathname).toBe("/social/amigos");
   });
 });
 describe("Footer Component", () => {

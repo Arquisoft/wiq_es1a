@@ -169,17 +169,19 @@ const CalculadoraHumana = () => {
     <>
       <Nav />
       <Flex justify="center" align="center" h="70vh">
-        <Box p={6} borderWidth="1px" borderRadius="lg" boxShadow="lg">
+        <Box p={6} borderWidth="1px" maxWidth={"90%"} borderRadius="lg" boxShadow="lg">
           {juegoTerminado ? (
             <Box textAlign="center">
               <Heading as="h2">{t('pages.humancalculator.finished')}</Heading>
               <p p={2}>Tu puntuación: {puntuacion}</p>
-              <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
-                {t('pages.humancalculator.playAgain')}
-              </Button>
-              <Link to="/home" style={{ marginLeft: "10px" }}>
-                {t('pages.humancalculator.again')}
-              </Link>
+              <Flex flexDirection={"column"}>
+                <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
+                  {t('pages.humancalculator.playAgain')}
+                </Button>
+                <Link to="/home" style={{ marginLeft: "10px" }}>
+                  {t('pages.humancalculator.back')}
+                </Link>
+              </Flex>
             </Box>
           ) : (
             <Box>
