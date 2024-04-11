@@ -199,6 +199,38 @@
       "profile": "View Profile",
       "delete": "Delete Friend",
       "noFriends": "You currently have no friends."
+    },
+    "groupdetails": {
+      "details": "Group details",
+      "loading": "Loading...",
+      "createdBy": "Created by",
+      "when": "on the",
+      "participants": "Participants",
+      "avatar": "Avatar",
+      "name": "Name",
+      "viewProfile": "View profile",
+      "loadingText": "Your search is being processed, please wait a moment.",
+      "noParticipants": "There are no participants in this group."
+    },
+    "groups": {
+      "title": "Create a group",
+      "name": "Name",
+      "create": "Create",
+      "errorPrefix": "Error: ",
+      "joinable": "Groups you can join",
+      "join": "Join group",
+      "noGroups": "There are no groups available to join."
+    },
+    "groupsTable": {
+      "groupName": "Group name",
+      "creationDate": "Creation date",
+      "creator": "Creator"
+    },
+    "usergroups": {
+      "title": "Your groups",
+      "seegroup": "See group",
+      "creationDate": "Creation date",
+      "creator": "Creator"
     }
   }
 }
