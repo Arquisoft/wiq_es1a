@@ -85,7 +85,7 @@ const History = () => {
                     key={index}
                     p={6}
                     borderWidth="1px"
-                    width={{ base: "90%", lg: "60%" }}
+                    width={{ base: "90%", lg: "50%" }}
                     borderRadius="lg"
                     boxShadow="lg"
                   >
