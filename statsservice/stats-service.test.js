@@ -1,6 +1,5 @@
 const request = require("supertest");
 const { MongoMemoryServer } = require("mongodb-memory-server");
-const statsResponse = require("./statsResponseExample.json");
 
 let mongoServer;
 let app;
@@ -17,17 +16,6 @@ const responseExample = {
   totalIncorrectQuestions: 50,
   ratioCorrect: 0.75,
   avgTime: 45
-}
-
-const responseExample2 = {
-  "username": "admin",
-  "gamemode": "clasico",
-  "gameData": {
-      "correctAnswers": 1,
-      "incorrectAnswers": 1,
-      "points": 1,
-      "avgTime": 2
-    }
 }
 
 async function addStat(responseExample) {
