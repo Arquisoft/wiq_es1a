@@ -21,13 +21,20 @@ const Groups = () => {
   }, []);
 
   const fetchData = async () => {
-    try {
-      const response = await axios.get(`${apiEndpoint}/group/list`);
-      const userGroups = response.data.groups.filter(group => !group.members.includes(username));
-      setGroups(userGroups);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+    fetch(`${apiEndpoint}/group/list`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const userGroups = data.groups.filter(group => !group.members.includes(username));
+        setGroups(userGroups);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   };
 
   const addGroup = async () => {
