@@ -199,6 +199,18 @@
       "profile": "Ver perfil",
       "delete": "Eliminar amigo",
       "noFriends": "No tienes amigos actualmente."
+    },
+    "groupdetails": {
+      "details":"Detalles del grupo",
+      "loading": "Cargando...",
+      "createdBy": "Creado por",
+      "when": "el",
+      "participants": "Participantes",
+      "avatar":"Avatar",
+      "name":"Nombre",
+      "viewProfile": "Ver perfil",
+      "loadingText": "Se está consultando su búsqueda, espere unos instantes.",
+      "noParticipants": "No hay participantes en este grupo."
     }
   }
 }
