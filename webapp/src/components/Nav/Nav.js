@@ -232,6 +232,9 @@ const Nav = () => {
               <MenuItem onClick={() => handleNavigate("/perfil")}>
                 {t("components.nav.myprofile")}
               </MenuItem>
+              <MenuItem onClick={() => handleNavigate("/history")}>
+                {t("components.nav.history")}
+              </MenuItem>
               <MenuItem onClick={() => handleNavigate("/config")}>
                 {t("components.nav.options")}
               </MenuItem>

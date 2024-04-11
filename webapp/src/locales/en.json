@@ -30,7 +30,8 @@
       "about": "About Us",
       "options": "Options",
       "disconnect": "Disconnect",
-      "api": "API docs"
+      "api": "API docs",
+      "history": "History"
     },
     "register": {
       "title": "Sign up",
@@ -123,6 +124,12 @@
       "avgTime": "Average Time",
       "seconds": "seconds",
       "noGames": "You haven't played any games yet."
+    },
+    "history": {
+      "title": "Game history",
+      "name": "Username",
+      "dateLabel": "Account creation date:",
+      "ngame": "Game"
     },
     "ranking": {
       "loading": "Loading...",

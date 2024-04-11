@@ -16,6 +16,7 @@ import Perfil from "./pages/Perfil/Perfil.js";
 import CalculadoraHumana from "./pages/Calculadora/Calculadora.js";
 import UsersPage from "./pages/Social/UsersPage.js";
 import FriendList from "./pages/Social/FriendsList.js";
+import History from "./pages/History/History.js";
 
 function App() {
   useEffect(() => {
@@ -40,6 +41,7 @@ function App() {
           <Route path="/social/usuarios" element={<UsersPage />} />
           <Route path="/social/amigos" element={<FriendList />} />
           <Route path="/perfil" element={<Perfil />} />
+          <Route path="/history" element={<History />} />
           <Route path="/config" element={<Config />} />
         </Route>
 

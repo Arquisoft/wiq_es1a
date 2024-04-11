@@ -30,7 +30,8 @@
       "about": "Sobre nosotros",
       "options": "Opciones",
       "disconnect": "Desconectar",
-      "api": "API docs"
+      "api": "API docs",
+      "history": "Historial"
     },
     "register": {
       "title": "Regístrate",
@@ -123,6 +124,12 @@
       "avgTime": "Tiempo promedio",
       "seconds": "segundos",
       "noGames": "No has jugado ninguna partida aún."
+    },
+    "history": {
+      "title": "Historial de partidas",
+      "name": "Nombre de usuario",
+      "dateLabel": "Fecha de creación de la cuenta:",
+      "ngame": "Partida"
     },
     "ranking": {
       "loading": "Cargando ...",
