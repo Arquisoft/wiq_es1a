@@ -225,6 +225,12 @@
       "groupName": "Nombre del grupo",
       "creationDate": "Fecha de creación",
       "creator": "Creador"
+    },
+    "usergroups": {
+      "title":"Tus grupos",
+      "seegroup": "Ver grupo",
+      "creationDate": "Fecha de creación",
+      "creator": "Creador"
     }
       
   }

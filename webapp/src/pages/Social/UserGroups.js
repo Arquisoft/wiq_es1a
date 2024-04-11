@@ -4,8 +4,10 @@ import { Box, Container, Text, Button, Table, Thead, Tbody, Tr, Th, Td } from '@
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const UserGroups = () => {
+  const { t } = useTranslation();
   const [groups, setGroups] = useState([]);
   const [name, setName] = useState('');
   const [error, setError] = useState('');
@@ -40,14 +42,14 @@ const UserGroups = () => {
       <Nav />
       <Container maxW="xs" mt="5" textAlign="center">
         <Box mt="5">
-          <Text fontSize="3xl" fontWeight="bold" mb="4">Tus grupos</Text>
+          <Text fontSize="3xl" fontWeight="bold" mb="4">{t('pages.usergroups.title')}</Text>
           <Table variant="simple" mx="auto">
             <Thead>
               <Tr>
-                <Th>Nombre del grupo</Th>
-                <Th>Creador</Th>
-                <Th>Fecha de creación</Th>
-                <Th>Ver grupo</Th>
+                <Th>{t('pages.groupsTable.groupName')}</Th>
+                <Th>{t('pages.groupsTable.creationDate')}</Th>
+                <Th>{t('pages.groupsTable.creator')}</Th>
+                <Th>{t('pages.usergroups.seegroup')}</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -57,7 +59,7 @@ const UserGroups = () => {
                   <Td>{group.members.length > 0 ? group.members[0] : ''}</Td>
                   <Td>{new Date(group.createdAt).toLocaleDateString()}</Td>
                   <Td>
-                    <Button colorScheme="blue" onClick={() => seeGroupDetails(group.name)}>Ver grupo</Button>
+                    <Button colorScheme="blue" onClick={() => seeGroupDetails(group.name)}>{t('pages.usergroups.seegroup')}</Button>
                   </Td>
                 </Tr>
               ))}
