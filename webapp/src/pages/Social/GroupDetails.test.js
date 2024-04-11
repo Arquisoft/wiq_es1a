@@ -38,8 +38,8 @@ describe('GroupDetails', () => {
   it('renders group details when data is fetched', async () => {
     
     global.fetch = jest.fn().mockResolvedValue({
-        json: jest.fn().mockResolvedValue(groupData),
-      });
+      json: jest.fn().mockResolvedValue(groupData),
+    });
 
     renderComponentWithRouter();
     
