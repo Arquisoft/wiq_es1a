@@ -63,7 +63,7 @@ describe('GroupDetails', () => {
 
     const viewProfileLink = screen.getByRole('link', { name: 'Ver perfil' });
     fireEvent.click(viewProfileLink);
-    //expect(useNavigate).toHaveBeenCalledWith('/perfil?user=user1');
+    expect(useNavigate).toHaveBeenCalledWith('/perfil?user=user1');
   });
 });
 
