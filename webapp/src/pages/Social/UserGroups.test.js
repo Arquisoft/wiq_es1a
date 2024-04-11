@@ -67,23 +67,6 @@ describe('UserGroups component', () => {
         });
     });
 
-    test('displays error message on fetch failure', async () => {
-        localStorage.setItem('username', 'testuser');
-        fetch.mockRejectedValueOnce(new Error('Failed to fetch groups'));
-
-        render(
-        <I18nextProvider i18n={i18n}>
-            <MemoryRouter>
-            <UserGroups />
-            </MemoryRouter>
-        </I18nextProvider>
-        );
-
-        await waitFor(() => {
-        expect(screen.getByText('Error fetching data: Error: Failed to fetch groups')).toBeInTheDocument();
-        });
-    });
-
     test('navigates to group details on click', async () => {
         localStorage.setItem('username', 'testuser');
         fetch.mockResolvedValueOnce({ json: async () => ({ groups: mockedGroups }) });

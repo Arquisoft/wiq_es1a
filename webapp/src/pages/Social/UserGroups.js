@@ -24,14 +24,19 @@ const UserGroups = () => {
     fetch(`${apiEndpoint}/group/list`)
       .then(response => response.json())
       .then(data => {
-        const userGroups = data.groups.filter(group => group.members.includes(username));
-        setGroups(userGroups);
+        if (data && data.groups) {
+          const userGroups = data.groups.filter(group => group.members.includes(username));
+          setGroups(userGroups);
+        } else {
+          setError('Error fetching data: Invalid response format');
+        }
       })
       .catch(error => {
         console.error('Error fetching data:', error);
-        setError('Error fetching data:'+ error);
+        setError('Error fetching data: ' + error.message);
       });
   };
+  
   
 
   const seeGroupDetails = (groupName) => {
