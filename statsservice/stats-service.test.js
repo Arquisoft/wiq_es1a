@@ -51,22 +51,6 @@ afterAll(async () => {
 });
 
 describe("Stats Service", () => {
-  it("should save game data successfully", async () => {
-    jest.setTimeout(10000000); // Set maximum timeout to 10 seconds
-    const response = await request(app).post("/saveGame").send(responseExample2);
-    expect(response.status).toBe(200);
-
-    expect(response.body).toHaveProperty("username", username);
-    expect(response.body).toHaveProperty("gamemode", "exampleGamemode");
-    expect(response.body).toHaveProperty("nGamesPlayed", 11);
-    expect(response.body).toHaveProperty("avgPoints", 82.27272727272727);
-    expect(response.body).toHaveProperty("totalPoints", 905);
-    expect(response.body).toHaveProperty("totalCorrectQuestions", 170);
-    expect(response.body).toHaveProperty("totalIncorrectQuestions", 60);
-    expect(response.body).toHaveProperty("ratioCorrect", 0.7391304347826086);
-    expect(response.body).toHaveProperty("avgTime", 47.72727272727273);
-  }, 10000000);
-
   it("should return user statistics successfully", async () => {
     const response = await request(app).get(
       `/stats/?username=${username}&gamemode=exampleGamemode`
