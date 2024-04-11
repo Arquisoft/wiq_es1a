@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Box, Container, Text, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import { Alert, Box, Container, Text, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,6 @@ const UserGroups = () => {
   const [groups, setGroups] = useState([]);
   const [name, setName] = useState('');
   const [error, setError] = useState('');
-  const [openAlert, setOpenAlert] = useState(false);
-  const [alertMessage, setAlertMessage] = useState('');
   const username = localStorage.getItem('username');
   const navigate = useNavigate();
 
@@ -24,21 +22,17 @@ const UserGroups = () => {
 
   const fetchData = () => {
     fetch(`${apiEndpoint}/group/list`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
         const userGroups = data.groups.filter(group => group.members.includes(username));
         setGroups(userGroups);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
-        setError('Error fetching data');
+        setError('Error fetching data:'+ error);
       });
   };
+  
 
   const seeGroupDetails = (groupName) => {
     navigate(`/social/grupo/${encodeURIComponent(groupName)}`);
@@ -51,6 +45,11 @@ const UserGroups = () => {
       <Container maxW="xs" mt="5" textAlign="center">
         <Box mt="5">
           <Text fontSize="3xl" fontWeight="bold" mb="4">{t('pages.usergroups.title')}</Text>
+          {error && (
+            <Alert status="error" variant="subtle" mt="2">
+              {`Error: ${error}`}
+            </Alert>
+          )}
           <Table variant="simple" mx="auto">
             <Thead>
               <Tr>
