@@ -4,8 +4,10 @@ import axios from 'axios';
 import { Container, Box, Text, Heading, Table, Thead, Tbody, Tr, Th, Td, Avatar, Link } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
+import { useTranslation } from "react-i18next";
 
 const GroupDetails = () => {
+  const { t } = useTranslation();
   const [group, setGroup] = useState(null);
   const { groupName } = useParams();
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
@@ -32,20 +34,21 @@ const GroupDetails = () => {
     <>
       <Nav/>
       <Container maxW="md" mt="5">
-        <Heading as="h1" mb="5">Detalles del grupo: {groupName}</Heading>
+        <Heading as="h1" mb="5">{t('pages.groupdetails.details')} {groupName}</Heading>
         {group ? (
           <Box>
             <Text fontSize="lg" fontWeight="bold" mb="4">
-              Creado por {group.members.length > 0 ? group.members[0] : ''} el {new Date(group.createdAt).toLocaleDateString()}
+            {t('pages.groupdetails.createdBy')} {group.members.length > 0 ? group.members[0] : ''} 
+            {t('pages.groupdetails.when')} {new Date(group.createdAt).toLocaleDateString()}
             </Text>
   
-            <Text fontSize="lg" fontWeight="bold" mb="2">Participantes ({group.members.length}) :</Text>
+            <Text fontSize="lg" fontWeight="bold" mb="2">{t('pages.groupdetails.participants')} ({group.members.length}) :</Text>
             <Table variant="striped">
               <Thead>
                 <Tr>
-                  <Th>Avatar</Th>
-                  <Th>Nombre</Th>
-                  <Th>Ver perfil</Th>
+                  <Th>{t('pages.groupdetails.avatar')}</Th>
+                  <Th>{t('pages.groupdetails.name')}</Th>
+                  <Th>{t('pages.groupdetails.viewProfile')}</Th>
                 </Tr>
               </Thead>
               <Tbody>
@@ -56,7 +59,7 @@ const GroupDetails = () => {
                     </Td>
                     <Td>{member}</Td>
                     <Td>
-                      <Link color="blue.500" onClick={() => redirectToProfile(member)}>Ver perfil</Link>
+                      <Link color="blue.500" onClick={() => redirectToProfile(member)}>{t('pages.groupdetails.viewProfile')}</Link>
                     </Td>
                   </Tr>
                 ))}
@@ -64,7 +67,7 @@ const GroupDetails = () => {
             </Table>
           </Box>
         ) : (
-          <Text>Loading...</Text>
+          <Text>{t('pages.groupdetails.loading')}</Text>
         )}
       </Container>
       <Footer/>

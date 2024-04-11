@@ -184,7 +184,7 @@ const Nav = () => {
                   onClick={() => handleNavigate("/social/grupos")}
                   color={textColor}
                 >
-                  Grupos
+                  {t("components.nav.groups")}
                 </Text>
                 <Text
                   data-testid="mygroups"
@@ -192,7 +192,7 @@ const Nav = () => {
                   onClick={() => handleNavigate("/social/misgrupos")}
                   color={textColor}
                 >
-                  Mis grupos
+                  {t("components.nav.usergroups")}
                 </Text>
               </PopoverBody>
             </PopoverContent>
@@ -314,6 +314,12 @@ const Nav = () => {
                       </Link>
                       <Link href="/social/amigos">
                         {t("components.nav.friends")}
+                      </Link>
+                      <Link href="/social/grupos">
+                        {t("components.nav.groups")}
+                      </Link>
+                      <Link href="/social/misgrupos">
+                        {t("components.nav.usergroups")}
                       </Link>
                       <Link href="/stats">{t("components.nav.stats")}</Link>
                       <Link href="/ranking">{t("components.nav.ranking")}</Link>

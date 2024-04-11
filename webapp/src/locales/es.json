@@ -22,6 +22,8 @@
       "humancalculator": "Calculadora humana",
       "users": "Usuarios",
       "social": "Social",
+      "groups": "Grupos",
+      "usergroups": "Mis grupos",
       "friends": "Amigos",
       "stats": "Estadísticas",
       "ranking": "Ranking",
@@ -199,6 +201,39 @@
       "profile": "Ver perfil",
       "delete": "Eliminar amigo",
       "noFriends": "No tienes amigos actualmente."
+    },
+    "groupdetails": {
+      "details":"Detalles del grupo",
+      "loading": "Cargando...",
+      "createdBy": "Creado por",
+      "when": "el",
+      "participants": "Participantes",
+      "avatar":"Avatar",
+      "name":"Nombre",
+      "viewProfile": "Ver perfil",
+      "loadingText": "Se está consultando su búsqueda, espere unos instantes.",
+      "noParticipants": "No hay participantes en este grupo."
+    },
+    "groups": {
+      "title": "Crea un grupo",
+      "name": "Nombre",
+      "create": "Crear",
+      "errorPrefix": "Error: ",
+      "joinable": "Grupos a los que puedes unirte",
+      "join": "Unirse al grupo",
+      "noGroups": "No hay grupos disponibles para unirse."
+    },
+    "groupsTable": {
+      "groupName": "Nombre del grupo",
+      "creationDate": "Fecha de creación",
+      "creator": "Creador"
+    },
+    "usergroups": {
+      "title":"Tus grupos",
+      "seegroup": "Ver grupo",
+      "creationDate": "Fecha de creación",
+      "creator": "Creador"
     }
+      
   }
 }
