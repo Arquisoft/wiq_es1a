@@ -14,6 +14,16 @@ jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),
 }));
 
+const renderComponentWithRouter = () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <GroupDetails />
+        </Router>
+      </I18nextProvider>
+    );
+  };
+
 describe('GroupDetails', () => {
   beforeEach(() => {
     useParams.mockReturnValue({ groupName: 'exampleGroup' });
@@ -22,13 +32,7 @@ describe('GroupDetails', () => {
 
   it('renders loading text when group data is not yet fetched', () => {
     axios.get.mockResolvedValueOnce({ data: { group: null } });
-    const { getByText } = render(
-        <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
-          <GroupDetails />
-        </MemoryRouter>
-      </I18nextProvider>
-    );
+    const { getByText } = renderComponentWithRouter();
     expect(getByText('Cargando...')).toBeInTheDocument();
   });
 
@@ -39,13 +43,7 @@ describe('GroupDetails', () => {
       createdAt: '2024-04-11T12:00:00Z',
     };
     axios.get.mockResolvedValueOnce({ data: { group: groupData } });
-    const { getByText, getByTestId, queryByText } = render(
-        <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
-          <GroupDetails />
-        </MemoryRouter>
-      </I18nextProvider>
-    );
+    const { getByText, getByTestId, queryByText } = renderComponentWithRouter();
 
     await waitFor(() => {
         expect(queryByText('Cargando...')).not.toBeInTheDocument();
@@ -68,13 +66,7 @@ describe('GroupDetails', () => {
       createdAt: '2024-04-11T12:00:00Z',
     };
     axios.get.mockResolvedValueOnce({ data: { group: groupData } });
-    const { getByRole, queryByText } = render(
-        <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
-          <GroupDetails />
-        </MemoryRouter>
-      </I18nextProvider>
-    );
+    const { getByRole, queryByText } = renderComponentWithRouter();
 
     await waitFor(() => {
         expect(queryByText('Cargando...')).not.toBeInTheDocument();
