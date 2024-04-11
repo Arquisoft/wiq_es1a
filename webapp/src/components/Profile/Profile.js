@@ -38,7 +38,7 @@ const Perfil = (username) => {
                 <Spinner />
               </Center>
             ) : error ? (
-              <Text>Error: {error}</Text>
+              <Text>{t('pages.profile.error')}</Text>
             ) : (
               <>
                 {userData && (

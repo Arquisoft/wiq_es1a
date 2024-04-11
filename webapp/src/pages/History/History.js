@@ -52,7 +52,7 @@ const History = () => {
         </Center>
       ) : error ? (
         <Center>
-          <Text>Error: {error}</Text>
+          <Heading>{t("pages.history.error")}</Heading>
         </Center>
       ) : (
         <Center py={8} maxWidth={"90%"}>
