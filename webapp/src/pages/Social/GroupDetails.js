@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Container, Box, Text, Heading, Table, Thead, Tbody, Tr, Th, Td, Avatar, Link } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -20,18 +19,13 @@ const GroupDetails = () => {
 
   const fetchGroupDetails = async () => {
     fetch(`${apiEndpoint}/group/${encodeURIComponent(groupName)}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        setGroup(data.group);
-      })
-      .catch(error => {
-        console.error('Error fetching group details:', error);
-      });
+    .then((response) => response.json())
+    .then((data) => {
+      setGroup(data);
+    })
+    .catch((error) => {
+      console.error("Error al obtener los detalles del grupo:", error);
+    })
   };
 
   const redirectToProfile = (username) => {
