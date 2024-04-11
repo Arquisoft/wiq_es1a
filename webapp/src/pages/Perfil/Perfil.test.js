@@ -27,7 +27,7 @@ describe("Perfil Component", () => {
       ],
     };
 
-    jest.spyOn(global, "fetch").mockResolvedValueOnce({
+    jest.spyOn(global, "fetch").mockResolvedValue({
       json: jest.fn().mockResolvedValueOnce(mockUserData),
     });
 
@@ -52,9 +52,10 @@ describe("Perfil Component", () => {
   });
 
   test("displays an error message when profile loading fails", async () => {
-    jest
-      .spyOn(global, "fetch")
-      .mockRejectedValueOnce(new Error("Failed to fetch"));
+    jest.spyOn(global, "fetch").mockRejectedValueOnce({
+      ok: false,
+      json: () => Promise.resolve(new Error("Error")),
+    });
 
     render(
       <I18nextProvider i18n={i18n}>
@@ -65,7 +66,7 @@ describe("Perfil Component", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText("Error: Failed to fetch")).toBeInTheDocument();
+      expect(screen.getByText("Ha habido un error al intentar cargar la información del usuario. Inténtalo más tarde.")).toBeInTheDocument();
     });
   });
 
@@ -77,7 +78,8 @@ describe("Perfil Component", () => {
     };
 
     jest.spyOn(global, "fetch").mockResolvedValueOnce({
-      json: jest.fn().mockResolvedValueOnce(mockUserData),
+      ok: true,
+      json: () => Promise.resolve(mockUserData),
     });
 
     render(
@@ -104,7 +106,8 @@ test("displays recent calculator game data", async () => {
   };
 
   jest.spyOn(global, "fetch").mockResolvedValueOnce({
-    json: jest.fn().mockResolvedValueOnce(mockUserData),
+    ok: true,
+    json: () => Promise.resolve(mockUserData),
   });
 
   render(

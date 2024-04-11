@@ -131,7 +131,7 @@
       "name": "Nombre de usuario",
       "dateLabel": "Fecha de creación de la cuenta:",
       "ngame": "Partida",
-      "error": "Ha habido un error al intentar cargar las preguntas. Inténtalo más tarde"
+      "error": "Ha habido un error al intentar cargar el perfil del usuario. Inténtalo más tarde"
     },
     "ranking": {
       "loading": "Cargando ...",

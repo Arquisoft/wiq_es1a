@@ -12,7 +12,7 @@ import {
   Divider,
   useColorMode,
 } from "@chakra-ui/react";
-import React, { useEffect, useState, getMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Nav from "../../components/Nav/Nav";
 import Footer from "../../components/Footer/Footer";

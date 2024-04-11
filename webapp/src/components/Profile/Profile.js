@@ -55,7 +55,7 @@ const Perfil = (username) => {
                       {t('components.profile.recentGames')}
                     </Heading>
                     <Box overflowX={"scroll"} width={'100%'}>
-                      {userData.games.length > 0 ? (
+                      { userData.games && userData.games.length > 0 ? (
                         <Table variant="simple">
                           <Thead>
                             <Tr>
