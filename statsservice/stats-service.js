@@ -2,7 +2,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
-const axios = require('axios');
 const Stats = require("./model/stats-model.js");
 const StatsForUser = require("./model/stats-getter.js");
 const mongoose = require('mongoose');
@@ -10,8 +9,6 @@ const mongoose = require('mongoose');
 const statsGetter= new StatsForUser();
 const app = express();
 const port = 8004;
-
-const URL = process.env.GATEWAY_SERVICE_URL || "http://localhost:8000";
 
 app.use(bodyParser.json());
 app.use(cors());

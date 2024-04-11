@@ -1,0 +1,34 @@
+{
+    "username": "admin",
+    "gamemode": "clasico",
+    "gameData": {
+        "correctAnswers": 1,
+        "incorrectAnswers": 1,
+        "points": 1,
+        "avgTime": 2
+      },
+    "questions": [
+        {
+            "pregunta": "¿Cuál es la capital de Francia?",
+            "respuestas": [
+                "Madrid",
+                "Paris",
+                "Londres",
+                "Roma"
+            ],
+            "correcta": "Paris",
+            "respuesta": "Paris"
+        },
+        {
+            "pregunta": "¿Cuál es la esperanza de vida media en Filipinas?",
+            "respuestas": [
+                59.89,
+                82.5,
+                73.83,
+                71.09
+            ],
+            "correcta": 71.09,
+            "respuesta": 59.89
+        }
+    ]
+}
