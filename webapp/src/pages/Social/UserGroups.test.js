@@ -14,86 +14,95 @@ const mockedGroups = [
     _id: '1',
     name: 'Group 1',
     createdAt: '2024-04-11T12:00:00.000Z',
-    members: ['user1', 'user2']
+    members: ['testuser','user1', 'user2']
   },
   { 
     _id: '2',
     name: 'Group 2',
     createdAt: '2024-04-10T12:00:00.000Z',
-    members: ['user3', 'user4']
+    members: ['testuser','user3', 'user4']
   }
 ];
 
 describe('UserGroups component', () => {
 
-  test('renders component', async () => {
-    axios.get.mockResolvedValueOnce({ data: { groups: [] } });
+    beforeEach(() => {
+        localStorage.clear();
+        jest.clearAllMocks();
+      });
+
+    test('renders component', async () => {
+        localStorage.setItem('username', 'testuser');
+        axios.get.mockResolvedValueOnce({ data: { groups: [] } });
     
-    render(
+        render(
+            <I18nextProvider i18n={i18n}>
+                <MemoryRouter>
+                    <UserGroups />
+                </MemoryRouter>
+            </I18nextProvider>
+            );
+    
+        await waitFor(() => {
+            expect(screen.getByText('Nombre del grupo')).toBeInTheDocument();
+            expect(screen.getByText('Fecha de creación')).toBeInTheDocument();
+            expect(screen.getByText('Creador')).toBeInTheDocument();
+            expect(screen.getByText('Ver grupo')).toBeInTheDocument();
+        });
+    });
+
+    test('fetches and displays user groups', async () => {
+        localStorage.setItem('username', 'testuser');
+        axios.get.mockResolvedValueOnce({ data: { groups: mockedGroups } });
+
+        render(
         <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
+            <MemoryRouter>
             <UserGroups />
-        </MemoryRouter>
+            </MemoryRouter>
         </I18nextProvider>
         );
-    
-    await waitFor(() => {
-        expect(screen.getByText('Nombre del grupo')).toBeInTheDocument();
-        expect(screen.getByText('Fecha de creación')).toBeInTheDocument();
-        expect(screen.getByText('Creador')).toBeInTheDocument();
-        expect(screen.getByText('Ver grupo')).toBeInTheDocument();
-    });
+
+        await waitFor(() => {
+        expect(screen.getByText('Group 1')).toBeInTheDocument();
+        expect(screen.getByText('Group 2')).toBeInTheDocument();
+        });
     });
 
-  test('fetches and displays user groups', async () => {
-    axios.get.mockResolvedValueOnce({ data: { groups: mockedGroups } });
+    test('displays error message on fetch failure', async () => {
+        localStorage.setItem('username', 'testuser');
+        axios.get.mockRejectedValueOnce(new Error('Failed to fetch groups'));
 
-    render(
-      <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
-          <UserGroups />
-        </MemoryRouter>
-      </I18nextProvider>
-    );
+        render(
+        <I18nextProvider i18n={i18n}>
+            <MemoryRouter>
+            <UserGroups />
+            </MemoryRouter>
+        </I18nextProvider>
+        );
 
-    await waitFor(() => {
-      expect(screen.getByText('Group 1')).toBeInTheDocument();
-      expect(screen.getByText('Group 2')).toBeInTheDocument();
-    });
-  });
-
-  test('displays error message on fetch failure', async () => {
-    axios.get.mockRejectedValueOnce(new Error('Failed to fetch groups'));
-
-    render(
-      <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
-          <UserGroups />
-        </MemoryRouter>
-      </I18nextProvider>
-    );
-
-    await waitFor(() => {
-      expect(screen.getByText('Error fetching data')).toBeInTheDocument();
-    });
-  });
-
-  test('navigates to group details on click', async () => {
-    axios.get.mockResolvedValueOnce({ data: { groups: mockedGroups } });
-
-    render(
-      <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
-          <UserGroups />
-        </MemoryRouter>
-      </I18nextProvider>
-    );
-
-    await waitFor(() => {
-      const groupLink = screen.getByText('Group 1');
-      userEvent.click(groupLink);
+        await waitFor(() => {
+        expect(screen.getByText('Error fetching data')).toBeInTheDocument();
+        });
     });
 
-    expect(window.location.pathname).toBe('/social/grupo/Group%201');
-  });
+    test('navigates to group details on click', async () => {
+        localStorage.setItem('username', 'testuser');
+        axios.get.mockResolvedValueOnce({ data: { groups: mockedGroups } });
+
+        render(
+        <I18nextProvider i18n={i18n}>
+            <MemoryRouter>
+            <UserGroups />
+            </MemoryRouter>
+        </I18nextProvider>
+        );
+
+        await waitFor(() => {
+        const groupLink = screen.getByText('Group 1');
+        userEvent.click(groupLink);
+        });
+
+        expect(window.location.pathname).toBe('/social/grupo/Group%201');
+    });
 });

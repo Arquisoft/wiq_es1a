@@ -21,7 +21,7 @@ const mockedGroups = [
   }
 ];
 
-global.fetch = jest.fn(); // Mock fetch function
+global.fetch = jest.fn();
 
 const renderComponentWithRouter = () => {
   render(
@@ -34,99 +34,99 @@ const renderComponentWithRouter = () => {
 };
 
 describe('Groups component', () => {
-  beforeEach(() => {
-    localStorage.clear();
-    jest.clearAllMocks();
-  });
-
-  test('fetches and displays joinable groups', async () => {
-    localStorage.setItem('username', 'testUser');
-
-    fetch.mockResolvedValueOnce({
-        json: async () => ({ groups: mockedGroups })
-      });
-
-    renderComponentWithRouter();
-
-    await waitFor(() => {
-      expect(screen.getByText('Group 1')).toBeInTheDocument();
-      expect(screen.getByText('Group 2')).toBeInTheDocument();
-    });
-  });
-
-  test('displays error message on group creation failure', async () => {
-    localStorage.setItem('username', 'testUser');
-
-    fetch.mockResolvedValueOnce({
-        json: async () => ({ groups: mockedGroups })
-      });
-
-    fetch.mockResolvedValueOnce({
-        ok: false
-      });
-
-    renderComponentWithRouter();
-
-    const addButton = screen.getByRole('button', { name: 'Crear' });
-    userEvent.click(addButton);
-
-    await waitFor(() => {
-      expect(screen.getByText('Error: Failed to create group')).toBeInTheDocument();
-    });
-  });
-
-  test('successfully joins a group', async () => {
-    localStorage.setItem('username', 'testUser');
-
-    fetch.mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ groups: mockedGroups })
-      });
-    fetch.mockResolvedValueOnce({ ok: true});
-
-    renderComponentWithRouter();
-
-    await waitFor(() => {
-      expect(screen.getByText('Group 1')).toBeInTheDocument();
+    beforeEach(() => {
+        localStorage.clear();
+        jest.clearAllMocks();
     });
 
-    const joinButton = screen.getByText('Group 1').closest('tr').querySelector('button');
-    userEvent.click(joinButton);
+    test('fetches and displays joinable groups', async () => {
+        localStorage.setItem('username', 'testUser');
 
-    await waitFor(() => {
-      expect(screen.queryByText('Group 1')).not.toBeInTheDocument();
-    });
-  });
+        fetch.mockResolvedValueOnce({
+            json: async () => ({ groups: mockedGroups })
+        });
 
-  test('successfully joins both groups', async () => {
-    localStorage.setItem('username', 'testUser');
+        renderComponentWithRouter();
 
-    fetch.mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ groups: mockedGroups })
-      });
-    fetch.mockResolvedValueOnce({ ok: true});
-    fetch.mockResolvedValueOnce({ ok: true});
-
-    renderComponentWithRouter();
-
-    await waitFor(() => {
-      expect(screen.getByText('Group 1')).toBeInTheDocument();
+        await waitFor(() => {
+        expect(screen.getByText('Group 1')).toBeInTheDocument();
+        expect(screen.getByText('Group 2')).toBeInTheDocument();
+        });
     });
 
-    var joinButton = screen.getByText('Group 1').closest('tr').querySelector('button');
-    userEvent.click(joinButton);
+    test('displays error message on group creation failure', async () => {
+        localStorage.setItem('username', 'testUser');
 
-    await waitFor(() => {
-      expect(screen.queryByText('Group 1')).not.toBeInTheDocument();
+        fetch.mockResolvedValueOnce({
+            json: async () => ({ groups: mockedGroups })
+        });
+
+        fetch.mockResolvedValueOnce({
+            ok: false
+        });
+
+        renderComponentWithRouter();
+
+        const addButton = screen.getByRole('button', { name: 'Crear' });
+        userEvent.click(addButton);
+
+        await waitFor(() => {
+        expect(screen.getByText('Error: Failed to create group')).toBeInTheDocument();
+        });
     });
 
-    joinButton = screen.getByText('Group 2').closest('tr').querySelector('button');
-    userEvent.click(joinButton);
+    test('successfully joins a group', async () => {
+        localStorage.setItem('username', 'testUser');
 
-    await waitFor(() => {
-      expect(screen.queryByText('Group 2')).not.toBeInTheDocument();
+        fetch.mockResolvedValueOnce({
+            ok: true,
+            json: async () => ({ groups: mockedGroups })
+        });
+        fetch.mockResolvedValueOnce({ ok: true});
+
+        renderComponentWithRouter();
+
+        await waitFor(() => {
+        expect(screen.getByText('Group 1')).toBeInTheDocument();
+        });
+
+        const joinButton = screen.getByText('Group 1').closest('tr').querySelector('button');
+        userEvent.click(joinButton);
+
+        await waitFor(() => {
+        expect(screen.queryByText('Group 1')).not.toBeInTheDocument();
+        });
     });
-  });
+
+    test('successfully joins both groups', async () => {
+        localStorage.setItem('username', 'testUser');
+
+        fetch.mockResolvedValueOnce({
+            ok: true,
+            json: async () => ({ groups: mockedGroups })
+        });
+        fetch.mockResolvedValueOnce({ ok: true});
+        fetch.mockResolvedValueOnce({ ok: true});
+
+        renderComponentWithRouter();
+
+        await waitFor(() => {
+        expect(screen.getByText('Group 1')).toBeInTheDocument();
+        });
+
+        var joinButton = screen.getByText('Group 1').closest('tr').querySelector('button');
+        userEvent.click(joinButton);
+
+        await waitFor(() => {
+        expect(screen.queryByText('Group 1')).not.toBeInTheDocument();
+        });
+
+        joinButton = screen.getByText('Group 2').closest('tr').querySelector('button');
+        userEvent.click(joinButton);
+
+        await waitFor(() => {
+        expect(screen.queryByText('Group 2')).not.toBeInTheDocument();
+        });
+    });
 
 });
