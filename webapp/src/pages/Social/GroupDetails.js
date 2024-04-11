@@ -30,10 +30,6 @@ const GroupDetails = () => {
     navigate(`/perfil?user=${username}`);
   };
 
-  const redirectToStats = (username) => {
-    navigate(`/stats?user=${username}&gamemode=clasico`);
-  };
-
   return (
     <>
       <Nav/>
@@ -65,9 +61,6 @@ const GroupDetails = () => {
                     <Td>{member}</Td>
                     <Td>
                       <Link color="blue.500" onClick={() => redirectToProfile(member)}>{t('pages.groupdetails.viewProfile')}</Link>
-                    </Td>
-                    <Td>
-                      <Link color="blue.500" onClick={() => redirectToStats(member)}>{t('pages.groupdetails.viewStats')}</Link>
                     </Td>
                   </Tr>
                 ))}

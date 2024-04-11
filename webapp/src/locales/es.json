@@ -211,7 +211,6 @@
       "avatar":"Avatar",
       "name":"Nombre",
       "viewProfile": "Ver perfil",
-      "viewStats": "Ver stats",
       "loadingText": "Se está consultando su búsqueda, espere unos instantes.",
       "noParticipants": "No hay participantes en este grupo."
     },

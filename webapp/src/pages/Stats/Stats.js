@@ -19,8 +19,7 @@ const Stats = () => {
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
   const { t } = useTranslation();
-
-  const [username, setUsername] = useState(localStorage.username || "error");
+  const [username, setUsername] = useState(localStorage.username);
   const [stats, setStats] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(false);
