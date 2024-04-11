@@ -30,7 +30,8 @@
       "about": "Sobre nosotros",
       "options": "Opciones",
       "disconnect": "Desconectar",
-      "api": "API docs"
+      "api": "API docs",
+      "history": "Historial"
     },
     "register": {
       "title": "Regístrate",
@@ -122,7 +123,15 @@
       "score": "Puntos",
       "avgTime": "Tiempo promedio",
       "seconds": "segundos",
-      "noGames": "No has jugado ninguna partida aún."
+      "noGames": "No has jugado ninguna partida aún.",
+      "error": "Ha habido un error al intentar cargar la información del usuario. Inténtalo más tarde."
+    },
+    "history": {
+      "title": "Historial de partidas",
+      "name": "Nombre de usuario",
+      "dateLabel": "Fecha de creación de la cuenta:",
+      "ngame": "Partida",
+      "error": "Ha habido un error al intentar cargar el perfil del usuario. Inténtalo más tarde"
     },
     "ranking": {
       "loading": "Cargando ...",

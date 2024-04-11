@@ -38,7 +38,7 @@ const Perfil = (username) => {
                 <Spinner />
               </Center>
             ) : error ? (
-              <Text>Error: {error}</Text>
+              <Text>{t('pages.profile.error')}</Text>
             ) : (
               <>
                 {userData && (
@@ -55,7 +55,7 @@ const Perfil = (username) => {
                       {t('components.profile.recentGames')}
                     </Heading>
                     <Box overflowX={"scroll"} width={'100%'}>
-                      {userData.games.length > 0 ? (
+                      { userData.games && userData.games.length > 0 ? (
                         <Table variant="simple">
                           <Thead>
                             <Tr>

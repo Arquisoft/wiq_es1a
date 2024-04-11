@@ -73,6 +73,10 @@ app.get("/friends", async (req, res) => {
   handleRequest(req, res, userServiceUrl + "/friends");
 });
 
+app.get("/userGames", async (req, res) => {
+  handleRequest(req, res, userServiceUrl + "/userGames");
+});
+
 app.post("/saveGameList", async (req, res) => {
   try {
     // Forward the save game request to the stats service

@@ -97,7 +97,7 @@ const CalculadoraHumana = () => {
         incorrectAnswers: 0,
         points: puntuacion,
         avgTime: tiempoMedio,
-      },
+      }
     };
     try {
       const response = await axios.post(URL + '/saveGame', newGame);

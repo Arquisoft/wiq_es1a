@@ -30,7 +30,8 @@
       "about": "About Us",
       "options": "Options",
       "disconnect": "Disconnect",
-      "api": "API docs"
+      "api": "API docs",
+      "history": "History"
     },
     "register": {
       "title": "Sign up",
@@ -122,7 +123,15 @@
       "score": "Score",
       "avgTime": "Average Time",
       "seconds": "seconds",
-      "noGames": "You haven't played any games yet."
+      "noGames": "You haven't played any games yet.",
+      "error": "Error loading the user profile. Please try again later."
+    },
+    "history": {
+      "title": "Game history",
+      "name": "Username",
+      "dateLabel": "Account creation date:",
+      "ngame": "Game",
+      "error": "Error loading the game history. Please try again later."
     },
     "ranking": {
       "loading": "Loading...",

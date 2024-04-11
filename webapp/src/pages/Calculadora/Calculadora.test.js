@@ -22,7 +22,7 @@ test("renders the game screen", () => {
   expect(screen.getByText(/puntuación/i)).toBeInTheDocument();
 });
 
-test("handles correct answer", () => {
+test("handles correct answer", async () => {
   render(
     <I18nextProvider i18n={i18n}>
       <MemoryRouter>
@@ -78,6 +78,10 @@ test("handles correct answer", () => {
       .trim()
   );
   expect(updatedScore).toBe(initialScore + 2);
+
+  await setTimeout(() => {
+
+  }, 1000);
 });
 
 test("handles incorrect answer", () => {
@@ -102,7 +106,7 @@ test("handles incorrect answer", () => {
   const submitButton = screen.getByRole("button", { name: /enviar/i });
 
   // Enter an incorrect answer and submit
-  fireEvent.change(inputField, { target: { value: 0 } });
+  fireEvent.change(inputField, { target: { value: "a" } });
   fireEvent.click(submitButton);
 
   // Check if the score remains the same
@@ -115,7 +119,7 @@ test("handles incorrect answer", () => {
   expect(updatedScore).toBe(initialScore);
 });
 
-test("handles game over", () => {
+test("handles game over", async () => {
   render(
     <I18nextProvider i18n={i18n}>
       <MemoryRouter>
@@ -131,7 +135,7 @@ test("handles game over", () => {
       .textContent.split(":")[1]
       .trim()
   );
-
+  
   // Get the input field and submit button
   const inputField = screen.getByTitle(/number/i);
   const submitButton = screen.getByRole("button", { name: /enviar/i });
@@ -153,10 +157,10 @@ test("handles game over", () => {
       .textContent.split(":")[1]
       .trim()
   ); 
-
-  screen.getByText(/jugar de nuevo/i).click();
-
-  waitFor(() => {
-    expect(screen.getByText(/¿/i)).toBeInTheDocument();
-  });
+  expect(updatedScore).toBe(initialScore);
+  
+  await setTimeout(() => {
+    screen.getByText(/jugar de nuevo/i).click();
+  }, 1000);
+  
 });

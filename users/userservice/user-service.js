@@ -208,18 +208,38 @@ app.get("/userInfo", async (req, res) => {
   }
 });
 
+app.get("/userGames", async (req, res) => {
+  try {
+    const username = req.query.user;
+    if(!username){
+      return res.status(400).json({ error: "Nombre inválido" });
+    }
+    const user = await User.findOne({ username:
+      username,
+    });
+    if (!user) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+    res.json(user.games);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+});
+
 app.post("/saveGameList", async (req, res) => {
   try {
     const username = checkInput(req.body.username);
     const gamemode = checkInput(req.body.gameMode);
     const gameData = req.body.gameData;
+    const questions = req.body.questions;
 
     let user = await User.findOne({ username: username });
 
     if (!user) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
-    const gameDataWithGamemode = { ...gameData, gamemode };
+    const gameDataWithGamemode = { ...gameData, gamemode, questions };
+    console.log(gameDataWithGamemode);
     user.games.push(gameDataWithGamemode);
 
     await user.save();
