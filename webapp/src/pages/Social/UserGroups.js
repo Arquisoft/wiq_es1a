@@ -38,10 +38,10 @@ const UserGroups = () => {
   return (
     <>
       <Nav />
-      <Container maxW="xs" mt="5" textAlign="center"> {/* Mover todo hacia arriba */}
+      <Container maxW="xs" mt="5" textAlign="center">
         <Box mt="5">
           <Text fontSize="3xl" fontWeight="bold" mb="4">Tus grupos</Text>
-          <Table variant="simple" mx="auto"> {/* Centrar la tabla */}
+          <Table variant="simple" mx="auto">
             <Thead>
               <Tr>
                 <Th>Nombre del grupo</Th>
