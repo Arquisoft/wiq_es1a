@@ -140,7 +140,7 @@ describe("User Service", () => {
 
     const response = await request(app).post("/users/add-friend").send(friend);
     expect(response.status).toBe(404);
-    expect(response.body).toEqual({error: "User not found"});
+    expect(response.body).toEqual({ error: "User not found" });
   });
 
   it("should return error 404 on POST /users/add-friend", async () => {
@@ -153,7 +153,7 @@ describe("User Service", () => {
     const response = await request(app).post("/users/add-friend").send(friend);
 
     expect(response.status).toBe(400);
-    expect(response.body).toEqual({error: "Friend already added"});
+    expect(response.body).toEqual({ error: "Friend already added" });
   });
 
   it("should remove friend on POST /users/remove-friend", async () => {
@@ -172,6 +172,18 @@ describe("User Service", () => {
     );
   });
 
+  it("should remove friend on POST /users/remove-friend", async () => {
+    const friend = {
+      username: "testuserx",
+      friend: "testfriendx",
+    };
+
+    const response = await request(app)
+      .post("/users/remove-friend")
+      .send(friend);
+    expect(response.status).toBe(404);
+  });
+
   it("should retrieve friends on GET /users/friends", async () => {
     const response = await request(app)
       .get("/friends")
@@ -185,7 +197,7 @@ describe("User Service", () => {
       .get("/friends")
       .query({ user: "testuser1" });
     expect(response.status).toBe(404);
-    expect(response.body).toEqual({error: "User not found"});
+    expect(response.body).toEqual({ error: "User not found" });
   });
 
   it("should get all users on GET /users", async () => {
@@ -197,8 +209,30 @@ describe("User Service", () => {
   it("should search for users on GET /users/search", async () => {
     const response = await request(app)
       .get("/users/search")
-      .query({ search: "test" });
+      .query({ username: "testuser" });
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual([]);
+  });
+
+  it("should search for users on GET /users/search and get not found", async () => {
+    const response = await request(app)
+      .get("/users/search")
+      .query({ username: "asdasd" });
     expect(response.status).toBe(404);
-    expect(response.body).toEqual({error: "User not found"});
+    expect(response.body).toEqual({ error: "User not found" });
+  });
+
+  it("should find a user by username", async () => {
+    const username = "testuser";
+    const user = await User.findOne({ username });
+    expect(user).toBeDefined();
+    expect(user.username).toBe(username);
+  });
+
+  it("should get game data for the user on GET /userGames", async () => {
+    const response = await request(app)
+      .get("/userGames")
+      .query({ user: "testuser" });
+    expect(response.status).toBe(200);
   });
 });
