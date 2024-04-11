@@ -25,6 +25,26 @@ const mockedGroups = [
 ];
 
 describe('UserGroups component', () => {
+
+  test('renders component', async () => {
+    axios.get.mockResolvedValueOnce({ data: { groups: [] } });
+    
+    render(
+        <I18nextProvider i18n={i18n}>
+        <MemoryRouter>
+            <UserGroups />
+        </MemoryRouter>
+        </I18nextProvider>
+        );
+    
+    await waitFor(() => {
+        expect(screen.getByText('Nombre del grupo')).toBeInTheDocument();
+        expect(screen.getByText('Fecha de creación')).toBeInTheDocument();
+        expect(screen.getByText('Creador')).toBeInTheDocument();
+        expect(screen.getByText('Ver grupo')).toBeInTheDocument();
+    });
+    });
+
   test('fetches and displays user groups', async () => {
     axios.get.mockResolvedValueOnce({ data: { groups: mockedGroups } });
 

@@ -22,14 +22,22 @@ const UserGroups = () => {
     fetchData();
   }, []);
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(`${apiEndpoint}/group/list`);
-      const userGroups = response.data.groups.filter(group => group.members.includes(username));
-      setGroups(userGroups);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+  const fetchData = () => {
+    fetch(`${apiEndpoint}/group/list`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const userGroups = data.groups.filter(group => group.members.includes(username));
+        setGroups(userGroups);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setError('Error fetching data');
+      });
   };
 
   const seeGroupDetails = (groupName) => {
