@@ -218,11 +218,13 @@
       "create": "Crear",
       "errorPrefix": "Error: ",
       "joinable": "Grupos a los que puedes unirte",
-      "groupName": "Nombre del grupo",
-      "creationDate": "Fecha de creación",
-      "creator": "Creador",
       "join": "Unirse al grupo",
       "noGroups": "No hay grupos disponibles para unirse."
+    },
+    "groupsTable": {
+      "groupName": "Nombre del grupo",
+      "creationDate": "Fecha de creación",
+      "creator": "Creador"
     }
       
   }

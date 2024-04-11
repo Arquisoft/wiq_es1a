@@ -95,9 +95,9 @@ const Groups = () => {
           <Table variant="simple">
             <Thead>
               <Tr>
-                <Th>{t('pages.groups.groupName')}</Th>
-                <Th>{t('pages.groups.creationDate')}</Th>
-                <Th>{t('pages.groups.creator')}</Th>
+                <Th>{t('pages.groupsTable.groupName')}</Th>
+                <Th>{t('pages.groupsTable.creationDate')}</Th>
+                <Th>{t('pages.groupsTable.creator')}</Th>
                 <Th>{t('pages.groups.join')}</Th>
               </Tr>
             </Thead>
