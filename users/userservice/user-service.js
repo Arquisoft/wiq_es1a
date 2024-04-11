@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
-const { User } = require("./user-model");
+const { User, Group } = require("./user-model");
 
 const app = express();
 const port = 8001;
@@ -246,13 +246,95 @@ app.post("/saveGameList", async (req, res) => {
 
     res.json({ message: "Partida guardada exitosamente" });
   } catch (error) {
-    res
-      .status(400)
-      .json({
-        error: "Error al guardar partida en la lista: " + error.message,
-      });
+    res.status(400).json({ error: "Error al guardar partida en la lista: " + error.message });
   }
 });
+
+app.get('/group/list', async (req, res) => {
+  try {
+      const allGroups = await Group.find();
+      res.json({ groups: allGroups });
+  } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Obtener un grupo por su nombre
+app.get('/group/:groupName', async (req, res) => {
+  try {
+      const groupName = req.params.groupName;
+      const group = await Group.findOne({ name: groupName });
+
+      if (!group) {
+          return res.status(404).json({ error: 'Group not found' });
+      }
+
+      res.json({ group });
+  } catch (error) {
+      res.status(400).json({ error: error.message });
+  }
+});
+
+
+// Crear un nuevo grupo
+app.post('/group/add', async (req, res) => {
+  try {
+      const name= req.body.name;
+      const username= req.body.username;
+
+      if (!name) {
+        return res.status(400).json({ error: 'Group name cannot be empty' });
+      }
+
+      const existingGroup = await Group.findOne({ name: name });
+      if (existingGroup) {
+        return res.status(400).json({ error: 'Group name already exists' });
+      }
+
+      const user = await User.findOne({ username:username });
+      if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+
+      const newGroup = new Group({ name: name,
+         members: [username] });
+      await newGroup.save();
+
+      res.json({ message: 'Group created successfully' });
+  } catch (error) {
+      res.status(400).json({ error: error.message });
+  }
+});
+
+// Unirse a un grupo existente
+app.post('/group/join', async (req, res) => {
+  try {
+      const groupId=req.body.groupId;
+      const username=req.body.username;
+
+      const user = await User.findOne({ username });
+      if (!user) {
+          return res.status(404).json({ error: 'User not found' });
+      }
+
+      const group = await Group.findById(groupId);
+      if (!group) {
+          return res.status(404).json({ error: 'Group not found' });
+      }
+
+      if (group.members.includes(username)) {
+          return res.status(400).json({ error: 'User already a member of this group' });
+      }
+
+      group.members.push(username);
+      await group.save();
+
+      res.json({ message: 'User joined the group successfully' });
+  } catch (error) {
+      res.status(400).json({ error: error.message });
+  }
+});
+
 
 const server = app.listen(port, () => {
   console.log(`User Service listening at http://localhost:${port}`);

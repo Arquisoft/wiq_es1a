@@ -178,6 +178,22 @@ const Nav = () => {
                 >
                   {t("components.nav.friends")}
                 </Text>
+                <Text
+                  data-testid="groups"
+                  cursor="pointer"
+                  onClick={() => handleNavigate("/social/grupos")}
+                  color={textColor}
+                >
+                  Grupos
+                </Text>
+                <Text
+                  data-testid="mygroups"
+                  cursor="pointer"
+                  onClick={() => handleNavigate("/social/misgrupos")}
+                  color={textColor}
+                >
+                  Mis grupos
+                </Text>
               </PopoverBody>
             </PopoverContent>
           </Popover>
