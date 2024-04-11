@@ -315,6 +315,12 @@ const Nav = () => {
                       <Link href="/social/amigos">
                         {t("components.nav.friends")}
                       </Link>
+                      <Link href="/social/grupos">
+                        {t("components.nav.groups")}
+                      </Link>
+                      <Link href="/social/misgrupos">
+                        {t("components.nav.usergroups")}
+                      </Link>
                       <Link href="/stats">{t("components.nav.stats")}</Link>
                       <Link href="/ranking">{t("components.nav.ranking")}</Link>
                     </Flex>
