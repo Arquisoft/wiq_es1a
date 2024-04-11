@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Box, Text, List, ListItem, Button, Input, Alert } from '@chakra-ui/react';
+import { Box, Container, Text, Button, Input, InputGroup, InputRightElement, Alert, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 
@@ -67,20 +67,20 @@ const Groups = () => {
   return (
     <>
       <Nav />
-      <Container maxW="xs" mt="8">
-        <Box>
+      <Container maxW="md" mt="5">
+        <Box mb="5">
           <Text fontSize="2xl" fontWeight="bold" mb="4">Crea un grupo</Text>
-          <InputGroup mb="4">
-            <Input
-              name="name"
-              placeholder="Nombre"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <InputRightElement>
-              <Button colorScheme="blue" onClick={addGroup}>Crear</Button>
-            </InputRightElement>
-          </InputGroup>
+          <Box display="flex" alignItems="center">
+            <InputGroup flex="1" mr="4">
+              <Input
+                name="name"
+                placeholder="Nombre"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </InputGroup>
+            <Button colorScheme="blue" onClick={addGroup}>Crear</Button>
+          </Box>
           {error && (
             <Alert status="error" variant="subtle" mt="2">
               {`Error: ${error}`}
@@ -88,7 +88,7 @@ const Groups = () => {
           )}
         </Box>
   
-        <Box mt="8">
+        <Box mt="4">
           <Text fontSize="3xl" fontWeight="bold" mb="4">Grupos a los que puedes unirte</Text>
           <Table variant="simple">
             <Thead>
@@ -103,7 +103,7 @@ const Groups = () => {
               {groups.map((group) => (
                 <Tr key={group._id}>
                   <Td>{group.name}</Td>
-                  <Td>{group.createdAt}</Td>
+                  <Td>{new Date(group.createdAt).toLocaleDateString()}</Td>
                   <Td>{group.members.length > 0 ? group.members[0] : ''}</Td>
                   <Td>
                     <Button colorScheme="blue" onClick={() => handleJoinGroup(group._id)}>Unirme</Button>

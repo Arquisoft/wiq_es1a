@@ -38,10 +38,10 @@ const UserGroups = () => {
   return (
     <>
       <Nav />
-      <Container maxW="xs" mt="8">
-        <Box mt="8">
+      <Container maxW="xs" mt="5" textAlign="center"> {/* Mover todo hacia arriba */}
+        <Box mt="5">
           <Text fontSize="3xl" fontWeight="bold" mb="4">Tus grupos</Text>
-          <Table variant="simple">
+          <Table variant="simple" mx="auto"> {/* Centrar la tabla */}
             <Thead>
               <Tr>
                 <Th>Nombre del grupo</Th>
@@ -54,8 +54,8 @@ const UserGroups = () => {
               {groups.map((group) => (
                 <Tr key={group._id}>
                   <Td>{group.name}</Td>
-                  <Td>{group.createdAt}</Td>
                   <Td>{group.members.length > 0 ? group.members[0] : ''}</Td>
+                  <Td>{new Date(group.createdAt).toLocaleDateString()}</Td>
                   <Td>
                     <Button colorScheme="blue" onClick={() => seeGroupDetails(group.name)}>Ver grupo</Button>
                   </Td>
@@ -68,6 +68,7 @@ const UserGroups = () => {
       <Footer />
     </>
   );
+  
   
   
 };
