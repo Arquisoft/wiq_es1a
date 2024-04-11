@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
-const { User } = require("./user-model");
+const { User, Group } = require("./user-model");
 
 const app = express();
 const port = 8001;

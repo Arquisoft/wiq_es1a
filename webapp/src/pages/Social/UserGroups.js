@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Container, Box, Text, List, ListItem, Button, Input, Alert } from '@chakra-ui/react';
+import { Box, Container, Text, Button, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { useNavigate } from "react-router-dom";
@@ -37,23 +37,39 @@ const UserGroups = () => {
 
   return (
     <>
-      <Nav/>
+      <Nav />
       <Container maxW="xs" mt="8">
         <Box mt="8">
           <Text fontSize="3xl" fontWeight="bold" mb="4">Tus grupos</Text>
-          <List>
-            {groups.map((group) => (
-              <ListItem key={group._id} display="flex" justifyContent="space-between" alignItems="center" mb="2">
-                <Text>{group.name}</Text>
-                <Button colorScheme="blue" onClick={() => seeGroupDetails(group.name)}>Ver grupo</Button>
-              </ListItem>
-            ))}
-          </List>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Nombre del grupo</Th>
+                <Th>Creador</Th>
+                <Th>Fecha de creación</Th>
+                <Th>Ver grupo</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {groups.map((group) => (
+                <Tr key={group._id}>
+                  <Td>{group.name}</Td>
+                  <Td>{group.createdAt}</Td>
+                  <Td>{group.members.length > 0 ? group.members[0] : ''}</Td>
+                  <Td>
+                    <Button colorScheme="blue" onClick={() => seeGroupDetails(group.name)}>Ver grupo</Button>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
         </Box>
       </Container>
-      <Footer/>
+      <Footer />
     </>
   );
+  
+  
 };
 
 export default UserGroups;

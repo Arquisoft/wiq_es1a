@@ -40,7 +40,7 @@ const GroupDetails = () => {
             </Text>
   
             <Text fontSize="lg" fontWeight="bold" mb="2">Participantes ({group.members.length}) :</Text>
-            <Table variant="striped" colorScheme="blue">
+            <Table variant="striped">
               <Thead>
                 <Tr>
                   <Th>Avatar</Th>

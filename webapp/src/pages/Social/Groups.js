@@ -63,51 +63,61 @@ const Groups = () => {
       console.error('Error joining group:', error);
     });
   };
-  
-
-  const handleCloseAlert = () => {
-    setOpenAlert(false);
-  };
 
   return (
     <>
-      <Nav/>
+      <Nav />
       <Container maxW="xs" mt="8">
         <Box>
           <Text fontSize="2xl" fontWeight="bold" mb="4">Crea un grupo</Text>
-          <Input
-            name="name"
-            mb="4"
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <Button colorScheme="blue" onClick={addGroup} mb="4">Crear</Button>
-          <Alert status="success" variant="subtle" mt="2" isOpen={openAlert} onClose={handleCloseAlert}>
-            {alertMessage}
-          </Alert>
+          <InputGroup mb="4">
+            <Input
+              name="name"
+              placeholder="Nombre"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <InputRightElement>
+              <Button colorScheme="blue" onClick={addGroup}>Crear</Button>
+            </InputRightElement>
+          </InputGroup>
           {error && (
             <Alert status="error" variant="subtle" mt="2">
               {`Error: ${error}`}
             </Alert>
           )}
         </Box>
-
+  
         <Box mt="8">
           <Text fontSize="3xl" fontWeight="bold" mb="4">Grupos a los que puedes unirte</Text>
-          <List>
-            {groups.map((group) => (
-              <ListItem key={group._id} display="flex" justifyContent="space-between" alignItems="center" mb="2">
-                <Text>{group.name}</Text>
-                <Button colorScheme="blue" onClick={() => handleJoinGroup(group._id)}>Join</Button>
-              </ListItem>
-            ))}
-          </List>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Nombre del grupo</Th>
+                <Th>Fecha de creación</Th>
+                <Th>Creador</Th>
+                <Th>Unirse al grupo</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {groups.map((group) => (
+                <Tr key={group._id}>
+                  <Td>{group.name}</Td>
+                  <Td>{group.createdAt}</Td>
+                  <Td>{group.members.length > 0 ? group.members[0] : ''}</Td>
+                  <Td>
+                    <Button colorScheme="blue" onClick={() => handleJoinGroup(group._id)}>Unirme</Button>
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
         </Box>
       </Container>
-      <Footer/>
+      <Footer />
     </>
   );
+  
 };
 
 export default Groups;
