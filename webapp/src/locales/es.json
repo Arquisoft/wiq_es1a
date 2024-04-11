@@ -211,6 +211,19 @@
       "viewProfile": "Ver perfil",
       "loadingText": "Se está consultando su búsqueda, espere unos instantes.",
       "noParticipants": "No hay participantes en este grupo."
+    },
+    "groups": {
+      "title": "Crea un grupo",
+      "name": "Nombre",
+      "create": "Crear",
+      "errorPrefix": "Error: ",
+      "joinable": "Grupos a los que puedes unirte",
+      "groupName": "Nombre del grupo",
+      "creationDate": "Fecha de creación",
+      "creator": "Creador",
+      "join": "Unirse al grupo",
+      "noGroups": "No hay grupos disponibles para unirse."
     }
+      
   }
 }

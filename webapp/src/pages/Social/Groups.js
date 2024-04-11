@@ -3,8 +3,10 @@ import axios from 'axios';
 import { Box, Container, Text, Button, Input, InputGroup, InputRightElement, Alert, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
+import { useTranslation } from "react-i18next";
 
 const Groups = () => {
+  const { t } = useTranslation();
   const [groups, setGroups] = useState([]);
   const [name, setName] = useState('');
   const [error, setError] = useState('');
@@ -69,7 +71,7 @@ const Groups = () => {
       <Nav />
       <Container maxW="md" mt="5">
         <Box mb="5">
-          <Text fontSize="2xl" fontWeight="bold" mb="4">Crea un grupo</Text>
+          <Text fontSize="2xl" fontWeight="bold" mb="4">{t('pages.groups.title')}</Text>
           <Box display="flex" alignItems="center">
             <InputGroup flex="1" mr="4">
               <Input
@@ -79,7 +81,7 @@ const Groups = () => {
                 onChange={(e) => setName(e.target.value)}
               />
             </InputGroup>
-            <Button colorScheme="blue" onClick={addGroup}>Crear</Button>
+            <Button colorScheme="blue" onClick={addGroup}>{t('pages.groups.create')}</Button>
           </Box>
           {error && (
             <Alert status="error" variant="subtle" mt="2">
@@ -89,14 +91,14 @@ const Groups = () => {
         </Box>
   
         <Box mt="4">
-          <Text fontSize="3xl" fontWeight="bold" mb="4">Grupos a los que puedes unirte</Text>
+          <Text fontSize="3xl" fontWeight="bold" mb="4">{t('pages.groups.joinable')}</Text>
           <Table variant="simple">
             <Thead>
               <Tr>
-                <Th>Nombre del grupo</Th>
-                <Th>Fecha de creación</Th>
-                <Th>Creador</Th>
-                <Th>Unirse al grupo</Th>
+                <Th>{t('pages.groups.groupName')}</Th>
+                <Th>{t('pages.groups.creationDate')}</Th>
+                <Th>{t('pages.groups.creator')}</Th>
+                <Th>{t('pages.groups.join')}</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -106,7 +108,7 @@ const Groups = () => {
                   <Td>{new Date(group.createdAt).toLocaleDateString()}</Td>
                   <Td>{group.members.length > 0 ? group.members[0] : ''}</Td>
                   <Td>
-                    <Button colorScheme="blue" onClick={() => handleJoinGroup(group._id)}>Unirme</Button>
+                    <Button colorScheme="blue" onClick={() => handleJoinGroup(group._id)}>{t('pages.groups.join')}</Button>
                   </Td>
                 </Tr>
               ))}
