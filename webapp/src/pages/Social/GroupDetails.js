@@ -14,17 +14,25 @@ const GroupDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchGroupDetails = async () => {
-      try {
-        const response = await axios.get(`${apiEndpoint}/group/${encodeURIComponent(groupName)}`);
-        setGroup(response.data.group);
-      } catch (error) {
-        console.error('Error fetching group details:', error);
-      }
-    };
 
     fetchGroupDetails();
-  }, [groupName]);
+  }, []);
+
+  const fetchGroupDetails = async () => {
+    fetch(`${apiEndpoint}/group/${encodeURIComponent(groupName)}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setGroup(data.group);
+      })
+      .catch(error => {
+        console.error('Error fetching group details:', error);
+      });
+  };
 
   const redirectToProfile = (username) => {
     navigate(`/perfil?user=${username}`);
