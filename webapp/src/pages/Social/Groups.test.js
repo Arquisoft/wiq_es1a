@@ -4,35 +4,34 @@ import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../i18n.js";
-import axios from 'axios';
 import Groups from './Groups';
 
-jest.mock('axios');
-
 const mockedGroups = [
-    {
-      _id: '1',
-      name: 'Group 1',
-      createdAt: '2024-04-11T12:00:00.000Z',
-      members: ['user1', 'user2']
-    },
-    {
-      _id: '2',
-      name: 'Group 2',
-      createdAt: '2024-04-10T12:00:00.000Z',
-      members: ['user3', 'user4']
-    }
-  ];
+  {
+    _id: '1',
+    name: 'Group 1',
+    createdAt: '2024-04-11T12:00:00.000Z',
+    members: ['user1', 'user2']
+  },
+  { 
+    _id: '2',
+    name: 'Group 2',
+    createdAt: '2024-04-10T12:00:00.000Z',
+    members: ['user3', 'user4']
+  }
+];
+
+global.fetch = jest.fn(); // Mock fetch function
 
 const renderComponentWithRouter = () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
-          <Groups />
-        </MemoryRouter>
-      </I18nextProvider>
-    );
-  };
+  render(
+    <I18nextProvider i18n={i18n}>
+      <MemoryRouter>
+        <Groups />
+      </MemoryRouter>
+    </I18nextProvider>
+  );
+};
 
 describe('Groups component', () => {
   beforeEach(() => {
@@ -40,24 +39,12 @@ describe('Groups component', () => {
     jest.clearAllMocks();
   });
 
-  test('renders groups component', async () => {
-
-    localStorage.setItem('username', 'testUser');
-
-    renderComponentWithRouter();
-
-    await waitFor(() => {
-      expect(screen.queryByText('Cargando ...')).not.toBeInTheDocument();
-    });
-
-    expect(screen.getByText('Tus grupos')).toBeInTheDocument();
-  });
-
   test('fetches and displays joinable groups', async () => {
-
     localStorage.setItem('username', 'testUser');
 
-    axios.get.mockResolvedValueOnce({ data: { groups: mockedGroups } });
+    fetch.mockResolvedValueOnce({
+        json: async () => ({ groups: mockedGroups })
+      });
 
     renderComponentWithRouter();
 
@@ -70,7 +57,13 @@ describe('Groups component', () => {
   test('displays error message on group creation failure', async () => {
     localStorage.setItem('username', 'testUser');
 
-    axios.post.mockRejectedValueOnce(new Error('Failed to create group'));
+    fetch.mockResolvedValueOnce({
+        json: async () => ({ groups: mockedGroups })
+      });
+
+    fetch.mockResolvedValueOnce({
+        ok: false
+      });
 
     renderComponentWithRouter();
 
@@ -85,8 +78,11 @@ describe('Groups component', () => {
   test('successfully joins a group', async () => {
     localStorage.setItem('username', 'testUser');
 
-    axios.get.mockResolvedValueOnce({ data: { groups: mockedGroups } });
-    axios.post.mockResolvedValueOnce();
+    fetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ groups: mockedGroups })
+      });
+    fetch.mockResolvedValueOnce({ ok: true});
 
     renderComponentWithRouter();
 
@@ -99,6 +95,37 @@ describe('Groups component', () => {
 
     await waitFor(() => {
       expect(screen.queryByText('Group 1')).not.toBeInTheDocument();
+    });
+  });
+
+  test('successfully joins both groups', async () => {
+    localStorage.setItem('username', 'testUser');
+
+    fetch.mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ groups: mockedGroups })
+      });
+    fetch.mockResolvedValueOnce({ ok: true});
+    fetch.mockResolvedValueOnce({ ok: true});
+
+    renderComponentWithRouter();
+
+    await waitFor(() => {
+      expect(screen.getByText('Group 1')).toBeInTheDocument();
+    });
+
+    var joinButton = screen.getByText('Group 1').closest('tr').querySelector('button');
+    userEvent.click(joinButton);
+
+    await waitFor(() => {
+      expect(screen.queryByText('Group 1')).not.toBeInTheDocument();
+    });
+
+    joinButton = screen.getByText('Group 2').closest('tr').querySelector('button');
+    userEvent.click(joinButton);
+
+    await waitFor(() => {
+      expect(screen.queryByText('Group 2')).not.toBeInTheDocument();
     });
   });
 
