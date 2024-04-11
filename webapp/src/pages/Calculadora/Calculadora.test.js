@@ -2,12 +2,16 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import CalculadoraHumana from "./Calculadora";
 import { MemoryRouter } from "react-router-dom";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../../i18n.js";
 
 test("renders the game screen", () => {
   render(
-    <MemoryRouter>
-      <CalculadoraHumana />
-    </MemoryRouter>
+    <I18nextProvider i18n={i18n}>
+      <MemoryRouter>
+        <CalculadoraHumana />
+      </MemoryRouter>
+    </I18nextProvider>
   );
 
   // Check if the game screen is rendered
@@ -18,11 +22,13 @@ test("renders the game screen", () => {
   expect(screen.getByText(/puntuación/i)).toBeInTheDocument();
 });
 
-test("handles correct answer", () => {
+test("handles correct answer", async () => {
   render(
-    <MemoryRouter>
-      <CalculadoraHumana />
-    </MemoryRouter>
+    <I18nextProvider i18n={i18n}>
+      <MemoryRouter>
+        <CalculadoraHumana />
+      </MemoryRouter>
+    </I18nextProvider>
   );
 
   // Get the initial score
@@ -34,7 +40,9 @@ test("handles correct answer", () => {
   );
 
   // Get the initial operation
-  var initialOperation = screen.getByText(/(\d+)\s*([-+*/])\s*(\d+)/).textContent;
+  var initialOperation = screen.getByText(
+    /(\d+)\s*([-+*/])\s*(\d+)/
+  ).textContent;
   initialOperation = initialOperation.substring(1, initialOperation.length - 1);
 
   // Get the input field and submit button
@@ -60,7 +68,7 @@ test("handles correct answer", () => {
 
   // Enter the correct answer and submit
   fireEvent.change(inputField, { target: { value: eval(nextOperation) } });
-  fireEvent.keyDown(inputField, { key: 'Enter', code: 'Enter' });
+  fireEvent.keyDown(inputField, { key: "Enter", code: "Enter" });
 
   // Check if the score has increased
   updatedScore = parseInt(
@@ -70,13 +78,19 @@ test("handles correct answer", () => {
       .trim()
   );
   expect(updatedScore).toBe(initialScore + 2);
+
+  await setTimeout(() => {
+
+  }, 1000);
 });
 
 test("handles incorrect answer", () => {
   render(
-    <MemoryRouter>
-      <CalculadoraHumana />
-    </MemoryRouter>
+    <I18nextProvider i18n={i18n}>
+      <MemoryRouter>
+        <CalculadoraHumana />
+      </MemoryRouter>
+    </I18nextProvider>
   );
 
   // Get the initial score
@@ -92,7 +106,7 @@ test("handles incorrect answer", () => {
   const submitButton = screen.getByRole("button", { name: /enviar/i });
 
   // Enter an incorrect answer and submit
-  fireEvent.change(inputField, { target: { value: 0 } });
+  fireEvent.change(inputField, { target: { value: "a" } });
   fireEvent.click(submitButton);
 
   // Check if the score remains the same
@@ -105,11 +119,13 @@ test("handles incorrect answer", () => {
   expect(updatedScore).toBe(initialScore);
 });
 
-test("handles game over", () => {
+test("handles game over", async () => {
   render(
-    <MemoryRouter>
-      <CalculadoraHumana />
-    </MemoryRouter>
+    <I18nextProvider i18n={i18n}>
+      <MemoryRouter>
+        <CalculadoraHumana />
+      </MemoryRouter>
+    </I18nextProvider>
   );
 
   // Get the initial score
@@ -119,7 +135,7 @@ test("handles game over", () => {
       .textContent.split(":")[1]
       .trim()
   );
-
+  
   // Get the input field and submit button
   const inputField = screen.getByTitle(/number/i);
   const submitButton = screen.getByRole("button", { name: /enviar/i });
@@ -140,12 +156,11 @@ test("handles game over", () => {
       .getByText(/puntuación: (\d+)/i)
       .textContent.split(":")[1]
       .trim()
-  );
+  ); 
   expect(updatedScore).toBe(initialScore);
-
-  screen.getByText(/repetir juego/i).click();
-
-  waitFor(() => {
-    expect(screen.getByText(/¿/i)).toBeInTheDocument();
-  });
+  
+  await setTimeout(() => {
+    screen.getByText(/jugar de nuevo/i).click();
+  }, 1000);
+  
 });

@@ -212,4 +212,44 @@ describe("Gateway Service", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({ saved: true });
   });
+
+  // Prueba para la ruta /friends
+  it("should forward friends request to user service", async () => {
+    axios.get.mockResolvedValueOnce({ data: { friends: ["friend1", "friend2"] } });
+
+    const response = await request(app).get("/friends").query({ userId: "testuser" });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ friends: ["friend1", "friend2"] });
+  });
+
+  // Prueba para la ruta /users/search
+  it("should forward search users request to user service", async () => {
+    axios.get.mockResolvedValueOnce({ data: { users: ["user1", "user2"] } });
+
+    const response = await request(app).get("/users/search").query({ query: "test" });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ users: ["user1", "user2"] });
+  });
+
+  // Prueba para la ruta /users/add-friend
+  it("should forward add friend request to user service", async () => {
+    axios.post.mockResolvedValueOnce({ data: { success: true } });
+
+    const response = await request(app).post("/users/add-friend").send({ userId: "user1", friendId: "user2" });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ success: true });
+  });
+
+  // Prueba para la ruta /users/remove-friend
+  it("should forward remove friend request to user service", async () => {
+    axios.post.mockResolvedValueOnce({ data: { success: true } });
+
+    const response = await request(app).post("/users/remove-friend").send({ userId: "user1", friendId: "user2" });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ success: true });
+  });
 });

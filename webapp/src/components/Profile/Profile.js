@@ -1,5 +1,6 @@
 import { Box, VStack, Heading, Text, Center, Spinner, Table, Thead, Tbody, Tr, Th, Td, Avatar } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const Perfil = (username) => {
   const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
@@ -7,6 +8,8 @@ const Perfil = (username) => {
   const [loading, setLoading] = useState(true);
 
   const [error, setError] = useState(null);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     fetch(gatewayUrl + `/userInfo?user=${username.username}`)
@@ -24,61 +27,61 @@ const Perfil = (username) => {
 
   return (
     <>
-      <Center py={8}>
+      <Center py={8} maxWidth={"90%"}>
         <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg" width="100%">
-          <VStack p={8} align="start" spacing={6}>
+          <VStack p={8} align="center" spacing={6}>
             <Heading as="h1" size="lg">
-              Perfil del usuario
+              {t('components.profile.profile')}
             </Heading>
             {loading ? (
               <Center>
                 <Spinner />
               </Center>
             ) : error ? (
-              <Text>Error: {error}</Text>
+              <Text>{t('pages.profile.error')}</Text>
             ) : (
               <>
                 {userData && (
                   <>
                     <Avatar name={username.username} />
-                    <Text>
-                      <strong>Nombre de usuario:</strong> {userData.username}
+                    <Text justifyContent={"center"}>
+                      <strong>{t('components.profile.name')}</strong> {userData.username}
                     </Text>
                     <Text>
-                      <strong>Fecha de creación de la cuenta:</strong>{" "}
+                      <strong>{t('components.profile.date')}</strong>{" "}
                       {new Date(userData.createdAt).toLocaleString()}
                     </Text>
                     <Heading as="h2" size="md">
-                      Partidas Recientes
+                      {t('components.profile.recentGames')}
                     </Heading>
-                    <div style={{ width: '100%'}}>
-                      {userData.games.length > 0 ? (
+                    <Box overflowX={"scroll"} width={'100%'}>
+                      { userData.games && userData.games.length > 0 ? (
                         <Table variant="simple">
                           <Thead>
                             <Tr>
-                              <Th>Modo de juego</Th>
-                              <Th>Respuestas correctas</Th>
-                              <Th>Respuestas incorrectas</Th>
-                              <Th>Puntos</Th>
-                              <Th>Tiempo promedio</Th>
+                              <Th textAlign={"center"}>{t('components.profile.gameMode')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.correct')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.incorrect')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.score')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.avgTime')}</Th>
                             </Tr>
                           </Thead>
                           <Tbody>
                             {userData.games.slice(0, 10).map((game, index) => (
                             <Tr key={index}>
-                              <Td>{game.gamemode}</Td>
-                              <Td>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
-                              <Td>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
-                              <Td>{game.points}</Td>
-                              <Td>{parseFloat(game.avgTime).toFixed(2)} segundos</Td>
+                              <Td textAlign={"center"}>{game.gamemode}</Td>
+                              <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
+                              <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
+                              <Td textAlign={"center"}>{game.points}</Td>
+                              <Td textAlign={"center"}>{parseFloat(game.avgTime).toFixed(2)} {t('components.profile.seconds')}</Td>
                             </Tr>
                             ))}
                           </Tbody>
                         </Table>
                       ) : (
-                        <Text>No hay partidas recientes.</Text>
+                        <Text>{t('components.profile.noGames')}</Text>
                       )}
-                    </div>
+                    </Box>
                   </>
                 )}
               </>

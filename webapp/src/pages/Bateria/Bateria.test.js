@@ -2,8 +2,9 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Bateria from "./Bateria";
-import { act } from "react-dom/test-utils";
 import { BrowserRouter as Router } from "react-router-dom";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../../i18n.js";
 
 jest.mock("axios", () => ({
   post: jest.fn((url) => {
@@ -42,9 +43,11 @@ describe("Bateria Component", () => {
 
   test("renders game questions correctly", async () => {
     render(
-      <Router>
-        <Bateria />
-      </Router>
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Bateria />
+        </Router>
+      </I18nextProvider>
     );
 
     // Verificar que el spinner de carga se muestra inicialmente
@@ -65,9 +68,11 @@ describe("Bateria Component", () => {
 
   test("handles answering questions correctly", async () => {
     render(
-      <Router>
-        <Bateria />
-      </Router>
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Bateria />
+        </Router>
+      </I18nextProvider>
     );
 
     // Esperar a que las preguntas se carguen
@@ -84,8 +89,8 @@ describe("Bateria Component", () => {
     await waitFor(() => {
       expect(screen.getByText("¡Juego terminado!")).toBeInTheDocument();
       expect(screen.getByText("Tu puntuación: 1")).toBeInTheDocument();
-      expect(screen.getByText("Repetir Juego")).toBeInTheDocument();
-      expect(screen.getByText("Volver al Menú Principal")).toBeInTheDocument();
+      expect(screen.getByText("Jugar de nuevo")).toBeInTheDocument();
+      expect(screen.getByText("Volver al menú")).toBeInTheDocument();
     });
   });
 });

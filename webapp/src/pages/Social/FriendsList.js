@@ -7,16 +7,22 @@ import {
   Divider,
   Heading,
   Button,
-  Avatar
+  Avatar,
+  Flex
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import Profile from "../../components/Profile/Profile.js";
+import { useTranslation } from "react-i18next";
 
 const FriendList = () => {
+  const { t } = useTranslation();
+
   const [isLoading, setIsLoading] = useState(false);
   const [friends, setFriends] = useState([]);
   const [friend, setFriend] = useState("");
+  const [friendReload, setFriendReload] = useState(false);
+  const currentUser = localStorage.getItem("username");
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
 
@@ -35,15 +41,39 @@ const FriendList = () => {
       });
   };
 
+  const handleRemoveFriend = async (friend) => {
+    try {
+      // Realizar la solicitud HTTP POST al endpoint '/users/remove-friend'
+      const response = await fetch(apiEndpoint + "/users/remove-friend", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: currentUser, // Nombre de usuario del usuario actual
+          friendUsername: friend, // Nombre de usuario del amigo que se está eliminando
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al eliminar amigo");
+      }
+      setFriendReload(!friendReload);
+    } catch (error) {
+      console.error("Error al eliminar amigo:", error);
+    }
+  };
+
   useEffect(() => {
     fetchFriends();
-  }, []);
+    // eslint-disable-next-line
+  }, [friendReload]);
 
   if (isLoading) {
     return (
       <div>
-        <Heading as="h2"> Cargando ... </Heading>
-        <p>Se está consultando su búsqueda, espere unos instantes.</p>
+        <Heading as="h2">{t('pages.friendlist.loading')}</Heading>
+        <p>{t('pages.friendlist.loadingText')}</p>
       </div>
     );
   }
@@ -59,16 +89,26 @@ const FriendList = () => {
       ) : (
         <Container maxW="md">
           <Heading as="h1" size="xl" margin="1rem">
-            Lista de amigos
+            {t('pages.friendlist.list')}
           </Heading>
           {friends.length > 0 ? (
-            <List display="flex" flexDirection="column" gap="1rem" spacing={3}>
+            <List display="flex" flexDirection="column" spacing={3}>
               {friends.map((friend, index) => (
                 <div key={friend._id}>
-                  <ListItem display="flex" justifyContent="space-around">
-                    <Avatar name={friend} />
-                    <Text alignSelf="center">{friend}</Text>
-                    <Button onClick={() => setFriend(friend)}>Ver perfil</Button>
+                  <ListItem
+                    m="1rem"
+                    display="flex"
+                    justifyContent="space-around"
+                  >
+                    <Flex flexDirection="column" alignItems="center">
+                      <Avatar name={friend} />
+                      <Text>{friend}</Text>
+                    </Flex>
+                    <Button onClick={() => setFriend(friend)}>
+                      {t('pages.friendlist.profile')}
+                    </Button>
+                    <Button onClick={() => handleRemoveFriend(friend)}>
+                      {t('pages.friendlist.delete')}</Button>
                   </ListItem>
                   {index !== friends.length - 1 && <Divider />}
                 </div>
@@ -76,7 +116,7 @@ const FriendList = () => {
             </List>
           ) : (
             <Text fontSize="xl" textAlign="center">
-              No tienes amigos actualmente.
+              {t('pages.friendlist.noFriends')}
             </Text>
           )}
         </Container>

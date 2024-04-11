@@ -56,17 +56,25 @@ app.post("/adduser", async (req, res) => {
   }
 });
 
-app.get("/userInfo", async (req, res) => {
+const handleRequest = async (req, res, serviceUrl) => {
   try {
-    // Forward the question request to the user service
-    const userResponse = await axios.get(
-      userServiceUrl + "/userInfo",
-      { params: req.query }
-    );
-    res.json(userResponse.data);
+    const response = await axios.get(serviceUrl, { params: req.query });
+    res.json(response.data);
   } catch (error) {
     returnError(res, error);
   }
+}
+
+app.get("/userInfo", async (req, res) => {
+  handleRequest(req, res, userServiceUrl + "/userInfo");
+});
+
+app.get("/friends", async (req, res) => {
+  handleRequest(req, res, userServiceUrl + "/friends");
+});
+
+app.get("/userGames", async (req, res) => {
+  handleRequest(req, res, userServiceUrl + "/userGames");
 });
 
 app.post("/saveGameList", async (req, res) => {
@@ -162,6 +170,19 @@ app.post("/users/add-friend", async (req, res) => {
     // Forward the save game request to the stats service
     const gameResponse = await axios.post(
       userServiceUrl + "/users/add-friend",
+      req.body
+    );
+    res.json(gameResponse.data);
+  } catch (error) {
+    returnError(res, error);
+  }
+});
+
+app.post("/users/remove-friend", async (req, res) => {
+  try {
+    // Forward the save game request to the stats service
+    const gameResponse = await axios.post(
+      userServiceUrl + "/users/remove-friend",
       req.body
     );
     res.json(gameResponse.data);
