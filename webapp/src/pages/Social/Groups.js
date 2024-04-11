@@ -76,7 +76,7 @@ const Groups = () => {
             <InputGroup flex="1" mr="4">
               <Input
                 name="name"
-                placeholder="Nombre"
+                placeholder={t('pages.groups.name')}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
