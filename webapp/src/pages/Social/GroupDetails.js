@@ -24,7 +24,7 @@ const GroupDetails = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      setGroup(data);
+      setGroup(data.group);
       setError(null);
     } catch (error) {
       setError(error);

@@ -25,7 +25,7 @@ const UserGroups = () => {
       .then(response => response.json())
       .then(data => {
         if (data) {
-          const userGroups = data.filter(group => group.members.includes(username));
+          const userGroups = data.groups.filter(group => group.members.includes(username));
           setGroups(userGroups);
         } else {
           setError('Error fetching data: Invalid response format');
