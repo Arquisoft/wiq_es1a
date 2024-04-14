@@ -221,7 +221,7 @@
       "errorPrefix": "Error: ",
       "joinable": "Grupos a los que puedes unirte",
       "join": "Unirse al grupo",
-      "noGroups": "No hay grupos disponibles para unirse."
+      "nogroups": "No hay grupos a los que puedas unirte."
     },
     "groupsTable": {
       "groupName": "Nombre del grupo",

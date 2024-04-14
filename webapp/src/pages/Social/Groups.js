@@ -21,26 +21,42 @@ const Groups = () => {
   }, []);
 
   const fetchData = async () => {
-    try {
-      const response = await axios.get(`${apiEndpoint}/group/list`);
-      const userGroups = response.data.groups.filter(group => !group.members.includes(username));
-      setGroups(userGroups);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
+    fetch(`${apiEndpoint}/group/list`)
+      .then(response => response.json())
+      .then(data => {
+        const userGroups = data.groups.filter(group => !group.members.includes(username));
+        setGroups(userGroups);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   };
 
-  const addGroup = async () => {
-    try {
-      await axios.post(`${apiEndpoint}/group/add`, {
+  const addGroup = () => {
+    fetch(`${apiEndpoint}/group/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
         name: name,
         username: username
-      });
+      })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to create group');
+      }
+      return response.json();
+    })
+    .then(() => {
       setAlertMessage('Group created successfully');
       setOpenAlert(true);
-    } catch (error) {
-      setError(error.response.data.error);
-    }
+      setName('');
+    })
+    .catch(error => {
+      setError(error.message);
+    });
   };
 
   const handleJoinGroup = (groupId) => {
@@ -88,10 +104,18 @@ const Groups = () => {
               {`Error: ${error}`}
             </Alert>
           )}
+          {alertMessage && (
+          <Alert status="success" variant="subtle" mt="2">
+            {alertMessage}
+          </Alert>
+        )}
         </Box>
   
         <Box mt="4">
-          <Text fontSize="3xl" fontWeight="bold" mb="4">{t('pages.groups.joinable')}</Text>
+        <Text fontSize="3xl" fontWeight="bold" mb="4">{t('pages.groups.joinable')}</Text>
+        {groups.length === 0 ? (
+          <Text>{t('pages.groups.nogroups')}</Text>
+        ) : (
           <Table variant="simple">
             <Thead>
               <Tr>
@@ -102,6 +126,7 @@ const Groups = () => {
               </Tr>
             </Thead>
             <Tbody>
+              
               {groups.map((group) => (
                 <Tr key={group._id}>
                   <Td>{group.name}</Td>
@@ -114,7 +139,8 @@ const Groups = () => {
               ))}
             </Tbody>
           </Table>
-        </Box>
+        )}
+      </Box>
       </Container>
       <Footer />
     </>
