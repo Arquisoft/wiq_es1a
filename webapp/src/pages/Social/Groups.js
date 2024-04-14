@@ -104,6 +104,11 @@ const Groups = () => {
               {`Error: ${error}`}
             </Alert>
           )}
+          {alertMessage && (
+          <Alert status="success" variant="subtle" mt="2">
+            {alertMessage}
+          </Alert>
+        )}
         </Box>
   
         <Box mt="4">
