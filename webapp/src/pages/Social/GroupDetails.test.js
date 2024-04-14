@@ -1,23 +1,24 @@
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
-import { MemoryRouter } from 'react-router-dom';
+import { Routes, Route,MemoryRouter } from 'react-router-dom';
 import { useParams, useNavigate } from 'react-router-dom';
 import GroupDetails from './GroupDetails';
 import { I18nextProvider } from "react-i18next";
 import i18n from "../../i18n.js";
 
-const renderComponentWithRouter = () => {
+const renderComponentWithRouter = async () => {
     render(
       <I18nextProvider i18n={i18n}>
-        <MemoryRouter>
+        <MemoryRouter initialEntries={['/groups/exampleGroup']}>
           <GroupDetails />
-        </MemoryRouter>
+      </MemoryRouter>
       </I18nextProvider>
     );
+    localStorage.setItem("username", "user1");
   };
 
 const groupData = {
-    groupName: 'exampleGroup',
+    name: 'exampleGroup',
     members: ['user1', 'user2'],
     createdAt: '2024-04-11T12:00:00Z',
   };
@@ -26,6 +27,11 @@ describe('GroupDetails', () => {
   beforeEach(() => {
     localStorage.clear();
   });
+
+  afterEach(() => {
+    global.fetch.mockRestore();
+  });
+  
 
     it('renders loading text when group data is not yet fetched', () => {
       global.fetch = jest.fn().mockResolvedValue({
@@ -42,6 +48,11 @@ describe('GroupDetails', () => {
       });
 
       renderComponentWithRouter();
+
+      console.log(screen)
+
+      const table = await screen.findByRole("table");
+      expect(table).toBeInTheDocument();
       
       await waitFor(() => {
         expect(screen.getByText('Detalles del grupo exampleGroup')).toBeInTheDocument();
@@ -56,8 +67,8 @@ describe('GroupDetails', () => {
     it('redirects to user profile when view profile link is clicked', async () => {
 
       global.fetch = jest.fn().mockResolvedValue({
-          json: jest.fn().mockResolvedValue(groupData),
-        });
+        json: jest.fn().mockResolvedValue(groupData),
+      });
 
       renderComponentWithRouter();
 

@@ -297,7 +297,8 @@ app.post('/group/add', async (req, res) => {
       }
 
       const newGroup = new Group({ name: name,
-         members: [username] });
+         members: [username],
+          createdAt:Date.now() });
       await newGroup.save();
 
       res.json({ message: 'Group created successfully' });

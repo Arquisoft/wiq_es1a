@@ -8,36 +8,53 @@ import { useTranslation } from "react-i18next";
 const GroupDetails = () => {
   const { t } = useTranslation();
   const [group, setGroup] = useState(null);
+  const [error, setError] = useState(null);
   const { groupName } = useParams();
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchGroupDetails = async () => {
+      try {
+        const response = await fetch(`${apiEndpoint}/group/${encodeURIComponent(groupName)}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setGroup(data);
+        setError(null);
+      } catch (error) {
+        setError(error);
+        console.error("Error al obtener los detalles del grupo:", error);
+      }
+    };
 
     fetchGroupDetails();
-  }, []);
-
-  const fetchGroupDetails = async () => {
-    fetch(`${apiEndpoint}/group/${encodeURIComponent(groupName)}`)
-    .then((response) => response.json())
-    .then((data) => {
-      setGroup(data);
-    })
-    .catch((error) => {
-      console.error("Error al obtener los detalles del grupo:", error);
-    })
-  };
+  }, [apiEndpoint, groupName]);
 
   const redirectToProfile = (username) => {
     navigate(`/perfil?user=${username}`);
   };
 
+  if (error) {
+    return (
+      <>
+        <Nav />
+        <Box>
+          <Heading as="h2">Error: {error.message}</Heading>
+          <p marginTop="1rem">{t("pages.stats.searchText")}</p>
+        </Box>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <Nav/>
       <Container maxW="md" mt="5">
-        <Heading as="h1" mb="5">{t('pages.groupdetails.details')} {groupName}</Heading>
-        {group ? (
+        <Heading as="h1" mb="5">{t('pages.groupdetails.details')} {group ? group.name: groupName}</Heading>
+        {group && (
           <Box>
             <Text fontSize="lg" fontWeight="bold" mb="4">
             {t('pages.groupdetails.createdBy')} {group.members.length > 0 ? group.members[0] : ''} 
@@ -69,7 +86,8 @@ const GroupDetails = () => {
               </Tbody>
             </Table>
           </Box>
-        ) : (
+        )}
+        {group===null && (
           <Text>{t('pages.groupdetails.loading')}</Text>
         )}
       </Container>
