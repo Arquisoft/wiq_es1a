@@ -221,7 +221,7 @@
       "errorPrefix": "Error: ",
       "joinable": "Groups you can join",
       "join": "Join group",
-      "noGroups": "There are no groups available to join."
+      "nogroups": "There are no groups available to join."
     },
     "groupsTable": {
       "groupName": "Group name",
