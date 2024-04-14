@@ -80,7 +80,6 @@ const GroupDetails = () => {
                   <Th>{t('pages.groupdetails.avatar')}</Th>
                   <Th>{t('pages.groupdetails.name')}</Th>
                   <Th>{t('pages.groupdetails.viewProfile')}</Th>
-                  <Th>{t('pages.groupdetails.viewStats')}</Th>
                 </Tr>
               </Thead>
               <Tbody>
