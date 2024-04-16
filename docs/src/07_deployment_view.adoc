@@ -8,35 +8,50 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 === Infrastructure Level 1
 
-image::DeploymentView.svg[Deployment View]
+image::07-deployment.svg[Deployment View]
 
 Motivation::
 
-This diagram shows us the process the application goes through when it is deployed.
-
+The infrastructure consists on a set of containers that will be deployed in a cloud provider. This containers will be responsible for the different parts of the application. The infrastructure will be monitored by Prometheus and Grafana. The data will be stored in a MongoDB database. The application will use Wikidata to obtain the data for the questions.
 
 === Infrastructure Level 2
 
-==== APP
+==== Webapp
 
-"App": It is the part with which the user interacts. This part would be responsible for providing the visual interface and using the rest of the created classes.
+This container is responsible for the user interface.
 
-==== LINK
+==== Question Generator
 
 "Link" is the part of the application that connects the rest of the parts. This will facilitate the use of the different parts of the application in the App section.
 
-==== REGISTER
+==== User Service
 
 "Register" is the part of the application that handles user registration and login. It's very important as it's the first thing a potential user will encounter when they visit our page.
 
-==== USER SERVICE
+==== Auth Service
 
 "User service" is the part of the application that generates the various services within the application to the user, such as a ranking, correctly answered questions, and so on.
 
-==== QUESTION GENERATOR
+==== Stats Service
 
 "Question generator" is the part of the application that, using the data from Wikidata and some pre-created templates, generates the questions and possible answers of the application.
 
-==== WIKIDATA
+==== Gateway service
 
 Wikidata” is the API that you will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects. 
+
+==== MongoDB
+
+"MongoDB" is the database that will store the data of the users, the questions, the answers, and the statistics of the application.
+
+==== Prometheus
+
+"Prometheus" is the monitoring tool that will be used to monitor the application.
+
+==== Grafana
+
+"Grafana" is the visualization tool that will be used to visualize the monitoring of the application.
+
+==== WIkidata
+
+"WikiData" is the API that you we willll use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects.
