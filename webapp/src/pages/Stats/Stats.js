@@ -31,11 +31,13 @@ const Stats = () => {
     fetch(gatewayUrl + `/stats?user=${username}&gamemode=${mode}`)
       .then((response) => response.json())
       .then((data) => {
+        if (!data.ok) {
+          throw new Error(data.message || "Ha ocurrido un error");
+        }
         setStats(data);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error al obtener las estadísticas:", error);
         setError(
           error.message || "Ha ocurrido un error al obtener las estadísticas"
         );

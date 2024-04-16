@@ -112,13 +112,6 @@ const JuegoPreguntas = () => {
       });
   };
 
-  const handleTimer = () => {
-    const timer = setInterval(() => {
-      setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
-    }, 1000);
-    return () => clearInterval(timer);
-  };
-
   const guardarPartida = async () => {
     const username = localStorage.getItem("username");
     const newGame = {

@@ -27,6 +27,9 @@ const Ranking = () => {
     fetch(gatewayUrl + `/ranking?gamemode=${gamemode}&filterBy=${filterBy}`)
       .then((response) => response.json())
       .then((data) => {
+        if (!data.ok) {
+          throw new Error(data.message || "Ha ocurrido un error");
+        }
         setRanking(data);
         setIsLoading(false);
       })
