@@ -39,11 +39,11 @@ const GroupDetails = () => {
       const response = await fetch(
         `${apiEndpoint}/group/${encodeURIComponent(groupName)}`
       );
-      // if (!response.status === 200) {
-      //   throw new Error("Network response was not ok");
-      // }
+      if (!response.status === 200) {
+         throw new Error("Network response was not ok");
+      }
       const data = await response.json();
-      setGroup(data.group);
+      setGroup(data);
       setError(null);
     } catch (error) {
       setError(error);

@@ -40,6 +40,20 @@ const mockNavigate = jest.fn();
     useNavigate: () => mockNavigate,
   }));
 
+const checks = (async () => {
+  await waitFor(() => {
+    expect(screen.getByText('Detalles del grupo exampleGroup')).toBeInTheDocument();
+    expect(screen.getByText('Avatar')).toBeInTheDocument();
+    expect(screen.getByText('Nombre')).toBeInTheDocument();
+    const viewProfile = screen.getAllByText('Ver perfil');
+      expect(viewProfile).toHaveLength(3);
+    expect(screen.getByTestId('user-avatar-user1')).toBeInTheDocument();
+    expect(screen.getByTestId('user-avatar-user2')).toBeInTheDocument();
+    expect(screen.getByText('user1')).toBeInTheDocument();
+    expect(screen.getByText('user2')).toBeInTheDocument();
+  });
+});
+
 describe('GroupDetails', () => {
   beforeEach(() => {
     localStorage.clear();
@@ -61,45 +75,25 @@ describe('GroupDetails', () => {
     it('renders group details when data is fetched', async () => {
       
       jest.spyOn(global, "fetch").mockResolvedValue({
-        ok: true,
+        status: 200,
         json: jest.fn().mockResolvedValueOnce(groupData),
       });
 
       renderComponentWithRouter();
       
-      await waitFor(() => {
-        expect(screen.getByText('Detalles del grupo exampleGroup')).toBeInTheDocument();
-        expect(screen.getByText('Avatar')).toBeInTheDocument();
-        expect(screen.getByText('Nombre')).toBeInTheDocument();
-        const viewProfile = screen.getAllByText('Ver perfil');
-          expect(viewProfile).toHaveLength(3);
-        expect(screen.getByTestId('user-avatar-user1')).toBeInTheDocument();
-        expect(screen.getByTestId('user-avatar-user2')).toBeInTheDocument();
-        expect(screen.getByText('user1')).toBeInTheDocument();
-        expect(screen.getByText('user2')).toBeInTheDocument();
-      });
+      checks();
     });
 
     it('redirects to user profile when view profile link is clicked', async () => {
 
       jest.spyOn(global, "fetch").mockResolvedValue({
-        ok: true,
+        status: 200,
         json: jest.fn().mockResolvedValueOnce(groupData),
       });
 
       renderComponentWithRouter();
 
-      await waitFor(() => {
-        expect(screen.getByText('Detalles del grupo exampleGroup')).toBeInTheDocument();
-        expect(screen.getByText('Avatar')).toBeInTheDocument();
-        expect(screen.getByText('Nombre')).toBeInTheDocument();
-        const viewProfile = screen.getAllByText('Ver perfil');
-          expect(viewProfile).toHaveLength(3);
-        expect(screen.getByTestId('user-avatar-user1')).toBeInTheDocument();
-        expect(screen.getByTestId('user-avatar-user2')).toBeInTheDocument();
-        expect(screen.getByText('user1')).toBeInTheDocument();
-        expect(screen.getByText('user2')).toBeInTheDocument();
-      });
+      
 
       const viewProfileButtons = screen.getByTestId('view-profile-button-user1');
 
