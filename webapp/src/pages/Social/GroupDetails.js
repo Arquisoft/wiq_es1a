@@ -13,15 +13,19 @@ import {
   Td,
   Avatar,
   Link,
+  Button
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { useTranslation } from "react-i18next";
+import Perfil from "../../components/Profile/Profile.js";
+import { set } from "date-fns";
 
 const GroupDetails = () => {
   const { t } = useTranslation();
   const [group, setGroup] = useState(null);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
   const { groupName } = useParams();
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
@@ -50,8 +54,19 @@ const GroupDetails = () => {
   };
 
   const redirectToProfile = (username) => {
-    navigate(`/perfil?user=${username}`);
+    setUser(username);
   };
+
+  if(user){
+    return (
+      <>
+        <Nav />
+        <Perfil username={user} />
+        <Button p={"1rem"} mb={"1rem"} onClick={() => setUser("")}>Volver</Button>
+        <Footer />
+      </>
+    );
+  }
 
   if (error) {
     return (
