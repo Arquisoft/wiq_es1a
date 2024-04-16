@@ -29,9 +29,11 @@ afterEach(() => {
 });
 
 const groupData = {
+  group : {
     name: 'exampleGroup',
     members: ['user1', 'user2'],
     createdAt: '2024-04-11T12:00:00Z',
+  }
   };
 
 const mockNavigate = jest.fn();
