@@ -96,7 +96,7 @@ const GroupDetails = () => {
   }
 
   return (
-    group && (
+    group && group.members && (
       <>
         <Nav />
         <Container maxW="md" mt="5">
