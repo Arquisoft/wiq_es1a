@@ -20,6 +20,16 @@ const userData = {
   "__v": 0
 };
 
+const columnHeaders = [
+  "Partidas jugadas",
+  "Puntos por partida",
+  "Puntos totales",
+  "Preguntas correctas totales",
+  "Preguntas incorrectas totales",
+  "Porcentaje de aciertos",
+  "Tiempo por pregunta (s)",
+];
+
 const renderComponentWithRouter = () => {
   render(
     <I18nextProvider i18n={i18n}>
@@ -62,15 +72,6 @@ describe("Stats component", () => {
       expect(table).toBeInTheDocument();
     });
 
-    const columnHeaders = [
-      "Partidas jugadas",
-      "Puntos por partida",
-      "Puntos totales",
-      "Preguntas correctas totales",
-      "Preguntas incorrectas totales",
-      "Porcentaje de aciertos",
-      "Tiempo por pregunta (s)",
-    ];
     columnHeaders.forEach((headerText) => {
       const headerElement = screen.getByText(headerText);
       expect(headerElement).toBeInTheDocument();
@@ -131,6 +132,7 @@ describe("Stats component", () => {
     });
 
     renderComponentWithRouter();
+    
     await screen.findByRole("table");
 
     const modeButton = screen.getByRole("button", {
@@ -138,8 +140,23 @@ describe("Stats component", () => {
     });
     userEvent.click(modeButton);
 
-    await waitFor(() => {
-      expect(screen.queryByText("WIQ")).toBeInTheDocument();
+    await waitFor(async () => {
+      const table = await screen.findByRole("table");
+      expect(table).toBeInTheDocument();
+    });
+    
+    columnHeaders.forEach((headerText) => {
+      const headerElement = screen.getByText(headerText);
+      expect(headerElement).toBeInTheDocument();
+    });
+    Object.entries(userData).forEach(([key, value]) => {
+      if (key !== "username" && key!=="_id") {
+        if (key === "avgPoints" || key === "avgTime") {
+          expect(screen.getByText(value.toFixed(2))).toBeInTheDocument();
+        } else if (key === "ratioCorrect") {
+          expect(screen.getByText(value.toFixed(2) + "%")).toBeInTheDocument();
+        }
+      }
     });
   });
 
@@ -149,6 +166,7 @@ describe("Stats component", () => {
     userData.ratioCorrect = 0;
     userData.totalCorrectQuestions = 0;
     userData.totalIncorrectQuestions = 0;
+    userData.gamemode = "calculadora";
 
     global.fetch = jest.fn().mockResolvedValue({
       json: jest.fn().mockResolvedValue(userData),
@@ -159,21 +177,12 @@ describe("Stats component", () => {
     await waitFor(() => {
       expect(screen.queryByText("Cargando ...")).not.toBeInTheDocument();
     });
-    
-    screen.getByTestId("calculator-button").click();
+
+    const modeButton = screen.getByTestId("calculator-button");
+    userEvent.click(modeButton);
 
     const table = await screen.findByRole("table");
     expect(table).toBeInTheDocument();
-
-    const columnHeaders = [
-      "Partidas jugadas",
-      "Puntos por partida",
-      "Puntos totales",
-      "Preguntas correctas totales",
-      "Preguntas incorrectas totales",
-      "Porcentaje de aciertos",
-      "Tiempo por pregunta (s)",
-    ];
 
     columnHeaders.forEach((headerText) => {
       const headerElement = screen.getByText(headerText);
@@ -181,7 +190,7 @@ describe("Stats component", () => {
     });
 
     Object.entries(userData).forEach(([key, value]) => {
-      if (key !== "username") {
+      if (key !== "username" && key!=="_id" && key!=="gamemode") {
         if (key === "avgPoints" || key === "avgTime") {
           const valueElements = screen.getAllByText(value.toFixed(2));
           expect(valueElements.length).toBeGreaterThan(0);
