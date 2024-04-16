@@ -79,7 +79,7 @@ app.post("/adduser", async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.json({
+    res.status(200).json({
       username: newUser.username,
       createdAt: newUser.createdAt,
       token: token,
@@ -93,7 +93,7 @@ app.post("/adduser", async (req, res) => {
 app.get("/users", async (req, res) => {
   try {
     const users = await User.find();
-    res.json(users);
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -117,7 +117,7 @@ app.get("/users/search", async (req, res) => {
       username: { $ne: un, $nin: currentUserFriends },
     });
 
-    res.json(users);
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -143,7 +143,7 @@ app.post("/users/add-friend", async (req, res) => {
     user.friends.push(friendUsername);
     await user.save();
 
-    res.json({ message: "Friend added successfully" });
+    res.status(200).json({ message: "Friend added successfully" });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -171,7 +171,7 @@ app.post("/users/remove-friend", async (req, res) => {
     user.friends = user.friends.filter((friend) => friend !== friendUsername);
     await user.save();
 
-    res.json({ message: "Friend removed successfully" });
+    res.status(200).json({ message: "Friend removed successfully" });
   } catch (error) {
     console.error("Error removing friend:", error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -189,7 +189,7 @@ app.get("/friends", async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
     // Devuelve la lista de amigos
-    res.json({ friends: user.friends });
+    res.status(200).json({ friends: user.friends });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }
@@ -202,7 +202,7 @@ app.get("/userInfo", async (req, res) => {
       { username: username },
       { username: 1, createdAt: 1, games: 1 }
     );
-    res.json(user);
+    res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -220,7 +220,7 @@ app.get("/userGames", async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "Usuario no encontrado" });
     }
-    res.json(user.games);
+    res.status(200).json(user.games);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -244,7 +244,7 @@ app.post("/saveGameList", async (req, res) => {
 
     await user.save();
 
-    res.json({ message: "Partida guardada exitosamente" });
+    res.status(200).json({ message: "Partida guardada exitosamente" });
   } catch (error) {
     res.status(400).json({ error: "Error al guardar partida en la lista: " + error.message });
   }
@@ -253,7 +253,7 @@ app.post("/saveGameList", async (req, res) => {
 app.get('/group/list', async (req, res) => {
   try {
       const allGroups = await Group.find();
-      res.json({ groups: allGroups });
+      res.status(200).json({ groups: allGroups });
   } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
   }
@@ -269,7 +269,7 @@ app.get('/group/:groupName', async (req, res) => {
           return res.status(404).json({ error: 'Group not found' });
       }
 
-      res.json({ group });
+      res.status(200).json({ group });
   } catch (error) {
       res.status(400).json({ error: error.message });
   }
@@ -301,7 +301,7 @@ app.post('/group/add', async (req, res) => {
           createdAt:Date.now() });
       await newGroup.save();
 
-      res.json({ message: 'Group created successfully' });
+      res.status(200).json({ message: 'Group created successfully' });
   } catch (error) {
       res.status(400).json({ error: error.message });
   }
@@ -330,7 +330,7 @@ app.post('/group/join', async (req, res) => {
       group.members.push(username);
       await group.save();
 
-      res.json({ message: 'User joined the group successfully' });
+      res.status(200).json({ message: 'User joined the group successfully' });
   } catch (error) {
       res.status(400).json({ error: error.message });
   }

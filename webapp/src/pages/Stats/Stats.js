@@ -28,10 +28,11 @@ const Stats = () => {
 
   const fetchStats = (mode) => {
     setIsLoading(true);
-    fetch(gatewayUrl + `/stats?user=${username}&gamemode=${mode}`)
+    fetch(gatewayUrl + `/stats?username=${username}&gamemode=${mode}`)
       .then((response) => response.json())
       .then((data) => {
-        if (!data.ok) {
+        console.log(data);
+        if (!data._id) {
           throw new Error(data.message || "Ha ocurrido un error");
         }
         setStats(data);
@@ -152,6 +153,7 @@ const Stats = () => {
             {t("pages.stats.wisebattery")}
           </Button>
           <Button
+            data-testid="calculator-button"
             className={gamemode === "calculadora" ? "active" : ""}
             onClick={() => handleGamemodeChange("calculadora")}
           >

@@ -83,7 +83,7 @@ app.post("/saveGame", async (req, res) => {
         );
       }
 
-      res.json({ message: "Partida guardada exitosamente" });
+      res.status(200).json({ message: "Partida guardada exitosamente" });
     }
   } catch (error) {
     res.status(400).json({ error: "Error al guardar juego" + error.message });
@@ -99,7 +99,7 @@ app.get("/stats", async (req, res) => {
     if (!data) {
       res.status(400).json({ error: "User not found" });
     } else {
-      res.json(data);
+      res.status(200).json(data);
     }
   } catch (error) {
     res
@@ -126,7 +126,7 @@ app.get("/ranking", async (req, res) => {
       throw new Error("No se encontraron estadísticas");
     }
 
-    res.json(data);
+    res.status(200).json(data);
   } catch (error) {
     res
       .status(400)

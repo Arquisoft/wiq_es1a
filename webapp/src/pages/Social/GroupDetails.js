@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Container,
   Box,
@@ -19,7 +19,6 @@ import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { useTranslation } from "react-i18next";
 import Perfil from "../../components/Profile/Profile.js";
-import { set } from "date-fns";
 
 const GroupDetails = () => {
   const { t } = useTranslation();
@@ -29,7 +28,6 @@ const GroupDetails = () => {
   const { groupName } = useParams();
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchGroupDetails();
@@ -41,9 +39,9 @@ const GroupDetails = () => {
       const response = await fetch(
         `${apiEndpoint}/group/${encodeURIComponent(groupName)}`
       );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      // if (!response.status === 200) {
+      //   throw new Error("Network response was not ok");
+      // }
       const data = await response.json();
       setGroup(data.group);
       setError(null);
