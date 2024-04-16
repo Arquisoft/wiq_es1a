@@ -31,17 +31,14 @@ const Stats = () => {
     fetch(gatewayUrl + `/stats?username=${username}&gamemode=${mode}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        if (!data._id) {
-          throw new Error(data.message || "Ha ocurrido un error");
+        if (data.error) {
+          setStats(null);
+        } else {
+          setStats(data);
         }
-        setStats(data);
         setIsLoading(false);
       })
       .catch((error) => {
-        setError(
-          error.message || "Ha ocurrido un error al obtener las estadísticas"
-        );
         setIsLoading(false);
       });
   };
@@ -107,7 +104,7 @@ const Stats = () => {
             data-testid="usernameInput"
           />
           <Button onClick={handleSearch}>{t("pages.stats.search")}</Button>
-          <Heading as="h2">Error: {error}</Heading>
+          <Heading as="h2">{t("pages.stats.noStats")}</Heading>
           <p marginTop="1rem">{t("pages.stats.searchText")}</p>
         </Box>
         <Footer />
@@ -181,7 +178,7 @@ const Stats = () => {
                   <Td>
                     <strong>{t("pages.stats.pointsPerGame")}</strong>
                   </Td>
-                  <Td>{stats.avgPoints.toFixed(2)}</Td>
+                  <Td>{stats.avgPoints && stats.avgPoints.toFixed(2)}</Td>
                 </Tr>
                 <Tr>
                   <Td>

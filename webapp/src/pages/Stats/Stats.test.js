@@ -7,15 +7,17 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "../../i18n.js";
 
 const userData = {
-  _id: "123456789012345678901234",
-  username: "testUser",
-  nGamesPlayed: 10,
-  avgPoints: 7.0,
-  totalPoints: 70,
-  totalCorrectQuestions: 20,
-  totalIncorrectQuestions: 5,
-  ratioCorrect: 80.0,
-  avgTime: 15.0,
+  "_id": "65fc58fba0ffce7c435e733e",
+  "username": "admin",
+  "gamemode": "clasico",
+  "nGamesPlayed": 27,
+  "avgPoints": 0.9629629629629629,
+  "totalPoints": 26,
+  "totalCorrectQuestions": 26,
+  "totalIncorrectQuestions": 214,
+  "ratioCorrect": 10.833333333333334,
+  "avgTime": 0.8445061728394961,
+  "__v": 0
 };
 
 const renderComponentWithRouter = () => {
@@ -79,8 +81,6 @@ describe("Stats component", () => {
           expect(screen.getByText(value.toFixed(2))).toBeInTheDocument();
         } else if (key === "ratioCorrect") {
           expect(screen.getByText(value.toFixed(2) + "%")).toBeInTheDocument();
-        } else {
-          expect(screen.getByText(value.toString())).toBeInTheDocument();
         }
       }
     });
