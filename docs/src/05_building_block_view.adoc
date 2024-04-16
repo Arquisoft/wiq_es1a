@@ -9,7 +9,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 The code is broken down in a structured way by levels, in which the internal dependencies of each element are taught. The system is divided into Whitebox and Blackbox.
 
-image::whiteBox5.1.png["Hierarchy of building blocks"]
+image::diagrama5.png["Hierarchy of building blocks"]
 
 |===
 | *_Actors_* | *_Description_*
@@ -30,7 +30,7 @@ image::whiteBox5.1.png["Hierarchy of building blocks"]
 
 === Level 2
 
-image::Level2.png["Hierarchy of building blocks"]
+image::diagrama5.2.png["Hierarchy of building blocks"]
 
 .Motivation
 
