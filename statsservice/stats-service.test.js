@@ -15,8 +15,8 @@ const responseExample = {
   totalCorrectQuestions: 150,
   totalIncorrectQuestions: 50,
   ratioCorrect: 0.75,
-  avgTime: 45
-}
+  avgTime: 45,
+};
 
 async function addStat(responseExample) {
   const newStat = new Stats(responseExample);
@@ -43,14 +43,15 @@ describe("Stats Service", () => {
     const response = await request(app).get(
       `/stats/?username=${username}&gamemode=exampleGamemode`
     );
+
     expect(response.status).toBe(200);
-    
-    expect(response.body).toHaveProperty("nGamesPlayed", 10)
-    expect(response.body).toHaveProperty("avgPoints", 75.5)
-    expect(response.body).toHaveProperty("totalPoints", 755)
-    expect(response.body).toHaveProperty("totalCorrectQuestions", 150)
-    expect(response.body).toHaveProperty("totalIncorrectQuestions", 50)
-    expect(response.body).toHaveProperty("ratioCorrect", 0.75)
+
+    expect(response.body).toHaveProperty("nGamesPlayed", 10);
+    expect(response.body).toHaveProperty("avgPoints", 75.5);
+    expect(response.body).toHaveProperty("totalPoints", 755);
+    expect(response.body).toHaveProperty("totalCorrectQuestions", 150);
+    expect(response.body).toHaveProperty("totalIncorrectQuestions", 50);
+    expect(response.body).toHaveProperty("ratioCorrect", 0.75);
     expect(response.body).toHaveProperty("avgTime", 45);
   });
 
@@ -71,13 +72,14 @@ describe("Stats Service", () => {
     );
     expect(response.status).toBe(400);
 
-    expect(response.body).toHaveProperty("error", "Error al obtener el ranking: No se encontraron estadísticas");
+    expect(response.body).toHaveProperty(
+      "error",
+      "Error al obtener el ranking: No se encontraron estadísticas"
+    );
   });
 
   it("should return status 400 for incomplete game data", async () => {
-    const response = await request(app).get(
-      `/stats/?username=${username}`
-    );
+    const response = await request(app).get(`/stats/?username=${username}`);
     expect(response.status).toBe(400);
   });
 });

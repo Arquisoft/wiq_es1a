@@ -93,7 +93,7 @@ app.post("/saveGame", async (req, res) => {
 app.get("/stats", async (req, res) => {
   try {
     var data = await Stats.findOne({
-      username: req.query.user,
+      username: req.query.username,
       gamemode: req.query.gamemode,
     });
     if (!data) {
