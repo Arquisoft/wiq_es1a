@@ -30,6 +30,24 @@ const columnHeaders = [
   "Tiempo por pregunta (s)",
 ];
 
+const checkTableHeader = (headerText) => {
+  const headerElement = screen.getByText(headerText);
+  expect(headerElement).toBeInTheDocument();
+};
+
+const checkCellValue = (key, value) => {
+  if (key !== "username" && key !== "_id" && key !== "gamemode" && key!=="__v") {
+    const formattedValue =
+      key === "avgPoints" || key === "avgTime"
+        ? value.toFixed(2)
+        : key === "ratioCorrect"
+        ? value.toFixed(2) + "%"
+        : value.toString();
+    const valueElements = screen.getAllByText(formattedValue);
+    expect(valueElements.length).toBeGreaterThan(0);
+  }
+};
+
 const renderComponentWithRouter = () => {
   render(
     <I18nextProvider i18n={i18n}>
@@ -60,30 +78,46 @@ describe("Stats component", () => {
 
   test("fetches user statistics and displays them", async () => {
     localStorage.setItem("username", "testUser");
-
+  
     global.fetch = jest.fn().mockResolvedValue({
       json: jest.fn().mockResolvedValue(userData),
     });
-
+  
     renderComponentWithRouter();
-
+  
     await waitFor(async () => {
       const table = await screen.findByRole("table");
       expect(table).toBeInTheDocument();
     });
-
-    columnHeaders.forEach((headerText) => {
-      const headerElement = screen.getByText(headerText);
-      expect(headerElement).toBeInTheDocument();
-    });
+  
+    columnHeaders.forEach(checkTableHeader);
     Object.entries(userData).forEach(([key, value]) => {
-      if (key !== "username" && key!=="_id") {
-        if (key === "avgPoints" || key === "avgTime") {
-          expect(screen.getByText(value.toFixed(2))).toBeInTheDocument();
-        } else if (key === "ratioCorrect") {
-          expect(screen.getByText(value.toFixed(2) + "%")).toBeInTheDocument();
-        }
-      }
+      checkCellValue(key, value);
+    });
+  });
+  
+  test("updates user statistics when game mode changes", async () => {
+    localStorage.setItem("username", "testUser");
+  
+    global.fetch = jest.fn().mockResolvedValue({
+      json: jest.fn().mockResolvedValue(userData),
+    });
+  
+    renderComponentWithRouter();
+  
+    await waitFor(() => {
+      expect(screen.queryByText("Cargando ...")).not.toBeInTheDocument();
+    });
+  
+    const modeButton = screen.getByTestId("calculator-button");
+    userEvent.click(modeButton);
+  
+    const table = await screen.findByRole("table");
+    expect(table).toBeInTheDocument();
+  
+    columnHeaders.forEach(checkTableHeader);
+    Object.entries(userData).forEach(([key, value]) => {
+      checkCellValue(key, value);
     });
   });
 
@@ -122,41 +156,6 @@ describe("Stats component", () => {
     renderComponentWithRouter();
 
     expect(fetch).toHaveBeenCalledWith(expect.stringContaining(newUsername));
-  });
-
-  test("updates user statistics when game mode changes", async () => {
-    localStorage.setItem("username", "testUser");
-
-    global.fetch = jest.fn().mockResolvedValue({
-      json: jest.fn().mockResolvedValue(userData),
-    });
-
-    renderComponentWithRouter();
-
-    await waitFor(() => {
-      expect(screen.queryByText("Cargando ...")).not.toBeInTheDocument();
-    });
-
-    const modeButton = screen.getByTestId("calculator-button");
-    userEvent.click(modeButton);
-
-    const table = await screen.findByRole("table");
-    expect(table).toBeInTheDocument();
-
-    columnHeaders.forEach((headerText) => {
-      const headerElement = screen.getByText(headerText);
-      expect(headerElement).toBeInTheDocument();
-    });
-
-    Object.entries(userData).forEach(([key, value]) => {
-      if (key !== "username" && key!=="_id") {
-        if (key === "avgPoints" || key === "avgTime") {
-          expect(screen.getByText(value.toFixed(2))).toBeInTheDocument();
-        } else if (key === "ratioCorrect") {
-          expect(screen.getByText(value.toFixed(2) + "%")).toBeInTheDocument();
-        }
-      }
-    });
   });
 
   test("fetches and displays user statistics for Human Calculator mode", async () => {
