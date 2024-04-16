@@ -26,5 +26,10 @@ MySQL:
   
 https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%236)-MySQL[ADR#6]
 
+Chakra UI:
 
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%237)-Chakra-UI[ADR#7]
 
+BDD de estadísticas:
+
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%238)-BD-de-estad%C3%ADsticas
