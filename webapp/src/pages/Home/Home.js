@@ -48,6 +48,13 @@ const Home = () => {
             route="/home/calculadora"
           />
         </Box>
+        <Box p={2}>
+          <CustomModal
+            title={t('pages.home.humancalculator')}
+            text={t('pages.home.humancalculatorDescription')}
+            route="/home/banderas"
+          />
+        </Box>
         {error && (
           <Box mb={4} color="red">
             {t('pages.home.error')}

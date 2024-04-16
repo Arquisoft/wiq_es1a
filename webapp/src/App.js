@@ -20,7 +20,7 @@ import Groups from "./pages/Social/Groups.js";
 import UserGroups from "./pages/Social/UserGroups.js";
 import GroupDetails from "./pages/Social/GroupDetails.js";
 import History from "./pages/History/History.js";
-
+import Flags from "./pages/Flags/Flags.js";
 
 function App() {
   useEffect(() => {
@@ -40,6 +40,7 @@ function App() {
           <Route path="/home/clasico" element={<Clasico />} />
           <Route path="/home/bateria" element={<Bateria />} />
           <Route path="/home/calculadora" element={<CalculadoraHumana />} />
+          <Route path="/home/banderas" element={<Flags />} />
           <Route path="/stats" element={<Stats />} />
           <Route path="/ranking" element={<Ranking />} />
           <Route path="/social/usuarios" element={<UsersPage />} />
