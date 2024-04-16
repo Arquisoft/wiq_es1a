@@ -76,7 +76,7 @@ describe("Stats component", () => {
       expect(headerElement).toBeInTheDocument();
     });
     Object.entries(userData).forEach(([key, value]) => {
-      if (key !== "username") {
+      if (key !== "username" && key!=="_id") {
         if (key === "avgPoints" || key === "avgTime") {
           expect(screen.getByText(value.toFixed(2))).toBeInTheDocument();
         } else if (key === "ratioCorrect") {
