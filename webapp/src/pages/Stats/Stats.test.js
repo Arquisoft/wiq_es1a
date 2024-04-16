@@ -132,23 +132,22 @@ describe("Stats component", () => {
     });
 
     renderComponentWithRouter();
-    
-    await screen.findByRole("table");
 
-    const modeButton = screen.getByRole("button", {
-      name: /Batería de sabios/i,
+    await waitFor(() => {
+      expect(screen.queryByText("Cargando ...")).not.toBeInTheDocument();
     });
+
+    const modeButton = screen.getByTestId("calculator-button");
     userEvent.click(modeButton);
 
-    await waitFor(async () => {
-      const table = await screen.findByRole("table");
-      expect(table).toBeInTheDocument();
-    });
-    
+    const table = await screen.findByRole("table");
+    expect(table).toBeInTheDocument();
+
     columnHeaders.forEach((headerText) => {
       const headerElement = screen.getByText(headerText);
       expect(headerElement).toBeInTheDocument();
     });
+
     Object.entries(userData).forEach(([key, value]) => {
       if (key !== "username" && key!=="_id") {
         if (key === "avgPoints" || key === "avgTime") {
