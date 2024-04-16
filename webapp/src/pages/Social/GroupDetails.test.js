@@ -81,7 +81,7 @@ describe('GroupDetails', () => {
 
       renderComponentWithRouter();
       
-      checks();
+      await checks();
     });
 
     it('redirects to user profile when view profile link is clicked', async () => {
@@ -93,9 +93,10 @@ describe('GroupDetails', () => {
 
       renderComponentWithRouter();
 
+      await checks();
       
-
       const viewProfileButtons = screen.getByTestId('view-profile-button-user1');
+      console.log(viewProfileButtons);
 
       fireEvent.click(viewProfileButtons);
       expect(mockNavigate).toHaveBeenCalledWith('/perfil?user=user1');
