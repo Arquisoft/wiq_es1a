@@ -3,15 +3,40 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-runtime-view]]
 == Runtime View
 
+=== <The user logs in>
+
+The user logs in by entering his username and password. The system checks the credentials and if they are correct, the user is redirected to the main page. Otherwise, an error message is shown.
+
+image::06-login.svg[]
+
+=== <The user registers>
+
+The user registers by entering his username, password, email and other optional information. The system checks if the username is unique and if the email is valid. If everything is correct, the user is redirected to the main page. Otherwise, an error message is shown.
+
+image::06-register.svg[]
 
 === <The user plays>
 
-The user starts a game, and the game uses the questions service to run it.
+The user selects a game to play. The system loads the game and the user can start playing. The user can pause the game, save it and resume it later. When the game is over, the user can see his score and the game is saved in the user's history.
 
-image::juega.png["Hierarchy of building blocks"]
+It should be noted that this does not require access to wikidata data, as the system has a data caching system that allows wikidata data to be stored in the system's database, so it is not necessary to access wikidata every time a game is played.
 
-=== <The user looks at their history>
+image::06-play.svg[]
 
-The user checks their scores and statistics.
+=== <The user looks his stats>
 
-image::historial.png["Hierarchy of building blocks"]
+The user can see his stats by pressing stats button. It shows things such as games played, average score, total score, total correct questions, total incorrect questions, correct answer ratio or average time per question.
+
+image::06-stats.svg[]
+
+=== <The user looks his game history>
+
+=== <The user looks at ranking>
+
+=== <The user looks his friends>
+
+=== <The user looks for users to get friend of>
+
+=== <The user looks his groups>
+
+=== <The user looks for available groups to join>
