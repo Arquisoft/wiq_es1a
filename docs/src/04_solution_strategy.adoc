@@ -10,14 +10,12 @@ A ranking with the maximum score of the user and can be compared with other user
 
 * MongoDB: MongoDB is an open-source NoSQL database that uses a document-based data model for information storage and retrieval.
 * React JS: It's a framework created by Facebook that's widely used to create user interface components. Chosen for the large volume of documentation and the fact that it is the framework used during the previous courses.
+* Chakra UI: It's a simple, modular and accessible component library that gives us the ability to create a responsive and accessible design.
 * WikiData: It's a free knowledge base modified by humans as well as machines, and it's where we'll get our questions from.
 * Microsoft Azure: A cloud computing platform that provides infrastructure, platform, and software-as-a-service services to host, manage, and scale online applications and services.
 
 === Design
 The designed website is composed of a frontend in React, a backend in Node.js and is documented using Asciidoc. Each user will have their own account where their information will be saved. Design-related decisions are detailed in point 9.
-
-=== Security
-We guarantee the safety of the user
 
 === Testability
 Tests will be carried out for each individual part of the application, thus ensuring the correct operation of the different modules both individually and together.
