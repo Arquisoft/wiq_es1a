@@ -54,4 +54,4 @@ Wikidata” is the API that you will use to obtain the data for the questions. W
 
 ==== WIkidata
 
-"WikiData" is the API that you we willll use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects.
+"WikiData" is the API that you we will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects.

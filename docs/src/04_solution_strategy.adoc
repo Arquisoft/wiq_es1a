@@ -17,9 +17,6 @@ A ranking with the maximum score of the user and can be compared with other user
 === Design
 The designed website is composed of a frontend in React, a backend in Node.js and is documented using Asciidoc. Each user will have their own account where their information will be saved. Design-related decisions are detailed in point 9.
 
-=== Security
-We guarantee the safety of the user
-
 === Testability
 Tests will be carried out for each individual part of the application, thus ensuring the correct operation of the different modules both individually and together.
 
