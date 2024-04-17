@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.22">
+<meta name="generator" content="Asciidoctor 2.0.20">
 <title>WIQ! Documentation</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -140,7 +140,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -162,7 +162,6 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
-body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -328,7 +327,7 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
@@ -462,22 +461,29 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#section-solution-strategy">4. Solution Strategy</a>
 <ul class="sectlevel2">
 <li><a href="#_design">4.1. Design</a></li>
-<li><a href="#_security">4.2. Security</a></li>
-<li><a href="#_testability">4.3. Testability</a></li>
-<li><a href="#_interface">4.4. Interface</a></li>
+<li><a href="#_testability">4.2. Testability</a></li>
+<li><a href="#_interface">4.3. Interface</a></li>
 </ul>
 </li>
 <li><a href="#section-building-block-view">5. Building Block View</a>
 <ul class="sectlevel2">
 <li><a href="#_whitebox_overall_system">5.1. Whitebox Overall System</a></li>
 <li><a href="#_blackbox_overall_system">5.2. Blackbox Overall System</a></li>
-<li><a href="#_level_2">5.3. Level 2</a></li>
+<li><a href="#_level_1">5.3. Level 1</a></li>
+<li><a href="#_level_2">5.4. Level 2</a></li>
 </ul>
 </li>
 <li><a href="#section-runtime-view">6. Runtime View</a>
 <ul class="sectlevel2">
-<li><a href="#_the_user_plays">6.1. The user plays</a></li>
-<li><a href="#_the_user_looks_at_their_history">6.2. The user looks at their history</a></li>
+<li><a href="#_user_logs_in">6.1. User logs in</a></li>
+<li><a href="#_user_registers">6.2. User registers</a></li>
+<li><a href="#_user_plays_a_game">6.3. User plays a game</a></li>
+<li><a href="#_user_looks_his_stats">6.4. User looks his stats</a></li>
+<li><a href="#_user_looks_his_game_history">6.5. User looks his game history</a></li>
+<li><a href="#_user_looks_at_ranking">6.6. User looks at ranking</a></li>
+<li><a href="#_user_checks_his_friends">6.7. User checks his friends</a></li>
+<li><a href="#_user_looks_for_users_to_be_friends">6.8. User looks for users to be friends</a></li>
+<li><a href="#_user_looks_for_available_groups_to_join">6.9. User looks for available groups to join</a></li>
 </ul>
 </li>
 <li><a href="#section-deployment-view">7. Deplyment View</a>
@@ -488,20 +494,26 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#section-concepts">8. Cross-cutting Concepts</a>
 <ul class="sectlevel2">
-<li><a href="#_user_interface">8.1. User Interface</a></li>
-<li><a href="#_internationalization">8.2. Internationalization</a></li>
-<li><a href="#_security_2">8.3. Security</a></li>
-<li><a href="#_build_test_deploy">8.4. Build, Test, Deploy</a></li>
-<li><a href="#_code_generation">8.5. Code Generation</a></li>
-<li><a href="#_migration">8.6. Migration</a></li>
-<li><a href="#_configurability">8.7. Configurability</a></li>
-<li><a href="#_administration">8.8. Administration</a></li>
-<li><a href="#_management">8.9. Management</a></li>
-<li><a href="#_disaster_recovery">8.10. Disaster-Recovery</a></li>
-<li><a href="#_architecture_and_design_patterns">8.11. Architecture and design patterns</a></li>
+<li><a href="#_domain_concepts">8.1. Domain Concepts</a></li>
+<li><a href="#_architecture_and_design_patterns">8.2. Architecture and Design Patterns</a></li>
+<li><a href="#_user_experience_ux">8.3. User Experience (UX)</a></li>
+<li><a href="#_development_concepts">8.4. Development Concepts</a></li>
+<li><a href="#_security_and_safety">8.5. Security and safety</a></li>
+<li><a href="#_operation_concepts">8.6. Operation concepts</a></li>
 </ul>
 </li>
-<li><a href="#section-design-decisions">9. Architecture Decisions</a></li>
+<li><a href="#section-design-decisions">9. Architecture Decisions</a>
+<ul class="sectlevel2">
+<li><a href="#_javascript">9.1. JavaScript</a></li>
+<li><a href="#_reactjs">9.2. ReactJS</a></li>
+<li><a href="#_nodejs">9.3. NodeJS</a></li>
+<li><a href="#_mongodb_2">9.4. MongoDB</a></li>
+<li><a href="#_docker">9.5. Docker</a></li>
+<li><a href="#_mysql">9.6. MySQL</a></li>
+<li><a href="#_chakra_ui">9.7. Chakra UI</a></li>
+<li><a href="#_bdd_de_estadísticas">9.8. BDD de estadísticas</a></li>
+</ul>
+</li>
 <li><a href="#section-quality-scenarios">10. Quality Requirements</a>
 <ul class="sectlevel2">
 <li><a href="#_quality_tree">10.1. Quality Tree</a></li>
@@ -760,7 +772,7 @@ WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recre
 <h3 id="_business_context">3.1. Business Context</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/businesscontext.svg" alt="Business context">
+<img src="./images/03-Business.svg" alt="Business context">
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -792,7 +804,7 @@ WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recre
 <h3 id="_technical_context">3.2. Technical Context</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/technicalcontext.svg" alt="Technical Context">
+<img src="./images/03-Technical.svg" alt="Technical Context">
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -852,6 +864,12 @@ A ranking with the maximum score of the user and can be compared with other user
 <p>React JS: It&#8217;s a framework created by Facebook that&#8217;s widely used to create user interface components. Chosen for the large volume of documentation and the fact that it is the framework used during the previous courses.</p>
 </li>
 <li>
+<p>Chakra UI: It&#8217;s a simple, modular and accessible component library that gives us the ability to create a responsive and accessible design.</p>
+</li>
+<li>
+<p>WikiData: It&#8217;s a free knowledge base modified by humans as well as machines, and it&#8217;s where we&#8217;ll get our questions from.</p>
+</li>
+<li>
 <p>Microsoft Azure: A cloud computing platform that provides infrastructure, platform, and software-as-a-service services to host, manage, and scale online applications and services.</p>
 </li>
 </ul>
@@ -863,19 +881,13 @@ A ranking with the maximum score of the user and can be compared with other user
 </div>
 </div>
 <div class="sect2">
-<h3 id="_security">4.2. Security</h3>
-<div class="paragraph">
-<p>We guarantee the safety of the user</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_testability">4.3. Testability</h3>
+<h3 id="_testability">4.2. Testability</h3>
 <div class="paragraph">
 <p>Tests will be carried out for each individual part of the application, thus ensuring the correct operation of the different modules both individually and together.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_interface">4.4. Interface</h3>
+<h3 id="_interface">4.3. Interface</h3>
 <div class="paragraph">
 <p>The graphical interface will be chosen among all the members of the team, each one contributing a sketch or idea, which will be shared and it will be decided which best fits the expected performance and which elements of these sketches are most suitable.
 This will take into account the usability and needs of different types of users.</p>
@@ -894,7 +906,7 @@ This will take into account the usability and needs of different types of users.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/diagrama5.png" alt="Hierarchy of building blocks">
+<img src="./images/05-Overall.svg" alt="Hierarchy of building blocks">
 </div>
 </div>
 <table class="tableblock frame-all grid-all stretch">
@@ -906,10 +918,6 @@ This will take into account the usability and needs of different types of users.
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Actors</em></strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Admin</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">You have access to the entire app and can manage it to make it work properly.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>User</em></strong></p></td>
@@ -931,22 +939,77 @@ This will take into account the usability and needs of different types of users.
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Interface</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The interface with which the user interacts</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>WIQ</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The application which users will interact with.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>WikiData</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Provide the questions that will be used in the app</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>MongoDB</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Store user data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Wikidata API</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The API that will provide data to the application, in order to generate the questions.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_level_2">5.3. Level 2</h3>
+<h3 id="_level_1">5.3. Level 1</h3>
+<div class="imageblock">
+<div class="content">
+<img src="./images/05-Level1.svg" alt="Hierarchy of building blocks">
+</div>
+</div>
+<div class="paragraph">
+<p>The system is divided into nine components, each of which is responsible for a specific task. These components are.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Component</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Webapp</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The main component of the application, which will be responsible for the user interface and game logic.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Gateway service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the communication between the web application and the other microservices.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Auth service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the authentication of the users.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>User service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the user data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Question service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for generating the questions.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Stats service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the statistics of the game.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Prometheus service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for monitoring the application.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Grafana service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for visualizing the monitoring data.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>MongoDB</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The database that will store the user data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_level_2">5.4. Level 2</h3>
 <div class="imageblock">
 <div class="content">
 <img src="./images/diagrama5.2.png" alt="Hierarchy of building blocks">
@@ -957,6 +1020,13 @@ This will take into account the usability and needs of different types of users.
 <p>In this diagram we can see the decided microservices that will provide all the operations necessary for the
 application to work properly.</p>
 </div>
+<div class="sect3">
+<h4 id="_question_service">5.4.1. Question Service</h4>
+<div class="imageblock">
+<div class="content">
+<img src="./images/05-Question-service.svg" alt="Hierarchy of building blocks">
+</div>
+</div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 50%;">
@@ -964,24 +1034,84 @@ application to work properly.</p>
 </colgroup>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Name</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Building block</em></strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Game Service</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">It is the microservice that will be in charge of the correct functioning of the game and calculate the user&#8217;s score.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Question service</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for receiving requests from gateway service and responding with the questions.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>UserData Service</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">It is the microservice that provides the necessary user data.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Generator chooser</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for generating generic generators, which will be used to generate the questions.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Authetification Service</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">It&#8217;s a microservice that users use to sign in to your app.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Generic generator</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for generating the questions about one specific topic.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_webapp">5.4.2. Webapp</h4>
+<div class="imageblock">
+<div class="content">
+<img src="./images/05-Webapp.svg" alt="Hierarchy of building blocks">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Building block</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Description</em></strong></p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Question Service</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">It is the microservice that will generate the questions through the WikiData API.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>App</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Main component of the application, which will be responsible for routing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Home</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the home page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Login</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the login page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Register</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the register page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Clasico</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the classic game mode.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Batería de sabios</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the wise battery game mode.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Calculadora</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the human calculator game mode.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Stats</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the statistics page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Profile</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the profile page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Settings</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the settings page.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Sobre</em></strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The component that will be responsible for the about page.</p></td>
 </tr>
 </tbody>
 </table>
@@ -989,28 +1119,109 @@ application to work properly.</p>
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="section-runtime-view">6. Runtime View</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_the_user_plays">6.1. The user plays</h3>
+<h3 id="_user_logs_in">6.1. User logs in</h3>
 <div class="paragraph">
-<p>The user starts a game, and the game uses the questions service to run it.</p>
+<p>User logs in by entering his username and password. The system checks the credentials and if they are correct, the user is redirected to the main page. Otherwise, an error message is shown.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/6.1.png" alt="Hierarchy of building blocks">
+<img src="./images/06-login.svg" alt="06 login">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_the_user_looks_at_their_history">6.2. The user looks at their history</h3>
+<h3 id="_user_registers">6.2. User registers</h3>
 <div class="paragraph">
-<p>The user checks their scores and statistics.</p>
+<p>User registers by entering his username, password, email and other optional information. The system checks if the username is unique and if the email is valid. If everything is correct, the user is redirected to the main page. Otherwise, an error message is shown.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/6.2.png" alt="Hierarchy of building blocks">
+<img src="./images/06-register.svg" alt="06 register">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_plays_a_game">6.3. User plays a game</h3>
+<div class="paragraph">
+<p>User selects a game to play. The system loads the game and the user can start playing. The user can pause the game, save it and resume it later. When the game is over, the user can see his score and the game is saved in the user&#8217;s history.</p>
+</div>
+<div class="paragraph">
+<p>It should be noted that this does not require access to wikidata data, as the system has a data caching system that allows wikidata data to be stored in the system&#8217;s database, so it is not necessary to access wikidata every time a game is played.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/06-play.svg" alt="06 play">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_looks_his_stats">6.4. User looks his stats</h3>
+<div class="paragraph">
+<p>User can see his stats by pressing stats button. It shows things such as games played, average score, total score, total correct questions, total incorrect questions, correct answer ratio or average time per question.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/06-stats.svg" alt="06 stats">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_looks_his_game_history">6.5. User looks his game history</h3>
+<div class="paragraph">
+<p>User can see his game history by pressing history button. It shows a list of games played, with answered questions.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/06-history.svg" alt="06 history">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_looks_at_ranking">6.6. User looks at ranking</h3>
+<div class="paragraph">
+<p>User can see the ranking of the users. This ranking can be filtered by average points, total points, correct answer ratio or average time.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/06-ranking.svg" alt="06 ranking">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_checks_his_friends">6.7. User checks his friends</h3>
+<div class="paragraph">
+<p>User can see his friends. He can also get into their profile to see their stats.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/06-friends.svg" alt="06 friends">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_looks_for_users_to_be_friends">6.8. User looks for users to be friends</h3>
+<div class="paragraph">
+<p>User can see a list of non-friends users. He can send a friend request to them.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/06-users.svg" alt="06 users">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_looks_for_available_groups_to_join">6.9. User looks for available groups to join</h3>
+<div class="paragraph">
+<p>User can see a list of available groups to join. He can send a request to join them.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/06-groups.svg" alt="06 groups">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -1024,14 +1235,14 @@ application to work properly.</p>
 <h3 id="_infrastructure_level_1">7.1. Infrastructure Level 1</h3>
 <div class="imageblock">
 <div class="content">
-<img src="./images/DeploymentView.svg" alt="Deployment View">
+<img src="./images/07-deployment.svg" alt="Deployment View">
 </div>
 </div>
 <div class="dlist">
 <dl>
 <dt class="hdlist1">Motivation</dt>
 <dd>
-<p>This diagram shows us the process the application goes through when it is deployed.</p>
+<p>The infrastructure consists on a set of containers that will be deployed in a cloud provider. This containers will be responsible for the different parts of the application. The infrastructure will be monitored by Prometheus and Grafana. The data will be stored in a MongoDB database. The application will use Wikidata to obtain the data for the questions.</p>
 </dd>
 </dl>
 </div>
@@ -1039,39 +1250,63 @@ application to work properly.</p>
 <div class="sect2">
 <h3 id="_infrastructure_level_2">7.2. Infrastructure Level 2</h3>
 <div class="sect3">
-<h4 id="_app">7.2.1. APP</h4>
+<h4 id="_webapp_2">7.2.1. Webapp</h4>
 <div class="paragraph">
-<p>"App": It is the part with which the user interacts. This part would be responsible for providing the visual interface and using the rest of the created classes.</p>
+<p>This container is responsible for the user interface.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_link">7.2.2. LINK</h4>
+<h4 id="_question_generator">7.2.2. Question Generator</h4>
 <div class="paragraph">
-<p>"Link" is the part of the application that connects the rest of the parts. This will facilitate the use of the different parts of the application in the App section.</p>
+<p>Question generator is the part of the application that generates the questions for the users.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_register">7.2.3. REGISTER</h4>
+<h4 id="_user_service">7.2.3. User Service</h4>
 <div class="paragraph">
-<p>"Register" is the part of the application that handles user registration and login. It&#8217;s very important as it&#8217;s the first thing a potential user will encounter when they visit our page.</p>
+<p>User Service is the part of the application that handles users information.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_user_service">7.2.4. USER SERVICE</h4>
+<h4 id="_auth_service">7.2.4. Auth Service</h4>
 <div class="paragraph">
-<p>"User service" is the part of the application that generates the various services within the application to the user, such as a ranking, correctly answered questions, and so on.</p>
+<p>Auth Service is the part of the application that handles the authentication of the users. It&#8217;s very important as it&#8217;s the first thing a potential user will encounter when they visit our page.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_question_generator">7.2.5. QUESTION GENERATOR</h4>
+<h4 id="_stats_service">7.2.5. Stats Service</h4>
 <div class="paragraph">
-<p>"Question generator" is the part of the application that, using the data from Wikidata and some pre-created templates, generates the questions and possible answers of the application.</p>
+<p>Stats Service is the part of the application that handles the statistics of the users.</p>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_wikidata">7.2.6. WIKIDATA</h4>
+<h4 id="_gateway_service">7.2.6. Gateway service</h4>
 <div class="paragraph">
-<p>Wikidata” is the API that you will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects.</p>
+<p>Gateway service is the part of the application that handles the communication between the different parts of the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_mongodb">7.2.7. MongoDB</h4>
+<div class="paragraph">
+<p>MongoDB is the database that will store the data of the users, the questions, the answers, and the statistics of the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_prometheus">7.2.8. Prometheus</h4>
+<div class="paragraph">
+<p>Prometheus is the monitoring tool that will be used to monitor the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_grafana">7.2.9. Grafana</h4>
+<div class="paragraph">
+<p>Grafana is the visualization tool that will be used to visualize the monitoring of the application.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_wikidata">7.2.10. Wikidata</h4>
+<div class="paragraph">
+<p>WikiData is the API that you we will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects.</p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
@@ -1081,253 +1316,152 @@ application to work properly.</p>
 <div class="sect1">
 <h2 id="section-concepts">8. Cross-cutting Concepts</h2>
 <div class="sectionbody">
-<div class="sidebarblock arc42help">
-<div class="content">
+<div class="sect2">
+<h3 id="_domain_concepts">8.1. Domain Concepts</h3>
 <div class="paragraph">
-<div class="title">Content</div>
-<p>This section describes overall, principal regulations and solution ideas that are relevant in multiple parts (= cross-cutting) of your system.
-Such concepts are often related to multiple building blocks.
-They can include many different topics, such as</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>models, especially domain models</p>
-</li>
-<li>
-<p>architecture or design patterns</p>
-</li>
-<li>
-<p>rules for using specific technology</p>
-</li>
-<li>
-<p>principal, often technical decisions of an overarching (= cross-cutting) nature</p>
-</li>
-<li>
-<p>implementation rules</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Motivation</div>
-<p>Concepts form the basis for <em>conceptual integrity</em> (consistency, homogeneity) of the architecture.
-Thus, they are an important contribution to achieve inner qualities of your system.</p>
-</div>
-<div class="paragraph">
-<p>Some of these concepts cannot be assigned to individual building blocks, e.g. security or safety.</p>
-</div>
-<div class="paragraph">
-<div class="title">Form</div>
-<p>The form can be varied:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>concept papers with any kind of structure</p>
-</li>
-<li>
-<p>cross-cutting model excerpts or scenarios using notations of the architecture views</p>
-</li>
-<li>
-<p>sample implementations, especially for technical concepts</p>
-</li>
-<li>
-<p>reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<div class="title">Structure</div>
-<p>A potential (but not mandatory) structure for this section could be:</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>Domain concepts</p>
-</li>
-<li>
-<p>User Experience concepts (UX)</p>
-</li>
-<li>
-<p>Safety and security concepts</p>
-</li>
-<li>
-<p>Architecture and design patterns</p>
-</li>
-<li>
-<p>"Under-the-hood"</p>
-</li>
-<li>
-<p>development concepts</p>
-</li>
-<li>
-<p>operational concepts</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Note: it might be difficult to assign individual concepts to one specific topic
-on this list.</p>
+<p>This is the actual domain of the application, which is the area of knowledge or activity that the application is designed to support. In this case, the domain is quiz games, which are games that test the player&#8217;s knowledge on a specific topic.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/08-Crosscutting-Concepts-Structure-EN.png" alt="Possible topics for crosscutting concepts">
-</div>
-</div>
-<div class="paragraph">
-<div class="title">Further Information</div>
-<p>See <a href="https://docs.arc42.org/section-8/">Concepts</a> in the arc42 documentation.</p>
+<img src="./images/08-Domain.svg" alt="Domain">
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_user_interface">8.1. User Interface</h3>
+<h3 id="_architecture_and_design_patterns">8.2. Architecture and Design Patterns</h3>
+<div class="paragraph">
+<p>The project follows a microservices architecture, which is a design pattern that structures an application as a collection of loosely coupled services. This makes the application more scalable, flexible, and easier to maintain.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_user_experience_ux">8.3. User Experience (UX)</h3>
+<div class="sect3">
+<h4 id="_user_interface">8.3.1. User Interface</h4>
 <div class="paragraph">
 <p>A user interface is the space where a human and a computer or device communicate and exchange information</p>
 </div>
 <div class="paragraph">
-<p>The user interface is the part of the application that directly interacts with the client, in our case, the player. It should function correctly and be user-friendly.
-=== Ergonomics</p>
+<p>The user interface is the part of the application that directly interacts with the client, in our case, the player. It should function correctly and be user-friendly.</p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_ergonomics">8.3.2. Ergonomics</h4>
 <div class="paragraph">
 <p>Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations.</p>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_internationalization">8.2. Internationalization</h3>
+<div class="sect3">
+<h4 id="_internationalization">8.3.3. Internationalization</h4>
 <div class="paragraph">
-<p>Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions.</p>
+<p>The application should be able to support multiple languages and regions, so that it can be used by people from different countries and cultures. As of today it has been translated into Spanish and English.</p>
 </div>
-<div class="paragraph">
-<p>Internationalization consists of adapting to the language and culture depending on the location, this is very important as it helps users from different regions to be able to use our game</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_security_2">8.3. Security</h3>
+<h3 id="_development_concepts">8.4. Development Concepts</h3>
+<div class="sect3">
+<h4 id="_build_test_deploy">8.4.1. Build, Test, Deploy</h4>
 <div class="paragraph">
-<p>Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm.</p>
+<p>The project follows a CI/CD pipeline that automates the build, test, and deployment processes. This ensures that the application is always up-to-date and working correctly.</p>
 </div>
-<div class="paragraph">
-<p>A minimum of security in the application is important to save our customers' data
-=== Safety</p>
 </div>
+<div class="sect3">
+<h4 id="_configurability">8.4.2. Configurability</h4>
 <div class="paragraph">
-<p>Is the state of being protected from danger or harm.</p>
+<p>The project has a configuration file that allows the developer to generate new types of questions just by modifying the file. This makes the application more flexible to topic addition.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_build_test_deploy">8.4. Build, Test, Deploy</h3>
-<div class="ulist">
-<ul>
-<li>
-<p>Build: This stage involves compiling, validating, and packaging the source code into executable or deployable artifacts.</p>
-</li>
-<li>
-<p>Test: This stage involves running various tests, such as unit tests, integration tests, and regression tests, to ensure the quality and functionality of the software.</p>
-</li>
-<li>
-<p>Deploy: This stage involves delivering or releasing the software to the target environment, such as a server, a cloud platform, or a user device.</p>
-</li>
-</ul>
+<h3 id="_security_and_safety">8.5. Security and safety</h3>
+<div class="sect3">
+<h4 id="_security">8.5.1. Security</h4>
+<div class="paragraph">
+<p>The app REST API verifies the user&#8217;s identity and permissions before allowing access to the resources. It also prevents sensitive data from being exposed to unauthorized users. This ensures that the application is secure and protects the user&#8217;s data.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_safety">8.5.2. Safety</h4>
+<div class="paragraph">
+<p>The application has a backup system that automatically saves the user&#8217;s progress in case of a failure. This ensures that the user&#8217;s data is always safe and can be recovered in case of a problem.</p>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_code_generation">8.5. Code Generation</h3>
+<h3 id="_operation_concepts">8.6. Operation concepts</h3>
+<div class="sect3">
+<h4 id="_disaster_recovery">8.6.1. Disaster-Recovery</h4>
 <div class="paragraph">
-<p>Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.</p>
+<p>App containers have restart policies that automatically restart the container in case of a failure. This ensures that the application is always available and running despite any failures.</p>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_monitoring">8.6.2. Monitoring</h4>
 <div class="paragraph">
-<p>Generating code makes it easier for the programmer to create functions without wasting a lot of time and simply focusing on the correct implementation of the code, an example is for example generating the getters and setters</p>
+<p>The application has a monitoring system that tracks the performance and availability of the application. This allows the developer to identify and fix any issues before they affect the user&#8217;s experience.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/08-Concepts.svg" alt="Architecture">
 </div>
-<div class="sect2">
-<h3 id="_migration">8.6. Migration</h3>
-<div class="paragraph">
-<p>Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_configurability">8.7. Configurability</h3>
-<div class="paragraph">
-<p>Configurability is the ability to modify or customize something, especially in computing, electronics, or devices</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_administration">8.8. Administration</h3>
-<div class="paragraph">
-<p>The process or activity of managing, directing, or organizing something or someone.</p>
-</div>
-<div class="paragraph">
-<p>Administering an application consists of managing all the resources, users to be able to maintain it in a correct way</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_management">8.9. Management</h3>
-<div class="paragraph">
-<p>Management is the process of organizing and directing the resources of a business or organization to achieve its goals.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_disaster_recovery">8.10. Disaster-Recovery</h3>
-<div class="paragraph">
-<p>Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.</p>
-</div>
-<div class="paragraph">
-<p>It is important to have a plan to recover the data in case of a system failure, it is usually a backup.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_architecture_and_design_patterns">8.11. Architecture and design patterns</h3>
-<div class="paragraph">
-<p>Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable.</p>
-</div>
-<div class="paragraph">
-<p>Design patterns are important so that your application can scale without cascading changes.</p>
 </div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="section-design-decisions">9. Architecture Decisions</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>JavaScript:</p>
-</div>
+<div class="sect2">
+<h3 id="_javascript">9.1. JavaScript</h3>
 <div class="paragraph">
 <p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScript">ADR#1</a></p>
 </div>
-<div class="paragraph">
-<p>ReactJS:</p>
 </div>
+<div class="sect2">
+<h3 id="_reactjs">9.2. ReactJS</h3>
 <div class="paragraph">
 <p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%232)-ReactJS">ADR#2</a></p>
 </div>
-<div class="paragraph">
-<p>NodeJS:</p>
 </div>
+<div class="sect2">
+<h3 id="_nodejs">9.3. NodeJS</h3>
 <div class="paragraph">
 <p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%233)-NodeJS">ADR#3</a></p>
 </div>
-<div class="paragraph">
-<p>MongoDB:</p>
 </div>
+<div class="sect2">
+<h3 id="_mongodb_2">9.4. MongoDB</h3>
 <div class="paragraph">
 <p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%234)-MongoDB">ADR#4</a></p>
 </div>
-<div class="paragraph">
-<p>Docker:</p>
 </div>
+<div class="sect2">
+<h3 id="_docker">9.5. Docker</h3>
 <div class="paragraph">
 <p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%235)-Docker">ADR#5</a></p>
 </div>
-<div class="paragraph">
-<p>MySQL:</p>
 </div>
+<div class="sect2">
+<h3 id="_mysql">9.6. MySQL</h3>
 <div class="paragraph">
 <p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%236)-MySQL">ADR#6</a></p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_chakra_ui">9.7. Chakra UI</h3>
+<div class="paragraph">
+<p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%237)-Chakra-UI">ADR#7</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bdd_de_estadísticas">9.8. BDD de estadísticas</h3>
+<div class="paragraph">
+<p><a href="https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%238)-BD-de-estad%C3%ADsticas">ADR#8</a></p>
+</div>
 <div style="page-break-after: always;"></div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -1538,7 +1672,7 @@ These are:</p>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Unoptimized styles</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Optimize CSS styles to improve application performance and loading times</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Optimize styles to improve application performance and loading times</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Low</p></td>
@@ -1638,7 +1772,7 @@ These are:</p>
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-03-11 19:41:30 +0100
+Last updated 2024-03-11 20:43:01 +0100
 </div>
 </div>
 </body>
