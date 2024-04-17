@@ -65,8 +65,8 @@ const handleRequest = async (req, res, serviceUrl) => {
   }
 }
 
-app.get("/userInfo", async (req, res) => {
-  handleRequest(req, res, userServiceUrl + "/userInfo");
+app.get("/userInfo/:user", async (req, res) => {
+  handleRequest(req, res, userServiceUrl + "/userInfo/:user");
 });
 
 app.get("/friends", async (req, res) => {
@@ -85,19 +85,6 @@ app.post("/saveGameList", async (req, res) => {
       req.body
     );
     res.json(gameResponse.data);
-  } catch (error) {
-    returnError(res, error);
-  }
-});
-
-app.get("/friends", async (req, res) => {
-  try {
-    // Forward the question request to the user service
-    const userResponse = await axios.get(
-      userServiceUrl + "/friends",
-      { params: req.query }
-    );
-    res.json(userResponse.data);
   } catch (error) {
     returnError(res, error);
   }
