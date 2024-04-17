@@ -143,6 +143,20 @@ app.post("/users/add-friend", async (req, res) => {
     user.friends.push(friendUsername);
     await user.save();
 
+    const friend = await User.findOne({ username: friendUsername });
+    if (!friend) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Verificar si el amigo ya está en la lista de amigos del usuario
+    if (friend.friends.includes(username)) {
+      return res.status(400).json({ error: "Friend already added" });
+    }
+
+    // Agregar al amigo a la lista de amigos del usuario
+    friend.friends.push(username);
+    await friend.save();
+
     res.status(200).json({ message: "Friend added successfully" });
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
@@ -170,6 +184,22 @@ app.post("/users/remove-friend", async (req, res) => {
     // Eliminar al amigo de la lista de amigos del usuario
     user.friends = user.friends.filter((friend) => friend !== friendUsername);
     await user.save();
+
+    const friend = await User.findOne({ username: friendUsername });
+    if (!friend) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Verificar si el amigo está en la lista de amigos del usuario
+    if (!friend.friends.includes(username)) {
+      return res
+        .status(400)
+        .json({ error: "Friend not found in the user's friend list" });
+    }
+
+    // Eliminar al amigo de la lista de amigos del usuario
+    friend.friends = friend.friends.filter((friend) => friend !== username);
+    await friend.save();
 
     res.status(200).json({ message: "Friend removed successfully" });
   } catch (error) {
