@@ -3,11 +3,11 @@ import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import Profile from "../../components/Profile/Profile.js";
 
-const Perfil = (username) => {
+const Perfil = () => {
   return (
     <>
       <Nav />
-      <Profile username={username ? username: localStorage.getItem('username')} />
+      <Profile />
       <Footer />
     </>
   );

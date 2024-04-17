@@ -65,8 +65,14 @@ const handleRequest = async (req, res, serviceUrl) => {
   }
 }
 
-app.get("/userInfo/:user", async (req, res) => {
-  handleRequest(req, res, userServiceUrl + "/userInfo/:user");
+app.get('/userInfo/:user', async (req, res) => {
+  try {
+    const user = req.params.user;
+    const userResponse = await axios.get(`${userServiceUrl}/userInfo/${user}`);
+    res.json(userResponse.data);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 });
 
 app.get("/friends", async (req, res) => {

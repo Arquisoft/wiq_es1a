@@ -78,8 +78,8 @@ const UserGroups = () => {
               {groups.map((group) => (
                 <Tr key={group._id}>
                   <Td>{group.name}</Td>
-                  <Td>{group.members.length > 0 ? group.members[0] : ""}</Td>
                   <Td>{new Date(group.createdAt).toLocaleDateString()}</Td>
+                  <Td>{group.members.length > 0 ? group.members[0] : ""}</Td>
                   <Td>
                     <Button
                       colorScheme="blue"

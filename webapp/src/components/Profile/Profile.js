@@ -7,13 +7,14 @@ const Perfil = () => {
   const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const user=useParams();
+  const params = useParams();
+  const user = params.user || localStorage.getItem("username");
   const [error, setError] = useState(null);
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    fetch(gatewayUrl + `/userInfo/${user}`)
+    fetch(gatewayUrl + `/userInfo/${encodeURIComponent(user)}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);

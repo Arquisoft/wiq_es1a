@@ -139,7 +139,7 @@ app.post("/users/add-friend", async (req, res) => {
 
     user.friends.push(friendUsername);
     await user.save();
-    
+
     const friend = await User.findOne({ username: friendUsername });
     if (!friend) {
       return res.status(404).json({ error: "User not found" });
@@ -219,11 +219,12 @@ app.get("/friends", async (req, res) => {
 
 app.get("/userInfo/:user", async (req, res) => {
   try {
-    const username = checkInput(req.params.user);
+    const username = req.params.user;
+    console.log(username);
     const user = await User.findOne(
-      { username: username },
-      { username: 1, createdAt: 1, games: 1 }
+      { username: username }
     );
+    console.log(user);
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
