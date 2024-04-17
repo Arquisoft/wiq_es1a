@@ -226,9 +226,9 @@ app.get("/friends", async (req, res) => {
   }
 });
 
-app.get("/userInfo", async (req, res) => {
+app.get("/userInfo/:user", async (req, res) => {
   try {
-    const username = checkInput(req.query.user);
+    const username = checkInput(req.params.user);
     const user = await User.findOne(
       { username: username },
       { username: 1, createdAt: 1, games: 1 }

@@ -1,18 +1,19 @@
 import { Box, VStack, Heading, Text, Center, Spinner, Table, Thead, Tbody, Tr, Th, Td, Avatar } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
-const Perfil = (username) => {
+const Perfil = () => {
   const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const user=useParams();
   const [error, setError] = useState(null);
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    fetch(gatewayUrl + `/userInfo?user=${username}`)
+    fetch(gatewayUrl + `/userInfo/${user}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);
@@ -23,7 +24,7 @@ const Perfil = (username) => {
         setLoading(false);
       });
       // eslint-disable-next-line
-  }, []);
+  }, [username]);
 
   return (
     <>
@@ -43,7 +44,7 @@ const Perfil = (username) => {
               <>
                 {userData && (
                   <>
-                    <Avatar name={username.username} />
+                    <Avatar name={user} />
                     <Text justifyContent={"center"}>
                       <strong>{t('components.profile.name')}</strong> {userData.username}
                     </Text>
