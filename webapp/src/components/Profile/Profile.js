@@ -24,7 +24,7 @@ const Perfil = () => {
         setLoading(false);
       });
       // eslint-disable-next-line
-  }, [username]);
+  }, []);
 
   return (
     <>
