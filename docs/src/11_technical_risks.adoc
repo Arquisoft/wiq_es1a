@@ -9,7 +9,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 | High     | Potential application malfunctions | Implement unit tests for key components and critical functions, along with extensive testing with real users 
 | Medium   | Slow performance of database queries | Optimize database queries, avoid unnecessary queries 
 | Medium   | Potential unavailability of Wikidata |  Design the UI to handle missing or incomplete data from Wikidata.
-| Low      | Unoptimized styles | Optimize CSS styles to improve application performance and loading times 
+| Low      | Unoptimized styles | Optimize styles to improve application performance and loading times 
 | Low      | Insufficient documentation | Provide comprehensive documentation of architecture, code structure, development processes, and deployment to facilitate team maintenance and collaboration 
 | Low      | Vulnerabilities in user authentication | Implement additional security measures, such as password encryption 
 |===

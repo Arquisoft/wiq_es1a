@@ -2,34 +2,35 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 [[section-design-decisions]]
 == Architecture Decisions
-JavaScript:
+
+=== JavaScript
 
 https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%231)-JavaScript[ADR#1]
 
-ReactJS:
+=== ReactJS
 
 https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%232)-ReactJS[ADR#2]
 
-NodeJS:
+=== NodeJS
 
 https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%233)-NodeJS[ADR#3]
 
-MongoDB:
+=== MongoDB
 
 https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%234)-MongoDB[ADR#4]
 
-Docker:
+=== Docker
 
 https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%235)-Docker[ADR#5]
 
-MySQL:
+=== MySQL
   
 https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%236)-MySQL[ADR#6]
 
-Chakra UI:
+=== Chakra UI
 
 https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%237)-Chakra-UI[ADR#7]
 
-BDD de estadísticas:
+=== BDD de estadísticas
 
-https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%238)-BD-de-estad%C3%ADsticas
+https://github.com/Arquisoft/wiq_es1a/wiki/(ADR-%238)-BD-de-estad%C3%ADsticas[ADR#8]
