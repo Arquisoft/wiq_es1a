@@ -127,7 +127,8 @@ app.post("/users/add-friend", async (req, res) => {
   try {
     const username = req.body.username;
     const friendUsername = req.body.friendUsername;
-
+    console.log(username);
+    console.log(friendUsername)
     // Buscar el usuario por su nombre de usuario
     const user = await User.findOne({ username: username });
     if (!user) {
