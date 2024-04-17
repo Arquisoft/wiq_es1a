@@ -29,7 +29,7 @@ const History = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    fetch(gatewayUrl + `/userInfo?user=${username}`)
+    fetch(gatewayUrl + `/userInfo/${username}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);
