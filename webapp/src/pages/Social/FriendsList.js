@@ -34,12 +34,12 @@ const FriendList = () => {
         if (!response.status === 200) {
           throw new Error("Network response was not ok");
         }
-        response.json();
+        return response.json();
       })
       .then((data) => {
-        setFriends(data.friends);
         console.log(data);
         console.log(data.friends);
+        setFriends(data.friends);
         setIsLoading(false);
       })
       .catch((error) => {

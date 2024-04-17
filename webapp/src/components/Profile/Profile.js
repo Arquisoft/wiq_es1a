@@ -12,7 +12,7 @@ const Perfil = (username) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    fetch(gatewayUrl + `/userInfo?user=${username.username}`)
+    fetch(gatewayUrl + `/userInfo?user=${username}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);
