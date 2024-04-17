@@ -214,7 +214,7 @@ app.get("/friends", async (req, res) => {
     const username = req.query.user;
 
     // Buscar al usuario por su nombre de usuario
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username:username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
