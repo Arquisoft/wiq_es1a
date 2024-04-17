@@ -22,36 +22,36 @@ This container is responsible for the user interface.
 
 ==== Question Generator
 
-"Link" is the part of the application that connects the rest of the parts. This will facilitate the use of the different parts of the application in the App section.
+Question generator is the part of the application that generates the questions for the users. 
 
 ==== User Service
 
-"Register" is the part of the application that handles user registration and login. It's very important as it's the first thing a potential user will encounter when they visit our page.
+User Service is the part of the application that handles users information.
 
 ==== Auth Service
 
-"User service" is the part of the application that generates the various services within the application to the user, such as a ranking, correctly answered questions, and so on.
+Auth Service is the part of the application that handles the authentication of the users. It's very important as it's the first thing a potential user will encounter when they visit our page.
 
 ==== Stats Service
 
-"Question generator" is the part of the application that, using the data from Wikidata and some pre-created templates, generates the questions and possible answers of the application.
+Stats Service is the part of the application that handles the statistics of the users. 
 
 ==== Gateway service
 
-Wikidata” is the API that you will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects. 
+Gateway service is the part of the application that handles the communication between the different parts of the application. 
 
 ==== MongoDB
 
-"MongoDB" is the database that will store the data of the users, the questions, the answers, and the statistics of the application.
+MongoDB is the database that will store the data of the users, the questions, the answers, and the statistics of the application.
 
 ==== Prometheus
 
-"Prometheus" is the monitoring tool that will be used to monitor the application.
+Prometheus is the monitoring tool that will be used to monitor the application. 
 
 ==== Grafana
 
-"Grafana" is the visualization tool that will be used to visualize the monitoring of the application.
+Grafana is the visualization tool that will be used to visualize the monitoring of the application.
 
-==== WIkidata
+==== Wikidata
 
-"WikiData" is the API that you we will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects.
+WikiData is the API that you we will use to obtain the data for the questions. Wikidata is a free and collaborative database that can be read and edited by both humans and machines. It provides a common source of certain types of data that can be used by Wikimedia projects.
