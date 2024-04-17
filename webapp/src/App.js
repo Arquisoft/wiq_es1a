@@ -48,7 +48,7 @@ function App() {
           <Route path="/social/misgrupos" element={<UserGroups />} />
           <Route path="/social/grupo/:groupName" element={<GroupDetails />} />
 
-          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/perfil/:user" element={<Perfil />} />
           <Route path="/history" element={<History />} />
           <Route path="/config" element={<Config />} />
         </Route>
