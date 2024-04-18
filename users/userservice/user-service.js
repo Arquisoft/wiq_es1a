@@ -150,7 +150,6 @@ app.post("/users/add-friend", async (req, res) => {
 
     res.status(200).json({ message: "Friend added successfully" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -304,6 +303,8 @@ app.get('/group/:groupName', async (req, res) => {
 // Crear un nuevo grupo
 app.post('/group/add', async (req, res) => {
   try {
+      validateRequiredFields(req, ['name', 'username']);
+
       const name= req.body.name;
       const username= req.body.username;
 
@@ -335,6 +336,8 @@ app.post('/group/add', async (req, res) => {
 // Unirse a un grupo existente
 app.post('/group/join', async (req, res) => {
   try {
+      validateRequiredFields(req, ['groupId', 'username']);
+      
       const groupId=req.body.groupId;
       const username=req.body.username;
 

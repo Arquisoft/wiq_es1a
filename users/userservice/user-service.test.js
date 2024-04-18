@@ -237,4 +237,54 @@ describe("User Service", () => {
       .query({ user: "testuser" });
     expect(response.status).toBe(200);
   });
+
+  it("should add a group on POST /group/add", async () => {
+    const group = {
+      name: "testgroup",
+      username: "testuser",
+    };
+
+    const response = await request(app).post("/group/add").send(group);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("message","Group created successfully");
+  });
+
+  it("should return error on POST /group/add", async () => {
+    const group = {
+      name: "testgroup2",
+    };
+
+    const response = await request(app).post("/group/add").send(group);
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ error: "Missing required field: username" });
+  });
+
+  it("should return all available groups on GET /group/list", async () => {
+    const response = await request(app).get("/group/list");
+    expect(response.body.groups).toBeDefined();
+    expect(response.body.groups).toHaveLength(1);
+  });
+
+  it("should return specified group on GET /group/:groupName", async () => {
+    const response = await request(app).get("/group/testgroup");
+    expect(response.status).toBe(200);
+    expect(response.body.group).toBeDefined();
+    expect(response.body.group.name).toBe("testgroup");
+  });
+
+  it("should join a group on POST /group/join", async () => {
+    var response = await request(app).get("/group/testgroup");
+    expect(response.status).toBe(200);
+    expect(response.body.group._id).toBeDefined();
+    const groupId = response.body.group._id;
+
+    const group = {
+      username: "testfriend",
+      groupId: groupId,
+    };
+
+    response = await request(app).post("/group/join").send(group);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("message","User joined the group successfully");
+  });
 });
