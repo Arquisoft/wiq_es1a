@@ -55,6 +55,13 @@ app.post("/adduser", async (req, res) => {
 
     const username = req.body.username;
 
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      return res.status(401).json({
+        error: "Password must be at least 8 characters long, contain at least one uppercase letter, and at least one number.",
+      });
+    }
+
     // Check if the username already exists
     const existingUser = await User.findOne({ username: username });
     if (existingUser) {
