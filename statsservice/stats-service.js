@@ -5,11 +5,26 @@ const cors = require("cors");
 const Stats = require("./model/stats-model.js");
 const mongoose = require("mongoose");
 
+//NO SONAR
 const app = express();
+
 const port = 8004;
 
 app.use(bodyParser.json());
-app.use(cors());
+
+const corsOptions = {
+  origin: [
+    process.env.AUTH_SERVICE_URL || "http://localhost:8000",
+    process.env.USER_SERVICE_URL || "http://localhost:8001",
+    process.env.QUESTION_SERVICE_URL || "http://localhost:8002",
+    process.env.STATS_SERVICE_URL || "http://localhost:8003",
+    process.env.GATEWAY_SERVICE_URL || "http://localhost:8004",
+    process.env.MONGODB_URI || "mongodb://localhost:27017/userdb",
+    process.env.MONGODB_STATS_URI || "mongodb://localhost:27017/statsdb",
+  ],
+};
+
+app.use(cors(corsOptions));
 
 app.set("json spaces", 40);
 
