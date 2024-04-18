@@ -84,9 +84,11 @@ app.post("/saveGame", async (req, res) => {
       }
 
       res.status(200).json({ message: "Partida guardada exitosamente" });
+    } else {
+      throw new Error("Invalid game mode");
     }
   } catch (error) {
-    res.status(400).json({ error: "Error al guardar juego" + error.message });
+    res.status(400).json({ error: "Error al guardar juego: " + error.message });
   }
 });
 
