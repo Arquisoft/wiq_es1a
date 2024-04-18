@@ -30,8 +30,15 @@ const FriendList = () => {
     const username = localStorage.getItem("username");
     setIsLoading(true);
     fetch(`${apiEndpoint}/friends?user=${username}`)
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.status === 200) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
+        console.log(data);
+        console.log(data.friends);
         setFriends(data.friends);
         setIsLoading(false);
       })
@@ -91,7 +98,7 @@ const FriendList = () => {
           <Heading as="h1" size="xl" margin="1rem">
             {t('pages.friendlist.list')}
           </Heading>
-          {friends.length > 0 ? (
+          {friends && friends.length > 0 ? (
             <List display="flex" flexDirection="column" spacing={3}>
               {friends.map((friend, index) => (
                 <div key={friend._id}>

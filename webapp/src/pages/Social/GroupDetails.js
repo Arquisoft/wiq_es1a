@@ -55,8 +55,8 @@ const GroupDetails = () => {
     }
   };
 
-  const redirectToProfile = (username) => {
-    navigate(`/perfil?user=${username}`);
+  const redirectToProfile = (member) => {
+    navigate(`/perfil/${member.username}`);
   };
 
 

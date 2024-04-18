@@ -245,7 +245,7 @@ const Nav = () => {
           </MenuButton>
           <MenuList>
             <MenuGroup title={t("components.nav.profile")}>
-              <MenuItem onClick={() => handleNavigate("/perfil")}>
+              <MenuItem onClick={() => handleNavigate(`/perfil/${username}`)}>
                 {t("components.nav.myprofile")}
               </MenuItem>
               <MenuItem onClick={() => handleNavigate("/history")}>

@@ -128,23 +128,29 @@ app.post("/users/add-friend", async (req, res) => {
     const username = req.body.username;
     const friendUsername = req.body.friendUsername;
 
-    // Buscar el usuario por su nombre de usuario
     const user = await User.findOne({ username: username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-
-    // Verificar si el amigo ya está en la lista de amigos del usuario
+    console.log(user)
     if (user.friends.includes(friendUsername)) {
       return res.status(400).json({ error: "Friend already added" });
     }
 
-    // Agregar al amigo a la lista de amigos del usuario
     user.friends.push(friendUsername);
     await user.save();
 
+    const friend = await User.findOne({ username: friendUsername });
+    if (!friend) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    friend.friends.push(username);
+    await friend.save();
+
     res.status(200).json({ message: "Friend added successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -171,6 +177,22 @@ app.post("/users/remove-friend", async (req, res) => {
     user.friends = user.friends.filter((friend) => friend !== friendUsername);
     await user.save();
 
+    const friend = await User.findOne({ username: friendUsername });
+    if (!friend) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Verificar si el amigo está en la lista de amigos del usuario
+    if (!friend.friends.includes(username)) {
+      return res
+        .status(400)
+        .json({ error: "Friend not found in the user's friend list" });
+    }
+
+    // Eliminar al amigo de la lista de amigos del usuario
+    friend.friends = friend.friends.filter((friend) => friend !== username);
+    await friend.save();
+
     res.status(200).json({ message: "Friend removed successfully" });
   } catch (error) {
     console.error("Error removing friend:", error);
@@ -184,7 +206,7 @@ app.get("/friends", async (req, res) => {
     const username = req.query.user;
 
     // Buscar al usuario por su nombre de usuario
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ username:username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -195,13 +217,14 @@ app.get("/friends", async (req, res) => {
   }
 });
 
-app.get("/userInfo", async (req, res) => {
+app.get("/userInfo/:user", async (req, res) => {
   try {
-    const username = checkInput(req.query.user);
+    const username = req.params.user;
+    console.log(username);
     const user = await User.findOne(
-      { username: username },
-      { username: 1, createdAt: 1, games: 1 }
+      { username: username }
     );
+    console.log(user);
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
