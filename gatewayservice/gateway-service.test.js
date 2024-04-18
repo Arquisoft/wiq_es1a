@@ -39,7 +39,13 @@ describe("Gateway Service", () => {
           ],
         },
       });
-    }
+    } else if (url.endsWith("/group/add")) {
+      return Promise.resolve({ data: { success: true } });
+    } else if (url.endsWith("/group/join")) {
+      return Promise.resolve({ data: { success: true } });
+    } else if (url.endsWith("/group/list")) {
+      return Promise.resolve({ data: { groups: ["group1", "group2"] } });
+    } 
   });
 
   axios.get.mockImplementation((url, data) => {
@@ -65,12 +71,14 @@ describe("Gateway Service", () => {
       });
     } else if (url.endsWith("/stats")) {
       return Promise.resolve({ data: { stats: "mockedStats" } });
-    } else if (url.endsWith("/userInfo")) {
+    } else if (url.endsWith("/userInfo/testuser")) {
       return Promise.resolve({ data: { userInfo: "mockedUserInfo" } });
     } else if (url.endsWith("/ranking")) {
       return Promise.resolve({ data: { ranking: "mockedRanking" } });
     } else if (url.endsWith("/health")) {
       return Promise.resolve({ data: { status: "OK" } });
+    } else if (url.endsWith("/group/group1")) {
+      return Promise.resolve({ data: { members: ["user1", "user2"] } });
     }
   });
 
@@ -171,10 +179,9 @@ describe("Gateway Service", () => {
   // Test /userInfo endpoint
   it("should forward userInfo request to user service", async () => {
     const response = await request(app)
-      .get("/userInfo")
-      .query({ user: "testuser" });
+      .get("/userInfo/testuser");
 
-    expect(response.statusCode).toBe(200);
+    expect(response.status).toBe(200);
     expect(response.body).toEqual({ userInfo: "mockedUserInfo" });
   });
 
@@ -252,4 +259,43 @@ describe("Gateway Service", () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toEqual({ success: true });
   });
+
+  // Prueba para la ruta /group/add
+  it("should forward add group request to user service", async () => {
+    axios.post.mockResolvedValueOnce({ data: { success: true } });
+
+    const response = await request(app).post("/group/add").send({ userId: "user1", groupName: "group1" });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ success: true });
+  });
+
+  // Prueba para la ruta /group/join
+  it("should forward join group request to user service", async () => {
+    axios.post.mockResolvedValueOnce({ data: { success: true } });
+
+    const response = await request(app).post("/group/join").send({ userId: "user1", groupName: "group1" });
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ success: true });
+  });
+
+  // Prueba para la ruta /group/list
+  it("should forward list groups request to user service", async () => {
+    axios.get.mockResolvedValueOnce({ data: { groups: ["group1", "group2"] } });
+
+    const response = await request(app).get("/group/list");
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ groups: ["group1", "group2"] });
+  });
+
+  // Prueba para la ruta /group/:groupName
+  it("should forward group info request to user service", async () => {
+    const response = await request(app).get("/group/group1");
+
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ members: ["user1", "user2"] });
+  });
+
 });
