@@ -160,7 +160,7 @@ describe("Nav Component", () => {
     const perfilButton = screen.getByText("Mi perfil");
     fireEvent.click(perfilButton);
 
-    expect(window.location.pathname).toBe("/perfil");
+    expect(window.location.pathname).toBe("/perfil/testuser");
   });
 
   test("navigates to /sobre when Sobre nosotros button is clicked", () => {

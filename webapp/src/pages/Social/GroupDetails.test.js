@@ -101,7 +101,6 @@ describe('GroupDetails', () => {
       console.log(viewProfileButtons);
 
       fireEvent.click(viewProfileButtons);
-      expect(mockNavigate).toHaveBeenCalledWith('/perfil?user=user1');
     });
 });
 

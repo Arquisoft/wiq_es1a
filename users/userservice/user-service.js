@@ -150,7 +150,6 @@ app.post("/users/add-friend", async (req, res) => {
 
     res.status(200).json({ message: "Friend added successfully" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
@@ -220,11 +219,13 @@ app.get("/friends", async (req, res) => {
 app.get("/userInfo/:user", async (req, res) => {
   try {
     const username = req.params.user;
-    console.log(username);
+    if(!username || typeof username !== "string" || username.trim() === ""){
+      throw new Error("Input debe ser una cadena de texto");
+    }
     const user = await User.findOne(
       { username: username }
     );
-    console.log(user);
+
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -302,6 +303,8 @@ app.get('/group/:groupName', async (req, res) => {
 // Crear un nuevo grupo
 app.post('/group/add', async (req, res) => {
   try {
+      validateRequiredFields(req, ['name', 'username']);
+
       const name= req.body.name;
       const username= req.body.username;
 
@@ -333,6 +336,8 @@ app.post('/group/add', async (req, res) => {
 // Unirse a un grupo existente
 app.post('/group/join', async (req, res) => {
   try {
+      validateRequiredFields(req, ['groupId', 'username']);
+      
       const groupId=req.body.groupId;
       const username=req.body.username;
 
