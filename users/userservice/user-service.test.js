@@ -126,7 +126,7 @@ describe("User Service", () => {
 
     await request(app).post("/adduser").send({username: friendUsername, password: password});
 
-    letresponse = await request(app).post("/users/add-friend").send(friend);
+    let response = await request(app).post("/users/add-friend").send(friend);
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty(
       "message",
