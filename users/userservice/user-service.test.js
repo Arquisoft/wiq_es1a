@@ -124,7 +124,7 @@ describe("User Service", () => {
       friendUsername: "testfriend",
     };
 
-    var response = await request(app).post("/adduser").send({username: friendUsername, password: password});
+    let response = await request(app).post("/adduser").send({username: friendUsername, password: password});
 
     response = await request(app).post("/users/add-friend").send(friend);
     expect(response.status).toBe(200);
@@ -164,7 +164,7 @@ describe("User Service", () => {
       friendUsername: friendUsername,
     };
 
-    response = await request(app)
+    let response = await request(app)
       .post("/users/remove-friend")
       .send(friend);
     expect(response.status).toBe(200);
@@ -273,7 +273,7 @@ describe("User Service", () => {
   });
 
   it("should join a group on POST /group/join", async () => {
-    var response = await request(app).get("/group/testgroup");
+    let response = await request(app).get("/group/testgroup");
     expect(response.status).toBe(200);
     expect(response.body.group._id).toBeDefined();
     const groupId = response.body.group._id;

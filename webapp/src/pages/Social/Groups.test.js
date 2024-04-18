@@ -114,7 +114,7 @@ describe('Groups component', () => {
         expect(screen.getByText('Group 1')).toBeInTheDocument();
         });
 
-        var joinButton = screen.getByText('Group 1').closest('tr').querySelector('button');
+        let joinButton = screen.getByText('Group 1').closest('tr').querySelector('button');
         userEvent.click(joinButton);
 
         await waitFor(() => {
