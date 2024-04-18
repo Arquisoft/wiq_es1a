@@ -9,6 +9,7 @@ import i18n from "./i18n.js";
 
 
 describe("App Component", () => {
+
   beforeEach(() => {
     Object.defineProperty(window, "localStorage", {
       value: { getItem: jest.fn(), setItem: jest.fn(), removeItem: jest.fn() },
@@ -54,14 +55,19 @@ describe("Home Component", () => {
 });
 
 describe("Nav Component", () => {
-  test("renders Nav component with links and logout button", async () => {
-    const { getByText, getByRole } = render(
+
+  const renderNav= () => {
+    render(
       <I18nextProvider i18n={i18n}>
         <Router>
           <Nav />
         </Router>
       </I18nextProvider>
     );
+  };
+
+  test("renders Nav component with links and logout button", async () => {
+    renderNav();
 
     // Verificar que el logo esté presente
     expect(screen.getByText("WIQ")).toBeInTheDocument();
@@ -92,25 +98,14 @@ describe("Nav Component", () => {
       writable: true,
     });
 
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
+
     const logoutButton = screen.getByText("testuser");
     fireEvent.click(logoutButton);
   });
 
   test("navigates to /home when Home button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const homeButton = screen.getByText("Inicio");
     fireEvent.click(homeButton);
@@ -119,13 +114,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /stats when Estadísticas button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const statsButton = screen.getByText("Estadísticas");
     fireEvent.click(statsButton);
@@ -134,13 +123,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /ranking when Ranking button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const rankingButton = screen.getByText("Ranking");
     fireEvent.click(rankingButton);
@@ -149,13 +132,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /perfil when Perfil button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const perfilButton = screen.getByText("Mi perfil");
     fireEvent.click(perfilButton);
@@ -164,13 +141,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /sobre when Sobre nosotros button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const aboutButton = screen.getByText("Sobre nosotros");
     fireEvent.click(aboutButton);
@@ -179,13 +150,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /config when Opciones button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const optionsButton = screen.getByText("Opciones");
     fireEvent.click(optionsButton);
@@ -194,13 +159,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to popover options", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     fireEvent.click(screen.getByTestId("classic"));
     expect(window.location.pathname).toBe("/home/clasico");
@@ -216,7 +175,14 @@ describe("Nav Component", () => {
 
     fireEvent.click(screen.getByTestId("friends"));
     expect(window.location.pathname).toBe("/social/amigos");
+
+    fireEvent.click(screen.getByTestId("groups"));
+    expect(window.location.pathname).toBe("/social/grupos");
+
+    fireEvent.click(screen.getByTestId("mygroups"));
+    expect(window.location.pathname).toBe("/social/misgrupos");
   });
+
 });
 describe("Footer Component", () => {
   it("renders footer text correctly", () => {

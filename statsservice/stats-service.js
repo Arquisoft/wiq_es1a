@@ -34,7 +34,7 @@ app.post("/saveGame", async (req, res) => {
         gamemode: gamemode,
       });
       if (!stats) {
-        var ratioCorrect = 0;
+        let ratioCorrect = 0;
         if (gameData.incorrectAnswers + gameData.correctAnswers > 0) {
           ratioCorrect =
             (gameData.correctAnswers /
@@ -84,15 +84,17 @@ app.post("/saveGame", async (req, res) => {
       }
 
       res.status(200).json({ message: "Partida guardada exitosamente" });
+    } else {
+      throw new Error("Invalid game mode");
     }
   } catch (error) {
-    res.status(400).json({ error: "Error al guardar juego" + error.message });
+    res.status(400).json({ error: "Error al guardar juego: " + error.message });
   }
 });
 
 app.get("/stats", async (req, res) => {
   try {
-    var data = await Stats.findOne({
+    let data = await Stats.findOne({
       username: req.query.username,
       gamemode: req.query.gamemode,
     });
@@ -113,7 +115,7 @@ app.get("/ranking", async (req, res) => {
     let sortBy = req.query.filterBy;
     let gamemode = req.query.gamemode;
 
-    var data = await Stats.find({ gamemode: gamemode })
+    let data = await Stats.find({ gamemode: gamemode })
       .sort(sortBy)
       .limit(10);
 

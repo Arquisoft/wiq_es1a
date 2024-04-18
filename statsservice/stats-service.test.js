@@ -82,4 +82,67 @@ describe("Stats Service", () => {
     const response = await request(app).get(`/stats/?username=${username}`);
     expect(response.status).toBe(400);
   });
+
+  it("should save game data successfully", async () => {
+    const gameData = {
+      username: "testusername",
+      gameMode: "clasico",
+      gameData: {
+        points: 100,
+        correctAnswers: 10,
+        incorrectAnswers: 5,
+        avgTime: 30,
+      },
+    };
+
+    const response = await request(app)
+      .post("/saveGame")
+      .send(gameData);
+
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty(
+      "message",
+      "Partida guardada exitosamente"
+    );
+  });
+
+  it("should return error when saving game data with invalid game mode", async () => {
+    const gameData = {
+      username: "testusername",
+      gameMode: "invalid",
+      gameData: {
+        points: 100,
+        correctAnswers: 10,
+        incorrectAnswers: 5,
+        avgTime: 30,
+      },
+    };
+
+    const response = await request(app)
+      .post("/saveGame")
+      .send(gameData);
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty(
+      "error",
+      "Error al guardar juego: Invalid game mode"
+    );
+  });
+
+  it("should return user not found error when fetching stats for non-existing user", async () => {
+    const response = await request(app).get(
+      "/stats/?username=nonexistinguser&gamemode=exampleGamemode"
+    );
+
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("error", "User not found");
+  });
+
+  it("should return error when fetching stats with incomplete parameters", async () => {
+    const response = await request(app).get("/stats/?username=testusername");
+
+    expect(response.status).toBe(400);
+  });
+
+  
 });
