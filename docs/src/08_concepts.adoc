@@ -3,123 +3,61 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-concepts]]
 == Cross-cutting Concepts
 
+=== Domain Concepts
 
-[role="arc42help"]
-****
-.Content
-This section describes overall, principal regulations and solution ideas that are relevant in multiple parts (= cross-cutting) of your system.
-Such concepts are often related to multiple building blocks.
-They can include many different topics, such as
+This is the actual domain of the application, which is the area of knowledge or activity that the application is designed to support. In this case, the domain is quiz games, which are games that test the player's knowledge on a specific topic.
 
-* models, especially domain models
-* architecture or design patterns
-* rules for using specific technology
-* principal, often technical decisions of an overarching (= cross-cutting) nature
-* implementation rules
+image::08-Domain.svg[Domain]
 
+=== Architecture and Design Patterns
 
-.Motivation
-Concepts form the basis for _conceptual integrity_ (consistency, homogeneity) of the architecture. 
-Thus, they are an important contribution to achieve inner qualities of your system.
+The project follows a microservices architecture, which is a design pattern that structures an application as a collection of loosely coupled services. This makes the application more scalable, flexible, and easier to maintain.
 
-Some of these concepts cannot be assigned to individual building blocks, e.g. security or safety. 
+=== User Experience (UX)
 
-
-.Form
-The form can be varied:
-
-* concept papers with any kind of structure
-* cross-cutting model excerpts or scenarios using notations of the architecture views
-* sample implementations, especially for technical concepts
-* reference to typical usage of standard frameworks (e.g. using Hibernate for object/relational mapping)
-
-.Structure
-A potential (but not mandatory) structure for this section could be:
-
-* Domain concepts
-* User Experience concepts (UX)
-* Safety and security concepts
-* Architecture and design patterns
-* "Under-the-hood"
-* development concepts
-* operational concepts
-
-Note: it might be difficult to assign individual concepts to one specific topic
-on this list.
-
-image::08-Crosscutting-Concepts-Structure-EN.png["Possible topics for crosscutting concepts"]
-
-
-.Further Information
-
-See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
-****
-
-
-=== User Interface 
+==== User Interface 
 
 A user interface is the space where a human and a computer or device communicate and exchange information
 
 The user interface is the part of the application that directly interacts with the client, in our case, the player. It should function correctly and be user-friendly.
-=== Ergonomics 
+
+==== Ergonomics 
 
 Ergonomics is the science of designing and arranging workplaces, products, and systems to fit and adapt to the people who use them. Ergonomics aims to improve comfort, efficiency, and safety by considering human physical and psychological needs and limitations. 
 
-=== Internationalization 
+==== Internationalization 
 
-Internationalization is the practice of designing and developing applications that can support multiple languages, formats, and conventions.
+The application should be able to support multiple languages and regions, so that it can be used by people from different countries and cultures. As of today it has been translated into Spanish and English.
 
-Internationalization consists of adapting to the language and culture depending on the location, this is very important as it helps users from different regions to be able to use our game
+=== Development Concepts
 
-=== Security 
+==== Build, Test, Deploy 
 
-Security is a broad term that can refer to different aspects of protection, resilience, or prevention of harm. 
+The project follows a CI/CD pipeline that automates the build, test, and deployment processes. This ensures that the application is always up-to-date and working correctly. 
 
-A minimum of security in the application is important to save our customers' data
-=== Safety  
+==== Configurability
 
-Is the state of being protected from danger or harm.
+The project has a configuration file that allows the developer to generate new types of questions just by modifying the file. This makes the application more flexible to topic addition.
 
-=== Build, Test, Deploy 
+=== Security and safety
 
-- Build: This stage involves compiling, validating, and packaging the source code into executable or deployable artifacts. 
-- Test: This stage involves running various tests, such as unit tests, integration tests, and regression tests, to ensure the quality and functionality of the software. 
-- Deploy: This stage involves delivering or releasing the software to the target environment, such as a server, a cloud platform, or a user device. 
+==== Security 
 
-=== Code Generation 
+The app REST API verifies the user's identity and permissions before allowing access to the resources. It also prevents sensitive data from being exposed to unauthorized users. This ensures that the application is secure and protects the user's data.
 
-Code generation is the process of creating executable or deployable code from various sources of information, such as natural language, images, or other code.
+==== Safety
 
-Generating code makes it easier for the programmer to create functions without wasting a lot of time and simply focusing on the correct implementation of the code, an example is for example generating the getters and setters
+The application has a backup system that automatically saves the user's progress in case of a failure. This ensures that the user's data is always safe and can be recovered in case of a problem.
 
-=== Migration 
+=== Operation concepts
 
-Migrating from one software application or platform to another, such as switching from a legacy system to a modern one, or from a local server to a cloud service.
+==== Disaster-Recovery 
 
-=== Configurability 
+App containers have restart policies that automatically restart the container in case of a failure. This ensures that the application is always available and running despite any failures.
 
-Configurability is the ability to modify or customize something, especially in computing, electronics, or devices
+==== Monitoring
 
-=== Administration 
+The application has a monitoring system that tracks the performance and availability of the application. This allows the developer to identify and fix any issues before they affect the user's experience.
 
-The process or activity of managing, directing, or organizing something or someone.
-
-Administering an application consists of managing all the resources, users to be able to maintain it in a correct way
-
-=== Management 
-
-Management is the process of organizing and directing the resources of a business or organization to achieve its goals. 
-
-=== Disaster-Recovery 
-
-Is the process of restoring the functionality and data of software applications after a disaster, such as a natural calamity, a cyberattack, or a human error.
-
-It is important to have a plan to recover the data in case of a system failure, it is usually a backup.
-
-=== Architecture and design patterns  
-
-Architecture and design patterns are concepts that help software developers and architects design and build software systems that are efficient, scalable, and maintainable.
-
-Design patterns are important so that your application can scale without cascading changes.
-
+image::08-Concepts.svg[Architecture]
 

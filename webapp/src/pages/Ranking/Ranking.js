@@ -27,6 +27,7 @@ const Ranking = () => {
     fetch(gatewayUrl + `/ranking?gamemode=${gamemode}&filterBy=${filterBy}`)
       .then((response) => response.json())
       .then((data) => {
+
         setRanking(data);
         setIsLoading(false);
       })
@@ -114,9 +115,9 @@ const Ranking = () => {
   return (
     <>
     <Nav/>
-    <Flex flexDirection="column" rowGap="1rem">
+    <Flex maxWidth={"90%"} flexDirection="column" rowGap="1rem">
       <Heading as="h2">{t('pages.ranking.rank-mode')} {getModeName()}</Heading>
-      <Select id="displaySelector" data-testid="combobox" onChange={handleDisplayChange}>
+      <Select width={"100%"} maxWidth={"90%"} id="displaySelector" data-testid="combobox" onChange={handleDisplayChange}>
         {displayOptions.map(option => {
           if (gamemode === "calculadora" && option.value === "ratioCorrect") {
             return null;

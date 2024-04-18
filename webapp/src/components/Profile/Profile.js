@@ -1,18 +1,20 @@
 import { Box, VStack, Heading, Text, Center, Spinner, Table, Thead, Tbody, Tr, Th, Td, Avatar } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 
-const Perfil = (username) => {
+const Perfil = () => {
   const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-
+  const params = useParams();
+  const user = params.user || localStorage.getItem("username");
   const [error, setError] = useState(null);
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    fetch(gatewayUrl + `/userInfo?user=${username.username}`)
+    fetch(gatewayUrl + `/userInfo/${encodeURIComponent(user)}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);
@@ -27,9 +29,9 @@ const Perfil = (username) => {
 
   return (
     <>
-      <Center py={8}>
+      <Center py={8} maxWidth={"90%"}>
         <Box w="xl" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="lg" width="100%">
-          <VStack p={8} align="start" spacing={6}>
+          <VStack p={8} align="center" spacing={6}>
             <Heading as="h1" size="lg">
               {t('components.profile.profile')}
             </Heading>
@@ -38,13 +40,13 @@ const Perfil = (username) => {
                 <Spinner />
               </Center>
             ) : error ? (
-              <Text>Error: {error}</Text>
+              <Text>{t('pages.profile.error')}</Text>
             ) : (
               <>
                 {userData && (
                   <>
-                    <Avatar name={username.username} />
-                    <Text>
+                    <Avatar name={user} />
+                    <Text justifyContent={"center"}>
                       <strong>{t('components.profile.name')}</strong> {userData.username}
                     </Text>
                     <Text>
@@ -54,26 +56,26 @@ const Perfil = (username) => {
                     <Heading as="h2" size="md">
                       {t('components.profile.recentGames')}
                     </Heading>
-                    <div style={{ width: '100%'}}>
-                      {userData.games.length > 0 ? (
+                    <Box overflowX={"scroll"} width={'100%'}>
+                      { userData.games && userData.games.length > 0 ? (
                         <Table variant="simple">
                           <Thead>
                             <Tr>
-                              <Th>{t('components.profile.gameMode')}</Th>
-                              <Th>{t('components.profile.correct')}</Th>
-                              <Th>{t('components.profile.incorrect')}</Th>
-                              <Th>{t('components.profile.score')}</Th>
-                              <Th>{t('components.profile.avgTime')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.gameMode')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.correct')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.incorrect')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.score')}</Th>
+                              <Th textAlign={"center"}>{t('components.profile.avgTime')}</Th>
                             </Tr>
                           </Thead>
                           <Tbody>
                             {userData.games.slice(0, 10).map((game, index) => (
                             <Tr key={index}>
-                              <Td>{game.gamemode}</Td>
-                              <Td>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
-                              <Td>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
-                              <Td>{game.points}</Td>
-                              <Td>{parseFloat(game.avgTime).toFixed(2)} {t('components.profile.seconds')}</Td>
+                              <Td textAlign={"center"}>{game.gamemode}</Td>
+                              <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
+                              <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
+                              <Td textAlign={"center"}>{game.points}</Td>
+                              <Td textAlign={"center"}>{parseFloat(game.avgTime).toFixed(2)} {t('components.profile.seconds')}</Td>
                             </Tr>
                             ))}
                           </Tbody>
@@ -81,7 +83,7 @@ const Perfil = (username) => {
                       ) : (
                         <Text>{t('components.profile.noGames')}</Text>
                       )}
-                    </div>
+                    </Box>
                   </>
                 )}
               </>

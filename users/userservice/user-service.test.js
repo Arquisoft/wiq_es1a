@@ -5,6 +5,8 @@ const { User } = require("./user-model");
 let mongoServer;
 let app;
 
+const username = "testuser";
+const friendUsername = "testfriend";
 const password = "testpassword";
 
 beforeAll(async () => {
@@ -57,8 +59,7 @@ describe("User Service", () => {
   it("should return user info on GET /userInfo", async () => {
     // Realizar la solicitud GET /userInfo
     const response = await request(app)
-      .get("/userInfo")
-      .query({ user: "testuser" });
+      .get("/userInfo/testuser");
 
     // Verificar la respuesta
     expect(response.status).toBe(200);
@@ -70,10 +71,8 @@ describe("User Service", () => {
     const response = await request(app).get("/userInfo");
 
     // Verificar la respuesta
-    expect(response.status).toBe(400);
-    expect(response.body).toEqual({
-      error: "Input debe ser una cadena de texto",
-    });
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({    });
   });
 
   it("should save game data for the user on POST /saveGameList", async () => {
@@ -119,12 +118,15 @@ describe("User Service", () => {
   });
 
   it("should add friend on POST /users/add-friend", async () => {
+
     const friend = {
       username: "testuser",
-      friend: "testfriend",
+      friendUsername: "testfriend",
     };
 
-    const response = await request(app).post("/users/add-friend").send(friend);
+    await request(app).post("/adduser").send({username: friendUsername, password: password});
+
+    let response = await request(app).post("/users/add-friend").send(friend);
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty(
       "message",
@@ -135,12 +137,12 @@ describe("User Service", () => {
   it("should return error 400 on POST /users/add-friend", async () => {
     const friend = {
       username: "testuser1",
-      friend: "testfriend",
+      friendUsername: "testfriend",
     };
 
     const response = await request(app).post("/users/add-friend").send(friend);
     expect(response.status).toBe(404);
-    expect(response.body).toEqual({error: "User not found"});
+    expect(response.body).toEqual({ error: "User not found" });
   });
 
   it("should return error 404 on POST /users/add-friend", async () => {
@@ -153,16 +155,16 @@ describe("User Service", () => {
     const response = await request(app).post("/users/add-friend").send(friend);
 
     expect(response.status).toBe(400);
-    expect(response.body).toEqual({error: "Friend already added"});
+    expect(response.body).toEqual({ error: "Friend already added" });
   });
 
   it("should remove friend on POST /users/remove-friend", async () => {
     const friend = {
-      username: "testuser",
-      friend: "testfriend",
+      username: username,
+      friendUsername: friendUsername,
     };
 
-    const response = await request(app)
+    let response = await request(app)
       .post("/users/remove-friend")
       .send(friend);
     expect(response.status).toBe(200);
@@ -170,6 +172,18 @@ describe("User Service", () => {
       "message",
       "Friend removed successfully"
     );
+  });
+
+  it("should remove friend on POST /users/remove-friend", async () => {
+    const friend = {
+      username: "testuserx",
+      friend: "testfriendx",
+    };
+
+    const response = await request(app)
+      .post("/users/remove-friend")
+      .send(friend);
+    expect(response.status).toBe(404);
   });
 
   it("should retrieve friends on GET /users/friends", async () => {
@@ -185,20 +199,92 @@ describe("User Service", () => {
       .get("/friends")
       .query({ user: "testuser1" });
     expect(response.status).toBe(404);
-    expect(response.body).toEqual({error: "User not found"});
+    expect(response.body).toEqual({ error: "User not found" });
   });
 
   it("should get all users on GET /users", async () => {
     const response = await request(app).get("/users");
     expect(response.status).toBe(200);
-    expect(response.body).toHaveLength(1);
+    expect(response.body).toHaveLength(2);
   });
 
   it("should search for users on GET /users/search", async () => {
     const response = await request(app)
       .get("/users/search")
-      .query({ search: "test" });
+      .query({ username: "testuser" });
+    expect(response.status).toBe(200);
+    expect(response.body).not.toEqual([]);
+  });
+
+  it("should search for users on GET /users/search and get not found", async () => {
+    const response = await request(app)
+      .get("/users/search")
+      .query({ username: "asdasd" });
     expect(response.status).toBe(404);
-    expect(response.body).toEqual({error: "User not found"});
+    expect(response.body).toEqual({ error: "User not found" });
+  });
+
+  it("should find a user by username", async () => {
+    const username = "testuser";
+    const user = await User.findOne({ username });
+    expect(user).toBeDefined();
+    expect(user.username).toBe(username);
+  });
+
+  it("should get game data for the user on GET /userGames", async () => {
+    const response = await request(app)
+      .get("/userGames")
+      .query({ user: "testuser" });
+    expect(response.status).toBe(200);
+  });
+
+  it("should add a group on POST /group/add", async () => {
+    const group = {
+      name: "testgroup",
+      username: "testuser",
+    };
+
+    const response = await request(app).post("/group/add").send(group);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("message","Group created successfully");
+  });
+
+  it("should return error on POST /group/add", async () => {
+    const group = {
+      name: "testgroup2",
+    };
+
+    const response = await request(app).post("/group/add").send(group);
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ error: "Missing required field: username" });
+  });
+
+  it("should return all available groups on GET /group/list", async () => {
+    const response = await request(app).get("/group/list");
+    expect(response.body.groups).toBeDefined();
+    expect(response.body.groups).toHaveLength(1);
+  });
+
+  it("should return specified group on GET /group/:groupName", async () => {
+    const response = await request(app).get("/group/testgroup");
+    expect(response.status).toBe(200);
+    expect(response.body.group).toBeDefined();
+    expect(response.body.group.name).toBe("testgroup");
+  });
+
+  it("should join a group on POST /group/join", async () => {
+    let response = await request(app).get("/group/testgroup");
+    expect(response.status).toBe(200);
+    expect(response.body.group._id).toBeDefined();
+    const groupId = response.body.group._id;
+
+    const group = {
+      username: "testfriend",
+      groupId: groupId,
+    };
+
+    response = await request(app).post("/group/join").send(group);
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("message","User joined the group successfully");
   });
 });

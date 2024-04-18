@@ -16,6 +16,11 @@ import Perfil from "./pages/Perfil/Perfil.js";
 import CalculadoraHumana from "./pages/Calculadora/Calculadora.js";
 import UsersPage from "./pages/Social/UsersPage.js";
 import FriendList from "./pages/Social/FriendsList.js";
+import Groups from "./pages/Social/Groups.js";
+import UserGroups from "./pages/Social/UserGroups.js";
+import GroupDetails from "./pages/Social/GroupDetails.js";
+import History from "./pages/History/History.js";
+
 
 function App() {
   useEffect(() => {
@@ -39,7 +44,12 @@ function App() {
           <Route path="/ranking" element={<Ranking />} />
           <Route path="/social/usuarios" element={<UsersPage />} />
           <Route path="/social/amigos" element={<FriendList />} />
-          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/social/grupos" element={<Groups />} />
+          <Route path="/social/misgrupos" element={<UserGroups />} />
+          <Route path="/social/grupo/:groupName" element={<GroupDetails />} />
+
+          <Route path="/perfil/:user" element={<Perfil />} />
+          <Route path="/history" element={<History />} />
           <Route path="/config" element={<Config />} />
         </Route>
 

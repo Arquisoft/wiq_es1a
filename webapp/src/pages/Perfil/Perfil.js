@@ -7,7 +7,7 @@ const Perfil = () => {
   return (
     <>
       <Nav />
-      <Profile username={localStorage.getItem('username')} />
+      <Profile />
       <Footer />
     </>
   );

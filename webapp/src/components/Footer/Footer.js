@@ -9,10 +9,23 @@ const Footer = () => {
     const bgColor = { light: 'gray.200', dark: 'gray.700' };
     const textColor = { light: 'black', dark: 'white' };
 
-    return(
-        <Box as="footer" textAlign="center" p={4} bg={bgColor[colorMode]} color={textColor[colorMode]} position="sticky" bottom="0" width="100%">
-            <Heading as="h2" fontSize="xl">WIQ!</Heading>
-            <Text fontSize="sm" mt={2}>{t('components.footer.copyright')}</Text>
+    return (
+        <Box
+            as="footer"
+            textAlign="center"
+            position="relative"
+            bottom="0"
+            width="100%"
+            p={4}
+            bg={bgColor[colorMode]}
+            color={textColor[colorMode]}
+        >
+            <Heading as="h2" fontSize="xl">
+                WIQ!
+            </Heading>
+            <Text fontSize="sm" mt={2}>
+                {t('components.footer.copyright')}
+            </Text>
         </Box>
     );
 }

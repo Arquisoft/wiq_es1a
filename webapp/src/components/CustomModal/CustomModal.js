@@ -13,7 +13,7 @@ const CustomModal = ({ title, text, route }) => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent maxWidth={{base: "90%", lg: "30%"}} >
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody textAlign='justify'>

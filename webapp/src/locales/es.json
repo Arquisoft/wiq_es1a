@@ -21,13 +21,19 @@
       "wisebattery": "Batería de sabios",
       "humancalculator": "Calculadora humana",
       "users": "Usuarios",
+      "social": "Social",
+      "groups": "Grupos",
+      "usergroups": "Mis grupos",
       "friends": "Amigos",
       "stats": "Estadísticas",
       "ranking": "Ranking",
       "profile": "Perfil",
+      "myprofile": "Mi perfil",
       "about": "Sobre nosotros",
       "options": "Opciones",
-      "disconnect": "Desconectar"
+      "disconnect": "Desconectar",
+      "api": "API docs",
+      "history": "Historial"
     },
     "register": {
       "title": "Regístrate",
@@ -119,7 +125,15 @@
       "score": "Puntos",
       "avgTime": "Tiempo promedio",
       "seconds": "segundos",
-      "noGames": "No has jugado ninguna partida aún."
+      "noGames": "No has jugado ninguna partida aún.",
+      "error": "Ha habido un error al intentar cargar la información del usuario. Inténtalo más tarde."
+    },
+    "history": {
+      "title": "Historial de partidas",
+      "name": "Nombre de usuario",
+      "dateLabel": "Fecha de creación de la cuenta:",
+      "ngame": "Partida",
+      "error": "Ha habido un error al intentar cargar el perfil del usuario. Inténtalo más tarde"
     },
     "ranking": {
       "loading": "Cargando ...",
@@ -187,6 +201,39 @@
       "profile": "Ver perfil",
       "delete": "Eliminar amigo",
       "noFriends": "No tienes amigos actualmente."
+    },
+    "groupdetails": {
+      "details":"Detalles del grupo",
+      "loading": "Cargando...",
+      "createdBy": "Creado por",
+      "when": "el",
+      "participants": "Participantes",
+      "avatar":"Avatar",
+      "name":"Nombre",
+      "viewProfile": "Ver perfil",
+      "loadingText": "Se está consultando su búsqueda, espere unos instantes.",
+      "noParticipants": "No hay participantes en este grupo."
+    },
+    "groups": {
+      "title": "Crea un grupo",
+      "name": "Nombre",
+      "create": "Crear",
+      "errorPrefix": "Error: ",
+      "joinable": "Grupos a los que puedes unirte",
+      "join": "Unirse al grupo",
+      "nogroups": "No hay grupos a los que puedas unirte."
+    },
+    "groupsTable": {
+      "groupName": "Nombre del grupo",
+      "creationDate": "Fecha de creación",
+      "creator": "Creador"
+    },
+    "usergroups": {
+      "title":"Tus grupos",
+      "seegroup": "Ver grupo",
+      "creationDate": "Fecha de creación",
+      "creator": "Creador"
     }
+      
   }
 }

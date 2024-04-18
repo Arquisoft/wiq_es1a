@@ -4,7 +4,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 == System Scope and Context
 
 === Business Context
-image::businesscontext.svg[Business context]
+image::03-Business.svg[Business context]
 
 |===
 | *Entity* | *_Description_*
@@ -14,7 +14,7 @@ image::businesscontext.svg[Business context]
 |===
 
 === Technical Context
-image::technicalcontext.svg[Technical Context]
+image::03-Technical.svg[Technical Context]
 |===
 | *Entity* | *_Description_*
 | *_User_* | Represents the user interacting with the system. In this case, the user is interacting with the "WIQ!" application through the device and the web browser.

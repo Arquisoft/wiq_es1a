@@ -10,6 +10,7 @@ services:
       - "27017:27017"
     networks:
       - mynetwork
+    restart: always
 
   questionservice:
       container_name: questionservice-${teamname:-defaultASW}
@@ -20,6 +21,7 @@ services:
         - "8003:8003"
       networks:
         - mynetwork
+      restart: always
 
   statsservice:
     container_name: statsservice-${teamname:-defaultASW}
@@ -34,6 +36,7 @@ services:
       - mynetwork
     environment:
       MONGODB_STATS_URI: mongodb://mongodb:27017/statsdb
+    restart: always
 
   authservice:
     container_name: authservice-${teamname:-defaultASW}
@@ -48,6 +51,7 @@ services:
       - mynetwork
     environment:
       MONGODB_URI: mongodb://mongodb:27017/userdb
+    restart: always
 
   userservice:
     container_name: userservice-${teamname:-defaultASW}
@@ -62,6 +66,7 @@ services:
       - mynetwork
     environment:
       MONGODB_URI: mongodb://mongodb:27017/userdb
+    restart: always
 
   gatewayservice:
     container_name: gatewayservice-${teamname:-defaultASW}
@@ -83,6 +88,7 @@ services:
       QUESTION_SERVICE_URL: http://questionservice:8003
       AUTH_SERVICE_URL: http://authservice:8002
       USER_SERVICE_URL: http://userservice:8001
+    restart: always
 
   webapp:
     container_name: webapp-${teamname:-defaultASW}
@@ -113,7 +119,7 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana-${teamname:-defaultASW}
-    profiles: ["dev"]
+    profiles: ["dev", "prod"]
     networks:
       - mynetwork
     volumes:

@@ -7,13 +7,12 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 === Whitebox Overall System
 
-The code is broken down in a structured way by levels, in which the internal dependencies of each element are taught. The system is divided into Whitebox and Blackbox.
+The code is broken down in a structured way by levels, in which the internal dependencies of each element are taught. The system is divided into Whitebox and Blackbox. 
 
-image::whiteBox5.1.png["Hierarchy of building blocks"]
+image::05-Overall.svg["Hierarchy of building blocks"]
 
 |===
 | *_Actors_* | *_Description_*
-| *_Admin_* | You have access to the entire app and can manage it to make it work properly.
 | *_User_* | It's the one that interacts directly with the app.
 |===
 
@@ -23,24 +22,65 @@ image::whiteBox5.1.png["Hierarchy of building blocks"]
 
 |===
 | *_Name_* | *_Description_*
-| *_Interface_* | The interface with which the user interacts
-| *_WikiData_* | Provide the questions that will be used in the app
-| *_MongoDB_* | Store user data
+| *_WIQ_* | The application which users will interact with.
+| *_Wikidata API_* | The API that will provide data to the application, in order to generate the questions.
+|===
+
+=== Level 1
+
+image::05-Level1.svg["Hierarchy of building blocks"]
+
+
+The system is divided into nine components, each of which is responsible for a specific task. These components are.
+
+|===
+| *_Component_* | *_Description_*
+| *_Webapp_* | The main component of the application, which will be responsible for the user interface and game logic.
+| *_Gateway service_* | The component that will be responsible for the communication between the web application and the other microservices.
+| *_Auth service_* | The component that will be responsible for the authentication of the users.
+| *_User service_* | The component that will be responsible for the user data.
+| *_Question service_* | The component that will be responsible for generating the questions.
+| *_Stats service_* | The component that will be responsible for the statistics of the game.
+| *_Prometheus service_* | The component that will be responsible for monitoring the application.
+| *_Grafana service_* | The component that will be responsible for visualizing the monitoring data.
+| *_MongoDB_* | The database that will store the user data.
 |===
 
 === Level 2
 
-image::Level2.png["Hierarchy of building blocks"]
+image::diagrama5.2.png["Hierarchy of building blocks"]
 
 .Motivation
 
 In this diagram we can see the decided microservices that will provide all the operations necessary for the 
 application to work properly.
 
+==== Question Service
+
+image::05-Question-service.svg["Hierarchy of building blocks"]
+
 |===
-| *_Name_* | *_Description_*
-| *_Game Service_* | It is the microservice that will be in charge of the correct functioning of the game and calculate the user's score.
-| *_UserData Service_* | It is the microservice that provides the necessary user data.
-| *_Authetification Service_* | It's a microservice that users use to sign in to your app.
-| *_Question Service_* | It is the microservice that will generate the questions through the WikiData API.
+| *_Building block_* | *_Description_*
+| *_Question service_* | The component that will be responsible for receiving requests from gateway service and responding with the questions.
+| *_Generator chooser_* | The component that will be responsible for generating generic generators, which will be used to generate the questions.
+| *_Generic generator_* | The component that will be responsible for generating the questions about one specific topic.
+|===
+
+==== Webapp
+
+image::05-Webapp.svg["Hierarchy of building blocks"]
+
+|===
+| *_Building block_* | *_Description_*
+| *_App_* | Main component of the application, which will be responsible for routing.
+| *_Home_* | The component that will be responsible for the home page.
+| *_Login_* | The component that will be responsible for the login page. 
+| *_Register_* | The component that will be responsible for the register page.
+| *_Clasico_* | The component that will be responsible for the classic game mode.
+| *_Batería de sabios_* | The component that will be responsible for the wise battery game mode.	
+| *_Calculadora_* | The component that will be responsible for the human calculator game mode.
+| *_Stats_* | The component that will be responsible for the statistics page.
+| *_Profile_* | The component that will be responsible for the profile page.
+| *_Settings_* | The component that will be responsible for the settings page.
+| *_Sobre_* | The component that will be responsible for the about page.
 |===
