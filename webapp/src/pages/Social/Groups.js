@@ -13,7 +13,7 @@ import {
   Tr,
   Th,
   Td,
-  Flex
+  Flex,
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";

@@ -23,7 +23,6 @@ const Stats = () => {
   const [stats, setStats] = useState(null);
   const [gamemode, setGamemode] = useState("clasico");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [fetched, setFetched] = useState(false);
 
   const fetchStats = (mode) => {
@@ -84,28 +83,6 @@ const Stats = () => {
         <Box>
           <Heading as="h2">{t("pages.stats.loading")}</Heading>
           <p>{t("pages.stats.loadingText")}</p>
-        </Box>
-        <Footer />
-      </>
-    );
-  }
-
-  if (error) {
-    return (
-      <>
-        <Nav />
-        <Box>
-          <label htmlFor="usernameInput">{t("pages.stats.username")}</label>
-          <Input
-            type="text"
-            id="usernameInput"
-            value={username}
-            onChange={handleUsernameChange}
-            data-testid="usernameInput"
-          />
-          <Button onClick={handleSearch}>{t("pages.stats.search")}</Button>
-          <Heading as="h2">{t("pages.stats.noStats")}</Heading>
-          <p marginTop="1rem">{t("pages.stats.searchText")}</p>
         </Box>
         <Footer />
       </>
