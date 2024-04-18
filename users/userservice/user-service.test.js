@@ -5,6 +5,8 @@ const { User } = require("./user-model");
 let mongoServer;
 let app;
 
+const username = "testuser";
+const friendUsername = "testfriend";
 const password = "testpassword";
 
 beforeAll(async () => {
@@ -57,8 +59,7 @@ describe("User Service", () => {
   it("should return user info on GET /userInfo", async () => {
     // Realizar la solicitud GET /userInfo
     const response = await request(app)
-      .get("/userInfo")
-      .query({ user: "testuser" });
+      .get("/userInfo/testuser");
 
     // Verificar la respuesta
     expect(response.status).toBe(200);
@@ -70,10 +71,8 @@ describe("User Service", () => {
     const response = await request(app).get("/userInfo");
 
     // Verificar la respuesta
-    expect(response.status).toBe(400);
-    expect(response.body).toEqual({
-      error: "Input debe ser una cadena de texto",
-    });
+    expect(response.status).toBe(404);
+    expect(response.body).toEqual({    });
   });
 
   it("should save game data for the user on POST /saveGameList", async () => {
@@ -119,12 +118,15 @@ describe("User Service", () => {
   });
 
   it("should add friend on POST /users/add-friend", async () => {
+
     const friend = {
       username: "testuser",
-      friend: "testfriend",
+      friendUsername: "testfriend",
     };
 
-    const response = await request(app).post("/users/add-friend").send(friend);
+    var response = await request(app).post("/adduser").send({username: friendUsername, password: password});
+
+    response = await request(app).post("/users/add-friend").send(friend);
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty(
       "message",
@@ -135,7 +137,7 @@ describe("User Service", () => {
   it("should return error 400 on POST /users/add-friend", async () => {
     const friend = {
       username: "testuser1",
-      friend: "testfriend",
+      friendUsername: "testfriend",
     };
 
     const response = await request(app).post("/users/add-friend").send(friend);
@@ -158,11 +160,11 @@ describe("User Service", () => {
 
   it("should remove friend on POST /users/remove-friend", async () => {
     const friend = {
-      username: "testuser",
-      friend: "testfriend",
+      username: username,
+      friendUsername: friendUsername,
     };
 
-    const response = await request(app)
+    response = await request(app)
       .post("/users/remove-friend")
       .send(friend);
     expect(response.status).toBe(200);
@@ -203,7 +205,7 @@ describe("User Service", () => {
   it("should get all users on GET /users", async () => {
     const response = await request(app).get("/users");
     expect(response.status).toBe(200);
-    expect(response.body).toHaveLength(1);
+    expect(response.body).toHaveLength(2);
   });
 
   it("should search for users on GET /users/search", async () => {
@@ -211,7 +213,7 @@ describe("User Service", () => {
       .get("/users/search")
       .query({ username: "testuser" });
     expect(response.status).toBe(200);
-    expect(response.body).toEqual([]);
+    expect(response.body).not.toEqual([]);
   });
 
   it("should search for users on GET /users/search and get not found", async () => {

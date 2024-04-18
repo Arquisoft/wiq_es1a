@@ -220,11 +220,13 @@ app.get("/friends", async (req, res) => {
 app.get("/userInfo/:user", async (req, res) => {
   try {
     const username = req.params.user;
-    console.log(username);
+    if(!username || typeof username !== "string" || username.trim() === ""){
+      throw new Error("Input debe ser una cadena de texto");
+    }
     const user = await User.findOne(
       { username: username }
     );
-    console.log(user);
+
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });
