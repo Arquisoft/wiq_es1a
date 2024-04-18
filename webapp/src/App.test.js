@@ -9,6 +9,7 @@ import i18n from "./i18n.js";
 
 
 describe("App Component", () => {
+
   beforeEach(() => {
     Object.defineProperty(window, "localStorage", {
       value: { getItem: jest.fn(), setItem: jest.fn(), removeItem: jest.fn() },
@@ -54,14 +55,19 @@ describe("Home Component", () => {
 });
 
 describe("Nav Component", () => {
-  test("renders Nav component with links and logout button", async () => {
-    const { getByText, getByRole } = render(
+
+  const renderNav= () => {
+    render(
       <I18nextProvider i18n={i18n}>
         <Router>
           <Nav />
         </Router>
       </I18nextProvider>
     );
+  };
+
+  test("renders Nav component with links and logout button", async () => {
+    const { getByText, getByRole } = renderNav();
 
     // Verificar que el logo esté presente
     expect(screen.getByText("WIQ")).toBeInTheDocument();
@@ -216,6 +222,26 @@ describe("Nav Component", () => {
 
     fireEvent.click(screen.getByTestId("friends"));
     expect(window.location.pathname).toBe("/social/amigos");
+
+    fireEvent.click(screen.getByTestId("groups"));
+    expect(window.location.pathname).toBe("/social/grupos");
+
+    fireEvent.click(screen.getByTestId("mygroups"));
+    expect(window.location.pathname).toBe("/social/misgrupos");
+  });
+
+  test("navigates to API Documentation page when API button in Help section is clicked", () => {
+    render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Nav />
+        </Router>
+      </I18nextProvider>
+    );
+
+    const button=screen.getByText("API docs");
+    fireEvent.click(button);
+    expect(window.location.pathname).toBe("/api-doc");
   });
 });
 describe("Footer Component", () => {

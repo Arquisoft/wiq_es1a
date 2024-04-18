@@ -34,7 +34,7 @@ app.post("/saveGame", async (req, res) => {
         gamemode: gamemode,
       });
       if (!stats) {
-        var ratioCorrect = 0;
+        let ratioCorrect = 0;
         if (gameData.incorrectAnswers + gameData.correctAnswers > 0) {
           ratioCorrect =
             (gameData.correctAnswers /
@@ -92,7 +92,7 @@ app.post("/saveGame", async (req, res) => {
 
 app.get("/stats", async (req, res) => {
   try {
-    var data = await Stats.findOne({
+    let data = await Stats.findOne({
       username: req.query.username,
       gamemode: req.query.gamemode,
     });
@@ -113,7 +113,7 @@ app.get("/ranking", async (req, res) => {
     let sortBy = req.query.filterBy;
     let gamemode = req.query.gamemode;
 
-    var data = await Stats.find({ gamemode: gamemode })
+    let data = await Stats.find({ gamemode: gamemode })
       .sort(sortBy)
       .limit(10);
 
