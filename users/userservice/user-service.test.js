@@ -7,7 +7,7 @@ let app;
 
 const username = "testuser";
 const friendUsername = "testfriend";
-const password = "testpassword";
+const password = "Testpassword1";
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
