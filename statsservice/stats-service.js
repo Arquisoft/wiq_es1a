@@ -5,8 +5,8 @@ const cors = require("cors");
 const Stats = require("./model/stats-model.js");
 const mongoose = require("mongoose");
 
-//NO SONAR
 const app = express();
+app.disable("x-powered-by");
 
 const port = 8004;
 
