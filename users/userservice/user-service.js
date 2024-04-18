@@ -54,7 +54,8 @@ app.post("/adduser", async (req, res) => {
     validateRequiredFields(req, ["username", "password"]);
 
     const username = req.body.username;
-
+    const password= req.body.password;
+    
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,}$/;
     if (!passwordRegex.test(password)) {
       return res.status(401).json({
