@@ -305,8 +305,8 @@ app.post('/group/add', async (req, res) => {
   try {
       validateRequiredFields(req, ['name', 'username']);
 
-      const name= req.body.name;
-      const username= req.body.username;
+      const name= checkInput(req.body.name);
+      const username= checkInput(req.body.username);
 
       if (!name) {
         return res.status(400).json({ error: 'Group name cannot be empty' });
