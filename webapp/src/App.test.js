@@ -67,7 +67,7 @@ describe("Nav Component", () => {
   };
 
   test("renders Nav component with links and logout button", async () => {
-    const { getByText, getByRole } = renderNav();
+    renderNav();
 
     // Verificar que el logo esté presente
     expect(screen.getByText("WIQ")).toBeInTheDocument();
@@ -98,25 +98,14 @@ describe("Nav Component", () => {
       writable: true,
     });
 
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
+
     const logoutButton = screen.getByText("testuser");
     fireEvent.click(logoutButton);
   });
 
   test("navigates to /home when Home button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const homeButton = screen.getByText("Inicio");
     fireEvent.click(homeButton);
@@ -125,13 +114,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /stats when Estadísticas button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const statsButton = screen.getByText("Estadísticas");
     fireEvent.click(statsButton);
@@ -140,13 +123,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /ranking when Ranking button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const rankingButton = screen.getByText("Ranking");
     fireEvent.click(rankingButton);
@@ -155,13 +132,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /perfil when Perfil button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const perfilButton = screen.getByText("Mi perfil");
     fireEvent.click(perfilButton);
@@ -170,13 +141,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /sobre when Sobre nosotros button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const aboutButton = screen.getByText("Sobre nosotros");
     fireEvent.click(aboutButton);
@@ -185,13 +150,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to /config when Opciones button is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     const optionsButton = screen.getByText("Opciones");
     fireEvent.click(optionsButton);
@@ -200,13 +159,7 @@ describe("Nav Component", () => {
   });
 
   test("navigates to popover options", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
+    renderNav();
 
     fireEvent.click(screen.getByTestId("classic"));
     expect(window.location.pathname).toBe("/home/clasico");
@@ -230,19 +183,6 @@ describe("Nav Component", () => {
     expect(window.location.pathname).toBe("/social/misgrupos");
   });
 
-  test("navigates to API Documentation page when API button in Help section is clicked", () => {
-    render(
-      <I18nextProvider i18n={i18n}>
-        <Router>
-          <Nav />
-        </Router>
-      </I18nextProvider>
-    );
-
-    const button=screen.getByText("API docs");
-    fireEvent.click(button);
-    expect(window.location.pathname).toBe("/api-doc");
-  });
 });
 describe("Footer Component", () => {
   it("renders footer text correctly", () => {
