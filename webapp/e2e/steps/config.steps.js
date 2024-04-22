@@ -23,7 +23,7 @@ defineFeature(feature, (test) => {
       .catch(() => {});
   });
 
-  test("The user can view the About Us page", ({ given, when, then }) => {
+  test("The user can view the Configuration page", ({ given, when, then }) => {
     let username;
     let password;
 
@@ -38,15 +38,17 @@ defineFeature(feature, (test) => {
       await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
-    when("I click on the About Us link", async () => {
-      await page.waitForSelector('[data-testid="about-us-link"]');
-      await page.click('[data-testid="about-us-link"]');
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
+    when("I click on the Configuration link", async () => {
+        await page.waitForSelector('[data-testid="profile-menu"]');
+        await page.click('[data-testid="profile-menu"]');
+        await page.waitForSelector('[data-testid="config-link"]');
+        await page.click('[data-testid="config-link"]');
+        await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
-    then("The About Us page should be shown on screen", async () => {
+    then("The Configuration page should be shown on screen", async () => {
       const url = page.url();
-      expect(url).toContain("/sobre");
+      expect(url).toContain("/config");
     });
   });
 
