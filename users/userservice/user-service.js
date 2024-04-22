@@ -250,7 +250,7 @@ app.get("/userGames", async (req, res) => {
       username,
     });
     if (!user) {
-      return res.status(404).json({ error: "Usuario no encontrado" });
+      return res.status(404).json({ error: "User not found" });
     }
     res.status(200).json(user.games);
   } catch (error) {
@@ -268,17 +268,21 @@ app.post("/saveGameList", async (req, res) => {
     let user = await User.findOne({ username: username });
 
     if (!user) {
-      return res.status(404).json({ error: "Usuario no encontrado" });
+      return res.status(404).json({ error: "User not found" });
     }
     const gameDataWithGamemode = { ...gameData, gamemode, questions };
-    console.log(gameDataWithGamemode);
+
+    if(gamemode!=="classic" && gamemode!=="bateria" && gamemode!=="calculadora"){
+      return res.status(422).json({ error: "Invalid gamemode" });
+    }
+
     user.games.push(gameDataWithGamemode);
 
     await user.save();
 
-    res.status(200).json({ message: "Partida guardada exitosamente" });
+    res.status(200).json({ message: "Game saved successfully" });
   } catch (error) {
-    res.status(400).json({ error: "Error al guardar partida en la lista: " + error.message });
+    res.status(400).json({ error: "Error while saving game on users list: " + error.message });
   }
 });
 
