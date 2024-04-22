@@ -7,7 +7,8 @@ let app;
 
 const username = "testuser";
 const friendUsername = "testfriend";
-const password = "testpassword";
+const password = "Testpassword1";
+const badPassword = "pass";
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
@@ -42,6 +43,20 @@ describe("User Service", () => {
     expect(response.status).toBe(400);
     expect(response.body).toEqual({
       error: "Missing required field: password",
+    });
+  });
+
+
+  it("should send password validation error on POST /adduser", async () => {
+    const newUser = {
+      username: "testuser",
+      password: badPassword,
+    };
+
+    const response = await request(app).post("/adduser").send(newUser);
+    expect(response.status).toBe(401);
+    expect(response.body).toEqual({
+      error: "Password must be at least 8 characters long, contain at least one uppercase letter, and at least one number.",
     });
   });
 
