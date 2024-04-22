@@ -23,13 +23,13 @@ defineFeature(feature, (test) => {
       .catch(() => {});
   });
 
-  test("The user can see his Profile page", ({ given, when, then }) => {
+  test("User can view the about us page", ({ given, when, then }) => {
     let username;
     let password;
 
     given("A logged-in user", async () => {
-      username="testuser";
-      password="Testpassword1";
+      username = "testuser";
+      password = "Testuser1";
       await page.waitForSelector("#login-username");
       await page.type("#login-username", username);
       await page.waitForSelector("#login-password");
@@ -38,17 +38,15 @@ defineFeature(feature, (test) => {
       await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
-    when("I click on the Profile link", async () => {
-      await page.waitForSelector('[data-testid="profile-menu"]');
-      await page.click('[data-testid="profile-menu"]');
-      await page.waitForSelector('[data-testid="profile-link"]');
-      await page.click('[data-testid="profile-link"]');
+    when("I click on the About Us link", async () => {
+      await page.waitForSelector('[data-testid="about-us-link"]');
+      await page.click('[data-testid="about-us-link"]');
       await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
-    then("The user's profile shoud be shown on screen", async () => {
+    then("The About Us page should be shown on screen", async () => {
       const url = page.url();
-      expect(url).toContain("/perfil/testuser");
+      expect(url).toContain("/sobre");
     });
   });
 
