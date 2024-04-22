@@ -23,30 +23,32 @@ defineFeature(feature, (test) => {
       .catch(() => {});
   });
 
-  test("User can view the about us page", ({ given, when, then }) => {
-    let username;
-    let password;
-
+  let username;
+  let password;
+    
+  test("The user can logout", ({ given, when, then }) => {
     given("A logged-in user", async () => {
       username = "testuser";
       password = "Testpassword1";
       await page.waitForSelector("#login-username");
       await page.type("#login-username", username);
-      await page.waitForSelector("#login-password");
-      await page.type("#login-password", password);
+      await page.waitForSelector("#register-password");
+      await page.type("#register-password", password);
       await page.click("button", { text: "Login" });
       await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
-    when("I click on the About Us link", async () => {
-      await page.waitForSelector('[data-testid="about-us-link"]');
-      await page.click('[data-testid="about-us-link"]');
+    when("I click on the Logout link", async () => {
+      await page.waitForSelector('[data-testid="profile-menu"]');
+      await page.click('[data-testid="profile-menu"]');
+      await page.waitForSelector('[data-testid="logout-link"]');
+      await page.click('[data-testid="logout-link"]');
       await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
-    then("The About Us page should be shown on screen", async () => {
+    then("The user should be logged out", async () => {
       const url = page.url();
-      expect(url).toContain("/sobre");
+      expect(url).toContain("/login");
     });
   });
 
