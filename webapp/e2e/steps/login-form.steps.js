@@ -27,27 +27,26 @@ defineFeature(feature, (test) => {
     let username;
     let password;
 
-    given("A registered user", async () => {
-      username = "pablo";
-      password = "pabloasw";
-      await expect(page).toClick("a", { text: "Regístrate" });
-    });
-
-    when("I fill the data in the form and press submit", async () => {
-      username = "testuser";
-      password = "Testpassword1";
-      await page.waitForSelector('#login-username');
-      await page.type('#login-username', username);
-      await page.waitForSelector('#register-password');
-      await page.type('#register-password', password);
+    given("A logged-in user", async () => {
+      await page.waitForSelector("#login-username");
+      await page.type("#login-username", "testuser");
+      await page.waitForSelector("#register-password");
+      await page.type("#register-password", "Testpassword1");
       await page.click("button", { text: "Login" });
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
-    then("The home screen should be shown", async () => {
-      await page.waitForTimeout(1000);
+    when("The user clicks on their profile", async () => {
+      await page.waitForSelector('[data-testid="profile-menu"]');
+      await page.click('[data-testid="profile-menu"]');
+      await page.waitForSelector('[data-testid="profile-link"]');
+      await page.click('[data-testid="profile-link"]');
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
+    });
+
+    then("The user's profile page should be displayed", async () => {
       const url = page.url();
-      expect(url).toContain("/home");
-      browser.close();
+      expect(url).toContain("/perfil/testuser");
     });
   });
 
