@@ -3,7 +3,7 @@ const { defineFeature, loadFeature } = require("jest-cucumber");
 const setDefaultOptions = require("expect-puppeteer").setDefaultOptions;
 const { expect } = require("expect-puppeteer");
 
-const feature = loadFeature("./features/play-classic.feature");
+const feature = loadFeature("./features/play-calculator.feature");
 
 let page;
 let browser;
@@ -21,7 +21,7 @@ defineFeature(feature, (test) => {
     });
   });
 
-  test("The user can answer a question on Classic mode", ({ given, when, then }) => {
+  test("The user can answer a question on Human Calculator mode", ({ given, when, then }) => {
     given("A logged-in user", async () => {
 
       await page.type("#login-username", "testuser");
@@ -30,33 +30,33 @@ defineFeature(feature, (test) => {
       await page.waitForNavigation();
     });
 
-    when("I play on Classic mode and click on an answer", async () => {
-      await page.click('[data-testid="classic"]');
+    when("I play on Human Calculator mode and answer incorrectly", async () => {
+
+      await page.click('[data-testid="calculator"]');
       await page.waitForNavigation();
 
-      await page.waitForSelector('[data-testid="question"]');
+      await page.waitForSelector('[data-testid="operation"]');
 
-      await page.click('[data-testid="answer-button"]');
+      const operation = await page.evaluate(() => {
+        return document.querySelector('[data-testid="operation"]').textContent;
+      });
+
+      const answer = -1;
+
+      await page.type('[data-testid="answer-input"]', answer.toString());
+
+      await page.click('[data-testid="submit-button"]');
     });
 
-    then("The right answer should be colored green", async () => {
-        await page.waitForTimeout(3000);
-      
-        const answerButtons = await page.$$('[data-testid^="answer-button"]');
-        let isGreen = false;
-      
-        for (const button of answerButtons) {
-          const buttonColor = await button.evaluate((el) => {
-            return window.getComputedStyle(el).getPropertyValue("background-color");
-          });
-          if (buttonColor === "rgb(16, 255, 0)") {
-            isGreen = true;
-            break;
-          }
-        }
-      
-        expect(isGreen).toBe(true);
+    then("The game ends", async () => {
+      await page.waitForSelector('[data-testid="game-over"]');
+
+      const gameOverMessage = await page.evaluate(() => {
+        return document.querySelector('[data-testid="game-over"]').textContent;
       });
+
+      expect(gameOverMessage).toContain("¡Juego terminado!");
+    });
   });
 
   afterAll(async () => {

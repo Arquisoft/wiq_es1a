@@ -175,7 +175,7 @@ const CalculadoraHumana = () => {
               <Heading as="h2">{t('pages.humancalculator.finished')}</Heading>
               <p p={2}>Tu puntuación: {puntuacion}</p>
               <Flex flexDirection={"column"}>
-                <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
+                <Button onClick={handleRepetirJuego} colorScheme="teal" m={2} data-testid="play-again-button">
                   {t('pages.humancalculator.playAgain')}
                 </Button>
                 <Link to="/home" style={{ marginLeft: "10px" }}>
@@ -185,8 +185,8 @@ const CalculadoraHumana = () => {
             </Box>
           ) : (
             <Box>
-              <Heading as="h2" mb={4}>
-                ¿{operation}?
+              <Heading as="h2" mb={4} data-testid="operation">
+                {operation} = ?
               </Heading>
               <Input
                 type="number"
@@ -194,8 +194,9 @@ const CalculadoraHumana = () => {
                 value={valSubmit}
                 onChange={(e) => setValSubmit(e.target.value)}
                 onKeyDown={handleKeyDown}
+                data-testid="answer-input"
               />
-              <Button mt={3} onClick={() => handleAnswer(Number(valSubmit))}>
+              <Button mt={3} onClick={() => handleAnswer(Number(valSubmit))} data-testid="submit-button">
                 {" "}
                 Enviar{" "}
               </Button>
