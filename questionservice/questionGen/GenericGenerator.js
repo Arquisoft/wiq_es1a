@@ -67,7 +67,7 @@ class GenericGenerator {
                 this.props
               ).join(" ")}
               WHERE {
-                  ?entity wdt:P31 wd:${this.entity};            
+                  ?entity ${this.entity};            
                       ${this.#generateProps(this.props)} .
                   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
               }

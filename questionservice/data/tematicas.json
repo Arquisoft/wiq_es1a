@@ -1,6 +1,6 @@
 {
   "paises": {
-    "entity": "Q6256",
+    "entity": "wdt:P31 wd:Q6256",
     "props": [
       "P36",
       "P35",
@@ -53,7 +53,7 @@
     ]
   },
   "literatura": {
-    "entity": "Q7725634",
+    "entity": "wdt:P31 wd:Q7725634",
     "props": ["P50", "P577", "P136", "P674"],
     "types": ["str", "date", "str", "str"],
     "preguntas": [
@@ -76,7 +76,7 @@
     ]
   },
   "cine": {
-    "entity": "Q11424",
+    "entity": "wdt:P31 wd:Q11424",
     "props": ["P577", "P57", "P2130"],
     "types": ["date", "str", "num"],
     "preguntas": [
@@ -95,7 +95,7 @@
     ]
   },
   "arte": {
-    "entity": "Q3305213",
+    "entity": "wdt:P31 wd:Q3305213",
     "props": ["P571", "P135", "P276"],
     "types": ["date", "str", "str"],
     "preguntas": [
@@ -114,7 +114,7 @@
     ]
   },
   "programacion": {
-    "entity": "Q9143",
+    "entity": "wdt:P31 wd:Q9143",
     "props": ["P571", "P287", "P348", "P1195"],
     "types": ["date", "str", "str", "str"],
     "preguntas": [
@@ -164,7 +164,7 @@
     ]
   },
   "clubes": {
-    "entity": "Q476028",
+    "entity": "wdt:P31 wd:Q476028",
     "props": ["P571", "P159", "P17", "P112", "P115", "P286"],
     "types": ["date", "str", "str", "str", "str"],
     "preguntas": [
@@ -192,6 +192,87 @@
         "es": "¿Cuál es el entrenador del club de fútbol %?",
         "en": "Who is the coach of the football club %?"
       }
+    ]
+  },
+  "baloncestistas": {
+    "entity": "wdt:P106 wd:Q3665646",
+    "props": ["P413", "P2031", "P54", "P2048", "P1618"],
+    "types": ["str", "date", "str", "str", "str"],
+    "preguntas": [
+      {
+        "es": "¿En qué posición juega el baloncestista %?",
+        "en": "In what position does the basketball player % play?"
+      },
+      {
+        "es": "¿Cuál es la fecha de inicio de la carrera del baloncestista %?",
+        "en": "What is the start date of the basketball player % career?"
+      },
+      {
+        "es": "¿Cuál es el equipo actual del baloncestista %?",
+        "en": "What is the current team of the basketball player %?"
+      },
+      {
+        "es": "¿Cuál es la altura del baloncestista %?",
+        "en": "What is the height of the basketball player %?"
+      },
+      {
+        "es": "¿Cuál es el número del baloncestista %?",
+        "en": "What is the number of the basketball player %?"
+      }
+    ]
+  },
+  "politica": {
+    "entity": "wdt:P31 wd:Q6065085",
+    "props": ["P571", "P112", "P3975", "P1387", "P1142"],
+    "types": ["date", "str", "str", "str", "str"],
+    "preguntas": [
+        {
+            "es": "¿En qué fecha se fundó el partido político %?",
+            "en": "On what date was the political party % founded?"
+        },
+        {
+            "es": "¿Quién es el fundador del partido político %?",
+            "en": "Who is the founder of the political party %?"
+        },
+        {
+            "es": "¿Quién es el secretario general del partido político %?",
+            "en": "Who is the general secretary of the political party %?"
+        },
+        {
+            "es": "¿Cuál es la posición en el espectro político del partido %?",
+            "en": "What is the position on the political spectrum of the party %?"
+        },
+        {
+            "es": "¿Cuál es una de las ideologías del partido político %?",
+            "en": "What is one of the ideologies of the political party %?"
+        }
+    ]
+  },
+  "videojuegos": {
+    "entity": "wdt:P31 wd:Q7889",
+    "props": ["P136", "P123", "P495", "P577", "P57"],
+    "types": ["str", "str", "str", "date", "str"],
+    "preguntas": [
+        {
+            "es": "¿Cuál es el género del videojuego %?",
+            "en": "What is the genre of the video game %?"
+        },
+        {
+            "es": "¿Quién es el desarrollador del videojuego %?",
+            "en": "Who is the developer of the video game %?"
+        },
+        {
+            "es": "¿En qué país se desarrolló el videojuego %?",
+            "en": "In which country was the video game % developed?"
+        },
+        {
+            "es": "¿En qué fecha se lanzó el videojuego %?",
+            "en": "On what date was the video game % released?"
+        },
+        {
+            "es": "¿Quién es el director del videojuego %?",
+            "en": "Who is the director of the video game %?"
+        }
     ]
   }
 }
