@@ -118,6 +118,21 @@ const Config = () => {
               <Checkbox id="programacion" mb={2}>
                 {t('pages.config.programming')}
               </Checkbox>
+              <Checkbox id="futbolistas" mb={2}>
+                {t('pages.config.futbolistas')}
+              </Checkbox>
+              <Checkbox id="clubes" mb={2}>
+                {t('pages.config.clubes')}
+              </Checkbox>
+              <Checkbox id="baloncestistas" mb={2}>
+                {t('pages.config.baloncestistas')}
+              </Checkbox>
+              <Checkbox id="politica" mb={2}>
+                {t('pages.config.politica')}
+              </Checkbox>
+              <Checkbox id="videojuegos" mb={2}>
+                {t('pages.config.videojuegos')}
+              </Checkbox>
             </Stack>
           </Box>
 

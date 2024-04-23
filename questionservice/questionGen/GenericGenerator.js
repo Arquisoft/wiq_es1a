@@ -73,8 +73,7 @@ class GenericGenerator {
               }
               LIMIT 10000
           `;
-
-    console.log(sparqlQuery);
+          
     const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
       sparqlQuery
     )}&format=json`;
