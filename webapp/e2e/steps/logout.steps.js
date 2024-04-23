@@ -32,8 +32,8 @@ defineFeature(feature, (test) => {
       password = "Testpassword1";
       await page.waitForSelector("#login-username");
       await page.type("#login-username", username);
-      await page.waitForSelector("#register-password");
-      await page.type("#register-password", password);
+      await page.waitForSelector("#login-password");
+      await page.type("#login-password", password);
       await page.click("button", { text: "Login" });
       await page.waitForNavigation({ waitUntil: "networkidle0" });
     });

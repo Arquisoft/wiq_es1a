@@ -24,8 +24,10 @@ defineFeature(feature, (test) => {
   test("The user can answer a question on Classic mode", ({ given, when, then }) => {
     given("A logged-in user", async () => {
 
-      await page.type("#login-username", "testuser");
-      await page.type("#login-password", "Testpassword1");
+      await page.waitForSelector("#login-username");
+      await page.type("#login-username", username);
+      await page.waitForSelector("#login-password");
+      await page.type("#login-password", password);
       await page.click("button", { text: "Login" });
       await page.waitForNavigation();
     });
