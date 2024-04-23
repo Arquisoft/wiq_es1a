@@ -96,19 +96,27 @@ const Ranking = () => {
 
   if (isLoading) {
     return (
+      <>
+    <Nav/>
       <div>
         <Heading as="h2">{t('pages.ranking.loading')}</Heading>
         <p>{t('pages.ranking.loadingText')}</p>
       </div>
+      <Footer/>
+      </>
     );
   }
 
   if (error) {
     return (
+      <>
+    <Nav/>
       <div>
         <Heading as="h2">{t('pages.ranking.error')} {error}</Heading>
         <p>{t('pages.ranking.errorLabel')}</p>
       </div>
+      <Footer/>
+    </>
     );
   }
 
