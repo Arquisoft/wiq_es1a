@@ -94,7 +94,7 @@ describe("User Service", () => {
     // Datos de la partida a guardar
     const gameData = {
       username: "testuser",
-      gameMode: "classic",
+      gameMode: "clasico",
       gameData: {
         points: 100,
         correctAnswers: 8,
@@ -115,7 +115,7 @@ describe("User Service", () => {
     // Datos de la partida a guardar
     const gameData = {
       username: "testuseraaa",
-      gameMode: "classic",
+      gameMode: "clasico",
       gameData: {
         points: 100,
         correctAnswers: 8,
