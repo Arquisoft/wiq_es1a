@@ -272,7 +272,7 @@ app.post("/saveGameList", async (req, res) => {
     }
     const gameDataWithGamemode = { ...gameData, gamemode, questions };
 
-    if(gamemode!=="classic" && gamemode!=="bateria" && gamemode!=="calculadora"){
+    if(gamemode!=="clasico" && gamemode!=="bateria" && gamemode!=="calculadora"){
       return res.status(422).json({ error: "Invalid gamemode" });
     }
 

@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(r);
 
 localStorage.setItem(
   "selectedThemes",
-  JSON.stringify(["paises", "literatura", "cine", "arte", "programacion"])
+  JSON.stringify(["paises", "literatura", "cine", "arte", "programacion", "futbolistas", "clubes", "baloncestistas", "politica", "videojuegos"])
 );
 localStorage.setItem("clasicoTime", 10);
 localStorage.setItem("clasicoPreguntas", 10);

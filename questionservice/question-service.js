@@ -69,7 +69,7 @@ app.post("/questions", async (req, res) => {
     const tematicasValidas =
       temas.length !== 0
         ? temas
-        : ["paises", "literatura", "cine", "arte", "programacion"];
+        : ["paises", "literatura", "cine", "arte", "programacion", "futbolistas", "clubes", "baloncestistas", "politica", "videojuegos"];
     const cantidadPreguntas = parseInt(n, 10);
     const data = gen.getQuestionsPost(tematicasValidas, cantidadPreguntas, locale);
     res.json(data);

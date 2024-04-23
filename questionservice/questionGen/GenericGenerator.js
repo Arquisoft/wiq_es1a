@@ -67,13 +67,13 @@ class GenericGenerator {
                 this.props
               ).join(" ")}
               WHERE {
-                  ?entity wdt:P31 wd:${this.entity};            
+                  ?entity ${this.entity};            
                       ${this.#generateProps(this.props)} .
                   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
               }
               LIMIT 10000
           `;
-
+          
     const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
       sparqlQuery
     )}&format=json`;
@@ -102,19 +102,19 @@ class GenericGenerator {
 
     var respuestaCorrecta = "";
     var propIndex = 0;
-    do{
+    do {
       propIndex = Math.floor(Math.random() * propiedades.length);
       var propiedadPregunta = propiedades[propIndex];
 
       // Obtener la respuesta correcta
       respuestaCorrecta =
         entidad[propiedadPregunta][entidad[propiedadPregunta].length - 1];
-    }while(/^Q\d+/.test(respuestaCorrecta));
+    } while (/^Q\d+/.test(respuestaCorrecta));
 
     var questionObj = {
       pregunta: "",
       respuestas: [respuestaCorrecta],
-      correcta: respuestaCorrecta
+      correcta: respuestaCorrecta,
     };
 
     // Obtener respuestas incorrectas
@@ -130,7 +130,6 @@ class GenericGenerator {
         !entidad[propiedadPregunta].includes(prop) &&
         !/^Q\d+/.test(prop) &&
         entidadLabel != prop
-
       ) {
         questionObj.respuestas.push(prop);
       }
@@ -139,21 +138,26 @@ class GenericGenerator {
     // Barajar las opciones de respuesta
     questionObj.respuestas.sort(() => Math.random() - 0.5);
 
-    switch(this.types[propIndex]){
+    switch (this.types[propIndex]) {
       case "date":
-        questionObj.respuestas = questionObj.respuestas.map(x => this.#dateFormatter(x));
+        questionObj.respuestas = questionObj.respuestas.map((x) =>
+          this.#dateFormatter(x)
+        );
         questionObj.correcta = this.#dateFormatter(questionObj.correcta);
         break;
       case "num":
-        questionObj.respuestas = questionObj.respuestas.map(x => parseFloat(x).toFixed(2));
+        questionObj.respuestas = questionObj.respuestas.map((x) =>
+          parseFloat(x).toFixed(2)
+        );
         questionObj.correcta = parseFloat(questionObj.correcta).toFixed(2);
         break;
       default:
         break;
     }
-    questionObj.pregunta =
-      this.preguntasMap.get(propiedadPregunta)[locale].replace('%', entidadLabel);
-    
+    questionObj.pregunta = this.preguntasMap
+      .get(propiedadPregunta)
+      [locale].replace("%", entidadLabel);
+
     return questionObj;
   }
 
@@ -170,18 +174,20 @@ class GenericGenerator {
 
   #dateFormatter(fecha) {
     var isAC = false;
-    if(fecha.startsWith('-')){
-        isAC = true;
-        fecha = fecha.substring(1);
+    if (fecha.startsWith("-")) {
+      isAC = true;
+      fecha = fecha.substring(1);
     }
 
-    const [año, mes, dia] = fecha.split('T')[0].split('-').map(n => Number.parseInt(n).toFixed());
+    const [año, mes, dia] = fecha
+      .split("T")[0]
+      .split("-")
+      .map((n) => Number.parseInt(n).toFixed());
 
-    const fechaFormateada = `${dia}/${mes}/${año}${isAC ? ' a.C.' : ''}`;
-    
+    const fechaFormateada = `${dia}/${mes}/${año}${isAC ? " a.C." : ""}`;
+
     return fechaFormateada;
-}
-
+  }
 }
 
 module.exports = GenericGenerator;
