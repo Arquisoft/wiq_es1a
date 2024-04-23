@@ -1,129 +1,197 @@
 {
-    "paises": {
-        "entity": "Q6256",
-        "props": ["P36", "P35", "P1344", "P37", "P47", "P2250", "P571", "P122", "P1451"],
-        "types": ["str", "str", "str", "str", "str", "num", "date", "str", "str"],
-        "preguntas": [
-            {
-                "es": "¿Cuál es la capital de %?",
-                "en": "What is the capital of %?"
-            },
-            {
-                "es": "¿Quién es el jefe de estado de % ?",
-                "en": "Who is the head of state of %?"
-            },
-            {
-                "es": "¿En qué evento histórico participó % ?",
-                "en": "In what historical event did % participate?"
-            },
-            {
-                "es": "¿Cuál es uno de los idiomas oficiales de % ?",
-                "en": "What is one of the official languages of %?"
-            },
-            {
-                "es": "¿Con qué país comparte frontera % ?",
-                "en": "Which country shares a border with %?"
-            },
-            {
-                "es": "¿Cuál es la esperanza de vida media de % ?",
-                "en": "What is the average life expectancy of %?"
-            },
-            {
-                "es": "¿En qué fecha se fundó % ?",
-                "en": "On what date was % founded?"
-            },
-            {
-                "es": "¿Cuál es la forma de gobierno de % ?",
-                "en": "What is the form of government of %?"
-            },
-            {
-                "es": "¿Cuál es el lema de % ?",
-                "en": "What is the motto of %?"
-            }
-        ]
-    },
-    "literatura": {
-        "entity": "Q7725634",
-        "props": ["P50", "P577", "P136", "P674"],
-        "types": ["str", "date", "str", "str"],
-        "preguntas": [
-            {
-                "es": "¿Quién es el autor de la obra literaria % ?",
-                "en": "Who is the author of the literary work %?"
-            },
-            {
-                "es": "¿Cuál fue la fecha de publicación de la obra literaria % ?",
-                "en": "What was the publication date of the literary work %?"
-            },
-            {
-                "es": "¿Cuál es el género de la obra literaria % ?",
-                "en": "What is the genre of the literary work %?"
-            },
-            {
-                "es": "¿Cuál es uno de los personajes de la obra literaria % ?",
-                "en": "Who is one of the characters in the literary work %?"
-            }
-        ]
-    },
-    "cine": {
-        "entity": "Q11424",
-        "props": ["P577", "P57", "P2130"],
-        "types": ["date", "str", "num"],
-        "preguntas": [
-            {
-                "es": "¿En qué fecha se estrenó el film % ?",
-                "en": "On what date was the film % released?"
-            },
-            {
-                "es": "¿Quién es director de la película % ?",
-                "en": "Who is the director of the movie %?"
-            },
-            {
-                "es": "¿Cuál fue el presupuesto (en USD) de la película % ?",
-                "en": "What was the budget (in USD) of the movie %?"
-            }
-        ]
-    },
-    "arte": {
-        "entity": "Q3305213",
-        "props": ["P571", "P135", "P276"],
-        "types": ["date", "str", "str"],
-        "preguntas": [
-            {
-                "es": "¿En qué año se pintó la obra % ?",
-                "en": "In what year was the artwork % painted?"
-            },
-            {
-                "es": "¿A qué movimiento artístico pertenece la obra % ?",
-                "en": "To which artistic movement does the artwork % belong?"
-            },
-            {
-                "es": "¿Dónde está exhibida la obra % ?",
-                "en": "Where is the artwork % exhibited?"
-            }
-        ]
-    },
-    "programacion": {
-        "entity": "Q9143",
-        "props": ["P571", "P287", "P348", "P1195"],
-        "types": ["date", "str", "str", "str"],
-        "preguntas": [
-            {
-                "es": "¿En qué fecha se creó el lenguaje de programación % ?",
-                "en": "On what date was the programming language % created?"
-            },
-            {
-                "es": "¿Quién es el creador del lenguaje de programación % ?",
-                "en": "Who is the creator of the programming language %?"
-            },
-            {
-                "es": "¿Cuál es la última versión del lenguaje de programación % ?",
-                "en": "What is the latest version of the programming language %?"
-            },
-            {
-                "es": "¿Cuál es una de las extensiones usadas por el lenguaje de programación % ?",
-                "en": "What is one of the extensions used by the programming language %?"
-            }
-        ]
-    }
+  "paises": {
+    "entity": "Q6256",
+    "props": [
+      "P36",
+      "P35",
+      "P1344",
+      "P37",
+      "P47",
+      "P2250",
+      "P571",
+      "P122",
+      "P1451"
+    ],
+    "types": ["str", "str", "str", "str", "str", "num", "date", "str", "str"],
+    "preguntas": [
+      {
+        "es": "¿Cuál es la capital de %?",
+        "en": "What is the capital of %?"
+      },
+      {
+        "es": "¿Quién es el jefe de estado de % ?",
+        "en": "Who is the head of state of %?"
+      },
+      {
+        "es": "¿En qué evento histórico participó %?",
+        "en": "In what historical event did % participate?"
+      },
+      {
+        "es": "¿Cuál es uno de los idiomas oficiales de %?",
+        "en": "What is one of the official languages of %?"
+      },
+      {
+        "es": "¿Con qué país comparte frontera %?",
+        "en": "Which country shares a border with %?"
+      },
+      {
+        "es": "¿Cuál es la esperanza de vida media de %?",
+        "en": "What is the average life expectancy of %?"
+      },
+      {
+        "es": "¿En qué fecha se fundó %?",
+        "en": "On what date was % founded?"
+      },
+      {
+        "es": "¿Cuál es la forma de gobierno de %?",
+        "en": "What is the form of government of %?"
+      },
+      {
+        "es": "¿Cuál es el lema de %?",
+        "en": "What is the motto of %?"
+      }
+    ]
+  },
+  "literatura": {
+    "entity": "Q7725634",
+    "props": ["P50", "P577", "P136", "P674"],
+    "types": ["str", "date", "str", "str"],
+    "preguntas": [
+      {
+        "es": "¿Quién es el autor de la obra literaria %?",
+        "en": "Who is the author of the literary work %?"
+      },
+      {
+        "es": "¿Cuál fue la fecha de publicación de la obra literaria %?",
+        "en": "What was the publication date of the literary work %?"
+      },
+      {
+        "es": "¿Cuál es el género de la obra literaria %?",
+        "en": "What is the genre of the literary work %?"
+      },
+      {
+        "es": "¿Cuál es uno de los personajes de la obra literaria %?",
+        "en": "Who is one of the characters in the literary work %?"
+      }
+    ]
+  },
+  "cine": {
+    "entity": "Q11424",
+    "props": ["P577", "P57", "P2130"],
+    "types": ["date", "str", "num"],
+    "preguntas": [
+      {
+        "es": "¿En qué fecha se estrenó el film %?",
+        "en": "On what date was the film % released?"
+      },
+      {
+        "es": "¿Quién es director de la película %?",
+        "en": "Who is the director of the movie %?"
+      },
+      {
+        "es": "¿Cuál fue el presupuesto (en USD) de la película %?",
+        "en": "What was the budget (in USD) of the movie %?"
+      }
+    ]
+  },
+  "arte": {
+    "entity": "Q3305213",
+    "props": ["P571", "P135", "P276"],
+    "types": ["date", "str", "str"],
+    "preguntas": [
+      {
+        "es": "¿En qué año se pintó la obra %?",
+        "en": "In what year was the artwork % painted?"
+      },
+      {
+        "es": "¿A qué movimiento artístico pertenece la obra %?",
+        "en": "To which artistic movement does the artwork % belong?"
+      },
+      {
+        "es": "¿Dónde está exhibida la obra %?",
+        "en": "Where is the artwork % exhibited?"
+      }
+    ]
+  },
+  "programacion": {
+    "entity": "Q9143",
+    "props": ["P571", "P287", "P348", "P1195"],
+    "types": ["date", "str", "str", "str"],
+    "preguntas": [
+      {
+        "es": "¿En qué fecha se creó el lenguaje de programación %?",
+        "en": "On what date was the programming language % created?"
+      },
+      {
+        "es": "¿Quién es el creador del lenguaje de programación %?",
+        "en": "Who is the creator of the programming language %?"
+      },
+      {
+        "es": "¿Cuál es la última versión del lenguaje de programación %?",
+        "en": "What is the latest version of the programming language %?"
+      },
+      {
+        "es": "¿Cuál es una de las extensiones usadas por el lenguaje de programación %?",
+        "en": "What is one of the extensions used by the programming language %?"
+      }
+    ]
+  },
+  "futbolistas": {
+    "entity": "wdt:P106 wd:Q937857",
+    "props": ["P569", "P413", "P1618", "P2048", "P103"],
+    "types": ["date", "str", "str", "str", "str"],
+    "preguntas": [
+      {
+        "es": "¿En qué fecha nació el futbolista %?",
+        "en": "On what date was the footballer % born?"
+      },
+      {
+        "es": "¿En posición juega el futbolista %?",
+        "en": "In what position does the footballer % play?"
+      },
+      {
+        "es": "¿Qué número de camiseta usa el futbolista %?",
+        "en": "What shirt number does the footballer % wear?"
+      },
+      {
+        "es": "¿Cuál es la altura del futbolista %?",
+        "en": "What is the height of the footballer %?"
+      },
+      {
+        "es": "¿Cuál es la lengua materna del futbolista %?",
+        "en": "What is the mother tongue of the footballer %?"
+      }
+    ]
+  },
+  "clubes": {
+    "entity": "Q476028",
+    "props": ["P571", "P159", "P17", "P112", "P115", "P286"],
+    "types": ["date", "str", "str", "str", "str"],
+    "preguntas": [
+      {
+        "es": "¿En qué año se fundó el club de fútbol %?",
+        "en": "In what year was the club % founded?"
+      },
+      {
+        "es": "¿En qué ciudad se encuentra la sede del club de fútbol %?",
+        "en": "In what city is the headquarters of the club %?"
+      },
+      {
+        "es": "¿De qué país es originario el club de fútbol %?",
+        "en": "From which country is the club %?"
+      },
+      {
+        "es": "¿Quién es el fundador el club de fútbol %?",
+        "en": "Who is the founder of the football club %?"
+      },
+      {
+        "es": "¿Cuál es el estadio del club de fútbol %?",
+        "en": "What is the stadium of the football club %?"
+      },
+      {
+        "es": "¿Cuál es el entrenador del club de fútbol %?",
+        "en": "Who is the coach of the football club %?"
+      }
+    ]
+  }
 }
