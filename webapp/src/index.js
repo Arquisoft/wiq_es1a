@@ -7,9 +7,16 @@ import './themes.js';
 import './index.css';
 // eslint-disable-next-line no-unused-vars
 import i18n from './i18n.js';
+import favicon from '../public/favicon.png';
 
 var r = document.getElementById("root");
 const root = ReactDOM.createRoot(r);
+
+var link = document.createElement('link');
+link.type = 'image/png';
+link.rel = 'icon';
+link.href = favicon;
+document.head.appendChild(link);
 
 localStorage.setItem(
   "selectedThemes",
