@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 const { defineFeature, loadFeature } = require("jest-cucumber");
 const setDefaultOptions = require("expect-puppeteer").setDefaultOptions;
 const { expect } = require("expect-puppeteer");
-const feature = loadFeature("./features/register-form.feature");
+const feature = loadFeature("./features/profile.feature");
 
 let page;
 let browser;
