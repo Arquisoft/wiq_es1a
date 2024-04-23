@@ -1,7 +1,15 @@
 const axios = require("axios");
 
+// El generador hace una query a Wikidata por idioma
+const LANGUAGES = ["es", "en"];
+
 class GenericGenerator {
   constructor(entity, props, types, preguntas) {
+    this.data = {};
+    for (let i = 0; i < LANGUAGES.length; i++) {
+      this.data[LANGUAGES[i]] = {};
+    }
+
     this.entity = entity;
     this.props = props;
     this.types = types;
@@ -62,40 +70,44 @@ class GenericGenerator {
 
   // Función para realizar la consulta SPARQL y obtener los datos de Wikidata
   async getData() {
-    const sparqlQuery = `
+    for (let i = 0; i < LANGUAGES.length; i++) {
+      const sparqlQuery = `
               SELECT DISTINCT ?entityLabel ${this.#generateLabels(
                 this.props
               ).join(" ")}
               WHERE {
                   ?entity ${this.entity};            
                       ${this.#generateProps(this.props)} .
-                  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
+                  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],${
+                    LANGUAGES[i]
+                  }" }
               }
               LIMIT 10000
           `;
-          
-    const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
-      sparqlQuery
-    )}&format=json`;
 
-    await axios
-      .get(url)
-      .then((response) => {
-        const data = response.data;
-        this.data = data.results.bindings.groupByEntity();
-      })
-      .catch((error) => {
-        console.error("Error fetching data: " + error.message);
-      });
+      var url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
+        sparqlQuery
+      )}&format=json`;
+
+      await axios
+        .get(url)
+        .then((response) => {
+          const data = response.data;
+          this.data[LANGUAGES[i]] = data.results.bindings.groupByEntity();
+        })
+        .catch((error) => {
+          console.error("Error fetching data: " + error.message);
+        });
+    }
   }
 
   generateRandomQuestion(locale) {
     // Elegir aleatoriamente una entidad del array
-    var entidades = Object.keys(this.data);
+    var entidades = Object.keys(this.data[locale]);
     const entidadLabel =
       entidades[Math.floor(Math.random() * entidades.length)];
 
-    const entidad = this.data[entidadLabel];
+    const entidad = this.data[locale][entidadLabel];
 
     // Elegir aleatoriamente una propiedad de la entidad para hacer la pregunta
     const propiedades = this.propLabels;
@@ -121,7 +133,7 @@ class GenericGenerator {
     while (questionObj.respuestas.length < 4) {
       const otroPaisLabel =
         entidades[Math.floor(Math.random() * entidades.length)];
-      const otroPais = this.data[otroPaisLabel];
+      const otroPais = this.data[locale][otroPaisLabel];
       let prop = otroPais[propiedadPregunta][0];
 
       // Si no está en las propiedades de la entidad de la pregunta

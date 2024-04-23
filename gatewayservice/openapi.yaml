@@ -399,7 +399,7 @@ paths:
           name: tematica
           schema:
             type: string
-            enum: [paises, literatura, cine, arte, programacion]
+            enum: [paises, literatura, cine, arte, programacion, "futbolistas", "clubes", "baloncestistas", "politica", "videojuegos"]
           description: Category of questions to retrieve
         - in: query
           name: n
@@ -468,7 +468,7 @@ paths:
               properties:
                 tematicas:
                   type: string
-                  enum: [paises, literatura, cine, arte, programacion]
+                  enum: [paises, literatura, cine, arte, programacion, "futbolistas", "clubes", "baloncestistas", "politica", "videojuegos"]
                 n:
                   type: integer
                 locale:
