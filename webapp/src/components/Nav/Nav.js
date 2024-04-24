@@ -325,6 +325,17 @@ const Nav = () => {
                       <Link href="/ranking" data-testid="home-ranking-link">{t("components.nav.ranking")}</Link>
                     </Flex>
                   </Box>
+
+                  <Box>
+                    <Flex flexDirection={"column"}>
+                      <Link href="/config" data-testid="home-config-link">
+                        {t("components.nav.config")}
+                      </Link>
+                      <Link href="/sobre" data-testid="home-sobre-link">
+                        {t("components.nav.about")}
+                      </Link>
+                    </Flex>
+                  </Box>
                 </Stack>
               </DrawerBody>
             </DrawerContent>

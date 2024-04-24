@@ -39,8 +39,9 @@ defineFeature(feature, (test) => {
     });
 
     when("I click on the Groups link and create a group", async () => {
-      await page.click('[data-testid="groups"]');
-      await page.waitForNavigation();
+      await page.click('button[aria-label="Abrir menú"]');
+      await page.click('[data-testid="home-grupos-link"]');
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
 
       await page.waitForSelector('[name="name"]');
       await page.type('[name="name"]', "Test Group");
@@ -49,8 +50,10 @@ defineFeature(feature, (test) => {
     });
 
     then("The Group should be shown on the My Groups page", async () => {
-      await page.click('[data-testid="my-groups"]');
-      await page.waitForNavigation();
+
+      await page.click('button[aria-label="Abrir menú"]');
+      await page.click('[data-testid="home-misgrupos-link"]');
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
 
       const groupExists = await page.evaluate(() => {
         const groupName = "Test Group";

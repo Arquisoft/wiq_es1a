@@ -32,6 +32,7 @@ const Home = () => {
             title={t('pages.home.classic')}
             text={t('pages.home.classicDescription')}
             route="/home/clasico"
+            data-testid="classic"
           />
         </Box>
         <Box p={2}>
@@ -39,6 +40,7 @@ const Home = () => {
             title={t('pages.home.wisebattery')}
             text={t('pages.home.wisebatteryDescription')}
             route="/home/bateria"
+            data-testid="battery"
           />
         </Box>
         <Box p={2}>
@@ -46,6 +48,7 @@ const Home = () => {
             title={t('pages.home.humancalculator')}
             text={t('pages.home.humancalculatorDescription')}
             route="/home/calculadora"
+            data-testid="calculator"
           />
         </Box>
         {error && (

@@ -39,8 +39,9 @@ defineFeature(feature, (test) => {
     });
 
     when("I click on the Stats link and in Calculator gamemode", async () => {
-      await page.waitForSelector('[data-testid="stats-link"]');
-      await page.click('[data-testid="stats-link"]');
+      await page.click('button[aria-label="Abrir menú"]');
+      await page.click('[data-testid="home-stats-link"]');
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
       await page.click('[data-testid="calculator-button"]');
       await page.waitForSelector('button.active');
       await page.waitForNavigation({ waitUntil: "networkidle0" });

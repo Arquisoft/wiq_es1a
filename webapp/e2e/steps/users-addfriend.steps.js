@@ -39,8 +39,8 @@ defineFeature(feature, (test) => {
     });
 
     when("I click on the Users link and add a friend", async () => {
-      await page.waitForSelector('[data-testid="users"]');
-      await page.click('[data-testid="users"]');
+      await page.click('button[aria-label="Abrir menú"]');
+      await page.click('[data-testid="home-users-link"]');
       await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 

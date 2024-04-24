@@ -128,18 +128,21 @@ const Ranking = () => {
       <Button
         className={gamemode === "clasico" ? "active" : ""}
         onClick={() => handleGamemodeChange("clasico")}
+        data-testid="classic-button"
       >
       {t('pages.ranking.classic')}
       </Button>
       <Button
         className={gamemode === "bateria" ? "active" : ""}
         onClick={() => handleGamemodeChange("bateria")}
+        data-testid="battery-button"
       >
         {t('pages.ranking.wisebattery')}
       </Button>
       <Button
         className={gamemode === "calculadora" ? "active" : ""}
         onClick={() => handleGamemodeChange("calculadora")}
+        data-testid="calculator-button"
       >
         {t('pages.ranking.humancalculator')}
       </Button>

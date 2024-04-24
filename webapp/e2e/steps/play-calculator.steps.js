@@ -35,7 +35,6 @@ defineFeature(feature, (test) => {
     });
 
     when("I play on Human Calculator mode and answer incorrectly", async () => {
-
       await page.click('[data-testid="calculator"]');
       await page.waitForNavigation();
 

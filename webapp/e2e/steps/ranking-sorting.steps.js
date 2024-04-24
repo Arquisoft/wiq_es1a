@@ -39,8 +39,9 @@ defineFeature(feature, (test) => {
     });
 
     when("I click on the Ranking link and in Sort by Total Points", async () => {
-      await page.waitForSelector('[data-testid="ranking-link"]');
-      await page.click('[data-testid="ranking-link"]');
+      await page.click('button[aria-label="Abrir menú"]');
+      await page.click('[data-testid="home-ranking-link"]');
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
       await page.select('[data-testid="combobox"]', "totalPoints");
       await page.waitForSelector('th', { text: "Puntos totales" });
       await page.waitForSelector('td');
