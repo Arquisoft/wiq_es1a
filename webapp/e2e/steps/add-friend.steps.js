@@ -22,10 +22,11 @@ defineFeature(feature, (test) => {
   });
   let username;
   let password;
+  let userCountBefore;
   test("The user can add a friend", ({ given, when, then }) => {
     given("A logged-in user and another user", async () => {
       await expect(page).toClick("a", { text: "Regístrate" });
-      username="friend";
+      username="Friend";
       password="Friend123";
       await page.waitForSelector('#register-username');
       await page.type('#register-username', username);
@@ -59,23 +60,19 @@ defineFeature(feature, (test) => {
       //await page.waitForNavigation({ waitUntil: "networkidle0" });
       await page.waitForTimeout(1000);
 
+      const userRowsBefore = await page.$$('[data-testid^="user-row-"]');
+      userCountBefore = userRowsBefore.length;
+
       await page.waitForSelector('[data-testid^="add-friend-button-"]');
       await page.click('[data-testid^="add-friend-button-"]');
 
   });
 
     then("The user should disappear from the Users page", async () => {
-      await page.waitForTimeout(1000);
-      
-      const userRowsBefore = await page.$$('[data-testid^="user-row-"]');
-      const userCountBefore = userRowsBefore.length;
-
-      await page.waitForSelector('[data-testid^="add-friend-button-"]');
-      const addFriendButtons = await page.$$('[data-testid^="add-friend-button-"]');
-      await addFriendButtons[0].click();
 
       await page.waitForTimeout(1000);
-  
+      await page.reload({ waitUntil: ["networkidle0", "domcontentloaded"] });
+
       const userRowsAfter = await page.$$('[data-testid^="user-row-"]');
       const userCountAfter = userRowsAfter.length;
     
