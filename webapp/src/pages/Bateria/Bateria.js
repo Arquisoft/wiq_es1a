@@ -216,7 +216,7 @@ const JuegoPreguntas = () => {
             </Box>
           ) : (
             <Box>
-              <Heading as="h2" mb={4}>
+              <Heading as="h2" mb={4} data-testid="question">
                 {t("pages.wisebattery.question")} {indicePregunta + 1}
               </Heading>
               <p>{preguntaActual.pregunta}</p>
