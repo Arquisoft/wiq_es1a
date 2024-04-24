@@ -44,7 +44,7 @@ defineFeature(feature, (test) => {
       await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
-    then("The user should be logged out", async () => {
+    then("The user should be logged out and the Login screen should be shown", async () => {
       const url = page.url();
       expect(url).toContain("/login");
     });

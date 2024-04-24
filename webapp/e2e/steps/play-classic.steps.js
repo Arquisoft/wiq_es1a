@@ -31,12 +31,12 @@ defineFeature(feature, (test) => {
       await page.waitForSelector("#login-password");
       await page.type("#login-password", password);
       await page.click("button", { text: "Login" });
-      await page.waitForNavigation();
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
     when("I play on Classic mode and click on an answer", async () => {
       await page.click('[data-testid="classic"]');
-      await page.waitForNavigation();
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
 
       await page.waitForSelector('[data-testid="question"]');
 

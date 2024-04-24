@@ -31,12 +31,12 @@ defineFeature(feature, (test) => {
       await page.waitForSelector("#login-password");
       await page.type("#login-password", password);
       await page.click("button", { text: "Login" });
-      await page.waitForNavigation();
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
     when("I play on Human Calculator mode and answer incorrectly", async () => {
       await page.click('[data-testid="calculator"]');
-      await page.waitForNavigation();
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
 
       await page.waitForSelector('[data-testid="operation"]');
 

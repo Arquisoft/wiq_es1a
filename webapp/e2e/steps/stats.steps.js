@@ -44,7 +44,6 @@ defineFeature(feature, (test) => {
       await page.waitForNavigation({ waitUntil: "networkidle0" });
       await page.click('[data-testid="calculator-button"]');
       await page.waitForSelector('button.active');
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
     then("The user's stats in Calculator gamemode shoud be shown on screen", async () => {
