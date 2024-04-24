@@ -318,7 +318,7 @@ const Nav = () => {
                       <Link href="/social/grupos" data-testid="home-grupos-link">
                         {t("components.nav.groups")}
                       </Link>
-                      <Link href="/social/misgrupos" data-testid="home-misgrupos-link">
+                      <Link href="/social/misgrupos" data-testid="home-mygroups-link">
                         {t("components.nav.usergroups")}
                       </Link>
                       <Link href="/stats" data-testid="home-stats-link">{t("components.nav.stats")}</Link>
@@ -329,7 +329,7 @@ const Nav = () => {
                   <Box>
                     <Flex flexDirection={"column"}>
                       <Link href="/config" data-testid="home-config-link">
-                        {t("components.nav.config")}
+                        {t("components.nav.options")}
                       </Link>
                       <Link href="/sobre" data-testid="home-sobre-link">
                         {t("components.nav.about")}

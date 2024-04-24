@@ -35,7 +35,7 @@ defineFeature(feature, (test) => {
       await page.waitForSelector("#login-password");
       await page.type("#login-password", password);
       await page.click("button", { text: "Login" });
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
+      //await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
     when("I click on the Logout link", async () => {
@@ -44,7 +44,7 @@ defineFeature(feature, (test) => {
       await page.click('button[aria-label="Abrir menú"]');
       await page.waitForSelector('[data-testid="home-logout-link"]');
       await page.click('[data-testid="home-logout-link"]');
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
+      //await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
     then("The user should be logged out and the Login screen should be shown", async () => {

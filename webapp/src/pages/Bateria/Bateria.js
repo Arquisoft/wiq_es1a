@@ -230,6 +230,7 @@ const JuegoPreguntas = () => {
                     padding={"1rem"}
                     height={"fit-content"}
                     minHeight={"3rem"}
+                    data-testid={`answer-button-${index}`}
                   >
                     {respuesta}
                   </Button>

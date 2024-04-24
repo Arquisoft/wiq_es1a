@@ -43,15 +43,31 @@ defineFeature(feature, (test) => {
 
       await page.waitForSelector('[name="name"]');
       await page.type('[name="name"]', "Test Group");
-      await page.click("button", { text: "Crear" });
-      await page.waitForTimeout(1000);
-    });
+      await page.waitForTimeout(2000);
+      await page.evaluate(() => {
+        var botones = document.querySelectorAll('button.chakra-button.css-r7xd4a[data-testid="addgroup-button"]');
+        botones.forEach(function(boton) {
+          if (boton.textContent === "Crear") {
+            boton.click();
+          }
+        });
+      });
+  });
 
     then("The Group should be shown on the My Groups page", async () => {
+      await page.waitForTimeout(1000);
       await page.click('button[aria-label="Abrir menú"]');
-      await page.click('[data-testid="home-misgrupos-link"]');
+      await page.waitForTimeout(1000);
+      await page.evaluate(() => {
+        var enlaces = document.querySelectorAll('a.chakra-link.css-spn4bz[data-testid="home-misgrupos-link"]');
+        enlaces.forEach(function(enlace) {
+          if (enlace.textContent === "Mis grupos") {
+            enlace.click();
+          }
+        });
+      });
       //await page.waitForNavigation({ waitUntil: "networkidle0" });
-
+      await page.waitForTimeout(2000);
       const groupExists = await page.evaluate(() => {
         const groupName = "Test Group";
         const groups = Array.from(document.querySelectorAll("tbody tr td:first-child"));

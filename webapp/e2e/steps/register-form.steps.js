@@ -32,7 +32,7 @@ defineFeature(feature, (test) => {
     });
 
     when("I fill the data in the form and press submit", async () => {
-      username = "testuser";
+      username = "papapa";
       password = "Testpassword1";
       await page.waitForSelector('#register-username');
       await page.type('#register-username', username);
