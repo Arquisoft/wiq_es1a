@@ -47,10 +47,6 @@ defineFeature(feature, (test) => {
       await jugarButton[0].click();
       await page.waitForSelector('[data-testid="operation"]');
 
-      const operation = await page.evaluate(() => {
-        return document.querySelector('[data-testid="operation"]').textContent;
-      });
-
       const answer = -1;
 
       await page.type('[data-testid="answer-input"]', answer.toString());
@@ -59,14 +55,14 @@ defineFeature(feature, (test) => {
     });
 
     then("The game ends", async () => {
-      await page.waitForSelector('[data-testid="game-over"]');
+      await page.waitForSelector('[data-testid="play-again-button"]');
 
       const gameOverMessage = await page.evaluate(() => {
-        return document.querySelector('h2:contains("¡Juego terminado!")');
+        return document.querySelector('[data-testid="play-again-button"]').textContent;
 
       });
 
-      expect(gameOverMessage).toContain("¡Juego terminado!");
+      expect(gameOverMessage).toContain("Jugar de nuevo");
     });
   });
 
