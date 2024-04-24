@@ -20,10 +20,12 @@ defineFeature(feature, (test) => {
       waitUntil: "networkidle0",
     });
   });
-
+  let username;
+  let password;
   test("The user can answer a question on Classic mode", ({ given, when, then }) => {
     given("A logged-in user", async () => {
-
+      username = "testuser";
+      password = "Testpassword1";
       await page.waitForSelector("#login-username");
       await page.type("#login-username", username);
       await page.waitForSelector("#login-password");

@@ -283,7 +283,7 @@ const Nav = () => {
               <DrawerHeader>WIQ</DrawerHeader>
               <DrawerBody>
                 <Stack spacing="24px">
-                  <Link href="/home/clasico">
+                  <Link href="/home/clasico" data-testid="home-clasico-link">
                     {t("components.nav.home")}
                   </Link>
 
@@ -292,13 +292,13 @@ const Nav = () => {
                       {t("components.nav.gameModes")}
                     </FormLabel>
                     <Flex flexDirection={"column"}>
-                      <Link href="/home/clasico">
+                      <Link href="/home/clasico" data-testid="home-clasico-link">
                         {t("components.nav.classic")}
                       </Link>
-                      <Link href="/home/bateria">
+                      <Link href="/home/bateria" data-testid="home-bateria-link">
                         {t("components.nav.wisebattery")}
                       </Link>
-                      <Link href="/home/calculadora">
+                      <Link href="/home/calculadora" data-testid="home-calculadora-link">
                         {t("components.nav.humancalculator")}
                       </Link>
                     </Flex>
@@ -309,20 +309,20 @@ const Nav = () => {
                       {t("components.nav.social")}
                     </FormLabel>
                     <Flex flexDirection={"column"}>
-                      <Link href="/social/usuarios">
+                      <Link href="/social/usuarios" data-testid="home-usuarios-link">
                         {t("components.nav.users")}
                       </Link>
-                      <Link href="/social/amigos">
+                      <Link href="/social/amigos" data-testid="home-amigos-link">
                         {t("components.nav.friends")}
                       </Link>
-                      <Link href="/social/grupos">
+                      <Link href="/social/grupos" data-testid="home-grupos-link">
                         {t("components.nav.groups")}
                       </Link>
-                      <Link href="/social/misgrupos">
+                      <Link href="/social/misgrupos" data-testid="home-misgrupos-link">
                         {t("components.nav.usergroups")}
                       </Link>
-                      <Link href="/stats">{t("components.nav.stats")}</Link>
-                      <Link href="/ranking">{t("components.nav.ranking")}</Link>
+                      <Link href="/stats" data-testid="home-stats-link">{t("components.nav.stats")}</Link>
+                      <Link href="/ranking" data-testid="home-ranking-link">{t("components.nav.ranking")}</Link>
                     </Flex>
                   </Box>
                 </Stack>

@@ -28,8 +28,6 @@ defineFeature(feature, (test) => {
     let password;
 
     given("An unregistered user", async () => {
-      username = "pablo";
-      password = "pabloasw";
       await expect(page).toClick("a", { text: "Regístrate" });
     });
 
