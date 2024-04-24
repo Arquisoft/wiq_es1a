@@ -216,7 +216,7 @@ const JuegoPreguntas = () => {
             </Box>
           ) : (
             <Box>
-              <Heading as="h2" mb={4}>
+              <Heading as="h2" mb={4} data-testid="question">
                 {t("pages.wisebattery.question")} {indicePregunta + 1}
               </Heading>
               <p>{preguntaActual.pregunta}</p>
@@ -230,6 +230,7 @@ const JuegoPreguntas = () => {
                     padding={"1rem"}
                     height={"fit-content"}
                     minHeight={"3rem"}
+                    data-testid={`answer-button-${index}`}
                   >
                     {respuesta}
                   </Button>

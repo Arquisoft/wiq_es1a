@@ -117,7 +117,7 @@ const Groups = () => {
                 onChange={(e) => setName(e.target.value)}
               />
             </InputGroup>
-            <Button colorScheme="blue" onClick={addGroup}>
+            <Button colorScheme="blue" onClick={addGroup} data-testid="addgroup-button">
               {t("pages.groups.create")}
             </Button>
           </Box>
