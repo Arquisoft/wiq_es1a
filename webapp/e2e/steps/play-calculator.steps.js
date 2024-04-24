@@ -31,13 +31,20 @@ defineFeature(feature, (test) => {
       await page.waitForSelector("#login-password");
       await page.type("#login-password", password);
       await page.click("button", { text: "Login" });
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
+      
+      //await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
     when("I play on Human Calculator mode and answer incorrectly", async () => {
-      await page.click('[data-testid="calculator"]');
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
+      await page.waitForTimeout(1000);
+      await page.waitForXPath('//button[contains(text(), "Calculadora humana")]');
+      const button = await page.$x('//button[contains(text(), "Calculadora humana")]');
+      await button[0].click();
+      //await page.waitForNavigation({ waitUntil: "networkidle0" });
 
+      await page.waitForXPath('//section[contains(@class, "chakra-modal__content")]//button[contains(text(), "Jugar")]');
+      const jugarButton = await page.$x('//section[contains(@class, "chakra-modal__content")]//button[contains(text(), "Jugar")]');
+      await jugarButton[0].click();
       await page.waitForSelector('[data-testid="operation"]');
 
       const operation = await page.evaluate(() => {
@@ -55,7 +62,8 @@ defineFeature(feature, (test) => {
       await page.waitForSelector('[data-testid="game-over"]');
 
       const gameOverMessage = await page.evaluate(() => {
-        return document.querySelector('[data-testid="game-over"]').textContent;
+        return document.querySelector('h2:contains("¡Juego terminado!")');
+
       });
 
       expect(gameOverMessage).toContain("¡Juego terminado!");

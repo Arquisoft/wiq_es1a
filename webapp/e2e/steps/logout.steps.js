@@ -39,6 +39,7 @@ defineFeature(feature, (test) => {
     });
 
     when("I click on the Logout link", async () => {
+      await page.waitForTimeout(1000);
       await page.waitForSelector('[data-testid="logout-link"]');
       await page.click('[data-testid="logout-link"]');
       await page.waitForNavigation({ waitUntil: "networkidle0" });

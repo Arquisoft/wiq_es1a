@@ -31,12 +31,19 @@ defineFeature(feature, (test) => {
       await page.waitForSelector("#login-password");
       await page.type("#login-password", password);
       await page.click("button", { text: "Login" });
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
+      //await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
     when("I play on Classic mode and click on an answer", async () => {
-      await page.click('[data-testid="classic"]');
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
+      await page.waitForTimeout(1000);
+      await page.waitForXPath('//button[contains(text(), "Clásico")]');
+      const classicButton = await page.$x('//button[contains(text(), "Clásico")]');
+      await classicButton[0].click();
+      //await page.waitForNavigation({ waitUntil: "networkidle0" });
+
+      await page.waitForXPath('//section[contains(@class, "chakra-modal__content")]//button[contains(text(), "Jugar")]');
+      const jugarButton = await page.$x('//section[contains(@class, "chakra-modal__content")]//button[contains(text(), "Jugar")]');
+      await jugarButton[0].click();
 
       await page.waitForSelector('[data-testid="question"]');
 
@@ -53,7 +60,7 @@ defineFeature(feature, (test) => {
           const buttonColor = await button.evaluate((el) => {
             return window.getComputedStyle(el).getPropertyValue("background-color");
           });
-          if (buttonColor === "rgb(16, 255, 0)") {
+          if (buttonColor.includes("rgb(44, 122, 123)")) {
             isGreen = true;
             break;
           }
