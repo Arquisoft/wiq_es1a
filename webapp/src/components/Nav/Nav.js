@@ -336,6 +336,14 @@ const Nav = () => {
                       </Link>
                     </Flex>
                   </Box>
+
+                  <Box>
+                    <Flex flexDirection={"column"}>
+                      <Link onClick={handleLogout} data-testid="home-logout-link">
+                        {t("components.nav.disconnect")}
+                      </Link>
+                    </Flex>
+                  </Box>
                 </Stack>
               </DrawerBody>
             </DrawerContent>
