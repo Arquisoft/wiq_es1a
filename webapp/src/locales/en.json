@@ -194,7 +194,7 @@
       "list": "User List",
       "user": "User",
       "actions": "Actions",
-      "friend": "Friend",
+      "friend": "Already friends",
       "addFriend": "Add Friend",
       "loading": "Loading users...",
       "error": "Error loading users: "
