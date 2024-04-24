@@ -101,6 +101,7 @@ app.post("/adduser", async (req, res) => {
 app.get("/users", async (req, res) => {
   try {
     const users = await User.find();
+    console.log(users);
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
@@ -219,6 +220,7 @@ app.get("/friends", async (req, res) => {
     }
     // Devuelve la lista de amigos
     res.status(200).json({ friends: user.friends });
+
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
   }

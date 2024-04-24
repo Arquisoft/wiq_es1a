@@ -103,9 +103,6 @@ const UsersPage = () => {
         throw new Error("Error al agregar amigo");
       }
 
-      // Agregar el usuario a la lista de amigos localmente
-      setUsers((prevFriends) => [...prevFriends, user]);
-      // Actualizar el estado de isFriend del usuario
       setUsers((prevUsers) => {
         return prevUsers.map((u) => {
           if (u._id === user._id) {
@@ -116,7 +113,6 @@ const UsersPage = () => {
       });
     } catch (error) {
       console.error("Error al agregar amigo:", error);
-      // Manejar el error según sea necesario
     }
   };
 

@@ -191,10 +191,10 @@
       "home": "Volver al inicio"
     },
     "userspage": {
-      "list": "Lista de usuarios",
+      "list": "Usuarios de la aplicación",
       "user": "Usuario",
       "actions": "Acciones",
-      "friend": "Amigo",
+      "friend": "Ya sois amigos",
       "addFriend": "Añadir amigo",
       "loading": "Cargando usuarios ...",
       "error": "Error al cargar los usuarios: "

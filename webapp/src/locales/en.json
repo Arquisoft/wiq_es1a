@@ -191,10 +191,10 @@
       "home": "Back to Home"
     },
     "userspage": {
-      "list": "User List",
+      "list": "Application users",
       "user": "User",
       "actions": "Actions",
-      "friend": "Friend",
+      "friend": "Already friends",
       "addFriend": "Add Friend",
       "loading": "Loading users...",
       "error": "Error loading users: "
