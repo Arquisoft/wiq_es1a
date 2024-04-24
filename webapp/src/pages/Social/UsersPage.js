@@ -113,7 +113,6 @@ const UsersPage = () => {
       });
     } catch (error) {
       console.error("Error al agregar amigo:", error);
-      // Manejar el error según sea necesario
     }
   };
 
