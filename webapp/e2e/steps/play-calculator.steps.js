@@ -47,7 +47,7 @@ defineFeature(feature, (test) => {
       await jugarButton[0].click();
       await page.waitForSelector('[data-testid="operation"]');
 
-      const answer = -1;
+      const answer = -999;
 
       await page.type('[data-testid="answer-input"]', answer.toString());
 

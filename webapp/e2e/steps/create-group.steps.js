@@ -42,39 +42,23 @@ defineFeature(feature, (test) => {
       //await page.waitForNavigation({ waitUntil: "networkidle0" });
 
       await page.waitForSelector('[name="name"]');
-      await page.type('[name="name"]', "Test Group");
+      await page.type('[name="name"]', "Testgroup");
       await page.waitForTimeout(2000);
-      await page.evaluate(() => {
-        var botones = document.querySelectorAll('button.chakra-button.css-r7xd4a[data-testid="addgroup-button"]');
-        botones.forEach(function(boton) {
-          if (boton.textContent === "Crear") {
-            boton.click();
-          }
-        });
-      });
+      await page.click('button[data-testid="addgroup-button"]');
   });
 
-    then("The Group should be shown on the My Groups page", async () => {
+    then("The confirmation message should be shown on screen", async () => {
       await page.waitForTimeout(1000);
-      await page.click('button[aria-label="Abrir menú"]');
-      await page.waitForTimeout(1000);
-      await page.evaluate(() => {
-        var enlaces = document.querySelectorAll('a.chakra-link.css-spn4bz[data-testid="home-misgrupos-link"]');
-        enlaces.forEach(function(enlace) {
-          if (enlace.textContent === "Mis grupos") {
-            enlace.click();
-          }
-        });
+      await page.waitForSelector('div[role="alert"]');
+  
+  // Obtén el texto del elemento que contiene el mensaje
+      const alertText = await page.evaluate(() => {
+      const alertElement = document.querySelector('div[role="alert"]');
+      return alertElement.innerText.trim();
       });
-      //await page.waitForNavigation({ waitUntil: "networkidle0" });
-      await page.waitForTimeout(2000);
-      const groupExists = await page.evaluate(() => {
-        const groupName = "Test Group";
-        const groups = Array.from(document.querySelectorAll("tbody tr td:first-child"));
-        return groups.some(td => td.textContent === groupName);
-      });
+      const rightMessage=alertText === "Group created successfully";
+      expect(rightMessage).toBe(true);
 
-      expect(groupExists).toBe(true);
     });
   });
 

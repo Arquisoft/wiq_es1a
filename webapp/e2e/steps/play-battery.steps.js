@@ -51,7 +51,7 @@ defineFeature(feature, (test) => {
       firstquestion = await page.evaluate(element => 
         element.textContent, await page.$('[data-testid="question"]'));
 
-      await page.click('[data-testid="answer-button"]');
+      await page.click('[data-testid="answer-button-0"]');
     });
 
     then("The next question should be loaded on screen", async () => {
