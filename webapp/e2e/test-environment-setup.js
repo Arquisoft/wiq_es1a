@@ -16,6 +16,17 @@ async function startServer() {
     statsservice = await require("../../statsservice/stats-service");
     authservice = await require("../../users/authservice/auth-service");
     gatewayservice = await require("../../gatewayservice/gateway-service");
+
+    await mongoose.connect(mongoUri);
+    const existingUser = await User.findOne({ username: "testuser" });
+    if (!existingUser) {
+      const pass = await bcrypt.hash("Testpassword1", 10);
+      const newUser = new User({
+              username: "testuser",
+              password: pass,
+      });
+      await newUser.save();
+    }
   }
 
   startServer();
