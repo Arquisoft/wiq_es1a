@@ -13,7 +13,7 @@ test("renders 404 message", () => {
       </Router>
     </I18nextProvider>
   );
-  const errorMessage = screen.getByText(/404/i);
+
   expect(getByText("404")).toBeInTheDocument();
   expect(getByText("Página no encontrada")).toBeInTheDocument();
   expect(
