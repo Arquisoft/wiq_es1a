@@ -124,7 +124,7 @@ const GroupDetails = () => {
               </Thead>
               <Tbody>
                 {group.members.map((member, index) => (
-                  <Tr key={index}>
+                  <Tr>
                     <Td>
                       <Avatar
                         size="sm"
