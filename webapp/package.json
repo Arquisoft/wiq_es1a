@@ -14,6 +14,7 @@
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.3.0",
     "axios": "^1.6.5",
+    "bcrypt": "^5.1.1",
     "framer-motion": "^11.0.19",
     "i18next": "^23.10.1",
     "mongoose": "^8.3.2",
