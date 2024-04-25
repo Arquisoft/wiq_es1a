@@ -15,7 +15,7 @@ test("renders the game screen", () => {
   );
 
   // Check if the game screen is rendered
-  expect(screen.getByText(/¿/i)).toBeInTheDocument();
+  expect(screen.getByText(/(\d+)\s*([-+*/])\s*(\d+)/i)).toBeInTheDocument();
   expect(screen.getByTitle(/number/i)).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /enviar/i })).toBeInTheDocument();
   expect(screen.getByText(/tiempo restante/i)).toBeInTheDocument();
@@ -43,7 +43,7 @@ test("handles correct answer", async () => {
   var initialOperation = screen.getByText(
     /(\d+)\s*([-+*/])\s*(\d+)/
   ).textContent;
-  initialOperation = initialOperation.substring(1, initialOperation.length - 1);
+  initialOperation = initialOperation.split("=")[0];
 
   // Get the input field and submit button
   const inputField = screen.getByTitle(/number/i);
@@ -64,7 +64,7 @@ test("handles correct answer", async () => {
 
   // Get next operation
   var nextOperation = screen.getByText(/(\d+)\s*([-+*/])\s*(\d+)/).textContent;
-  nextOperation = nextOperation.substring(1, nextOperation.length - 1);
+  nextOperation = nextOperation.split("=")[0];
 
   // Enter the correct answer and submit
   fireEvent.change(inputField, { target: { value: eval(nextOperation) } });
