@@ -31,7 +31,7 @@ const UserList = ({ users, handleAddFriend }) => {
         </Thead>
         <Tbody>
           {users.map((user, index) => (
-            <Tr key={index} data-testid={`user-row-${index}`}> 
+            <Tr data-testid={`user-row-${index}`}> 
               <Td>
                 <Flex flexDirection="column" alignItems="center">
                   <Avatar name={user.username} />

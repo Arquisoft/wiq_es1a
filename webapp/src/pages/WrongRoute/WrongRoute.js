@@ -7,15 +7,15 @@ const WrongRoute = () => {
   const { t } = useTranslation();
 
   return (
-    <div id="notfound">
-      <div class="notfound-bg">
+    <div>
+      <div>
         <div></div>
         <div></div>
         <div></div>
         <div></div>
       </div>
-      <div class="notfound">
-        <div class="notfound-404">
+      <div>
+        <div>
           <h1>404</h1>
         </div>
         <h2>{t('pages.wrongroute.title')}</h2>
