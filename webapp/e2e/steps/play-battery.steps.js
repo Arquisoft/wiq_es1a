@@ -19,6 +19,40 @@ defineFeature(feature, (test) => {
     await page.goto("http://localhost:3000", {
       waitUntil: "networkidle0",
     });
+    await page.setRequestInterception(true);
+    page.on('request', (req) => {
+      if (req.method() === 'OPTIONS'){
+        req.respond({
+          status: 200,
+          headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+              'Access-Control-Allow-Headers': '*'
+          }
+        });
+      } else if (req.url().includes('/questions')) {
+            req.respond({
+                status: 200,
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                },
+                contentType: 'application/json',
+                body: JSON.stringify([{
+                    pregunta: 'Test question',
+                    respuestas: ['Test answer 1', 'Test answer 2', 'Test answer 3', 'Test correct answer'],
+                    correcta: 'Test correct answer',
+                    
+                }, {
+                  pregunta: 'Test question 2',
+                  respuestas: ['Test answer 1', 'Test answer 2', 'Test answer 3', 'Test correct answer'],
+                  correcta: 'Test correct answer'
+              }]
+              )
+            });
+        } else {
+            req.continue();
+        }
+      });
   });
   let username;
   let password;
