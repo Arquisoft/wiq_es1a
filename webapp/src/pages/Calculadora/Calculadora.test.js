@@ -15,7 +15,7 @@ test("renders the game screen", () => {
   );
 
   // Check if the game screen is rendered
-  expect(screen.getByText(/(\d+)\s*([-+*/])\s*(\d+)/i)).toBeInTheDocument();
+  expect(screen.getByText(/\b\d+\s*[-+*/]\s*\d+\b/i)).toBeInTheDocument();
   expect(screen.getByTitle(/number/i)).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /enviar/i })).toBeInTheDocument();
   expect(screen.getByText(/tiempo restante/i)).toBeInTheDocument();
