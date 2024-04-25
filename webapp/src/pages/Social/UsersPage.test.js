@@ -41,7 +41,7 @@ describe("UsersPage", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText("Amigo")).toBeInTheDocument();
+      expect(screen.getByText("Ya sois amigos")).toBeInTheDocument();
     });
   });
 
@@ -62,7 +62,7 @@ describe("UsersPage", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText("Amigo")).toBeInTheDocument();
+      expect(screen.getByText("Ya sois amigos")).toBeInTheDocument();
     });
   });
 
@@ -83,7 +83,7 @@ describe("UsersPage", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText("Amigo")).toBeInTheDocument();
+      expect(screen.getByText("Ya sois amigos")).toBeInTheDocument();
     });
   });
 
