@@ -128,12 +128,10 @@ const JuegoPreguntas = () => {
       } else if (respuesta === respuestaSeleccionada) {
         return { backgroundColor: "red" };
       }
-    } else {
-      if (respuesta === respuestaSeleccionada) {
-        return isDarkTheme
-          ? { color: "#333333", backgroundColor: "#F0F0F0" }
-          : { backgroundColor: "#333333", color: "#F0F0F0" };
-      }
+    } else if (respuesta === respuestaSeleccionada) {
+      return isDarkTheme
+        ? { color: "#333333", backgroundColor: "#F0F0F0" }
+        : { backgroundColor: "#333333", color: "#F0F0F0" };
     }
     return {};
   };
@@ -154,7 +152,7 @@ const JuegoPreguntas = () => {
       correcta: preguntaActual.correcta,
       respuesta: respuestaSeleccionada,
     };
-    setQuestionsToSave( [...questionsToSave, pregunta]);
+    setQuestionsToSave([...questionsToSave, pregunta]);
 
     setTiempoTotal(tiempoTotal + tiempoRestante);
     setRespuestaSeleccionada(null);
@@ -286,7 +284,6 @@ const JuegoPreguntas = () => {
               <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
                 {preguntaActual.respuestas.map((respuesta, index) => (
                   <Button
-                    key={index}
                     onClick={() => handleRespuestaSeleccionada(respuesta)}
                     disabled={tiempoRestante === 0 || juegoTerminado}
                     style={estiloRespuesta(respuesta)}

@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import CalculadoraHumana from "./Calculadora";
 import { MemoryRouter } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
@@ -40,7 +40,7 @@ test("handles correct answer", async () => {
   );
 
   // Get the initial operation
-  var initialOperation = screen.getByText(
+  let initialOperation = screen.getByText(
     /(\d+)\s*([-+*/])\s*(\d+)/
   ).textContent;
   initialOperation = initialOperation.split("=")[0];
@@ -54,7 +54,7 @@ test("handles correct answer", async () => {
   fireEvent.click(submitButton);
 
   // Check if the score has increased
-  var updatedScore = parseInt(
+  let updatedScore = parseInt(
     screen
       .getByText(/puntuación: (\d+)/i)
       .textContent.split(":")[1]
@@ -63,7 +63,7 @@ test("handles correct answer", async () => {
   expect(updatedScore).toBe(initialScore + 1);
 
   // Get next operation
-  var nextOperation = screen.getByText(/(\d+)\s*([-+*/])\s*(\d+)/).textContent;
+  let nextOperation = screen.getByText(/(\d+)\s*([-+*/])\s*(\d+)/).textContent;
   nextOperation = nextOperation.split("=")[0];
 
   // Enter the correct answer and submit
@@ -79,9 +79,7 @@ test("handles correct answer", async () => {
   );
   expect(updatedScore).toBe(initialScore + 2);
 
-  await setTimeout(() => {
-
-  }, 1000);
+  await setTimeout(() => {}, 1000);
 });
 
 test("handles incorrect answer", () => {
@@ -135,7 +133,7 @@ test("handles game over", async () => {
       .textContent.split(":")[1]
       .trim()
   );
-  
+
   // Get the input field and submit button
   const inputField = screen.getByTitle(/number/i);
   const submitButton = screen.getByRole("button", { name: /enviar/i });
@@ -156,11 +154,10 @@ test("handles game over", async () => {
       .getByText(/puntuación: (\d+)/i)
       .textContent.split(":")[1]
       .trim()
-  ); 
+  );
   expect(updatedScore).toBe(initialScore);
-  
+
   await setTimeout(() => {
     screen.getByText(/jugar de nuevo/i).click();
   }, 1000);
-  
 });
