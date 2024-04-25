@@ -223,7 +223,6 @@ const JuegoPreguntas = () => {
               <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
                 {preguntaActual.respuestas.map((respuesta, index) => (
                   <Button
-                    key={index}
                     onClick={() => handleSiguientePregunta(respuesta)}
                     disabled={tiempoRestante === 0 || juegoTerminado}
                     whiteSpace={"normal"}

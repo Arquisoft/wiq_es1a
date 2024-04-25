@@ -1,6 +1,5 @@
 import React from 'react';
-import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from '@chakra-ui/react';
-import { useDisclosure } from '@chakra-ui/react';
+import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 const CustomModal = ({ title, text, route }) => {

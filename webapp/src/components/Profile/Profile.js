@@ -70,7 +70,7 @@ const Perfil = () => {
                           </Thead>
                           <Tbody>
                             {userData.games.slice(0, 10).map((game, index) => (
-                            <Tr key={index}>
+                            <Tr>
                               <Td textAlign={"center"}>{game.gamemode}</Td>
                               <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.correctAnswers}</Td>
                               <Td textAlign={"center"}>{game.gamemode === 'calculadora' ? '-' : game.incorrectAnswers}</Td>
