@@ -94,7 +94,7 @@ describe("User Service", () => {
     // Datos de la partida a guardar
     const gameData = {
       username: "testuser",
-      gameMode: "classic",
+      gameMode: "clasico",
       gameData: {
         points: 100,
         correctAnswers: 8,
@@ -108,14 +108,14 @@ describe("User Service", () => {
 
     // Verificar la respuesta
     expect(response.status).toBe(200);
-    expect(response.body).toEqual({ message: "Partida guardada exitosamente" });
+    expect(response.body).toEqual({ message: "Game saved successfully" });
   });
 
   it("should send error POST /saveGameList", async () => {
     // Datos de la partida a guardar
     const gameData = {
       username: "testuseraaa",
-      gameMode: "classic",
+      gameMode: "clasico",
       gameData: {
         points: 100,
         correctAnswers: 8,
@@ -129,7 +129,28 @@ describe("User Service", () => {
 
     // Verificar la respuesta
     expect(response.status).toBe(404);
-    expect(response.body).toEqual({ error: "Usuario no encontrado" });
+    expect(response.body).toEqual({ error: "User not found" });
+  });
+
+  it("should send error POST /saveGameList for invalid gamemode", async () => {
+    // Datos de la partida a guardar
+    const gameData = {
+      username: "testuser",
+      gameMode: "a",
+      gameData: {
+        points: 100,
+        correctAnswers: 8,
+        incorrectAnswers: 2,
+        avgTime: 30,
+      },
+    };
+
+    // Realizar la solicitud POST /saveGameList
+    const response = await request(app).post("/saveGameList").send(gameData);
+
+    // Verificar la respuesta
+    expect(response.status).toBe(422);
+    expect(response.body).toEqual({ error: "Invalid gamemode" });
   });
 
   it("should add friend on POST /users/add-friend", async () => {

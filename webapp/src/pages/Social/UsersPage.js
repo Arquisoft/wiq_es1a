@@ -30,8 +30,8 @@ const UserList = ({ users, handleAddFriend }) => {
           </Tr>
         </Thead>
         <Tbody>
-          {users.map((user) => (
-            <Tr key={user._id}>
+          {users.map((user, index) => (
+            <Tr key={index} data-testid={`user-row-${index}`}> 
               <Td>
                 <Flex flexDirection="column" alignItems="center">
                   <Avatar name={user.username} />
@@ -42,7 +42,7 @@ const UserList = ({ users, handleAddFriend }) => {
                 {user.isFriend ? (
                   <span>{t("pages.userspage.friend")}</span>
                 ) : (
-                  <Button onClick={() => handleAddFriend(user)}>
+                  <Button data-testid={`add-friend-button-${index}`} onClick={() => handleAddFriend(user)}>
                     {t("pages.userspage.addFriend")}
                   </Button>
                 )}
@@ -103,9 +103,6 @@ const UsersPage = () => {
         throw new Error("Error al agregar amigo");
       }
 
-      // Agregar el usuario a la lista de amigos localmente
-      setUsers((prevFriends) => [...prevFriends, user]);
-      // Actualizar el estado de isFriend del usuario
       setUsers((prevUsers) => {
         return prevUsers.map((u) => {
           if (u._id === user._id) {
@@ -116,7 +113,6 @@ const UsersPage = () => {
       });
     } catch (error) {
       console.error("Error al agregar amigo:", error);
-      // Manejar el error según sea necesario
     }
   };
 

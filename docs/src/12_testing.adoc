@@ -1,0 +1,14 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+== Testing 
+
+This section details the results of the various types of tests that have been carried out with the application.
+
+=== Load Testing
+We used Gatling to perform load testing on the application. It consisted of simulating 1000 users accessing the application at the same time, each of one performing 83 requests. The results of the test are shown below:
+
+image::12-loadtest.png[]
+
+As we can see in Gatling's report, the application was able to handle a load of 70868 requests. In particular, 81% of the requests were successful in less than 800 milliseconds, 6% in more than 1200 milliseconds and 13% were unsuccessful. 
+
+This shows that the application is able to handle a large number of requests in a short period of time, with a high success rate. We can also be sure that the application is able to handle a large number of users accessing it at the same time in production.

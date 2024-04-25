@@ -98,6 +98,11 @@
       "cinema": "Cinema",
       "art": "Art",
       "programming": "Programming",
+      "futbolistas": "Football players",
+      "clubes": "Footbal clubs",
+      "baloncestistas": "Basketball players",
+      "politica": "Politics",
+      "videojuegos": "Videogames",
       "save": "Apply Changes",
       "timeBetweenClassic": "Time Between Questions (Classic)",
       "questionCountClassic": "Number of Questions (Classic)",
@@ -186,10 +191,10 @@
       "home": "Back to Home"
     },
     "userspage": {
-      "list": "User List",
+      "list": "Application users",
       "user": "User",
       "actions": "Actions",
-      "friend": "Friend",
+      "friend": "Already friends",
       "addFriend": "Add Friend",
       "loading": "Loading users...",
       "error": "Error loading users: "

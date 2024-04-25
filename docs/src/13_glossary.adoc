@@ -1,0 +1,54 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-glossary]]
+== Glossary
+
+[cols="e,2e" options="header"]
+|===
+|Term |Definition
+
+|WIQ
+| Application or game based on the TV show "Saber y Ganar".
+
+|Login
+| Process of authenticating a user's identity to access the application.
+
+|Wikidata
+| Online collaborative database storing structured data and linking information across different projects and languages.
+
+|User
+| Person who interacts with a system, service, or application to perform tasks. 
+
+|Admin
+| Person with special rights or authority to manageaspects of an application.
+
+|Query 
+| Request for information from a database.
+
+|Database 
+| Organized collection of structured information.
+
+|Documentation 
+| Written information regarding a system's design, functionality, or usage.
+
+|Distractors
+| Incorrect or irrelevant options or elements included in a question.
+
+|NodeJS 
+| Runtime environment that allows the execution of JavaScript code outside of a web browser.
+
+|ReactJS 
+| JavaScript library for building user interfaces, particularly single-page applications.
+
+|JavaScript 
+| High-level programming language primarily used for creating interactive web pages and applications.
+
+|MongoDB 
+| Popular NoSQL database program, known for its flexibility and scalability.
+
+|CSS 
+| Cascading Style Sheets, used for styling and formatting web pages written in HTML.
+
+|HTML 
+| Hypertext Markup Language, the standard markup language for creating web pages and web applications.
+|===

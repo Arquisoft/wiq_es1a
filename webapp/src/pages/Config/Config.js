@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const Config = () => {
-  const { t, i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     // Obtener el estado de los checkboxes desde el localStorage
@@ -86,45 +86,62 @@ const Config = () => {
     <>
       <Nav />
       <Flex direction="column" align="center" justify="center">
-        <Box className="configContainer">
+        <Box className="configContainer" maxW={"80%"}>
           <Heading as="h2" mb={4}>
-            {t('pages.config.title')}
+            {t("pages.config.title")}
           </Heading>
-          <FormLabel htmlFor="idioma">{t('pages.config.language')}</FormLabel>
+          <FormLabel htmlFor="idioma">{t("pages.config.language")}</FormLabel>
           <Flex direction="row" align="center" justify="space-around">
-            <Button colorScheme="teal" onClick={() => i18n.changeLanguage("es")}>Español</Button>
-            <Button colorScheme="teal" onClick={() => i18n.changeLanguage("en")}>English</Button>
+            <Button
+              colorScheme="teal"
+              onClick={() => i18n.changeLanguage("es")}
+            >
+              Español
+            </Button>
+            <Button
+              colorScheme="teal"
+              onClick={() => i18n.changeLanguage("en")}
+            >
+              English
+            </Button>
           </Flex>
-          <FormLabel htmlFor="clasico">{t('pages.config.topics')}</FormLabel>
-          <Box
-            display="grid"
-            gridTemplateColumns="repeat(auto-fit, minmax(150px, 1fr))"
-            gridGap={4}
-            alignItems="start"
-          >
-            <Stack spacing={5} direction="row">
-              <Checkbox id="paises" mb={2}>
-                {t('pages.config.countries')}
-              </Checkbox>
-              <Checkbox id="literatura" mb={2}>
-                {t('pages.config.literature')}
-              </Checkbox>
-              <Checkbox id="cine" mb={2}>
-                {t('pages.config.cinema')}
-              </Checkbox>
-              <Checkbox id="arte" mb={2}>
-                {t('pages.config.art')}
-              </Checkbox>
-              <Checkbox id="programacion" mb={2}>
-                {t('pages.config.programming')}
-              </Checkbox>
-            </Stack>
-          </Box>
-
+          <FormLabel htmlFor="clasico">{t("pages.config.topics")}</FormLabel>
+          <Stack spacing={5} direction="row" wrap={"wrap"} justifyContent={"center"}>
+            <Checkbox id="paises" mb={2}>
+              {t("pages.config.countries")}
+            </Checkbox>
+            <Checkbox id="literatura" mb={2}>
+              {t("pages.config.literature")}
+            </Checkbox>
+            <Checkbox id="cine" mb={2}>
+              {t("pages.config.cinema")}
+            </Checkbox>
+            <Checkbox id="arte" mb={2}>
+              {t("pages.config.art")}
+            </Checkbox>
+            <Checkbox id="programacion" mb={2}>
+              {t("pages.config.programming")}
+            </Checkbox>
+            <Checkbox id="futbolistas" mb={2}>
+              {t("pages.config.futbolistas")}
+            </Checkbox>
+            <Checkbox id="clubes" mb={2}>
+              {t("pages.config.clubes")}
+            </Checkbox>
+            <Checkbox id="baloncestistas" mb={2}>
+              {t("pages.config.baloncestistas")}
+            </Checkbox>
+            <Checkbox id="politica" mb={2}>
+              {t("pages.config.politica")}
+            </Checkbox>
+            <Checkbox id="videojuegos" mb={2}>
+              {t("pages.config.videojuegos")}
+            </Checkbox>
+          </Stack>
           <Box>
             <FormLabel htmlFor="clasico">
               {" "}
-              {t('pages.config.timeBetweenClassic')}
+              {t("pages.config.timeBetweenClassic")}
             </FormLabel>
             <NumberInput
               id="clasico"
@@ -143,7 +160,7 @@ const Config = () => {
             </NumberInput>
             <FormLabel htmlFor="clasicoPreguntas">
               {" "}
-              {t('pages.config.questionCountClassic')}
+              {t("pages.config.questionCountClassic")}
             </FormLabel>
             <NumberInput
               id="clasicoPreguntas"
@@ -161,7 +178,7 @@ const Config = () => {
               </NumberInputStepper>
             </NumberInput>
             <FormLabel htmlFor="bateria">
-              {t('pages.config.totalTimeBattery')}
+              {t("pages.config.totalTimeBattery")}
             </FormLabel>
             <NumberInput
               id="bateria"
@@ -180,7 +197,7 @@ const Config = () => {
             </NumberInput>
           </Box>
           <Button colorScheme="teal" onClick={handleConfig} mb={4}>
-            {t('pages.config.save')}
+            {t("pages.config.save")}
           </Button>
         </Box>
       </Flex>

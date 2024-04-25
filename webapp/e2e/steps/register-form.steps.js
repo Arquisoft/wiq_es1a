@@ -28,14 +28,12 @@ defineFeature(feature, (test) => {
     let password;
 
     given("An unregistered user", async () => {
-      username = "pablo";
-      password = "pabloasw";
       await expect(page).toClick("a", { text: "Regístrate" });
     });
 
     when("I fill the data in the form and press submit", async () => {
-      username = "testuser";
-      password = "testpassword";
+      username = "papapa";
+      password = "Testpassword1";
       await page.waitForSelector('#register-username');
       await page.type('#register-username', username);
       await page.waitForSelector('#register-password');
@@ -45,7 +43,7 @@ defineFeature(feature, (test) => {
       await page.click("button", { text: "Registrarse" });
     });
 
-    then("A confirmation message should be shown in the screen", async () => {
+    then("The home screen should be shown", async () => {
       await page.waitForTimeout(1000);
       const url = page.url();
       expect(url).toContain("/home");

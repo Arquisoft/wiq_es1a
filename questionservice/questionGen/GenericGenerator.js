@@ -1,7 +1,15 @@
 const axios = require("axios");
 
+// El generador hace una query a Wikidata por idioma
+const LANGUAGES = ["es", "en"];
+
 class GenericGenerator {
   constructor(entity, props, types, preguntas) {
+    this.data = {};
+    for (let i = 0; i < LANGUAGES.length; i++) {
+      this.data[LANGUAGES[i]] = {};
+    }
+
     this.entity = entity;
     this.props = props;
     this.types = types;
@@ -62,66 +70,70 @@ class GenericGenerator {
 
   // Función para realizar la consulta SPARQL y obtener los datos de Wikidata
   async getData() {
-    const sparqlQuery = `
+    for (let i = 0; i < LANGUAGES.length; i++) {
+      const sparqlQuery = `
               SELECT DISTINCT ?entityLabel ${this.#generateLabels(
                 this.props
               ).join(" ")}
               WHERE {
-                  ?entity wdt:P31 wd:${this.entity};            
+                  ?entity ${this.entity};            
                       ${this.#generateProps(this.props)} .
-                  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es" }
+                  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],${
+                    LANGUAGES[i]
+                  }" }
               }
               LIMIT 10000
           `;
 
-    const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
-      sparqlQuery
-    )}&format=json`;
+      var url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(
+        sparqlQuery
+      )}&format=json`;
 
-    await axios
-      .get(url)
-      .then((response) => {
-        const data = response.data;
-        this.data = data.results.bindings.groupByEntity();
-      })
-      .catch((error) => {
-        console.error("Error fetching data: " + error.message);
-      });
+      await axios
+        .get(url)
+        .then((response) => {
+          const data = response.data;
+          this.data[LANGUAGES[i]] = data.results.bindings.groupByEntity();
+        })
+        .catch((error) => {
+          console.error("Error fetching data: " + error.message);
+        });
+    }
   }
 
   generateRandomQuestion(locale) {
     // Elegir aleatoriamente una entidad del array
-    var entidades = Object.keys(this.data);
+    var entidades = Object.keys(this.data[locale]);
     const entidadLabel =
       entidades[Math.floor(Math.random() * entidades.length)];
 
-    const entidad = this.data[entidadLabel];
+    const entidad = this.data[locale][entidadLabel];
 
     // Elegir aleatoriamente una propiedad de la entidad para hacer la pregunta
     const propiedades = this.propLabels;
 
     var respuestaCorrecta = "";
     var propIndex = 0;
-    do{
+    do {
       propIndex = Math.floor(Math.random() * propiedades.length);
       var propiedadPregunta = propiedades[propIndex];
 
       // Obtener la respuesta correcta
       respuestaCorrecta =
         entidad[propiedadPregunta][entidad[propiedadPregunta].length - 1];
-    }while(/^Q\d+/.test(respuestaCorrecta));
+    } while (/^Q\d+/.test(respuestaCorrecta));
 
     var questionObj = {
       pregunta: "",
       respuestas: [respuestaCorrecta],
-      correcta: respuestaCorrecta
+      correcta: respuestaCorrecta,
     };
 
     // Obtener respuestas incorrectas
     while (questionObj.respuestas.length < 4) {
       const otroPaisLabel =
         entidades[Math.floor(Math.random() * entidades.length)];
-      const otroPais = this.data[otroPaisLabel];
+      const otroPais = this.data[locale][otroPaisLabel];
       let prop = otroPais[propiedadPregunta][0];
 
       // Si no está en las propiedades de la entidad de la pregunta
@@ -130,7 +142,6 @@ class GenericGenerator {
         !entidad[propiedadPregunta].includes(prop) &&
         !/^Q\d+/.test(prop) &&
         entidadLabel != prop
-
       ) {
         questionObj.respuestas.push(prop);
       }
@@ -139,21 +150,26 @@ class GenericGenerator {
     // Barajar las opciones de respuesta
     questionObj.respuestas.sort(() => Math.random() - 0.5);
 
-    switch(this.types[propIndex]){
+    switch (this.types[propIndex]) {
       case "date":
-        questionObj.respuestas = questionObj.respuestas.map(x => this.#dateFormatter(x));
+        questionObj.respuestas = questionObj.respuestas.map((x) =>
+          this.#dateFormatter(x)
+        );
         questionObj.correcta = this.#dateFormatter(questionObj.correcta);
         break;
       case "num":
-        questionObj.respuestas = questionObj.respuestas.map(x => parseFloat(x).toFixed(2));
+        questionObj.respuestas = questionObj.respuestas.map((x) =>
+          parseFloat(x).toFixed(2)
+        );
         questionObj.correcta = parseFloat(questionObj.correcta).toFixed(2);
         break;
       default:
         break;
     }
-    questionObj.pregunta =
-      this.preguntasMap.get(propiedadPregunta)[locale].replace('%', entidadLabel);
-    
+    questionObj.pregunta = this.preguntasMap
+      .get(propiedadPregunta)
+      [locale].replace("%", entidadLabel);
+
     return questionObj;
   }
 
@@ -170,18 +186,20 @@ class GenericGenerator {
 
   #dateFormatter(fecha) {
     var isAC = false;
-    if(fecha.startsWith('-')){
-        isAC = true;
-        fecha = fecha.substring(1);
+    if (fecha.startsWith("-")) {
+      isAC = true;
+      fecha = fecha.substring(1);
     }
 
-    const [año, mes, dia] = fecha.split('T')[0].split('-').map(n => Number.parseInt(n).toFixed());
+    const [año, mes, dia] = fecha
+      .split("T")[0]
+      .split("-")
+      .map((n) => Number.parseInt(n).toFixed());
 
-    const fechaFormateada = `${dia}/${mes}/${año}${isAC ? ' a.C.' : ''}`;
-    
+    const fechaFormateada = `${dia}/${mes}/${año}${isAC ? " a.C." : ""}`;
+
     return fechaFormateada;
-}
-
+  }
 }
 
 module.exports = GenericGenerator;
