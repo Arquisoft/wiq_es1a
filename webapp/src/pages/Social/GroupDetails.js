@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Container,
   Box,
@@ -19,7 +19,6 @@ import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { useTranslation } from "react-i18next";
 import Perfil from "../../components/Profile/Profile.js";
-import { useNavigate } from "react-router-dom";
 
 
 const GroupDetails = () => {

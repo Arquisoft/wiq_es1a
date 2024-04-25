@@ -130,7 +130,7 @@ const Ranking = () => {
           if (gamemode === "calculadora" && option.value === "ratioCorrect") {
             return null;
           }
-          return <option key={option.value} value={option.value}>{option.label}</option>;
+          return <option value={option.value}>{option.label}</option>;
         })}
       </Select>
       <Button
