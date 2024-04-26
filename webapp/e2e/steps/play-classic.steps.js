@@ -12,7 +12,7 @@ defineFeature(feature, (test) => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
       ? await puppeteer.launch({ headless: 'new', slowMo: 100 })
-      : await puppeteer.launch({ headless: 'new', slowMo: 10 });
+      : await puppeteer.launch({ headless: 'new', slowMo: 100 });
     page = await browser.newPage();
     setDefaultOptions({ timeout: 10000 });
 
@@ -59,14 +59,14 @@ defineFeature(feature, (test) => {
   let password;
   test("The user can answer a question on Classic mode", ({ given, when, then }) => {
     given("A logged-in user", async () => {
-      username = "testuser";
-      password = "Testpassword1";
-      await page.waitForSelector("#login-username");
-      await page.type("#login-username", username);
-      await page.waitForSelector("#login-password");
-      await page.type("#login-password", password);
-      await page.click("button", { text: "Login" });
-      //await page.waitForNavigation({ waitUntil: "networkidle0" });
+      await page.evaluate(() => {
+        localStorage.setItem("username","testuser");
+        localStorage.setItem("token","abcdefg");
+      });
+      
+      await page.goto("http://localhost:3000/home/", {
+        waitUntil: "networkidle0",
+      });
     });
 
     when("I play on Classic mode and click on an answer", async () => {
