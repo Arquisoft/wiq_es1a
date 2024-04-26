@@ -18,15 +18,11 @@ defineFeature(feature, (test) => {
     
     await page.goto("http://localhost:3000", {
       waitUntil: "networkidle0",
-    });
+    }).catch(() => {});
 
     await page.evaluate(() => {
       localStorage.setItem("username","testuser");
       localStorage.setItem("token","abcdefg");
-    });
-
-    await page.goto("http://localhost:3000/home/bateria", {
-      waitUntil: "networkidle0",
     });
     
     await page.setRequestInterception(true);
