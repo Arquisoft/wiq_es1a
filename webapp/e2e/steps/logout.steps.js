@@ -75,13 +75,17 @@ defineFeature(feature, (test) => {
 
   test("The user can logout", ({ given, when, then }) => {
     given("A logged-in user", async () => {
-      username = "testuser";
-      password = "Testpassword1";
-      await page.waitForSelector("#login-username");
-      await page.type("#login-username", username);
-      await page.waitForSelector("#login-password");
-      await page.type("#login-password", password);
-      await page.click("button", { text: "Login" });
+      await page.evaluate(() => {
+        localStorage.clear();
+        localStorage.setItem("username","testuser");
+        localStorage.setItem("token","abcdefg");
+      });
+
+      await page
+      .goto("http://localhost:3000/home", {
+        waitUntil: "networkidle0",
+      })
+      .catch(() => {});
     });
 
     when("I click on the Logout link", async () => {

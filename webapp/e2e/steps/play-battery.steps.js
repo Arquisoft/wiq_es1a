@@ -69,6 +69,11 @@ defineFeature(feature, (test) => {
   let firstquestion;
   test("The user can answer a question on Battery mode", ({ given, when, then }) => {
     given("A logged-in user", async () => {
+      await page.evaluate(() => {
+        localStorage.clear();
+        localStorage.setItem("username","testuser");
+        localStorage.setItem("token","abcdefg");
+      });
 
       await page.waitForTimeout(1000);
       await page.waitForXPath('//button[contains(text(), "Batería de sabios")]');
@@ -84,8 +89,6 @@ defineFeature(feature, (test) => {
     });
 
     when("I play on Battery mode and click on an answer", async () => {
-      
-
       await page.waitForSelector('[data-testid="question"]');
 
       firstquestion = await page.evaluate(element => 
