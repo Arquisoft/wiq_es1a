@@ -101,6 +101,7 @@ services:
       - "3000:3000" 
     environment:
       REACT_APP_API_ENDPOINT: http://gatewayservice:8000
+    restart: always
 
   prometheus:
     image: prom/prometheus
@@ -115,6 +116,7 @@ services:
       - "9090:9090"
     depends_on: 
       - gatewayservice
+    restart: always
       
   grafana:
     image: grafana/grafana
@@ -134,6 +136,7 @@ services:
       - "9091:9091"
     depends_on: 
       - prometheus
+    restart: always
 
 
 volumes:
