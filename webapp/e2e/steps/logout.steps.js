@@ -23,19 +23,21 @@ defineFeature(feature, (test) => {
       })
       .catch(() => {});
 
-      await page.setRequestInterception(true);
-      page.on('request', (req) => {
-        if (req.method() === 'OPTIONS'){
-          req.respond({
-            status: 200,
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                'Access-Control-Allow-Headers': '*'
-            }
-          });
-        } else {req.continue();}
-      });
+    await page.setRequestInterception(true);
+    page.on("request", (req) => {
+      if (req.method() === "OPTIONS") {
+        req.respond({
+          status: 200,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+          },
+        });
+      } else {
+        req.continue();
+      }
+    });
   });
 
   let username;
@@ -50,7 +52,7 @@ defineFeature(feature, (test) => {
       await page.waitForSelector("#login-password");
       await page.type("#login-password", password);
       await page.click("button", { text: "Login" });
-      //await page.waitForNavigation({ waitUntil: "networkidle0" });
+      await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
     when("I click on the Logout link", async () => {
