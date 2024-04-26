@@ -102,7 +102,7 @@ defineFeature(feature, (test) => {
         const alertElement = document.querySelector('div[role="alert"]');
         return alertElement.innerText.trim();
       });
-      const rightMessage = "Error: Failed to fetch";
+      const rightMessage = "Group created successfully";
       expect(rightMessage).toBe(alertText);
     });
   });

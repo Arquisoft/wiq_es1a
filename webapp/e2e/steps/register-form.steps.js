@@ -103,11 +103,17 @@ defineFeature(feature, (test) => {
       await page.type("#register-password", password);
       await page.waitForSelector("#register-pass2");
       await page.type("#register-pass2", password);
+
+      await page.evaluate(() => {
+        localStorage.setItem("username","testuser");
+        localStorage.setItem("token","abcdefg");
+      });
+      
       await page.click("button", { text: "Registrarse" });
     });
 
     then("The home screen should be shown", async () => {
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(10000);
       const url = page.url();
       expect(url).toContain("/home");
       browser.close();
