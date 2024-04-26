@@ -42,7 +42,7 @@ defineFeature(feature, (test) => {
     });
 
     when("I click on the Logout link", async () => {
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(10000);
       await page.click('#menu-button-\\:r3\\:');
       await page.waitForSelector('#menu-list-\\:r3\\:-menuitem-\\:r9\\:');
       await page.click('#menu-list-\\:r3\\:-menuitem-\\:r9\\:');
