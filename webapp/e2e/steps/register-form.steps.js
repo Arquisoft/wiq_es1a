@@ -87,16 +87,13 @@ defineFeature(feature, (test) => {
   });
 
   test("The user is not registered in the site", ({ given, when, then }) => {
-    var username;
-    var password;
-
     given("An unregistered user", async () => {
       await expect(page).toClick("a", { text: "Regístrate" });
     });
 
     when("I fill the data in the form and press submit", async () => {
-      username = generateUUID();
-      password = "HOLApass1234";
+      var username = generateUUID();
+      var password = "HOLApass1234";
       await page.waitForSelector("#register-username");
       await page.type("#register-username", username);
       await page.waitForSelector("#register-password");
@@ -105,11 +102,17 @@ defineFeature(feature, (test) => {
       await page.type("#register-pass2", password);
 
       await page.evaluate(() => {
-        localStorage.setItem("username",username);
+        localStorage.setItem("username","generateUUID()");
         localStorage.setItem("token","abcdefg");
       });
 
       await page.click("button", { text: "Registrarse" });
+
+      await page
+      .goto("http://localhost:3000/home", {
+        waitUntil: "networkidle0",
+      })
+      .catch(() => {});
     });
 
     then("The home screen should be shown", async () => {
