@@ -15,6 +15,11 @@ defineFeature(feature, (test) => {
       : await puppeteer.launch({ headless: "new", slowMo: 100 });
     page = await browser.newPage();
     setDefaultOptions({ timeout: 10000 });
+
+    await page.goto("http://localhost:3000", {
+      waitUntil: "networkidle0",
+    });
+
     await page.evaluate(() => {
       localStorage.setItem("username","testuser");
       localStorage.setItem("token","abcdefg");
