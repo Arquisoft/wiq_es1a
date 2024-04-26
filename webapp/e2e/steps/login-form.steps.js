@@ -90,6 +90,12 @@ defineFeature(feature, (test) => {
       });
 
       await page.click("button", { text: "Login" });
+
+      await page
+      .goto("http://localhost:3000/home", {
+        waitUntil: "networkidle0",
+      })
+      .catch(() => {});
     });
 
     then("The home screen should be shown", async () => {
