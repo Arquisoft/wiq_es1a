@@ -10,11 +10,9 @@ let browser;
 defineFeature(feature, (test) => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
-      ? await puppeteer.launch({ headless: 'new', slowMo: 100 })
+      ? await puppeteer.launch({ headless: "new", slowMo: 100 })
       : await puppeteer.launch({ headless: false, slowMo: 100 });
     page = await browser.newPage();
-
-    await page.setViewport({ width: 1600, height: 800 });
 
     //Way of setting up the timeout
     setDefaultOptions({ timeout: 10000 });
@@ -24,11 +22,25 @@ defineFeature(feature, (test) => {
         waitUntil: "networkidle0",
       })
       .catch(() => {});
+
+      await page.setRequestInterception(true);
+      page.on('request', (req) => {
+        if (req.method() === 'OPTIONS'){
+          req.respond({
+            status: 200,
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers': '*'
+            }
+          });
+        }
+      });
   });
 
   let username;
   let password;
-    
+
   test("The user can logout", ({ given, when, then }) => {
     given("A logged-in user", async () => {
       username = "testuser";
@@ -42,19 +54,23 @@ defineFeature(feature, (test) => {
     });
 
     when("I click on the Logout link", async () => {
-      let src = await page.content();
-      console.log(src);
+      const bodyHTML = await page.evaluate(() => document.body.innerHTML);
+      console.log(bodyHTML);
+
       await page.waitForTimeout(10000);
-      await page.click('#menu-button-\\:r3\\:');
-      await page.waitForSelector('#menu-list-\\:r3\\:-menuitem-\\:r9\\:');
-      await page.click('#menu-list-\\:r3\\:-menuitem-\\:r9\\:');
+      await page.click("#menu-button-\\:r3\\:");
+      await page.waitForSelector("#menu-list-\\:r3\\:-menuitem-\\:r9\\:");
+      await page.click("#menu-list-\\:r3\\:-menuitem-\\:r9\\:");
       //await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
-    then("The user should be logged out and the Login screen should be shown", async () => {
-      const url = page.url();
-      expect(url).toContain("/login");
-    });
+    then(
+      "The user should be logged out and the Login screen should be shown",
+      async () => {
+        const url = page.url();
+        expect(url).toContain("/login");
+      }
+    );
   });
 
   afterAll(async () => {
