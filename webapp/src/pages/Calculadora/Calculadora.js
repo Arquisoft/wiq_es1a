@@ -93,7 +93,7 @@ const CalculadoraHumana = () => {
       username: username,
       gameMode: "calculadora",
       gameData: {
-        correctAnswers: 0,
+        correctAnswers: puntuacion,
         incorrectAnswers: 0,
         points: puntuacion,
         avgTime: tiempoMedio,
