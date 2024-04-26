@@ -75,6 +75,10 @@ defineFeature(feature, (test) => {
         localStorage.setItem("token","abcdefg");
       });
 
+      await page.goto("http://localhost:3000/home/", {
+        waitUntil: "networkidle0",
+      });
+
       await page.waitForTimeout(1000);
       await page.waitForXPath('//button[contains(text(), "Batería de sabios")]');
       const button = await page.$x('//button[contains(text(), "Batería de sabios")]');
