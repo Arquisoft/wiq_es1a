@@ -117,7 +117,6 @@ defineFeature(feature, (test) => {
 
     then("The game ends", async () => {
       await page.waitForSelector('[data-testid="play-again-button"]');
-
       const gameOverMessage = await page.evaluate(() => {
         return document.querySelector('[data-testid="play-again-button"]')
           .textContent;
