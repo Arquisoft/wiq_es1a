@@ -16,7 +16,7 @@ defineFeature(feature, (test) => {
     page = await browser.newPage();
     setDefaultOptions({ timeout: 10000 });
 
-    await page.goto("http://localhost:3000", {
+    await page.goto("http://localhost:3000/home/calculadora", {
       waitUntil: "networkidle0",
     });
 
@@ -31,31 +31,50 @@ defineFeature(feature, (test) => {
             "Access-Control-Allow-Headers": "*",
           },
         });
+      } else if (req.url().includes("/questions")) {
+        req.respond({
+          status: 200,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+          contentType: "application/json",
+          body: JSON.stringify([
+            {
+              pregunta: "Test question",
+              respuestas: [
+                "Test answer 1",
+                "Test answer 2",
+                "Test answer 3",
+                "Test correct answer",
+              ],
+              correcta: "Test correct answer",
+            },
+            {
+              pregunta: "Test question 2",
+              respuestas: [
+                "Test answer 1",
+                "Test answer 2",
+                "Test answer 3",
+                "Test correct answer",
+              ],
+              correcta: "Test correct answer",
+            },
+          ]),
+        });
       } else {
         req.continue();
       }
     });
   });
-  let username;
-  let password;
   test("The user can answer a question on Human Calculator mode", ({
     given,
     when,
     then,
   }) => {
     given("A logged-in user", async () => {
-      username = "testuser";
-      password = "Testpassword1";
-      await page.waitForSelector("#login-username");
-      await page.type("#login-username", username);
-      await page.waitForSelector("#login-password");
-      await page.type("#login-password", password);
-      await page.click("button", { text: "Login" });
+      localStorage.setItem("username","testuser");
+      localStorage.setItem("token","abcdefg");
 
-      //await page.waitForNavigation({ waitUntil: "networkidle0" });
-    });
-
-    when("I play on Human Calculator mode and answer incorrectly", async () => {
       await page.waitForTimeout(1000);
       await page.waitForXPath(
         '//button[contains(text(), "Calculadora humana")]'
@@ -64,7 +83,6 @@ defineFeature(feature, (test) => {
         '//button[contains(text(), "Calculadora humana")]'
       );
       await button[0].click();
-      //await page.waitForNavigation({ waitUntil: "networkidle0" });
 
       await page.waitForXPath(
         '//section[contains(@class, "chakra-modal__content")]//button[contains(text(), "Jugar")]'
@@ -73,6 +91,14 @@ defineFeature(feature, (test) => {
         '//section[contains(@class, "chakra-modal__content")]//button[contains(text(), "Jugar")]'
       );
       await jugarButton[0].click();
+      //await page.waitForNavigation({ waitUntil: "networkidle0" });
+    });
+
+    when("I play on Human Calculator mode and answer incorrectly", async () => {
+      
+      //await page.waitForNavigation({ waitUntil: "networkidle0" });
+
+      
       await page.waitForSelector('[data-testid="operation"]');
 
       const answer = -999;
