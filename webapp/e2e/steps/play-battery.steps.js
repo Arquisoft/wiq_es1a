@@ -15,8 +15,10 @@ defineFeature(feature, (test) => {
       : await puppeteer.launch({ headless: 'new', slowMo: 100 });
     page = await browser.newPage();
     setDefaultOptions({ timeout: 10000 });
-    localStorage.setItem("username","testuser");
-    localStorage.setItem("token","abcdefg");
+    await page.evaluate(() => {
+      localStorage.setItem("username","testuser");
+      localStorage.setItem("token","abcdefg");
+    });
     await page.goto("http://localhost:3000/home/bateria", {
       waitUntil: "networkidle0",
     });
