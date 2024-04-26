@@ -34,6 +34,36 @@ defineFeature(feature, (test) => {
             "Access-Control-Allow-Headers": "*",
           },
         });
+      } else if (req.url().includes("/questions")) {
+        req.respond({
+          status: 200,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+          contentType: "application/json",
+          body: JSON.stringify([
+            {
+              pregunta: "Test question",
+              respuestas: [
+                "Test answer 1",
+                "Test answer 2",
+                "Test answer 3",
+                "Test correct answer",
+              ],
+              correcta: "Test correct answer",
+            },
+            {
+              pregunta: "Test question 2",
+              respuestas: [
+                "Test answer 1",
+                "Test answer 2",
+                "Test answer 3",
+                "Test correct answer",
+              ],
+              correcta: "Test correct answer",
+            },
+          ]),
+        });
       } else {
         req.continue();
       }
@@ -55,7 +85,6 @@ defineFeature(feature, (test) => {
     });
 
     when("I click on the Logout link", async () => {
-
       await page.waitForTimeout(10000);
       await page.waitForSelector("#menu-button-\\:r3\\:");
       await page.click("#menu-button-\\:r3\\:");
