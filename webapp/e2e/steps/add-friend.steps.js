@@ -101,8 +101,10 @@ defineFeature(feature, (test) => {
     when("I add the user as a friend", async () => {
       await page.waitForTimeout(1000);
 
-      localStorage.setItem("username", "testuser");
-      localStorage.setItem("token", "testtoken");
+      await page.evaluate(() => {
+        localStorage.setItem("username", "testuser");
+        localStorage.setItem("token", "testtoken");
+      });
 
       await page.goto("http://localhost:3000/social/usuarios", {
         waitUntil: "networkidle0",
