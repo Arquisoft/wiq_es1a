@@ -14,7 +14,7 @@ defineFeature(feature, (test) => {
       : await puppeteer.launch({ headless: false, slowMo: 100 });
     page = await browser.newPage();
 
-    await page.setViewport({ width: 600, height: 800 });
+    await page.setViewport({ width: 1600, height: 800 });
 
     //Way of setting up the timeout
     setDefaultOptions({ timeout: 10000 });
@@ -43,10 +43,9 @@ defineFeature(feature, (test) => {
 
     when("I click on the Logout link", async () => {
       await page.waitForTimeout(1000);
-
-      await page.click('button[aria-label="Abrir menú"]');
-      await page.waitForSelector('[data-testid="home-logout-link"]');
-      await page.click('[data-testid="home-logout-link"]');
+      await page.click('#menu-button-\\:r3\\:');
+      await page.waitForSelector('#menu-list-\\:r3\\:-menuitem-\\:r9\\:');
+      await page.click('#menu-list-\\:r3\\:-menuitem-\\:r9\\:');
       //await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
