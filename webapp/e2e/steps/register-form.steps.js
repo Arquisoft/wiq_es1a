@@ -96,7 +96,7 @@ defineFeature(feature, (test) => {
 
     when("I fill the data in the form and press submit", async () => {
       username = generateUUID();
-      password = generateUUID();
+      password = "HOLApass1234";
       await page.waitForSelector("#register-username");
       await page.type("#register-username", username);
       await page.waitForSelector("#register-password");
@@ -105,15 +105,15 @@ defineFeature(feature, (test) => {
       await page.type("#register-pass2", password);
 
       await page.evaluate(() => {
-        localStorage.setItem("username","testuser");
+        localStorage.setItem("username",username);
         localStorage.setItem("token","abcdefg");
       });
-      
+
       await page.click("button", { text: "Registrarse" });
     });
 
     then("The home screen should be shown", async () => {
-      await page.waitForTimeout(10000);
+      await page.waitForTimeout(2000);
       const url = page.url();
       expect(url).toContain("/home");
       browser.close();

@@ -66,8 +66,7 @@ defineFeature(feature, (test) => {
       }
     });
   });
-  let username;
-  let password;
+  let groupname;
   test("The user can create a group", ({ given, when, then }) => {
     given("A logged-in user", async () => {
       await page.evaluate(() => {
@@ -87,8 +86,10 @@ defineFeature(feature, (test) => {
       await page.click('[data-testid="home-grupos-link"]');
       //await page.waitForNavigation({ waitUntil: "networkidle0" });
 
+
+      groupname = generateUUID();
       await page.waitForSelector('[name="name"]');
-      await page.type('[name="name"]', "Testgroup");
+      await page.type('[name="name"]', groupname);
       await page.waitForTimeout(2000);
       await page.click('button[data-testid="addgroup-button"]');
     });
