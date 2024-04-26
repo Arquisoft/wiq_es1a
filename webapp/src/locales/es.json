@@ -33,7 +33,8 @@
       "options": "Opciones",
       "disconnect": "Desconectar",
       "api": "API docs",
-      "history": "Historial"
+      "history": "Historial",
+      "help": "Ayuda"
     },
     "register": {
       "title": "Regístrate",
@@ -238,7 +239,19 @@
       "seegroup": "Ver grupo",
       "creationDate": "Fecha de creación",
       "creator": "Creador"
+    },
+    "help": {
+      "title": "Centro de ayuda",
+      "description": "Bienvenido al centro de ayuda de nuestra aplicación. Aquí encontrarás información útil para sacar el máximo provecho de nuestra juego .",
+      "category": "Categoria",
+      "descriptionC": "Descripción",
+      "gameModes": "Ayuda: Modos de juego",
+      "gameModesDescription": "En nuestra aplición tenemos 3 modos de juego con los que podras entretnerte, en esta sección esperamos responder todas tus dudas",
+      "socialHelp": "Ayuda: Social",  
+      "socialHelpDescription": "Tenemos diferentes maneras de interactuar con otros usuarios si tienes dudas sobre como hacerlo esta es tu sección.",
+      "statsHelp": "Ayuda: Estadisticas",
+      "statsHelpDescription": "Tenemos un modo para comprobar todas las estadisticas, si tienes alguna duda esta es tu sección",
+      "moreDetails": "Más detalles" 
     }
-      
-  }
+}
 }
