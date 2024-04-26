@@ -25,7 +25,7 @@ defineFeature(feature, (test) => {
       localStorage.setItem("token","abcdefg");
     });
     
-    await page.goto("http://localhost:3000/home/calculadora", {
+    await page.goto("http://localhost:3000/home/", {
       waitUntil: "networkidle0",
     });
 
