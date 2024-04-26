@@ -15,8 +15,9 @@ defineFeature(feature, (test) => {
       : await puppeteer.launch({ headless: 'new', slowMo: 100 });
     page = await browser.newPage();
     setDefaultOptions({ timeout: 10000 });
-
-    await page.goto("http://localhost:3000", {
+    localStorage.setItem("username","testuser");
+    localStorage.setItem("token","abcdefg");
+    await page.goto("http://localhost:3000/home/bateria", {
       waitUntil: "networkidle0",
     });
     await page.setRequestInterception(true);
@@ -59,9 +60,7 @@ defineFeature(feature, (test) => {
   let firstquestion;
   test("The user can answer a question on Battery mode", ({ given, when, then }) => {
     given("A logged-in user", async () => {
-      localStorage.setItem("username","testuser");
-      localStorage.setItem("token","abcdefg");
-      
+
       await page.waitForTimeout(1000);
       await page.waitForXPath('//button[contains(text(), "Batería de sabios")]');
       const button = await page.$x('//button[contains(text(), "Batería de sabios")]');

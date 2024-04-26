@@ -15,7 +15,8 @@ defineFeature(feature, (test) => {
       : await puppeteer.launch({ headless: "new", slowMo: 100 });
     page = await browser.newPage();
     setDefaultOptions({ timeout: 10000 });
-
+    localStorage.setItem("username","testuser");
+    localStorage.setItem("token","abcdefg");
     await page.goto("http://localhost:3000/home/calculadora", {
       waitUntil: "networkidle0",
     });
@@ -72,8 +73,6 @@ defineFeature(feature, (test) => {
     then,
   }) => {
     given("A logged-in user", async () => {
-      localStorage.setItem("username","testuser");
-      localStorage.setItem("token","abcdefg");
 
       await page.waitForTimeout(1000);
       await page.waitForXPath(
