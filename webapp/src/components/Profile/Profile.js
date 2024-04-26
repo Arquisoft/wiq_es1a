@@ -10,8 +10,10 @@ const Profile = (user) => {
 
   const { t } = useTranslation();
 
+  const username =  (user && user.username) || localStorage.getItem("username");
+
   useEffect(() => {
-    fetch(gatewayUrl + `/userInfo/${user.username}`)
+    fetch(gatewayUrl + `/userInfo/${username}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);
@@ -42,7 +44,7 @@ const Profile = (user) => {
               <>
                 {userData && (
                   <>
-                    <Avatar name={user.username} />
+                    <Avatar name={username} />
                     <Text justifyContent={"center"}>
                       <strong>{t('components.profile.name')}</strong> {userData.username}
                     </Text>

@@ -9,7 +9,7 @@ const Perfil = () => {
   return (
     <>
       <Nav />
-      <Profile username={username.username}/>
+      <Profile username={username}/>
       <Footer />
     </>
   );
