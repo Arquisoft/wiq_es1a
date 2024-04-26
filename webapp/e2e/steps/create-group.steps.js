@@ -92,8 +92,8 @@ defineFeature(feature, (test) => {
       const alertElement = document.querySelector('div[role="alert"]');
       return alertElement.innerText.trim();
       });
-      const rightMessage=alertText === "Group created successfully";
-      expect(rightMessage).toBe(true);
+      const rightMessage = "Group created successfully";
+      expect(rightMessage).toBe(alertText);
 
     });
   });
