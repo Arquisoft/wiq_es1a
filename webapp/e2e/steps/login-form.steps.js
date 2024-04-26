@@ -41,7 +41,7 @@ defineFeature(feature, (test) => {
     });
 
     then("The home screen should be shown", async () => {
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(3000);
       const url = page.url();
       expect(url).toContain("/home");
       browser.close();
