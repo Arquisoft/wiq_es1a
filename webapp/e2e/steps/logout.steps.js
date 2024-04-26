@@ -34,7 +34,7 @@ defineFeature(feature, (test) => {
                 'Access-Control-Allow-Headers': '*'
             }
           });
-        }
+        } else {req.continue();}
       });
   });
 
