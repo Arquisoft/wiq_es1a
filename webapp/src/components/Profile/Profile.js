@@ -1,20 +1,17 @@
 import { Box, VStack, Heading, Text, Center, Spinner, Table, Thead, Tbody, Tr, Th, Td, Avatar } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
 
-const Perfil = () => {
+const Profile = (user) => {
   const gatewayUrl = process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const params = useParams();
-  const user = params.user || localStorage.getItem("username");
   const [error, setError] = useState(null);
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    fetch(gatewayUrl + `/userInfo/${encodeURIComponent(user)}`)
+    fetch(gatewayUrl + `/userInfo/${user.username}`)
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);
@@ -45,7 +42,7 @@ const Perfil = () => {
               <>
                 {userData && (
                   <>
-                    <Avatar name={user} />
+                    <Avatar name={user.username} />
                     <Text justifyContent={"center"}>
                       <strong>{t('components.profile.name')}</strong> {userData.username}
                     </Text>
@@ -56,7 +53,7 @@ const Perfil = () => {
                     <Heading as="h2" size="md">
                       {t('components.profile.recentGames')}
                     </Heading>
-                    <Box overflowX={"scroll"} width={'100%'}>
+                    <Box overflowX={{ base: "scroll", lg: "auto" }} width={'100%'}>
                       { userData.games && userData.games.length > 0 ? (
                         <Table variant="simple">
                           <Thead>
@@ -95,5 +92,5 @@ const Perfil = () => {
   );
 };
 
-export default Perfil;
+export default Profile;
 

@@ -102,7 +102,7 @@ paths:
     get:
       summary: Get User Information
       parameters:
-        - in: query
+        - in: param
           name: username
           schema:
             type: string
