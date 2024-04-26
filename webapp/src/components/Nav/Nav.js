@@ -256,12 +256,18 @@ const Nav = () => {
               </MenuItem>
             </MenuGroup>
             <MenuDivider />
-            <MenuGroup title="Ayuda">
+            <MenuGroup title="Info">
               <MenuItem>
                 <a href={otherPortUrl}>{t("components.nav.api")}</a>
               </MenuItem>
               <MenuItem onClick={() => handleNavigate("/sobre")}>
                 {t("components.nav.about")}
+              </MenuItem>
+            </MenuGroup>
+            <MenuDivider />
+            <MenuGroup title="Ayuda">
+            <MenuItem onClick={() => handleNavigate("/ayuda")}>
+                {t("components.nav.help")}
               </MenuItem>
             </MenuGroup>
             <MenuDivider />
