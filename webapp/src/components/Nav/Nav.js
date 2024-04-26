@@ -60,6 +60,7 @@ const Nav = () => {
   const handleLogout = () => { // NOSONAR
     if(process.env.NODE_ENV !== 'test'){
       localStorage.removeItem("username");
+      localStorage.removeItem("token");
     }
     navigate("/login");
   };
