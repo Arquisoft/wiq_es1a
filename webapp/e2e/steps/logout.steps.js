@@ -52,14 +52,12 @@ defineFeature(feature, (test) => {
       await page.waitForSelector("#login-password");
       await page.type("#login-password", password);
       await page.click("button", { text: "Login" });
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
     });
 
     when("I click on the Logout link", async () => {
-      const bodyHTML = await page.evaluate(() => document.body.innerHTML);
-      console.log(bodyHTML);
 
       await page.waitForTimeout(10000);
+      await page.waitForSelector("#menu-button-\\:r3\\:");
       await page.click("#menu-button-\\:r3\\:");
       await page.waitForSelector("#menu-list-\\:r3\\:-menuitem-\\:r9\\:");
       await page.click("#menu-list-\\:r3\\:-menuitem-\\:r9\\:");
