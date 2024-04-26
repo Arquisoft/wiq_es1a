@@ -70,8 +70,8 @@ defineFeature(feature, (test) => {
   });
 
   test("The user is registered in the site", ({ given, when, then }) => {
-    let username;
-    let password;
+    var username;
+    var password;
 
     given("A registered user", async () => {
       username = "testuser";

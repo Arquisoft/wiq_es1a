@@ -87,8 +87,8 @@ defineFeature(feature, (test) => {
   });
 
   test("The user is not registered in the site", ({ given, when, then }) => {
-    let username;
-    let password;
+    var username;
+    var password;
 
     given("An unregistered user", async () => {
       await expect(page).toClick("a", { text: "Regístrate" });
