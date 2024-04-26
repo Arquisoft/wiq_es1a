@@ -15,8 +15,8 @@ defineFeature(feature, (test) => {
       : await puppeteer.launch({ headless: "new", slowMo: 100 });
     page = await browser.newPage();
     setDefaultOptions({ timeout: 10000 });
-    
-    await page.goto("http://localhost:3000/", {
+
+    await page.goto("http://localhost:3000", {
       waitUntil: "networkidle0",
     });
 
@@ -117,7 +117,6 @@ defineFeature(feature, (test) => {
 
     then("The game ends", async () => {
       await page.waitForSelector('[data-testid="play-again-button"]');
-
       const gameOverMessage = await page.evaluate(() => {
         return document.querySelector('[data-testid="play-again-button"]')
           .textContent;
