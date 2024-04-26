@@ -318,7 +318,7 @@ const JuegoPreguntas = () => {
                 <p>
                   {t("pages.classic.time")} {Math.floor(tiempoRestante)}
                 </p>
-                <p>Puntuación: {puntuacion}</p>
+                <p>{t("pages.classic.score")} {puntuacion}</p>
                 <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
                   <Box
                     bg="teal.500"

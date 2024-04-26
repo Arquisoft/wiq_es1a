@@ -18,7 +18,7 @@ import {
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { useTranslation } from "react-i18next";
-import Perfil from "../../components/Profile/Profile.js";
+import Profile from "../../components/Profile/Profile.js";
 
 
 const GroupDetails = () => {
@@ -55,7 +55,7 @@ const GroupDetails = () => {
   };
 
   const redirectToProfile = (member) => {
-    navigate(`/perfil/${member.username}`);
+    setUser(member);
   };
 
 
@@ -63,7 +63,7 @@ const GroupDetails = () => {
     return (
       <>
         <Nav />
-        <Perfil username={user} />
+        <Profile username={user} />
         <Button p={"1rem"} mb={"1rem"} onClick={() => setUser("")}>Volver</Button>
         <Footer />
       </>

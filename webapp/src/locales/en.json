@@ -1,5 +1,9 @@
 {
   "components": {
+    "custommodal": {
+      "play": "Jugar",
+      "close": "Cerrar"
+    },
     "footer": {
       "copyright": "Copyright 2024 ® Software Architecture Group 1A"
     },
@@ -87,7 +91,8 @@
       "playAgain": "Play Again",
       "back": "Back to Menu",
       "question": "Question",
-      "time": "Time Remaining:"
+      "time": "Time Remaining:",
+      "send": "Send"
     },
     "config": {
       "title": "Settings",
