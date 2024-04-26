@@ -83,6 +83,12 @@ defineFeature(feature, (test) => {
       await page.type("#login-username", username);
       await page.waitForSelector("#login-password");
       await page.type("#login-password", password);
+
+      await page.evaluate(() => {
+        localStorage.setItem("username",username);
+        localStorage.setItem("token","abcdefg");
+      });
+
       await page.click("button", { text: "Login" });
     });
 
