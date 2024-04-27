@@ -4,59 +4,59 @@ const fs = require("fs");
 class GeneratorChooser {
   constructor() {
     this.generators = new Map();
-    this.tematicas = [];
-    this.leer_json("./data/tematicas.json");
+    this.topics = [];
+    this.read_json("./data/topics.json");
   }
 
-  leer_json(ruta) {
+  read_json(ruta) {
     const datos = fs.readFileSync(ruta);
-    var tematicas = JSON.parse(datos);
+    var topics = JSON.parse(datos);
 
-    for (let i in tematicas) {
-      var tematica = tematicas[i];
-      this.tematicas.push(i);
+    for (let i in topics) {
+      var topic = topics[i];
+      this.topics.push(i);
       this.generators.set(
         i,
         new GenericGenerator(
-          tematica.entity,
-          tematica.props,
-          tematica.types,
-          tematica.preguntas
+          topic.entity,
+          topic.props,
+          topic.types,
+          topic.preguntas
         )
       );
     }
   }
 
-  getQuestions(tematica, n, locale) {
-    if (tematica === "all") {
+  getQuestions(topic, n, locale) {
+    if (topic === "all") {
       var questions = [];
       for (let i = 0; i < n; i++) {
-        let rand = Math.floor(Math.random() * this.tematicas.length);
-        let randTematica = this.tematicas[rand];
-        let q = this.generators.get(randTematica).generateRandomQuestions(1, locale);
+        let rand = Math.floor(Math.random() * this.topics.length);
+        let randTopic = this.topics[rand];
+        let q = this.generators.get(randTopic).generateRandomQuestions(1, locale);
         questions.push(q);
       }
       return questions.flat();
     } else {
-      return this.generators.get(tematica).generateRandomQuestions(n, locale);
+      return this.generators.get(topic).generateRandomQuestions(n, locale);
     }
   }
 
-  getQuestionsPost(tematicas, n, locale) {
+  getQuestionsPost(topics, n, locale) {
     var questions = [];
     for (let i = 0; i < n; i++) {
-      let rand = Math.floor(Math.random() * tematicas.length);
-      let randTematica = tematicas[rand];
-      let q = this.generators.get(randTematica).generateRandomQuestions(1, locale);
+      let rand = Math.floor(Math.random() * topics.length);
+      let randTopic = topics[rand];
+      let q = this.generators.get(randTopic).generateRandomQuestions(1, locale);
       questions.push(q);
     }
     return questions.flat();
   }
 
   async loadGenerators() {
-    for (let i = 0; i < this.tematicas.length; i++) {
-      var gen = this.generators.get(this.tematicas[i]);
-      console.log("Cargando temática: " + this.tematicas[i]);
+    for (let i = 0; i < this.topics.length; i++) {
+      var gen = this.generators.get(this.topics[i]);
+      console.log("Loading topic: " + this.topics[i]);
       await gen.getData();
       await this.#sleep(10000);
     }

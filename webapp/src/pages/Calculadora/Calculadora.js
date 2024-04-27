@@ -43,71 +43,71 @@ const CalculadoraHumana = () => {
   const { t } = useTranslation();
 
   const [valSubmit, setValSubmit] = useState("");
-  const [puntuacion, setPuntuacion] = useState(0);
+  const [points, setPoints] = useState(0);
   const [operation, setOperation] = useState(generateRandomOperation());
-  const [tiempoRestante, setTiempoRestante] = useState(TIME);
-  const [juegoTerminado, setJuegoTerminado] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(TIME);
+  const [endgame, setEndgame] = useState(false);
   const [progressPercent, setProgressPercent] = useState(100);
 
-  const [tiempoMedio, setTiempoMedio] = useState(0);
+  const [averageTime, setAverageTime] = useState(0);
 
   useEffect(() => {
-    if (tiempoRestante === 0) {
-      setJuegoTerminado(true);
-      if(puntuacion>0){
-        const tMedio=TIME/puntuacion;
-        setTiempoMedio(tMedio);
+    if (timeLeft === 0) {
+      setEndgame(true);
+      if(points>0){
+        const tMedio=TIME/points;
+        setAverageTime(tMedio);
       }
     }
     const timer = setInterval(() => {
-      setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
+      setTimeLeft((prevTime) => (prevTime <= 0 ? 0 : prevTime - 1));
     }, 1000);
     return () => clearInterval(timer);
     // eslint-disable-next-line
-  }, [tiempoRestante, puntuacion]);
+  }, [timeLeft, points]);
 
   useEffect(() => {
-    setProgressPercent((tiempoRestante / TIME) * 100);
+    setProgressPercent((timeLeft / TIME) * 100);
 
     const timer = setInterval(() => {
-      setTiempoRestante((prevTiempo) =>
-        prevTiempo <= 0 ? 0 : prevTiempo - 0.01
+      setTimeLeft((prevTime) =>
+        prevTime <= 0 ? 0 : prevTime - 0.01
       );
     }, 10);
 
     return () => clearInterval(timer);
     // eslint-disable-next-line
-  }, [tiempoRestante]);
+  }, [timeLeft]);
 
   useEffect(() => {
-    if (juegoTerminado && tiempoMedio !== 0) {
-      guardarPartida();
+    if (endgame && averageTime !== 0) {
+      saveGame();
     }
     // eslint-disable-next-line
-  }, [juegoTerminado, tiempoMedio]);
+  }, [endgame, averageTime]);
 
-  const guardarPartida = async () => {
+  const saveGame = async () => {
     
     const username = localStorage.getItem("username");
     const newGame = {
       username: username,
       gameMode: "calculadora",
       gameData: {
-        correctAnswers: puntuacion,
+        correctAnswers: points,
         incorrectAnswers: 0,
-        points: puntuacion,
-        avgTime: tiempoMedio,
+        points: points,
+        avgTime: averageTime,
       }
     };
     try {
-      await axios.post(URL + '/saveGame', newGame);     
+      await axios.post(URL + '/saveGame', newGame);  
     } catch (error) {
-      console.error('Error al guardar el juego:', error);
+      console.error(error);
     }
     try {
       await axios.post(URL + "/saveGameList", newGame);
     } catch (error) {
-      console.error("Error al guardar el juego:", error);
+      console.error(error);
     }
   }
 
@@ -118,15 +118,15 @@ const CalculadoraHumana = () => {
     // eslint-disable-next-line no-eval
     let evalued = eval(operation);
     if (valSubmit === evalued) {
-      setPuntuacion(puntuacion + 1);
+      setPoints(points + 1);
       let newOperation = generateOperation(valSubmit);
       setOperation(newOperation);
     } else {
-      if(puntuacion>0){
-        const tMedio=(TIME-tiempoRestante)/puntuacion;
-        setTiempoMedio(tMedio);
+      if(points>0){
+        const avg=(TIME-timeLeft)/points;
+        setAverageTime(avg);
       }
-      setJuegoTerminado(true);
+      setEndgame(true);
     }
   };
 
@@ -149,10 +149,10 @@ const CalculadoraHumana = () => {
     return operation;
   };
 
-  const handleRepetirJuego = () => {
-    setPuntuacion(0);
-    setTiempoRestante(60);
-    setJuegoTerminado(false);
+  const handleRepeatGame = () => {
+    setPoints(0);
+    setTimeLeft(60);
+    setEndgame(false);
     setOperation(generateRandomOperation());
   };
 
@@ -167,12 +167,12 @@ const CalculadoraHumana = () => {
       <Nav />
       <Flex justify="center" align="center" h="70vh">
         <Box p={6} borderWidth="1px" maxWidth={"90%"} borderRadius="lg" boxShadow="lg">
-          {juegoTerminado ? (
+          {endgame ? (
             <Box textAlign="center">
               <Heading as="h2">{t('pages.humancalculator.finished')}</Heading>
               <p p={2}>{t("pages.humancalculator.score")} {puntuacion}</p>
               <Flex flexDirection={"column"}>
-                <Button onClick={handleRepetirJuego} colorScheme="teal" m={2} data-testid="play-again-button">
+                <Button onClick={handleRepeatGame} colorScheme="teal" m={2} data-testid="play-again-button">
                   {t('pages.humancalculator.playAgain')}
                 </Button>
                 <Link to="/home" style={{ marginLeft: "10px" }}>
@@ -198,8 +198,8 @@ const CalculadoraHumana = () => {
                 {t('pages.humancalculator.send')}{" "}
               </Button>
               <Box textAlign="center" mt={4}>
-                <p>{t('pages.humancalculator.time')} {Math.floor(tiempoRestante)}</p>
-                <p>{t('pages.humancalculator.score')} {puntuacion}</p>
+                <p>{t('pages.humancalculator.time')} {Math.floor(timeLeft)}</p>
+                <p>{t('pages.humancalculator.score')} {points}</p>
                 <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
                   <Box
                     bg="teal.500"

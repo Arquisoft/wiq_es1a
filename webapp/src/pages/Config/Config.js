@@ -22,13 +22,13 @@ const Config = () => {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    // Obtener el estado de los checkboxes desde el localStorage
+    // Obtain the selected themes from localStorage and check the checkboxes
     const selectedThemes =
       JSON.parse(localStorage.getItem("selectedThemes")) || [];
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
     checkboxes.forEach((checkbox) => {
-      // Verificar si el checkbox debe estar marcado según el localStorage
+      // Verify if the checkbox id is in the selected themes array
       if (selectedThemes.includes(checkbox.id)) {
         checkbox.click();
       }
@@ -71,15 +71,15 @@ const Config = () => {
   };
 
   const handleClasicoChange = (valueString) => {
-    setClasicoTime(parseInt(valueString)); // Convertir el valor a entero
+    setClasicoTime(parseInt(valueString)); 
   };
 
   const handleClasicoPreguntasChange = (valueString) => {
-    setClasicoPreguntas(parseInt(valueString)); // Convertir el valor a entero
+    setClasicoPreguntas(parseInt(valueString)); 
   };
 
   const handleBateriaChange = (valueString) => {
-    setBateriaTime(parseInt(valueString)); // Convertir el valor a entero
+    setBateriaTime(parseInt(valueString)); 
   };
 
   return (

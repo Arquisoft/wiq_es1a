@@ -72,26 +72,21 @@ describe("User Service", () => {
   });
 
   it("should return user info on GET /userInfo", async () => {
-    // Realizar la solicitud GET /userInfo
     const response = await request(app)
       .get("/userInfo/testuser");
 
-    // Verificar la respuesta
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("username", "testuser");
   });
 
   it("should return error on GET /userInfo", async () => {
-    // Realizar la solicitud GET /userInfo sin parámetros
     const response = await request(app).get("/userInfo");
 
-    // Verificar la respuesta
     expect(response.status).toBe(404);
     expect(response.body).toEqual({    });
   });
 
   it("should save game data for the user on POST /saveGameList", async () => {
-    // Datos de la partida a guardar
     const gameData = {
       username: "testuser",
       gameMode: "clasico",
@@ -103,16 +98,13 @@ describe("User Service", () => {
       },
     };
 
-    // Realizar la solicitud POST /saveGameList
     const response = await request(app).post("/saveGameList").send(gameData);
 
-    // Verificar la respuesta
     expect(response.status).toBe(200);
     expect(response.body).toEqual({ message: "Game saved successfully" });
   });
 
   it("should send error POST /saveGameList", async () => {
-    // Datos de la partida a guardar
     const gameData = {
       username: "testuseraaa",
       gameMode: "clasico",
@@ -124,16 +116,13 @@ describe("User Service", () => {
       },
     };
 
-    // Realizar la solicitud POST /saveGameList
     const response = await request(app).post("/saveGameList").send(gameData);
 
-    // Verificar la respuesta
     expect(response.status).toBe(404);
     expect(response.body).toEqual({ error: "User not found" });
   });
 
   it("should send error POST /saveGameList for invalid gamemode", async () => {
-    // Datos de la partida a guardar
     const gameData = {
       username: "testuser",
       gameMode: "a",
@@ -145,10 +134,8 @@ describe("User Service", () => {
       },
     };
 
-    // Realizar la solicitud POST /saveGameList
     const response = await request(app).post("/saveGameList").send(gameData);
 
-    // Verificar la respuesta
     expect(response.status).toBe(422);
     expect(response.body).toEqual({ error: "Invalid gamemode" });
   });

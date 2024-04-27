@@ -110,17 +110,17 @@ app.get("/users", async (req, res) => {
 app.get("/users/search", async (req, res) => {
   try {
     const { username } = req.query;
-    // Encuentra al usuario actual
+    // Search for the user by username
     const currentUser = await User.findOne({ username });
     if (!currentUser) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Encuentra los amigos del usuario actual
+    // Find all users that are not friends of the current user
     const un = username;
     const currentUserFriends = currentUser.friends;
 
-    // Encuentra todos los usuarios que no son amigos del usuario actual
+    // Find all users that are not friends of the current user
     const users = await User.find({
       username: { $ne: un, $nin: currentUserFriends },
     });
@@ -167,20 +167,20 @@ app.post("/users/remove-friend", async (req, res) => {
     const username = req.body.username;
     const friendUsername = req.body.friendUsername;
 
-    // Buscar el usuario por su nombre de usuario
+    // Search for the user by username
     const user = await User.findOne({ username: username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Verificar si el amigo está en la lista de amigos del usuario
+    // Verify if the friend is in the user's friend list
     if (!user.friends.includes(friendUsername)) {
       return res
         .status(400)
         .json({ error: "Friend not found in the user's friend list" });
     }
 
-    // Eliminar al amigo de la lista de amigos del usuario
+    // Delete the friend from the user's friend list
     user.friends = user.friends.filter((friend) => friend !== friendUsername);
     await user.save();
 
@@ -189,14 +189,14 @@ app.post("/users/remove-friend", async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Verificar si el amigo está en la lista de amigos del usuario
+    // Verify if the user is in the friend's friend list
     if (!friend.friends.includes(username)) {
       return res
         .status(400)
         .json({ error: "Friend not found in the user's friend list" });
     }
 
-    // Eliminar al amigo de la lista de amigos del usuario
+    // Delete the user from the friend's friend list
     friend.friends = friend.friends.filter((friend) => friend !== username);
     await friend.save();
 
@@ -212,12 +212,12 @@ app.get("/friends", async (req, res) => {
   try {
     const username = checkInput(req.query.user);
 
-    // Buscar al usuario por su nombre de usuario
+    // Search for the user by username
     const user = await User.findOne({ username:username });
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    // Devuelve la lista de amigos
+    // Return the friends of the user
     res.status(200).json({ friends: user.friends });
 
   } catch (error) {
@@ -296,7 +296,7 @@ app.get('/group/list', async (req, res) => {
   }
 });
 
-// Obtener un grupo por su nombre
+// Get group by name
 app.get('/group/:groupName', async (req, res) => {
   try {
       const groupName = req.params.groupName;
@@ -313,7 +313,7 @@ app.get('/group/:groupName', async (req, res) => {
 });
 
 
-// Crear un nuevo grupo
+// Create a new group
 app.post('/group/add', async (req, res) => {
   try {
       validateRequiredFields(req, ['name', 'username']);
@@ -346,7 +346,7 @@ app.post('/group/add', async (req, res) => {
   }
 });
 
-// Unirse a un grupo existente
+// Join a group
 app.post('/group/join', async (req, res) => {
   try {
       validateRequiredFields(req, ['groupId', 'username']);
