@@ -74,7 +74,7 @@ describe("Stats Service", () => {
 
     expect(response.body).toHaveProperty(
       "error",
-      "Error al obtener el ranking: No se encontraron estadísticas"
+      "Error getting ranking: No stats found"
     );
   });
 
@@ -102,7 +102,7 @@ describe("Stats Service", () => {
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty(
       "message",
-      "Partida guardada exitosamente"
+      "Game saved successfully"
     );
   });
 
@@ -125,7 +125,7 @@ describe("Stats Service", () => {
     expect(response.status).toBe(400);
     expect(response.body).toHaveProperty(
       "error",
-      "Error al guardar juego: Invalid game mode"
+      "Error while saving game: Invalid game mode"
     );
   });
 

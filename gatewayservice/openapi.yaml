@@ -98,11 +98,11 @@ paths:
               example:
                 error: Username already exists. Please choose a different username.
 
-  /userInfo:
+  /userInfo/{username}:
     get:
       summary: Get User Information
       parameters:
-        - in: query
+        - in: path
           name: username
           schema:
             type: string
@@ -135,6 +135,89 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Error"
+
+  /userGames:
+    get:
+      summary: Get User Games
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          description: Username for which to retrieve games
+      responses:
+        "200":
+          description: Games retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Game"
+                example:
+                  - gameMode: clasico
+                    correctAnswers: 10
+                    incorrectAnswers: 5
+                    points: 10
+                    avgTime: 10
+                    _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                    questions:
+                      - pregunta: ¿Cuál es la capital de Francia?
+                        respuestas:
+                          - "Londres"
+                          - "Madrid"
+                          - "Berlín"
+                          - "París"
+                        correcta: "París"
+                        respuesta: "París"
+                      - pregunta: ¿Cuál es el río más largo del mundo?
+                        respuestas:
+                          - "Amazonas"
+                          - "Nilo"
+                          - "Mississippi"
+                          - "Yangtsé"
+                        correcta: "Amazonas"
+                        respuesta: "Nilo"
+                  - gameMode: bateria
+                    correctAnswers: 2
+                    incorrectAnswers: 12
+                    points: 15
+                    avgTime: 7
+                    _id: 65ea02cf891b09479a383477
+                    questions:
+                      - pregunta: ¿Quién pintó la Mona Lisa?
+                        respuestas:
+                          - "Leonardo da Vinci"
+                          - "Pablo Picasso"
+                          - "Vincent van Gogh"
+                          - "Claude Monet"
+                        correcta: "Leonardo da Vinci"
+                        respuesta: "Leonardo da Vinci"
+                      - pregunta: ¿Cuál es el elemento más abundante en la Tierra?
+                        respuestas:
+                          - "Oxígeno"
+                          - "Hidrógeno"
+                          - "Nitrógeno"
+                          - "Hierro"
+                        correcta: "Oxígeno"
+                        respuesta: "Hidrógeno"
+                      
+        "400":
+          description: Username is not present
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Invalid name
+        "404":
+          description: User is not present in the database
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: User not found
 
   /saveGameList:
     post:
@@ -180,6 +263,201 @@ paths:
                 $ref: "#/components/schemas/Error"
               example:
                 error: Usuario no encontrado
+
+  /group/list:
+    get:
+      summary: Get Group List
+      responses:
+        "200":
+          description: Group list retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupList"
+              example:
+                groups:
+                  - _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                    name: testGroup
+                    createdAt: 2021-06-01T00:00:00Z
+                    members:
+                      - test1
+                      - test2
+                      - test3
+                    __v: 0
+                  - _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                    name: testGroup2
+                    createdAt: 2021-06-01T00:00:00Z
+                    members:
+                      - test4
+                      - test5
+                      - test6
+                    __v: 0
+                  
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
+
+  /group/add:
+    post:
+      summary: Create Group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: Username of the group creator
+                name:
+                  type: string
+                  description: Name of the group to create
+      responses:
+        "200":
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessMessage"
+              example:
+                message: Group created successfully
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                EmptyGroupName:
+                  value:
+                    error: Group name cannot be empty
+                GroupNameExists:
+                  value:
+                    error: Group name already exists
+
+        "404":
+          description: User is not present in the database
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: User not found
+        "500":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
+
+  /group/{groupName}:
+    get:
+      summary: Get Group Information
+      parameters:
+        - in: path
+          name: groupName
+          schema:
+            type: string
+          description: Name of the group for which to retrieve information
+      responses:
+        "200":
+          description: Group information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GroupInfo"
+              examples:
+                GroupExample:
+                  summary: Example of group information retrieval
+                  value:
+                    group:
+                      _id: "661e8828d59b7c02682d24bc"
+                      name: "Manzana"
+                      createdAt: "2024-04-16T14:16:08.328Z"
+                      members:
+                        - "admin"
+                        - "vinuesa"
+                      __v: 1
+        "404":
+          description: Group not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Group not found
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
+
+  /group/join:
+    post:
+      summary: Join Group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                groupId:
+                  type: string
+                  description: ID of the group to join
+                name:
+                  username: string
+                  description: Username of the user joining the group
+      responses:
+        "200":
+          description: Group created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessMessage"
+              example:
+                message: User joined the group successfully
+        "400":
+          description: User already a member of this group
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: User already a member of this group
+        "404":
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              examples:
+                UserNotFound:
+                  value:
+                    error: User not found in the database
+                GroupNotFound:
+                  value:
+                    error: Group not found in the database
+        "500":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
+
   /friends:
     get:
       summary: Get Friends of User
@@ -209,6 +487,79 @@ paths:
                 $ref: "#/components/schemas/Error"
               example:
                 error: User not found
+        "500":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+              example:
+                error: Internal Server Error
+
+  /users:
+    get:
+      summary: Get all users
+      responses:
+        "200":
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                $ref: "#/components/schemas/UserInfo"
+              example:
+                - _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                  username: testUsername
+                  createdAt: 2021-06-01T00:00:00Z
+                  games: []
+                - _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                  username: testUsername2
+                  createdAt: 2021-06-01T00:00:00Z
+                  games:
+                    - correctAnswers: 1
+                      incorrectAnswers: 1
+                      points: 1
+                      avgTime: 10
+                      _id: 60b6f7b3b3b3b3b3b3b3b3b3
+                      questions:
+                        - pregunta: ¿Cuál es la capital de Francia?
+                          respuestas:
+                            - "Londres"
+                            - "Madrid"
+                            - "Berlín"
+                            - "París"
+                          correcta: "París"
+                          respuesta: "París"
+                        - pregunta: ¿Cuál es el río más largo del mundo?
+                          respuestas:
+                            - "Amazonas"
+                            - "Nilo"
+                            - "Mississippi"
+                            - "Yangtsé"
+                          correcta: "Amazonas"
+                          respuesta: "Nilo"
+                    - correctAnswers: 1
+                      incorrectAnswers: 1
+                      points: 1
+                      avgTime: 2
+                      _id: 65ea02cf891b09479a383477
+                      questions:
+                        - pregunta: ¿Quién pintó la Mona Lisa?
+                          respuestas:
+                            - "Leonardo da Vinci"
+                            - "Pablo Picasso"
+                            - "Vincent van Gogh"
+                            - "Claude Monet"
+                          correcta: "Leonardo da Vinci"
+                          respuesta: "Leonardo da Vinci"
+                        - pregunta: ¿Cuál es el elemento más abundante en la Tierra?
+                          respuestas:
+                            - "Oxígeno"
+                            - "Hidrógeno"
+                            - "Nitrógeno"
+                            - "Hierro"
+                          correcta: "Oxígeno"
+                          respuesta: "Hidrógeno"
         "500":
           description: Invalid request
           content:
@@ -468,7 +819,7 @@ paths:
               properties:
                 tematicas:
                   type: string
-                  enum: [paises, literatura, cine, arte, programacion, "futbolistas", "clubes", "baloncestistas", "politica", "videojuegos"]
+                  example: "[\"paises\",\"literatura\",\"cine\",\"arte\",\"programacion\",\"futbolistas\",\"clubes\",\"baloncestistas\",\"politica\",\"videojuegos\"]"
                 n:
                   type: integer
                 locale:
@@ -686,6 +1037,9 @@ components:
     Game:
       type: object
       properties:
+        gameMode:
+          type: string
+          enum: [clasico, bateria, calculadora]
         correctAnswers:
           type: integer
         incorrectAnswers:
@@ -696,15 +1050,28 @@ components:
           type: number
         _id:
           type: string  
-
-    QuestionList:
-      type: array
-      items:
-        type: object
+        questions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Question"
 
     Question:
       type: object
       properties:
+        pregunta:
+          type: string
+          description: Question text
+        respuestas:
+          type: array
+          description: List of possible answers
+          items:
+            type: string
+        correcta:
+          description: Correct answer
+          type: string
+        respuesta:
+          description: User's answer
+          type: string
 
     Stats:
       type: object
@@ -804,3 +1171,53 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/User"
+
+    GroupInfo:
+      Group:
+      type: Group
+      properties:
+        _id:
+          type: string
+          description: ID del grupo
+        name:
+          type: string
+          description: Nombre del grupo
+        createdAt:
+          type: string
+          format: date-time
+          description: Fecha de creación del grupo
+        members:
+          type: array
+          items:
+            type: string
+          description: Lista de miembros del grupo
+        __v:
+          type: integer
+          description: Versión del esquema
+    
+    GroupList:
+      type: object
+      properties:
+        groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/Group"
+    
+    Group:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: Group ID
+        name:
+          type: string
+          description: Group name
+        createdAt:
+          type: string
+          format: date-time
+          description: Group creation date
+        members:
+          type: array
+          items:
+            type: string
+          description: Group members

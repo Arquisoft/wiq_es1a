@@ -43,7 +43,7 @@ const Sobre = () => {
           </Thead>
           <Tbody>
             {designers.map((designer, index) => (
-              <Tr key={index}>
+              <Tr>
                 <Td>
                   <Flex flexDirection="column" alignItems="center">
                     <Avatar

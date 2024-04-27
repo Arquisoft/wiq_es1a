@@ -52,7 +52,7 @@ describe("Ranking component", () => {
     renderComponent();
 
     await waitFor(() => {
-      expect(screen.getByText("Error: Failed to fetch")).toBeInTheDocument();
+      expect(screen.getByText("Failed to fetch")).toBeInTheDocument();
     });
   });
 

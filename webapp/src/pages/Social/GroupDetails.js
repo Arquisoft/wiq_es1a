@@ -18,8 +18,7 @@ import {
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
 import { useTranslation } from "react-i18next";
-import Perfil from "../../components/Profile/Profile.js";
-import { useNavigate } from "react-router-dom";
+import Profile from "../../components/Profile/Profile.js";
 
 
 const GroupDetails = () => {
@@ -30,8 +29,6 @@ const GroupDetails = () => {
   const { groupName } = useParams();
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
-  
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchGroupDetails();
@@ -56,7 +53,7 @@ const GroupDetails = () => {
   };
 
   const redirectToProfile = (member) => {
-    navigate(`/perfil/${member.username}`);
+    setUser(member);
   };
 
 
@@ -64,7 +61,7 @@ const GroupDetails = () => {
     return (
       <>
         <Nav />
-        <Perfil username={user} />
+        <Profile username={user} />
         <Button p={"1rem"} mb={"1rem"} onClick={() => setUser("")}>Volver</Button>
         <Footer />
       </>

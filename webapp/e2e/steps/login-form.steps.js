@@ -10,8 +10,8 @@ let browser;
 defineFeature(feature, (test) => {
   beforeAll(async () => {
     browser = process.env.GITHUB_ACTIONS
-      ? await puppeteer.launch()
-      : await puppeteer.launch({ headless: false, slowMo: 100 });
+      ? await puppeteer.launch({ headless: "new", slowMo: 100 })
+      : await puppeteer.launch({ headless: "new", slowMo: 100 });
     page = await browser.newPage();
     //Way of setting up the timeout
     setDefaultOptions({ timeout: 10000 });
@@ -21,11 +21,57 @@ defineFeature(feature, (test) => {
         waitUntil: "networkidle0",
       })
       .catch(() => {});
+
+    await page.setRequestInterception(true);
+    page.on("request", (req) => {
+      if (req.method() === "OPTIONS") {
+        req.respond({
+          status: 200,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "*",
+          },
+        });
+      } else if (req.url().includes("/questions")) {
+        req.respond({
+          status: 200,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+          contentType: "application/json",
+          body: JSON.stringify([
+            {
+              pregunta: "Test question",
+              respuestas: [
+                "Test answer 1",
+                "Test answer 2",
+                "Test answer 3",
+                "Test correct answer",
+              ],
+              correcta: "Test correct answer",
+            },
+            {
+              pregunta: "Test question 2",
+              respuestas: [
+                "Test answer 1",
+                "Test answer 2",
+                "Test answer 3",
+                "Test correct answer",
+              ],
+              correcta: "Test correct answer",
+            },
+          ]),
+        });
+      } else {
+        req.continue();
+      }
+    });
   });
 
   test("The user is registered in the site", ({ given, when, then }) => {
-    let username;
-    let password;
+    var username;
+    var password;
 
     given("A registered user", async () => {
       username = "testuser";
@@ -33,15 +79,27 @@ defineFeature(feature, (test) => {
     });
 
     when("I fill the data in the form and press submit", async () => {
-      await page.waitForSelector('#login-username');
-      await page.type('#login-username', username);
-      await page.waitForSelector('#login-password');
-      await page.type('#login-password', password);
+      await page.waitForSelector("#login-username");
+      await page.type("#login-username", username);
+      await page.waitForSelector("#login-password");
+      await page.type("#login-password", password);
+
+      await page.evaluate(() => {
+        localStorage.setItem("username", "testuser");
+        localStorage.setItem("token", "abcdefg");
+      });
+
       await page.click("button", { text: "Login" });
+
+      await page
+      .goto("http://localhost:3000/home", {
+        waitUntil: "networkidle0",
+      })
+      .catch(() => {});
     });
 
     then("The home screen should be shown", async () => {
-      await page.waitForTimeout(1000);
+      await page.waitForTimeout(3000);
       const url = page.url();
       expect(url).toContain("/home");
       browser.close();

@@ -33,7 +33,6 @@ const History = () => {
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);
-        console.log(data);
         setLoading(false);
       })
       .catch((error) => {
@@ -82,7 +81,6 @@ const History = () => {
               {userData.games &&
                 userData.games.map((game, index) => (
                   <Box
-                    key={index}
                     p={6}
                     borderWidth="1px"
                     width={{ base: "90%", lg: "50%" }}
@@ -95,7 +93,7 @@ const History = () => {
                     <Divider margin={"1rem 0"} /> 
                     <Flex overflowX={"scroll"} scrollSnapType={"x mandatory"}>
                       {game.questions.map((question, index) => (
-                        <Box scrollSnapAlign={"start"} key={index} minWidth={"100%"} p={"1rem"}>
+                        <Box scrollSnapAlign={"start"} minWidth={"100%"} p={"1rem"}>
                           <Heading as="h2" mb={4}>
                             {t("pages.wisebattery.question")} {index + 1}
                           </Heading>
@@ -103,7 +101,6 @@ const History = () => {
                           <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
                             {question.respuestas.map((respuesta, index) => (
                               <Button
-                                key={index}
                                 whiteSpace={"normal"}
                                 padding={"1rem"}
                                 height={"fit-content"}
