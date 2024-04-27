@@ -70,6 +70,19 @@ app.post("/saveGame", async (req, res) => {
         });
         await stats.save();
       } else {
+        let ratio = 0;
+        if ((stats.totalIncorrectQuestions +
+          stats.totalCorrectQuestions +
+          gameData.incorrectAnswers +
+          gameData.correctAnswers) > 0) {
+          ratio =
+                ((stats.totalCorrectQuestions + gameData.correctAnswers) /
+                  (stats.totalIncorrectQuestions +
+                    stats.totalCorrectQuestions +
+                    gameData.incorrectAnswers +
+                    gameData.correctAnswers)) *
+                100
+        }
         await Stats.updateOne(
           { username: username, gamemode: gamemode },
           {
@@ -83,13 +96,7 @@ app.post("/saveGame", async (req, res) => {
               avgPoints:
                 (stats.avgPoints * stats.nGamesPlayed + gameData.points) /
                 (stats.nGamesPlayed + 1),
-              ratioCorrect:
-                ((stats.totalCorrectQuestions + gameData.correctAnswers) /
-                  (stats.totalIncorrectQuestions +
-                    stats.totalCorrectQuestions +
-                    gameData.incorrectAnswers +
-                    gameData.correctAnswers)) *
-                100,
+              ratioCorrect: ratio,
               avgTime:
                 (stats.avgTime * stats.nGamesPlayed + gameData.avgTime) /
                 (stats.nGamesPlayed + 1),
