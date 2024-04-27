@@ -43,10 +43,10 @@ app.get("/questions", async (req, res) => {
     req.query.locale = "es";
   }
   try {
-    var tematica = req.query.tematica ? req.query.tematica : "all";
+    var topic = req.query.tematica ? req.query.tematica : "all";
     var n = req.query.n ? req.query.n : 10;
     var locale = req.query.locale;
-    var data = gen.getQuestions(tematica, n, locale);
+    var data = gen.getQuestions(topic, n, locale);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -65,13 +65,13 @@ app.post("/questions", async (req, res) => {
     return;
   }
   try {
-    const temas = tematicas ? JSON.parse(tematicas) : [];
-    const tematicasValidas =
-      temas.length !== 0
-        ? temas
+    const topics = tematicas ? JSON.parse(tematicas) : [];
+    const validTopics =
+      topics.length !== 0
+        ? topics
         : ["paises", "literatura", "cine", "arte", "programacion", "futbolistas", "clubes", "baloncestistas", "politica", "videojuegos"];
-    const cantidadPreguntas = parseInt(n, 10);
-    const data = gen.getQuestionsPost(tematicasValidas, cantidadPreguntas, locale);
+    const questionCount = parseInt(n, 10);
+    const data = gen.getQuestionsPost(validTopics, questionCount, locale);
     res.json(data);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -91,6 +91,7 @@ const server = app.listen(port, async () => {
     });
 });
 
+// Schedule to reload generators data every day at 3:00 AM
 cron.schedule("0 3 * * *", async () => {
   await gen.loadGenerators();
 });

@@ -43,7 +43,7 @@ app.post("/saveGame", async (req, res) => {
       gamemode == "bateria" ||
       gamemode == "calculadora"
     ) {
-      // Buscar las estadísticas existentes del usuario y modo de juego
+      // Search for existing stats
       let stats = await Stats.findOne({
         username: username,
         gamemode: gamemode,
@@ -56,7 +56,7 @@ app.post("/saveGame", async (req, res) => {
               (gameData.incorrectAnswers + gameData.correctAnswers)) *
             100;
         }
-        // Si no existen estadísticas, crear un nuevo documento
+        // If no stats found, create new stats
         stats = new Stats({
           username: username,
           gamemode: gamemode,
