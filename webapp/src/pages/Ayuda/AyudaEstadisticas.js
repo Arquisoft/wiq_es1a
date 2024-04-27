@@ -11,10 +11,10 @@ const AyudaEstadisticas = () => {
   return (
     <>
       <Nav />
-      <Heading as="h1">{t('pages.helpSats.title')}</Heading>
+      <Heading as="h2">{t('pages.helpStats.title')}</Heading>
       <p>{t('pages.helpStats.description')}
       </p>
-      <Heading as="h2">{t('pages.helpSats.title2')}</Heading>
+      <Heading as="h2">{t('pages.helpStats.title2')}</Heading>
       <p>{t('pages.helpStats.description2')}</p>
       <Footer />
       </>

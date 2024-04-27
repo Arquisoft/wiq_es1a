@@ -22,8 +22,8 @@ describe('AyudaEstadisticas Component', () => {
   });
 
   it('renders the correct title and description', () => {
-    const { getByText } = renderComponentWithRouter();
-    const descriptionElement = getByText(/Nuestra aplicación cuenta con un sistema de estadísticas en la que podrás ver tus estadísticas en los distintos modos de juego, y a su vez también puedes ver las estadísticas de otros usuarios./i);
+    const { getByText,queryAllByRole  } = renderComponentWithRouter();
+    const descriptionElement = getByText(/Nuestra aplicación cuenta con un sistema de estadísticas en la que podrás ver tus estadísticas en los distintos modos de juego, y a su vez también puedes ver las estadisticas de otros usuarios./i);
 
     expect(descriptionElement).toBeInTheDocument();
   });

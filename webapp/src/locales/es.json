@@ -263,7 +263,7 @@
       "sabiosDescription": "En el modo de Batería de Sabios tendrás que responder de forma correcta el máximo de preguntas en un tiempo limite.",
       "calculatorDescription": "En el modo Calculadora Humana tendrás que responder a operaciones matemáticas. La partida acaba cuando fallas."
     },
-    "statsHelp": {
+    "helpStats": {
       "title":"Estadísticas",
       "title2":"Ranking",
       "description": "Nuestra aplicación cuenta con un sistema de estadísticas en la que podrás ver tus estadísticas en los distintos modos de juego, y a su vez también puedes ver las estadisticas de otros usuarios.",
