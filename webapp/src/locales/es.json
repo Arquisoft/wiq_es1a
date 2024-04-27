@@ -252,6 +252,19 @@
       "statsHelp": "Ayuda: Estadisticas",
       "statsHelpDescription": "Tenemos un modo para comprobar todas las estadisticas, si tienes alguna duda esta es tu sección",
       "moreDetails": "Más detalles" 
+    },
+    "helpGame": {
+      "tittle": " Ayuda: Modos de Juego",
+      "description": " Nuestra aplicación cuenta con 3 modos de juego en los que podrás entretenerte todo el tiempo que quieras y conseguir obtener la mejor puntuación.
+      Todos ellos tienen la siguiente estructura: cuentan con cuatro opciones de respuesta en la que solo una es la correcta y tambien hay una barra de tiempo que te indica el tiempo restante.
+      Para saber cuala es la pregunta correcta esta se pondrá de color verde y si has fallado se pondra en rojo.
+      A continuación se detallaran los juegos y se hara un breve ejemplo de su funcionamiento",
+      "classic": "Modo Clásico",
+      "sabios" : "Batería de Sabios",
+      "calculator": "Calculadora Humana",
+      "classicDescription": "En el modo clásico tendras que responder a una serie de preguntas en un tiempo determinado por pregunta ",
+      "sabiosDescription": "En el modo de bateria de sabios tendrás que responder de forma correcta el máximo de preguntas en un tiempo limite.",
+      "calculatorDescription": "En el mode Calculadora Humana tendrás que responder a operaciones matemáticas como si de una calculadora te trataras "
     }
 }
 }
