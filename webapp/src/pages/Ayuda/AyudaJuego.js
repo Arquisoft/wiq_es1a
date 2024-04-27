@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Heading} from '@chakra-ui/react';
 import Nav from '../../components/Nav/Nav';
 import Footer from '../../components/Footer/Footer';
-const AyudaModosJuego = () => {
+const AyudaJuego = () => {
   
   const { t } = useTranslation();
 
@@ -24,4 +24,4 @@ const AyudaModosJuego = () => {
   );
 };
 
-export default AyudaModosJuego;
+export default AyudaJuego;

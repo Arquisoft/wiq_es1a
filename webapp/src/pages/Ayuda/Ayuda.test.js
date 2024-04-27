@@ -1,43 +1,58 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Ayuda from './Ayuda'; 
+import { BrowserRouter as Router } from "react-router-dom";
+import { I18nextProvider } from "react-i18next";
+import i18n from "../../i18n.js";
 
 describe('Ayuda Component', () => {
+
+  const renderComponentWithRouter = () => {
+    return render(
+      <I18nextProvider i18n={i18n}>
+        <Router>
+          <Ayuda />
+        </Router>
+      </I18nextProvider>
+    );
+  };
+
   it('renders component without crashing', () => {
-    render(<Ayuda />);
+    renderComponentWithRouter();
   });
   
-  it('renders the correct title', () => {
-    const { getByText } = render(<Ayuda />);
-    const titleElement = getByText(/Centro de ayuda/i);
-    expect(titleElement).toBeInTheDocument();
-  });
-
-  it('renders the correct description', () => {
-    const { getByText } = render(<Ayuda />);
+  it('renders the correct title and description', () => {
+    const { getByText, getAllByText } = renderComponentWithRouter();
+    const titleElement = getByText("Centro de ayuda");
     const descriptionElement = getByText(/Bienvenido al centro de ayuda de nuestra aplicación. Aquí encontrarás información útil para sacar el máximo provecho de nuestra juego/i);
+    expect(titleElement).toBeInTheDocument();
     expect(descriptionElement).toBeInTheDocument();
   });
 
-  it('renders the correct help categories', () => {
-    const { getByText } = render(<Ayuda />);
-    const gameModesElement = getByText(/Ayuda: Modos de juego/i);
-    const socialHelpElement = getByText(/Ayuda: Social/i);
-    const statsHelpElement = getByText(/Ayuda: Estadisticas/i);
+  it('renders the correct help categories and descriptions with more details links', () => {
+    const { getByText,getAllByText } = renderComponentWithRouter();
 
-    expect(gameModesElement).toBeInTheDocument();
-    expect(socialHelpElement).toBeInTheDocument();
-    expect(statsHelpElement).toBeInTheDocument();
-  });
+    const categoriesAndDescriptions = [
+      {
+        description: /En nuestra aplicación tenemos 3 modos de juego con los que podrás entretenerte, en esta sección esperamos responder todas tus dudas./,
+        moreDetails: /Más detalles/
+      },
+      {
+        description: /Tenemos diferentes maneras de interactuar con otros usuarios, si tienes dudas sobre como hacerlo esta es tu sección./,
+        moreDetails: /Más detalles/
+      },
+      {
+        description: /Tenemos un modo para poder ver todas tus estadísticas para cada modo de juego, si tienes alguna duda esta es tu sección/,
+        moreDetails: /Más detalles/
+      }
+    ];
 
-  it('renders the correct more details links', () => {
-    const { getByText } = render(<Ayuda />);
-    const gameModesLink = getByText(/Más detalles/i);
-    const socialHelpLink = getByText(/Más detalles/i);
-    const statsHelpLink = getByText(/Más detalles/i);
-
-    expect(gameModesLink).toBeInTheDocument();
-    expect(socialHelpLink).toBeInTheDocument();
-    expect(statsHelpLink).toBeInTheDocument();
+    categoriesAndDescriptions.forEach(({ description, moreDetails }) => {
+      const descriptionElement = getByText(description);
+      const moreDetailsLinks = getAllByText(moreDetails);
+    
+      expect(descriptionElement).toBeInTheDocument();
+      expect(moreDetailsLinks.length).toBeGreaterThanOrEqual(1);
+    });
   });
 });

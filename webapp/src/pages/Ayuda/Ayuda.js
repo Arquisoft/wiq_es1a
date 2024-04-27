@@ -11,7 +11,6 @@ const Ayuda = () => {
     <>
       <Nav />
       <Heading as="h1">{t('pages.help.title')}</Heading>
-      <img src = "/helCenter.jpeg"> alt={t('pages.help.title')}</img>
       <Heading as="h2" size="md">
         {t('pages.help.description')}
       </Heading>
