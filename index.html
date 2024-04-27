@@ -521,22 +521,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#section-technical-risks">11. Risks and Technical Debts</a></li>
-<li><a href="#_testing">12. Testing</a></li>
-<li><a href="#_unit_testing">13. Unit Testing</a>
+<li><a href="#_testing">12. Testing</a>
 <ul class="sectlevel2">
-<li><a href="#_auth_service_2">13.1. Auth service</a></li>
-<li><a href="#_user_service_2">13.2. User service</a></li>
-<li><a href="#_gateway_service_2">13.3. Gateway service</a></li>
-<li><a href="#_stats_service_2">13.4. Stats service</a></li>
-<li><a href="#_webapp_3">13.5. Webapp</a></li>
+<li><a href="#_unit_testing">12.1. Unit Testing</a></li>
+<li><a href="#_e2e_testing">12.2. e2e Testing</a></li>
 </ul>
 </li>
-<li><a href="#_e2e_testing">14. e2e Testing</a></li>
-<li><a href="#_code_coverage">15. Code coverage</a>
+<li><a href="#_code_coverage">13. Code coverage</a></li>
+<li><a href="#_usability_and_accessibility_testing">14. Usability and accessibility Testing</a>
 <ul class="sectlevel2">
-<li><a href="#_load_testing">15.1. Load Testing</a></li>
+<li><a href="#_automatic_tools">14.1. Automatic tools:</a></li>
+<li><a href="#_testing_with_real_users">14.2. Testing with real users:</a></li>
 </ul>
 </li>
+<li><a href="#_load_testing">15. Load Testing</a></li>
 <li><a href="#section-glossary">16. Glossary</a></li>
 </ul>
 </div>
@@ -1711,48 +1709,45 @@ These are:</p>
 <div class="paragraph">
 <p>This section details the results of the various types of tests that have been carried out with the application.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_unit_testing">13. Unit Testing</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_unit_testing">12.1. Unit Testing</h3>
 <div class="paragraph">
 <p>We used Jest to perform unit testing on the application. We have written tests for all the components of the application, mocking the database and external services. All the tests passed successfully. The results of the tests are shown below:</p>
 </div>
-<div class="sect2">
-<h3 id="_auth_service_2">13.1. Auth service</h3>
+<div class="sect3">
+<h4 id="_auth_service_2">12.1.1. Auth service</h4>
 <div class="imageblock">
 <div class="content">
 <img src="./images/12-authservice.png" alt="12 authservice">
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_user_service_2">13.2. User service</h3>
+<div class="sect3">
+<h4 id="_user_service_2">12.1.2. User service</h4>
 <div class="imageblock">
 <div class="content">
 <img src="./images/12-userservice.png" alt="12 userservice">
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_gateway_service_2">13.3. Gateway service</h3>
+<div class="sect3">
+<h4 id="_gateway_service_2">12.1.3. Gateway service</h4>
 <div class="imageblock">
 <div class="content">
 <img src="./images/12-gatewayservice.png" alt="12 gatewayservice">
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_stats_service_2">13.4. Stats service</h3>
+<div class="sect3">
+<h4 id="_stats_service_2">12.1.4. Stats service</h4>
 <div class="imageblock">
 <div class="content">
 <img src="./images/12-statsservice.png" alt="12 statsservice">
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_webapp_3">13.5. Webapp</h3>
+<div class="sect3">
+<h4 id="_webapp_3">12.1.5. Webapp</h4>
 <div class="imageblock">
 <div class="content">
 <img src="./images/12-webapp.png" alt="12 webapp">
@@ -1760,39 +1755,151 @@ These are:</p>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_e2e_testing">14. e2e Testing</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_e2e_testing">12.2. e2e Testing</h3>
 <div class="paragraph">
 <p>We used puppeteer to perform end-to-end testing on the application. We have written tests for login, register, create group, and for the three gamemodes.</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/12-e2e.png" alt="12 e2e">
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_code_coverage">15. Code coverage</h2>
+<h2 id="_code_coverage">13. Code coverage</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>We used sonarCloud to check the code coverage of the application. The results are shown below:</p>
 </div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_usability_and_accessibility_testing">14. Usability and accessibility Testing</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We used some tools to measure usability levels of the application, along with some testing with real users (friends and family).</p>
+</div>
 <div class="sect2">
-<h3 id="_load_testing">15.1. Load Testing</h3>
+<h3 id="_automatic_tools">14.1. Automatic tools:</h3>
+<div class="paragraph">
+<p>First, we will show the automatic tools results:</p>
+</div>
+<div class="sect3">
+<h4 id="_pagespeed_insights">14.1.1. PageSpeed Insights:</h4>
+<div class="paragraph">
+<p>This tool is used to measure different aspects of a certain page, such as performance, accessibility, best practices and optimisation.
+We used this tool on all of our pages, and the results were kind of similar. Below, the results for the Classic and Stats page are shown:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/pagespeed-stats.png" alt="pagespeed stats">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/pagespeed-classic.png" alt="pagespeed classic">
+</div>
+</div>
+<div class="paragraph">
+<p>As we can see, our pages perform very nicely on every evaluable aspect, except in Best practices, and that&#8217;s because the tool is giving us a
+warning because we don&#8217;t use HTTPS in our application, which can lead to security issues.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_juicy_studio">14.1.2. Juicy Studio:</h4>
+<div class="paragraph">
+<p>This tool is used to measure the contrast between background and foreground colors of a web page.
+We used this tool on both of out color combinations: dark mode and light mode. The results are shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/juicy-light.png" alt="juicy light">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/juicy-dark.png" alt="juicy dark">
+</div>
+</div>
+<div class="paragraph">
+<p>As we can see, both of our themes use correct and high-contrasted color combinations.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_testing_with_real_users">14.2. Testing with real users:</h3>
+<div class="paragraph">
+<p>We did some testing with 18 people, all of them being friends and family of us, the develpoment team.
+We let them try the application, play games, view their stats, create groups, etc., and when they were
+finished we asked them a few questions.
+We wanted to get from each individual his UI rating, functionality rating and some recommendation of things we could change / add
+if we continued developing the app.</p>
+</div>
+<div class="paragraph">
+<p>The results of this test are shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/usability-table.png" alt="usability table">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/usability-averages.png" alt="usability averages">
+</div>
+</div>
+<div class="paragraph">
+<p>As we can see, we have attempted to conduct tests with people of various ages, and approximately the same number of men and women,
+in order to obtain different perspectives and a broader and more diverse range of users.
+We consider the results to be very positive, judging by the average of the scores obtained.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/usability-graph.png" alt="usability graph">
+</div>
+</div>
+<div class="paragraph">
+<p>However, looking at the recommendations made by our testers, we think it would be a good idea to work on upgrading the group system, adding
+administrators, invitations, and private groups, and adding friend requests.
+We should also consider improving our UI, maybe studying design tendencies and trying to applicate them to our project.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_load_testing">15. Load Testing</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>We used Gatling to perform load testing on the application. It consisted of simulating 1000 users accessing the application at the same time, each of one performing 83 requests. The results of the test are shown below:</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/12-loadtest.png" alt="12 loadtest">
+<img src="./images/12-script.png" alt="12 script">
 </div>
 </div>
 <div class="paragraph">
-<p>As we can see in Gatling&#8217;s report, the application was able to handle a load of 70868 requests. In particular, 81% of the requests were successful in less than 800 milliseconds, 6% in more than 1200 milliseconds and 13% were unsuccessful.</p>
+<p>Using this script we inject 2 users per second during 60 seconds in total, and each user performs 83 requests. The test was successful, and the results are shown below:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/12-loadtests.png" alt="12 loadtests">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/12-grafana-loadtests.png" alt="12 grafana loadtests">
+</div>
+</div>
+<div class="paragraph">
+<p>As we can see in Gatling&#8217;s report, the application was able to handle a load of 9990 requests. In particular, 97% of the requests were successful in less than 800 milliseconds and 3% were unsuccessful.</p>
 </div>
 <div class="paragraph">
 <p>This shows that the application is able to handle a large number of requests in a short period of time, with a high success rate. We can also be sure that the application is able to handle a large number of users accessing it at the same time in production.</p>
 </div>
 <div style="page-break-after: always;"></div>
-</div>
 </div>
 </div>
 <div class="sect1">
