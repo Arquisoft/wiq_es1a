@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import Ayuda from './Ayuda'; // Asegúrate de ajustar la ruta correcta
+import Ayuda from './Ayuda'; 
 
 describe('Ayuda Component', () => {
   it('renders component without crashing', () => {

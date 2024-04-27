@@ -264,13 +264,16 @@
       "sabiosDescription": "In the Wisdom Battery mode, you need to correctly answer as many questions as possible within a limited time.",
       "calculatorDescription": "In Human Calculator mode, you'll tackle mathematical operations as if using a real calculator."
     },
-    "helpSats": {
-      "title": "Statistics",
-      "title2": "Ranking System",
-      "description": "Our application has a Statistics system where you can view your statistics in the different game modes, and at the same time, you can also see the statistics of other users.",
-      "description2": "Our application also has a ranking system where you can see which users have the best scores."
+
+    "helpSocial": {
+      "title": "Help: Social",
+      "description": "Our application has a Social section where you can share your gaming experience with other users.",
+      "friends": "Friends",
+      "description2": "We can search for users in the system and add them as friends to easily access their statistics.",
+      "groups": "Groups",
+      "description3": "We can create or join an existing group with other users to access their statistics and compare with them."
     }
-    
+     
     
   }
 }

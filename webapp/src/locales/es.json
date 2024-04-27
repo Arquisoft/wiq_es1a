@@ -269,6 +269,14 @@
       "description": "Nuestra aplicación cuenta con un sistema de Estadisticas en la que podras ver tus estadisticas en los distintos modos de juego y a su vez también puedes ver las estadisticas de otros usuarios.",
       "description2": "Nuestra aplicación tambien cuenta con un sistema de ranking donde podras ver que usarios tienen las mejores puntuaciones."
 
+    }, 
+    "helpSocial": {
+      "title": "Ayuda: Social",
+      "description": "Nuestra aplicación cuenta con un apartado Social donde podras compartir tu experiencia de juego con otros usuarios.",
+      "friends": "Amigos",
+      "description2": "Podremos buscar los usuarios del sistema y añadirlos como amigos para asi acceder a sus estadisticas de forma más facil.",
+      "groups": "Grupos",
+      "description3": "Podremos crear o unirnos a un grupo ya existente con otros usuarios para asi poder acceder a su sestadisticas y compararnos con ellos"
     }
 }
 }
