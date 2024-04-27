@@ -819,7 +819,7 @@ paths:
               properties:
                 tematicas:
                   type: string
-                  enum: [paises, literatura, cine, arte, programacion, "futbolistas", "clubes", "baloncestistas", "politica", "videojuegos"]
+                  example: "[\"paises\",\"literatura\",\"cine\",\"arte\",\"programacion\",\"futbolistas\",\"clubes\",\"baloncestistas\",\"politica\",\"videojuegos\"]"
                 n:
                   type: integer
                 locale:
