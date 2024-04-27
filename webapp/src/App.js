@@ -53,7 +53,7 @@ function App() {
           <Route path="/social/grupo/:groupName" element={<GroupDetails />} />
           <Route path="/ayuda" element={<Help/>} />
           <Route path="/ayuda/modos-de-juego" element={<HelpGames/>} />
-          <Route path="/ayuda/estadísticas" element={<HelpStats/>} />
+          <Route path="/ayuda/estadisticas" element={<HelpStats/>} />
           <Route path="/ayuda/social" element={<HelpSocial/>} />
           <Route path="/perfil/:user" element={<Perfil />} />
           <Route path="/history" element={<History />} />
