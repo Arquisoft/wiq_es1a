@@ -125,6 +125,9 @@ const CalculadoraHumana = () => {
       if(points>0){
         const avg=(TIME-timeLeft)/points;
         setAverageTime(avg);
+      }else{
+        const avg=(TIME-timeLeft);
+        setAverageTime(avg);
       }
       setEndgame(true);
     }
