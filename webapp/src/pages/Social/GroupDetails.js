@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Container,
   Box,
@@ -29,8 +29,6 @@ const GroupDetails = () => {
   const { groupName } = useParams();
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
-  
-  const navigate = useNavigate();
 
   useEffect(() => {
     fetchGroupDetails();

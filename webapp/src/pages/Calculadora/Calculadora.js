@@ -100,13 +100,12 @@ const CalculadoraHumana = () => {
       }
     };
     try {
-      const response = await axios.post(URL + '/saveGame', newGame);
-      
+      await axios.post(URL + '/saveGame', newGame);     
     } catch (error) {
       console.error('Error al guardar el juego:', error);
     }
     try {
-      const response = await axios.post(URL + "/saveGameList", newGame);
+      await axios.post(URL + "/saveGameList", newGame);
     } catch (error) {
       console.error("Error al guardar el juego:", error);
     }

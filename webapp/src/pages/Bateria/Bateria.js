@@ -132,7 +132,7 @@ const JuegoPreguntas = () => {
 
   const saveGame = async (endpoint, newGame) => {
     try {
-      const response = await axios.post(URL + endpoint, newGame);
+      await axios.post(URL + endpoint, newGame);
     } catch (error) {
       console.error("Error al guardar el juego:", error);
     }
