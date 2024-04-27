@@ -98,7 +98,6 @@ describe('GroupDetails', () => {
       await checks();
       
       const viewProfileButtons = screen.getByTestId('view-profile-button-user1');
-      console.log(viewProfileButtons);
 
       fireEvent.click(viewProfileButtons);
     });

@@ -43,7 +43,7 @@ app.post("/saveGame", async (req, res) => {
       gamemode == "bateria" ||
       gamemode == "calculadora"
     ) {
-      // Buscar las estadísticas existentes del usuario y modo de juego
+      // Search for existing stats
       let stats = await Stats.findOne({
         username: username,
         gamemode: gamemode,
@@ -56,7 +56,7 @@ app.post("/saveGame", async (req, res) => {
               (gameData.incorrectAnswers + gameData.correctAnswers)) *
             100;
         }
-        // Si no existen estadísticas, crear un nuevo documento
+        // If no stats found, create new stats
         stats = new Stats({
           username: username,
           gamemode: gamemode,
@@ -98,12 +98,12 @@ app.post("/saveGame", async (req, res) => {
         );
       }
 
-      res.status(200).json({ message: "Partida guardada exitosamente" });
+      res.status(200).json({ message: "Game saved successfully" });
     } else {
       throw new Error("Invalid game mode");
     }
   } catch (error) {
-    res.status(400).json({ error: "Error al guardar juego: " + error.message });
+    res.status(400).json({ error: "Error while saving game: " + error.message });
   }
 });
 
@@ -121,7 +121,7 @@ app.get("/stats", async (req, res) => {
   } catch (error) {
     res
       .status(400)
-      .json({ error: "Error al obtener las estadísticas:" + error.message });
+      .json({ error: "Error getting stats:" + error.message });
   }
 });
 
@@ -131,8 +131,8 @@ app.get("/ranking", async (req, res) => {
     let gamemode = req.query.gamemode;
 
     let data = await Stats.find({ gamemode: gamemode })
-      .sort(sortBy)
-      .limit(10);
+    .sort(sortBy === 'avgTime' ? { [sortBy]: 1 } : { [sortBy]: -1 })
+    .limit(10);
 
     if (data && data.length > 0) {
       data = data.map((stat) => ({
@@ -140,14 +140,14 @@ app.get("/ranking", async (req, res) => {
         [sortBy]: stat[sortBy],
       }));
     } else {
-      throw new Error("No se encontraron estadísticas");
+      throw new Error("No stats found");
     }
 
     res.status(200).json(data);
   } catch (error) {
     res
       .status(400)
-      .json({ error: "Error al obtener el ranking: " + error.message });
+      .json({ error: "Error getting ranking: " + error.message });
   }
 });
 

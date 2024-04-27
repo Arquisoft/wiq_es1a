@@ -29,11 +29,11 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          {/** Rutas públicas */}
+          {/** Public routes */}
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-        {/** Rutas privadas */}
+        {/** Private routes */}
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<Home />} />
           <Route path="/sobre" element={<Sobre />} />
@@ -48,12 +48,12 @@ function App() {
           <Route path="/social/misgrupos" element={<UserGroups />} />
           <Route path="/social/grupo/:groupName" element={<GroupDetails />} />
 
-          <Route path="/perfil/:user" element={<Perfil />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="/history" element={<History />} />
           <Route path="/config" element={<Config />} />
         </Route>
 
-          {/* Ruta por defecto */}
+          {/* Default */}
           <Route path="*" element={<WrongRoute />} />
         </Routes>
       </BrowserRouter>
