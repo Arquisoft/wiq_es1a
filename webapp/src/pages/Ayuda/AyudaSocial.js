@@ -15,7 +15,7 @@ const AyudaSocial = () => {
       </p>
       <Heading as="h2" size="md">{t('pages.helpSocial.friends')}</Heading>
       <p>{t('pages.helpSocial.description2')}</p>
-      <Heading as="h3" size="md">{t('pages.helpSocial.groups')}</Heading>
+      <Heading as="h2" size="md">{t('pages.helpSocial.groups')}</Heading>
       <p>{t('pages.helpSocial.description3')}</p>
       <Footer/>
       </>

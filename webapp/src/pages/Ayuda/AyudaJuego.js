@@ -15,9 +15,9 @@ const AyudaModosJuego = () => {
       </p>
       <Heading as="h2" size="md">{t('pages.helpGame.classic')}</Heading>
       <p>{t('pages.helpGame.classicDescription')}</p>
-      <Heading as="h3" size="md">{t('pages.helpGame.sabios')}</Heading>
+      <Heading as="h2" size="md">{t('pages.helpGame.sabios')}</Heading>
       <p>{t('pages.helpGame.sabiosDescription')}</p>
-      <Heading as="h4" size="md">{t('pages.helpGame.calculator')}</Heading>
+      <Heading as="h2" size="md">{t('pages.helpGame.calculator')}</Heading>
       <p>{t('pages.helpGame.calculatorDescription')}</p>
       <Footer />
       </>
