@@ -131,8 +131,8 @@ app.get("/ranking", async (req, res) => {
     let gamemode = req.query.gamemode;
 
     let data = await Stats.find({ gamemode: gamemode })
-      .sort(sortBy)
-      .limit(10);
+    .sort(sortBy === 'avgTime' ? { [sortBy]: 1 } : { [sortBy]: -1 })
+    .limit(10);
 
     if (data && data.length > 0) {
       data = data.map((stat) => ({
