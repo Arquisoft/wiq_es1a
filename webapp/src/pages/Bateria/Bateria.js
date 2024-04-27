@@ -126,7 +126,7 @@ const JuegoPreguntas = () => {
       questions: questionsToSave,
     };
 
-    save("/save", newGame);
+    save("/saveGame", newGame);
     save("/saveGameList", newGame);
   };
 

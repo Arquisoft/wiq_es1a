@@ -28,15 +28,15 @@ We used puppeteer to perform end-to-end testing on the application. We have writ
 
 image::12-e2e.png[]
 
-== Code coverage
+=== Code coverage
 
 We used sonarCloud to check the code coverage of the application. The results are shown below:
 
-== Usability and accessibility Testing
+=== Usability and accessibility Testing
 
 We used some tools to measure usability levels of the application, along with some testing with real users (friends and family).
 
-=== Automatic tools:
+==== Automatic tools:
 
 First, we will show the automatic tools results:
 
@@ -87,7 +87,7 @@ administrators, invitations, and private groups, and adding friend requests.
 We should also consider improving our UI, maybe studying design tendencies and trying to applicate them to our project.
 
 
-== Load Testing
+=== Load Testing
 We used Gatling to perform load testing on the application. It consisted of simulating 1000 users accessing the application at the same time, each of one performing 83 requests. The results of the test are shown below:
 
 image::12-script.png[]
