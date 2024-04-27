@@ -1,8 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+<<<<<<< HEAD
+import { Heading, Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
+import Nav from '../../components/Nav/Nav';
+import Footer from '../../components/Footer/Footer';
+=======
 import Nav from '../../components/Nav/Nav';
 import Footer from '../../components/Footer/Footer';
 
+>>>>>>> a8ab90c201bf92f078a3df55ce8bb921238ae03d
 const AyudaModosJuego = () => {
   
   const { t } = useTranslation();
