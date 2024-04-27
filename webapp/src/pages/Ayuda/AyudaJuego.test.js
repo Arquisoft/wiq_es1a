@@ -38,7 +38,7 @@ describe('AyudaJuego Component', () => {
 
   it('renders the correct sabios mode title and description', () => {
     const { getByText } = renderComponentWithRouter();
-    const sabiosModeDescription = getByText(/En el modo de Batería de Sabios tendrás que responder de forma correcta el máximo de preguntas en un tiempo límite./i);
+    const sabiosModeDescription = getByText(/En el modo de Batería de Sabios tendrás que responder de forma correcta el máximo de preguntas en un tiempo limite./i);
 
     expect(sabiosModeDescription).toBeInTheDocument();
   });

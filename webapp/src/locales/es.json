@@ -254,7 +254,7 @@
       "moreDetails": "Más detalles" 
     },
     "helpGame": {
-      "tittle": "Ayuda: Modos de Juego",
+      "title": "Ayuda: Modos de Juego",
       "description": "Nuestra aplicación cuenta con 3 modos de juego en los que podrás entretenerte todo el tiempo que quieras y conseguir obtener la mejor puntuación. Todos ellos tienen la siguiente estructura: cuentan con cuatro opciones de respuesta en la que solo una es la correcta, y hay una barra de tiempo que te indica el tiempo restante. A continuación se detallarán los juegos y se dará un breve ejemplo de su funcionamiento",
       "classic": "Modo Clásico",
       "sabios" : "Batería de Sabios",
