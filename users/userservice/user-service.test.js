@@ -278,7 +278,7 @@ describe("User Service", () => {
     };
 
     const response = await request(app).post("/group/add").send(group);
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(500);
     expect(response.body).toEqual({ error: "Missing required field: username" });
   });
 

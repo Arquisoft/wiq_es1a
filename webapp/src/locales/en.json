@@ -1,5 +1,9 @@
 {
   "components": {
+    "custommodal": {
+      "play": "Jugar",
+      "close": "Cerrar"
+    },
     "footer": {
       "copyright": "Copyright 2024 ® Software Architecture Group 1A"
     },
@@ -87,7 +91,8 @@
       "playAgain": "Play Again",
       "back": "Back to Menu",
       "question": "Question",
-      "time": "Time Remaining:"
+      "time": "Time Remaining:",
+      "send": "Send"
     },
     "config": {
       "title": "Settings",
@@ -155,7 +160,8 @@
       "ratioCorrect": "Correct Ratio (%)",
       "avgTime": "Time per Question (s):",
       "reboot": "Reset to Default",
-      "errorText": "An error occurred while retrieving the ranking"
+      "errorText": "An error occurred while retrieving the ranking",
+      "noStats":"No stats found for this gamemode"
     },
     "about": {
       "title": "WIQ_es1a Team",

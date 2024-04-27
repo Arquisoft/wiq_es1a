@@ -32,7 +32,6 @@ const Login = () => {
 
   const apiEndpoint =
     process.env.REACT_APP_API_ENDPOINT || "http://localhost:8000";
-    console.log(process.env.REACT_APP_API_ENDPOINT);
 
   const loginUser = () => {
     axios
@@ -50,7 +49,6 @@ const Login = () => {
         navigate("/home");
       })
       .catch((err) => {
-        console.log(err);
         setError(err.response.data.error);
       });
   };

@@ -1,5 +1,9 @@
 {
   "components": {
+    "custommodal": {
+      "play": "Jugar",
+      "close": "Cerrar"
+    },
     "footer": {
       "copyright": "Copyright 2024 ® Grupo 1A de Arquitectura del Software"
     },
@@ -87,7 +91,8 @@
       "playAgain": "Jugar de nuevo",
       "back": "Volver al menú",
       "question": "Pregunta",
-      "time": "Tiempo restante:"
+      "time": "Tiempo restante:",
+      "send": "Enviar"
     },
     "config": {
       "title": "Configuración",
@@ -155,7 +160,8 @@
       "ratioCorrect": "Ratio de aciertos (%)",
       "avgTime": "Tiempo por pregunta (s):",
       "reboot": "Restablecer por defecto",
-      "errorText": "Ha ocurrido un error al obtener el ranking"
+      "errorText": "Ha ocurrido un error al obtener el ranking",
+      "noStats":"No hay estadísticas para este modo de juego"
     },
     "about": {
         "title": "Equipo WIQ_es1a",
