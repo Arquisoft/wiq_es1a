@@ -24,7 +24,7 @@ describe('AyudaSocial Component', () => {
   it('renders the correct title and description', () => {
     const { getByText } = renderComponentWithRouter();
     const titleElement = getByText(/Ayuda: Social/i);
-    const descriptionElement = getByText(/Nuestra aplicación cuenta con un apartado Social donde podrás compartir tu experiencia de juego con otros usuarios./i);
+    const descriptionElement = getByText(/Nuestra aplicación cuenta con un apartado Social donde podras compartir tu experiencia de juego con otros usuarios./i);
     expect(titleElement).toBeInTheDocument();
     expect(descriptionElement).toBeInTheDocument();
   });
