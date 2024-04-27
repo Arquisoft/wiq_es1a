@@ -153,7 +153,9 @@ const Ranking = () => {
       >
         {t('pages.ranking.humancalculator')}
       </Button>
-      <Table>
+      {ranking && ranking.length>0 ? (
+        <>
+        <Table>
         <Thead>
           <Tr>
             <Th>{t('pages.ranking.user')}</Th>
@@ -169,6 +171,15 @@ const Ranking = () => {
           ))}
         </Tbody>
       </Table>
+      </>
+      ): 
+      <>
+      <div>
+        <Heading as="h2">{t('pages.ranking.errorText')}</Heading>
+        <p>{t('pages.ranking.noStats')}</p>
+      </div>
+      </>}
+      
     </Flex>
     <Footer/>
     </>

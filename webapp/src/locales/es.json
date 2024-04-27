@@ -155,7 +155,8 @@
       "ratioCorrect": "Ratio de aciertos (%)",
       "avgTime": "Tiempo por pregunta (s):",
       "reboot": "Restablecer por defecto",
-      "errorText": "Ha ocurrido un error al obtener el ranking"
+      "errorText": "Ha ocurrido un error al obtener el ranking",
+      "noStats":"No hay estadísticas para este modo de juego"
     },
     "about": {
         "title": "Equipo WIQ_es1a",
