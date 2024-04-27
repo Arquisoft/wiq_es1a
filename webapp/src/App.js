@@ -22,6 +22,8 @@ import GroupDetails from "./pages/Social/GroupDetails.js";
 import History from "./pages/History/History.js";
 import Help from "./pages/Ayuda/Ayuda.js";
 import HelpGames from "./pages/Ayuda/AyudaJuego.js";
+import HelpStats from ".pages/Ayuda/AyudaEstadisticas.js"
+import HelpSocial from "./pages/Ayuda/AyudaSocialJ.js";
 
 
 function App() {
@@ -51,6 +53,8 @@ function App() {
           <Route path="/social/grupo/:groupName" element={<GroupDetails />} />
           <Route path="/ayuda" element={<Help/>} />
           <Route path="/ayuda/modos-de-juego" element={<HelpGames/>} />
+          <Route path="/ayuda/estadísticas" element={<HelpStats/>} />
+          <Route path="/ayuda/social" element={<HelpSocial/>} />
           <Route path="/perfil/:user" element={<Perfil />} />
           <Route path="/history" element={<History />} />
           <Route path="/config" element={<Config />} />
