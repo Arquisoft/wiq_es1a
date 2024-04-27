@@ -38,7 +38,6 @@ describe("Config Component", () => {
     button.click();
 
     const checks = screen.getAllByRole("checkbox");
-    console.log(checks)
     checks[0].checked = true;
     button.click();
   });
