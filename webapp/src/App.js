@@ -23,7 +23,7 @@ import History from "./pages/History/History.js";
 import Help from "./pages/Ayuda/Ayuda.js";
 import HelpGames from "./pages/Ayuda/AyudaJuego.js";
 import HelpStats from ".pages/Ayuda/AyudaEstadisticas.js"
-import HelpSocial from "./pages/Ayuda/AyudaSocialJ.js";
+import HelpSocial from "./pages/Ayuda/AyudaSocial.js";
 
 
 function App() {
