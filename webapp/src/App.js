@@ -20,10 +20,10 @@ import Groups from "./pages/Social/Groups.js";
 import UserGroups from "./pages/Social/UserGroups.js";
 import GroupDetails from "./pages/Social/GroupDetails.js";
 import History from "./pages/History/History.js";
-import Help from "./pages/Ayuda/Ayuda.js";
-import HelpGames from "./pages/Ayuda/AyudaJuego.js";
-import HelpStats from ".pages/Ayuda/AyudaEstadisticas.js"
-import HelpSocial from "./pages/Ayuda/AyudaSocial.js";
+import Ayuda from "./pages/Ayuda/Ayuda.js";
+import AyudaJuego from "./pages/Ayuda/AyudaJuego.js";
+import AyudaEstadisticas from "./pages/Ayuda/AyudaEstadisticas.js"
+import AyudaSocial from "./pages/Ayuda/AyudaSocial.js";
 
 
 function App() {
@@ -51,10 +51,10 @@ function App() {
           <Route path="/social/grupos" element={<Groups />} />
           <Route path="/social/misgrupos" element={<UserGroups />} />
           <Route path="/social/grupo/:groupName" element={<GroupDetails />} />
-          <Route path="/ayuda" element={<Help/>} />
-          <Route path="/ayuda/modos-de-juego" element={<HelpGames/>} />
-          <Route path="/ayuda/estadisticas" element={<HelpStats/>} />
-          <Route path="/ayuda/social" element={<HelpSocial/>} />
+          <Route path="/ayuda" element={<Ayuda/>} />
+          <Route path="/ayuda/modos-de-juego" element={<AyudaJuego/>} />
+          <Route path="/ayuda/estadisticas" element={<AyudaEstadisticas/>} />
+          <Route path="/ayuda/social" element={<AyudaSocial/>} />
           <Route path="/perfil/:user" element={<Perfil />} />
           <Route path="/history" element={<History />} />
           <Route path="/config" element={<Config />} />
