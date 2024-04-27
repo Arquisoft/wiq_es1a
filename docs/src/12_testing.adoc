@@ -6,7 +6,27 @@ This section details the results of the various types of tests that have been ca
 
 === Unit Testing
 
-We used Jest to perform unit testing on the application. We have written tests for all the components of the application, mocking the database and external services. The results of the tests are shown below:
+We used Jest to perform unit testing on the application. We have written tests for all the components of the application, mocking the database and external services. All the tests passed successfully. The results of the tests are shown below:
+
+=== Auth service
+image::12-authservice.png[]
+
+=== User service
+image::12-userservice.png[]
+
+=== Gateway service
+image::12-gatewayservice.png[]
+
+=== Stats service
+image::12-statsservice.png[]
+
+=== Webapp
+image::12-webapp.png[]
+
+== e2e Testing
+We used puppeteer to perform end-to-end testing on the application. We have written tests for login, register, create group, and for the three gamemodes.
+
+image::12-e2e.png[]
 
 === Code coverage
 
