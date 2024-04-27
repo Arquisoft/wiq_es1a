@@ -170,7 +170,7 @@ const CalculadoraHumana = () => {
           {endgame ? (
             <Box textAlign="center">
               <Heading as="h2">{t('pages.humancalculator.finished')}</Heading>
-              <p p={2}>{t("pages.humancalculator.score")} {puntuacion}</p>
+              <p p={2}>{t("pages.humancalculator.score")} {points}</p>
               <Flex flexDirection={"column"}>
                 <Button onClick={handleRepeatGame} colorScheme="teal" m={2} data-testid="play-again-button">
                   {t('pages.humancalculator.playAgain')}
