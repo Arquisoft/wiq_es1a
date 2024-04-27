@@ -27,7 +27,6 @@ const Ranking = () => {
     fetch(gatewayUrl + `/ranking?gamemode=${gamemode}&filterBy=${filterBy}`)
       .then((response) => response.json())
       .then((data) => {
-
         setRanking(data);
         setIsLoading(false);
       })
@@ -110,13 +109,13 @@ const Ranking = () => {
   if (error) {
     return (
       <>
-    <Nav/>
-      <div>
-        <Heading as="h2">{t('pages.ranking.error')} {error}</Heading>
-        <p>{t('pages.ranking.errorLabel')}</p>
-      </div>
-      <Footer/>
-    </>
+        <Nav/>
+        <div>
+          <Heading as="h2">{t('pages.ranking.errorText')}</Heading>
+          <p>{error}</p>
+        </div>
+        <Footer/>
+      </>
     );
   }
 
