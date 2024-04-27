@@ -71,6 +71,22 @@ finished we asked them a few questions.
 We wanted to get from each individual his UI rating, functionality rating and some recommendation of things we could change / add
 if we continued developing the app.
 
+The results of this test are shown below:
+
+image::usability-table.png[]
+
+image::usability-averages.png[]
+
+As we can see, we have attempted to conduct tests with people of various ages, and approximately the same number of men and women, 
+in order to obtain different perspectives and a broader and more diverse range of users. 
+We consider the results to be very positive, judging by the average of the scores obtained.
+
+image::usability-graph.png[]
+
+However, looking at the recommendations made by our testers, we think it would be a good idea to work on upgrading the group system, adding
+administrators, invitations, and private groups, and adding friend requests.
+We should also consider improving our UI, maybe studying design tendencies and trying to applicate them to our project.
+
 
 === Load Testing
 We used Gatling to perform load testing on the application. It consisted of simulating 1000 users accessing the application at the same time, each of one performing 83 requests. The results of the test are shown below:
