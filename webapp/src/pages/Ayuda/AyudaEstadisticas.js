@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Heading} from '@chakra-ui/react';
+import { Heading,Text } from '@chakra-ui/react';
 import Nav from '../../components/Nav/Nav';
 import Footer from '../../components/Footer/Footer';
 
@@ -12,10 +12,10 @@ const AyudaEstadisticas = () => {
     <>
       <Nav />
       <Heading as="h2">{t('pages.helpStats.title')}</Heading>
-      <p>{t('pages.helpStats.description')}
-      </p>
+      <Text maxWidth={{base: "100%", lg:"40%"}} textAlign={"justify"}>{t('pages.helpStats.description')}
+      </Text>
       <Heading as="h2">{t('pages.helpStats.title2')}</Heading>
-      <p>{t('pages.helpStats.description2')}</p>
+      <Text maxWidth={{base: "100%", lg:"40%"}} textAlign={"justify"}>{t('pages.helpStats.description2')}</Text>
       <Footer />
       </>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Heading} from '@chakra-ui/react';
+import { Heading, Text} from '@chakra-ui/react';
 import Nav from '../../components/Nav/Nav';
 import Footer from '../../components/Footer/Footer';
 const AyudaJuego = () => {
@@ -11,14 +11,14 @@ const AyudaJuego = () => {
     <>
       <Nav />
       <Heading as="h1">{t('pages.helpGame.title')}</Heading>
-      <p>{t('pages.helpGame.description')}
-      </p>
+      <Text maxWidth={{base: "100%", lg:"40%"}} textAlign={"justify"}>{t('pages.helpGame.description')}
+      </Text>
       <Heading as="h2" size="md">{t('pages.helpGame.classic')}</Heading>
-      <p>{t('pages.helpGame.classicDescription')}</p>
+      <Text maxWidth={{base: "100%", lg:"40%"}} textAlign={"justify"}>{t('pages.helpGame.classicDescription')}</Text>
       <Heading as="h2" size="md">{t('pages.helpGame.sabios')}</Heading>
-      <p>{t('pages.helpGame.sabiosDescription')}</p>
+      <Text maxWidth={{base: "100%", lg:"40%"}} textAlign={"justify"}>{t('pages.helpGame.sabiosDescription')}</Text>
       <Heading as="h2" size="md">{t('pages.helpGame.calculator')}</Heading>
-      <p>{t('pages.helpGame.calculatorDescription')}</p>
+      <Text maxWidth={{base: "100%", lg:"40%"}} textAlign={"justify"}>{t('pages.helpGame.calculatorDescription')}</Text>
       <Footer />
       </>
   );

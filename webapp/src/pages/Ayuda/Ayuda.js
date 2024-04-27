@@ -11,10 +11,10 @@ const Ayuda = () => {
     <>
       <Nav />
       <Heading as="h1">{t('pages.help.title')}</Heading>
-      <Heading as="h2" size="md">
+      <Heading maxWidth={{base: "100%", lg:"40%"}} textAlign={"justify"} as="h2" size="md">
         {t('pages.help.description')}
       </Heading>
-      <Table className="help-table" id="help-table">
+      <Table maxWidth={{base: "100%", lg:"40%"}} className="help-table" id="help-table">
         <Thead>
           <Tr>
             <Th>{t('pages.help.category')}</Th>
@@ -25,7 +25,7 @@ const Ayuda = () => {
         <Tbody>
           <Tr>
             <Td>{t('pages.help.gameModes')}</Td>
-            <Td>
+            <Td textAlign={"justify"}>
               {t('pages.help.gameModesDescription')}
             </Td>
             <Td>
@@ -34,7 +34,7 @@ const Ayuda = () => {
           </Tr>
           <Tr>
             <Td>{t('pages.help.socialHelp')}</Td>
-            <Td>
+            <Td textAlign={"justify"}>
               {t('pages.help.socialHelpDescription')}
             </Td>
             <Td>
@@ -43,7 +43,7 @@ const Ayuda = () => {
           </Tr>
           <Tr>
             <Td>{t('pages.help.statsHelp')}</Td>
-            <Td>
+            <Td textAlign={"justify"}>
               {t('pages.help.statsHelpDescription')}
             </Td>
             <Td>
