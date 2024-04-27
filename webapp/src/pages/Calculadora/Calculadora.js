@@ -100,15 +100,12 @@ const CalculadoraHumana = () => {
       }
     };
     try {
-      const response = await axios.post(URL + '/saveGame', newGame);
-      console.log("Solicitud exitosa:", response.data);
-      
+      await axios.post(URL + '/saveGame', newGame);     
     } catch (error) {
       console.error('Error al guardar el juego:', error);
     }
     try {
-      const response = await axios.post(URL + "/saveGameList", newGame);
-      console.log("Solicitud exitosa:", response.data);
+      await axios.post(URL + "/saveGameList", newGame);
     } catch (error) {
       console.error("Error al guardar el juego:", error);
     }
@@ -173,7 +170,7 @@ const CalculadoraHumana = () => {
           {juegoTerminado ? (
             <Box textAlign="center">
               <Heading as="h2">{t('pages.humancalculator.finished')}</Heading>
-              <p p={2}>Tu puntuación: {puntuacion}</p>
+              <p p={2}>{t("pages.humancalculator.score")} {puntuacion}</p>
               <Flex flexDirection={"column"}>
                 <Button onClick={handleRepetirJuego} colorScheme="teal" m={2} data-testid="play-again-button">
                   {t('pages.humancalculator.playAgain')}
@@ -198,7 +195,7 @@ const CalculadoraHumana = () => {
               />
               <Button mt={3} onClick={() => handleAnswer(Number(valSubmit))} data-testid="submit-button">
                 {" "}
-                Enviar{" "}
+                {t('pages.humancalculator.send')}{" "}
               </Button>
               <Box textAlign="center" mt={4}>
                 <p>{t('pages.humancalculator.time')} {Math.floor(tiempoRestante)}</p>

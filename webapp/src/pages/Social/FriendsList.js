@@ -37,8 +37,6 @@ const FriendList = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
-        console.log(data.friends);
         setFriends(data.friends);
         setIsLoading(false);
       })

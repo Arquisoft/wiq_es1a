@@ -195,8 +195,7 @@ const JuegoPreguntas = () => {
     };
 
     try {
-      const response = await axios.post(URL + "/saveGameList", newGame);
-      console.log("Solicitud exitosa:", response.data);
+      await axios.post(URL + "/saveGameList", newGame);
     } catch (error) {
       console.error(
         "Error al guardar el juego en la lista de partidas:",
@@ -204,8 +203,7 @@ const JuegoPreguntas = () => {
       );
     }
     try {
-      const response = await axios.post(URL + "/saveGame", newGame);
-      console.log("Solicitud exitosa:", response.data);
+      await axios.post(URL + "/saveGame", newGame);
     } catch (error) {
       console.error("Error al guardar el juego:", error);
     }
@@ -318,7 +316,7 @@ const JuegoPreguntas = () => {
                 <p>
                   {t("pages.classic.time")} {Math.floor(tiempoRestante)}
                 </p>
-                <p>Puntuación: {puntuacion}</p>
+                <p>{t("pages.classic.score")} {puntuacion}</p>
                 <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
                   <Box
                     bg="teal.500"

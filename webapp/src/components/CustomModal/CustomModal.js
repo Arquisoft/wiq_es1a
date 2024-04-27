@@ -1,10 +1,13 @@
 import React from 'react';
 import { Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, useDisclosure } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from "react-i18next";
 
 const CustomModal = ({ title, text, route }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -21,9 +24,9 @@ const CustomModal = ({ title, text, route }) => {
 
           <ModalFooter>
             <Button variant='ghost' mr={3} onClick={onClose}>
-              Cerrar
+            {t("components.custommodal.close")}
             </Button>
-            <Button colorScheme='blue' onClick={() => navigate(route)}>Jugar</Button>
+            <Button colorScheme='blue' onClick={() => navigate(route)}>{t("components.custommodal.play")}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -33,7 +33,6 @@ const History = () => {
       .then((response) => response.json())
       .then((data) => {
         setUserData(data);
-        console.log(data);
         setLoading(false);
       })
       .catch((error) => {
