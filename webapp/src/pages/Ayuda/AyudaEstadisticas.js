@@ -1,4 +1,7 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import Nav from '../../components/Nav/Nav';
+import Footer from '../../components/Footer/Footer';
 
 const AyudaEstadisticas = () => {
   
@@ -12,6 +15,7 @@ const AyudaEstadisticas = () => {
       </p>
       <Heading as="h2">{t('pages.helpSats.title2')}</Heading>
       <p>{t('pages.helpStats.description2')}</p>
+      <Footer />
       </>
   );
 };

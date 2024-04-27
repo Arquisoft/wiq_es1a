@@ -1,4 +1,7 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import Nav from '../../components/Nav/Nav';
+import Footer from '../../components/Footer/Footer';
 
 const AyudaModosJuego = () => {
   
@@ -16,6 +19,7 @@ const AyudaModosJuego = () => {
       <p>{t('pages.helpGame.sabiosDescription')}</p>
       <Heading as="h4" size="md">{t('pages.helpGame.calculator')}</Heading>
       <p>{t('pages.helpGame.calculatorDescription')}</p>
+      <Footer />
       </>
   );
 };
