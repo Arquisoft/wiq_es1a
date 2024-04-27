@@ -22,9 +22,9 @@ describe('Ayuda Component', () => {
   });
   
   it('renders the correct title and description', () => {
-    const { getByText, getAllByText } = renderComponentWithRouter();
+    const { getByText} = renderComponentWithRouter();
     const titleElement = getByText("Centro de ayuda");
-    const descriptionElement = getByText(/Bienvenido al centro de ayuda de nuestra aplicación. Aquí encontrarás información útil para sacar el máximo provecho de nuestra juego/i);
+    const descriptionElement = getByText(/Bienvenido al centro de ayuda de nuestra aplicación. Aquí encontrarás información útil para sacar el máximo provecho de nuestro juego/i);
     expect(titleElement).toBeInTheDocument();
     expect(descriptionElement).toBeInTheDocument();
   });

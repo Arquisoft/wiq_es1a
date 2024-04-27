@@ -21,18 +21,18 @@ describe('AyudaEstadisticas Component', () => {
     renderComponentWithRouter();
   });
 
-  it('renders the correct title and description', () => {
-    const { getByText,queryAllByRole  } = renderComponentWithRouter();
-    const descriptionElement = getByText(/Nuestra aplicación cuenta con un sistema de estadísticas en la que podrás ver tus estadísticas en los distintos modos de juego, y a su vez también puedes ver las estadisticas de otros usuarios./i);
-
+  const checkDescription = (description) => {
+    const { getByText } = renderComponentWithRouter();
+    const descriptionElement = getByText(description);
     expect(descriptionElement).toBeInTheDocument();
+  };
+
+  it('renders the correct title and description', () => {
+    checkDescription(/Nuestra aplicación cuenta con un sistema de estadísticas en la que podrás ver tus estadísticas en los distintos modos de juego, y a su vez también puedes ver las estadisticas de otros usuarios./i);
   });
 
   it('renders the correct second title and description', () => {
-    const { getByText } = renderComponentWithRouter();
-    const description2Element = getByText(/Nuestra aplicación también cuenta con un sistema de ranking donde podrás ver los usuarios con las mejores puntuaciones, y filtrarlo por distintos parámetros./i);
-
-    expect(description2Element).toBeInTheDocument();
+    checkDescription(/Nuestra aplicación también cuenta con un sistema de ranking donde podrás ver los usuarios con las mejores puntuaciones, y filtrarlo por distintos parámetros./i);
   });
 });
 

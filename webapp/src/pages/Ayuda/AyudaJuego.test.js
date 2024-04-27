@@ -21,6 +21,14 @@ describe('AyudaJuego Component', () => {
     renderComponentWithRouter();
   });
 
+  const checkModeDescription = (mode, description) => {
+    it(`renders the correct ${mode} mode title and description`, () => {
+      const { getByText } = renderComponentWithRouter();
+      const modeDescription = getByText(description);
+      expect(modeDescription).toBeInTheDocument();
+    });
+  };
+
   it('renders the correct title and description', () => {
     const { getByText } = renderComponentWithRouter();
     const titleElement = getByText(/Ayuda: Modos de Juego/i);
@@ -29,25 +37,9 @@ describe('AyudaJuego Component', () => {
     expect(descriptionElement).toBeInTheDocument();
   });
 
-  it('renders the correct classic mode title and description', () => {
-    const { getByText } = renderComponentWithRouter();
-    const classicModeDescription = getByText(/En el modo Clásico tendrás que responder a una serie de preguntas en un tiempo determinado por pregunta. Tras responder una pregunta, la respuesta correcta se pondrá de color verde y, si has fallado, tu respuesta se pondrá en rojo./i);
-
-    expect(classicModeDescription).toBeInTheDocument();
-  });
-
-  it('renders the correct sabios mode title and description', () => {
-    const { getByText } = renderComponentWithRouter();
-    const sabiosModeDescription = getByText(/En el modo de Batería de Sabios tendrás que responder de forma correcta el máximo de preguntas en un tiempo limite./i);
-
-    expect(sabiosModeDescription).toBeInTheDocument();
-  });
-
-  it('renders the correct calculator mode title and description', () => {
-    const { getByText } = renderComponentWithRouter();
-    const calculatorModeDescription = getByText(/En el modo Calculadora Humana tendrás que responder a operaciones matemáticas. La partida acaba cuando fallas./i);
-
-    expect(calculatorModeDescription).toBeInTheDocument();
-  });
+  checkModeDescription('classic', /En el modo Clásico tendrás que responder a una serie de preguntas en un tiempo determinado por pregunta. Tras responder una pregunta, la respuesta correcta se pondrá de color verde y, si has fallado, tu respuesta se pondrá en rojo./i);
+  checkModeDescription('sabios', /En el modo de Batería de Sabios tendrás que responder de forma correcta el máximo de preguntas en un tiempo limite./i);
+  checkModeDescription('calculator', /En el modo Calculadora Humana tendrás que responder a operaciones matemáticas. La partida acaba cuando fallas./i);
 });
+
 

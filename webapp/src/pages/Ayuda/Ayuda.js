@@ -19,27 +19,34 @@ const Ayuda = () => {
           <Tr>
             <Th>{t('pages.help.category')}</Th>
             <Th>{t('pages.help.descriptionC')}</Th>
+            <Th>{t('pages.help.details')}</Th>
           </Tr>
         </Thead>
         <Tbody>
           <Tr>
             <Td>{t('pages.help.gameModes')}</Td>
             <Td>
-              {t('pages.help.gameModesDescription')}{' '}
+              {t('pages.help.gameModesDescription')}
+            </Td>
+            <Td>
               <a href="/ayuda/modos-de-juego">{t('pages.help.moreDetails')}</a>
             </Td>
           </Tr>
           <Tr>
             <Td>{t('pages.help.socialHelp')}</Td>
             <Td>
-              {t('pages.help.socialHelpDescription')}{' '}
+              {t('pages.help.socialHelpDescription')}
+            </Td>
+            <Td>
               <a href="/ayuda/social">{t('pages.help.moreDetails')}</a>
             </Td>
           </Tr>
           <Tr>
             <Td>{t('pages.help.statsHelp')}</Td>
             <Td>
-              {t('pages.help.statsHelpDescription')}{' '}
+              {t('pages.help.statsHelpDescription')}
+            </Td>
+            <Td>
               <a href="/ayuda/estadisticas">{t('pages.help.moreDetails')}</a>
             </Td>
           </Tr>

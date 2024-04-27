@@ -21,6 +21,14 @@ describe('AyudaSocial Component', () => {
     renderComponentWithRouter();
   });
 
+  const checkSectionDescription = (section, description) => {
+    it(`renders the correct ${section} section description`, () => {
+      const { getByText } = renderComponentWithRouter();
+      const descriptionElement = getByText(description);
+      expect(descriptionElement).toBeInTheDocument();
+    });
+  };
+
   it('renders the correct title and description', () => {
     const { getByText } = renderComponentWithRouter();
     const titleElement = getByText(/Ayuda: Social/i);
@@ -29,20 +37,8 @@ describe('AyudaSocial Component', () => {
     expect(descriptionElement).toBeInTheDocument();
   });
 
-  it('renders the correct friends section title and description', () => {
-    const { getByText } = renderComponentWithRouter();
-
-    const friendsDescription = getByText(/Podrás buscar los usuarios del sistema y añadirlos como amigos para así acceder a su perfil de forma más fácil./i);
-
-    expect(friendsDescription).toBeInTheDocument();
-  });
-
-  it('renders the correct groups section title and description', () => {
-    const { getByText } = renderComponentWithRouter();
-
-    const groupsDescription = getByText(/Podrás crear o unirte a un grupo ya existente con otros usuarios para poder ver su perfil y partidas recientes, y compartir tu experiencia con ellos./i);
-
-    expect(groupsDescription).toBeInTheDocument();
-  });
+  checkSectionDescription('friends', /Podrás buscar los usuarios del sistema y añadirlos como amigos para así acceder a su perfil de forma más fácil./i);
+  checkSectionDescription('groups', /Podrás crear o unirte a un grupo ya existente con otros usuarios para poder ver su perfil y partidas recientes, y compartir tu experiencia con ellos./i);
 });
+
 

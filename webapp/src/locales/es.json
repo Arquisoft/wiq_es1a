@@ -242,14 +242,15 @@
     },
     "help": {
       "title": "Centro de ayuda",
-      "description": "Bienvenido al centro de ayuda de nuestra aplicación. Aquí encontrarás información útil para sacar el máximo provecho de nuestra juego.",
+      "description": "Bienvenido al centro de ayuda de nuestra aplicación. Aquí encontrarás información útil para sacar el máximo provecho de nuestro juego.",
       "category": "Categoría",
       "descriptionC": "Descripción",
-      "gameModes": "Ayuda: Modos de juego",
+      "gameModes": "Modos de juego",
+      "details": "Detalles",
       "gameModesDescription": "En nuestra aplicación tenemos 3 modos de juego con los que podrás entretenerte, en esta sección esperamos responder todas tus dudas.",
-      "socialHelp": "Ayuda: Social",  
+      "socialHelp": "Social",  
       "socialHelpDescription": "Tenemos diferentes maneras de interactuar con otros usuarios, si tienes dudas sobre como hacerlo esta es tu sección.",
-      "statsHelp": "Ayuda: Estadisticas",
+      "statsHelp": "Estadisticas",
       "statsHelpDescription": "Tenemos un modo para poder ver todas tus estadísticas para cada modo de juego, si tienes alguna duda esta es tu sección",
       "moreDetails": "Más detalles" 
     },
@@ -264,8 +265,8 @@
       "calculatorDescription": "En el modo Calculadora Humana tendrás que responder a operaciones matemáticas. La partida acaba cuando fallas."
     },
     "helpStats": {
-      "title":"Estadísticas",
-      "title2":"Ranking",
+      "title":"Ayuda: Estadísticas",
+      "title2":"Ayuda: Ranking",
       "description": "Nuestra aplicación cuenta con un sistema de estadísticas en la que podrás ver tus estadísticas en los distintos modos de juego, y a su vez también puedes ver las estadisticas de otros usuarios.",
       "description2": "Nuestra aplicación también cuenta con un sistema de ranking donde podrás ver los usuarios con las mejores puntuaciones, y filtrarlo por distintos parámetros."
 
