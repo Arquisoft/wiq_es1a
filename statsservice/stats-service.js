@@ -98,7 +98,7 @@ app.post("/saveGame", async (req, res) => {
         );
       }
 
-      res.status(200).json({ message: "Partida guardada exitosamente" });
+      res.status(200).json({ message: "Game saved successfully" });
     } else {
       throw new Error("Invalid game mode");
     }
@@ -121,7 +121,7 @@ app.get("/stats", async (req, res) => {
   } catch (error) {
     res
       .status(400)
-      .json({ error: "Error al obtener las estadísticas:" + error.message });
+      .json({ error: "Error getting stats:" + error.message });
   }
 });
 
@@ -140,14 +140,14 @@ app.get("/ranking", async (req, res) => {
         [sortBy]: stat[sortBy],
       }));
     } else {
-      throw new Error("No se encontraron estadísticas");
+      throw new Error("No stats found");
     }
 
     res.status(200).json(data);
   } catch (error) {
     res
       .status(400)
-      .json({ error: "Error al obtener el ranking: " + error.message });
+      .json({ error: "Error getting ranking: " + error.message });
   }
 });
 
