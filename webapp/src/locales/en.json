@@ -263,7 +263,14 @@
       "classicDescription": "In classic mode, you'll have to answer a series of questions within a set time limit for each question.",
       "sabiosDescription": "In the Wisdom Battery mode, you need to correctly answer as many questions as possible within a limited time.",
       "calculatorDescription": "In Human Calculator mode, you'll tackle mathematical operations as if using a real calculator."
+    },
+    "helpSats": {
+      "title": "Statistics",
+      "title2": "Ranking System",
+      "description": "Our application has a Statistics system where you can view your statistics in the different game modes, and at the same time, you can also see the statistics of other users.",
+      "description2": "Our application also has a ranking system where you can see which users have the best scores."
     }
+    
     
   }
 }
