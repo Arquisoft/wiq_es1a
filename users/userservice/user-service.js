@@ -100,8 +100,7 @@ app.post("/adduser", async (req, res) => {
 // Route to get all users
 app.get("/users", async (req, res) => {
   try {
-    const users = await User.find();
-    console.log(users);
+    const users = await User.find({}, { password: 0});
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: "Internal Server Error" });
@@ -246,7 +245,7 @@ app.get("/userGames", async (req, res) => {
   try {
     const username = req.query.user;
     if(!username){
-      return res.status(400).json({ error: "Nombre inválido" });
+      return res.status(400).json({ error: "Invalid name" });
     }
     const user = await User.findOne({ username:
       username,
@@ -309,7 +308,7 @@ app.get('/group/:groupName', async (req, res) => {
 
       res.status(200).json({ group });
   } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(500).json({ error: error.message });
   }
 });
 
@@ -343,7 +342,7 @@ app.post('/group/add', async (req, res) => {
 
       res.status(200).json({ message: 'Group created successfully' });
   } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(500).json({ error: error.message });
   }
 });
 
@@ -374,7 +373,7 @@ app.post('/group/join', async (req, res) => {
 
       res.status(200).json({ message: 'User joined the group successfully' });
   } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(500).json({ error: error.message });
   }
 });
 
