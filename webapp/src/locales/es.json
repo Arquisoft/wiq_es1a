@@ -242,41 +242,41 @@
     },
     "help": {
       "title": "Centro de ayuda",
-      "description": "Bienvenido al centro de ayuda de nuestra aplicación. Aquí encontrarás información útil para sacar el máximo provecho de nuestra juego .",
-      "category": "Categoria",
+      "description": "Bienvenido al centro de ayuda de nuestra aplicación. Aquí encontrarás información útil para sacar el máximo provecho de nuestra juego.",
+      "category": "Categoría",
       "descriptionC": "Descripción",
       "gameModes": "Ayuda: Modos de juego",
-      "gameModesDescription": "En nuestra aplición tenemos 3 modos de juego con los que podras entretnerte, en esta sección esperamos responder todas tus dudas",
+      "gameModesDescription": "En nuestra aplicación tenemos 3 modos de juego con los que podrás entretnerte, en esta sección esperamos responder todas tus dudas.",
       "socialHelp": "Ayuda: Social",  
-      "socialHelpDescription": "Tenemos diferentes maneras de interactuar con otros usuarios si tienes dudas sobre como hacerlo esta es tu sección.",
+      "socialHelpDescription": "Tenemos diferentes maneras de interactuar con otros usuarios, si tienes dudas sobre como hacerlo esta es tu sección.",
       "statsHelp": "Ayuda: Estadisticas",
-      "statsHelpDescription": "Tenemos un modo para comprobar todas las estadisticas, si tienes alguna duda esta es tu sección",
+      "statsHelpDescription": "Tenemos un modo para poder ver todas tus estadísticas para cada modo de juego, si tienes alguna duda esta es tu sección",
       "moreDetails": "Más detalles" 
     },
     "helpGame": {
-      "tittle": " Ayuda: Modos de Juego",
-      "description": " Nuestra aplicación cuenta con 3 modos de juego en los que podrás entretenerte todo el tiempo que quieras y conseguir obtener la mejor puntuación. Todos ellos tienen la siguiente estructura: cuentan con cuatro opciones de respuesta en la que solo una es la correcta y tambien hay una barra de tiempo que te indica el tiempo restante. Para saber cuala es la pregunta correcta esta se pondrá de color verde y si has fallado se pondra en rojo. A continuación se detallaran los juegos y se hara un breve ejemplo de su funcionamiento",
+      "tittle": "Ayuda: Modos de Juego",
+      "description": "Nuestra aplicación cuenta con 3 modos de juego en los que podrás entretenerte todo el tiempo que quieras y conseguir obtener la mejor puntuación. Todos ellos tienen la siguiente estructura: cuentan con cuatro opciones de respuesta en la que solo una es la correcta, y hay una barra de tiempo que te indica el tiempo restante. A continuación se detallarán los juegos y se dará un breve ejemplo de su funcionamiento",
       "classic": "Modo Clásico",
       "sabios" : "Batería de Sabios",
       "calculator": "Calculadora Humana",
-      "classicDescription": "En el modo clásico tendras que responder a una serie de preguntas en un tiempo determinado por pregunta ",
-      "sabiosDescription": "En el modo de bateria de sabios tendrás que responder de forma correcta el máximo de preguntas en un tiempo limite.",
-      "calculatorDescription": "En el mode Calculadora Humana tendrás que responder a operaciones matemáticas como si de una calculadora te trataras "
+      "classicDescription": "En el modo Clásico tendrás que responder a una serie de preguntas en un tiempo determinado por pregunta. Tras responder una pregunta, la respuesta correcta se pondrá de color verde y, si has fallado, tu respuesta se pondrá en rojo.",
+      "sabiosDescription": "En el modo de Batería de Sabios tendrás que responder de forma correcta el máximo de preguntas en un tiempo limite.",
+      "calculatorDescription": "En el modo Calculadora Humana tendrás que responder a operaciones matemáticas. La partida acaba cuando fallas."
     },
-    "helpSats": {
+    "statsHelp": {
       "title":"Estadísticas",
-      "title2":"Sistema de Ranking",
-      "description": "Nuestra aplicación cuenta con un sistema de Estadisticas en la que podras ver tus estadisticas en los distintos modos de juego y a su vez también puedes ver las estadisticas de otros usuarios.",
-      "description2": "Nuestra aplicación tambien cuenta con un sistema de ranking donde podras ver que usarios tienen las mejores puntuaciones."
+      "title2":"Ranking",
+      "description": "Nuestra aplicación cuenta con un sistema de estadísticas en la que podrás ver tus estadísticas en los distintos modos de juego, y a su vez también puedes ver las estadisticas de otros usuarios.",
+      "description2": "Nuestra aplicación también cuenta con un sistema de ranking donde podrás ver los usuarios con las mejores puntuaciones, y filtrarlo por distintos parámetros."
 
     }, 
     "helpSocial": {
       "title": "Ayuda: Social",
       "description": "Nuestra aplicación cuenta con un apartado Social donde podras compartir tu experiencia de juego con otros usuarios.",
       "friends": "Amigos",
-      "description2": "Podremos buscar los usuarios del sistema y añadirlos como amigos para asi acceder a sus estadisticas de forma más facil.",
+      "description2": "Podrás buscar los usuarios del sistema y añadirlos como amigos para así acceder a su perfil de forma más fácil.",
       "groups": "Grupos",
-      "description3": "Podremos crear o unirnos a un grupo ya existente con otros usuarios para asi poder acceder a su sestadisticas y compararnos con ellos"
+      "description3": "Podrás crear o unirte a un grupo ya existente con otros usuarios para poder ver su perfil y partidas recientes, y compartir tu experiencia con ellos."
     }
 }
 }
