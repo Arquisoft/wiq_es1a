@@ -20,6 +20,10 @@ import Groups from "./pages/Social/Groups.js";
 import UserGroups from "./pages/Social/UserGroups.js";
 import GroupDetails from "./pages/Social/GroupDetails.js";
 import History from "./pages/History/History.js";
+import Ayuda from "./pages/Ayuda/Ayuda.js";
+import AyudaJuego from "./pages/Ayuda/AyudaJuego.js";
+import AyudaEstadisticas from "./pages/Ayuda/AyudaEstadisticas.js"
+import AyudaSocial from "./pages/Ayuda/AyudaSocial.js";
 
 
 function App() {
@@ -47,8 +51,12 @@ function App() {
           <Route path="/social/grupos" element={<Groups />} />
           <Route path="/social/misgrupos" element={<UserGroups />} />
           <Route path="/social/grupo/:groupName" element={<GroupDetails />} />
-
+          <Route path="/ayuda" element={<Ayuda/>} />
+          <Route path="/ayuda/modos-de-juego" element={<AyudaJuego/>} />
+          <Route path="/ayuda/estadisticas" element={<AyudaEstadisticas/>} />
+          <Route path="/ayuda/social" element={<AyudaSocial/>} />
           <Route path="/perfil" element={<Perfil />} />
+
           <Route path="/history" element={<History />} />
           <Route path="/config" element={<Config />} />
         </Route>

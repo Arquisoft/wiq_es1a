@@ -37,7 +37,8 @@
       "options": "Options",
       "disconnect": "Disconnect",
       "api": "API docs",
-      "history": "History"
+      "history": "History",
+      "help": "Help"
     },
     "register": {
       "title": "Sign up",
@@ -244,6 +245,41 @@
       "seegroup": "See group",
       "creationDate": "Creation date",
       "creator": "Creator"
+    },
+    "help": {
+      "title": "Help Center",
+      "description": "Welcome to our application's help center. Here you'll find useful information to make the most out of our game.",
+      "category": "Category",
+      "descriptionC": "Description",
+      "gameModes": "Help: Game Modes",
+      "gameModesDescription": "In our application, we have 3 game modes to entertain you. In this section, we aim to address all your doubts.",
+      "socialHelp": "Help: Social",
+      "socialHelpDescription": "We have different ways to interact with other users. If you have any doubts about how to do it, this is your section.",
+      "statsHelp": "Help: Statistics",
+      "statsHelpDescription": "We have a mode to check all the statistics. If you have any doubts, this is your section.",
+      "moreDetails": "More details"
+    },
+    
+    "helpGame": {
+      "title": "Help: Game Modes",
+      "description": "Our application features 3 game modes where you can entertain yourself as much as you want and strive to achieve the highest score. All of them follow the same structure: they present four answer options, out of which only one is correct. Below, we'll detail each game mode and provide a brief example of how they work.",
+      "classic": "Classic Mode",
+      "sabios": "Wisdom Battery",
+      "calculator": "Human Calculator",
+      "classicDescription": "In Classic mode, you'll have to answer a series of questions within a set time limit for each question.  There's also a time bar indicating the remaining time. Correct answers are highlighted in green, while incorrect ones are marked in red.",
+      "sabiosDescription": "In the Wisdom Battery mode, you need to correctly answer as many questions as possible within a limited time.",
+      "calculatorDescription": "In Human Calculator mode, you'll tackle mathematical operations, as many as you can until you fail."
+    },
+
+    "helpSocial": {
+      "title": "Help: Social",
+      "description": "Our application has a Social section where you can share your gaming experience with other users.",
+      "friends": "Friends",
+      "description2": "You can search for users in the system and add them as friends to easily access their profile.",
+      "groups": "Groups",
+      "description3": "You can create or join an existing group with other users to access their profile and recent games."
     }
+     
+    
   }
 }
