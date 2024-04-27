@@ -27,7 +27,6 @@ const Ranking = () => {
     fetch(gatewayUrl + `/ranking?gamemode=${gamemode}&filterBy=${filterBy}`)
       .then((response) => response.json())
       .then((data) => {
-
         setRanking(data);
         setIsLoading(false);
       })
@@ -110,13 +109,13 @@ const Ranking = () => {
   if (error) {
     return (
       <>
-    <Nav/>
-      <div>
-        <Heading as="h2">{t('pages.ranking.error')} {error}</Heading>
-        <p>{t('pages.ranking.errorLabel')}</p>
-      </div>
-      <Footer/>
-    </>
+        <Nav/>
+        <div>
+          <Heading as="h2">{t('pages.ranking.errorText')}</Heading>
+          <p>{error}</p>
+        </div>
+        <Footer/>
+      </>
     );
   }
 
@@ -130,7 +129,7 @@ const Ranking = () => {
           if (gamemode === "calculadora" && option.value === "ratioCorrect") {
             return null;
           }
-          return <option key={option.value} value={option.value}>{option.label}</option>;
+          return <option value={option.value}>{option.label}</option>;
         })}
       </Select>
       <Button
@@ -154,7 +153,9 @@ const Ranking = () => {
       >
         {t('pages.ranking.humancalculator')}
       </Button>
-      <Table>
+      {ranking && ranking.length>0 ? (
+        <>
+        <Table>
         <Thead>
           <Tr>
             <Th>{t('pages.ranking.user')}</Th>
@@ -170,6 +171,15 @@ const Ranking = () => {
           ))}
         </Tbody>
       </Table>
+      </>
+      ): 
+      <>
+      <div>
+        <Heading as="h2">{t('pages.ranking.errorText')}</Heading>
+        <p>{t('pages.ranking.noStats')}</p>
+      </div>
+      </>}
+      
     </Flex>
     <Footer/>
     </>

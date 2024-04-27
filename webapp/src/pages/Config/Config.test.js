@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Config from "./Config";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -38,7 +38,6 @@ describe("Config Component", () => {
     button.click();
 
     const checks = screen.getAllByRole("checkbox");
-    console.log(checks)
     checks[0].checked = true;
     button.click();
   });

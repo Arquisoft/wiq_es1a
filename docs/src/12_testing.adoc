@@ -4,6 +4,89 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 This section details the results of the various types of tests that have been carried out with the application.
 
+=== Unit Testing
+
+We used Jest to perform unit testing on the application. We have written tests for all the components of the application, mocking the database and external services. All the tests passed successfully. The results of the tests are shown below:
+
+=== Auth service
+image::12-authservice.png[]
+
+=== User service
+image::12-userservice.png[]
+
+=== Gateway service
+image::12-gatewayservice.png[]
+
+=== Stats service
+image::12-statsservice.png[]
+
+=== Webapp
+image::12-webapp.png[]
+
+== e2e Testing
+We used puppeteer to perform end-to-end testing on the application. We have written tests for login, register, create group, and for the three gamemodes.
+
+image::12-e2e.png[]
+
+=== Code coverage
+
+We used sonarCloud to check the code coverage of the application. The results are shown below:
+
+=== Usability and accessibility Testing
+
+We used some tools to measure usability levels of the application, along with some testing with real users (friends and family).
+
+==== Automatic tools:
+
+First, we will show the automatic tools results:
+
+===== PageSpeed Insights: 
+
+This tool is used to measure different aspects of a certain page, such as performance, accessibility, best practices and optimisation.
+We used this tool on all of our pages, and the results were kind of similar. Below, the results for the Classic and Stats page are shown:
+
+image::pagespeed-stats.png[]
+
+image::pagespeed-classic.png[]
+
+As we can see, our pages perform very nicely on every evaluable aspect, except in Best practices, and that's because the tool is giving us a 
+warning because we don't use HTTPS in our application, which can lead to security issues.
+
+===== Juicy Studio:
+This tool is used to measure the contrast between background and foreground colors of a web page.
+We used this tool on both of out color combinations: dark mode and light mode. The results are shown below:
+
+image::juicy-light.png[]
+
+image::juicy-dark.png[]
+
+As we can see, both of our themes use correct and high-contrasted color combinations.
+
+==== Testing with real users:
+
+We did some testing with 18 people, all of them being friends and family of us, the develpoment team.
+We let them try the application, play games, view their stats, create groups, etc., and when they were
+finished we asked them a few questions.
+We wanted to get from each individual his UI rating, functionality rating and some recommendation of things we could change / add
+if we continued developing the app.
+
+The results of this test are shown below:
+
+image::usability-table.png[]
+
+image::usability-averages.png[]
+
+As we can see, we have attempted to conduct tests with people of various ages, and approximately the same number of men and women, 
+in order to obtain different perspectives and a broader and more diverse range of users. 
+We consider the results to be very positive, judging by the average of the scores obtained.
+
+image::usability-graph.png[]
+
+However, looking at the recommendations made by our testers, we think it would be a good idea to work on upgrading the group system, adding
+administrators, invitations, and private groups, and adding friend requests.
+We should also consider improving our UI, maybe studying design tendencies and trying to applicate them to our project.
+
+
 === Load Testing
 We used Gatling to perform load testing on the application. It consisted of simulating 1000 users accessing the application at the same time, each of one performing 83 requests. The results of the test are shown below:
 

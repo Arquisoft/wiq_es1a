@@ -28,7 +28,7 @@ app.get("/health", (req, res) => {
   res.json({ status: "OK" });
 });
 
-var returnError = (res, error) => {
+let returnError = (res, error) => {
   console.log(error);
   res.status(error.response.status).json({ error: error.response.data.error });
 }
@@ -246,7 +246,7 @@ app.get("/ranking", async (req, res) => {
   }
 });
 
-var openapiPath='./openapi.yaml'
+let openapiPath='./openapi.yaml'
 if (fs.existsSync(openapiPath)) {
   const file = fs.readFileSync(openapiPath, 'utf8');
 

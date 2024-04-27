@@ -60,6 +60,7 @@ const Nav = () => {
   const handleLogout = () => { // NOSONAR
     if(process.env.NODE_ENV !== 'test'){
       localStorage.removeItem("username");
+      localStorage.removeItem("token");
     }
     navigate("/login");
   };
@@ -245,7 +246,7 @@ const Nav = () => {
           </MenuButton>
           <MenuList>
             <MenuGroup title={t("components.nav.profile")}>
-              <MenuItem onClick={() => handleNavigate(`/perfil/${username}`)}>
+              <MenuItem onClick={() => handleNavigate("/perfil")}>
                 {t("components.nav.myprofile")}
               </MenuItem>
               <MenuItem onClick={() => handleNavigate("/history")}>

@@ -14,18 +14,18 @@ const JuegoPreguntas = () => {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [indicePregunta, setIndicePregunta] = useState(0);
-  const [puntuacion, setPuntuacion] = useState(0);
-  const [tiempoRestante, setTiempoRestante] = useState(TIME);
-  const [juegoTerminado, setJuegoTerminado] = useState(false);
-  const [preguntas, setPreguntas] = useState([]);
-  const [preguntaActual, setPreguntaActual] = useState(null);
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [points, setPoints] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(TIME);
+  const [endgame, setEndgame] = useState(false);
+  const [questions, setQuestions] = useState([]);
+  const [actualQuestion, setActualQuestion] = useState(null);
   const [progressPercent, setProgressPercent] = useState(100);
 
   //Used for user stats
-  const [preguntasCorrectas, setPreguntasCorrectas] = useState(0);
-  const [preguntasFalladas, setPreguntasFalladas] = useState(0);
-  const [tiempoMedio, setTiempoMedio] = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [incorrectAnswers, setIncorrectAnswers] = useState(0);
+  const [averageTime, setAverageTime] = useState(0);
 
   const questionsToSave = [];
 
@@ -37,50 +37,50 @@ const JuegoPreguntas = () => {
 
   useEffect(() => {
     const roundedProgressPercent = (
-      (tiempoRestante / TIME) *
+      (timeLeft / TIME) *
       100
     ).toFixed(2);
     setProgressPercent(roundedProgressPercent);
 
     const timer = setInterval(() => {
-      setTiempoRestante((prevTiempo) =>
+      setTimeLeft((prevTiempo) =>
         prevTiempo <= 0 ? 0 : prevTiempo - 0.01
       );
     }, 10);
 
     return () => clearInterval(timer);
     // eslint-disable-next-line
-  }, [tiempoRestante]);
+  }, [timeLeft]);
 
   useEffect(() => {
-    if (tiempoRestante === 0) {
-      setJuegoTerminado(true);
+    if (timeLeft === 0) {
+      setEndgame(true);
     }
     const timer = setInterval(() => {
-      setTiempoRestante((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
+      setTimeLeft((prevTiempo) => (prevTiempo <= 0 ? 0 : prevTiempo - 1));
     }, 1000);
     return () => clearInterval(timer);
     // eslint-disable-next-line
-  }, [tiempoRestante]);
+  }, [timeLeft]);
 
   useEffect(() => {
-    if (juegoTerminado && tiempoMedio !== 0) {
-      guardarPartida();
+    if (endgame && averageTime !== 0) {
+      saveGame();
     }
     // eslint-disable-next-line
-  }, [juegoTerminado, tiempoMedio]);
+  }, [endgame, averageTime]);
 
   useEffect(() => {
-    if (tiempoRestante === 0) {
-      setJuegoTerminado(true);
-      if (preguntasCorrectas + preguntasFalladas > 0) {
-        const preguntasTotales = preguntasCorrectas + preguntasFalladas;
+    if (timeLeft === 0) {
+      setEndgame(true);
+      if (correctAnswers + incorrectAnswers > 0) {
+        const preguntasTotales = correctAnswers + incorrectAnswers;
         const tMedio = TIME / preguntasTotales;
-        setTiempoMedio(tMedio);
+        setAverageTime(tMedio);
       }
     }
     // eslint-disable-next-line
-  }, [tiempoRestante]);
+  }, [timeLeft]);
 
   const fetchQuestions = () => {
     fetch(URL + "/questions", {
@@ -102,72 +102,71 @@ const JuegoPreguntas = () => {
         return response.json();
       })
       .then((data) => {
-        setPreguntas(data);
-        setPreguntaActual(data[0]);
+        setQuestions(data);
+        setActualQuestion(data[0]);
         setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Error al obtener las preguntas:", error);
+        console.error("Error al obtener las questions:", error);
         navigate("/home?error=1");
       });
   };
 
-  const guardarPartida = async () => {
+  const saveGame = async () => {
     const username = localStorage.getItem("username");
     const newGame = {
       username: username,
       gameMode: "bateria",
       gameData: {
-        correctAnswers: preguntasCorrectas,
-        incorrectAnswers: preguntasFalladas,
-        points: puntuacion,
-        avgTime: tiempoMedio,
+        correctAnswers: correctAnswers,
+        incorrectAnswers: incorrectAnswers,
+        points: points,
+        avgTime: averageTime,
       },
       questions: questionsToSave,
     };
 
-    saveGame("/saveGame", newGame);
-    saveGame("/saveGameList", newGame);
+    save("/save", newGame);
+    save("/saveGameList", newGame);
   };
 
-  const saveGame = async (endpoint, newGame) => {
+  const save = async (endpoint, newGame) => {
     try {
-      const response = await axios.post(URL + endpoint, newGame);
-      console.log("Solicitud exitosa:", response.data);
+      await axios.post(URL + endpoint, newGame);
     } catch (error) {
-      console.error("Error al guardar el juego:", error);
+      console.error(error);
     }
   };
 
-  const handleSiguientePregunta = async (respuesta) => {
-    if (respuesta === preguntaActual.correcta) {
-      setPuntuacion(puntuacion + 1);
-      setPreguntasCorrectas(preguntasCorrectas + 1);
+  const handleNextQuestion = async (answer) => {
+    if (answer === actualQuestion.correcta) {
+      setPoints(points + 1);
+      setCorrectAnswers(correctAnswers + 1);
     } else {
-      setPreguntasFalladas(preguntasFalladas + 1);
+      setIncorrectAnswers(incorrectAnswers + 1);
     }
 
     const pregunta = {
-      pregunta: preguntaActual.pregunta,
-      respuestas: preguntaActual.respuestas,
-      correcta: preguntaActual.correcta,
-      respuesta: respuesta,
+      pregunta: actualQuestion.pregunta,
+      respuestas: actualQuestion.respuestas,
+      correcta: actualQuestion.correcta,
+      respuesta: answer,
     };
     questionsToSave.push(pregunta);
 
-    if (indicePregunta + 1 < preguntas.length) {
-      setIndicePregunta(indicePregunta + 1);
-      setPreguntaActual(preguntas[indicePregunta + 1]);
+    if (questionIndex + 1 < questions.length) {
+      setQuestionIndex(questionIndex + 1);
+      setActualQuestion(questions[questionIndex + 1]);
     } else {
-      setJuegoTerminado(true);
+      setEndgame(true);
     }
   };
 
-  const handleRepetirJuego = () => {
-    setIndicePregunta(0);
-    setPuntuacion(0);
-    setTiempoRestante(180);
-    setJuegoTerminado(false);
+  const handleRematch = () => {
+    setQuestionIndex(0);
+    setPoints(0);
+    setTimeLeft(180);
+    setEndgame(false);
   };
 
   if (isLoading) {
@@ -199,14 +198,14 @@ const JuegoPreguntas = () => {
           borderRadius="lg"
           boxShadow="lg"
         >
-          {juegoTerminado ? (
+          {endgame ? (
             <Box textAlign="center">
               <Heading as="h2">{t("pages.wisebattery.finished")}</Heading>
               <p p={2}>
-                {t("pages.wisebattery.score")} {puntuacion}
+                {t("pages.wisebattery.score")} {points}
               </p>
               <Flex flexDirection={"column"}>
-                <Button onClick={handleRepetirJuego} colorScheme="teal" m={2}>
+                <Button onClick={handleRematch} colorScheme="teal" m={2}>
                   {t("pages.wisebattery.playAgain")}
                 </Button>
                 <Link to="/home" style={{ marginLeft: "10px" }}>
@@ -217,15 +216,14 @@ const JuegoPreguntas = () => {
           ) : (
             <Box>
               <Heading as="h2" mb={4} data-testid="question">
-                {t("pages.wisebattery.question")} {indicePregunta + 1}
+                {t("pages.wisebattery.question")} {questionIndex + 1}
               </Heading>
-              <p>{preguntaActual.pregunta}</p>
+              <p>{actualQuestion.pregunta}</p>
               <Grid templateColumns="repeat(2, 1fr)" gap={4} mt={4}>
-                {preguntaActual.respuestas.map((respuesta, index) => (
+                {actualQuestion.respuestas.map((respuesta, index) => (
                   <Button
-                    key={index}
-                    onClick={() => handleSiguientePregunta(respuesta)}
-                    disabled={tiempoRestante === 0 || juegoTerminado}
+                    onClick={() => handleNextQuestion(respuesta)}
+                    disabled={timeLeft === 0 || endgame}
                     whiteSpace={"normal"}
                     padding={"1rem"}
                     height={"fit-content"}
@@ -239,10 +237,10 @@ const JuegoPreguntas = () => {
 
               <Box textAlign="center" mt={4}>
                 <p>
-                  {t("pages.wisebattery.time")} {Math.floor(tiempoRestante)}
+                  {t("pages.wisebattery.time")} {Math.floor(timeLeft)}
                 </p>
                 <p>
-                  {t("pages.wisebattery.score")} {puntuacion}
+                  {t("pages.wisebattery.score")} {points}
                 </p>
                 <Box w="100%" bg="gray.100" borderRadius="lg" mt={4}>
                   <Box
