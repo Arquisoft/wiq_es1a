@@ -556,7 +556,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <div class="paragraph">
 <p>WIQ is a project developed for the subject "Software Architecture" of the Computer Engineering degree of the School of Computer Engineering of the University of Oviedo. This project is based on the wiq project, made available to the students by the teachers of the subject.
-WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recreating its famous quiz show Saber y ganar in a web version accessible to everyone. This project will be carried out by the development team is formed by:</p>
+WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recreating its famous quiz show Saber y ganar in a web version accessible to everyone. This project will be carried out by the development team, which is formed by:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -671,7 +671,7 @@ WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recre
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Students (HappySw)</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Martín Cancio Barrera, Iyán Fernández Riol, Rodrigo García Iglesias and Alfredo Jirout Cid</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Martín Cancio Barrera, Iyán Fernández Riol and Rodrigo García Iglesias</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The students are the developers of the application. They are in charge of the complete development, which will improve their programming and teamwork skills.</p></td>
 </tr>
 <tr>
@@ -717,10 +717,6 @@ WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recre
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Implementation Platform</em></strong></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The application must be implemented on a web hosting platform that meets RTVE&#8217;s performance, security and scalability requirements.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Privacy Compliance</em></strong></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The architecture must ensure compliance with data privacy regulations, such as GDPR, to protect users' information.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><strong><em>Code Maintainability</em></strong></p></td>
@@ -832,6 +828,12 @@ A ranking with the maximum score of the user and can be compared with other user
 <div class="title">Technologies used to carry out:</div>
 <ul>
 <li>
+<p>JavaScript: JavaScript is a very flexible programming language widely used in software development. It incorporates many features that makes this development easy and effective, such as asynchronous functions, libraries, etc. This is the language that will be used to create front-end and back-end on our application.</p>
+</li>
+<li>
+<p>Node.js: Node.js is a JavaScript runtime built on Chrome&#8217;s V8 JavaScript engine. It&#8217;s used to create server-side applications, and it&#8217;s the runtime that will be used to create the back-end of our application.</p>
+</li>
+<li>
 <p>MongoDB: MongoDB is an open-source NoSQL database that uses a document-based data model for information storage and retrieval.</p>
 </li>
 <li>
@@ -845,6 +847,15 @@ A ranking with the maximum score of the user and can be compared with other user
 </li>
 <li>
 <p>Microsoft Azure: A cloud computing platform that provides infrastructure, platform, and software-as-a-service services to host, manage, and scale online applications and services.</p>
+</li>
+<li>
+<p>GitHub: It&#8217;s a platform that provides hosting for software development and version control using Git. It&#8217;s where we&#8217;ll host our code and collaborate with the team.</p>
+</li>
+<li>
+<p>Github Actions: It&#8217;s a CI/CD tool that automates the process of building, testing, and deploying code. It&#8217;s where we&#8217;ll automate the process of testing and deploying our application in Azure Cloud.</p>
+</li>
+<li>
+<p>Asciidoc: It&#8217;s a text document format for writing notes, documentation, articles, books, ebooks, slideshows, web pages. We&#8217;ll use it to document our project.</p>
 </li>
 </ul>
 </div>
@@ -1543,6 +1554,15 @@ These are:</p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The system ends the current game, displays the user&#8217;s score, resets all game elements, and offers the option to start a new game.</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Score is saved accurately, and game restarts without errors.</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Performance</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">User</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A user finishes playing a game and wants to see his stats.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">System, User Interface, Stats Service</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stats retrieving.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user presses the Stats button, and his stats are shown in the screen, giving him the option to switch between gamemodes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stats are shown correctly, including last game.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -1952,7 +1972,7 @@ We should also consider improving our UI, maybe studying design tendencies and t
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-04-28 13:16:03 +0200
+Last updated 2024-04-28 21:21:00 +0200
 </div>
 </div>
 </body>
