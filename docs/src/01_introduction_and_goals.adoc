@@ -12,15 +12,13 @@ WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recre
 
 * Rodrigo García Iglesias, mailto:UO276396@uniovi.es[_UO276396_].
 
-* Alfredo Jirout Cid, mailto:UO288443@uniovi.es[_UO288443_]. 
-
 WIQ! is a software by means of which users can emulate being the participants of the quiz show Saber y ganar, which has numerous functionalities:
 
 * Play several of the game modes seen on the show.
 
 * Register to be able to keep track of their statistics in the game
 
-* Play with friends
+* Have friends, join groups and see the statistics of the other users.
 
 * Adjust the themes of the questions, the answer time, the number of questions...
 ***
