@@ -435,7 +435,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1><span class="image"><img src="./images/arc42-logo.png" alt="arc42"></span> WIQ! Documentation</h1>
+<h1><span class="image"><img src="./images/WIQ-logo.png" alt="WIQ"></span> WIQ! Documentation</h1>
 <div class="details">
 <span id="revnumber">version 8.2 EN,</span>
 <span id="revdate">January 2023</span>
@@ -525,17 +525,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_unit_testing">12.1. Unit Testing</a></li>
 <li><a href="#_e2e_testing">12.2. e2e Testing</a></li>
+<li><a href="#_code_coverage">12.3. Code coverage</a></li>
+<li><a href="#_usability_and_accessibility_testing">12.4. Usability and accessibility Testing</a></li>
+<li><a href="#_testing_with_real_users">12.5. Testing with real users:</a></li>
+<li><a href="#_load_testing">12.6. Load Testing</a></li>
 </ul>
 </li>
-<li><a href="#_code_coverage">13. Code coverage</a></li>
-<li><a href="#_usability_and_accessibility_testing">14. Usability and accessibility Testing</a>
-<ul class="sectlevel2">
-<li><a href="#_automatic_tools">14.1. Automatic tools:</a></li>
-<li><a href="#_testing_with_real_users">14.2. Testing with real users:</a></li>
-</ul>
-</li>
-<li><a href="#_load_testing">15. Load Testing</a></li>
-<li><a href="#section-glossary">16. Glossary</a></li>
+<li><a href="#section-glossary">13. Glossary</a></li>
 </ul>
 </div>
 </div>
@@ -551,40 +547,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 	.arc42help {display:none;}
 }
 </style>
-<div class="paragraph">
-<p><strong>About arc42</strong></p>
-</div>
-<div class="paragraph lead">
-<p>arc42, the template for documentation of software and system architecture.</p>
-</div>
-<div class="paragraph">
-<p>Template Version 8.2 EN. (based upon AsciiDoc version), January 2023</p>
-</div>
-<div class="paragraph">
-<p>Created, maintained and &#169; by Dr. Peter Hruschka, Dr. Gernot Starke and contributors.
-See <a href="https://arc42.org" class="bare">https://arc42.org</a>.</p>
-</div>
 <hr>
-<div class="sidebarblock arc42help">
-<div class="content">
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>This version of the template contains some help and explanations.
-It is used for familiarization with arc42 and the understanding of the concepts.
-For documentation of your own system you use better the <em>plain</em> version.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-</div>
-</div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -592,7 +555,7 @@ For documentation of your own system you use better the <em>plain</em> version.<
 <h2 id="section-introduction-and-goals">1. Introduction and Goals</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>WIQ! is a project developed for the subject "Software Architecture" of the Computer Engineering degree of the School of Computer Engineering of the University of Oviedo. This project is based on the wiq project, made available to the students by the teachers of the subject.
+<p>WIQ is a project developed for the subject "Software Architecture" of the Computer Engineering degree of the School of Computer Engineering of the University of Oviedo. This project is based on the wiq project, made available to the students by the teachers of the subject.
 WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recreating its famous quiz show Saber y ganar in a web version accessible to everyone. This project will be carried out by the development team is formed by:</p>
 </div>
 <div class="ulist">
@@ -1024,15 +987,8 @@ This will take into account the usability and needs of different types of users.
 </div>
 <div class="sect2">
 <h3 id="_level_2">5.4. Level 2</h3>
-<div class="imageblock">
-<div class="content">
-<img src="./images/diagrama5.2.png" alt="Hierarchy of building blocks">
-</div>
-</div>
 <div class="paragraph">
-<div class="title">Motivation</div>
-<p>In this diagram we can see the decided microservices that will provide all the operations necessary for the
-application to work properly.</p>
+<p>In this level, the components are divided into smaller components, which are responsible for specific tasks. We&#8217;ll take a closer look to some of the most important components, which are question service, and webapp.</p>
 </div>
 <div class="sect3">
 <h4 id="_question_service">5.4.1. Question Service</h4>
@@ -1180,7 +1136,7 @@ application to work properly.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/06-stats.svg" alt="06 stats">
+<img src="./images/06-stats.png" alt="06 stats">
 </div>
 </div>
 </div>
@@ -1191,7 +1147,7 @@ application to work properly.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/06-history.svg" alt="06 history">
+<img src="./images/06-history.png" alt="06 history">
 </div>
 </div>
 </div>
@@ -1202,7 +1158,7 @@ application to work properly.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/06-ranking.svg" alt="06 ranking">
+<img src="./images/06-ranking.png" alt="06 ranking">
 </div>
 </div>
 </div>
@@ -1213,7 +1169,7 @@ application to work properly.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/06-friends.svg" alt="06 friends">
+<img src="./images/06-friends.png" alt="06 friends">
 </div>
 </div>
 </div>
@@ -1224,7 +1180,7 @@ application to work properly.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/06-users.svg" alt="06 users">
+<img src="./images/06-users.png" alt="06 users">
 </div>
 </div>
 </div>
@@ -1235,7 +1191,7 @@ application to work properly.</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="./images/06-groups.svg" alt="06 groups">
+<img src="./images/06-groups.png" alt="06 groups">
 </div>
 </div>
 <div style="page-break-after: always;"></div>
@@ -1766,29 +1722,25 @@ These are:</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_code_coverage">13. Code coverage</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_code_coverage">12.3. Code coverage</h3>
 <div class="paragraph">
 <p>We used sonarCloud to check the code coverage of the application. The results are shown below:</p>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_usability_and_accessibility_testing">14. Usability and accessibility Testing</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_usability_and_accessibility_testing">12.4. Usability and accessibility Testing</h3>
 <div class="paragraph">
 <p>We used some tools to measure usability levels of the application, along with some testing with real users (friends and family).</p>
 </div>
-<div class="sect2">
-<h3 id="_automatic_tools">14.1. Automatic tools:</h3>
+<div class="sect3">
+<h4 id="_automatic_tools">12.4.1. Automatic tools:</h4>
 <div class="paragraph">
 <p>First, we will show the automatic tools results:</p>
 </div>
+</div>
 <div class="sect3">
-<h4 id="_pagespeed_insights">14.1.1. PageSpeed Insights:</h4>
+<h4 id="_pagespeed_insights">12.4.2. PageSpeed Insights:</h4>
 <div class="paragraph">
 <p>This tool is used to measure different aspects of a certain page, such as performance, accessibility, best practices and optimisation.
 We used this tool on all of our pages, and the results were kind of similar. Below, the results for the Classic and Stats page are shown:</p>
@@ -1809,7 +1761,7 @@ warning because we don&#8217;t use HTTPS in our application, which can lead to s
 </div>
 </div>
 <div class="sect3">
-<h4 id="_juicy_studio">14.1.2. Juicy Studio:</h4>
+<h4 id="_juicy_studio">12.4.3. Juicy Studio:</h4>
 <div class="paragraph">
 <p>This tool is used to measure the contrast between background and foreground colors of a web page.
 We used this tool on both of out color combinations: dark mode and light mode. The results are shown below:</p>
@@ -1830,7 +1782,7 @@ We used this tool on both of out color combinations: dark mode and light mode. T
 </div>
 </div>
 <div class="sect2">
-<h3 id="_testing_with_real_users">14.2. Testing with real users:</h3>
+<h3 id="_testing_with_real_users">12.5. Testing with real users:</h3>
 <div class="paragraph">
 <p>We did some testing with 18 people, all of them being friends and family of us, the develpoment team.
 We let them try the application, play games, view their stats, create groups, etc., and when they were
@@ -1867,11 +1819,8 @@ administrators, invitations, and private groups, and adding friend requests.
 We should also consider improving our UI, maybe studying design tendencies and trying to applicate them to our project.</p>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_load_testing">15. Load Testing</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_load_testing">12.6. Load Testing</h3>
 <div class="paragraph">
 <p>We used Gatling to perform load testing on the application. It consisted of simulating 1000 users accessing the application at the same time, each of one performing 83 requests. The results of the test are shown below:</p>
 </div>
@@ -1902,8 +1851,9 @@ We should also consider improving our UI, maybe studying design tendencies and t
 <div style="page-break-after: always;"></div>
 </div>
 </div>
+</div>
 <div class="sect1">
-<h2 id="section-glossary">16. Glossary</h2>
+<h2 id="section-glossary">13. Glossary</h2>
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -1985,7 +1935,7 @@ We should also consider improving our UI, maybe studying design tendencies and t
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-04-25 18:13:16 +0200
+Last updated 2024-04-28 12:43:46 +0200
 </div>
 </div>
 </body>
