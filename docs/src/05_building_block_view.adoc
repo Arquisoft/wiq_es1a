@@ -48,12 +48,7 @@ The system is divided into nine components, each of which is responsible for a s
 
 === Level 2
 
-image::diagrama5.2.png["Hierarchy of building blocks"]
-
-.Motivation
-
-In this diagram we can see the decided microservices that will provide all the operations necessary for the 
-application to work properly.
+In this level, the components are divided into smaller components, which are responsible for specific tasks. We'll take a closer look to some of the most important components, which are question service, and webapp.
 
 ==== Question Service
 

@@ -27,34 +27,34 @@ image::06-play.svg[]
 
 User can see his stats by pressing stats button. It shows things such as games played, average score, total score, total correct questions, total incorrect questions, correct answer ratio or average time per question.
 
-image::06-stats.svg[]
+image::06-stats.png[]
 
 === User looks his game history
 
 User can see his game history by pressing history button. It shows a list of games played, with answered questions.
 
-image::06-history.svg[]
+image::06-history.png[]
 
 === User looks at ranking
 
 User can see the ranking of the users. This ranking can be filtered by average points, total points, correct answer ratio or average time.
 
-image::06-ranking.svg[]
+image::06-ranking.png[]
 
 === User checks his friends
 
 User can see his friends. He can also get into their profile to see their stats.
 
-image::06-friends.svg[]
+image::06-friends.png[]
 
 === User looks for users to be friends
 
 User can see a list of non-friends users. He can send a friend request to them.
 
-image::06-users.svg[]
+image::06-users.png[]
 
 === User looks for available groups to join
 
 User can see a list of available groups to join. He can send a request to join them.
 
-image::06-groups.svg[]
+image::06-groups.png[]
