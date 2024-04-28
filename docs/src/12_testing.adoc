@@ -95,6 +95,14 @@ Using this script we inject 2 users per second during 60 seconds in total, and e
 
 image::12-loadtests.png[]
 
+image::12-activeusers.png[]
+
+image::12-responsetime.png[]
+
+image::12-responsenumbers.png[]
+
+image::12-responsespersecond.png[]
+
 image::12-grafana-loadtests.png[]
 
 As we can see in Gatling's report, the application was able to handle a load of 9990 requests. In particular, 97% of the requests were successful in less than 800 milliseconds and 3% were unsuccessful. 

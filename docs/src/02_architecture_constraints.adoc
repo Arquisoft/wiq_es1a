@@ -10,8 +10,6 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 | *_Implementation Platform_* | The application must be implemented on a web hosting platform that meets RTVE's performance, security and scalability requirements.
 
-| *_Privacy Compliance_* | The architecture must ensure compliance with data privacy regulations, such as GDPR, to protect users' information.
-
 | *_Code Maintainability_* | Software development practices that promote clean and well-documented code should be followed to facilitate future upgrades and maintenance.
 
 | *_Development Time_* | The application must be developed within a specific time frame, which may influence architectural decisions and technology selection.

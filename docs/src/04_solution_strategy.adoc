@@ -7,12 +7,16 @@ We developed an application in which users can register to play, where in each g
 A ranking with the maximum score of the user and can be compared with other users, it will also have a section that indicates their correct guess and in which category they get the most questions right.
 
 .Technologies used to carry out:
-
+* JavaScript: JavaScript is a very flexible programming language widely used in software development. It incorporates many features that makes this development easy and effective, such as asynchronous functions, libraries, etc. This is the language that will be used to create front-end and back-end on our application.
+* Node.js: Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine. It's used to create server-side applications, and it's the runtime that will be used to create the back-end of our application.
 * MongoDB: MongoDB is an open-source NoSQL database that uses a document-based data model for information storage and retrieval.
 * React JS: It's a framework created by Facebook that's widely used to create user interface components. Chosen for the large volume of documentation and the fact that it is the framework used during the previous courses.
 * Chakra UI: It's a simple, modular and accessible component library that gives us the ability to create a responsive and accessible design.
 * WikiData: It's a free knowledge base modified by humans as well as machines, and it's where we'll get our questions from.
 * Microsoft Azure: A cloud computing platform that provides infrastructure, platform, and software-as-a-service services to host, manage, and scale online applications and services.
+* GitHub: It's a platform that provides hosting for software development and version control using Git. It's where we'll host our code and collaborate with the team.
+* Github Actions: It's a CI/CD tool that automates the process of building, testing, and deploying code. It's where we'll automate the process of testing and deploying our application in Azure Cloud.
+* Asciidoc: It's a text document format for writing notes, documentation, articles, books, ebooks, slideshows, web pages. We'll use it to document our project.
 
 === Design
 The designed website is composed of a frontend in React, a backend in Node.js and is documented using Asciidoc. Each user will have their own account where their information will be saved. Design-related decisions are detailed in point 9.
