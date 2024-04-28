@@ -4,7 +4,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Introduction and Goals
 
 WIQ is a project developed for the subject "Software Architecture" of the Computer Engineering degree of the School of Computer Engineering of the University of Oviedo. This project is based on the wiq project, made available to the students by the teachers of the subject.
-WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recreating its famous quiz show Saber y ganar in a web version accessible to everyone. This project will be carried out by the development team is formed by:
+WIQ! has been commissioned to the company HappySw by RTVE, with the aim of recreating its famous quiz show Saber y ganar in a web version accessible to everyone. This project will be carried out by the development team, which is formed by:
 
 * Martín Cancio Barrera, mailto:UO287561@uniovi.es[_UO287561_].
 
@@ -59,7 +59,7 @@ WIQ! is a software by means of which users can emulate being the participants of
 |Role/Name|Contact|Expectations 
 
 | *_Students (HappySw)_*
-| Martín Cancio Barrera, Iyán Fernández Riol, Rodrigo García Iglesias and Alfredo Jirout Cid
+| Martín Cancio Barrera, Iyán Fernández Riol and Rodrigo García Iglesias
 | The students are the developers of the application. They are in charge of the complete development, which will improve their programming and teamwork skills.
 
 | *_Users_*

@@ -35,6 +35,7 @@ These are:
 | Performance |User |While playing, a user selects a response to a question.|User Interface|Normal gameplay conditions.|The system updates its interface very fast and the user knows if they responded correctly, so they can keep playing.|Interface update time is less than 0.5 seconds.
 | Usability |User|A new user starts playing the game.|User Interface|Initial game setup.|The user interface displays available options and provides clear instructions on how to play, including a 'Help' button.|User can navigate through the interface without guidance.
 | Performance |User|A user finishes playing a game and wants to start a new one.|System and User Interface|Post-game completion.|The system ends the current game, displays the user's score, resets all game elements, and offers the option to start a new game.|Score is saved accurately, and game restarts without errors.
+| Performance |User|A user finishes playing a game and wants to see his stats.|System, User Interface, Stats Service |Stats retrieving.|The user presses the Stats button, and his stats are shown in the screen, giving him the option to switch between gamemodes.|Stats are shown correctly, including last game.
 |===
 
 
