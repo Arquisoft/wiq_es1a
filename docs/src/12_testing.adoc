@@ -108,3 +108,8 @@ image::12-grafana-loadtests.png[]
 As we can see in Gatling's report, the application was able to handle a load of 9990 requests. In particular, 97% of the requests were successful in less than 800 milliseconds and 3% were unsuccessful. 
 
 This shows that the application is able to handle a large number of requests in a short period of time, with a high success rate. We can also be sure that the application is able to handle a large number of users accessing it at the same time in production.
+
+=== Code coverage
+We used SonarCloud to check the code coverage of the application. It shows test coverage, code duplication, and code smells, among other things. The results are shown below:
+
+image::12-sonarcloud.png[]
