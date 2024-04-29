@@ -62,7 +62,7 @@ const GroupDetails = () => {
       <>
         <Nav />
         <Profile username={user} />
-        <Button p={"1rem"} mb={"1rem"} onClick={() => setUser("")}>Volver</Button>
+        <Button p={"1rem"} mb={"1rem"} onClick={() => setUser("")}>{t('pages.friendlist.back')}</Button>
         <Footer />
       </>
     );
