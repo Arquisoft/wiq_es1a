@@ -290,7 +290,7 @@ const Nav = () => {
               <DrawerHeader>WIQ</DrawerHeader>
               <DrawerBody>
                 <Stack spacing="24px">
-                  <Link href="/home/clasico" data-testid="home-clasico-link">
+                  <Link href="/home" data-testid="home-clasico-link">
                     {t("components.nav.home")}
                   </Link>
 

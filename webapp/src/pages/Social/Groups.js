@@ -103,7 +103,7 @@ const Groups = () => {
   return (
     <>
       <Nav />
-      <Container maxW="md" mt="5">
+      <Flex maxW="md" mt="5" flexDir={"column"} alignItems={"center"} width={{base: "90%", lg: "60%"}}>
         <Box mb="5">
           <Text fontSize="2xl" fontWeight="bold" mb="4">
             {t("pages.groups.title")}
@@ -117,7 +117,11 @@ const Groups = () => {
                 onChange={(e) => setName(e.target.value)}
               />
             </InputGroup>
-            <Button colorScheme="blue" onClick={addGroup} data-testid="addgroup-button">
+            <Button
+              colorScheme="blue"
+              onClick={addGroup}
+              data-testid="addgroup-button"
+            >
               {t("pages.groups.create")}
             </Button>
           </Box>
@@ -140,36 +144,40 @@ const Groups = () => {
           {groups.length === 0 ? (
             <Text>{t("pages.groups.nogroups")}</Text>
           ) : (
-            <Table variant="simple">
-              <Thead>
-                <Tr>
-                  <Th>{t("pages.groupsTable.groupName")}</Th>
-                  <Th>{t("pages.groupsTable.creationDate")}</Th>
-                  <Th>{t("pages.groupsTable.creator")}</Th>
-                  <Th>{t("pages.groups.join")}</Th>
-                </Tr>
-              </Thead>
-              <Tbody>
-                {groups.map((group) => (
-                  <Tr key={group._id}>
-                    <Td>{group.name}</Td>
-                    <Td>{new Date(group.createdAt).toLocaleDateString()}</Td>
-                    <Td>{group.members.length > 0 ? group.members[0] : ""}</Td>
-                    <Td>
-                      <Button
-                        colorScheme="blue"
-                        onClick={() => handleJoinGroup(group._id)}
-                      >
-                        {t("pages.groups.join")}
-                      </Button>
-                    </Td>
+            <Box overflowX={{ base: "scroll", lg: "unset" }} width={"100%"} maxW={"100vw"}>
+              <Table variant="simple" w={"100%"}>
+                <Thead>
+                  <Tr>
+                    <Th>{t("pages.groupsTable.groupName")}</Th>
+                    <Th>{t("pages.groupsTable.creationDate")}</Th>
+                    <Th>{t("pages.groupsTable.creator")}</Th>
+                    <Th>{t("pages.groups.join")}</Th>
                   </Tr>
-                ))}
-              </Tbody>
-            </Table>
+                </Thead>
+                <Tbody>
+                  {groups.map((group) => (
+                    <Tr key={group._id}>
+                      <Td>{group.name}</Td>
+                      <Td>{new Date(group.createdAt).toLocaleDateString()}</Td>
+                      <Td>
+                        {group.members.length > 0 ? group.members[0] : ""}
+                      </Td>
+                      <Td>
+                        <Button
+                          colorScheme="blue"
+                          onClick={() => handleJoinGroup(group._id)}
+                        >
+                          {t("pages.groups.join")}
+                        </Button>
+                      </Td>
+                    </Tr>
+                  ))}
+                </Tbody>
+              </Table>
+            </Box>
           )}
         </Flex>
-      </Container>
+      </Flex>
       <Footer />
     </>
   );

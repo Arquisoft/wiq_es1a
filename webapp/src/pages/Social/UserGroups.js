@@ -9,7 +9,8 @@ import {
   Tr,
   Th,
   Td,
-  Flex
+  Flex,
+  Box
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -65,6 +66,7 @@ const UserGroups = () => {
               {`Error: ${error}`}
             </Alert>
           )}
+          <Box overflowX={{ base: "scroll", lg: "auto" }} width={'100%'}>
           <Table variant="simple">
             <Thead>
               <Tr>
@@ -92,6 +94,7 @@ const UserGroups = () => {
               ))}
             </Tbody>
           </Table>
+          </Box>
       </Flex>
       <Footer />
     </>
