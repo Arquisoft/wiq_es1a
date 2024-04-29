@@ -10,7 +10,7 @@ import {
   Th,
   Td,
   Flex,
-  Box
+  Box,
 } from "@chakra-ui/react";
 import Nav from "../../components/Nav/Nav.js";
 import Footer from "../../components/Footer/Footer.js";
@@ -58,15 +58,20 @@ const UserGroups = () => {
     <>
       <Nav />
       <Flex maxW="xs" mt="5" flexDirection={"column"} alignItems={"center"}>
-          <Text fontSize="3xl" fontWeight="bold" mb="4">
-            {t("pages.usergroups.title")}
-          </Text>
-          {error && (
-            <Alert status="error" variant="subtle" mt="2">
-              {`Error: ${error}`}
-            </Alert>
-          )}
-          <Box overflowX={{ base: "scroll", lg: "auto" }} width={'100%'}>
+        <Text fontSize="3xl" fontWeight="bold" mb="4">
+          {t("pages.usergroups.title")}
+        </Text>
+        {error && (
+          <Alert status="error" variant="subtle" mt="2">
+            {`Error: ${error}`}
+          </Alert>
+        )}
+        <Flex
+          flexDir={"column"}
+          alignItems={"center"}
+          overflowX={{ base: "scroll", lg: "unset" }}
+          width={"100%"}
+        >
           <Table variant="simple">
             <Thead>
               <Tr>
@@ -94,7 +99,7 @@ const UserGroups = () => {
               ))}
             </Tbody>
           </Table>
-          </Box>
+        </Flex>
       </Flex>
       <Footer />
     </>
