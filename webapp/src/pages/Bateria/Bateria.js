@@ -27,7 +27,7 @@ const JuegoPreguntas = () => {
   const [incorrectAnswers, setIncorrectAnswers] = useState(0);
   const [averageTime, setAverageTime] = useState(0);
 
-  const questionsToSave = [];
+  const [questionsToSave, setQuestionsToSave] = useState([]);
 
   useEffect(() => {
     setProgressPercent(100);
@@ -152,7 +152,7 @@ const JuegoPreguntas = () => {
       correcta: actualQuestion.correcta,
       respuesta: answer,
     };
-    questionsToSave.push(pregunta);
+    setQuestionsToSave([...questionsToSave, pregunta]);
 
     if (questionIndex + 1 < questions.length) {
       setQuestionIndex(questionIndex + 1);
