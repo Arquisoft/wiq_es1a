@@ -38,11 +38,11 @@ const Ranking = () => {
 
   const getModeName = () => {
     if(gamemode === "clasico"){
-      return "Clásico";    
+      return t('pages.ranking.classic');    
     } else if(gamemode === "bateria"){
-      return "Batería de sabios";
+      return t('pages.ranking.wisebattery');
     } else if(gamemode === "calculadora"){
-      return "Calculadora humana";
+      return t('pages.ranking.humancalculator');
     }
     return gamemode;
   };

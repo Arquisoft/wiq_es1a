@@ -1,8 +1,8 @@
 {
   "components": {
     "custommodal": {
-      "play": "Jugar",
-      "close": "Cerrar"
+      "play": "Play",
+      "close": "Close"
     },
     "footer": {
       "copyright": "Copyright 2024 ® Software Architecture Group 1A"
@@ -212,7 +212,8 @@
       "list": "Friend List",
       "profile": "View Profile",
       "delete": "Delete Friend",
-      "noFriends": "You currently have no friends."
+      "noFriends": "You currently have no friends.",
+      "back":"Back"
     },
     "groupdetails": {
       "details": "Group details",

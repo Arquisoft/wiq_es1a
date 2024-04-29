@@ -89,7 +89,7 @@ const FriendList = () => {
       {friend ? (
         <>
           <Profile username={friend} />
-          <Button onClick={() => setFriend("")}>Volver</Button>
+          <Button onClick={() => setFriend("")}>{t('pages.friendlist.back')}</Button>
         </>
       ) : (
         <Container maxW="md">

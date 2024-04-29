@@ -212,7 +212,8 @@
       "list": "Lista de amigos",
       "profile": "Ver perfil",
       "delete": "Eliminar amigo",
-      "noFriends": "No tienes amigos actualmente."
+      "noFriends": "No tienes amigos actualmente.",
+      "back":"Volver"
     },
     "groupdetails": {
       "details":"Detalles del grupo",

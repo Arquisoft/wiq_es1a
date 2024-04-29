@@ -66,12 +66,12 @@ const Stats = () => {
   };
 
   const getModeName = () => {
-    if (gamemode === "clasico") {
-      return "Clásico";
-    } else if (gamemode === "bateria") {
-      return "Batería de sabios";
-    } else if (gamemode === "calculadora") {
-      return "Calculadora humana";
+    if(gamemode === "clasico"){
+      return t('pages.ranking.classic');    
+    } else if(gamemode === "bateria"){
+      return t('pages.ranking.wisebattery');
+    } else if(gamemode === "calculadora"){
+      return t('pages.ranking.humancalculator');
     }
     return gamemode;
   };
