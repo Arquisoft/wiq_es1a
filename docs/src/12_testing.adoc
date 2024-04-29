@@ -40,7 +40,7 @@ We used some tools to measure usability levels of the application, along with so
 
 First, we will show the automatic tools results:
 
-==== PageSpeed Insights: 
+===== PageSpeed Insights: 
 
 This tool is used to measure different aspects of a certain page, such as performance, accessibility, best practices and optimisation.
 We used this tool on all of our pages, and the results were kind of similar. Below, the results for the Classic and Stats page are shown:
@@ -52,7 +52,7 @@ image::pagespeed-classic.png[]
 As we can see, our pages perform very nicely on every evaluable aspect, except in Best practices, and that's because the tool is giving us a 
 warning because we don't use HTTPS in our application, which can lead to security issues.
 
-==== Juicy Studio:
+===== Juicy Studio:
 This tool is used to measure the contrast between background and foreground colors of a web page.
 We used this tool on both of out color combinations: dark mode and light mode. The results are shown below:
 
@@ -62,7 +62,7 @@ image::juicy-dark.png[]
 
 As we can see, both of our themes use correct and high-contrasted color combinations.
 
-=== Testing with real users:
+==== Testing with real users:
 
 We did some testing with 18 people, all of them being friends and family of us, the develpoment team.
 We let them try the application, play games, view their stats, create groups, etc., and when they were
