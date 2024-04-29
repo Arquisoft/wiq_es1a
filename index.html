@@ -527,9 +527,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_e2e_testing">12.2. e2e Testing</a></li>
 <li><a href="#_code_coverage">12.3. Code coverage</a></li>
 <li><a href="#_usability_and_accessibility_testing">12.4. Usability and accessibility Testing</a></li>
-<li><a href="#_testing_with_real_users">12.5. Testing with real users:</a></li>
-<li><a href="#_load_testing">12.6. Load Testing</a></li>
-<li><a href="#_code_coverage_2">12.7. Code coverage</a></li>
+<li><a href="#_load_testing">12.5. Load Testing</a></li>
+<li><a href="#_code_coverage_2">12.6. Code coverage</a></li>
 </ul>
 </li>
 <li><a href="#section-glossary">13. Glossary</a></li>
@@ -1745,6 +1744,11 @@ These are:</p>
 <div class="paragraph">
 <p>We used sonarCloud to check the code coverage of the application. The results are shown below:</p>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="./images/12-sonarcloud.png" alt="12 sonarcloud">
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_usability_and_accessibility_testing">12.4. Usability and accessibility Testing</h3>
@@ -1756,9 +1760,8 @@ These are:</p>
 <div class="paragraph">
 <p>First, we will show the automatic tools results:</p>
 </div>
-</div>
-<div class="sect3">
-<h4 id="_pagespeed_insights">12.4.2. PageSpeed Insights:</h4>
+<div class="sect4">
+<h5 id="_pagespeed_insights">PageSpeed Insights:</h5>
 <div class="paragraph">
 <p>This tool is used to measure different aspects of a certain page, such as performance, accessibility, best practices and optimisation.
 We used this tool on all of our pages, and the results were kind of similar. Below, the results for the Classic and Stats page are shown:</p>
@@ -1778,8 +1781,8 @@ We used this tool on all of our pages, and the results were kind of similar. Bel
 warning because we don&#8217;t use HTTPS in our application, which can lead to security issues.</p>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_juicy_studio">12.4.3. Juicy Studio:</h4>
+<div class="sect4">
+<h5 id="_juicy_studio">Juicy Studio:</h5>
 <div class="paragraph">
 <p>This tool is used to measure the contrast between background and foreground colors of a web page.
 We used this tool on both of out color combinations: dark mode and light mode. The results are shown below:</p>
@@ -1799,8 +1802,8 @@ We used this tool on both of out color combinations: dark mode and light mode. T
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_testing_with_real_users">12.5. Testing with real users:</h3>
+<div class="sect3">
+<h4 id="_testing_with_real_users">12.4.2. Testing with real users:</h4>
 <div class="paragraph">
 <p>We did some testing with 18 people, all of them being friends and family of us, the develpoment team.
 We let them try the application, play games, view their stats, create groups, etc., and when they were
@@ -1837,8 +1840,9 @@ administrators, invitations, and private groups, and adding friend requests.
 We should also consider improving our UI, maybe studying design tendencies and trying to applicate them to our project.</p>
 </div>
 </div>
+</div>
 <div class="sect2">
-<h3 id="_load_testing">12.6. Load Testing</h3>
+<h3 id="_load_testing">12.5. Load Testing</h3>
 <div class="paragraph">
 <p>We used Gatling to perform load testing on the application. It consisted of simulating 1000 users accessing the application at the same time, each of one performing 83 requests. The results of the test are shown below:</p>
 </div>
@@ -1888,7 +1892,7 @@ We should also consider improving our UI, maybe studying design tendencies and t
 </div>
 </div>
 <div class="sect2">
-<h3 id="_code_coverage_2">12.7. Code coverage</h3>
+<h3 id="_code_coverage_2">12.6. Code coverage</h3>
 <div class="paragraph">
 <p>We used SonarCloud to check the code coverage of the application. It shows test coverage, code duplication, and code smells, among other things. The results are shown below:</p>
 </div>
@@ -1984,7 +1988,7 @@ We should also consider improving our UI, maybe studying design tendencies and t
 <div id="footer">
 <div id="footer-text">
 Version 8.2 EN<br>
-Last updated 2024-04-28 21:21:00 +0200
+Last updated 2024-04-29 19:46:34 +0200
 </div>
 </div>
 </body>
