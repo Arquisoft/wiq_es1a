@@ -28,7 +28,7 @@ image::05-Overall.svg["Hierarchy of building blocks"]
 
 === Level 1
 
-image::05-Level1.svg["Hierarchy of building blocks"]
+image::05-Level1.png["Hierarchy of building blocks"]
 
 
 The system is divided into nine components, each of which is responsible for a specific task. These components are.
