@@ -32,6 +32,8 @@ image::12-e2e.png[]
 
 We used sonarCloud to check the code coverage of the application. The results are shown below:
 
+image::12-sonarcloud.png[]
+
 === Usability and accessibility Testing
 
 We used some tools to measure usability levels of the application, along with some testing with real users (friends and family).
